@@ -26,7 +26,7 @@ export const HomePartners = () => {
   return (
     <div className='flex flex-col items-center gap-3 lg:flex-row lg:justify-between'>
       <p className='max-w-[211px] text-center text-header-100 lg:text-start'>
-        We partners with over 30+ Health Providers
+        We are partners with over 30+ Health Providers
       </p>
       <div className='mx-auto grid grid-flow-dense grid-cols-2 gap-[39.31px] md:grid-cols-4 lg:grid-flow-col'>
         {partners.map((partner, index) => (
