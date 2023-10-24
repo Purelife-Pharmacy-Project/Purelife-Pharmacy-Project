@@ -1,7 +1,7 @@
 export const Quotes = () => {
   return (
     <svg
-      className='absolute left-[-90px]'
+      className='absolute left-[-90px] top-10'
       width='186'
       height='128'
       viewBox='0 0 186 128'
