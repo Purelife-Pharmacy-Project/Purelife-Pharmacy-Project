@@ -116,7 +116,7 @@ export const Footer = () => {
   return (
     <footer className='mx-auto grid w-full gap-8 pb-10'>
       <div className='grid grid-flow-dense gap-24 sm:grid-cols-2 lg:grid-flow-col'>
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-2 md:col-span-2 lg:col-span-1'>
           <Link href='/'>
             <Image
               src='/app-logo.png'
