@@ -1,18 +1,13 @@
-export const Hometransformation = () => {
-  const data = [
-    {
-      stat: '80%',
-      description: 'See improvement in their first 6 months.',
-    },
-    {
-      stat: '8k+',
-      description: 'Certified and accredited laboratory test results.',
-    },
-    {
-      stat: '95%',
-      description: 'Of members would recommend to friends & family.',
-    },
-  ];
+export type TransformationData = {
+  stat: string;
+  description: string;
+};
+
+export const Hometransformation = ({
+  data,
+}: {
+  data: TransformationData[];
+}) => {
   return (
     <div className='grid gap-10'>
       <h1 className='max-w-none text-center text-3xl font-bold text-header-100 md:max-w-lg lg:text-4xl xl:max-w-3xl xl:text-start'>
@@ -27,7 +22,7 @@ export const Hometransformation = () => {
             <p className='text-center text-6xl font-bold text-primary'>
               {item.stat}
             </p>
-            <p className='px-6 text-center text-xs font-medium text-content'>
+            <p className='px-6 text-center text-sm font-medium text-content'>
               {item.description}
             </p>
           </div>

@@ -1,29 +1,16 @@
-import { IconFluidMed } from '@/components/icons/IconFluidMed';
-import { IconLabs } from '@/components/icons/IconLabs';
-import { IconPill } from '@/components/icons/IconPill';
 import { Button, Card, CardBody } from '@nextui-org/react';
+import { FC } from 'react';
 
-export const HealthSteps = () => {
-  const steps = [
-    {
-      icon: <IconPill size={48} />,
-      title: 'Subscribe to a drug refill',
-      description:
-        'Get your medications delivered to you at your preferred intervals.',
-    },
-    {
-      icon: <IconLabs />,
-      title: 'Book a lab test',
-      description:
-        'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
-    },
-    {
-      icon: <IconFluidMed />,
-      title: 'Get Vaccination',
-      description:
-        'Choose from our expertly curated vaccines whenever you want.',
-    },
-  ];
+interface HealthStepsProps {
+  steps: {
+    icon: JSX.Element;
+    title: string;
+    description: string;
+    url: string;
+  }[];
+}
+
+export const HealthSteps: FC<HealthStepsProps> = ({ steps }) => {
   return (
     <div className='grid gap-10'>
       <div className='flex flex-col justify-between gap-4 md:flex-row md:gap-0'>
@@ -58,7 +45,9 @@ export const HealthSteps = () => {
                 <p className='text-lg font-medium text-header-100'>
                   {step.title}
                 </p>
-                <p className='text-xs text-content'>{step.description}</p>
+                <p className='text-xs text-content lg:max-w-[246px]'>
+                  {step.description}
+                </p>
               </div>
               <Button
                 variant='bordered'

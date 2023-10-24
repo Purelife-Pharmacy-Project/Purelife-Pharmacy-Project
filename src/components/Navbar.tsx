@@ -31,7 +31,7 @@ export const AppNavbar = ({
   const menuItems = [
     {
       name: 'Telehealth',
-      path: '#',
+      path: '/telehealth',
     },
     {
       name: 'Shop & Order',
@@ -71,12 +71,24 @@ export const AppNavbar = ({
 
       <NavbarContent justify='center' className='hidden gap-8 sm:flex'>
         <NavbarItem>
-          <Link color='foreground' href='#'>
+          <Link
+            color='foreground'
+            href='/telehealth'
+            className={
+              isActive('/telehealth') ? 'font-medium text-primary' : ''
+            }
+          >
             Telehealth
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color='foreground' href='#'>
+          <Link
+            color='foreground'
+            href='#'
+            className={
+              isActive('/shop-and-order') ? 'font-medium text-primary' : ''
+            }
+          >
             Shop & Order
           </Link>
         </NavbarItem>
@@ -99,7 +111,11 @@ export const AppNavbar = ({
           />
         </NavbarItem>
         <NavbarItem className='flex items-center'>
-          <Link color='foreground' href='#'>
+          <Link
+            color='foreground'
+            className={isActive('/sign-in') ? 'font-medium text-primary' : ''}
+            href='#'
+          >
             <div className='flex items-center gap-2'>
               <IconProfile />
               <p>Sign in</p>
@@ -107,7 +123,11 @@ export const AppNavbar = ({
           </Link>
         </NavbarItem>
         <NavbarItem className='flex items-center'>
-          <Link color='foreground' href='#'>
+          <Link
+            className={isActive('/cart') ? 'font-medium text-primary' : ''}
+            color='foreground'
+            href='#'
+          >
             <div className='flex items-center gap-2'>
               <IconCart size={24} color='header-100' />
               <p>Cart</p>
