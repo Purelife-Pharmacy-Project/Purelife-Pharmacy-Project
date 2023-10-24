@@ -6,7 +6,7 @@ export const HomeHero = () => {
   return (
     <div className='justify-between py-12 lg:flex'>
       <div className='grid gap-6 lg:justify-start'>
-        <h1 className='mx-auto max-w-[530px] text-center text-5xl font-bold text-header-100 lg:text-start lg:text-6xl'>
+        <h1 className='mx-auto max-w-[530px] text-center text-4xl font-bold text-header-100 lg:text-start lg:text-6xl'>
           Your the one-stop shop for wellness and lifestyle.
         </h1>
         <p className='mx-auto max-w-[498px] text-center text-base leading-[30px] text-content lg:mx-0 lg:text-start lg:text-xl'>

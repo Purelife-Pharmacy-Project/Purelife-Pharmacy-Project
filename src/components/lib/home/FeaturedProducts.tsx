@@ -12,7 +12,7 @@ export const FeaturedProducts = () => {
           .fill(0)
           .map((_, index) => (
             <Card key={index} shadow='none' className='w-full' radius='lg'>
-              <CardBody className='overflow-visible py-2'>
+              <CardBody className='overflow-visible px-0 py-2 md:px-3'>
                 <div>
                   <Image
                     alt='Card background'
