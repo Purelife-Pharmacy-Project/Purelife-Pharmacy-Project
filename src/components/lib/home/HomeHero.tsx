@@ -9,7 +9,7 @@ export const HomeHero = () => {
         <h1 className='mx-auto max-w-[530px] text-center text-5xl font-bold text-header-100 lg:text-start lg:text-6xl'>
           Your the one-stop shop for wellness and lifestyle.
         </h1>
-        <p className='mx-auto max-w-[498px] text-start text-base leading-[30px] text-content md:text-center lg:mx-0 lg:text-xl'>
+        <p className='mx-auto max-w-[498px] text-center text-base leading-[30px] text-content lg:mx-0 lg:text-start lg:text-xl'>
           Schedule laboratory tests, book vaccination appointments, and receive
           high-quality medical services from the convenience of wherever you are
           in Nigeria.
