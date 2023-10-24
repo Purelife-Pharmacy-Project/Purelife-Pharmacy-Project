@@ -26,12 +26,12 @@ export const HealthSteps = () => {
   ];
   return (
     <div className='grid gap-10'>
-      <div className='flex justify-between'>
+      <div className='flex flex-col justify-between gap-4 md:flex-row md:gap-0'>
         <div className='grid gap-2'>
-          <h1 className='text-center text-2xl font-bold text-header-100 md:text-start lg:text-4xl'>
+          <h1 className='text-start text-xl font-bold text-header-100 lg:text-4xl'>
             Use our Convenient Telehealth Service.
           </h1>
-          <p className='text-lg text-content lg:max-w-[476px]'>
+          <p className='text-content lg:max-w-[476px] lg:text-lg'>
             Subscribe to medication refills, book laboratory tests, and schedule
             vaccinations all in one place.
           </p>

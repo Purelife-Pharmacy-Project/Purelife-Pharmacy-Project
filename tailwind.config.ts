@@ -31,6 +31,7 @@ const config: Config = {
         content: '#5A5A5A',
         gray: {
           100: '#F7F7F7',
+          200: '#D9D9D9',
         },
       },
       backgroundImage: {

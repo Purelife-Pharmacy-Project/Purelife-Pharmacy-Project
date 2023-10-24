@@ -2,7 +2,9 @@ import { IconFacebook } from '@/components/icons/social/IconFacebook';
 import { IconInstagram } from '@/components/icons/social/IconInstagram';
 import { IconLinkedin } from '@/components/icons/social/IconLinkedin';
 import { IconTwitter } from '@/components/icons/social/IconTwitter';
+import { Line } from '@/components/ui/Line';
 import { Image, Link } from '@nextui-org/react';
+import { FooterBase } from './FooterBase';
 
 export const Footer = () => {
   const socialIcons = [
@@ -112,43 +114,47 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className='mx-auto grid w-full grid-flow-dense gap-24 sm:grid-cols-2 lg:grid-flow-col'>
-      <div className='flex flex-col gap-2'>
-        <Link href='/'>
-          <Image
-            src='/app-logo.png'
-            alt='purelife logo'
-            width={147}
-            height={68.271}
-          />
-        </Link>
-        <div className='flex gap-2'>
-          {socialIcons.map((socialIcon, index) => (
-            <div
-              key={index}
-              className='flex items-center justify-center rounded-full'
-            >
-              {socialIcon.icon}
-            </div>
-          ))}
-        </div>
-      </div>
-      {footerContent.map((content, index) => (
-        <div key={index} className='flex flex-col'>
-          <p className='mb-5 h-max font-bold text-header-100'>
-            {content.title}
-          </p>
-          <div className='grid gap-2'>
-            {content.links.map((link, index) => (
-              <div key={index} className='max-w-[300px]'>
-                <Link href={link.path} className='font-light text-content'>
-                  {link.name}
-                </Link>
+    <footer className='mx-auto grid w-full gap-8'>
+      <div className='grid grid-flow-dense gap-24 sm:grid-cols-2 lg:grid-flow-col'>
+        <div className='flex flex-col gap-2'>
+          <Link href='/'>
+            <Image
+              src='/app-logo.png'
+              alt='purelife logo'
+              width={147}
+              height={68.271}
+            />
+          </Link>
+          <div className='flex gap-2'>
+            {socialIcons.map((socialIcon, index) => (
+              <div
+                key={index}
+                className='flex items-center justify-center rounded-full'
+              >
+                {socialIcon.icon}
               </div>
             ))}
           </div>
         </div>
-      ))}
+        {footerContent.map((content, index) => (
+          <div key={index} className='flex flex-col'>
+            <p className='mb-5 h-max font-bold text-header-100'>
+              {content.title}
+            </p>
+            <div className='grid gap-2'>
+              {content.links.map((link, index) => (
+                <div key={index} className='max-w-[300px]'>
+                  <Link href={link.path} className='font-light text-content'>
+                    {link.name}
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <Line />
+      <FooterBase />
     </footer>
   );
 };
