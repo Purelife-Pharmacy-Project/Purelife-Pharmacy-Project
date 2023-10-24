@@ -20,12 +20,12 @@ export const HomeShopAndOrder = () => {
   ];
   return (
     <div className='grid gap-10'>
-      <div className='flex justify-between'>
+      <div className='flex flex-col justify-between gap-4 md:flex-row md:gap-0'>
         <div className='grid gap-2'>
-          <h1 className='text-center text-2xl font-bold text-primaryGreenDark md:min-w-[476px] md:text-start lg:text-4xl'>
+          <h1 className='text-start text-2xl font-bold text-primaryGreenDark md:min-w-[476px] lg:text-4xl'>
             Shop and Order
           </h1>
-          <p className='text-lg text-content lg:max-w-[524px]'>
+          <p className='text-content lg:max-w-[524px] lg:text-lg'>
             Discover our one-stop shop for your health, supermarket, beauty and
             skin essentials, and enjoy hassle-free ordering.
           </p>
