@@ -14,6 +14,29 @@ import { NewsLetterCard } from '@/components/lib/home/NewsletterCard';
 import { Section } from '@/components/lib/home/Section';
 import { Testomonials } from '@/components/lib/home/Testimonials';
 
+export const teleHealthServiceSteps = [
+  {
+    icon: <IconPill size={48} />,
+    title: 'Subscribe to a drug refill',
+    description:
+      'Get your medications delivered to you at your preferred intervals.',
+    url: '#',
+  },
+  {
+    icon: <IconLabs />,
+    title: 'Book a lab test',
+    description:
+      'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
+    url: '#',
+  },
+  {
+    icon: <IconFluidMed />,
+    title: 'Get Vaccination',
+    description: 'Choose from our expertly curated vaccines whenever you want.',
+    url: '#',
+  },
+];
+
 export default function Home() {
   const transformationData = [
     {
@@ -27,30 +50,6 @@ export default function Home() {
     {
       stat: '95%',
       description: 'Of members would recommend to friends & family.',
-    },
-  ];
-
-  const teleHealthServiceSteps = [
-    {
-      icon: <IconPill size={48} />,
-      title: 'Subscribe to a drug refill',
-      description:
-        'Get your medications delivered to you at your preferred intervals.',
-      url: '#',
-    },
-    {
-      icon: <IconLabs />,
-      title: 'Book a lab test',
-      description:
-        'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
-      url: '#',
-    },
-    {
-      icon: <IconFluidMed />,
-      title: 'Get Vaccination',
-      description:
-        'Choose from our expertly curated vaccines whenever you want.',
-      url: '#',
     },
   ];
 

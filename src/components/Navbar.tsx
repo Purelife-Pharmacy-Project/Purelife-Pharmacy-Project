@@ -84,7 +84,7 @@ export const AppNavbar = ({
         <NavbarItem>
           <Link
             color='foreground'
-            href='#'
+            href='/shop-and-order'
             className={
               isActive('/shop-and-order') ? 'font-medium text-primary' : ''
             }
@@ -138,7 +138,7 @@ export const AppNavbar = ({
 
       <NavbarContent justify='end'>
         <NavbarItem>
-          <Link color='foreground' href='#'>
+          <Link color='foreground' href='/shop-and-order'>
             <Button radius='full' size='lg' color='primary'>
               Shop & Order
             </Button>
