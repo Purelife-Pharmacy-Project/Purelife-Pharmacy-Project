@@ -95,7 +95,12 @@ export default function Telehealth() {
       <main className='grid gap-6'>
         <div className='grid justify-center bg-primaryLight lg:pt-[55px]'>
           <Section className='bg-primaryLight'>
-            <HomeHero />
+            <HomeHero
+              title='Your the one-stop shop for wellness and lifestyle.'
+              description='Schedule laboratory tests, book vaccination appointments, and receive high-quality medical services from the convenience of wherever you are in Nigeria.'
+              ctaText='Start here'
+              ctaLink='#'
+            />
           </Section>
         </div>
 

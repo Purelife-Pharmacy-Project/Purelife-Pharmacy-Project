@@ -1,20 +1,21 @@
 import { Button, Card, CardBody, Input } from '@nextui-org/react';
-import { Section } from './Section';
+import { Section } from '../home/Section';
 
-export const NewsLetterCard = () => {
+export const BookATestHero = () => {
   return (
     <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
         <Card shadow='none'>
-          <CardBody className='bg-primaryLight'>
-            <div className='flex w-full flex-col items-center justify-between gap-4 p-1 md:flex-row md:p-4 lg:gap-0 lg:p-20'>
-              <h1 className='w-full text-center text-3xl font-bold text-header-100 lg:text-start lg:text-4xl xl:max-w-[500px]'>
+          <CardBody className='bg-primaryGreenLight'>
+            <div className='grid w-full gap-4 p-1 md:p-4 lg:p-20'>
+              <h1 className='w-full text-center text-3xl font-bold text-primaryGreenDark lg:text-4xl'>
                 Sign up for amazing health and lifestyle deals
               </h1>
+
               <Input
                 size='lg'
                 radius='full'
-                type='email'
+                type='Search'
                 isRequired
                 classNames={{
                   input: ['py-6'],
@@ -29,15 +30,15 @@ export const NewsLetterCard = () => {
                 }}
                 endContent={
                   <Button
-                    color='primary'
-                    className='px-10 lg:px-12'
+                    color='success'
+                    className='px-10 text-white lg:px-12'
                     radius='full'
                     size='lg'
                   >
                     Shop & Order
                   </Button>
                 }
-                placeholder='Enter your email address'
+                placeholder='Search all tests here'
               />
             </div>
           </CardBody>

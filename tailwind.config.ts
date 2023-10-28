@@ -28,6 +28,7 @@ const config: Config = {
           200: '#582029',
         },
         white: '#FFFFFF',
+        success: '#00CD52',
         content: '#5A5A5A',
         gray: {
           100: '#F7F7F7',
@@ -52,7 +53,9 @@ const config: Config = {
       themes: {
         light: {
           layout: {}, // light theme layout tokens
-          colors: {}, // light theme colors
+          colors: {
+            success: '#00CD52',
+          }, // light theme colors
         },
         dark: {
           layout: {}, // dark theme layout tokens

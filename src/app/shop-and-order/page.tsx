@@ -1,4 +1,7 @@
 import { AppNavbar } from '@/components/Navbar';
+import { IconFluidMed } from '@/components/icons/IconFluidMed';
+import { IconLabs } from '@/components/icons/IconLabs';
+import { IconPill } from '@/components/icons/IconPill';
 import { EarnedClients } from '@/components/lib/home/EarnedClients';
 import { Footer } from '@/components/lib/home/Footer';
 import { HealthSteps } from '@/components/lib/home/HealthSteps';
@@ -6,9 +9,31 @@ import { HomeHero } from '@/components/lib/home/HomeHero';
 import { NewsLetterCard } from '@/components/lib/home/NewsletterCard';
 import { Section } from '@/components/lib/home/Section';
 import { ShopCategory } from '@/components/lib/shop-and-order/ShopCategory';
-import { teleHealthServiceSteps } from '../page';
 
 export default function ShopAndOrder() {
+  const teleHealthServiceSteps = [
+    {
+      icon: <IconPill size={48} />,
+      title: 'Subscribe to a drug refill',
+      description:
+        'Get your medications delivered to you at your preferred intervals.',
+      url: '#',
+    },
+    {
+      icon: <IconLabs color='primary' />,
+      title: 'Book a lab test',
+      description:
+        'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
+      url: '#',
+    },
+    {
+      icon: <IconFluidMed />,
+      title: 'Get Vaccination',
+      description:
+        'Choose from our expertly curated vaccines whenever you want.',
+      url: '#',
+    },
+  ];
   const earnedClients = [
     {
       name: 'IFitness',
@@ -37,7 +62,12 @@ export default function ShopAndOrder() {
       <main className='grid gap-6'>
         <div className='grid justify-center bg-primaryLight lg:pt-[55px]'>
           <Section className='bg-primaryLight'>
-            <HomeHero />
+            <HomeHero
+              title='Your the one-stop shop for wellness and lifestyle.'
+              description='Schedule laboratory tests, book vaccination appointments, and receive high-quality medical services from the convenience of wherever you are in Nigeria.'
+              ctaText='Start here'
+              ctaLink='#'
+            />
           </Section>
         </div>
 
