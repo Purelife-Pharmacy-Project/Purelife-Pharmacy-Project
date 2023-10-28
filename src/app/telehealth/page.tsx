@@ -60,7 +60,7 @@ export default function Telehealth() {
       url: '#',
     },
     {
-      icon: <IconLabs />,
+      icon: <IconLabs size={48} color='primary' />,
       title: 'Book a lab test',
       description:
         'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
