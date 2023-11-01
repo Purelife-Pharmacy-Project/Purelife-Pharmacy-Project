@@ -47,7 +47,7 @@ export const DoctorsForm = () => {
           <div className='flex h-full'>
             <Textarea
               size='lg'
-              style={{ height: '100%' }}
+              style={{ height: '310px' }}
               placeholder='Noted about your prescription'
               classNames={textAreaClassNames}
             />
