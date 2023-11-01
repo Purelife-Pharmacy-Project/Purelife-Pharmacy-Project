@@ -5,7 +5,7 @@ import { IconPill } from '@/components/icons/IconPill';
 import { EarnedClients } from '@/components/lib/home/EarnedClients';
 import { FeaturedProducts } from '@/components/lib/home/FeaturedProducts';
 import { Footer } from '@/components/lib/home/Footer';
-import { HealthSteps } from '@/components/lib/home/HealthSteps';
+import { HealthServices } from '@/components/lib/home/HealthServices';
 import { HomeHero } from '@/components/lib/home/HomeHero';
 import { HomePartners } from '@/components/lib/home/HomePartners';
 import { HomeShopAndOrder } from '@/components/lib/home/HomeShopAndOrder';
@@ -15,20 +15,20 @@ import { Testomonials } from '@/components/lib/home/Testimonials';
 import { Button } from '@nextui-org/react';
 
 export default function Home() {
-  const teleHealthServiceSteps = [
+  const healthServices = [
     {
       icon: <IconPill size={48} />,
       title: 'Subscribe to a drug refill',
       description:
         'Get your medications delivered to you at your preferred intervals.',
-      url: '#',
+      url: '/drug-refill',
     },
     {
       icon: <IconLabs color='primary' />,
       title: 'Book a lab test',
       description:
         'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
-      url: '#',
+      url: '/book-lab-test',
     },
     {
       icon: <IconFluidMed />,
@@ -92,7 +92,7 @@ export default function Home() {
 
         <Hometransformation data={transformationData} />
 
-        <HealthSteps steps={teleHealthServiceSteps} />
+        <HealthServices steps={healthServices} />
 
         <HomeShopAndOrder />
 

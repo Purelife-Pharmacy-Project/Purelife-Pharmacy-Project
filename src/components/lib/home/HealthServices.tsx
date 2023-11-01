@@ -1,8 +1,8 @@
-import { Button, Card, CardBody } from '@nextui-org/react';
+import { Button, Card, CardBody, Link } from '@nextui-org/react';
 import { FC } from 'react';
 import { Section } from './Section';
 
-interface HealthStepsProps {
+interface HealthServicesProps {
   steps: {
     icon: JSX.Element;
     title: string;
@@ -11,7 +11,7 @@ interface HealthStepsProps {
   }[];
 }
 
-export const HealthSteps: FC<HealthStepsProps> = ({ steps }) => {
+export const HealthServices: FC<HealthServicesProps> = ({ steps }) => {
   return (
     <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
@@ -53,6 +53,8 @@ export const HealthSteps: FC<HealthStepsProps> = ({ steps }) => {
                     </p>
                   </div>
                   <Button
+                    as={Link}
+                    href={step.url}
                     variant='bordered'
                     radius='sm'
                     size='lg'

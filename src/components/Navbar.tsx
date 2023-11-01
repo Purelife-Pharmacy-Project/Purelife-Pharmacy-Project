@@ -1,4 +1,5 @@
 'use client';
+import { inputClassNames } from '@/theme';
 import {
   Button,
   Image,
@@ -96,13 +97,7 @@ export const AppNavbar = ({
           <Input
             radius='full'
             color='default'
-            classNames={{
-              inputWrapper: [
-                'bg-white',
-                'focus-within:bg-white',
-                'hover:bg-white',
-              ],
-            }}
+            classNames={inputClassNames}
             size='lg'
             type='text'
             isClearable

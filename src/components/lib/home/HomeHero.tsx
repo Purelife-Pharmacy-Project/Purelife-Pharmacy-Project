@@ -17,7 +17,7 @@ export const HomeHero: FC<HomeHeroProps> = ({
   ctaLink,
 }) => {
   return (
-    <div className='grid justify-center bg-primaryLight lg:pt-[55px]'>
+    <div className='grid justify-center bg-primaryLight'>
       <Section className='bg-primaryLight'>
         <div className='justify-between py-12 lg:flex'>
           <div className='grid gap-6 lg:justify-start'>
