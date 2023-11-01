@@ -1,4 +1,4 @@
-export const inputClassNames = {
+export const inputBordered = {
   label: ['text-content text-md font-light'],
   inputWrapper: [
     'pr-2',
@@ -10,6 +10,20 @@ export const inputClassNames = {
     'group-data-[active=true]:bg-white',
   ],
 };
+
+export const inputDefault = {
+  label: ['text-content text-md font-light'],
+  inputWrapper: [
+    'pr-2',
+    'bg-white',
+    'shadow-none',
+    'text-black capitalize',
+    'data-[hover=true]:bg-white',
+    'group-data-[focus=true]:bg-white',
+    'group-data-[active=true]:bg-white',
+  ],
+};
+
 export const textAreaClassNames = {
   label: ['text-content text-md font-light hidden'],
   description: ['hidden'],

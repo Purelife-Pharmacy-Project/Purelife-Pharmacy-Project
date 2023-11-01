@@ -1,5 +1,5 @@
 import { IconBrowse } from '@/components/icons/IconBrowse';
-import { inputClassNames, textAreaClassNames } from '@/theme';
+import { inputBordered, textAreaClassNames } from '@/theme';
 import { Button, Input, Textarea } from '@nextui-org/react';
 
 export const DoctorsForm = () => {
@@ -7,23 +7,23 @@ export const DoctorsForm = () => {
     <form onSubmit={(e) => e.preventDefault()}>
       <div className='mb-8 flex gap-4'>
         <div className='grid w-full gap-8'>
-          <Input label='Patient Name' classNames={inputClassNames} />
+          <Input label='Patient Name' classNames={inputBordered} />
           <Input
             label='Patient Number'
             type='number'
             inputMode='numeric'
-            classNames={inputClassNames}
+            classNames={inputBordered}
           />
           <Input
             label='Phone Number'
             inputMode='numeric'
-            classNames={inputClassNames}
+            classNames={inputBordered}
           />
           <Input
             label="Prescriber's Number"
             type='number'
             inputMode='numeric'
-            classNames={inputClassNames}
+            classNames={inputBordered}
           />
           <div className='flex w-full flex-col items-center justify-center rounded-lg border border-primaryGreenDark bg-white py-20'>
             <IconBrowse />
@@ -36,14 +36,14 @@ export const DoctorsForm = () => {
           <Input
             label="Patient's email"
             type='email'
-            classNames={inputClassNames}
+            classNames={inputBordered}
           />
           <Input
             label="Prescriber's email"
             type='email'
-            classNames={inputClassNames}
+            classNames={inputBordered}
           />
-          <Input label='Hospital name' classNames={inputClassNames} />
+          <Input label='Hospital name' classNames={inputBordered} />
           <div className='flex h-full'>
             <Textarea
               size='lg'

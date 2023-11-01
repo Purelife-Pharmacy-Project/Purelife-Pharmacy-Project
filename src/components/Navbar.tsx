@@ -1,5 +1,5 @@
 'use client';
-import { inputClassNames } from '@/theme';
+import { inputBordered } from '@/theme';
 import {
   Button,
   Image,
@@ -40,7 +40,7 @@ export const AppNavbar = ({
     },
     {
       name: 'Sign in',
-      path: '#',
+      path: '/sign-in',
     },
     {
       name: 'Cart',
@@ -97,7 +97,7 @@ export const AppNavbar = ({
           <Input
             radius='full'
             color='default'
-            classNames={inputClassNames}
+            classNames={inputBordered}
             size='lg'
             type='text'
             isClearable
@@ -109,10 +109,13 @@ export const AppNavbar = ({
           <Link
             color='foreground'
             className={isActive('/sign-in') ? 'font-medium text-primary' : ''}
-            href='#'
+            href='sign-in'
           >
             <div className='flex items-center gap-2'>
-              <IconProfile />
+              <IconProfile
+                color={isActive('/sign-in') ? 'primary' : 'header-100'}
+                size={24}
+              />
               <p>Sign in</p>
             </div>
           </Link>

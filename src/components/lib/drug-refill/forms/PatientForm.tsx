@@ -1,5 +1,5 @@
 import { IconBrowse } from '@/components/icons/IconBrowse';
-import { inputClassNames, textAreaClassNames } from '@/theme';
+import { inputBordered, textAreaClassNames } from '@/theme';
 import { Button, Input, Textarea } from '@nextui-org/react';
 
 export const PatientForm = () => {
@@ -7,11 +7,11 @@ export const PatientForm = () => {
     <form onSubmit={(e) => e.preventDefault()}>
       <div className='mb-8 flex gap-4'>
         <div className='grid w-full gap-8'>
-          <Input label='Full Name' classNames={inputClassNames} />
+          <Input label='Full Name' classNames={inputBordered} />
           <Input
             label='Phone Number'
             inputMode='numeric'
-            classNames={inputClassNames}
+            classNames={inputBordered}
           />
           <div className='flex w-full flex-col items-center justify-center rounded-lg border border-primaryGreenDark bg-white py-20'>
             <IconBrowse />
@@ -24,7 +24,7 @@ export const PatientForm = () => {
           <Input
             label='Email Address'
             type='email'
-            classNames={inputClassNames}
+            classNames={inputBordered}
           />
           <div className='flex h-full'>
             <Textarea
