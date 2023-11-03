@@ -1,6 +1,7 @@
 import { IconShopAndOrderRound } from '@/components/icons/IconShopAndOrderRound';
 import { IconTellehealthRound } from '@/components/icons/IconTellehealthRound';
-import { Button, Image } from '@nextui-org/react';
+import { Button } from '@nextui-org/react';
+import Image from 'next/image';
 import { FC } from 'react';
 import { Section } from './Section';
 
@@ -44,6 +45,8 @@ export const HomeHero: FC<HomeHeroProps> = ({
           <div className='relative hidden lg:block'>
             <Image
               width={400}
+              height={400}
+              className='rounded-medium'
               src='/images/hero-image.png'
               alt='woman in red smiling'
             />

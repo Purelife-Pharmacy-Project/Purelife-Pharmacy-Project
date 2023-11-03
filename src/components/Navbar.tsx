@@ -2,7 +2,6 @@
 import { inputBordered } from '@/theme';
 import {
   Button,
-  Image,
   Input,
   Link,
   Navbar,
@@ -13,6 +12,7 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from '@nextui-org/react';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { IconCart } from './icons/IconCart';
@@ -64,6 +64,7 @@ export const AppNavbar = ({
               src='/app-logo.png'
               alt='purelife logo'
               width={147}
+              loading='eager'
               height={68.271}
             />
           </Link>

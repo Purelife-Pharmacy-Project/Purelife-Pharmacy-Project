@@ -60,7 +60,7 @@ export default function ShopAndOrder() {
     <>
       <AppNavbar background='primaryLight' />
       <main className='grid gap-6'>
-        <div className='grid justify-center bg-primaryLight lg:pt-[55px]'>
+        <div className='grid justify-center bg-primaryLight'>
           <Section className='bg-primaryLight'>
             <HomeHero
               title='Your the one-stop shop for wellness and lifestyle.'
