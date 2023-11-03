@@ -76,7 +76,7 @@ export const PersonalForm = () => {
       <Image
         alt='secured by paystack'
         width={300}
-        height={88}
+        height='auto'
         src='/images/secured-by-paystack.png'
       />
 
