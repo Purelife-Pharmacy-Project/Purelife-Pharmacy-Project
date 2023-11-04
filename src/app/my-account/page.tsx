@@ -1,4 +1,4 @@
-import { PersonalForm } from '@/components/lib/my-account/personal/personalForm';
+import { AccountPersonalForm } from '@/components/lib/my-account/AccountPersonalForm';
 
 export default function MyAccountPage() {
   return (
@@ -7,7 +7,7 @@ export default function MyAccountPage() {
         Personal Details
       </h1>
 
-      <PersonalForm />
+      <AccountPersonalForm />
     </section>
   );
 }

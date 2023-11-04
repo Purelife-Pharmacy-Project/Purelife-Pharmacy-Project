@@ -5,7 +5,7 @@ import { Line } from '@/components/ui/Line';
 import { inputDefault } from '@/theme';
 import { Button, Image, Input, Radio, RadioGroup } from '@nextui-org/react';
 
-export const PersonalForm = () => {
+export const AccountPersonalForm = () => {
   return (
     <div className='grid gap-6'>
       <form className='grid gap-6'>
