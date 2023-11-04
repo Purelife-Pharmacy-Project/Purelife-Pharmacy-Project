@@ -6,7 +6,7 @@ import { PatientForm } from './forms/PatientForm';
 
 export const DrugSubscriptionForm = () => {
   return (
-    <div className='grid justify-center lg:pb-10 '>
+    <div className='grid justify-center lg:pb-10'>
       <Section className='bg-white'>
         <div className='grid gap-10'>
           <Tabs
@@ -21,14 +21,14 @@ export const DrugSubscriptionForm = () => {
           >
             <Tab key='patient' title='As a patient'>
               <Card className='bg-primaryGreenLight' shadow='none'>
-                <CardBody>
+                <CardBody className='lg:py-[67px]'>
                   <PatientForm />
                 </CardBody>
               </Card>
             </Tab>
             <Tab key='doctor' title='As a doctor'>
               <Card className='bg-primaryGreenLight' shadow='none'>
-                <CardBody className='py-40'>
+                <CardBody className='lg:py-[67px]'>
                   <DoctorsForm />
                 </CardBody>
               </Card>

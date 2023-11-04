@@ -38,9 +38,12 @@ export default function LoginPage() {
                     <Link href='/sign-in'>Forgot Password</Link>
                   </p>
                 </div>
-                <Link className='text-black' href='/create-account'>
-                  Create an account
-                </Link>
+                <p>
+                  Don&apos;t have an account?{' '}
+                  <Link color='primary' href='/create-account'>
+                    Create an account
+                  </Link>
+                </p>
               </div>
             </CardBody>
           </Card>

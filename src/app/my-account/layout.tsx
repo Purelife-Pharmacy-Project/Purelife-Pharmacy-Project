@@ -1,4 +1,5 @@
 import { AppNavbar } from '@/components/Navbar';
+import { Footer } from '@/components/lib/home/Footer';
 import { Section } from '@/components/lib/home/Section';
 import { MyAccountTabs } from '@/components/lib/my-account/MyAccountTabs';
 
@@ -24,6 +25,8 @@ export default function MyAccountLayout({
           </Section>
         </div>
       </main>
+
+      <Footer />
     </>
   );
 }

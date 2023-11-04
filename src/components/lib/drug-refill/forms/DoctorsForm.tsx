@@ -5,7 +5,7 @@ import { Button, Input, Textarea } from '@nextui-org/react';
 export const DoctorsForm = () => {
   return (
     <form onSubmit={(e) => e.preventDefault()}>
-      <div className='mb-8 flex gap-4'>
+      <div className='mb-8 flex flex-col-reverse gap-4 lg:flex-row'>
         <div className='grid w-full gap-8'>
           <Input label='Patient Name' classNames={inputBordered} />
           <Input
