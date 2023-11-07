@@ -49,7 +49,7 @@ export const MyAccountTabs = ({ children }: { children: React.ReactNode }) => {
           </Link>
         ))}
       </div>
-      <div className='bg-primaryLight px-10 py-5'>{children}</div>
+      <div className='rounded-lg bg-primaryLight px-10 py-5'>{children}</div>
     </div>
   );
 };
