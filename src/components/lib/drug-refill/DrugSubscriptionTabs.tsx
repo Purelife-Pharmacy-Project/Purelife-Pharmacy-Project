@@ -4,7 +4,7 @@ import { Section } from '../home/Section';
 import { DoctorsForm } from './forms/DoctorsForm';
 import { PatientForm } from './forms/PatientForm';
 
-export const DrugSubscriptionForm = () => {
+export const DrugSubscriptionTabs = () => {
   return (
     <div className='grid justify-center lg:pb-10'>
       <Section className='bg-white'>

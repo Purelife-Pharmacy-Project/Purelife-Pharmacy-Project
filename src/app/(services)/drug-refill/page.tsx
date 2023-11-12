@@ -3,7 +3,7 @@ import { IconAddNotification } from '@/components/icons/IconAddNotification';
 import { IconDrugPrescription } from '@/components/icons/IconDrugPrescription';
 import { IconPill } from '@/components/icons/IconPill';
 import { HowitWorks } from '@/components/lib/book-a-test/HowItWorks';
-import { DrugSubscriptionForm } from '@/components/lib/drug-refill/DrugSubscriptionForm';
+import { DrugSubscriptionTabs } from '@/components/lib/drug-refill/DrugSubscriptionTabs';
 import { Footer } from '@/components/lib/home/Footer';
 import { HomeHero } from '@/components/lib/home/HomeHero';
 import { NewsLetterCard } from '@/components/lib/home/NewsletterCard';
@@ -42,7 +42,7 @@ export default function DrugRefill() {
 
         <HowitWorks data={howItWorksData} />
 
-        <DrugSubscriptionForm />
+        <DrugSubscriptionTabs />
 
         <NewsLetterCard />
         <Footer />

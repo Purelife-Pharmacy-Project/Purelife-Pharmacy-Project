@@ -12,7 +12,7 @@ export default function CartPage() {
       <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
         <Section className='bg-white'>
           <h1 className='text-2xl font-bold text-header-100 lg:text-4xl'>
-            Health Category
+            Your Cart
           </h1>
           <div className='flex items-center justify-between'>
             <p className='font-light text-header-100'>
