@@ -1,6 +1,6 @@
-import { IconLabs } from '@/library/icons/IconLabs';
-import { IconScience } from '@/library/icons/IconScience';
-import { IconStar } from '@/library/icons/IconStar';
+import { IconLabs } from '@/components/icons/IconLabs';
+import { IconScience } from '@/components/icons/IconScience';
+import { IconStar } from '@/components/icons/IconStar';
 import { Image } from '@nextui-org/react';
 import { Section } from '../home/Section';
 

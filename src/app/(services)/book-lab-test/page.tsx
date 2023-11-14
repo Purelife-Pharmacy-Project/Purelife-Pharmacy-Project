@@ -5,9 +5,9 @@ import { WhyBookATest } from '@/components/book-a-test/WhyBookATest';
 import { FeaturedProducts } from '@/components/home/FeaturedProducts';
 import { Footer } from '@/components/home/Footer';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
-import { IconAddNotification } from '@/library/icons/IconAddNotification';
-import { IconBrowse } from '@/library/icons/IconBrowse';
-import { IconHealthShield } from '@/library/icons/IconHealthShield';
+import { IconAddNotification } from '@/components/icons/IconAddNotification';
+import { IconBrowse } from '@/components/icons/IconBrowse';
+import { IconHealthShield } from '@/components/icons/IconHealthShield';
 
 export default function BookATest() {
   const howItWorksData: {

@@ -1,6 +1,6 @@
 'use client';
 
-import { IconBrowse } from '@/library/icons/IconBrowse';
+import { IconBrowse } from '@/components/icons/IconBrowse';
 import { Line } from '@/library/ui/Line';
 import { inputDefault } from '@/theme';
 import { Button, Image, Input, Radio, RadioGroup } from '@nextui-org/react';
@@ -77,7 +77,7 @@ export const AccountPersonalForm = () => {
         alt='secured by paystack'
         width={300}
         height='auto'
-        src='/images/secured-by-paystack.png'
+        src='/images/paystack-secure.png'
       />
 
       <Button color='primary' size='lg' radius='full' className='w-max px-10'>

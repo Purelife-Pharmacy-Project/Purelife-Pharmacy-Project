@@ -1,6 +1,6 @@
-import { IconChatSolid } from '@/library/icons/IconChatSolid';
-import { IconEmailSolid } from '@/library/icons/IconEmailSolid';
-import { IconPhoneSolid } from '@/library/icons/IconPhoneSolid';
+import { IconChatSolid } from '@/components/icons/IconChatSolid';
+import { IconEmailSolid } from '@/components/icons/IconEmailSolid';
+import { IconPhoneSolid } from '@/components/icons/IconPhoneSolid';
 import { Card, CardBody, Link } from '@nextui-org/react';
 
 export default function SettingsSupportPage() {

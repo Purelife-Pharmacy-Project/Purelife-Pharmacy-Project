@@ -15,9 +15,9 @@ import {
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { IconCart } from '../library/icons/IconCart';
-import { IconProfile } from '../library/icons/IconProfile';
-import { IconSearch } from '../library/icons/IconSearch';
+import { IconCart } from './icons/IconCart';
+import { IconProfile } from './icons/IconProfile';
+import { IconSearch } from './icons/IconSearch';
 
 export const AppNavbar = ({
   background = 'bg-inherit',

@@ -1,8 +1,8 @@
-import { IconDoctor } from '@/library/icons/IconDoctor';
-import { IconFluidMed } from '@/library/icons/IconFluidMed';
-import { IconLabs } from '@/library/icons/IconLabs';
-import { IconPill } from '@/library/icons/IconPill';
-import { IconPrescription } from '@/library/icons/IconPrescription';
+import { IconDoctor } from '@/components/icons/IconDoctor';
+import { IconFluidMed } from '@/components/icons/IconFluidMed';
+import { IconLabs } from '@/components/icons/IconLabs';
+import { IconPill } from '@/components/icons/IconPill';
+import { IconPrescription } from '@/components/icons/IconPrescription';
 
 export const healthServices = [
   {

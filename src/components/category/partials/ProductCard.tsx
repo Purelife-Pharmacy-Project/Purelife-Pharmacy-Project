@@ -1,5 +1,5 @@
-import { IconCart } from '@/library/icons/IconCart';
-import { IconShare } from '@/library/icons/IconShare';
+import { IconCart } from '@/components/icons/IconCart';
+import { IconShare } from '@/components/icons/IconShare';
 import { Button, Card, CardBody, CardFooter, Image } from '@nextui-org/react';
 
 export const ProductCard = ({

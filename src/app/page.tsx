@@ -9,9 +9,9 @@ import { HomeShopAndOrder } from '@/components/home/HomeShopAndOrder';
 import { Hometransformation } from '@/components/home/HomeTranformation';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Testomonials } from '@/components/home/Testimonials';
-import { IconFluidMed } from '@/library/icons/IconFluidMed';
-import { IconLabs } from '@/library/icons/IconLabs';
-import { IconPill } from '@/library/icons/IconPill';
+import { IconFluidMed } from '@/components/icons/IconFluidMed';
+import { IconLabs } from '@/components/icons/IconLabs';
+import { IconPill } from '@/components/icons/IconPill';
 import { Button } from '@nextui-org/react';
 
 export default function Home() {

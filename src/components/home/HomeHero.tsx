@@ -1,5 +1,5 @@
-import { IconShopAndOrderRound } from '@/library/icons/IconShopAndOrderRound';
-import { IconTellehealthRound } from '@/library/icons/IconTellehealthRound';
+import { IconShopAndOrderRound } from '@/components/icons/IconShopAndOrderRound';
+import { IconTellehealthRound } from '@/components/icons/IconTellehealthRound';
 import { Button } from '@nextui-org/react';
 import Image from 'next/image';
 import { FC } from 'react';

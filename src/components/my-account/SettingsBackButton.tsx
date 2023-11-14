@@ -1,6 +1,6 @@
 'use client';
 
-import { IconChevronLeft } from '@/library/icons/IconChevronLeft';
+import { IconChevronLeft } from '@/components/icons/IconChevronLeft';
 import { Link } from '@nextui-org/react';
 import { usePathname } from 'next/navigation';
 

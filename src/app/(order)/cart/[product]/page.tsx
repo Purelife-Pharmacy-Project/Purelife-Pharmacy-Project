@@ -2,7 +2,7 @@ import { AppNavbar } from '@/components/Navbar';
 import { DeliveryModeTabs } from '@/components/cart/DeliveryModeTabs';
 import { ProductQuantity } from '@/components/cart/ProductQuantity';
 import { Section } from '@/components/home/Section';
-import { IconBin } from '@/library/icons/IconBin';
+import { IconBin } from '@/components/icons/IconBin';
 import { Button, Card, CardBody, Image } from '@nextui-org/react';
 
 export default function CartProductPage() {

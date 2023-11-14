@@ -1,7 +1,7 @@
-import { IconChat } from '@/library/icons/IconChat';
-import { IconFaQ } from '@/library/icons/IconFaq';
-import { IconLock } from '@/library/icons/IconLock';
-import { IconLogout } from '@/library/icons/IconLogout';
+import { IconChat } from '@/components/icons/IconChat';
+import { IconFaQ } from '@/components/icons/IconFaq';
+import { IconLock } from '@/components/icons/IconLock';
+import { IconLogout } from '@/components/icons/IconLogout';
 import Link from 'next/link';
 
 export default function MyAccountSettingsPage() {

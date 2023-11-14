@@ -1,11 +1,10 @@
 import { AppNavbar } from '@/components/Navbar';
 
-export default function BillingPage() {
+export default function OrderStatusPage() {
   return (
     <>
       <AppNavbar background='primaryLight' />
-
-      <p>billing page</p>
+      <div className='grid h-screen w-full place-content-center'></div>
     </>
   );
 }
