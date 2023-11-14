@@ -1,8 +1,8 @@
 import { AppNavbar } from '@/components/Navbar';
-import { IconBin } from '@/components/icons/IconBin';
-import { DeliveryModeTabs } from '@/components/lib/cart/DeliveryModeTabs';
-import { ProductQuantity } from '@/components/lib/cart/ProductQuantity';
-import { Section } from '@/components/lib/home/Section';
+import { DeliveryModeTabs } from '@/components/cart/DeliveryModeTabs';
+import { ProductQuantity } from '@/components/cart/ProductQuantity';
+import { Section } from '@/components/home/Section';
+import { IconBin } from '@/library/icons/IconBin';
 import { Button, Card, CardBody, Image } from '@nextui-org/react';
 
 export default function CartProductPage() {

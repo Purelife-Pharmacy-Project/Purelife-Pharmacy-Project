@@ -1,4 +1,4 @@
-import { IconBrowse } from '@/components/icons/IconBrowse';
+import { IconBrowse } from '@/library/icons/IconBrowse';
 import { inputBordered, textAreaClassNames } from '@/theme';
 import { Button, Input, Textarea } from '@nextui-org/react';
 

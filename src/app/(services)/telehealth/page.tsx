@@ -1,16 +1,16 @@
 import { AppNavbar } from '@/components/Navbar';
-import { IconDoctor } from '@/components/icons/IconDoctor';
-import { IconFluidMed } from '@/components/icons/IconFluidMed';
-import { IconLabs } from '@/components/icons/IconLabs';
-import { IconPill } from '@/components/icons/IconPill';
-import { IconPrescription } from '@/components/icons/IconPrescription';
-import { EarnedClients } from '@/components/lib/home/EarnedClients';
-import { Footer } from '@/components/lib/home/Footer';
-import { HealthServices } from '@/components/lib/home/HealthServices';
-import { HomeHero } from '@/components/lib/home/HomeHero';
-import { Hometransformation } from '@/components/lib/home/HomeTranformation';
-import { NewsLetterCard } from '@/components/lib/home/NewsletterCard';
-import { Section } from '@/components/lib/home/Section';
+import { EarnedClients } from '@/components/home/EarnedClients';
+import { Footer } from '@/components/home/Footer';
+import { HealthServices } from '@/components/home/HealthServices';
+import { HomeHero } from '@/components/home/HomeHero';
+import { Hometransformation } from '@/components/home/HomeTranformation';
+import { NewsLetterCard } from '@/components/home/NewsletterCard';
+import { Section } from '@/components/home/Section';
+import { IconDoctor } from '@/library/icons/IconDoctor';
+import { IconFluidMed } from '@/library/icons/IconFluidMed';
+import { IconLabs } from '@/library/icons/IconLabs';
+import { IconPill } from '@/library/icons/IconPill';
+import { IconPrescription } from '@/library/icons/IconPrescription';
 
 export default function Telehealth() {
   const transformationData = [

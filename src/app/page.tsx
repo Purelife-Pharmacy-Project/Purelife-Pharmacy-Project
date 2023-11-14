@@ -1,17 +1,17 @@
 import { AppNavbar } from '@/components/Navbar';
-import { IconFluidMed } from '@/components/icons/IconFluidMed';
-import { IconLabs } from '@/components/icons/IconLabs';
-import { IconPill } from '@/components/icons/IconPill';
-import { EarnedClients } from '@/components/lib/home/EarnedClients';
-import { FeaturedProducts } from '@/components/lib/home/FeaturedProducts';
-import { Footer } from '@/components/lib/home/Footer';
-import { HealthServices } from '@/components/lib/home/HealthServices';
-import { HomeHero } from '@/components/lib/home/HomeHero';
-import { HomePartners } from '@/components/lib/home/HomePartners';
-import { HomeShopAndOrder } from '@/components/lib/home/HomeShopAndOrder';
-import { Hometransformation } from '@/components/lib/home/HomeTranformation';
-import { NewsLetterCard } from '@/components/lib/home/NewsletterCard';
-import { Testomonials } from '@/components/lib/home/Testimonials';
+import { EarnedClients } from '@/components/home/EarnedClients';
+import { FeaturedProducts } from '@/components/home/FeaturedProducts';
+import { Footer } from '@/components/home/Footer';
+import { HealthServices } from '@/components/home/HealthServices';
+import { HomeHero } from '@/components/home/HomeHero';
+import { HomePartners } from '@/components/home/HomePartners';
+import { HomeShopAndOrder } from '@/components/home/HomeShopAndOrder';
+import { Hometransformation } from '@/components/home/HomeTranformation';
+import { NewsLetterCard } from '@/components/home/NewsletterCard';
+import { Testomonials } from '@/components/home/Testimonials';
+import { IconFluidMed } from '@/library/icons/IconFluidMed';
+import { IconLabs } from '@/library/icons/IconLabs';
+import { IconPill } from '@/library/icons/IconPill';
 import { Button } from '@nextui-org/react';
 
 export default function Home() {

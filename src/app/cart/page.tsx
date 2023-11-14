@@ -1,8 +1,8 @@
 import { AppNavbar } from '@/components/Navbar';
-import { CartItem } from '@/components/lib/cart/CartItem';
-import { OrderSummary } from '@/components/lib/cart/OrderSummary';
-import { Footer } from '@/components/lib/home/Footer';
-import { Section } from '@/components/lib/home/Section';
+import { CartItem } from '@/components/cart/CartItem';
+import { OrderSummary } from '@/components/cart/OrderSummary';
+import { Footer } from '@/components/home/Footer';
+import { Section } from '@/components/home/Section';
 import { Button, Input } from '@nextui-org/react';
 
 export default function CartPage() {

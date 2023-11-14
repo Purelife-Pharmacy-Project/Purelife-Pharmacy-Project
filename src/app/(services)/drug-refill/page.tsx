@@ -1,12 +1,12 @@
 import { AppNavbar } from '@/components/Navbar';
-import { IconAddNotification } from '@/components/icons/IconAddNotification';
-import { IconDrugPrescription } from '@/components/icons/IconDrugPrescription';
-import { IconPill } from '@/components/icons/IconPill';
-import { HowitWorks } from '@/components/lib/book-a-test/HowItWorks';
-import { DrugSubscriptionTabs } from '@/components/lib/drug-refill/DrugSubscriptionTabs';
-import { Footer } from '@/components/lib/home/Footer';
-import { HomeHero } from '@/components/lib/home/HomeHero';
-import { NewsLetterCard } from '@/components/lib/home/NewsletterCard';
+import { HowitWorks } from '@/components/book-a-test/HowItWorks';
+import { DrugSubscriptionTabs } from '@/components/drug-refill/DrugSubscriptionTabs';
+import { Footer } from '@/components/home/Footer';
+import { HomeHero } from '@/components/home/HomeHero';
+import { NewsLetterCard } from '@/components/home/NewsletterCard';
+import { IconAddNotification } from '@/library/icons/IconAddNotification';
+import { IconDrugPrescription } from '@/library/icons/IconDrugPrescription';
+import { IconPill } from '@/library/icons/IconPill';
 
 export default function DrugRefill() {
   const howItWorksData: {

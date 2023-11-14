@@ -1,4 +1,4 @@
-import { AccountSubscriptions } from '@/components/lib/my-account/AccountSubscriptions';
+import { AccountSubscriptions } from '@/components/my-account/AccountSubscriptions';
 
 export default function MyAccountSubscriptionsPage() {
   return (

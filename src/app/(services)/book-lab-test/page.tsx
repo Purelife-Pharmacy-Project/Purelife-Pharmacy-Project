@@ -1,13 +1,13 @@
 import { AppNavbar } from '@/components/Navbar';
-import { IconAddNotification } from '@/components/icons/IconAddNotification';
-import { IconBrowse } from '@/components/icons/IconBrowse';
-import { IconHealthShield } from '@/components/icons/IconHealthShield';
-import { BookATestHero } from '@/components/lib/book-a-test/BookATestHero';
-import { HowitWorks } from '@/components/lib/book-a-test/HowItWorks';
-import { WhyBookATest } from '@/components/lib/book-a-test/WhyBookATest';
-import { FeaturedProducts } from '@/components/lib/home/FeaturedProducts';
-import { Footer } from '@/components/lib/home/Footer';
-import { NewsLetterCard } from '@/components/lib/home/NewsletterCard';
+import { BookATestHero } from '@/components/book-a-test/BookATestHero';
+import { HowitWorks } from '@/components/book-a-test/HowItWorks';
+import { WhyBookATest } from '@/components/book-a-test/WhyBookATest';
+import { FeaturedProducts } from '@/components/home/FeaturedProducts';
+import { Footer } from '@/components/home/Footer';
+import { NewsLetterCard } from '@/components/home/NewsletterCard';
+import { IconAddNotification } from '@/library/icons/IconAddNotification';
+import { IconBrowse } from '@/library/icons/IconBrowse';
+import { IconHealthShield } from '@/library/icons/IconHealthShield';
 
 export default function BookATest() {
   const howItWorksData: {

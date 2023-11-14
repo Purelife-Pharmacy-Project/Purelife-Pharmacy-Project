@@ -1,6 +1,6 @@
 import { AppNavbar } from '@/components/Navbar';
-import { CategoryHero } from '@/components/lib/category/CategoryHero';
-import { CategoryProducts } from '@/components/lib/category/CategoryProducts';
+import { CategoryHero } from '@/components/category/CategoryHero';
+import { CategoryProducts } from '@/components/category/CategoryProducts';
 
 export default function CategoryPage() {
   return (

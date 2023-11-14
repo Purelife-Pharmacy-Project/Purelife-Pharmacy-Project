@@ -1,6 +1,6 @@
-import { IconCart } from '@/components/icons/IconCart';
-import { IconHandAndHeart } from '@/components/icons/IconHandAndHeart';
-import { IconHome } from '@/components/icons/IconHome';
+import { IconCart } from '@/library/icons/IconCart';
+import { IconHandAndHeart } from '@/library/icons/IconHandAndHeart';
+import { IconHome } from '@/library/icons/IconHome';
 import { Button, Card, CardBody } from '@nextui-org/react';
 import { Section } from './Section';
 

@@ -1,8 +1,8 @@
-import { IconFacebook } from '@/components/icons/social/IconFacebook';
-import { IconInstagram } from '@/components/icons/social/IconInstagram';
-import { IconLinkedin } from '@/components/icons/social/IconLinkedin';
-import { IconTwitter } from '@/components/icons/social/IconTwitter';
-import { Line } from '@/components/ui/Line';
+import { IconFacebook } from '@/library/icons/social/IconFacebook';
+import { IconInstagram } from '@/library/icons/social/IconInstagram';
+import { IconLinkedin } from '@/library/icons/social/IconLinkedin';
+import { IconTwitter } from '@/library/icons/social/IconTwitter';
+import { Line } from '@/library/ui/Line';
 import { Image, Link } from '@nextui-org/react';
 import { FooterBase } from './FooterBase';
 import { Section } from './Section';

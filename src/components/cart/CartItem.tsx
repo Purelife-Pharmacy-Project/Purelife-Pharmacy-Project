@@ -1,4 +1,4 @@
-import { IconX } from '@/components/icons/IconX';
+import { IconX } from '@/library/icons/IconX';
 import { Button, Card, CardBody, Image } from '@nextui-org/react';
 import { ProductQuantity } from './ProductQuantity';
 

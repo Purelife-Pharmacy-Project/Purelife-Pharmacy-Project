@@ -1,5 +1,5 @@
-import { SettingsBackButton } from '@/components/lib/my-account/SettingsBackButton';
-import { SettingsHeader } from '@/components/lib/my-account/SettingsHeader';
+import { SettingsBackButton } from '@/components/my-account/SettingsBackButton';
+import { SettingsHeader } from '@/components/my-account/SettingsHeader';
 
 export default function AccountSettingsLayout({
   children,

@@ -1,4 +1,4 @@
-import { AccountPersonalForm } from '@/components/lib/my-account/AccountPersonalForm';
+import { AccountPersonalForm } from '@/components/my-account/AccountPersonalForm';
 
 export default function MyAccountPage() {
   return (

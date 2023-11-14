@@ -1,5 +1,5 @@
 'use client';
-import { IconSearch } from '@/components/icons/IconSearch';
+import { IconSearch } from '@/library/icons/IconSearch';
 import { inputDefault } from '@/theme';
 import { Card, CardBody, Input, Radio, RadioGroup } from '@nextui-org/react';
 

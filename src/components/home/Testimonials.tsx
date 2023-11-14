@@ -1,4 +1,4 @@
-import { Quotes } from '@/components/illustrations/Quotes';
+import { Quotes } from '@/library/illustrations/Quotes';
 import { Avatar, AvatarGroup } from '@nextui-org/react';
 import { Section } from './Section';
 

@@ -1,4 +1,4 @@
-import { AccountTransactions } from '@/components/lib/my-account/AccountTransactions';
+import { AccountTransactions } from '@/components/my-account/AccountTransactions';
 
 export default function MyAccountTransactionsPage() {
   return (

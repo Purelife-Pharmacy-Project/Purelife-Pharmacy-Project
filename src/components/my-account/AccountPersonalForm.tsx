@@ -1,7 +1,7 @@
 'use client';
 
-import { IconBrowse } from '@/components/icons/IconBrowse';
-import { Line } from '@/components/ui/Line';
+import { IconBrowse } from '@/library/icons/IconBrowse';
+import { Line } from '@/library/ui/Line';
 import { inputDefault } from '@/theme';
 import { Button, Image, Input, Radio, RadioGroup } from '@nextui-org/react';
 
