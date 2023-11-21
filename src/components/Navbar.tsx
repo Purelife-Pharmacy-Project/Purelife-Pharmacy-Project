@@ -36,7 +36,7 @@ export const AppNavbar = ({
     },
     {
       name: 'Shop & Order',
-      path: '#',
+      path: '/shop-and-order',
     },
     {
       name: 'Sign in',
@@ -128,7 +128,10 @@ export const AppNavbar = ({
             href='/cart'
           >
             <div className='flex items-center gap-2'>
-              <IconCart size={24} color='header-100' />
+              <IconCart
+                size={24}
+                color={isActive('/cart') ? 'primary' : 'header-100'}
+              />
               <p>Cart</p>
             </div>
           </Link>

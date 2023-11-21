@@ -1,8 +1,10 @@
 import { AppNavbar } from '@/components/Navbar';
+import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { BookATestHero } from '@/components/book-a-test/BookATestHero';
+import { FrequentLabTests } from '@/components/book-a-test/FrequentLabTests';
 import { HowitWorks } from '@/components/book-a-test/HowItWorks';
+import { LabTestProducts } from '@/components/book-a-test/LabTestProducts';
 import { WhyBookATest } from '@/components/book-a-test/WhyBookATest';
-import { FeaturedProducts } from '@/components/home/FeaturedProducts';
 import { Footer } from '@/components/home/Footer';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { IconAddNotification } from '@/components/icons/IconAddNotification';
@@ -39,9 +41,13 @@ export default function BookATest() {
 
         <WhyBookATest />
 
-        <FeaturedProducts title='Frequently Scheduled Lab Tests' />
+        <FrequentLabTests title='Frequently Scheduled Lab Tests' />
+
+        <LabTestProducts />
 
         <HowitWorks data={howItWorksData} />
+
+        <ReportDrugReaction />
 
         <NewsLetterCard />
 

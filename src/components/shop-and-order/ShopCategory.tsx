@@ -14,7 +14,7 @@ export const ShopCategory = () => {
       description:
         'Discover a wide range of healthcare and pharmaceutical products at budget-friendly rates.',
       image: '/images/woman.png',
-      url: '#',
+      url: '/category/health',
       bgColor: 'bg-primaryLight',
     },
     {
@@ -22,7 +22,7 @@ export const ShopCategory = () => {
       description:
         'Get a sleek grasp on top-notch skincare and beauty products.',
       image: '/images/woman.png',
-      url: '#',
+      url: '/category/beauty',
       bgColor: 'bg-primaryLight',
     },
     {
@@ -30,7 +30,7 @@ export const ShopCategory = () => {
       description:
         'Easily purchase your everyday essentials from wherever you are.',
       image: '/images/woman.png',
-      url: '#',
+      url: '/category/supermarket',
       bgColor: 'bg-primaryLight',
     },
   ];

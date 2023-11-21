@@ -1,4 +1,5 @@
 import { AppNavbar } from '@/components/Navbar';
+import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { EarnedClients } from '@/components/home/EarnedClients';
 import { FeaturedProducts } from '@/components/home/FeaturedProducts';
 import { Footer } from '@/components/home/Footer';
@@ -9,6 +10,7 @@ import { HomeShopAndOrder } from '@/components/home/HomeShopAndOrder';
 import { Hometransformation } from '@/components/home/HomeTranformation';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Testomonials } from '@/components/home/Testimonials';
+import { WellnessBlogSection } from '@/components/home/WellnessBlogSection';
 import { IconFluidMed } from '@/components/icons/IconFluidMed';
 import { IconLabs } from '@/components/icons/IconLabs';
 import { IconPill } from '@/components/icons/IconPill';
@@ -31,7 +33,7 @@ export default function Home() {
       url: '/book-lab-test',
     },
     {
-      icon: <IconFluidMed />,
+      icon: <IconFluidMed color='primary' />,
       title: 'Get Vaccination',
       description:
         'Choose from our expertly curated vaccines whenever you want.',
@@ -115,6 +117,10 @@ export default function Home() {
           title='We have earned the trust of 300+ Clients'
           clients={earnedClients}
         />
+
+        <WellnessBlogSection />
+
+        <ReportDrugReaction />
 
         <NewsLetterCard />
         <Footer />

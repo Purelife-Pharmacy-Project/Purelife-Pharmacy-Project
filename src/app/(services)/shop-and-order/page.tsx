@@ -27,7 +27,7 @@ export default function ShopAndOrder() {
       url: '#',
     },
     {
-      icon: <IconFluidMed />,
+      icon: <IconFluidMed color='primary' />,
       title: 'Get Vaccination',
       description:
         'Choose from our expertly curated vaccines whenever you want.',

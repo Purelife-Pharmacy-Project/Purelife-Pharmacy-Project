@@ -3,7 +3,8 @@ import { IconInstagram } from '@/components/icons/social/IconInstagram';
 import { IconLinkedin } from '@/components/icons/social/IconLinkedin';
 import { IconTwitter } from '@/components/icons/social/IconTwitter';
 import { Line } from '@/library/ui/Line';
-import { Image, Link } from '@nextui-org/react';
+import { Link } from '@nextui-org/react';
+import Image from 'next/image';
 import { FooterBase } from './FooterBase';
 import { Section } from './Section';
 
