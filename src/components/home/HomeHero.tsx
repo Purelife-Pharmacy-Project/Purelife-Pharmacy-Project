@@ -2,6 +2,7 @@ import { IconShopAndOrderRound } from '@/components/icons/IconShopAndOrderRound'
 import { IconTellehealthRound } from '@/components/icons/IconTellehealthRound';
 import { Button } from '@nextui-org/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { FC } from 'react';
 import { Section } from './Section';
 
@@ -12,33 +13,33 @@ interface HomeHeroProps {
   ctaLink: string;
 }
 export const HomeHero: FC<HomeHeroProps> = ({
-  title,
-  description,
-  ctaText,
-  ctaLink,
+  title = 'Your the one-stop shop for wellness and lifestyle.',
+  description = 'Schedule laboratory tests, book vaccination appointments, and receive high-quality medical services from the convenience of wherever you are in Nigeria.',
+  ctaText = 'Start here',
+  ctaLink = '#',
 }) => {
   return (
     <div className='grid justify-center bg-primaryLight'>
       <Section className='bg-primaryLight'>
         <div className='justify-between py-12 lg:flex'>
-          <div className='grid gap-6 lg:justify-start'>
-            <h1 className='mx-auto max-w-[530px] text-center text-4xl font-bold text-header-100 lg:text-start lg:text-6xl'>
-              Your the one-stop shop for wellness and lifestyle.
+          <div className='flex flex-col gap-6 lg:justify-center'>
+            <h1 className='mx-auto max-w-[530px] text-center text-4xl font-bold text-header-100 lg:text-start lg:text-5xl'>
+              {title}
             </h1>
             <p className='mx-auto max-w-[498px] text-center text-base leading-[30px] text-content lg:mx-0 lg:text-start lg:text-xl'>
-              Schedule laboratory tests, book vaccination appointments, and
-              receive high-quality medical services from the convenience of
-              wherever you are in Nigeria.
+              {description}
             </p>
 
-            <div className='flex w-full justify-center  lg:w-max lg:justify-start'>
+            <div className='flex w-full justify-center lg:w-max lg:justify-start'>
               <Button
+                as={Link}
+                href={ctaLink}
                 radius='full'
-                className='px-12 py-8'
+                className='px-12 py-6'
                 color='primary'
                 size='lg'
               >
-                Start here
+                {ctaText}
               </Button>
             </div>
           </div>

@@ -95,7 +95,7 @@ export const healthServicesFull = [
     title: 'Consult with a doctor',
     description:
       'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
-    url: '#',
+    url: '/find-a-doctor',
   },
   {
     icon: IconPrescription as ({
