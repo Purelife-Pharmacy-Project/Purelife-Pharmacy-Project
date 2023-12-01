@@ -14,7 +14,7 @@ import { IconCalendar } from '../icons/IconCalendar';
 import { BillingAndPaymentModal } from './modals/BillingAndPaymentModal';
 
 export const BookConsultationForm = () => {
-  const [openCheckoutModal, setOpenCheckoutModal] = useState(true);
+  const [openCheckoutModal, setOpenCheckoutModal] = useState(false);
   return (
     <Card shadow='none' className='bg-primaryLight p-5'>
       <CardBody>
