@@ -14,9 +14,21 @@ import { WellnessBlogSection } from '@/components/home/WellnessBlogSection';
 import { IconFluidMed } from '@/components/icons/IconFluidMed';
 import { IconLabs } from '@/components/icons/IconLabs';
 import { IconPill } from '@/components/icons/IconPill';
+import ProductService from '@/services/products';
 import { Button } from '@nextui-org/react';
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from '@tanstack/react-query';
 
-export default function Home() {
+export default async function Home() {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ['products'],
+    queryFn: () => ProductService.getAllProducts(),
+  });
+
   const healthServices = [
     {
       icon: <IconPill size={48} />,
@@ -98,7 +110,9 @@ export default function Home() {
 
         <HomeShopAndOrder />
 
-        <FeaturedProducts />
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <FeaturedProducts />
+        </HydrationBoundary>
 
         <div className='flex justify-center'>
           <Button

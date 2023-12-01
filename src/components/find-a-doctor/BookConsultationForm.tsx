@@ -8,10 +8,13 @@ import {
   Select,
   SelectItem,
 } from '@nextui-org/react';
+import { useState } from 'react';
 import { IconAlarm } from '../icons/IconAlarm';
 import { IconCalendar } from '../icons/IconCalendar';
+import { BillingAndPaymentModal } from './modals/BillingAndPaymentModal';
 
 export const BookConsultationForm = () => {
+  const [openCheckoutModal, setOpenCheckoutModal] = useState(true);
   return (
     <Card shadow='none' className='bg-primaryLight p-5'>
       <CardBody>
@@ -119,11 +122,21 @@ export const BookConsultationForm = () => {
               <p className='text-3xl font-bold text-primary'>N10,000</p>
             </div>
 
-            <Button color='primary' radius='full' size='lg' className='px-8'>
+            <Button
+              onClick={() => setOpenCheckoutModal(true)}
+              color='primary'
+              radius='full'
+              size='lg'
+              className='px-8'
+            >
               Consult now
             </Button>
           </div>
         </form>
+        <BillingAndPaymentModal
+          isOpen={openCheckoutModal}
+          onClose={() => setOpenCheckoutModal(false)}
+        />
       </CardBody>
     </Card>
   );

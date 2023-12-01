@@ -1,7 +1,7 @@
 import { Button, Card, CardBody, Input } from '@nextui-org/react';
 import { Section } from './Section';
 
-export const NewsLetterCard = () => {
+export const NewsLetterCard = async () => {
   return (
     <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>

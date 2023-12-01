@@ -10,7 +10,7 @@ import {
 
 export const BillingPaymentCard = () => {
   return (
-    <Card shadow='none' className='w-full bg-primaryLight lg:w-[543px]'>
+    <Card shadow='none' className='w-full bg-primaryLight'>
       <CardBody className='p-8 lg:p-12'>
         <div className='grid gap-4'>
           <div className='grid gap-6'>

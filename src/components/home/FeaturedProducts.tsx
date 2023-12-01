@@ -1,5 +1,7 @@
-import { Button, Card, CardBody, CardFooter, Image } from '@nextui-org/react';
+'use client';
+import { useGetProducts } from '@/hooks';
 import { FC } from 'react';
+import { FeaturedProduct } from './FeaturedProduct';
 import { Section } from './Section';
 
 interface FeaturedProductsProps {
@@ -16,6 +18,7 @@ export const FeaturedProducts: FC<FeaturedProductsProps> = ({
   title,
   products,
 }) => {
+  const { products: allProducts, loadingProducts } = useGetProducts();
   return (
     <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
@@ -28,31 +31,12 @@ export const FeaturedProducts: FC<FeaturedProductsProps> = ({
             {Array.from({ length: 3 })
               .fill(0)
               .map((_, index) => (
-                <Card key={index} shadow='none' className='w-full' radius='lg'>
-                  <CardBody className='overflow-visible px-0 py-2 md:px-3'>
-                    <div>
-                      <Image
-                        alt='Card background'
-                        className='rounded-xl object-cover'
-                        src='/images/dummy-imagee.png'
-                      />
-                    </div>
-                  </CardBody>
-                  <CardFooter className='flex w-full justify-between'>
-                    <div>
-                      <p className='text-lg font-semibold text-header-100'>
-                        Amino Pep 200ml
-                      </p>
-                      <p className='font-medium text-header-100'>₦2,550.00 </p>
-                    </div>
-                    <Button
-                      className='border-header-100 text-header-100'
-                      variant='bordered'
-                    >
-                      Add to Cart
-                    </Button>
-                  </CardFooter>
-                </Card>
+                <FeaturedProduct
+                  key={index}
+                  name='Amino Pep 200ml'
+                  price={2550}
+                  image='/images/dummy-imagee.png'
+                />
               ))}
           </div>
         </div>

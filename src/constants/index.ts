@@ -4,6 +4,10 @@ import { IconLabs } from '@/components/icons/IconLabs';
 import { IconPill } from '@/components/icons/IconPill';
 import { IconPrescription } from '@/components/icons/IconPrescription';
 
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '/api/v1';
+
+export const USER_TOKEN_KEY = 'user_token';
+
 export const healthServices = [
   {
     icon: IconPill as ({
