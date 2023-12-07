@@ -27,7 +27,7 @@ class Api {
       const apiError = err.response.data;
 
       if (apiError.code === 'EXPIRED_TOKEN') {
-        // logoutUser();
+        // UsersService.logoutUser();
         window.location.href = `/auth/login?redirectUrl=${window.location.pathname}`;
       }
 
@@ -35,7 +35,7 @@ class Api {
         apiError.code === 'MISSING_TOKEN' &&
         !this.hasToastedUnauthorizedError
       ) {
-        // logoutUser();
+        // UsersService.logoutUser();
 
         const timeout = setTimeout(() => {
           window.location.href = `/login?redirectUrl=${window.location.pathname}`;
@@ -44,12 +44,12 @@ class Api {
         return () => clearTimeout(timeout);
       }
       console.error(
-        `Backend returned code ${err.code}:${apiError.code}, ` +
-          `body was: ${apiError.message}`,
+        `Backend returned code ${err.code}, status: ${apiError.status}, ` +
+          `body was: ${apiError.title || apiError.message}`,
         'data:',
         apiError.data
       );
-      errorMessage = apiError.message;
+      errorMessage = apiError.title || apiError.message;
     } else if (err.request) {
       // client never received a response, or request never left
       console.error('An error occurred:', err.message);

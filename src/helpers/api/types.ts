@@ -6,21 +6,20 @@ export interface IApiPaginateResponse {
 }
 
 export interface IApiResponse<T> {
-  status: 'error' | 'success';
+  status: number;
   code: string;
+  title: string;
   message: string;
   data: T;
   meta?: IApiPaginateResponse;
 }
 
 export interface IApiSuccessResponse<T> extends IApiResponse<T> {
-  status: 'success';
   meta?: IApiPaginateResponse;
   data: T;
 }
 
 export interface IApiErrorResponse<T> extends IApiResponse<T> {
-  status: 'error';
   meta: undefined;
 }
 

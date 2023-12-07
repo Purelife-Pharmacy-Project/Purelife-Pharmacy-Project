@@ -4,18 +4,18 @@ export enum AccountTransactionStatus {
   Failed = 'Failed',
 }
 
-export interface IAccountTransaction {
+export type AccountTransaction = {
   amount: string;
   date: string;
   description: string;
   orderId: string;
   status: AccountTransactionStatus;
-}
+};
 
-export interface IAccountSubscription {
+export type AccountSubscription = {
   id: number;
   medication: string;
   date: string;
   refillFrequency: string;
   refillDate: string;
-}
+};

@@ -1,6 +1,6 @@
 import { IconShare } from '@/components/icons/IconShare';
 import { TransactionDetailsBlock } from '@/components/my-account/TransactionDetailsBlock';
-import { IAccountTransaction } from '@/services/user/types';
+import { AccountTransaction } from '@/services/user/types';
 import {
   Modal,
   ModalBody,
@@ -14,7 +14,7 @@ import { FC } from 'react';
 interface TransactionDetailsModalProps {
   isOpen: boolean;
   onOpenChange: () => void;
-  transaction: IAccountTransaction | undefined;
+  transaction: AccountTransaction | undefined;
 }
 export const TransactionDetailsModal: FC<TransactionDetailsModalProps> = ({
   isOpen,

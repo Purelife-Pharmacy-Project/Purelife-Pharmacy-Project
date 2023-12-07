@@ -1,8 +1,8 @@
 'use client';
 import { TransactionDetailsModal } from '@/components/my-account/modals/TransactionDetailsModal';
 import {
+  AccountTransaction,
   AccountTransactionStatus,
-  IAccountTransaction,
 } from '@/services/user/types';
 import {
   Table,
@@ -18,7 +18,7 @@ export const AccountTransactions = () => {
   const [openTransactionDetailsModal, setOpenTransactionDetailsModal] =
     useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState<
-    IAccountTransaction | undefined
+    AccountTransaction | undefined
   >(undefined);
 
   const columns = [
@@ -43,7 +43,7 @@ export const AccountTransactions = () => {
       label: 'Price',
     },
   ];
-  const data: IAccountTransaction[] = [
+  const data: AccountTransaction[] = [
     {
       orderId: '23748437',
       status: AccountTransactionStatus.Pending,

@@ -1,21 +1,41 @@
 import { USER_TOKEN_KEY } from '@/constants';
+import Api from '@/helpers/api';
 import { Cookies } from 'react-cookie';
+import { LoginPayload, RegisterPayload } from './schema';
 
-const cookies = new Cookies();
+class UsersService {
+  private static cookies = new Cookies();
+  private static USERS_API_BASE = '/Contact';
+  constructor() {}
 
-/**
- * All user related services should be defined here.
- * Methods should be async and return the User class.
- **/
-export const loadAuthToken = (): string => cookies.get(USER_TOKEN_KEY);
+  public static async login(payload: LoginPayload) {
+    const { data } = await Api.post(`${this.USERS_API_BASE}/login`, payload);
+    return data;
+  }
 
-export const saveAuthToken = (token: string) => {
-  return cookies.set(USER_TOKEN_KEY, token, { path: '/', sameSite: 'strict' });
-};
+  public static async register(payload: RegisterPayload) {
+    const { data } = await Api.post(`${this.USERS_API_BASE}/create`, payload);
+    return data;
+  }
 
-export const removeAuthToken = () =>
-  cookies.remove(USER_TOKEN_KEY, { path: '/', sameSite: 'strict' });
+  public static async getUser() {
+    const { data } = await Api.get(`${this.USERS_API_BASE}`);
+    return data;
+  }
 
-export const logoutUser = () => {
-  return removeAuthToken();
-};
+  public static loadAuthToken = () => this.cookies.get(USER_TOKEN_KEY);
+
+  public static saveAuthToken = (token: string) => {
+    return this.cookies.set(USER_TOKEN_KEY, token, {
+      path: '/',
+      sameSite: 'strict',
+    });
+  };
+
+  public static logoutUser() {
+    // remove auth token
+    return this.cookies.remove(USER_TOKEN_KEY, { path: '/' });
+  }
+}
+
+export default UsersService;

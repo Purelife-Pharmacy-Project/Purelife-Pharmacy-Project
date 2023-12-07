@@ -1,5 +1,5 @@
 'use client';
-import { IAccountSubscription } from '@/services/user/types';
+import { AccountSubscription } from '@/services/user/types';
 import {
   Table,
   TableBody,
@@ -15,7 +15,7 @@ export const AccountSubscriptions = () => {
   const [openSubscriptionDetailsModal, setOpenSubscriptionDetailsModal] =
     useState(false);
   const [selectedSubscription, setSelectedSubscription] = useState<
-    IAccountSubscription | undefined
+    AccountSubscription | undefined
   >(undefined);
 
   const columns = [
@@ -37,7 +37,7 @@ export const AccountSubscriptions = () => {
     },
   ];
 
-  const data: IAccountSubscription[] = [
+  const data: AccountSubscription[] = [
     {
       id: 1,
       medication: 'Acebutolol',

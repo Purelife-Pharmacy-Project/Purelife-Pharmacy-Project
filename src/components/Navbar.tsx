@@ -110,7 +110,7 @@ export const AppNavbar = ({
           <Link
             color='foreground'
             className={isActive('/sign-in') ? 'font-medium text-primary' : ''}
-            href='sign-in'
+            href='/sign-in'
           >
             <div className='flex items-center gap-2'>
               <IconProfile

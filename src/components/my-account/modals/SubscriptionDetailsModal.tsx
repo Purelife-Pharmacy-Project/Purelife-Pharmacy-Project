@@ -1,5 +1,5 @@
 import { IconShare } from '@/components/icons/IconShare';
-import { IAccountSubscription } from '@/services/user/types';
+import { AccountSubscription } from '@/services/user/types';
 import {
   Button,
   Modal,
@@ -14,7 +14,7 @@ import { TransactionDetailsBlock } from '../TransactionDetailsBlock';
 interface SubscriptionDetailsModalProps {
   isOpen: boolean;
   onOpenChange: () => void;
-  subscription: IAccountSubscription | undefined;
+  subscription: AccountSubscription | undefined;
 }
 
 export const SubscriptionDetailsModal: FC<SubscriptionDetailsModalProps> = ({

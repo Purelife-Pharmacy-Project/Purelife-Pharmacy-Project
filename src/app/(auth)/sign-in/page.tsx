@@ -1,6 +1,6 @@
 import { AppNavbar } from '@/components/Navbar';
-import { inputDefault } from '@/theme';
-import { Button, Card, CardBody, Input, Link } from '@nextui-org/react';
+import { Card, CardBody } from '@nextui-org/react';
+import { LoginForm } from '@/components/login/loginForm';
 
 export default function LoginPage() {
   return (
@@ -16,35 +16,7 @@ export default function LoginPage() {
             shadow='none'
           >
             <CardBody className='p-8 lg:p-12'>
-              <div className='grid gap-4'>
-                <Input label='Email' type='email' classNames={inputDefault} />
-                <Input
-                  label='Password'
-                  type='password'
-                  classNames={inputDefault}
-                />
-
-                <div className='flex items-center justify-start gap-4'>
-                  <Button
-                    size='lg'
-                    className='px-20'
-                    color='primary'
-                    radius='full'
-                  >
-                    Login
-                  </Button>
-
-                  <p className='text-center'>
-                    <Link href='/sign-in'>Forgot Password</Link>
-                  </p>
-                </div>
-                <p>
-                  Don&apos;t have an account?{' '}
-                  <Link color='primary' href='/create-account'>
-                    Create an account
-                  </Link>
-                </p>
-              </div>
+              <LoginForm />
             </CardBody>
           </Card>
         </div>
