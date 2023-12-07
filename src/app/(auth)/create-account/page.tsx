@@ -1,6 +1,6 @@
 import { AppNavbar } from '@/components/Navbar';
-import { inputDefault } from '@/theme';
-import { Button, Card, CardBody, Input, Link } from '@nextui-org/react';
+import { Card, CardBody } from '@nextui-org/react';
+import { CreateAccountForm } from '@/components/create-account/CreateAccountForm';
 
 export default function CreateAccountPage() {
   return (
@@ -16,44 +16,7 @@ export default function CreateAccountPage() {
             shadow='none'
           >
             <CardBody className='p-8 lg:p-12'>
-              <div className='grid gap-8'>
-                <Input
-                  label='Email'
-                  type='email'
-                  autoComplete='new-email'
-                  classNames={inputDefault}
-                />
-                <Input
-                  label='Password'
-                  type='password'
-                  autoComplete='new-password'
-                  classNames={inputDefault}
-                />
-                <p className='mx-auto w-full text-center font-light md:max-w-[400px]'>
-                  We&apos;ll use your data to improve your website experience,
-                  manage account access, and for other purposes as detailed in
-                  our privacy policy.
-                </p>
-
-                <div className='flex justify-center'>
-                  <Button
-                    size='lg'
-                    className='px-10'
-                    color='primary'
-                    radius='full'
-                  >
-                    Create Account
-                  </Button>
-                </div>
-
-                <p className='text-center'>
-                  Already have an account?
-                  <Link className='ml-2' href='/sign-in'>
-                    {' '}
-                    Sign in
-                  </Link>
-                </p>
-              </div>
+              <CreateAccountForm />
             </CardBody>
           </Card>
         </div>

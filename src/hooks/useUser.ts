@@ -46,7 +46,7 @@ export const useRegister = () => {
     error: registerError,
     isSuccess,
     isError,
-  } = useMutation({
+  } = useMutation<Record<string, unknown>, string, RegisterPayload, unknown>({
     mutationFn: (payload: RegisterPayload) => UsersService.register(payload),
   });
 

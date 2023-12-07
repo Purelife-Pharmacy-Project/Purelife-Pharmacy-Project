@@ -22,7 +22,7 @@ export const FormMessage: FC<FormMessageProps> = ({ message, type }) => {
   return (
     <div
       className={twMerge(
-        'flex items-center justify-center gap-2 rounded-md py-2',
+        'flex items-center justify-center gap-2 rounded-md p-2',
         colorClass()
       )}
     >
