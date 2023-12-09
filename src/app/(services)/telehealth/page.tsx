@@ -71,7 +71,7 @@ export default function Telehealth() {
       title: 'Get Vaccination',
       description:
         'Choose from our expertly curated vaccines whenever you want.',
-      url: '#',
+      url: '/get-vaccination',
     },
     {
       icon: <IconDoctor size={48} color='primary' />,
@@ -85,7 +85,7 @@ export default function Telehealth() {
       title: 'Upload Prescription',
       description:
         'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
-      url: '#',
+      url: '/upload-prescription',
     },
   ];
   return (

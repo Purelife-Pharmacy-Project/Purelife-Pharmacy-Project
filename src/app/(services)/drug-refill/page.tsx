@@ -1,12 +1,11 @@
 import { AppNavbar } from '@/components/Navbar';
-import { HowitWorks } from '@/components/book-a-test/HowItWorks';
-import { DrugSubscriptionTabs } from '@/components/drug-refill/DrugSubscriptionTabs';
-import { Footer } from '@/components/home/Footer';
-import { HomeHero } from '@/components/home/HomeHero';
-import { NewsLetterCard } from '@/components/home/NewsletterCard';
+import { IconBrowse } from '@/components/icons/IconBrowse';
+import { IconHealthShield } from '@/components/icons/IconHealthShield';
 import { IconAddNotification } from '@/components/icons/IconAddNotification';
-import { IconDrugPrescription } from '@/components/icons/IconDrugPrescription';
-import { IconPill } from '@/components/icons/IconPill';
+import { DrugRefillHero } from '@/components/drug-refill/DrugRefillHero';
+import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
+import { NewsLetterCard } from '@/components/home/NewsletterCard';
+import { Footer } from '@/components/home/Footer';
 
 export default function DrugRefill() {
   const howItWorksData: {
@@ -15,17 +14,17 @@ export default function DrugRefill() {
   }[] = [
     {
       description:
-        'Browse for your preferred test packages and easily schedule a home sample collection.',
-      icon: <IconPill size={48} color='success' />,
+        'Choose from our pool of curated drug subscription packages.',
+      icon: <IconBrowse size={48} color='success' />,
     },
     {
       description:
-        'Receive one of our certified health professionals at your preferred location for a test sample collection.',
-      icon: <IconDrugPrescription size={60} color='success' />,
+        'Submit your drug prescriptions either as a doctor for your patients, or as a patient yourself.',
+      icon: <IconHealthShield size={60} color='success' />,
     },
     {
       description:
-        'Get notified by mail of your reports, which is also available within your account on the Purelife app.',
+        'Get notified of the details of your drug subscriptions via mail or within the Pure life app.',
       icon: <IconAddNotification size={60} color='success' />,
     },
   ];
@@ -33,16 +32,11 @@ export default function DrugRefill() {
     <>
       <AppNavbar background='primaryLight' />
       <main className='grid gap-6'>
-        <HomeHero
-          title="Get us Your Doctor's Prescription, and Get an On-time Refill"
-          description='We deliver your medications to you at your preferred intervals.'
-          ctaText='Start Here'
-          ctaLink='#'
-        />
+        <DrugRefillHero />
 
-        <HowitWorks data={howItWorksData} />
-
-        <DrugSubscriptionTabs />
+        <div className='mt-[900px] md:mt-[700px] lg:mt-[652px]'>
+          <HowItWorks data={howItWorksData} variant={'success'} />
+        </div>
 
         <NewsLetterCard />
         <Footer />

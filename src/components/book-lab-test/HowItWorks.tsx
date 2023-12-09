@@ -1,19 +1,28 @@
 import { FC } from 'react';
 import { Section } from '../home/Section';
+import { twMerge } from 'tailwind-merge';
 
-interface HowItWorksProps {
+type HowItWorksProps = {
+  variant?: 'primary' | 'success';
   data: {
     description: string;
     icon: JSX.Element;
   }[];
-}
+};
 
-export const HowitWorks: FC<HowItWorksProps> = ({ data }) => {
+export const HowItWorks: FC<HowItWorksProps> = ({ data, variant }) => {
   return (
     <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
         <div className='grid gap-10'>
-          <h1 className='text-center text-2xl font-bold text-primaryGreenDark lg:text-4xl'>
+          <h1
+            className={twMerge(
+              'text-center text-2xl font-bold lg:text-4xl',
+              variant === 'primary'
+                ? 'text-header-100'
+                : 'text-primaryGreenDark'
+            )}
+          >
             How it Works
           </h1>
 
@@ -21,7 +30,14 @@ export const HowitWorks: FC<HowItWorksProps> = ({ data }) => {
             {data.map((answer, index) => {
               return (
                 <div key={index} className='grid w-full gap-2'>
-                  <div className='mx-auto grid h-[123px] w-[123px] place-content-center items-center rounded-full bg-primaryGreenLight'>
+                  <div
+                    className={twMerge(
+                      'mx-auto grid h-[123px] w-[123px] place-content-center items-center rounded-full',
+                      variant === 'primary'
+                        ? 'bg-primaryLight'
+                        : 'bg-primaryGreenLight'
+                    )}
+                  >
                     {answer.icon}
                   </div>
                   <div className='mx-auto flex max-w-[330px] flex-col gap-1'>

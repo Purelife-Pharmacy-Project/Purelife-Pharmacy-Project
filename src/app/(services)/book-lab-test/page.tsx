@@ -1,10 +1,10 @@
 import { AppNavbar } from '@/components/Navbar';
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
-import { BookATestHero } from '@/components/book-a-test/BookATestHero';
-import { FrequentLabTests } from '@/components/book-a-test/FrequentLabTests';
-import { HowitWorks } from '@/components/book-a-test/HowItWorks';
-import { LabTestProducts } from '@/components/book-a-test/LabTestProducts';
-import { WhyBookATest } from '@/components/book-a-test/WhyBookATest';
+import { BookATestHero } from '@/components/book-lab-test/BookATestHero';
+import { FrequentLabTests } from '@/components/book-lab-test/FrequentLabTests';
+import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
+import { LabTestProducts } from '@/components/book-lab-test/LabTestProducts';
+import { WhyBookATest } from '@/components/book-lab-test/WhyBookATest';
 import { Footer } from '@/components/home/Footer';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { IconAddNotification } from '@/components/icons/IconAddNotification';
@@ -45,7 +45,7 @@ export default function BookATest() {
 
         <LabTestProducts />
 
-        <HowitWorks data={howItWorksData} />
+        <HowItWorks data={howItWorksData} />
 
         <ReportDrugReaction />
 

@@ -1,5 +1,5 @@
 import { AppNavbar } from '@/components/Navbar';
-import { HowitWorks } from '@/components/book-a-test/HowItWorks';
+import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
 import { DoctorCard } from '@/components/find-a-doctor/DoctorCard';
 import { Footer } from '@/components/home/Footer';
 import { HomeHero } from '@/components/home/HomeHero';
@@ -43,7 +43,7 @@ export default function FindADoctor() {
           />
         </div>
 
-        <HowitWorks data={howItWorksData} />
+        <HowItWorks data={howItWorksData} />
 
         <div className='grid justify-center bg-primaryLight'>
           <div className='grid justify-center bg-primaryLight'>

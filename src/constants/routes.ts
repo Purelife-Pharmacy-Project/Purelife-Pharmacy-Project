@@ -17,7 +17,7 @@ export const ROUTES = [
   },
   {
     name: 'Book a test',
-    path: '/book-a-test',
+    path: '/book-lab-test',
   },
   {
     name: 'Drug refill',

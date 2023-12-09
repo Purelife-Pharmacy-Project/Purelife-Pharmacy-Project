@@ -17,9 +17,9 @@ import { IconPill } from '@/components/icons/IconPill';
 import ProductService from '@/services/products';
 import { Button } from '@nextui-org/react';
 import {
+  dehydrate,
   HydrationBoundary,
   QueryClient,
-  dehydrate,
 } from '@tanstack/react-query';
 
 export default async function Home() {
@@ -49,7 +49,7 @@ export default async function Home() {
       title: 'Get Vaccination',
       description:
         'Choose from our expertly curated vaccines whenever you want.',
-      url: '#',
+      url: '/get-vaccination',
     },
   ];
 
