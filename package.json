@@ -15,6 +15,7 @@
     "@tanstack/react-query": "^5.0.0",
     "@tanstack/react-query-devtools": "^5.8.7",
     "@uidotdev/usehooks": "^2.4.0",
+    "@vercel/speed-insights": "^1.0.1",
     "axios": "^1.5.1",
     "framer-motion": "^10.16.4",
     "next": "13.5.6",
