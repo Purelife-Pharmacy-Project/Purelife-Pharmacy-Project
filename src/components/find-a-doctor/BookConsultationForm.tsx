@@ -116,7 +116,7 @@ export const BookConsultationForm = () => {
             privacy policy
           </p>
 
-          <div className='flex w-full flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-0'>
+          <div className='flex w-full flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-0 lg:mt-10'>
             <div className='grid gap-2'>
               <p className='text-sm font-medium uppercase'>Fee:</p>
               <p className='text-3xl font-bold text-primary'>N10,000</p>

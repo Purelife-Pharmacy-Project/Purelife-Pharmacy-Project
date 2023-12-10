@@ -11,7 +11,7 @@ export default function Doctor() {
 
       <div className='grid justify-center gap-6 bg-primaryLight'>
         <Section className='relative h-[10vh] w-screen bg-primaryLight lg:h-[30vh]'>
-          <div className='absolute top-[50px] flex w-max flex-col items-start gap-4 lg:top-[180px] lg:flex-row lg:gap-10'>
+          <div className='absolute top-[50px] flex w-max flex-col items-start gap-4 lg:top-[140px] lg:flex-row lg:gap-10'>
             <Avatar
               name='Francis Odeyemi'
               size='lg'
@@ -23,8 +23,11 @@ export default function Doctor() {
                 Dr. Francis Odeyemi
               </p>
               <p className='text-lg font-light'>General Partitioner</p>
-              <Chip className='mt-2 bg-primary text-sm font-light text-white lg:bg-white lg:text-black'>
-                8 Years Experience
+              <Chip
+                size={'lg'}
+                className='text-dark mt-2 bg-primaryLight text-sm font-light'
+              >
+                🏆 8 Years Experience
               </Chip>
             </div>
           </div>
@@ -32,7 +35,7 @@ export default function Doctor() {
       </div>
 
       <section className='grid justify-center gap-6'>
-        <div className='mt-[240px] grid items-end lg:mt-32'>
+        <div className='mt-[250px] grid items-end'>
           <Section className='relative grid grid-flow-row gap-6 pb-10 lg:grid-flow-col lg:grid-cols-[3fr_4fr]'>
             <div className='flex flex-col gap-6'>
               <h1 className='text-3xl font-bold text-header-100 lg:max-w-[370px]'>

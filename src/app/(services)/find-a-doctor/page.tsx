@@ -16,17 +16,17 @@ export default function FindADoctor() {
     {
       description:
         'Search for tests and packages and seamlessly book a home sample collection.',
-      icon: <IconBrowse size={48} color='success' />,
+      icon: <IconBrowse size={48} color='primary' />,
     },
     {
       description:
         'We will send a certified professional to your place to assist you with the sample collection',
-      icon: <IconHealthShield size={60} color='success' />,
+      icon: <IconHealthShield size={60} color='primary' />,
     },
     {
       description:
         'We will email you the reports. You can also access your reports within your account on the Purelife app',
-      icon: <IconAddNotification size={60} color='success' />,
+      icon: <IconAddNotification size={60} color='primary' />,
     },
   ];
   return (
@@ -43,7 +43,7 @@ export default function FindADoctor() {
           />
         </div>
 
-        <HowItWorks data={howItWorksData} />
+        <HowItWorks data={howItWorksData} variant='primary' />
 
         <div className='grid justify-center bg-primaryLight'>
           <div className='grid justify-center bg-primaryLight'>
