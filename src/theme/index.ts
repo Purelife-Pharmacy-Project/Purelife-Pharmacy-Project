@@ -16,6 +16,19 @@ export const inputBordered: SlotsToClasses<InputSlots> = {
   ],
 };
 
+export const inputBorderedGray: SlotsToClasses<InputSlots> = {
+  label: ['text-header-100 text-md font-base'],
+  inputWrapper: [
+    'pr-2',
+    'bg-white',
+    'shadow-none',
+    'text-black capitalize',
+    'border border-gray-300 data-[hover=true]:bg-white',
+    'group-data-[focus=true]:bg-white',
+    'group-data-[active=true]:bg-white',
+  ],
+};
+
 export const inputBorderedRegular: SlotsToClasses<InputSlots> = {
   label: ['text-content text-md font-light'],
   inputWrapper: [
@@ -34,6 +47,13 @@ export const selectBordered: SlotsToClasses<SelectSlots> = {
     'text-content text-md group-data-[filled=true]:font-light font-light',
   ],
   trigger: ['border border-content bg-white'],
+};
+
+export const selectBorderedGray: SlotsToClasses<SelectSlots> = {
+  label: [
+    'text-content text-md group-data-[filled=true]:font-light font-light',
+  ],
+  trigger: ['border border-gray-400 bg-white'],
 };
 
 export const inputDefault: SlotsToClasses<InputSlots> = {
