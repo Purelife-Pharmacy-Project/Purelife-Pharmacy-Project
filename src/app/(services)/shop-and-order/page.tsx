@@ -79,16 +79,13 @@ export default function ShopAndOrder() {
 
         <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
           <Section className='bg-white'>
-            <EarnedClients
-              title='We got products over 300+ trusted manufacturers'
-              clients={earnedClients}
-            />
+            <EarnedClients title='We got products over 300+ trusted manufacturers' />
           </Section>
         </div>
 
         <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
           <Section className='bg-white'>
-            <HealthServices steps={teleHealthServiceSteps} />
+            <HealthServices />
           </Section>
         </div>
 

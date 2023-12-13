@@ -1,5 +1,5 @@
 'use client';
-import { inputBordered } from '@/theme';
+import { inputDefault } from '@/theme';
 import {
   Button,
   Input,
@@ -53,12 +53,15 @@ export const AppNavbar = ({
       className={`py-4 text-foreground lg:pb-2 bg-${background}`}
       maxWidth='xl'
     >
-      <NavbarContent>
+      <NavbarContent
+        justify='start'
+        className='grid grid-flow-col gap-6 data-[justify=start]:flex-grow-0'
+      >
         <NavbarMenuToggle
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           className='sm:hidden'
         />
-        <NavbarBrand>
+        <NavbarBrand className='w-max flex-none flex-grow-0'>
           <Link href='/'>
             <Image
               src='/app-logo.png'
@@ -69,76 +72,82 @@ export const AppNavbar = ({
             />
           </Link>
         </NavbarBrand>
+
+        <div className='hidden md:flex md:gap-[22px]'>
+          <NavbarItem className='text-lg leading-[27px] text-header-100'>
+            <Link
+              color='foreground'
+              href='/telehealth'
+              className={
+                isActive('/telehealth') ? 'font-medium text-primary' : ''
+              }
+            >
+              Telehealth
+            </Link>
+          </NavbarItem>
+          <NavbarItem className='text-lg leading-[27px] text-header-100'>
+            <Link
+              color='foreground'
+              href='/shop-and-order'
+              className={
+                isActive('/shop-and-order') ? 'font-medium text-primary' : ''
+              }
+            >
+              Shop & Order
+            </Link>
+          </NavbarItem>
+        </div>
       </NavbarContent>
 
-      <NavbarContent justify='center' className='hidden gap-8 sm:flex'>
-        <NavbarItem>
-          <Link
-            color='foreground'
-            href='/telehealth'
-            className={
-              isActive('/telehealth') ? 'font-medium text-primary' : ''
-            }
-          >
-            Telehealth
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link
-            color='foreground'
-            href='/shop-and-order'
-            className={
-              isActive('/shop-and-order') ? 'font-medium text-primary' : ''
-            }
-          >
-            Shop & Order
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Input
-            radius='full'
-            color='default'
-            classNames={inputBordered}
-            size='lg'
-            type='text'
-            isClearable
-            placeholder='Search Purelife'
-            startContent={<IconSearch />}
-          />
-        </NavbarItem>
-        <NavbarItem className='flex items-center'>
-          <Link
-            color='foreground'
-            className={isActive('/sign-in') ? 'font-medium text-primary' : ''}
-            href='/sign-in'
-          >
-            <div className='flex items-center gap-2'>
-              <IconProfile
-                color={isActive('/sign-in') ? 'primary' : 'header-100'}
-                size={24}
-              />
-              <p>Sign in</p>
-            </div>
-          </Link>
-        </NavbarItem>
-        <NavbarItem className='flex items-center'>
-          <Link
-            className={isActive('/cart') ? 'font-medium text-primary' : ''}
-            color='foreground'
-            href='/cart'
-          >
-            <div className='flex items-center gap-2'>
-              <IconCart
-                size={24}
-                color={isActive('/cart') ? 'primary' : 'header-100'}
-              />
-              <p>Cart</p>
-            </div>
-          </Link>
-        </NavbarItem>
+      <NavbarContent justify='center' className='hidden w-full sm:flex'>
+        <Input
+          radius='full'
+          color='default'
+          classNames={inputDefault}
+          size='lg'
+          type='text'
+          isClearable
+          placeholder='Search Purelife'
+          startContent={<IconSearch />}
+        />
       </NavbarContent>
 
-      <NavbarContent justify='end'>
+      <NavbarContent
+        className='grid w-max grid-flow-col gap-6 data-[justify=end]:flex-grow-0'
+        justify='end'
+      >
+        <div className='hidden md:flex md:gap-[22px]'>
+          <NavbarItem className='flex items-center text-lg leading-[27px] text-header-100'>
+            <Link
+              color='foreground'
+              className={isActive('/sign-in') ? 'font-medium text-primary' : ''}
+              href='/sign-in'
+            >
+              <div className='flex items-center gap-2'>
+                <IconProfile
+                  color={isActive('/sign-in') ? 'primary' : 'header-100'}
+                  size={24}
+                />
+                <p>Sign in</p>
+              </div>
+            </Link>
+          </NavbarItem>
+          <NavbarItem className='flex items-center text-lg leading-[27px] text-header-100'>
+            <Link
+              className={isActive('/cart') ? 'font-medium text-primary' : ''}
+              color='foreground'
+              href='/cart'
+            >
+              <div className='flex items-center gap-2'>
+                <IconCart
+                  size={24}
+                  color={isActive('/cart') ? 'primary' : 'header-100'}
+                />
+                <p>Cart</p>
+              </div>
+            </Link>
+          </NavbarItem>
+        </div>
         <NavbarItem>
           <Link color='foreground' href='/shop-and-order'>
             <Button radius='full' size='lg' color='primary'>

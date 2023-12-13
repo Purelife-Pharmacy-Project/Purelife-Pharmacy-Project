@@ -7,14 +7,13 @@ import { HealthServices } from '@/components/home/HealthServices';
 import { HomeHero } from '@/components/home/HomeHero';
 import { HomePartners } from '@/components/home/HomePartners';
 import { HomeShopAndOrder } from '@/components/home/HomeShopAndOrder';
-import { Hometransformation } from '@/components/home/HomeTranformation';
+import { HomeTransformation } from '@/components/home/HomeTranformation';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
-import { Testomonials } from '@/components/home/Testimonials';
+import { Testimonials } from '@/components/home/Testimonials';
 import { WellnessBlogSection } from '@/components/home/WellnessBlogSection';
 import { IconFluidMed } from '@/components/icons/IconFluidMed';
 import { IconLabs } from '@/components/icons/IconLabs';
 import { IconPill } from '@/components/icons/IconPill';
-import ProductService from '@/services/products';
 import { Button } from '@nextui-org/react';
 import {
   dehydrate,
@@ -24,10 +23,10 @@ import {
 
 export default async function Home() {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ['products'],
-    queryFn: () => ProductService.getAllProducts(),
-  });
+  // await queryClient.prefetchQuery({
+  //   queryKey: ['products'],
+  //   queryFn: () => ProductService.getAllProducts(),
+  // });
 
   const healthServices = [
     {
@@ -68,29 +67,6 @@ export default async function Home() {
     },
   ];
 
-  const earnedClients = [
-    {
-      name: 'IFitness',
-      image: '/images/clients/iFitness.png',
-    },
-    {
-      name: 'Buy Asap',
-      image: '/images/clients/buyAsap.png',
-    },
-    {
-      name: 'Nike',
-      image: '/images/clients/nike.png',
-    },
-    {
-      name: 'Gallant Biz',
-      image: '/images/clients/gallantBiz.png',
-    },
-    {
-      name: 'Laroche',
-      image: '/images/clients/laroche.png',
-    },
-  ];
-
   return (
     <>
       <AppNavbar background='primaryLight' />
@@ -104,9 +80,9 @@ export default async function Home() {
 
         <HomePartners />
 
-        <Hometransformation data={transformationData} />
+        <HomeTransformation data={transformationData} />
 
-        <HealthServices steps={healthServices} />
+        <HealthServices />
 
         <HomeShopAndOrder />
 
@@ -115,22 +91,14 @@ export default async function Home() {
         </HydrationBoundary>
 
         <div className='flex justify-center'>
-          <Button
-            color='primary'
-            className='px-16 py-8'
-            radius='full'
-            size='lg'
-          >
+          <Button color='primary' className='px-8 py-8' radius='full' size='lg'>
             Shop & Order
           </Button>
         </div>
 
-        <Testomonials />
+        <Testimonials />
 
-        <EarnedClients
-          title='We have earned the trust of 300+ Clients'
-          clients={earnedClients}
-        />
+        <EarnedClients title='We have earned the trust of 300+ Clients' />
 
         <WellnessBlogSection />
 

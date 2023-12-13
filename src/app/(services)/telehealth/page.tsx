@@ -3,7 +3,7 @@ import { EarnedClients } from '@/components/home/EarnedClients';
 import { Footer } from '@/components/home/Footer';
 import { HealthServices } from '@/components/home/HealthServices';
 import { HomeHero } from '@/components/home/HomeHero';
-import { Hometransformation } from '@/components/home/HomeTranformation';
+import { HomeTransformation } from '@/components/home/HomeTranformation';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Section } from '@/components/home/Section';
 import { IconDoctor } from '@/components/icons/IconDoctor';
@@ -106,22 +106,19 @@ export default function Telehealth() {
 
         <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
           <Section className='bg-white'>
-            <Hometransformation data={transformationData} />
+            <HomeTransformation data={transformationData} />
           </Section>
         </div>
 
         <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
           <Section className='bg-white'>
-            <HealthServices steps={healthServicesFull} />
+            <HealthServices />
           </Section>
         </div>
 
         <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
           <Section className='bg-white'>
-            <EarnedClients
-              title='We got products over 300+ trusted manufacturers'
-              clients={earnedClients}
-            />
+            <EarnedClients title='We got products over 300+ trusted manufacturers' />
           </Section>
         </div>
 

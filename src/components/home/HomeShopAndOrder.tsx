@@ -1,22 +1,25 @@
 import { IconCart } from '@/components/icons/IconCart';
 import { IconHandAndHeart } from '@/components/icons/IconHandAndHeart';
 import { IconHome } from '@/components/icons/IconHome';
-import { Button, Card, CardBody } from '@nextui-org/react';
+import { Button, Card, CardBody, Link } from '@nextui-org/react';
 import { Section } from './Section';
 
 export const HomeShopAndOrder = () => {
-  const steps = [
+  const shopCategories = [
     {
       icon: <IconHome size={48} />,
       title: '​Health Category​',
+      url: '/shop-and-order/health',
     },
     {
       icon: <IconHandAndHeart size={48} />,
       title: 'Beauty and Skin Care Category',
+      url: '/shop-and-order/beauty',
     },
     {
       icon: <IconCart size={48} color='success' />,
       title: '​Supermarket Category',
+      url: '/shop-and-order/supermarket',
     },
   ];
   return (
@@ -45,22 +48,24 @@ export const HomeShopAndOrder = () => {
           </div>
 
           <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
-            {steps.map((step, index) => (
+            {shopCategories.map((category, index) => (
               <Card key={index} shadow='none' radius='lg'>
                 <CardBody className='grid gap-6 bg-primaryGreenLight p-6'>
                   <div className='ml-auto grid h-[104px] w-[104px] place-content-center rounded-full bg-white'>
-                    {step.icon}
+                    {category.icon}
                   </div>
                   <div className='grid h-max gap-2'>
-                    <p className='max-w-[280px] text-lg font-medium text-primaryGreenDark'>
-                      {step.title}
+                    <p className='mb-[66px] max-w-[227px] text-lg font-medium text-primaryGreenDark'>
+                      {category.title}
                     </p>
                   </div>
                   <Button
                     variant='bordered'
+                    as={Link}
+                    href={category.url}
                     radius='sm'
                     size='lg'
-                    className='border-primaryGreenDark py-[18px] uppercase text-primaryGreenDark'
+                    className='border-primaryGreenDark bg-white py-[28px] uppercase text-primaryGreenDark'
                   >
                     Shop all
                   </Button>
