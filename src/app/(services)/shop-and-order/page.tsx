@@ -63,8 +63,8 @@ export default function ShopAndOrder() {
         <div className='grid justify-center bg-primaryLight'>
           <Section className='bg-primaryLight'>
             <HomeHero
-              title='Your the one-stop shop for wellness and lifestyle.'
-              description='Schedule laboratory tests, book vaccination appointments, and receive high-quality medical services from the convenience of wherever you are in Nigeria.'
+              title='Your Wellness is Only a Shopping Order Away'
+              description='Discover our one-stop shop for your health, supermarket, beauty and skin essentials, and enjoy hassle-free ordering.'
               ctaText='Start here'
               ctaLink='#'
             />

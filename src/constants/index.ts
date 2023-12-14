@@ -20,7 +20,7 @@ export const healthServices = [
     title: 'Subscribe to a drug refill',
     description:
       'Get your medications delivered to you at your preferred intervals.',
-    url: '#',
+    url: '/drug-refill',
   },
   {
     icon: IconLabs as ({
@@ -33,7 +33,7 @@ export const healthServices = [
     title: 'Book a lab test',
     description:
       'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
-    url: '#',
+    url: '/book-a-test',
   },
   {
     icon: IconFluidMed as ({
@@ -45,7 +45,7 @@ export const healthServices = [
     }) => JSX.Element,
     title: 'Get Vaccination',
     description: 'Choose from our expertly curated vaccines whenever you want.',
-    url: '#',
+    url: '/get-vaccination',
   },
   {
     icon: IconDoctor as ({

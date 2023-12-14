@@ -96,8 +96,8 @@ export default function Telehealth() {
         <div className='grid justify-center bg-primaryLight'>
           <Section className='bg-primaryLight'>
             <HomeHero
-              title='Your the one-stop shop for wellness and lifestyle.'
-              description='Schedule laboratory tests, book vaccination appointments, and receive high-quality medical services from the convenience of wherever you are in Nigeria.'
+              title='Health Packages and Medical Care Right in Your Home.'
+              description='Explore a range of healthcare products, schedule laboratory tests, book vaccination appointments, and receive high-quality medical services from wherever you are in Nigeria.'
               ctaText='Start here'
               ctaLink='#'
             />
