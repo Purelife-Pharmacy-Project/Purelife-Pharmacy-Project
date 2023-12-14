@@ -52,7 +52,7 @@ export const HeroImage = () => {
     },
     {
       alt: 'health kit',
-      src: '/images/health-kit.png',
+      src: '/images/first-aid-kit.png',
     },
     {
       alt: 'woman getting vaccination',
