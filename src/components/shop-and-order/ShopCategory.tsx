@@ -13,25 +13,25 @@ export const ShopCategory = () => {
       title: 'Health Category',
       description:
         'Discover a wide range of healthcare and pharmaceutical products at budget-friendly rates.',
-      image: '/images/woman.png',
-      url: '/category/health',
-      bgColor: 'bg-primaryLight',
+      image: '/images/health-basket.png',
+      url: '/shop-and-order/health',
+      bgColor: 'bg-gray-300',
     },
     {
       title: 'Beauty and Skin Care Category',
       description:
         'Get a sleek grasp on top-notch skincare and beauty products.',
-      image: '/images/woman.png',
-      url: '/category/beauty',
+      image: '/images/beauty-kit.png',
+      url: '/shop-and-order/beauty',
       bgColor: 'bg-primaryLight',
     },
     {
       title: 'Supermarket Category',
       description:
         'Easily purchase your everyday essentials from wherever you are.',
-      image: '/images/woman.png',
-      url: '/category/supermarket',
-      bgColor: 'bg-primaryLight',
+      image: '/images/shopping-cart.png',
+      url: '/shop-and-order/supermarket',
+      bgColor: 'bg-blueLight',
     },
   ];
 
@@ -41,7 +41,7 @@ export const ShopCategory = () => {
         <Card
           key={index}
           shadow='none'
-          className={'bg-primaryLight'}
+          className={category.bgColor}
           radius='lg'
         >
           <div className='flex items-center justify-between gap-4'>
@@ -64,8 +64,10 @@ export const ShopCategory = () => {
                 </Button>
               </div>
             </CardBody>
-            <div className='mr-20 hidden self-end lg:block'>
+            <div className='mr-20 hidden justify-center lg:flex'>
               <Image
+                width={600}
+                height={600}
                 src={category.image}
                 className='object-cover'
                 alt='image'

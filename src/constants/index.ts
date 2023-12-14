@@ -33,7 +33,7 @@ export const healthServices = [
     title: 'Book a lab test',
     description:
       'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
-    url: '/book-lab-test',
+    url: '/book-a-test',
   },
   {
     icon: IconFluidMed as ({
@@ -45,48 +45,7 @@ export const healthServices = [
     }) => JSX.Element,
     title: 'Get Vaccination',
     description: 'Choose from our expertly curated vaccines whenever you want.',
-    url: '#',
-  },
-];
-
-export const healthServicesFull = [
-  {
-    icon: IconPill as ({
-      color,
-      size,
-    }: {
-      color?: string;
-      size?: number;
-    }) => JSX.Element,
-    title: 'Subscribe to a drug refill',
-    description:
-      'Get your medications delivered to you at your preferred intervals.',
-    url: '#',
-  },
-  {
-    icon: IconLabs as ({
-      color,
-      size,
-    }: {
-      color?: string;
-      size?: number;
-    }) => JSX.Element,
-    title: 'Book a lab test',
-    description:
-      'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
-    url: '#',
-  },
-  {
-    icon: IconFluidMed as ({
-      color,
-      size,
-    }: {
-      color?: string;
-      size?: number;
-    }) => JSX.Element,
-    title: 'Get Vaccination',
-    description: 'Choose from our expertly curated vaccines whenever you want.',
-    url: '#',
+    url: '/get-vaccination',
   },
   {
     icon: IconDoctor as ({
@@ -112,6 +71,29 @@ export const healthServicesFull = [
     title: 'Upload Prescription',
     description:
       'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
-    url: '#',
+    url: '/upload-prescription',
+  },
+];
+
+export const earnedClients = [
+  {
+    name: 'IFitness',
+    image: '/images/clients/iFitness.png',
+  },
+  {
+    name: 'Buy Asap',
+    image: '/images/clients/buyAsap.png',
+  },
+  {
+    name: 'Nike',
+    image: '/images/clients/nike.png',
+  },
+  {
+    name: 'Gallant Biz',
+    image: '/images/clients/gallantBiz.png',
+  },
+  {
+    name: 'Laroche',
+    image: '/images/clients/laroche.png',
   },
 ];

@@ -33,6 +33,7 @@ const config: Config = {
         gray: {
           100: '#F7F7F7',
           200: '#D9D9D9',
+          300: '#F4F4F4',
         },
       },
       backgroundImage: {

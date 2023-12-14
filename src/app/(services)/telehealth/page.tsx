@@ -3,7 +3,7 @@ import { EarnedClients } from '@/components/home/EarnedClients';
 import { Footer } from '@/components/home/Footer';
 import { HealthServices } from '@/components/home/HealthServices';
 import { HomeHero } from '@/components/home/HomeHero';
-import { Hometransformation } from '@/components/home/HomeTranformation';
+import { HomeTransformation } from '@/components/home/HomeTranformation';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Section } from '@/components/home/Section';
 import { IconDoctor } from '@/components/icons/IconDoctor';
@@ -96,8 +96,8 @@ export default function Telehealth() {
         <div className='grid justify-center bg-primaryLight'>
           <Section className='bg-primaryLight'>
             <HomeHero
-              title='Your the one-stop shop for wellness and lifestyle.'
-              description='Schedule laboratory tests, book vaccination appointments, and receive high-quality medical services from the convenience of wherever you are in Nigeria.'
+              title='Health Packages and Medical Care Right in Your Home.'
+              description='Explore a range of healthcare products, schedule laboratory tests, book vaccination appointments, and receive high-quality medical services from wherever you are in Nigeria.'
               ctaText='Start here'
               ctaLink='#'
             />
@@ -106,21 +106,21 @@ export default function Telehealth() {
 
         <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
           <Section className='bg-white'>
-            <Hometransformation data={transformationData} />
+            <HomeTransformation data={transformationData} />
           </Section>
         </div>
 
         <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
           <Section className='bg-white'>
-            <HealthServices steps={healthServicesFull} />
+            <HealthServices />
           </Section>
         </div>
 
         <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
           <Section className='bg-white'>
             <EarnedClients
+              earnedClients={earnedClients}
               title='We got products over 300+ trusted manufacturers'
-              clients={earnedClients}
             />
           </Section>
         </div>

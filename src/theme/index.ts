@@ -61,7 +61,7 @@ export const inputDefault: SlotsToClasses<InputSlots> = {
   inputWrapper: [
     'pr-2',
     'bg-white',
-    'shadow-none',
+    'shadow-sm',
     'text-black capitalize',
     'data-[hover=true]:bg-white',
     'group-data-[focus=true]:bg-white',

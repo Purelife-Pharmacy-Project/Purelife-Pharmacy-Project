@@ -14,10 +14,10 @@ export const FeaturedProduct: FC<FeaturedProductProps> = ({
   image,
 }) => {
   return (
-    <Card shadow='none' className='w-full' radius='lg'>
+    <Card shadow='none' className='w-full bg-gray-100' radius='lg'>
       <CardBody className='overflow-visible px-0 py-2 md:px-3'>
         <div>
-          <Image alt={name} className='rounded-xl object-cover' src={image} />
+          <Image alt={name} className='rounded-md object-cover' src={image} />
         </div>
       </CardBody>
       <CardFooter className='flex w-full justify-between'>

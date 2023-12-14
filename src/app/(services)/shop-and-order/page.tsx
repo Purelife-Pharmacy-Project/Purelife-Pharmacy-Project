@@ -5,66 +5,40 @@ import { HealthServices } from '@/components/home/HealthServices';
 import { HomeHero } from '@/components/home/HomeHero';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Section } from '@/components/home/Section';
-import { IconFluidMed } from '@/components/icons/IconFluidMed';
-import { IconLabs } from '@/components/icons/IconLabs';
-import { IconPill } from '@/components/icons/IconPill';
 import { ShopCategory } from '@/components/shop-and-order/ShopCategory';
 
 export default function ShopAndOrder() {
-  const teleHealthServiceSteps = [
-    {
-      icon: <IconPill size={48} />,
-      title: 'Subscribe to a drug refill',
-      description:
-        'Get your medications delivered to you at your preferred intervals.',
-      url: '#',
-    },
-    {
-      icon: <IconLabs color='primary' />,
-      title: 'Book a lab test',
-      description:
-        'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
-      url: '#',
-    },
-    {
-      icon: <IconFluidMed color='primary' />,
-      title: 'Get Vaccination',
-      description:
-        'Choose from our expertly curated vaccines whenever you want.',
-      url: '#',
-    },
-  ];
   const earnedClients = [
     {
-      name: 'IFitness',
-      image: '/images/clients/iFitness.png',
+      name: 'Relumins',
+      image: '/images/manufacturers/relumins.png',
     },
     {
-      name: 'Buy Asap',
-      image: '/images/clients/buyAsap.png',
+      name: 'Zaron',
+      image: '/images/manufacturers/zaron.png',
     },
     {
-      name: 'Nike',
-      image: '/images/clients/nike.png',
+      name: 'Natures Field',
+      image: '/images/manufacturers/natures-field.png',
     },
     {
-      name: 'Gallant Biz',
-      image: '/images/clients/gallantBiz.png',
+      name: 'Unilever',
+      image: '/images/manufacturers/unilever.png',
     },
     {
-      name: 'Laroche',
-      image: '/images/clients/laroche.png',
+      name: 'SSA Supplements',
+      image: '/images/manufacturers/ssa-supplements.png',
     },
   ];
   return (
     <>
-      <AppNavbar background='primaryLight' />
+      <AppNavbar background={'primaryLight'} />
       <main className='grid gap-6'>
         <div className='grid justify-center bg-primaryLight'>
           <Section className='bg-primaryLight'>
             <HomeHero
-              title='Your the one-stop shop for wellness and lifestyle.'
-              description='Schedule laboratory tests, book vaccination appointments, and receive high-quality medical services from the convenience of wherever you are in Nigeria.'
+              title='Your Wellness is Only a Shopping Order Away'
+              description='Discover our one-stop shop for your health, supermarket, beauty and skin essentials, and enjoy hassle-free ordering.'
               ctaText='Start here'
               ctaLink='#'
             />
@@ -80,15 +54,15 @@ export default function ShopAndOrder() {
         <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
           <Section className='bg-white'>
             <EarnedClients
+              earnedClients={earnedClients}
               title='We got products over 300+ trusted manufacturers'
-              clients={earnedClients}
             />
           </Section>
         </div>
 
         <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
           <Section className='bg-white'>
-            <HealthServices steps={teleHealthServiceSteps} />
+            <HealthServices />
           </Section>
         </div>
 
