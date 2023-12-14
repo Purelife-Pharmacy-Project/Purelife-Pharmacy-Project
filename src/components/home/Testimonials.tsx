@@ -88,7 +88,7 @@ export const Testimonials = () => {
     setTimeout(() => {
       setShouldRender(false);
     }, 3000);
-  }, [activeIndex]);
+  }, [activeIndex, startInterval]);
 
   // const handleOnButtonSwitch = () => {
   //   setStartInterval(false);
