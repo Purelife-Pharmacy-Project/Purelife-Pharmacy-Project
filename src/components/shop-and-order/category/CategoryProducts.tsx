@@ -1,4 +1,4 @@
-import { Section } from '../home/Section';
+import { Section } from '../../home/Section';
 import { ProductsFilter } from './partials/ProductsFilter';
 import { ProductsList } from './partials/ProductsList';
 import { ProductSortDropdown } from './partials/ProductsSortDropdown';

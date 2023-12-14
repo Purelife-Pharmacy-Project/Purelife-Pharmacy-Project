@@ -1,7 +1,7 @@
 'use client';
 import { Button, Card, CardBody, Image } from '@nextui-org/react';
 import { FC } from 'react';
-import { Section } from '../home/Section';
+import { Section } from '../../home/Section';
 import { usePathname } from 'next/navigation';
 
 interface CategoryHeroProps {}
