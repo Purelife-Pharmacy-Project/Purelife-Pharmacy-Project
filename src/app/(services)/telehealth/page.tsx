@@ -118,7 +118,10 @@ export default function Telehealth() {
 
         <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
           <Section className='bg-white'>
-            <EarnedClients title='We got products over 300+ trusted manufacturers' />
+            <EarnedClients
+              earnedClients={earnedClients}
+              title='We got products over 300+ trusted manufacturers'
+            />
           </Section>
         </div>
 

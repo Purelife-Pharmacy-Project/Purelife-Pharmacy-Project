@@ -1,17 +1,23 @@
 import { Image } from '@nextui-org/react';
 import { FC } from 'react';
 import { Section } from './Section';
-import { earnedClients } from '@/constants';
 
 export interface EarnedClientsProps {
   title: string;
+  earnedClients: {
+    image: string;
+    name: string;
+  }[];
 }
 
-export const EarnedClients: FC<EarnedClientsProps> = ({ title }) => {
+export const EarnedClients: FC<EarnedClientsProps> = ({
+  title,
+  earnedClients,
+}) => {
   return (
     <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
-        <div className='grid gap-10'>
+        <div className='grid gap-20'>
           <div className='flex justify-center'>
             <h1 className='text-center text-2xl font-bold lg:max-w-[557px] lg:text-4xl'>
               {title}

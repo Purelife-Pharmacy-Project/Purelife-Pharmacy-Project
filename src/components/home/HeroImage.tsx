@@ -78,11 +78,11 @@ export const HeroImage = () => {
       </Card>
       {currentPath === '/' || currentPath === '/shop-and-order' ? (
         <>
-          <div className='absolute left-[-10px] top-[320px] z-10 flex items-center gap-3 rounded-md bg-white p-2 px-6 shadow-lg'>
+          <div className='absolute left-[-10px] top-[280px] z-10 flex items-center gap-3 rounded-md bg-white p-2 px-6 shadow-lg'>
             <IconTellehealthRound />
             <p className='text-sm font-bold text-header-100'>TeleHealth</p>
           </div>
-          <div className='absolute  right-[-10px] top-[400px] z-10 flex items-center gap-3 rounded-md bg-white p-2 px-6 shadow-lg'>
+          <div className='absolute  right-[-10px] top-[380px] z-10 flex items-center gap-3 rounded-md bg-white p-2 px-6 shadow-lg'>
             <IconShopAndOrderRound />
             <p className='text-sm font-bold text-header-100'>Shop & Order</p>
           </div>

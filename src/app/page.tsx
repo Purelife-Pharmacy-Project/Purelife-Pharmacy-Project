@@ -20,6 +20,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
+import { earnedClients } from '@/constants';
 
 export default async function Home() {
   const queryClient = new QueryClient();
@@ -98,7 +99,10 @@ export default async function Home() {
 
         <Testimonials />
 
-        <EarnedClients title='We have earned the trust of 300+ Clients' />
+        <EarnedClients
+          earnedClients={earnedClients}
+          title='We have earned the trust of 300+ Clients'
+        />
 
         <WellnessBlogSection />
 
