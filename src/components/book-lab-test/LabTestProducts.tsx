@@ -9,19 +9,19 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
   const categories = [
     {
       name: 'All',
-      image: '/images/dummy-imagee.png',
+      image: '/images/care-package.png',
     },
     {
       name: 'Sexual Health',
-      image: '/images/dummy-imagee.png',
+      image: '/images/care-package.png',
     },
     {
       name: "Women's Health",
-      image: '/images/dummy-imagee.png',
+      image: '/images/care-package.png',
     },
     {
       name: 'Men’s Health',
-      image: '/images/dummy-imagee.png',
+      image: '/images/care-package.png',
     },
   ];
   return (

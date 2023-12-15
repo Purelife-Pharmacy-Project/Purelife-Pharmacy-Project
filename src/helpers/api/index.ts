@@ -18,13 +18,30 @@ class Api {
     return res.data;
   };
 
+  private static isStringError(error: any): error is string {
+    return typeof error === 'string';
+  }
+
   private static handleApiError = (
     err: AxiosError<IApiErrorResponse<any>, any>
   ) => {
     let errorMessage = '';
 
     if (err.response) {
-      const apiError = err.response.data;
+      const apiError: IApiErrorResponse<any> | string = err.response.data;
+
+      // check if apiError is a string
+      if (this.isStringError(apiError)) {
+        errorMessage = apiError;
+        console.error(
+          `Backend returned code ${err.code}, status: null, ` + 'data:',
+          apiError
+        );
+        throw (
+          errorMessage ||
+          "We couldn't complete your request. Please try again or check your internet connection."
+        );
+      }
 
       if (apiError.code === 'EXPIRED_TOKEN') {
         // UsersService.logoutUser();
@@ -43,6 +60,7 @@ class Api {
 
         return () => clearTimeout(timeout);
       }
+
       console.error(
         `Backend returned code ${err.code}, status: ${apiError.status}, ` +
           `body was: ${apiError.title || apiError.message}`,

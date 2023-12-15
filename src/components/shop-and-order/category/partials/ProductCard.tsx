@@ -9,29 +9,30 @@ export const ProductCard = ({
 }: {
   imageUrl: string;
   title: string;
-  price: number;
+  price: string;
 }) => {
   return (
     <Card shadow='none' className='w-full' radius='lg'>
-      <CardBody className='relative overflow-visible px-0 py-2 md:px-3'>
+      <CardBody className='relative overflow-visible px-0 py-2'>
         <Button
           isIconOnly
           className='absolute right-5 top-5 z-20 rounded-full bg-primary/40 p-0 shadow-md'
         >
           <IconCart color='white' />
         </Button>
-        <div>
-          <Image
-            alt='Card background'
-            className='rounded-xl object-cover'
-            src={imageUrl}
-          />
-        </div>
+
+        <Image
+          alt='Card background'
+          className='rounded-xl object-cover'
+          src={imageUrl}
+        />
       </CardBody>
       <CardFooter className='grid w-full gap-3 px-0'>
-        <div className='flex justify-between'>
-          <p className='text-lg font-semibold text-header-100'>{title}</p>
-          <p className='font-medium text-header-100'>₦{price}</p>
+        <div className='flex flex-col gap-2'>
+          <p className='break-words font-semibold text-header-100'>{title}</p>
+          <p className='max-w-[200px] break-words font-medium text-header-100'>
+            {price}
+          </p>
         </div>
         <div className='flex justify-between'>
           <Button

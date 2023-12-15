@@ -1,6 +1,7 @@
 'use client';
 import { useGetProducts } from '@/hooks';
-import { FC } from 'react';
+import { Button } from '@nextui-org/react';
+import { FC, useMemo } from 'react';
 import { FeaturedProduct } from './FeaturedProduct';
 import { Section } from './Section';
 
@@ -18,7 +19,18 @@ export const FeaturedProducts: FC<FeaturedProductsProps> = ({
   title,
   products,
 }) => {
-  const { products: allProducts, loadingProducts } = useGetProducts();
+  const {
+    products: allProducts,
+    loadingProducts,
+    isSuccess,
+  } = useGetProducts();
+
+  const featuredProducts = useMemo(() => {
+    if (allProducts) {
+      return allProducts.slice(0, 3);
+    }
+  }, [allProducts]);
+
   return (
     <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
@@ -28,19 +40,23 @@ export const FeaturedProducts: FC<FeaturedProductsProps> = ({
           </h1>
 
           <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
-            {Array.from({ length: 3 })
-              .fill(0)
-              .map((_, index) => (
-                <FeaturedProduct
-                  key={index}
-                  name='Amino Pep 200ml'
-                  price={2550}
-                  image='/images/dummy-imagee.png'
-                />
-              ))}
+            {featuredProducts?.map((product, index) => (
+              <FeaturedProduct
+                key={product.id}
+                name={product.name}
+                price={product.price}
+                image={product.imageUrl}
+              />
+            ))}
           </div>
         </div>
       </Section>
+
+      <div className='mt-10 flex justify-center'>
+        <Button color='primary' className='px-8 py-8' radius='full' size='lg'>
+          Shop & Order
+        </Button>
+      </div>
     </div>
   );
 };

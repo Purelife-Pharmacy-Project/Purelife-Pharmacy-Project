@@ -2,7 +2,7 @@ import { AppNavbar } from '@/components/Navbar';
 import { CategoryHero } from '@/components/shop-and-order/category/CategoryHero';
 import { CategoryProducts } from '@/components/shop-and-order/category/CategoryProducts';
 
-export default function CategoryPage() {
+export default async function CategoryPage() {
   return (
     <>
       <AppNavbar background={'white'} />

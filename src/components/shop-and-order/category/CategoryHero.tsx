@@ -1,8 +1,8 @@
 'use client';
 import { Button, Card, CardBody, Image } from '@nextui-org/react';
+import { usePathname } from 'next/navigation';
 import { FC } from 'react';
 import { Section } from '../../home/Section';
-import { usePathname } from 'next/navigation';
 
 interface CategoryHeroProps {}
 
@@ -10,38 +10,38 @@ export const CategoryHero: FC<CategoryHeroProps> = ({}) => {
   const currentPath = usePathname();
 
   const generateHero = () => {
-    switch (currentPath) {
-      case '/shop-and-order/health':
-        return {
-          image: '/images/health-basket.png',
-          title: 'Health Category',
-          bgColor: 'bg-gray-300',
-          description:
-            'Discover a wide range of healthcare and pharmaceutical products at budget-friendly rates.',
-        };
-      case '/shop-and-order/beauty':
-        return {
-          image: '/images/beauty-kit.png',
-          title: 'Beauty and Skin Care Category',
-          bgColor: 'bg-primaryLight',
-          description:
-            'Get a sleek grasp on top-notch skincare and beauty products.',
-        };
-      case '/shop-and-order/supermarket':
-        return {
-          image: '/images/shopping-cart.png',
-          title: 'Supermarket Category',
-          bgColor: 'bg-blueLight',
-          description:
-            'Easily purchase your everyday essentials from wherever you are.',
-        };
-      default:
-        return {
-          image: '/images/health-basket.png',
-          title: 'Health Category',
-          description:
-            'Discover a wide range of healthcare and pharmaceutical products at budget-friendly rates.',
-        };
+    if (currentPath.startsWith('/shop-and-order/health')) {
+      return {
+        image: '/images/health-basket.png',
+        title: 'Health Category',
+        bgColor: 'bg-gray-300',
+        description:
+          'Discover a wide range of healthcare and pharmaceutical products at budget-friendly rates.',
+      };
+    } else if (currentPath.startsWith('/shop-and-order/beauty')) {
+      return {
+        image: '/images/beauty-kit.png',
+        title: 'Beauty and Skin Care Category',
+        bgColor: 'bg-primaryLight',
+        description:
+          'Get a sleek grasp on top-notch skincare and beauty products.',
+      };
+    } else if (currentPath.startsWith('/shop-and-order/supermarket')) {
+      return {
+        image: '/images/shopping-cart.png',
+        title: 'Supermarket Category',
+        bgColor: 'bg-blueLight',
+        description:
+          'Easily purchase your everyday essentials from wherever you are.',
+      };
+    } else {
+      return {
+        image: '/images/health-basket.png',
+        title: 'Health Category',
+        bgColor: 'bg-gray-300',
+        description:
+          'Discover a wide range of healthcare and pharmaceutical products at budget-friendly rates.',
+      };
     }
   };
 

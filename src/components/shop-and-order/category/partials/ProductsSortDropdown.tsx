@@ -14,11 +14,17 @@ export const ProductSortDropdown = () => {
       <SelectItem className='text-content' key={0}>
         None
       </SelectItem>
-      <SelectItem className='text-content' key={1}>
-        Top Products
+      <SelectItem className='text-content' value={''} key={1}>
+        Price - Low to High
       </SelectItem>
-      <SelectItem className='text-content' key={2}>
-        Popular
+      <SelectItem className='text-content' value={''} key={2}>
+        Price - High to Low
+      </SelectItem>
+      <SelectItem className='text-content' value={''} key={3}>
+        Newest Arrivals
+      </SelectItem>
+      <SelectItem className='text-content' value={''} key={4}>
+        Name
       </SelectItem>
     </Select>
   );

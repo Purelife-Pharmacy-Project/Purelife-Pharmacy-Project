@@ -8,12 +8,36 @@ export const useGetProducts = () => {
     isSuccess,
     isError,
   } = useQuery({
+    // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: ['products'],
-    queryFn: () => ProductService.getAllProducts(),
+    queryFn: () => ProductService.getAllProducts({}),
   });
 
   return {
     products,
     loadingProducts,
+    isSuccess,
+    isError,
+  };
+};
+
+export const useGetProductsByCategory = (categoryId: string) => {
+  const {
+    data: products,
+    isLoading: loadingProducts,
+    isSuccess,
+    isError,
+  } = useQuery({
+    // eslint-disable-next-line @tanstack/query/exhaustive-deps
+    queryKey: ['products', categoryId],
+    queryFn: () => ProductService.getAllProducts({ categoryId }),
+    enabled: !!categoryId,
+  });
+
+  return {
+    products,
+    loadingProducts,
+    isSuccess,
+    isError,
   };
 };

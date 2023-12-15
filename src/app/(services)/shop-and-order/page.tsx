@@ -6,8 +6,21 @@ import { HomeHero } from '@/components/home/HomeHero';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Section } from '@/components/home/Section';
 import { ShopCategory } from '@/components/shop-and-order/ShopCategory';
+import { CategoryService } from '@/services/categories';
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from '@tanstack/react-query';
 
-export default function ShopAndOrder() {
+export default async function ShopAndOrder() {
+  // Prefetch categories
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ['categories'],
+    queryFn: () => CategoryService.getAllCategories(),
+  });
+
   const earnedClients = [
     {
       name: 'Relumins',
@@ -47,7 +60,9 @@ export default function ShopAndOrder() {
 
         <div className='grid justify-center lg:pt-[55px]'>
           <Section>
-            <ShopCategory />
+            <HydrationBoundary state={dehydrate(queryClient)}>
+              <ShopCategory />
+            </HydrationBoundary>
           </Section>
         </div>
 

@@ -1,4 +1,7 @@
+'use client';
+import { useGetCategories } from '@/hooks/useCategory';
 import { Button, Card, CardBody, Image, Link } from '@nextui-org/react';
+import { getCategoryUrl } from '@/helpers/utils';
 
 interface shopCategory {
   title: string;
@@ -8,13 +11,20 @@ interface shopCategory {
 }
 
 export const ShopCategory = () => {
+  const {
+    categories: allCategories,
+    loadingCategories,
+    isError,
+    isSuccess,
+  } = useGetCategories();
+
   const categories = [
     {
       title: 'Health Category',
       description:
         'Discover a wide range of healthcare and pharmaceutical products at budget-friendly rates.',
       image: '/images/health-basket.png',
-      url: '/shop-and-order/health',
+      url: getCategoryUrl('health', allCategories),
       bgColor: 'bg-gray-300',
     },
     {
@@ -22,7 +32,7 @@ export const ShopCategory = () => {
       description:
         'Get a sleek grasp on top-notch skincare and beauty products.',
       image: '/images/beauty-kit.png',
-      url: '/shop-and-order/beauty',
+      url: getCategoryUrl('beauty', allCategories),
       bgColor: 'bg-primaryLight',
     },
     {
@@ -30,7 +40,7 @@ export const ShopCategory = () => {
       description:
         'Easily purchase your everyday essentials from wherever you are.',
       image: '/images/shopping-cart.png',
-      url: '/shop-and-order/supermarket',
+      url: getCategoryUrl('supermarket', allCategories),
       bgColor: 'bg-blueLight',
     },
   ];
@@ -56,11 +66,14 @@ export const ShopCategory = () => {
                 <Button
                   variant='bordered'
                   as={Link}
+                  isDisabled={
+                    loadingCategories || isError || category.url === ''
+                  }
                   href={category.url}
                   radius='full'
-                  className='w-full border-header-100 px-[54px] py-6 text-lg text-header-100 lg:w-max'
+                  className='w-full border-header-100 px-[54px] py-6 text-lg text-header-100 disabled:cursor-not-allowed disabled:opacity-50 lg:w-max'
                 >
-                  Start Here
+                  {category.url === '' ? 'Unavailable' : 'Start Here'}
                 </Button>
               </div>
             </CardBody>

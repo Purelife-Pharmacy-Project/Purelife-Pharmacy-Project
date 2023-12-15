@@ -12,7 +12,7 @@ export const IconShare = ({ color = 'inherit', size = 24 }) => {
         className={`stroke-current text-${color}`}
         strokeWidth='2.08376'
         strokeLinecap='round'
-        stroke-linejoin='round'
+        strokeLinejoin='round'
       />
       <path
         d='M7.9375 12.2012L13.1469 14.8059'
@@ -24,9 +24,9 @@ export const IconShare = ({ color = 'inherit', size = 24 }) => {
       <path
         d='M5.33517 13.5043C6.77371 13.5043 7.93988 12.3382 7.93988 10.8996C7.93988 9.46109 6.77371 8.29492 5.33517 8.29492C3.89663 8.29492 2.73047 9.46109 2.73047 10.8996C2.73047 12.3382 3.89663 13.5043 5.33517 13.5043Z'
         className={`stroke-current text-${color}`}
-        stroke-width='2.08376'
+        strokeWidth='2.08376'
         strokeLinecap='round'
-        stroke-linejoin='round'
+        strokeLinejoin='round'
       />
       <path
         d='M13.1469 6.99219L7.9375 9.59689'

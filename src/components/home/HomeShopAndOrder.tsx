@@ -1,25 +1,39 @@
-import { IconCart } from '@/components/icons/IconCart';
-import { IconHandAndHeart } from '@/components/icons/IconHandAndHeart';
-import { IconHome } from '@/components/icons/IconHome';
+'use client';
 import { Button, Card, CardBody, Link } from '@nextui-org/react';
 import { Section } from './Section';
+import { getCategoryUrl } from '@/helpers/utils';
+import { useGetCategories } from '@/hooks/useCategory';
+import { IconHome } from '@/components/icons/IconHome';
+import { IconHandAndHeart } from '@/components/icons/IconHandAndHeart';
+import { IconCart } from '@/components/icons/IconCart';
 
 export const HomeShopAndOrder = () => {
-  const shopCategories = [
+  const { categories: allCategories } = useGetCategories();
+
+  const categories = [
     {
+      title: 'Health Category',
+      description:
+        'Discover a wide range of healthcare and pharmaceutical products at budget-friendly rates.',
       icon: <IconHome size={48} />,
-      title: '​Health Category​',
-      url: '/shop-and-order/health',
+      url: getCategoryUrl('health', allCategories),
+      bgColor: 'bg-gray-300',
     },
     {
-      icon: <IconHandAndHeart size={48} />,
       title: 'Beauty and Skin Care Category',
-      url: '/shop-and-order/beauty',
+      description:
+        'Get a sleek grasp on top-notch skincare and beauty products.',
+      icon: <IconHandAndHeart size={48} />,
+      url: getCategoryUrl('beauty', allCategories),
+      bgColor: 'bg-primaryLight',
     },
     {
+      title: 'Supermarket Category',
+      description:
+        'Easily purchase your everyday essentials from wherever you are.',
       icon: <IconCart size={48} color='success' />,
-      title: '​Supermarket Category',
-      url: '/shop-and-order/supermarket',
+      url: getCategoryUrl('supermarket', allCategories),
+      bgColor: 'bg-blueLight',
     },
   ];
   return (
@@ -50,7 +64,7 @@ export const HomeShopAndOrder = () => {
           </div>
 
           <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
-            {shopCategories.map((category, index) => (
+            {categories?.map((category, index) => (
               <Card key={index} shadow='none' radius='lg'>
                 <CardBody className='grid gap-6 bg-primaryGreenLight p-6'>
                   <div className='ml-auto grid h-[104px] w-[104px] place-content-center rounded-full bg-white'>

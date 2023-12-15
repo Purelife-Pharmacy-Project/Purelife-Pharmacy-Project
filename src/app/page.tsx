@@ -1,5 +1,3 @@
-import { AppNavbar } from '@/components/Navbar';
-import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { EarnedClients } from '@/components/home/EarnedClients';
 import { FeaturedProducts } from '@/components/home/FeaturedProducts';
 import { Footer } from '@/components/home/Footer';
@@ -14,20 +12,29 @@ import { WellnessBlogSection } from '@/components/home/WellnessBlogSection';
 import { IconFluidMed } from '@/components/icons/IconFluidMed';
 import { IconLabs } from '@/components/icons/IconLabs';
 import { IconPill } from '@/components/icons/IconPill';
-import { Button } from '@nextui-org/react';
+import { AppNavbar } from '@/components/Navbar';
+import { ReportDrugReaction } from '@/components/ReportDrugReaction';
+import { earnedClients } from '@/constants';
+import { CategoryService } from '@/services/categories';
+import ProductService from '@/services/products';
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-import { earnedClients } from '@/constants';
 
 export default async function Home() {
   const queryClient = new QueryClient();
-  // await queryClient.prefetchQuery({
-  //   queryKey: ['products'],
-  //   queryFn: () => ProductService.getAllProducts(),
-  // });
+  await queryClient.prefetchQuery({
+    queryKey: ['products'],
+    queryFn: () => ProductService.getAllProducts({}),
+  });
+
+  // Prefetch categories
+  await queryClient.prefetchQuery({
+    queryKey: ['categories'],
+    queryFn: () => CategoryService.getAllCategories(),
+  });
 
   const healthServices = [
     {
@@ -85,17 +92,10 @@ export default async function Home() {
 
         <HealthServices />
 
-        <HomeShopAndOrder />
-
         <HydrationBoundary state={dehydrate(queryClient)}>
+          <HomeShopAndOrder />
           <FeaturedProducts />
         </HydrationBoundary>
-
-        <div className='flex justify-center'>
-          <Button color='primary' className='px-8 py-8' radius='full' size='lg'>
-            Shop & Order
-          </Button>
-        </div>
 
         <Testimonials />
 
