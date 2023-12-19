@@ -1,19 +1,22 @@
 import { ProductSkeleton } from '@/components/shop-and-order/category/skeletons/ProductSkeleton';
-import { Product } from '@/services/products/types';
+import { useGetProductsByCategory } from '@/hooks';
 import { Card, CardBody } from '@nextui-org/react';
 import { FC } from 'react';
 import { ProductCard } from './ProductCard';
 
 type ProductsListProps = {
-  products: Product[] | undefined;
-  loading: boolean;
+  categoryId: string;
 };
 
-export const ProductsList: FC<ProductsListProps> = ({ products, loading }) => {
+export const ProductsList: FC<ProductsListProps> = ({ categoryId }) => {
+  const { products, loadingProducts, isFetching } = useGetProductsByCategory(
+    categoryId as string
+  );
+
   return (
     <Card shadow='none' className='w-full'>
       <CardBody>
-        {loading ? (
+        {loadingProducts || isFetching ? (
           <ProductSkeleton />
         ) : (
           <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
@@ -27,7 +30,7 @@ export const ProductsList: FC<ProductsListProps> = ({ products, loading }) => {
             ))}
           </div>
         )}
-        {products?.length === 0 && !loading && (
+        {products?.length === 0 && !loadingProducts && (
           <div className='text-center'>
             <p>Oops. No products found</p>
           </div>

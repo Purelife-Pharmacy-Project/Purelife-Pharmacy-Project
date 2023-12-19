@@ -1,9 +1,23 @@
 'use client';
 import { IconSearch } from '@/components/icons/IconSearch';
+import { useGetProductsByCategory } from '@/hooks';
 import { inputDefault } from '@/theme';
 import { Card, CardBody, Input, Radio, RadioGroup } from '@nextui-org/react';
+import debounce from 'lodash/debounce';
+import {
+  ChangeEvent,
+  FC,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
-export const ProductsFilter = () => {
+type ProductsFilterProps = {
+  categoryId: string;
+};
+
+export const ProductsFilter: FC<ProductsFilterProps> = ({ categoryId }) => {
   const filterOptions = [
     {
       name: 'Manufacturer',
@@ -56,6 +70,37 @@ export const ProductsFilter = () => {
       ],
     },
   ];
+  const [searchString, setSearchString] = useState<string | undefined>(
+    undefined
+  );
+  const searchStringRef = useRef(searchString);
+
+  useEffect(() => {
+    searchStringRef.current = searchString;
+  }, [searchString]);
+
+  const { refetch } = useGetProductsByCategory(
+    categoryId as string,
+    searchString
+  );
+
+  const handleDebouncedSearch = debounce((value: string) => {
+    if (value === '') {
+      setSearchString(undefined);
+      refetch();
+    } else {
+      setSearchString(value);
+      refetch();
+    }
+  }, 500);
+
+  const handleInputChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      handleDebouncedSearch(e.target.value);
+    },
+    [handleDebouncedSearch]
+  );
+
   return (
     <Card shadow='none' className='h-max bg-primaryLight'>
       <CardBody>
@@ -73,8 +118,10 @@ export const ProductsFilter = () => {
                 isClearable
                 startContent={<IconSearch />}
                 radius='full'
+                isDisabled
                 className='mb-3'
                 placeholder='search'
+                onChange={handleInputChange}
                 classNames={inputDefault}
               />
               {filterOption.options.map((option, index) => (

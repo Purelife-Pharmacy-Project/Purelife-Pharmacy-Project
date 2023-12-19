@@ -77,7 +77,7 @@ export default async function Home() {
 
   return (
     <>
-      <AppNavbar background='primaryLight' />
+      <AppNavbar background={'primaryLight'} />
       <main className='grid gap-6'>
         <HomeHero
           title='Your the one-stop shop for wellness and lifestyle.'
