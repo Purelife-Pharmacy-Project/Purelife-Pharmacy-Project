@@ -37,13 +37,18 @@ export const ProductSearch: FC<ProductSearchProps> = ({
   // watch the search string and refetch the data
   useEffect(() => {
     if (searchStr === '') {
-      router.push(`${pathName}?${createQueryString('searchString', '')}`);
+      router.push(`${pathName}?${createQueryString('searchString', '')}`, {
+        scroll: false,
+      });
       onRefetch();
     } else {
       setSearchStr(searchStr);
 
       router.push(
-        `${pathName}?${createQueryString('searchString', searchStr!)}`
+        `${pathName}?${createQueryString('searchString', searchStr!)}`,
+        {
+          scroll: false,
+        }
       );
       onRefetch();
     }

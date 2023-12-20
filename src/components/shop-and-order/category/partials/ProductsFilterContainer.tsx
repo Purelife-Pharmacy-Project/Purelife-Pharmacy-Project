@@ -1,8 +1,9 @@
 'use client';
+import { ProductsManufacturersList } from '@/components/shop-and-order/category/partials/ProductsManufacturersList';
 import { useGetProductsByCategory } from '@/hooks';
 import { Card, CardBody } from '@nextui-org/react';
 import { FC } from 'react';
-import { ProductsManufacturersFilter } from '@/components/shop-and-order/category/partials/ProductsManufacturersFilter';
+import { ProductsPriceList } from './ProductsPriceList';
 
 type ProductsFilterContainerProps = {
   categoryId: string;
@@ -31,11 +32,12 @@ export const ProductsFilterContainer: FC<ProductsFilterContainerProps> = ({
         <h1 className='mb-4 text-2xl font-semibold text-header-100'>Filter</h1>
 
         <div className='grid gap-4'>
-          <ProductsManufacturersFilter
+          <ProductsManufacturersList
             categoryId={categoryId}
             manufacturerId={manufacturerId}
             onRefetch={refetchProducts}
           />
+          <ProductsPriceList />
         </div>
       </CardBody>
     </Card>

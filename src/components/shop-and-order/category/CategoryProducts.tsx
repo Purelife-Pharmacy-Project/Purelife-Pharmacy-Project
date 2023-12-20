@@ -1,17 +1,15 @@
 'use client';
+import { ProductSearch } from '@/components/shop-and-order/category/partials/ProductSearch';
+import { useGetProductsByCategory } from '@/hooks';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Section } from '../../home/Section';
 import { ProductsFilterContainer } from './partials/ProductsFilterContainer';
 import { ProductsList } from './partials/ProductsList';
 import { ProductSortDropdown } from './partials/ProductsSortDropdown';
-import { ProductSearch } from '@/components/shop-and-order/category/partials/ProductSearch';
-import { useQueryClient } from '@tanstack/react-query';
-import { useGetProductsByCategory } from '@/hooks';
 
 export const CategoryProducts = () => {
   const currentPath = usePathname();
   const router = useRouter();
-  const queryClient = useQueryClient();
   const category = currentPath.split('/')[2].split('-');
   const noId = category.length === 1;
   const categoryId = category.pop() || '1';

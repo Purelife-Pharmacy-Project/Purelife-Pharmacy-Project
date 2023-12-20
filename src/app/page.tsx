@@ -5,7 +5,7 @@ import { HealthServices } from '@/components/home/HealthServices';
 import { HomeHero } from '@/components/home/HomeHero';
 import { HomePartners } from '@/components/home/HomePartners';
 import { HomeShopAndOrder } from '@/components/home/HomeShopAndOrder';
-import { HomeTransformation } from '@/components/home/HomeTranformation';
+import { HomeTransformation } from '@/components/home/HomeTransformation';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Testimonials } from '@/components/home/Testimonials';
 import { WellnessBlogSection } from '@/components/home/WellnessBlogSection';
@@ -80,7 +80,7 @@ export default async function Home() {
       <AppNavbar background={'primaryLight'} />
       <main className='grid gap-6'>
         <HomeHero
-          title='Your the one-stop shop for wellness and lifestyle.'
+          title='Your one-stop shop for wellness and lifestyle.'
           description='Schedule laboratory tests, book vaccination appointments, and receive high-quality medical services from the convenience of wherever you are in Nigeria.'
           ctaText='Start here'
           ctaLink='#'

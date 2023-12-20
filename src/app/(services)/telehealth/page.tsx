@@ -3,7 +3,7 @@ import { EarnedClients } from '@/components/home/EarnedClients';
 import { Footer } from '@/components/home/Footer';
 import { HealthServices } from '@/components/home/HealthServices';
 import { HomeHero } from '@/components/home/HomeHero';
-import { HomeTransformation } from '@/components/home/HomeTranformation';
+import { HomeTransformation } from '@/components/home/HomeTransformation';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Section } from '@/components/home/Section';
 import { IconDoctor } from '@/components/icons/IconDoctor';

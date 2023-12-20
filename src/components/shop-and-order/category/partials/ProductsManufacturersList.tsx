@@ -8,15 +8,17 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { ManufacturersSkeleton } from '../skeletons/ManufacturersSkeleton';
 
-type ProductsManufacturersFilterProps = {
+type ProductsManufacturersListProps = {
   categoryId: string;
   manufacturerId: string;
   onRefetch: () => void;
 };
 
-export const ProductsManufacturersFilter: FC<
-  ProductsManufacturersFilterProps
-> = ({ categoryId, manufacturerId, onRefetch }) => {
+export const ProductsManufacturersList: FC<ProductsManufacturersListProps> = ({
+  categoryId,
+  manufacturerId,
+  onRefetch,
+}) => {
   const urlParams = useSearchParams();
   const router = useRouter();
   const pathName = usePathname();
@@ -75,12 +77,17 @@ export const ProductsManufacturersFilter: FC<
   // watch the manufacturerId and refetch the data
   useEffect(() => {
     if (manufacturer === '') {
-      router.replace(`${pathName}?${createQueryString('manufacturer', '')}`);
+      router.replace(`${pathName}?${createQueryString('manufacturer', '')}`, {
+        scroll: false,
+      });
       onRefetch();
     } else {
       setManufacturer(manufacturer);
       router.replace(
-        `${pathName}?${createQueryString('manufacturer', manufacturer!)}`
+        `${pathName}?${createQueryString('manufacturer', manufacturer!)}`,
+        {
+          scroll: false,
+        }
       );
       onRefetch();
     }
@@ -90,7 +97,9 @@ export const ProductsManufacturersFilter: FC<
   return (
     <>
       <RadioGroup
-        classNames={{ label: 'font-semibold text-header-100' }}
+        classNames={{
+          label: 'font-semibold text-header-100',
+        }}
         label={'Manufacturer'}
         value={manufacturer}
         onValueChange={setManufacturer}
@@ -109,23 +118,32 @@ export const ProductsManufacturersFilter: FC<
 
         {manufacturers && manufacturers.length > 0 && !loadingManufacturers && (
           <>
-            {manufacturers?.map((manufacturer, index) => (
-              <Radio key={index} value={manufacturer.id}>
+            {manufacturers?.map((manufacturer) => (
+              <Radio
+                isDisabled={loadingManufacturers}
+                key={manufacturer.id}
+                value={manufacturer.id}
+              >
                 {manufacturer.name}
               </Radio>
             ))}
           </>
         )}
-        {manufacturer !== '' && (
-          <Button variant='faded' onClick={handleReset}>
-            Reset
-          </Button>
-        )}
+        {manufacturers &&
+          manufacturers.length > 0 &&
+          !loadingManufacturers &&
+          manufacturer !== '' && (
+            <div className='flex justify-end'>
+              <Button variant='faded' onClick={handleReset}>
+                Reset
+              </Button>
+            </div>
+          )}
 
         {!loadingManufacturers && manufacturers?.length === 0 && (
           <div className='text-center'>
             <p className='text-center text-sm text-content'>
-              Oops! Couldnt find that
+              No Manufacturers found
             </p>
           </div>
         )}

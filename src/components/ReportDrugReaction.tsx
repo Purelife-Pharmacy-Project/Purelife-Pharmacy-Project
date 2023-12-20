@@ -1,4 +1,4 @@
-import { Button } from '@nextui-org/react';
+import { Button, Link } from '@nextui-org/react';
 import { Section } from './home/Section';
 
 export const ReportDrugReaction = () => {
@@ -11,6 +11,9 @@ export const ReportDrugReaction = () => {
           </p>
 
           <Button
+            as={Link}
+            href='https://primaryreporting.who-umc.org/NG'
+            target='_blank'
             color='primary'
             className='px-10 lg:px-12'
             radius='full'
