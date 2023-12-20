@@ -1,6 +1,6 @@
 'use client';
 import { useGetProducts } from '@/hooks';
-import { Button } from '@nextui-org/react';
+import { Button, Link } from '@nextui-org/react';
 import { FC, useMemo } from 'react';
 import { FeaturedProduct } from './FeaturedProduct';
 import { Section } from './Section';
@@ -53,7 +53,14 @@ export const FeaturedProducts: FC<FeaturedProductsProps> = ({
       </Section>
 
       <div className='mt-10 flex justify-center'>
-        <Button color='primary' className='px-8 py-8' radius='full' size='lg'>
+        <Button
+          color='primary'
+          as={Link}
+          href='/shop-and-order'
+          className='px-8 py-8'
+          radius='full'
+          size='lg'
+        >
           Shop & Order
         </Button>
       </div>

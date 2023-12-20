@@ -1,4 +1,4 @@
-import { CategoryType } from '@/services/categories/type';
+import { CategoryType } from '@/services/categories/types';
 
 export const isServer = () => typeof window === 'undefined';
 

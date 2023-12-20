@@ -1,0 +1,246 @@
+import { ProductType } from '@/services/products/types';
+
+export const mock_products: ProductType[] = [
+  {
+    id: 1,
+    name: 'Amoxil',
+    isActive: true,
+    price: 1099,
+    categoryId: '1',
+    manufacturerId: '1',
+    imageUrl: '/images/care-package.png',
+    description:
+      'Amoxil is an antibiotic used to treat bacterial infections such as bronchitis, pneumonia, and infections of the ear, nose, throat, skin, and urinary tract. It works by stopping the growth of bacteria.',
+  },
+  {
+    id: 2,
+    name: 'Lisinopril',
+    isActive: true,
+    price: 999,
+    categoryId: '1',
+    manufacturerId: '1',
+    imageUrl: '/images/care-package.png',
+    description:
+      'Lisinopril is used to treat high blood pressure. It works by relaxing blood vessels so that blood can flow more easily.',
+  },
+  {
+    id: 3,
+    name: 'Metformin',
+    isActive: true,
+    price: 899,
+    categoryId: '1',
+    manufacturerId: '1',
+    imageUrl: '/images/care-package.png',
+    description:
+      "Metformin is used to treat type 2 diabetes. It works by decreasing the amount of glucose produced by the liver and improving the body's response to insulin.",
+  },
+  {
+    id: 4,
+    name: 'Atorvastatin',
+    isActive: true,
+    price: 799,
+    categoryId: '1',
+    manufacturerId: '2',
+    imageUrl: '/images/care-package.png',
+    description:
+      'Atorvastatin is used to treat high cholesterol. It works by blocking an enzyme that the body needs to make cholesterol, thereby reducing the amount of cholesterol in the blood.',
+  },
+  {
+    id: 5,
+    name: 'Ibuprofen',
+    isActive: true,
+    price: 699,
+    categoryId: '1',
+    manufacturerId: '2',
+    imageUrl: '/images/care-package.png',
+    description:
+      'Ibuprofen is a nonsteroidal anti-inflammatory drug (NSAID) used to relieve pain, fever, and inflammation. It works by blocking the production of certain chemicals in the body that cause pain and inflammation.',
+  },
+  {
+    id: 6,
+    name: 'Acetaminophen',
+    isActive: true,
+    price: 599,
+    categoryId: '1',
+    manufacturerId: '1',
+    imageUrl: '/images/care-package.png',
+    description:
+      'Acetaminophen is a pain reliever and fever reducer. It works by changing the way the body senses pain and by cooling the body.',
+  },
+  {
+    id: 7,
+    name: 'Aspirin',
+    isActive: true,
+    price: 499,
+    categoryId: '1',
+    manufacturerId: '3',
+    imageUrl: '/images/care-package.png',
+    description:
+      'Aspirin is a nonsteroidal anti-inflammatory drug (NSAID) used to relieve pain, fever, and inflammation. It works by blocking the production of certain chemicals in the body that cause pain and inflammation.',
+  },
+  {
+    id: 8,
+    name: 'Cetirizine',
+    isActive: true,
+    price: 399,
+    categoryId: '1',
+    manufacturerId: '4',
+    imageUrl: '/images/care-package.png',
+    description:
+      'Cetirizine is an antihistamine used to relieve allergy symptoms such as watery eyes, runny nose, itching eyes/nose, and sneezing. It works by blocking a certain natural substance (histamine) that your body makes during an allergic reaction.',
+  },
+  {
+    id: 9,
+    name: 'Omeprazole',
+    price: 299,
+    isActive: true,
+    categoryId: '1',
+    manufacturerId: '5',
+    imageUrl: '/images/care-package.png',
+    description:
+      'Omeprazole is used to treat certain stomach and esophagus problems (such as acid reflux, ulcers). It works by decreasing the amount of acid your stomach makes. It relieves symptoms such as heartburn, difficulty swallowing, and persistent cough.',
+  },
+  {
+    id: 10,
+    name: 'Simvastatin',
+    isActive: false,
+    price: 199,
+    categoryId: '1',
+    manufacturerId: '4',
+    imageUrl: '/images/care-package.png',
+    description:
+      'Simvastatin is used along with a proper diet to help lower "bad" cholesterol and fats (such as LDL, triglycerides) and raise "good" cholesterol (HDL) in the blood. It belongs to a group of drugs known as "statins." It works by reducing the amount of cholesterol made by the liver.',
+  },
+  {
+    id: 11,
+    name: 'Lipstick',
+    isActive: true,
+    price: 199,
+    categoryId: '3',
+    manufacturerId: '10',
+    imageUrl: '/images/care-package.png',
+    description:
+      'A lipstick is a cosmetic product containing pigments, oils, waxes, and emollients that apply color, texture, and protection to the lips.',
+  },
+  {
+    id: 12,
+    name: 'Foundation',
+    isActive: true,
+    price: 299,
+    categoryId: '3',
+    manufacturerId: '9',
+    imageUrl: '/images/care-package.png',
+    description:
+      'Foundation is a skin-coloured makeup applied to the face to create an even, uniform colour to the complexion, to cover flaws and, sometimes, to change the natural skin tone.',
+  },
+  {
+    id: 13,
+    name: 'Mascara',
+    isActive: true,
+    price: 399,
+    categoryId: '3',
+    manufacturerId: '11',
+    imageUrl: '/images/care-package.png',
+    description:
+      'Mascara is a cosmetic commonly used to enhance the eyelashes. It may darken, thicken, lengthen, and/or define the eyelashes.',
+  },
+  {
+    id: 14,
+    name: 'Eyeliner',
+    isActive: true,
+    price: 499,
+    categoryId: '3',
+    manufacturerId: '14',
+    imageUrl: '/images/care-package.png',
+    description:
+      'Eyeliner is a cosmetic used to define the eyes. It is applied around the contours of the eye(s) to create a variety of aesthetic effects.',
+  },
+  {
+    id: 15,
+    name: 'Eyeshadow',
+    isActive: true,
+    price: 599,
+    categoryId: '3',
+    manufacturerId: '12',
+    imageUrl: '/images/care-package.png',
+    description:
+      "Eyeshadow is a cosmetic that is applied on the eyelids and under the eyebrows. It is commonly used to make the wearer's eyes stand out or look more attractive.",
+  },
+  {
+    id: 16,
+    name: 'Highlighter',
+    isActive: true,
+    price: 699,
+    categoryId: '3',
+    manufacturerId: '13',
+    imageUrl: '/images/care-package.png',
+    description:
+      "Highligher is a cosmetic that's used to highlight the skin's texture.",
+  },
+  {
+    id: 17,
+    name: 'Dish Soap',
+    isActive: true,
+    price: 199,
+    categoryId: '2',
+    manufacturerId: '6',
+    imageUrl: '/images/care-package.png',
+    description:
+      'Dish soap, also known as dishwashing soap and dish detergent, is a detergent used to assist in dishwashing. It is usually a highly-foaming mixture of surfactants with low skin irritation, and is primarily used for hand washing of glasses, plates, cutlery, and cooking utensils in a sink or bowl.',
+  },
+  {
+    id: 18,
+    name: 'Bathroom Cleaner',
+    isActive: true,
+    price: 299,
+    categoryId: '2',
+    manufacturerId: '8',
+    imageUrl: '/images/care-package.png',
+    description:
+      'A bathroom cleaner is a cleaning product specifically designed to clean the bathroom, including the tub, shower, sink, toilet, and countertops.',
+  },
+  {
+    id: 19,
+    name: 'Toilet Cleaner',
+    isActive: true,
+    price: 399,
+    categoryId: '2',
+    manufacturerId: '8',
+    imageUrl: '/images/care-package.png',
+    description:
+      'A toilet cleaner is a chemical substance or mechanical implement designed to clean the toilet, usually removing hard water stains and lime scale.',
+  },
+  {
+    id: 20,
+    name: 'Glass Cleaner',
+    isActive: true,
+    price: 499,
+    categoryId: '2',
+    manufacturerId: '8',
+    imageUrl: '/images/care-package.png',
+    description:
+      'Glass cleaner is a type of cleaning agent used for cleaning glass surfaces. Glass cleaners are typically sprayed directly onto glass surfaces and then wiped off.',
+  },
+  {
+    id: 21,
+    name: 'Floor Cleaner',
+    isActive: true,
+    price: 599,
+    categoryId: '2',
+    manufacturerId: '7',
+    imageUrl: '/images/care-package.png',
+    description:
+      'A floor cleaner is a liquid or powder-based cleaning agent specifically designed to clean floors, including hardwood, ceramic tile, and laminate.',
+  },
+  {
+    id: 22,
+    name: 'All-Purpose Cleaner',
+    isActive: true,
+    price: 699,
+    categoryId: '2',
+    manufacturerId: '7',
+    imageUrl: '/images/care-package.png',
+    description:
+      'All-purpose cleaner is a type of cleaning agent used for cleaning surfaces. All-purpose cleaners are typically sprayed directly onto surfaces and then wiped off.',
+  },
+];

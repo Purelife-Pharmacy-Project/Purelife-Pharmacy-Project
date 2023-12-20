@@ -26,7 +26,8 @@ export const useGetProductsByCategory = (
   pageSize?: number,
   pageIndex?: number,
   active?: boolean,
-  productId?: string
+  productId?: string,
+  manufacturerId?: string
 ) => {
   const {
     data: products,
@@ -36,15 +37,8 @@ export const useGetProductsByCategory = (
     isError,
     refetch,
   } = useQuery({
-    queryKey: [
-      'products',
-      categoryId,
-      name,
-      pageSize,
-      pageIndex,
-      active,
-      productId,
-    ],
+    // eslint-disable-next-line @tanstack/query/exhaustive-deps
+    queryKey: ['products', categoryId, name, manufacturerId],
     queryFn: () =>
       ProductService.getAllProducts({
         categoryId,
@@ -53,8 +47,9 @@ export const useGetProductsByCategory = (
         pageIndex,
         active,
         productId,
+        manufacturerId,
       }),
-    enabled: !!categoryId || !!name,
+    enabled: !!categoryId || !!name || !!manufacturerId,
   });
 
   return {

@@ -6,17 +6,29 @@ import { ProductCard } from './ProductCard';
 
 type ProductsListProps = {
   categoryId: string;
+  searchString: string;
+  manufacturerId: string;
 };
 
-export const ProductsList: FC<ProductsListProps> = ({ categoryId }) => {
-  const { products, loadingProducts, isFetching } = useGetProductsByCategory(
-    categoryId as string
+export const ProductsList: FC<ProductsListProps> = ({
+  categoryId,
+  searchString,
+  manufacturerId,
+}) => {
+  const { products, loadingProducts } = useGetProductsByCategory(
+    categoryId as string,
+    searchString,
+    10,
+    0,
+    false,
+    undefined,
+    manufacturerId
   );
 
   return (
     <Card shadow='none' className='w-full'>
       <CardBody>
-        {loadingProducts || isFetching ? (
+        {loadingProducts ? (
           <ProductSkeleton />
         ) : (
           <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
