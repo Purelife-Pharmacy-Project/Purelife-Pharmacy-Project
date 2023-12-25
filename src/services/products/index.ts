@@ -1,4 +1,4 @@
-import { mock_products } from '@/mocks/products';
+import { mock_products } from '@/helpers/mocks/products';
 import { Product, ProductType } from '@/services/products/types';
 
 class ProductService {

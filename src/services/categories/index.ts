@@ -1,4 +1,4 @@
-import { mock_categories } from '@/mocks/categories';
+import { mock_categories } from '@/helpers/mocks/categories';
 import { CategoryType } from '@/services/categories/types';
 
 export class CategoryService {

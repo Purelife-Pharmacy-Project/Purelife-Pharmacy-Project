@@ -1,22 +1,20 @@
 import { AppNavbar } from '@/components/Navbar';
 import { DeliveryModeTabs } from '@/components/cart/DeliveryModeTabs';
-import { ProductQuantity } from '@/components/cart/ProductQuantity';
+import { NoOfCartItems } from '@/components/cart/NoOfCartItems';
 import { Section } from '@/components/home/Section';
-import { IconBin } from '@/components/icons/IconBin';
-import { Button, Card, CardBody, Image } from '@nextui-org/react';
+import { Card, CardBody, Image } from '@nextui-org/react';
+import { CartItemDetails } from '@/components/cart/CartItemDetails';
 
 export default function CartProductPage() {
   return (
     <>
-      <AppNavbar background='primaryLight' />
+      <AppNavbar background={'primaryLight'} />
       <div className='grid justify-start bg-primaryLight px-4 py-10 lg:justify-center lg:px-0 lg:pb-10'>
         <Section className='bg-primaryLight'>
           <h1 className='border-grey-200 mb-6 border-b pb-4 text-2xl font-bold text-header-100 lg:text-4xl'>
             Your Cart
           </h1>
-          <p className='font-light text-header-100'>
-            You have 3 item(s) in your cart
-          </p>
+          <NoOfCartItems />
         </Section>
       </div>
 
@@ -32,28 +30,7 @@ export default function CartProductPage() {
             </Card>
             <Card shadow='none' className='w-full'>
               <CardBody>
-                <div className='grid gap-4'>
-                  <h1 className='text-2xl font-semibold text-header-100'>
-                    Lokmal Qs-Tab
-                  </h1>
-                  <p className='text-lg font-light text-header-100'>
-                    Lokmal Qs is a combination of Artemether Lumefantrine and
-                    paracetamol, it is indicated for the treatment of malaria in
-                    children (14 years and above) and adults caused by all forms
-                    of plasmodium including severe malaria caused by multiple
-                    drug resistant strains of P.falciparum.
-                  </p>
-
-                  <p className='font-bold text-content'>₦ 2,550.00 </p>
-
-                  <div className='flex items-center justify-between'>
-                    <ProductQuantity />
-
-                    <Button isIconOnly variant='faded'>
-                      <IconBin color='primary' />
-                    </Button>
-                  </div>
-                </div>
+                <CartItemDetails />
               </CardBody>
             </Card>
           </div>

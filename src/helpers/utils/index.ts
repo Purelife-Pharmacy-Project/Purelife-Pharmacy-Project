@@ -13,3 +13,10 @@ export const getCategoryUrl = (
   if (!categoryId) return '';
   return `/shop-and-order/${category}-${categoryId}`;
 };
+
+export const toNaira = (amount: number) => {
+  return amount?.toLocaleString('en-NG', {
+    style: 'currency',
+    currency: 'NGN',
+  });
+};

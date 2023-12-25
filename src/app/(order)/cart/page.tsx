@@ -1,17 +1,30 @@
 import { AppNavbar } from '@/components/Navbar';
-import { CartItem } from '@/components/cart/CartItem';
-import { OrderSummary } from '@/components/cart/OrderSummary';
+import { CartWrapper } from '@/components/cart/CartWrapper';
+import { NoOfCartItems } from '@/components/cart/NoOfCartItems';
+import { SubscribeDrugRefillModal } from '@/components/cart/modals/SubscribeDrugRefillModal';
 import { Footer } from '@/components/home/Footer';
 import { Section } from '@/components/home/Section';
+import { CartService } from '@/services/cart';
 import { Button, Input } from '@nextui-org/react';
-import { OrderTypeRadio } from '@/components/drug-refill/OrderTypeRadio';
-import { SubscribeDrugRefillModal } from '@/components/cart/modals/SubscribeDrugRefillModal';
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from '@tanstack/react-query';
 
-export default function CartPage() {
+export default async function CartPage() {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ['cart'],
+    queryFn: () => CartService.getCart(),
+  });
+
   return (
     <>
-      <AppNavbar background='primaryLight' />
-      {/*TODO: (Me)Add the event listener back to handle when the modal's action is complete*/}
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <AppNavbar background={'primaryLight'} />
+      </HydrationBoundary>
+
       <SubscribeDrugRefillModal isOpen={false} />
       <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
         <Section className='mt-8 bg-white lg:mt-0'>
@@ -19,9 +32,7 @@ export default function CartPage() {
             Your Cart
           </h1>
           <div className='flex flex-col justify-between gap-6 lg:flex-row lg:items-center lg:gap-0'>
-            <p className='font-light text-header-100'>
-              You have 3 item(s) in your cart
-            </p>
+            <NoOfCartItems />
 
             <div className='grid items-center gap-4 lg:grid-flow-col lg:grid-cols-[3fr_11fr]'>
               <p className='text-header-100'>Have a coupon?</p>
@@ -37,17 +48,11 @@ export default function CartPage() {
               />
             </div>
           </div>
-          <div className='grid gap-5 py-4'>
-            {Array.from({ length: 3 }).map((_, index) => (
-              <CartItem key={index} />
-            ))}
 
-            <OrderTypeRadio />
-          </div>
-
-          <div className='mt-6 lg:flex lg:justify-end'>
-            <OrderSummary />
-          </div>
+          <HydrationBoundary state={dehydrate(queryClient)}>
+            <CartWrapper />
+            {/*<OrderTypeRadio />*/}
+          </HydrationBoundary>
         </Section>
         <Footer />
       </div>

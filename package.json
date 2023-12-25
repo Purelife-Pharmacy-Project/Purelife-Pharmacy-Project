@@ -12,6 +12,8 @@
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
     "@nextui-org/react": "^2.1.13",
+    "@react-rxjs/core": "^0.10.7",
+    "@react-rxjs/utils": "^0.9.7",
     "@tanstack/react-query": "^5.0.0",
     "@tanstack/react-query-devtools": "^5.8.7",
     "@uidotdev/usehooks": "^2.4.0",
@@ -25,6 +27,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.47.0",
     "react-hot-toast": "^2.4.1",
+    "rxjs": "^7.8.1",
     "tailwind-merge": "^1.14.0",
     "zod": "^3.22.4"
   },

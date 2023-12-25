@@ -1,5 +1,5 @@
+import { mock_manufacturers } from '@/helpers/mocks/manufacturers';
 import { ManufacturerType } from '@/services/manufacturers/types';
-import { mock_manufacturers } from '@/mocks/manufacturers';
 
 export class ManufacturersService {
   private static MANUFACTURERS_API_BASE = '/Manufacturer';

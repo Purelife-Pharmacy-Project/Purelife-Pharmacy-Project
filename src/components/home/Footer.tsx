@@ -124,6 +124,7 @@ export const Footer = () => {
               <Link href='/'>
                 <Image
                   src='/app-logo.png'
+                  priority
                   alt='purelife logo'
                   width={147}
                   height={68.271}

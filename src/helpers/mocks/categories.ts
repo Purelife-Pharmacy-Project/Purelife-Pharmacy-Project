@@ -13,4 +13,8 @@ export const mock_categories: CategoryType[] = [
     id: '3',
     name: 'Beauty',
   },
+  {
+    id: '4',
+    name: 'Drug Refill',
+  },
 ];

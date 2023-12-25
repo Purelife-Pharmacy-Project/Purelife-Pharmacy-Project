@@ -1,6 +1,8 @@
 'use client';
+import { useGetCart } from '@/hooks';
 import { inputDefault } from '@/theme';
 import {
+  Badge,
   Button,
   Input,
   Link,
@@ -26,6 +28,7 @@ export const AppNavbar = ({
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathName = usePathname();
+  const { cart } = useGetCart();
 
   const isActive = (path: string) => pathName.startsWith(path);
 
@@ -65,6 +68,7 @@ export const AppNavbar = ({
           <Link href='/'>
             <Image
               src='/app-logo.png'
+              priority
               alt='purelife logo'
               width={147}
               loading='eager'
@@ -139,10 +143,12 @@ export const AppNavbar = ({
               href='/cart'
             >
               <div className='flex items-center gap-2'>
-                <IconCart
-                  size={24}
-                  color={isActive('/cart') ? 'primary' : 'header-100'}
-                />
+                <Badge content={cart?.length} size='lg' color='primary'>
+                  <IconCart
+                    size={24}
+                    color={isActive('/cart') ? 'primary' : 'header-100'}
+                  />
+                </Badge>
                 <p>Cart</p>
               </div>
             </Link>

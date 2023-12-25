@@ -1,3 +1,5 @@
+import { toNaira } from '@/helpers/utils';
+
 export type ProductType = {
   id: number;
   name: string;
@@ -30,9 +32,6 @@ export class Product {
     this.manufacturerId = product.manufacturerId;
     this.description = product.description || '';
     this.imageUrl = product.imageUrl || '/images/care-package.png';
-    this.amount = this.price.toLocaleString('en-NG', {
-      style: 'currency',
-      currency: 'NGN',
-    });
+    this.amount = toNaira(this.price);
   }
 }
