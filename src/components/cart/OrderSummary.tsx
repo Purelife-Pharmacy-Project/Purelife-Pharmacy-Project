@@ -1,12 +1,12 @@
 'use client';
-import { useGetCartSummary } from '@/hooks';
-import { Button, Card, CardBody } from '@nextui-org/react';
+import { useCartStore } from '@/hooks';
+import { Button, Card, CardBody, Link } from '@nextui-org/react';
 import { FC } from 'react';
 
 export type OrderSummaryProps = {};
 
 export const OrderSummary: FC<OrderSummaryProps> = () => {
-  const { subTotal } = useGetCartSummary();
+  const { summary } = useCartStore();
 
   return (
     <Card shadow='none' className='w-full border border-gray-300 lg:w-[543px]'>
@@ -15,7 +15,9 @@ export const OrderSummary: FC<OrderSummaryProps> = () => {
           <h1 className='text-2xl font-bold text-header-100'>Order Summary</h1>
           <div className='flex justify-between border-b border-gray-300 py-4'>
             <p className='text-lg font-light text-header-100'>Subtotal</p>
-            <p className='text-lg font-semibold text-header-100'>{subTotal}</p>
+            <p className='text-lg font-semibold text-header-100'>
+              {summary.subTotal}
+            </p>
           </div>
 
           <div className='flex justify-between py-4'>
@@ -36,11 +38,15 @@ export const OrderSummary: FC<OrderSummaryProps> = () => {
           </div>
           <div className='flex justify-between py-4'>
             <p className='text-lg font-light text-header-100'>Total</p>
-            <p className='text-lg font-semibold text-header-100'>{subTotal}</p>
+            <p className='text-lg font-semibold text-header-100'>
+              {summary.total}
+            </p>
           </div>
           <Button
             color='primary'
             size='lg'
+            as={Link}
+            href='/checkout'
             radius='full'
             className='w-full py-8'
           >

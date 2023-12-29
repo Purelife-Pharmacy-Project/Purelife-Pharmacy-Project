@@ -1,10 +1,9 @@
 'use client';
 import { IconSearch } from '@/components/icons/IconSearch';
-import { useGetManufacturers } from '@/hooks';
+import { useGetManufacturers, useQueryParams } from '@/hooks';
 import { inputDefault } from '@/theme';
 import { Button, Input, Radio, RadioGroup } from '@nextui-org/react';
 import debounce from 'lodash/debounce';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { ManufacturersSkeleton } from '../skeletons/ManufacturersSkeleton';
 
@@ -19,10 +18,7 @@ export const ProductsManufacturersList: FC<ProductsManufacturersListProps> = ({
   manufacturerId,
   onRefetch,
 }) => {
-  const urlParams = useSearchParams();
-  const router = useRouter();
-  const pathName = usePathname();
-
+  const { setQuery, removeQuery } = useQueryParams();
   const [manufacturer, setManufacturer] = useState<string>(
     manufacturerId || ''
   );
@@ -31,31 +27,9 @@ export const ProductsManufacturersList: FC<ProductsManufacturersListProps> = ({
   const { loadingManufacturers, manufacturers, refetchManufacturers } =
     useGetManufacturers(categoryId, searchStr || '');
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(urlParams);
-
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [urlParams]
-  );
-
-  const handleDebouncedManufacturer = debounce((value: string) => {
-    setManufacturer(value);
-  }, 500);
-
   const handleDebouncedSearch = debounce((value: string) => {
     setSearchStr(value);
   }, 500);
-
-  const handleRadioChange = useCallback(
-    (value: string) => {
-      handleDebouncedManufacturer(value);
-    },
-    [handleDebouncedManufacturer]
-  );
 
   const handleSearchChange = useCallback(
     (value: string) => {
@@ -77,18 +51,11 @@ export const ProductsManufacturersList: FC<ProductsManufacturersListProps> = ({
   // watch the manufacturerId and refetch the data
   useEffect(() => {
     if (manufacturer === '') {
-      router.replace(`${pathName}?${createQueryString('manufacturer', '')}`, {
-        scroll: false,
-      });
+      removeQuery(['manufacturer']);
       onRefetch();
     } else {
       setManufacturer(manufacturer);
-      router.replace(
-        `${pathName}?${createQueryString('manufacturer', manufacturer!)}`,
-        {
-          scroll: false,
-        }
-      );
+      setQuery({ manufacturer: manufacturer });
       onRefetch();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -104,20 +71,19 @@ export const ProductsManufacturersList: FC<ProductsManufacturersListProps> = ({
         value={manufacturer}
         onValueChange={setManufacturer}
       >
-        <Input
-          type='text'
-          isClearable
-          startContent={<IconSearch />}
-          radius='full'
-          className='mb-3'
-          placeholder='Find Manufacturer'
-          onChange={(e) => handleSearchChange(e.target.value)}
-          classNames={inputDefault}
-          onClear={() => handleSearchChange('')}
-        />
-
         {manufacturers && manufacturers.length > 0 && !loadingManufacturers && (
           <>
+            <Input
+              type='text'
+              isClearable
+              startContent={<IconSearch />}
+              radius='full'
+              className='mb-3'
+              placeholder='Find Manufacturer'
+              onChange={(e) => handleSearchChange(e.target.value)}
+              classNames={inputDefault}
+              onClear={() => handleSearchChange('')}
+            />
             {manufacturers?.map((manufacturer) => (
               <Radio
                 isDisabled={loadingManufacturers}

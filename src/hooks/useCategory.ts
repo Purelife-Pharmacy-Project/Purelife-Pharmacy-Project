@@ -9,7 +9,7 @@ export const useGetCategories = () => {
     isError,
   } = useQuery({
     queryKey: ['categories'],
-    queryFn: () => CategoryService.getAllCategories(),
+    queryFn: () => CategoryService.getAllCategories({}),
   });
 
   return {

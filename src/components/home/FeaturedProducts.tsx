@@ -45,7 +45,7 @@ export const FeaturedProducts: FC<FeaturedProductsProps> = ({
                 key={product.id}
                 name={product.name}
                 price={product.price}
-                image={product.imageUrl}
+                image={product.imageInBinary}
               />
             ))}
           </div>

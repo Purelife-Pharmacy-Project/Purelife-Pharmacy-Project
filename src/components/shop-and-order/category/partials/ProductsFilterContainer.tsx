@@ -1,29 +1,31 @@
 'use client';
-import { ProductsManufacturersList } from '@/components/shop-and-order/category/partials/ProductsManufacturersList';
-import { useGetProductsByCategory } from '@/hooks';
+import { useGetProducts } from '@/hooks';
 import { Card, CardBody } from '@nextui-org/react';
 import { FC } from 'react';
-import { ProductsPriceList } from './ProductsPriceList';
+import { ProductsPriceRange } from './ProductsPriceRange';
 
 type ProductsFilterContainerProps = {
   categoryId: string;
   searchString: string;
-  manufacturerId: string;
+  minPrice: string | undefined;
+  maxPrice: string | undefined;
 };
 
 export const ProductsFilterContainer: FC<ProductsFilterContainerProps> = ({
   categoryId,
   searchString,
-  manufacturerId,
+  minPrice,
+  maxPrice,
 }) => {
-  const { refetch: refetchProducts } = useGetProductsByCategory(
+  const { refetch: refetchProducts } = useGetProducts(
     categoryId as string,
     searchString,
-    10,
-    0,
+    undefined,
+    undefined,
     true,
     undefined,
-    manufacturerId as string
+    minPrice,
+    maxPrice
   );
 
   return (
@@ -32,12 +34,12 @@ export const ProductsFilterContainer: FC<ProductsFilterContainerProps> = ({
         <h1 className='mb-4 text-2xl font-semibold text-header-100'>Filter</h1>
 
         <div className='grid gap-4'>
-          <ProductsManufacturersList
+          {/* <ProductsManufacturersList
             categoryId={categoryId}
             manufacturerId={manufacturerId}
             onRefetch={refetchProducts}
-          />
-          <ProductsPriceList />
+          /> */}
+          <ProductsPriceRange onRefetch={refetchProducts} />
         </div>
       </CardBody>
     </Card>

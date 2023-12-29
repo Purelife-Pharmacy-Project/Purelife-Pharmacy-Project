@@ -1,5 +1,5 @@
 'use client';
-import { useGetCart } from '@/hooks';
+import { useCartStore } from '@/hooks';
 import { inputDefault } from '@/theme';
 import {
   Badge,
@@ -16,7 +16,7 @@ import {
 } from '@nextui-org/react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IconCart } from './icons/IconCart';
 import { IconProfile } from './icons/IconProfile';
 import { IconSearch } from './icons/IconSearch';
@@ -27,10 +27,15 @@ export const AppNavbar = ({
   background?: string;
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [noOfCartItems, setNoOfCartItems] = useState(0);
   const pathName = usePathname();
-  const { cart } = useGetCart();
+  const { cart } = useCartStore();
 
   const isActive = (path: string) => pathName.startsWith(path);
+
+  useEffect(() => {
+    setNoOfCartItems(cart?.length);
+  }, [cart]);
 
   const menuItems = [
     {
@@ -69,7 +74,7 @@ export const AppNavbar = ({
             <Image
               src='/app-logo.png'
               priority
-              alt='purelife logo'
+              alt='Purelife logo'
               width={147}
               loading='eager'
               height={68.271}
@@ -143,7 +148,12 @@ export const AppNavbar = ({
               href='/cart'
             >
               <div className='flex items-center gap-2'>
-                <Badge content={cart?.length} size='lg' color='primary'>
+                <Badge
+                  content={noOfCartItems}
+                  isInvisible={noOfCartItems === 0}
+                  size='lg'
+                  color='primary'
+                >
                   <IconCart
                     size={24}
                     color={isActive('/cart') ? 'primary' : 'header-100'}

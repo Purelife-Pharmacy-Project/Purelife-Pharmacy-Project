@@ -1,7 +1,7 @@
 'use client';
+import { getCategoryUrl } from '@/helpers/utils';
 import { useGetCategories } from '@/hooks/useCategory';
 import { Button, Card, CardBody, Image, Link } from '@nextui-org/react';
-import { getCategoryUrl } from '@/helpers/utils';
 
 interface shopCategory {
   title: string;
@@ -66,6 +66,7 @@ export const ShopCategory = () => {
                 <Button
                   variant='bordered'
                   as={Link}
+                  isLoading={loadingCategories}
                   isDisabled={
                     loadingCategories || isError || category.url === ''
                   }

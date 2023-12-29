@@ -1,33 +1,21 @@
 import { ProductSkeleton } from '@/components/shop-and-order/category/skeletons/ProductSkeleton';
-import { useGetProductsByCategory } from '@/hooks';
+import { Product } from '@/services/products/types';
 import { Card, CardBody } from '@nextui-org/react';
 import { FC } from 'react';
 import { ProductCard } from './ProductCard';
 
 type ProductsListProps = {
-  categoryId: string;
-  searchString: string;
-  manufacturerId: string;
+  products: Product[] | undefined;
+  loadingProducts: boolean;
 };
 
 export const ProductsList: FC<ProductsListProps> = ({
-  categoryId,
-  searchString,
-  manufacturerId,
+  products,
+  loadingProducts,
 }) => {
-  const { products, loadingProducts } = useGetProductsByCategory(
-    categoryId as string,
-    searchString,
-    10,
-    0,
-    false,
-    undefined,
-    manufacturerId
-  );
-
   return (
     <Card shadow='none' className='w-full'>
-      <CardBody>
+      <CardBody className='lg:p-0'>
         {loadingProducts ? (
           <ProductSkeleton />
         ) : (

@@ -1,9 +1,11 @@
 'use client';
 import { IconCart } from '@/components/icons/IconCart';
 import { IconShare } from '@/components/icons/IconShare';
-import { Button, Card, CardBody, CardFooter, Image } from '@nextui-org/react';
-import { useAddToCart } from '@/hooks';
+import { randomId } from '@/helpers/utils';
+import { useCartStore } from '@/hooks';
 import { Product } from '@/services/products/types';
+import { Button, Card, CardBody, CardFooter, Image } from '@nextui-org/react';
+import { useRouter } from 'next/navigation';
 import { FC } from 'react';
 
 type ProductCardProps = {
@@ -11,21 +13,24 @@ type ProductCardProps = {
 };
 
 export const ProductCard: FC<ProductCardProps> = ({ product }) => {
-  const { addToCart, loadingAddToCart } = useAddToCart();
+  const { addToCart } = useCartStore();
+  const router = useRouter();
+
   return (
     <Card shadow='none' className='w-full' radius='lg'>
       <CardBody className='relative overflow-visible px-0 py-2'>
         <Button
           isIconOnly
+          isDisabled={!product.canBeSold}
           onClick={() =>
             addToCart({
-              id: '20',
+              id: randomId(),
               unitsLeft: 3,
               product,
               quantity: 1,
             })
           }
-          className='absolute right-5 top-5 z-20 rounded-full bg-primary/40 p-0 shadow-md'
+          className='absolute right-4 top-5 z-20 rounded-full bg-primary/40 p-0 shadow-md'
         >
           <IconCart color='white' />
         </Button>
@@ -33,7 +38,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
         <Image
           alt='Card background'
           className='rounded-xl object-cover'
-          src={product.imageUrl}
+          src={product.imageInBinary}
         />
       </CardBody>
       <CardFooter className='grid w-full gap-3 px-0'>
@@ -49,6 +54,16 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
           <Button
             className='w-max border-header-100 text-header-100'
             variant='bordered'
+            onClick={() => {
+              const id = randomId();
+              addToCart({
+                id,
+                unitsLeft: 3,
+                product,
+                quantity: 1,
+              });
+              router.push(`/cart/${id}`, { scroll: false });
+            }}
           >
             Buy
           </Button>

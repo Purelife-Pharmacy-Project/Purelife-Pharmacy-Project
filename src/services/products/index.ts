@@ -1,58 +1,32 @@
-import { mock_products } from '@/helpers/mocks/products';
-import { Product, ProductType } from '@/services/products/types';
+import Api from '@/helpers/api';
+import { filteredQueryParams } from '@/helpers/utils';
+import {
+  Product,
+  ProductQueryParams,
+  ProductType,
+} from '@/services/products/types';
 
 class ProductService {
-  // private static PRODUCTS_API_BASE = '/Product';
-  private static PRODUCTS_API_BASE = '/products';
+  private static PRODUCTS_API_BASE = '/Product';
 
-  public static getAllProducts = async ({
-    active = false,
-    pageSize = 10,
-    pageIndex = 1,
-    name = '',
-    categoryId = '',
-    manufacturerId = '',
-    productId = '',
-  }) => {
-    // const response = (await Api.get<ProductType[]>(
-    //   `${this.PRODUCTS_API_BASE}/get-products?Active=${active}&PageSize=${pageSize}&PageIndex=${pageIndex}&Name=${name}&CategoryId=${categoryId}&ProductId=${productId}`
-    // )) as unknown as ProductType[];
-    try {
-      const response = (await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(
-            mock_products.filter((product) => {
-              //   check if the params are available and if they are, check if they match the product
-              if (active && product.isActive !== active) return false;
-              else if (
-                name &&
-                !product.name.toLowerCase().includes(name.toLowerCase())
-              ) {
-                return false;
-              } else if (categoryId && product.categoryId !== categoryId) {
-                return false;
-              } else if (
-                manufacturerId &&
-                product.manufacturerId !== manufacturerId
-              ) {
-                return false;
-              }
-              return product;
-            })
-          );
-        }, 500);
-      })) as unknown as ProductType[];
+  public static getAllProducts = async (params: ProductQueryParams) => {
+    const queryParams = filteredQueryParams({
+      Active: params.active,
+      PageSize: params.pageSize,
+      PageIndex: params.pageIndex,
+      Name: params.name,
+      CategoryId: params.categoryId,
+      ProductId: params.productId,
+      'SortByPrice.MinPrice': params.minPrice,
+      'SortByPrice.MaxPrice': params.maxPrice,
+    });
 
-      /**
-       * Sending a serializable object so Next.js can pass it to client components safely
-       * Ref: https://github.com/vercel/next.js/discussions/46137
-       */
-      const newProducts = response.map((product) => new Product(product));
-      return JSON.parse(JSON.stringify(newProducts)) as Product[];
-    } catch (error) {
-      console.error(error);
-      return [];
-    }
+    const response = (await Api.get<ProductType[]>(
+      `${this.PRODUCTS_API_BASE}/get-products?${queryParams}`
+    )) as unknown as ProductType[];
+
+    const newProducts = response.map((product) => new Product(product));
+    return JSON.parse(JSON.stringify(newProducts)) as Product[];
   };
 }
 

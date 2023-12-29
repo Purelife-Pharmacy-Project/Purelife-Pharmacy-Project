@@ -1,5 +1,5 @@
 'use client';
-import { useRemoveCartItem } from '@/hooks';
+import { useCartStore } from '@/hooks';
 import {
   Button,
   Modal,
@@ -20,12 +20,14 @@ export const ConfirmationModal: FC<ConfirmModalProps> = ({
   openChange,
   productId,
 }) => {
-  const { loadingRemoveCartItem, removeCartItem, isSuccess } =
-    useRemoveCartItem();
+  const { removeFromCart } = useCartStore();
 
-  if (isSuccess) {
-    openChange();
-  }
+  const handleRemove = () => {
+    removeFromCart(productId);
+    setTimeout(() => {
+      openChange();
+    }, 300);
+  };
 
   return (
     <Modal onOpenChange={openChange} isOpen={isOpen}>
@@ -59,7 +61,7 @@ export const ConfirmationModal: FC<ConfirmModalProps> = ({
                 size='lg'
                 color='primary'
                 className={'lg:px-10'}
-                onClick={() => removeCartItem(productId)}
+                onClick={handleRemove}
               >
                 Remove item
               </Button>

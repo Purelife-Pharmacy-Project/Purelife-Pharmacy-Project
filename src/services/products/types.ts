@@ -1,15 +1,29 @@
 import { toNaira } from '@/helpers/utils';
 
+export type ProductQueryParams = {
+  categoryId?: string;
+  name?: string;
+  pageSize?: number;
+  pageIndex?: number;
+  active?: boolean;
+  productId?: string;
+  manufacturerId?: string;
+  minPrice?: string;
+  maxPrice?: string;
+};
+
 export type ProductType = {
   id: number;
   name: string;
   isActive: boolean;
   price: number;
   description: string;
-  imageUrl: string;
+  imageInBinary: string;
   categoryId: string;
   manufacturerId: string;
   amount?: number;
+  canBePurchased: boolean;
+  canBeSold: boolean;
 };
 
 export class Product {
@@ -20,8 +34,10 @@ export class Product {
   public description: string;
   public categoryId: string;
   public manufacturerId: string;
-  public imageUrl: string;
+  public imageInBinary: string;
   public amount: string;
+  public canBePurchased: boolean;
+  public canBeSold: boolean;
 
   constructor(product: ProductType) {
     this.id = product.id;
@@ -31,7 +47,9 @@ export class Product {
     this.categoryId = product.categoryId;
     this.manufacturerId = product.manufacturerId;
     this.description = product.description || '';
-    this.imageUrl = product.imageUrl || '/images/care-package.png';
+    this.imageInBinary = product.imageInBinary || '/images/care-package.png';
     this.amount = toNaira(this.price);
+    this.canBePurchased = product.canBePurchased;
+    this.canBeSold = product.canBeSold;
   }
 }

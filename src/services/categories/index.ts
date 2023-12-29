@@ -1,18 +1,21 @@
-import { mock_categories } from '@/helpers/mocks/categories';
-import { CategoryType } from '@/services/categories/types';
+import Api from '@/helpers/api';
+import { filteredQueryParams } from '@/helpers/utils';
+import { CategoryQueryParams, CategoryType } from '@/services/categories/types';
 
 export class CategoryService {
   private static CATEGORIES_API_BASE = '/Category';
 
-  public static getAllCategories = async () => {
-    // const response = (await Api.get<CategoryType[]>(
-    //   `${this.CATEGORIES_API_BASE}/get-all`
-    // )) as unknown as CategoryType[];
+  public static getAllCategories = async (params: CategoryQueryParams) => {
+    const queryParams = filteredQueryParams({
+      PageSize: params.pageSize,
+      PageIndex: params.pageIndex,
+      CategoryId: params.categoryId,
+    });
 
-    return (await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(mock_categories);
-      }, 500);
-    })) as unknown as CategoryType[];
+    const response = (await Api.get<CategoryType[]>(
+      `${this.CATEGORIES_API_BASE}/get-all?${queryParams}`
+    )) as unknown as CategoryType[];
+
+    return JSON.parse(JSON.stringify(response)) as CategoryType[];
   };
 }

@@ -1,44 +1,26 @@
 import ProductService from '@/services/products';
 import { useQuery } from '@tanstack/react-query';
 
-export const useGetProducts = () => {
-  const {
-    data: products,
-    isLoading: loadingProducts,
-    isSuccess,
-    isError,
-  } = useQuery({
-    queryKey: ['products'],
-    queryFn: () => ProductService.getAllProducts({}),
-  });
-
-  return {
-    products,
-    loadingProducts,
-    isSuccess,
-    isError,
-  };
-};
-
-export const useGetProductsByCategory = (
+export const useGetProducts = (
   categoryId?: string,
   name?: string,
   pageSize?: number,
   pageIndex?: number,
   active?: boolean,
   productId?: string,
-  manufacturerId?: string
+  minPrice?: string,
+  maxPrice?: string
 ) => {
   const {
     data: products,
-    isLoading: loadingProducts,
-    isFetching,
+    isLoading,
+    isRefetching,
     isSuccess,
     isError,
     refetch,
   } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
-    queryKey: ['products', categoryId, name, manufacturerId],
+    queryKey: ['products', categoryId, name, minPrice, maxPrice],
     queryFn: () =>
       ProductService.getAllProducts({
         categoryId,
@@ -47,15 +29,16 @@ export const useGetProductsByCategory = (
         pageIndex,
         active,
         productId,
-        manufacturerId,
+        minPrice,
+        maxPrice,
       }),
-    enabled: !!categoryId || !!name || !!manufacturerId,
+    enabled: !!categoryId || !!name || !!minPrice || !!maxPrice,
   });
 
   return {
     products,
-    loadingProducts,
-    isFetching,
+    loadingProducts: isLoading || isRefetching,
+    isRefetching,
     refetch,
     isSuccess,
     isError,

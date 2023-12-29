@@ -20,3 +20,16 @@ export const toNaira = (amount: number) => {
     currency: 'NGN',
   });
 };
+
+export const randomId = () => {
+  return (new Date().getTime() * 0.5).toString(36);
+};
+
+export const filteredQueryParams = <T extends Record<string, unknown>>(
+  queryParams: T
+): string => {
+  return Object.entries(queryParams)
+    .filter(([_, value]) => value != null && value !== '')
+    .map(([key, value]) => `${key}=${value}`)
+    .join('&');
+};

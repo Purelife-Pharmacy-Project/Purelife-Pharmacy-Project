@@ -1,9 +1,7 @@
 import { AppNavbar } from '@/components/Navbar';
-import { DeliveryModeTabs } from '@/components/cart/DeliveryModeTabs';
+import { CartItemDetails } from '@/components/cart/CartItemDetails';
 import { NoOfCartItems } from '@/components/cart/NoOfCartItems';
 import { Section } from '@/components/home/Section';
-import { Card, CardBody, Image } from '@nextui-org/react';
-import { CartItemDetails } from '@/components/cart/CartItemDetails';
 
 export default function CartProductPage() {
   return (
@@ -20,25 +18,7 @@ export default function CartProductPage() {
 
       <div className='grid justify-center py-10 lg:py-10'>
         <Section className='bg-white'>
-          <div className='grid grid-cols-1 lg:grid-flow-col lg:grid-cols-2'>
-            <Card shadow='none' className='w-full lg:w-[543px]'>
-              <CardBody className='bg-primaryLight'>
-                <div className='rounded-lg bg-white p-3'>
-                  <Image alt='product image' src='/images/dummy-image.jpeg' />
-                </div>
-              </CardBody>
-            </Card>
-            <Card shadow='none' className='w-full'>
-              <CardBody>
-                <CartItemDetails />
-              </CardBody>
-            </Card>
-          </div>
-
-          <div className='mt-6 grid w-full grid-flow-col grid-cols-1 lg:grid-cols-2'>
-            <div className='hidden w-full lg:block'></div>
-            <DeliveryModeTabs />
-          </div>
+          <CartItemDetails />
         </Section>
       </div>
     </>

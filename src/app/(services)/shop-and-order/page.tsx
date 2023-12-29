@@ -18,7 +18,7 @@ export default async function ShopAndOrder() {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ['categories'],
-    queryFn: () => CategoryService.getAllCategories(),
+    queryFn: () => CategoryService.getAllCategories({}),
   });
 
   const earnedClients = [

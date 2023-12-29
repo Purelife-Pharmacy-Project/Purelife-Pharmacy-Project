@@ -1,18 +1,16 @@
 'use client';
+import { ConfirmationModal } from '@/components/cart/modals/ConfirmationModal';
 import { IconX } from '@/components/icons/IconX';
 import { CartType } from '@/services/cart/types';
 import { Button, Card, CardBody, Image, Link } from '@nextui-org/react';
 import { FC, useState } from 'react';
 import { ProductQuantity } from './ProductQuantity';
-import { ConfirmationModal } from '@/components/cart/modals/ConfirmationModal';
-import { useQueryClient } from '@tanstack/react-query';
 
 type CartItemProps = {
   product: CartType;
 };
 
 export const CartItem: FC<CartItemProps> = ({ product }) => {
-  const queryClient = useQueryClient();
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
 
   return (
@@ -23,23 +21,15 @@ export const CartItem: FC<CartItemProps> = ({ product }) => {
             width={79}
             height={75}
             radius='md'
-            src={product.product.imageUrl}
+            src={product.product.imageInBinary}
             alt={product.product.name}
           />
 
-          <Link
-            href={`/cart/${product.id}`}
-            className='text-body'
-            onMouseEnter={() =>
-              queryClient.prefetchQuery({
-                queryKey: ['cart', product.id],
-              })
-            }
-          >
+          <Link href={`/cart/${product.id}`} className='text-body'>
             {product.product.name}
           </Link>
           <p>{product.product.amount}</p>
-          <ProductQuantity product={product} />
+          <ProductQuantity cartItem={product} />
           <div className='flex items-center justify-end'>
             <Button
               isIconOnly
