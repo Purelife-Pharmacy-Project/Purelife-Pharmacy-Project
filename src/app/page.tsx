@@ -33,7 +33,7 @@ export default async function Home() {
   // Prefetch categories
   await queryClient.prefetchQuery({
     queryKey: ['categories'],
-    queryFn: () => CategoryService.getAllCategories(),
+    queryFn: () => CategoryService.getAllCategories({}),
   });
 
   const healthServices = [
