@@ -7,11 +7,13 @@ import { FC, useCallback, useEffect, useState } from 'react';
 type ProductSearchProps = {
   searchString: string;
   onRefetch: () => void;
+  loading: boolean;
 };
 
 export const ProductSearch: FC<ProductSearchProps> = ({
   searchString,
   onRefetch,
+  loading,
 }) => {
   const [searchStr, setSearchStr] = useState<string | null>(searchString);
   const { setQuery, removeQuery } = useQueryParams();
@@ -45,6 +47,7 @@ export const ProductSearch: FC<ProductSearchProps> = ({
       isClearable
       variant={'flat'}
       size={'lg'}
+      isDisabled={loading}
       startContent={<IconSearch />}
       placeholder='Find a product'
       defaultValue={searchString}

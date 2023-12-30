@@ -1,5 +1,6 @@
 'use client';
 import { useCartStore } from '@/hooks';
+import { useStore } from '@/hooks/store';
 import { inputDefault } from '@/theme';
 import {
   Badge,
@@ -16,7 +17,7 @@ import {
 } from '@nextui-org/react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { IconCart } from './icons/IconCart';
 import { IconProfile } from './icons/IconProfile';
 import { IconSearch } from './icons/IconSearch';
@@ -27,15 +28,10 @@ export const AppNavbar = ({
   background?: string;
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [noOfCartItems, setNoOfCartItems] = useState(0);
   const pathName = usePathname();
-  const { cart } = useCartStore();
+  const cart = useStore(useCartStore, (state) => state)?.cart;
 
   const isActive = (path: string) => pathName.startsWith(path);
-
-  useEffect(() => {
-    setNoOfCartItems(cart?.length);
-  }, [cart]);
 
   const menuItems = [
     {
@@ -149,8 +145,8 @@ export const AppNavbar = ({
             >
               <div className='flex items-center gap-2'>
                 <Badge
-                  content={noOfCartItems}
-                  isInvisible={noOfCartItems === 0}
+                  content={cart?.length || 0}
+                  isInvisible={cart?.length === 0}
                   size='lg'
                   color='primary'
                 >

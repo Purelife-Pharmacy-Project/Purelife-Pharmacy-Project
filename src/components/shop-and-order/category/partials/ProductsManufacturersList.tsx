@@ -2,7 +2,7 @@
 import { IconSearch } from '@/components/icons/IconSearch';
 import { useGetManufacturers, useQueryParams } from '@/hooks';
 import { inputDefault } from '@/theme';
-import { Button, Input, Radio, RadioGroup } from '@nextui-org/react';
+import { Button, Input, RadioGroup } from '@nextui-org/react';
 import debounce from 'lodash/debounce';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { ManufacturersSkeleton } from '../skeletons/ManufacturersSkeleton';
@@ -84,7 +84,7 @@ export const ProductsManufacturersList: FC<ProductsManufacturersListProps> = ({
               classNames={inputDefault}
               onClear={() => handleSearchChange('')}
             />
-            {manufacturers?.map((manufacturer) => (
+            {/* {[manufacturers]?.map((manufacturer) => (
               <Radio
                 isDisabled={loadingManufacturers}
                 key={manufacturer.id}
@@ -92,7 +92,7 @@ export const ProductsManufacturersList: FC<ProductsManufacturersListProps> = ({
               >
                 {manufacturer.name}
               </Radio>
-            ))}
+            ))} */}
           </>
         )}
         {manufacturers &&

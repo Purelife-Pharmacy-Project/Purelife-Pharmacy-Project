@@ -18,7 +18,7 @@ export type ProductType = {
   isActive: boolean;
   price: number;
   description: string;
-  imageInBinary: string;
+  imageInBinary: Blob;
   categoryId: string;
   manufacturerId: string;
   amount?: number;
@@ -46,8 +46,10 @@ export class Product {
     this.price = product.price;
     this.categoryId = product.categoryId;
     this.manufacturerId = product.manufacturerId;
-    this.description = product.description || '';
-    this.imageInBinary = product.imageInBinary || '/images/care-package.png';
+    this.description = product.name || '';
+    this.imageInBinary = product.imageInBinary
+      ? `data:image/png;base64,${product.imageInBinary}`
+      : '/images/care-package.png';
     this.amount = toNaira(this.price);
     this.canBePurchased = product.canBePurchased;
     this.canBeSold = product.canBeSold;

@@ -17,7 +17,7 @@ export const ProductsFilterContainer: FC<ProductsFilterContainerProps> = ({
   minPrice,
   maxPrice,
 }) => {
-  const { refetch: refetchProducts } = useGetProducts(
+  const { refetch: refetchProducts, loadingProducts } = useGetProducts(
     categoryId as string,
     searchString,
     undefined,
@@ -39,7 +39,10 @@ export const ProductsFilterContainer: FC<ProductsFilterContainerProps> = ({
             manufacturerId={manufacturerId}
             onRefetch={refetchProducts}
           /> */}
-          <ProductsPriceRange onRefetch={refetchProducts} />
+          <ProductsPriceRange
+            loading={loadingProducts}
+            onRefetch={refetchProducts}
+          />
         </div>
       </CardBody>
     </Card>

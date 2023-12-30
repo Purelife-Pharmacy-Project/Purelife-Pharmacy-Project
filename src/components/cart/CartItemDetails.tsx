@@ -3,6 +3,7 @@
 import { ProductQuantity } from '@/components/cart/ProductQuantity';
 import { IconBin } from '@/components/icons/IconBin';
 import { useCartStore } from '@/hooks';
+import { useStore } from '@/hooks/store';
 import { CartType } from '@/services/cart/types';
 import { Button, Card, CardBody, Image } from '@nextui-org/react';
 import { usePathname, useRouter } from 'next/navigation';
@@ -15,8 +16,7 @@ export const CartItemDetails = () => {
   const router = useRouter();
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
-  const { getCartItem } = useCartStore();
-  const item = getCartItem(itemId);
+  const item = useStore(useCartStore, (state) => state)?.getCartItem(itemId);
 
   return (
     <>
@@ -39,8 +39,12 @@ export const CartItemDetails = () => {
         <div className='grid grid-cols-1 lg:grid-flow-col lg:grid-cols-2'>
           <Card shadow='none' className='w-full lg:w-[543px]'>
             <CardBody className='bg-primaryLight'>
-              <div className='rounded-lg bg-white p-3'>
-                <Image alt='product image' src='/images/dummy-image.jpeg' />
+              <div className='flex justify-center rounded-lg bg-white p-3'>
+                <Image
+                  alt='product image'
+                  className='max-h-80 object-cover'
+                  src={item.product.imageInBinary}
+                />
               </div>
             </CardBody>
           </Card>

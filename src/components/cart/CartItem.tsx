@@ -2,7 +2,14 @@
 import { ConfirmationModal } from '@/components/cart/modals/ConfirmationModal';
 import { IconX } from '@/components/icons/IconX';
 import { CartType } from '@/services/cart/types';
-import { Button, Card, CardBody, Image, Link } from '@nextui-org/react';
+import {
+  Button,
+  Card,
+  CardBody,
+  Image,
+  Link,
+  Tooltip,
+} from '@nextui-org/react';
 import { FC, useState } from 'react';
 import { ProductQuantity } from './ProductQuantity';
 
@@ -25,9 +32,15 @@ export const CartItem: FC<CartItemProps> = ({ product }) => {
             alt={product.product.name}
           />
 
-          <Link href={`/cart/${product.id}`} className='text-body'>
-            {product.product.name}
-          </Link>
+          <Tooltip color='foreground' content={product.product.name}>
+            <Link
+              href={`/cart/${product.id}`}
+              className='text-body max-w-[400px] truncate'
+            >
+              {product.product.name}
+            </Link>
+          </Tooltip>
+
           <p>{product.product.amount}</p>
           <ProductQuantity cartItem={product} />
           <div className='flex items-center justify-end'>

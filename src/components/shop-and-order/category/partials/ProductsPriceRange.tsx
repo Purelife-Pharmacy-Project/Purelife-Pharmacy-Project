@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from 'react';
 
 type ProductsPriceRangeProps = {
   onRefetch: () => void;
+  loading: boolean;
 };
 
 enum PriceRanges {
@@ -17,6 +18,7 @@ enum PriceRanges {
 
 export const ProductsPriceRange: FC<ProductsPriceRangeProps> = ({
   onRefetch,
+  loading,
 }) => {
   const [range, setRange] = useState<string | null>(null);
   const { setQuery, removeQuery } = useQueryParams();
@@ -60,6 +62,7 @@ export const ProductsPriceRange: FC<ProductsPriceRangeProps> = ({
       <RadioGroup
         label={'Price'}
         value={range!}
+        isDisabled={loading}
         onValueChange={(value) => setRange(value as string)}
         classNames={{
           label: 'font-semibold text-header-100',

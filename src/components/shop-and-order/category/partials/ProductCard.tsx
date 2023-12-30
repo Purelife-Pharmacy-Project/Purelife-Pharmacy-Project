@@ -36,8 +36,8 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
         </Button>
 
         <Image
-          alt='Card background'
-          className='rounded-xl object-cover'
+          alt={product.name}
+          className='rounded-xl object-center'
           src={product.imageInBinary}
         />
       </CardBody>

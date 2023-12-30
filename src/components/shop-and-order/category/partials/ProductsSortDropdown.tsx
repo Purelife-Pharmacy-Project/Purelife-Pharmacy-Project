@@ -1,13 +1,23 @@
 'use client';
 import { Select, SelectItem } from '@nextui-org/react';
+import { FC } from 'react';
 
-export const ProductSortDropdown = () => {
+type ProductSortDropdownProps = {
+  onRefetch: () => void;
+  loading: boolean;
+};
+
+export const ProductSortDropdown: FC<ProductSortDropdownProps> = ({
+  onRefetch,
+  loading,
+}) => {
   return (
     <Select
-      size='lg'
+      isDisabled={loading}
       labelPlacement='outside'
       color='default'
       aria-label='Select a category'
+      size='lg'
       className='w-[200px]'
       defaultSelectedKeys={['0']}
     >
