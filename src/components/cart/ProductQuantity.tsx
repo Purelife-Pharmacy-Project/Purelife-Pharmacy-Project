@@ -22,19 +22,19 @@ export const ProductQuantity: FC<ProductQuantityProps> = ({
         }
         onClick={() => increaseQuantity(product?.id)}
         variant='flat'
-        className='w-full rounded-l-full bg-primaryLight text-2xl'
+        className='w-full rounded-l-full bg-primaryLight text-2xl text-black'
       >
         +
       </Button>
 
-      <p className='text-xl'>{product?.quantity}</p>
+      <p className='text-xl text-black'>{product?.quantity}</p>
 
       <Button
         isIconOnly
         isDisabled={product?.quantity === 1}
         onClick={() => decreaseQuantity(product?.id)}
         variant='flat'
-        className='w-full rounded-r-full bg-primaryLight text-2xl'
+        className='w-full rounded-r-full bg-primaryLight text-2xl text-black'
       >
         -
       </Button>

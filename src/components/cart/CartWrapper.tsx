@@ -24,6 +24,14 @@ export const CartWrapper: FC<CartWrapperProps> = ({}) => {
             <OrderSummary />
           </div>
         ) : null}
+
+        {cart && cart.length === 0 ? (
+          <div className='my-20 flex flex-col gap-3 text-center'>
+            <p className='text-lg font-light text-content'>
+              Please add items to your cart to continue
+            </p>
+          </div>
+        ) : null}
       </div>
     </>
   );

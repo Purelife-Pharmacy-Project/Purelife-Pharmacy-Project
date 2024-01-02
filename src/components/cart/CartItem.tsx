@@ -1,6 +1,7 @@
 'use client';
 import { ConfirmationModal } from '@/components/cart/modals/ConfirmationModal';
 import { IconX } from '@/components/icons/IconX';
+import { toNaira } from '@/helpers/utils';
 import { CartType } from '@/services/cart/types';
 import {
   Button,
@@ -35,13 +36,13 @@ export const CartItem: FC<CartItemProps> = ({ product }) => {
           <Tooltip color='foreground' content={product.product.name}>
             <Link
               href={`/cart/${product.id}`}
-              className='text-body max-w-[400px] truncate'
+              className='text-body max-w-[400px] break-words'
             >
               {product.product.name}
             </Link>
           </Tooltip>
 
-          <p>{product.product.amount}</p>
+          <p>{toNaira(product.product.price * product.quantity)}</p>
           <ProductQuantity cartItem={product} />
           <div className='flex items-center justify-end'>
             <Button
