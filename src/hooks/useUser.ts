@@ -1,6 +1,8 @@
 import UsersService from '@/services/user';
 import { LoginPayload, RegisterPayload } from '@/services/user/schema';
+import { UserType } from '@/services/user/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 export const useGetUser = () => {
   const {
@@ -10,7 +12,6 @@ export const useGetUser = () => {
   } = useQuery({
     queryKey: ['user'],
     queryFn: () => UsersService.getUser(),
-    staleTime: Infinity,
   });
 
   return {
@@ -75,6 +76,39 @@ export const useRegister = () => {
     registerUser,
     loadingRegister,
     registerError,
+    isSuccess,
+    isError,
+  };
+};
+
+export const useUpdateUser = (
+  onSuccess?: () => void,
+  onError?: (error: string) => void
+) => {
+  const {
+    mutate: updateUser,
+    isPending: loadingUpdateUser,
+    error: updateUserError,
+    isSuccess,
+    data: user,
+    isError,
+  } = useMutation<UserType, string, Partial<UserType>, unknown>({
+    mutationFn: (payload: Partial<UserType>) =>
+      UsersService.updateUser(payload),
+    onSuccess: (data) => {
+      toast.success('Profile updated successfully');
+      onSuccess && onSuccess();
+    },
+    onError: (error) => {
+      onError && onError(error);
+    },
+  });
+
+  return {
+    updateUser,
+    loadingUpdateUser,
+    updateUserError,
+    user,
     isSuccess,
     isError,
   };

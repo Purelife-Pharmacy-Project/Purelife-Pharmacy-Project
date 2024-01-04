@@ -12,6 +12,7 @@ class Api {
     timeout: 1000 * 60, // 60 seconds
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${UsersService.loadAuthToken()}`,
     },
   });
 

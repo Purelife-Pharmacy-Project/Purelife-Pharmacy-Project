@@ -69,6 +69,16 @@ class UsersService {
     const response = (await Api.get<UserType>(
       `${this.USERS_API_BASE}?id=${id}`
     )) as unknown as UserType[];
+
+    return JSON.parse(JSON.stringify(response[0])) as UserType;
+  }
+
+  public static async updateUser(payload: Partial<UserType>) {
+    const response = (await Api.post<UserType>(
+      `${this.USERS_API_BASE}/update`,
+      payload
+    )) as unknown as UserType[];
+
     return response[0];
   }
 

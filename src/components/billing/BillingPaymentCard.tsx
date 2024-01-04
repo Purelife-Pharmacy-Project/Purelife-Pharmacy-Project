@@ -1,3 +1,7 @@
+'use client';
+import { useCartStore, useUpdateUser } from '@/hooks';
+import { useStore } from '@/hooks/store';
+import { UserType } from '@/services/user/types';
 import {
   Button,
   Card,
@@ -7,8 +11,20 @@ import {
   Radio,
   RadioGroup,
 } from '@nextui-org/react';
+import { FC } from 'react';
+import { Paystack } from '../paystack';
 
-export const BillingPaymentCard = () => {
+type BillingPaymentCardProps = {
+  billingData?: Partial<UserType>;
+};
+
+export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
+  billingData,
+}) => {
+  const { updateUser, loadingUpdateUser, user } = useUpdateUser();
+  const cart = useStore(useCartStore, (state) => state)?.cart;
+  const summary = useStore(useCartStore, (state) => state)?.summary;
+
   return (
     <Card shadow='none' className='w-full bg-primaryLight'>
       <CardBody className='p-8 lg:p-12'>
@@ -36,14 +52,26 @@ export const BillingPaymentCard = () => {
               .
             </p>
           </div>
-          <Button
-            color='primary'
-            size='md'
-            radius='full'
-            className='mt-6 w-full py-6'
-          >
-            Place Order
-          </Button>
+          {!user ? (
+            <Button
+              color='primary'
+              size='md'
+              isDisabled={!billingData}
+              isLoading={loadingUpdateUser}
+              onClick={() => updateUser(billingData!)}
+              radius='full'
+              className='mt-6 w-full py-6'
+            >
+              Place Order
+            </Button>
+          ) : (
+            <Paystack
+              amount={1000}
+              email={user?.email as string}
+              ctaText='Pay Now'
+              label='Shop and Order'
+            />
+          )}
         </div>
       </CardBody>
     </Card>

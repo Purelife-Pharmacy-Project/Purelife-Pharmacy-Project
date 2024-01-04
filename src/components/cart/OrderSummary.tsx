@@ -1,12 +1,13 @@
 'use client';
 import { useCartStore } from '@/hooks';
+import { useStore } from '@/hooks/store';
 import { Button, Card, CardBody, Link } from '@nextui-org/react';
 import { FC } from 'react';
 
 type OrderSummaryProps = {};
 
 export const OrderSummary: FC<OrderSummaryProps> = () => {
-  const { summary } = useCartStore();
+  const summary = useStore(useCartStore, (state) => state)?.summary;
 
   return (
     <Card shadow='none' className='w-full border border-gray-300 lg:w-[543px]'>
@@ -16,7 +17,7 @@ export const OrderSummary: FC<OrderSummaryProps> = () => {
           <div className='flex justify-between border-b border-gray-300 py-4'>
             <p className='text-lg font-light text-header-100'>Subtotal</p>
             <p className='text-lg font-semibold text-header-100'>
-              {summary.subTotal}
+              {summary?.subTotal}
             </p>
           </div>
 
@@ -39,7 +40,7 @@ export const OrderSummary: FC<OrderSummaryProps> = () => {
           <div className='flex justify-between py-4'>
             <p className='text-lg font-light text-header-100'>Total</p>
             <p className='text-lg font-semibold text-header-100'>
-              {summary.total}
+              {summary?.total}
             </p>
           </div>
           <Button
@@ -50,7 +51,7 @@ export const OrderSummary: FC<OrderSummaryProps> = () => {
             radius='full'
             className='w-full py-8'
           >
-            Checkout
+            Proceed to Billing
           </Button>
         </div>
       </CardBody>

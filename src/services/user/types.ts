@@ -31,3 +31,32 @@ export type UserType = {
 export type LoginResponse = {
   token: string;
 } & UserType;
+
+export class User {
+  public id: number;
+  public name: string;
+  public email: string;
+  public phoneNumber: string;
+  public contactAddress: string;
+
+  constructor(user: UserType) {
+    this.id = user.id;
+    this.name = user.name;
+    this.email = user.email;
+    this.phoneNumber = user.phoneNumber;
+    this.contactAddress = user.contactAddress;
+  }
+
+  get firstName() {
+    return this.name.split(' ')[0];
+  }
+
+  get lastName() {
+    return this.name.split(' ')[1];
+  }
+
+  get initials() {
+    const [firstName, lastName] = this.name.split(' ');
+    return `${firstName[0]}${lastName[0]}`;
+  }
+}
