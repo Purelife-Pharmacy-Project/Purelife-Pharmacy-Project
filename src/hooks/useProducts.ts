@@ -1,6 +1,29 @@
 import ProductService from '@/services/products';
 import { useQuery } from '@tanstack/react-query';
 
+export const useGetFeaturedProducts = () => {
+  const {
+    data: products,
+    isLoading,
+    isRefetching,
+    refetch,
+  } = useQuery({
+    queryKey: ['featured-products'],
+    queryFn: () =>
+      ProductService.getAllProducts({
+        active: true,
+        pageSize: 3,
+        pageIndex: 1,
+      }),
+  });
+
+  return {
+    products,
+    loadingFeaturedProducts: isLoading || isRefetching,
+    refetch,
+  };
+};
+
 export const useGetProducts = (
   categoryId?: string,
   name?: string,

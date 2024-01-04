@@ -19,3 +19,15 @@ export type AccountSubscription = {
   refillFrequency: string;
   refillDate: string;
 };
+
+export type UserType = {
+  id: number;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  contactAddress: string;
+};
+
+export type LoginResponse = {
+  token: string;
+} & UserType;

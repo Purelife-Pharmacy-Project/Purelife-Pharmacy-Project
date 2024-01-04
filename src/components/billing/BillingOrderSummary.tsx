@@ -1,8 +1,12 @@
+'use client';
+import { useCartStore } from '@/hooks';
 import { Card, CardBody } from '@nextui-org/react';
 
 export const BillingOrderSummary = () => {
+  const { summary } = useCartStore();
+
   return (
-    <Card shadow='none' className='w-full bg-primaryLight lg:w-[543px]'>
+    <Card shadow='none' className='w-full bg-primaryLight'>
       <CardBody className='p-8 lg:p-12'>
         <div className='grid gap-4'>
           <h1 className='text-2xl font-bold text-header-100'>Order Summary</h1>
@@ -11,22 +15,26 @@ export const BillingOrderSummary = () => {
             <div className='flex justify-between border-b border-gray-300 pb-3'>
               <p className='text-lg font-light text-header-100'>Subtotal</p>
               <p className='text-md font-semibold text-header-100'>
-                ₦ 2,550.00{' '}
+                {summary.subTotal}
               </p>
             </div>
 
             <div className='flex justify-between pb-3'>
               <p className='text-lg font-light text-header-100'>Discount</p>
-              <p className='text-md font-light text-header-100'>₦ 2,550.00 </p>
+              <p className='text-md font-light text-header-100'>
+                {summary.discount}
+              </p>
             </div>
             <div className='flex justify-between border-b border-gray-300 pb-3'>
               <p className='text-lg font-light text-header-100'>Delivery Fee</p>
-              <p className='text-md font-light text-header-100'>₦ 2,550.00 </p>
+              <p className='text-md font-light text-header-100'>
+                {summary.discount}{' '}
+              </p>
             </div>
             <div className='flex justify-between'>
               <p className='text-lg font-semibold text-header-100'>Total</p>
               <p className='text-2xl font-semibold text-header-100'>
-                ₦ 2,550.00{' '}
+                {summary.total}{' '}
               </p>
             </div>
           </div>

@@ -1,7 +1,7 @@
 'use client';
-import { useGetProducts } from '@/hooks';
+import { useGetFeaturedProducts } from '@/hooks';
 import { Button, Link } from '@nextui-org/react';
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import { FeaturedProduct } from './FeaturedProduct';
 import { Section } from './Section';
 
@@ -19,17 +19,7 @@ export const FeaturedProducts: FC<FeaturedProductsProps> = ({
   title,
   products,
 }) => {
-  const {
-    products: allProducts,
-    loadingProducts,
-    isSuccess,
-  } = useGetProducts();
-
-  const featuredProducts = useMemo(() => {
-    if (allProducts) {
-      return allProducts.slice(0, 3);
-    }
-  }, [allProducts]);
+  const { products: allProducts } = useGetFeaturedProducts();
 
   return (
     <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
@@ -40,13 +30,8 @@ export const FeaturedProducts: FC<FeaturedProductsProps> = ({
           </h1>
 
           <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
-            {featuredProducts?.map((product, index) => (
-              <FeaturedProduct
-                key={product.id}
-                name={product.name}
-                price={product.price}
-                image={product.imageInBinary}
-              />
+            {allProducts?.map((product) => (
+              <FeaturedProduct key={product.id} product={product} />
             ))}
           </div>
         </div>

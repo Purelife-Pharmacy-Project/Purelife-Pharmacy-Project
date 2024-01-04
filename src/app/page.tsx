@@ -15,7 +15,6 @@ import { IconPill } from '@/components/icons/IconPill';
 import { AppNavbar } from '@/components/Navbar';
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { earnedClients } from '@/constants';
-import { CategoryService } from '@/services/categories';
 import ProductService from '@/services/products';
 import {
   dehydrate,
@@ -26,14 +25,13 @@ import {
 export default async function Home() {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
-    queryKey: ['products'],
-    queryFn: () => ProductService.getAllProducts({}),
-  });
-
-  // Prefetch categories
-  await queryClient.prefetchQuery({
-    queryKey: ['categories'],
-    queryFn: () => CategoryService.getAllCategories({}),
+    queryKey: ['featured-products'],
+    queryFn: () =>
+      ProductService.getAllProducts({
+        active: true,
+        pageSize: 3,
+        pageIndex: 1,
+      }),
   });
 
   const healthServices = [

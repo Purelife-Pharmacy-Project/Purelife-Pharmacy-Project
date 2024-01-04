@@ -1,6 +1,6 @@
 import { ProductSkeleton } from '@/components/shop-and-order/category/skeletons/ProductSkeleton';
 import { Product } from '@/services/products/types';
-import { Card, CardBody } from '@nextui-org/react';
+import { Card, CardBody, Pagination } from '@nextui-org/react';
 import { FC } from 'react';
 import { ProductCard } from './ProductCard';
 
@@ -31,6 +31,15 @@ export const ProductsList: FC<ProductsListProps> = ({
           </div>
         )}
       </CardBody>
+
+      <div className='mt-10 flex justify-end'>
+        {/* here you will send pageSize to the url and refetch using the pageIndex query parameter */}
+        <Pagination
+          onChange={(value) => console.log(value)}
+          initialPage={1}
+          total={10}
+        />
+      </div>
     </Card>
   );
 };

@@ -1,6 +1,6 @@
 import UsersService from '@/services/user';
 import { LoginPayload, RegisterPayload } from '@/services/user/schema';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const useGetUser = () => {
   const {
@@ -10,6 +10,7 @@ export const useGetUser = () => {
   } = useQuery({
     queryKey: ['user'],
     queryFn: () => UsersService.getUser(),
+    staleTime: Infinity,
   });
 
   return {
@@ -19,19 +20,39 @@ export const useGetUser = () => {
   };
 };
 
-export const useLogin = () => {
+export const useLogin = (
+  onSuccess?: () => void,
+  onError?: (error: string) => void
+) => {
   const {
     mutate: loginUser,
     isPending: loadingLogin,
     error: loginError,
     isSuccess,
     isError,
+    data: user,
   } = useMutation<Record<string, unknown>, string, LoginPayload, unknown>({
     mutationFn: (payload: LoginPayload) => UsersService.login(payload),
+    onSuccess: () => {
+      onSuccess && onSuccess();
+    },
+    onError: (error) => {
+      onError && onError(error);
+    },
   });
+
+  const queryClient = useQueryClient();
+
+  if (isSuccess) {
+    queryClient.fetchQuery({
+      queryKey: ['user'],
+      queryFn: () => UsersService.getUser(),
+    });
+  }
 
   return {
     loginUser,
+    user,
     loadingLogin,
     loginError,
     isSuccess,

@@ -3,7 +3,7 @@ import { useCartStore } from '@/hooks';
 import { Button, Card, CardBody, Link } from '@nextui-org/react';
 import { FC } from 'react';
 
-export type OrderSummaryProps = {};
+type OrderSummaryProps = {};
 
 export const OrderSummary: FC<OrderSummaryProps> = () => {
   const { summary } = useCartStore();
@@ -46,7 +46,7 @@ export const OrderSummary: FC<OrderSummaryProps> = () => {
             color='primary'
             size='lg'
             as={Link}
-            href='/checkout'
+            href='/billing'
             radius='full'
             className='w-full py-8'
           >

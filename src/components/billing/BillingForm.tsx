@@ -1,5 +1,6 @@
 'use client';
 
+import { useGetUser } from '@/hooks';
 import { inputBorderedRegular, selectBordered } from '@/theme';
 import {
   Checkbox,
@@ -10,6 +11,8 @@ import {
 } from '@nextui-org/react';
 
 export const BillingForm = () => {
+  const { user } = useGetUser();
+
   return (
     <form className='grid gap-6'>
       <div className='flex gap-4'>

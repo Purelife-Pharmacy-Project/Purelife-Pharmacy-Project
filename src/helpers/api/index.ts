@@ -1,6 +1,7 @@
 import { API_BASE_URL } from '@/constants';
-// import { logoutUser } from '@/services/user';
+import UsersService from '@/services/user';
 import _axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { useRouter } from 'next/navigation';
 import { IApiErrorResponse, IApiResponse } from './types';
 
 class Api {
@@ -26,6 +27,7 @@ class Api {
     err: AxiosError<IApiErrorResponse<any>, any>
   ) => {
     let errorMessage = '';
+    console.log('err', err);
 
     if (err.response) {
       const apiError: IApiErrorResponse<any> | string = err.response.data;
@@ -44,18 +46,19 @@ class Api {
       }
 
       if (apiError.code === 'EXPIRED_TOKEN') {
-        // UsersService.logoutUser();
-        window.location.href = `/auth/login?redirectUrl=${window.location.pathname}`;
+        UsersService.logoutUser();
+
+        useRouter().push(`/sign-in?redirectUrl=${window.location.pathname}`);
       }
 
       if (
         apiError.code === 'MISSING_TOKEN' &&
         !this.hasToastedUnauthorizedError
       ) {
-        // UsersService.logoutUser();
+        UsersService.logoutUser();
 
         const timeout = setTimeout(() => {
-          window.location.href = `/login?redirectUrl=${window.location.pathname}`;
+          useRouter().push(`/sign-in?redirectUrl=${window.location.pathname}`);
         }, 1000);
 
         return () => clearTimeout(timeout);

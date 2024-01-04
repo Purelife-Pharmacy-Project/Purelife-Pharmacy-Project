@@ -1,10 +1,16 @@
 'use client';
-import { useCartStore } from '@/hooks';
+import { useCartStore, useGetUser } from '@/hooks';
 import { useStore } from '@/hooks/store';
+import UsersService from '@/services/user';
 import { inputDefault } from '@/theme';
 import {
+  Avatar,
   Badge,
   Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
   Input,
   Link,
   Navbar,
@@ -15,6 +21,7 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from '@nextui-org/react';
+import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -28,10 +35,20 @@ export const AppNavbar = ({
   background?: string;
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const pathName = usePathname();
+  const queryClient = useQueryClient();
   const cart = useStore(useCartStore, (state) => state)?.cart;
+  const { user } = useGetUser();
 
   const isActive = (path: string) => pathName.startsWith(path);
+
+  const handleLogout = () => {
+    UsersService.logoutUser();
+    queryClient.clear();
+
+    window.location.reload();
+  };
 
   const menuItems = [
     {
@@ -123,19 +140,59 @@ export const AppNavbar = ({
       >
         <div className='hidden md:flex md:gap-[22px]'>
           <NavbarItem className='flex items-center text-lg leading-[27px] text-header-100'>
-            <Link
-              color='foreground'
-              className={isActive('/sign-in') ? 'font-medium text-primary' : ''}
-              href='/sign-in'
-            >
-              <div className='flex items-center gap-2'>
-                <IconProfile
-                  color={isActive('/sign-in') ? 'primary' : 'header-100'}
-                  size={24}
-                />
-                <p>Sign in</p>
-              </div>
-            </Link>
+            {user ? (
+              <Dropdown>
+                <DropdownTrigger>
+                  <Button variant='light'>
+                    <Avatar
+                      size='sm'
+                      showFallback
+                      src={''}
+                      name={user?.name[0]}
+                      classNames={{
+                        base: 'bg-primary/80',
+                        icon: 'text-primary',
+                        name: 'text-white text-base',
+                      }}
+                    />
+                    <span className='text-base'>Profile</span>
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu aria-label='Static Actions'>
+                  <DropdownItem
+                    className='text-content'
+                    color='default'
+                    key='key'
+                  >
+                    Link
+                  </DropdownItem>
+                  <DropdownItem
+                    key='logout'
+                    onClick={handleLogout}
+                    className='text-danger'
+                    color='danger'
+                  >
+                    Logout
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            ) : (
+              <Link
+                color='foreground'
+                className={
+                  isActive('/sign-in') ? 'font-medium text-primary' : ''
+                }
+                href='/sign-in'
+              >
+                <div className='flex items-center gap-2'>
+                  <IconProfile
+                    color={isActive('/sign-in') ? 'primary' : 'header-100'}
+                    size={24}
+                  />
+                  <p>Sign in</p>
+                </div>
+              </Link>
+            )}
           </NavbarItem>
           <NavbarItem className='flex items-center text-lg leading-[27px] text-header-100'>
             <Link

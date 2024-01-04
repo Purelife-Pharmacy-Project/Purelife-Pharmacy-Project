@@ -23,8 +23,8 @@ export const CategoryProducts = () => {
   useEffect(() => {
     const invalidId = Number.isNaN(Number(categoryId));
     const invalidSearchString = searchString && searchString.length > 50;
-    const invalidMinPrice = minPrice && Number.isNaN(Number(minPrice));
-    const invalidMaxPrice = maxPrice && Number.isNaN(Number(maxPrice));
+    const invalidMinPrice = minPrice && isNaN(Number(minPrice));
+    const invalidMaxPrice = maxPrice && isNaN(Number(maxPrice));
 
     if (
       invalidId ||
@@ -32,9 +32,9 @@ export const CategoryProducts = () => {
       invalidMinPrice ||
       invalidMaxPrice
     ) {
-      router.push('/shop-and-order');
+      router.push(currentPath);
     }
-  }, [categoryId, maxPrice, minPrice, noId, router, searchString]);
+  }, [categoryId, maxPrice, minPrice, noId, router, searchString, currentPath]);
 
   const {
     refetch: refetchProducts,

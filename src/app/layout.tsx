@@ -1,10 +1,9 @@
 import { Providers } from '@/providers';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 import { Bricolage_Grotesque } from 'next/font/google';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import './globals.css';
-import { Toaster } from 'sonner';
 import React from 'react';
+import './globals.css';
 
 const bricolage = Bricolage_Grotesque({ subsets: ['latin'] });
 
@@ -25,7 +24,6 @@ export default function RootLayout({
           <main className='bg-background text-foreground light'>
             {children}
           </main>
-          <Toaster />
         </Providers>
         <SpeedInsights />
       </body>

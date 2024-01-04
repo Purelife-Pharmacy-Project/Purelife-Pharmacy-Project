@@ -1,16 +1,61 @@
 import { USER_TOKEN_KEY } from '@/constants';
 import Api from '@/helpers/api';
-import { Cookies } from 'react-cookie';
+import { deleteCookie, getCookie, setCookie } from 'cookies-next';
+import { jwtDecode } from 'jwt-decode';
 import { LoginPayload, RegisterPayload } from './schema';
+import { LoginResponse, UserType } from './types';
 
 class UsersService {
-  private static cookies = new Cookies();
   private static USERS_API_BASE = '/Contact';
+
   constructor() {}
 
+  public static loadAuthToken = (): string =>
+    getCookie(USER_TOKEN_KEY) as string;
+
+  private static saveAuthToken = (token: string) => {
+    return setCookie(USER_TOKEN_KEY, token, {
+      path: '/',
+      sameSite: 'strict',
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3), // 3 days
+    });
+  };
+
+  public static removeAuthToken = () => deleteCookie(USER_TOKEN_KEY);
+
+  public static getUserFromToken() {
+    const token = this.loadAuthToken();
+    const decoded = jwtDecode(token) as {
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier': string;
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress': string;
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name': string;
+      exp: number;
+      iss: string;
+      aud: string;
+    };
+    return {
+      id: decoded[
+        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+      ],
+      email:
+        decoded[
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
+        ],
+      name: decoded[
+        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
+      ],
+      exp: decoded.exp,
+    };
+  }
+
   public static async login(payload: LoginPayload) {
-    const { data } = await Api.post(`${this.USERS_API_BASE}/login`, payload);
-    return data;
+    const response = (await Api.post<LoginResponse>(
+      `${this.USERS_API_BASE}/login`,
+      payload
+    )) as unknown as LoginResponse;
+
+    this.saveAuthToken(response.token);
+    return response;
   }
 
   public static async register(payload: RegisterPayload) {
@@ -19,22 +64,17 @@ class UsersService {
   }
 
   public static async getUser() {
-    const { data } = await Api.get(`${this.USERS_API_BASE}`);
-    return data;
+    const id = this.getUserFromToken().id;
+    if (!id) return null;
+    const response = (await Api.get<UserType>(
+      `${this.USERS_API_BASE}?id=${id}`
+    )) as unknown as UserType[];
+    return response[0];
   }
-
-  public static loadAuthToken = () => this.cookies.get(USER_TOKEN_KEY);
-
-  public static saveAuthToken = (token: string) => {
-    return this.cookies.set(USER_TOKEN_KEY, token, {
-      path: '/',
-      sameSite: 'strict',
-    });
-  };
 
   public static logoutUser() {
     // remove auth token
-    return this.cookies.remove(USER_TOKEN_KEY, { path: '/' });
+    return this.removeAuthToken();
   }
 }
 
