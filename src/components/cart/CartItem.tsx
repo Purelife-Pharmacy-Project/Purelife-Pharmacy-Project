@@ -23,11 +23,12 @@ export const CartItem: FC<CartItemProps> = ({ product }) => {
 
   return (
     <Card shadow='none' className='w-full border border-gray-200'>
-      <CardBody>
+      <CardBody className='overflow-hidden'>
         <div className='grid grid-flow-col grid-cols-[2fr_5fr_2fr_1fr_3fr] items-center'>
           <Image
-            width={79}
-            height={75}
+            width={80}
+            height={80}
+            className='max-h-14 object-contain'
             radius='md'
             src={product.product.imageInBinary}
             alt={product.product.name}

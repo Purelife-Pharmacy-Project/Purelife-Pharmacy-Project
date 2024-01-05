@@ -30,7 +30,7 @@ export const FeaturedProducts: FC<FeaturedProductsProps> = ({
           </h1>
 
           <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
-            {allProducts?.map((product) => (
+            {allProducts?.products?.map((product) => (
               <FeaturedProduct key={product.id} product={product} />
             ))}
           </div>

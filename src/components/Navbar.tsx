@@ -10,6 +10,7 @@ import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
+  DropdownSection,
   DropdownTrigger,
   Input,
   Link,
@@ -141,14 +142,14 @@ export const AppNavbar = ({
         <div className='hidden md:flex md:gap-[22px]'>
           <NavbarItem className='flex items-center text-lg leading-[27px] text-header-100'>
             {user ? (
-              <Dropdown>
+              <Dropdown showArrow>
                 <DropdownTrigger>
                   <Button variant='light'>
                     <Avatar
                       size='sm'
                       showFallback
                       src={''}
-                      name={user?.name[0]}
+                      name={user && user.name[0]}
                       classNames={{
                         base: 'bg-primary/80',
                         icon: 'text-primary',
@@ -160,20 +161,23 @@ export const AppNavbar = ({
                 </DropdownTrigger>
                 <DropdownMenu aria-label='Static Actions'>
                   <DropdownItem
-                    className='text-content'
+                    isReadOnly
+                    className='pointer-events-none text-content'
                     color='default'
-                    key='key'
+                    key='profile'
                   >
-                    Link
+                    {user?.name}
                   </DropdownItem>
-                  <DropdownItem
-                    key='logout'
-                    onClick={handleLogout}
-                    className='text-danger'
-                    color='danger'
-                  >
-                    Logout
-                  </DropdownItem>
+                  <DropdownSection>
+                    <DropdownItem
+                      key='logout'
+                      onClick={handleLogout}
+                      className='text-danger'
+                      color='danger'
+                    >
+                      Logout
+                    </DropdownItem>
+                  </DropdownSection>
                 </DropdownMenu>
               </Dropdown>
             ) : (

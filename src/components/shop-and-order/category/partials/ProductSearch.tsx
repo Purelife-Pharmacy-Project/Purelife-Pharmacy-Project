@@ -24,7 +24,7 @@ export const ProductSearch: FC<ProductSearchProps> = ({
 
   // watch the search string and refetch the data
   useEffect(() => {
-    if (searchStr === '') {
+    if (!searchStr || searchStr === '') {
       removeQuery(['searchString']);
       onRefetch();
     } else {

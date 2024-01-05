@@ -3,9 +3,9 @@
 import { useGetUser } from '@/hooks';
 import { BillingPayload, billingSchema } from '@/services/billing/schema';
 import { User, UserType } from '@/services/user/types';
-import { inputBorderedRegular, selectBordered } from '@/theme';
+import { inputBorderedRegular } from '@/theme';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Checkbox, Input, Select, SelectItem } from '@nextui-org/react';
+import { Checkbox, Input } from '@nextui-org/react';
 import { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -22,9 +22,7 @@ export const BillingForm: FC<BillingFormProps> = ({ onFinish }) => {
     email: '',
     phone: '',
     country: '',
-    streetAddress: '',
-    apartment: '',
-    city: '',
+    address: '',
     createAccount: false,
   };
 
@@ -43,24 +41,12 @@ export const BillingForm: FC<BillingFormProps> = ({ onFinish }) => {
   useEffect(() => {
     if (user) {
       const _user = new User(user);
-      const country = _user.contactAddress.split(',').pop();
-      const streetAddress = _user.contactAddress.split(',').shift();
-      const apartment = _user.contactAddress.split(' ')[0];
-      const city = _user.contactAddress.split(',')[2];
-
-      console.log(user.contactAddress);
-      // does not come back with contact address
-
-      // TODO: finish the prefill
 
       setValue('firstName', _user.firstName);
       setValue('lastName', _user.lastName);
       setValue('email', _user.email);
       setValue('phone', _user.phoneNumber);
-      setValue('country', country || '');
-      setValue('streetAddress', streetAddress || '');
-      setValue('apartment', city || '');
-      setValue('city', apartment || '');
+      setValue('address', _user.contactAddress);
     }
   }, [setValue, user]);
 
@@ -71,7 +57,7 @@ export const BillingForm: FC<BillingFormProps> = ({ onFinish }) => {
         name: `${formData.firstName} ${formData.lastName}`,
         email: formData.email,
         phoneNumber: formData.phone,
-        contactAddress: `${formData.apartment} ${formData.streetAddress}, ${formData.city}, ${formData.country}`,
+        contactAddress: formData.address,
       };
       onFinish(payload);
     } else {
@@ -88,6 +74,7 @@ export const BillingForm: FC<BillingFormProps> = ({ onFinish }) => {
           {...register('firstName')}
           errorMessage={errors.firstName?.message}
           labelPlacement='outside'
+          disabled={!!user}
           label='First name'
           isRequired
           placeholder='Enter your first name'
@@ -98,13 +85,14 @@ export const BillingForm: FC<BillingFormProps> = ({ onFinish }) => {
           {...register('lastName')}
           errorMessage={errors.lastName?.message}
           labelPlacement='outside'
+          disabled={!!user}
           isRequired
           label='Last name'
           placeholder='Enter your last name'
           classNames={inputBorderedRegular}
         />
       </div>
-      <div className='relative mt-6 w-full'>
+      {/* <div className='relative mt-6 w-full'>
         <Select
           color='default'
           {...register('country')}
@@ -124,16 +112,16 @@ export const BillingForm: FC<BillingFormProps> = ({ onFinish }) => {
             Nigeria
           </SelectItem>
         </Select>
-      </div>
+      </div> */}
       <div className='w-full'>
         <Input
           radius='lg'
           isRequired
-          {...register('streetAddress')}
-          errorMessage={errors.streetAddress?.message}
+          {...register('address')}
+          errorMessage={errors.address?.message}
           labelPlacement='outside'
-          label='Street Address'
-          placeholder='Enter your street address'
+          label='Contact Address'
+          placeholder='Enter your address'
           classNames={inputBorderedRegular}
         />
       </div>
@@ -159,7 +147,7 @@ export const BillingForm: FC<BillingFormProps> = ({ onFinish }) => {
         </Select>
       </div> */}
 
-      <div className='w-full'>
+      {/* <div className='w-full'>
         <Input
           {...register('apartment')}
           errorMessage={errors.apartment?.message}
@@ -182,7 +170,7 @@ export const BillingForm: FC<BillingFormProps> = ({ onFinish }) => {
           placeholder='Town/City'
           classNames={inputBorderedRegular}
         />
-      </div>
+      </div> */}
       <div className='w-full'>
         <Input
           {...register('phone')}

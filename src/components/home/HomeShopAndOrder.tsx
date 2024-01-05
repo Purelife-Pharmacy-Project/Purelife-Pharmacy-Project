@@ -1,11 +1,11 @@
 'use client';
-import { Button, Card, CardBody, Link } from '@nextui-org/react';
-import { Section } from './Section';
+import { IconCart } from '@/components/icons/IconCart';
+import { IconHandAndHeart } from '@/components/icons/IconHandAndHeart';
+import { IconHome } from '@/components/icons/IconHome';
 import { getCategoryUrl } from '@/helpers/utils';
 import { useGetCategories } from '@/hooks/useCategory';
-import { IconHome } from '@/components/icons/IconHome';
-import { IconHandAndHeart } from '@/components/icons/IconHandAndHeart';
-import { IconCart } from '@/components/icons/IconCart';
+import { Button, Card, CardBody, Link } from '@nextui-org/react';
+import { Section } from './Section';
 
 export const HomeShopAndOrder = () => {
   const { categories: allCategories } = useGetCategories();

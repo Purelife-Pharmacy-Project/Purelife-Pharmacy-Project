@@ -16,25 +16,37 @@ export const CategoryProducts = () => {
   const categoryId = category.pop() || '1';
   const searchParams = useSearchParams();
 
-  const searchString = searchParams.get('searchString');
+  const searchString = searchParams.get('searchString') || undefined;
   const minPrice = searchParams.get('minPrice') || undefined;
   const maxPrice = searchParams.get('maxPrice') || undefined;
+  const pageIndex = searchParams.get('pageIndex') || 1;
 
   useEffect(() => {
-    const invalidId = Number.isNaN(Number(categoryId));
-    const invalidSearchString = searchString && searchString.length > 50;
-    const invalidMinPrice = minPrice && isNaN(Number(minPrice));
-    const invalidMaxPrice = maxPrice && isNaN(Number(maxPrice));
+    const invalidId = !!Number.isNaN(Number(categoryId));
+    const invalidSearchString = !!(searchString && searchString.length === 0);
+    const invalidMinPrice = !!(minPrice && isNaN(Number(minPrice)));
+    const invalidMaxPrice = !!(maxPrice && isNaN(Number(maxPrice)));
+    const invalidPageIndex = !!(pageIndex && isNaN(Number(pageIndex)));
 
     if (
       invalidId ||
       invalidSearchString ||
       invalidMinPrice ||
-      invalidMaxPrice
+      invalidMaxPrice ||
+      invalidPageIndex
     ) {
       router.push(currentPath);
     }
-  }, [categoryId, maxPrice, minPrice, noId, router, searchString, currentPath]);
+  }, [
+    categoryId,
+    maxPrice,
+    minPrice,
+    noId,
+    router,
+    searchString,
+    currentPath,
+    pageIndex,
+  ]);
 
   const {
     refetch: refetchProducts,
@@ -43,8 +55,8 @@ export const CategoryProducts = () => {
   } = useGetProducts(
     categoryId as string,
     searchString as string,
-    undefined,
-    undefined,
+    20,
+    Number(pageIndex),
     true,
     undefined,
     minPrice,
@@ -77,7 +89,11 @@ export const CategoryProducts = () => {
             maxPrice={maxPrice}
           />
           {/* products */}
-          <ProductsList products={products} loadingProducts={loadingProducts} />
+          <ProductsList
+            products={products?.products}
+            loadingProducts={loadingProducts}
+            totalPages={products?.totalPages || 0}
+          />
         </div>
       </Section>
     </div>

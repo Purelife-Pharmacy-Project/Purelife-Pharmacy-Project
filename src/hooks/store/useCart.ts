@@ -9,6 +9,7 @@ type CartSummary = {
   total: string;
   subTotal: string;
   discount: string;
+  totalAmount: number;
 };
 
 type CartState = {
@@ -32,6 +33,7 @@ export const useCartStore = create<CartState>()(
           total: toNaira(0),
           subTotal: toNaira(0),
           discount: toNaira(0),
+          totalAmount: 0,
         },
         // when make a cart action we need to update the summary
         setSummary: () =>
@@ -45,6 +47,7 @@ export const useCartStore = create<CartState>()(
                 ...state.summary,
                 subTotal: toNaira(totalAmount),
                 total: toNaira(totalAmount),
+                totalAmount,
               },
             };
           }),
@@ -93,6 +96,10 @@ export const useCartStore = create<CartState>()(
               }),
               summary: {
                 ...state.summary,
+                totalAmount: state.cart.reduce(
+                  (acc, cart) => acc + cart.product.price * cart.quantity,
+                  0
+                ),
                 subTotal: toNaira(
                   state.cart.reduce(
                     (acc, cart) => acc + cart.product.price * cart.quantity,
@@ -120,6 +127,10 @@ export const useCartStore = create<CartState>()(
               }),
               summary: {
                 ...state.summary,
+                totalAmount: state.cart.reduce(
+                  (acc, cart) => acc + cart.product.price * cart.quantity,
+                  0
+                ),
                 subTotal: toNaira(
                   state.cart.reduce(
                     (acc, cart) => acc + cart.product.price * cart.quantity,
@@ -144,6 +155,7 @@ export const useCartStore = create<CartState>()(
                 total: toNaira(0),
                 subTotal: toNaira(0),
                 discount: toNaira(0),
+                totalAmount: 0,
               },
             };
           });

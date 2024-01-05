@@ -17,16 +17,22 @@ class ProductService {
       Name: params.name,
       CategoryId: params.categoryId,
       ProductId: params.productId,
-      'SortByPrice.MinPrice': params.minPrice,
-      'SortByPrice.MaxPrice': params.maxPrice,
+      'PriceRange.MinPrice': params.minPrice,
+      'PriceRange.MaxPrice': params.maxPrice,
     });
 
-    const response = (await Api.get<ProductType[]>(
-      `${this.PRODUCTS_API_BASE}/get-products?${queryParams}`
-    )) as unknown as ProductType[];
+    const response = (await Api.get<{
+      data: ProductType[];
+      totalPage: number;
+    }>(`${this.PRODUCTS_API_BASE}/get-products?${queryParams}`)) as unknown as {
+      data: ProductType[];
+      totalPage: number;
+    };
 
-    const newProducts = response.map((product) => new Product(product));
-    return JSON.parse(JSON.stringify(newProducts)) as Product[];
+    const products = response.data?.map((product) => new Product(product));
+    return JSON.parse(
+      JSON.stringify({ products, totalPages: response.totalPage })
+    ) as { products: Product[]; totalPages: number };
   };
 }
 

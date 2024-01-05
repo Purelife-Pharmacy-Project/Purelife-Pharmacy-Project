@@ -1,4 +1,4 @@
-export const IconSpinner = () => {
+export const IconSpinner = ({ color = 'currentColor', size = 12 }) => {
   return (
     <svg
       className='h-5 w-5 animate-spin text-current'
@@ -8,16 +8,15 @@ export const IconSpinner = () => {
     >
       <circle
         className='opacity-25'
-        cx='12'
-        cy='12'
+        cx={size}
+        cy={size}
         r='10'
         stroke='currentColor'
         strokeWidth='4'
       />
       <path
-        className='opacity-75'
         d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-        fill='currentColor'
+        className={`fill-current opacity-75 text-${color}`}
       />
     </svg>
   );

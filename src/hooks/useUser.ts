@@ -81,14 +81,14 @@ export const useRegister = () => {
   };
 };
 
-export const useUpdateUser = (
+export const useUpdateUserContactInfo = (
   onSuccess?: () => void,
   onError?: (error: string) => void
 ) => {
   const {
-    mutate: updateUser,
-    isPending: loadingUpdateUser,
-    error: updateUserError,
+    mutate: updateUserInfo,
+    isPending: loadingUpdateUserInfo,
+    error: updateUserInfoError,
     isSuccess,
     data: user,
     isError,
@@ -105,9 +105,9 @@ export const useUpdateUser = (
   });
 
   return {
-    updateUser,
-    loadingUpdateUser,
-    updateUserError,
+    updateUserInfo,
+    loadingUpdateUserInfo,
+    updateUserInfoError,
     user,
     isSuccess,
     isError,

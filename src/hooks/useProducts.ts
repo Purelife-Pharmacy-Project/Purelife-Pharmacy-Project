@@ -43,7 +43,15 @@ export const useGetProducts = (
     refetch,
   } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
-    queryKey: ['products', categoryId, name, minPrice, maxPrice],
+    queryKey: [
+      'products',
+      categoryId,
+      name,
+      minPrice,
+      maxPrice,
+      pageIndex,
+      pageSize,
+    ],
     queryFn: () =>
       ProductService.getAllProducts({
         categoryId,
@@ -55,7 +63,7 @@ export const useGetProducts = (
         minPrice,
         maxPrice,
       }),
-    enabled: !!categoryId || !!name || !!minPrice || !!maxPrice,
+    enabled: !!categoryId || !!name || !!minPrice || !!maxPrice || !!pageIndex,
   });
 
   return {

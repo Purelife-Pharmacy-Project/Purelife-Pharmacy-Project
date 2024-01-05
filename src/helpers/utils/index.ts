@@ -6,6 +6,7 @@ export const getCategoryUrl = (
   category: string,
   allCategories: CategoryType[] | undefined
 ) => {
+  if (!allCategories) return '';
   const categoryId = allCategories?.find(
     (c) => c.name?.toLowerCase() === category
   )?.id;

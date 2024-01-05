@@ -37,8 +37,11 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
 
         <Image
           alt={product.name}
-          className='rounded-xl object-center'
+          className='flex max-h-[200px] rounded-xl object-center'
           src={product.imageInBinary}
+          classNames={{
+            wrapper: '!max-w-full !h-full !max-h-[200px]',
+          }}
         />
       </CardBody>
       <CardFooter className='grid w-full gap-3 px-0'>

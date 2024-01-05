@@ -12,10 +12,14 @@ export class CategoryService {
       CategoryId: params.categoryId,
     });
 
-    const response = (await Api.get<CategoryType[]>(
-      `${this.CATEGORIES_API_BASE}/get-all?${queryParams}`
-    )) as unknown as CategoryType[];
+    const response = (await Api.get<{
+      data: CategoryType[];
+      totalPage: number;
+    }>(`${this.CATEGORIES_API_BASE}/get-all?${queryParams}`)) as unknown as {
+      data: CategoryType[];
+      totalPage: number;
+    };
 
-    return JSON.parse(JSON.stringify(response)) as CategoryType[];
+    return JSON.parse(JSON.stringify(response.data)) as CategoryType[];
   };
 }
