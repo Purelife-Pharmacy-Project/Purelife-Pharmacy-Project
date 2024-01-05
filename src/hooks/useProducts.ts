@@ -15,6 +15,7 @@ export const useGetFeaturedProducts = () => {
         pageSize: 3,
         pageIndex: 1,
       }),
+    refetchOnWindowFocus: false,
   });
 
   return {
@@ -64,6 +65,7 @@ export const useGetProducts = (
         maxPrice,
       }),
     enabled: !!categoryId || !!name || !!minPrice || !!maxPrice || !!pageIndex,
+    refetchOnWindowFocus: false,
   });
 
   return {
