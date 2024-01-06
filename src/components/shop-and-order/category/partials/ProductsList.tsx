@@ -67,6 +67,7 @@ export const ProductsList: FC<ProductsListProps> = ({
         <Pagination
           onChange={(value) => setQuery({ pageIndex: value })}
           page={initialPage}
+          isDisabled={loadingProducts}
           total={noOfPages}
         />
       </div>
