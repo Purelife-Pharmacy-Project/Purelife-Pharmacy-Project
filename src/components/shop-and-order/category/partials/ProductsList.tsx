@@ -35,12 +35,17 @@ export const ProductsList: FC<ProductsListProps> = ({
         {loadingProducts ? (
           <ProductSkeleton />
         ) : (
-          <div className='grid max-h-[1000px] min-h-[1000px] grid-flow-row grid-cols-1 gap-10 overflow-y-auto md:grid-cols-2 lg:grid-cols-3'>
+          <div className='relative grid max-h-[800px] min-h-[500px] grid-flow-row grid-cols-1 gap-10 overflow-y-auto md:grid-cols-2 lg:grid-cols-3'>
             {products?.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard
+                loading={loadingProducts}
+                key={product.id}
+                product={product}
+              />
             ))}
           </div>
         )}
+
         {products?.length === 0 && !loadingProducts && (
           <div className='text-center'>
             <p>No products found.</p>
@@ -51,7 +56,7 @@ export const ProductsList: FC<ProductsListProps> = ({
       <div className='mt-10 flex w-full justify-end'>
         <Pagination
           onChange={(value) => setQuery({ pageIndex: value })}
-          initialPage={initialPage}
+          page={initialPage}
           total={totalPages}
           isDisabled={loadingProducts}
         />

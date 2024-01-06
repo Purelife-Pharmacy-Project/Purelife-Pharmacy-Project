@@ -10,7 +10,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
       <ReactQueryProvider>
         <NextTopLoader height={2} color='#FF0028' showSpinner />
         {children}
-        <Toaster richColors />
+        <Toaster richColors position='top-right' />
       </ReactQueryProvider>
     </NextUIProvider>
   );

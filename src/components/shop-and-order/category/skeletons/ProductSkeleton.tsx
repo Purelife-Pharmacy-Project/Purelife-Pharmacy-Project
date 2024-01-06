@@ -2,8 +2,8 @@ import { Skeleton } from '@nextui-org/react';
 
 export const ProductSkeleton = () => {
   return (
-    <div className='grid max-h-[1000px] min-h-[1000px] grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
-      {Array(10)
+    <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
+      {Array(6)
         .fill(0)
         .map((item, index) => (
           <div key={index} className='grid gap-2'>

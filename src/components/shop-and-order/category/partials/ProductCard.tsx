@@ -10,9 +10,10 @@ import { FC } from 'react';
 
 type ProductCardProps = {
   product: Product;
+  loading: boolean;
 };
 
-export const ProductCard: FC<ProductCardProps> = ({ product }) => {
+export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
   const { addToCart } = useCartStore();
   const router = useRouter();
 
@@ -57,6 +58,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
           <Button
             className='w-max border-header-100 text-header-100'
             variant='bordered'
+            isDisabled={loading}
             onClick={() => {
               const id = randomId();
               addToCart({
@@ -70,7 +72,12 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
           >
             Buy
           </Button>
-          <Button variant='light' size='sm' className='w-max p-0'>
+          <Button
+            isDisabled={loading}
+            variant='light'
+            size='sm'
+            className='w-max p-0'
+          >
             <IconShare size={21} />
           </Button>
         </div>

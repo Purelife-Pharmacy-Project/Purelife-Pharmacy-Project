@@ -20,7 +20,7 @@ export const useGetFeaturedProducts = () => {
 
   return {
     products,
-    loadingFeaturedProducts: isLoading || isRefetching,
+    loadingFeaturedProducts: isLoading,
     refetch,
   };
 };
@@ -70,7 +70,7 @@ export const useGetProducts = (
 
   return {
     products,
-    loadingProducts: isLoading || isRefetching,
+    loadingProducts: isLoading,
     isRefetching,
     refetch,
     isSuccess,
