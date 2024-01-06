@@ -92,7 +92,7 @@ export const CategoryProducts = () => {
           <ProductsList
             products={products?.products}
             loadingProducts={loadingProducts}
-            totalPages={products?.totalPages || 0}
+            totalPages={products?.totalPages as number}
           />
         </div>
       </Section>

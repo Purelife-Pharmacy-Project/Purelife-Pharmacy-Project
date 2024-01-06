@@ -20,14 +20,23 @@ export const ProductsList: FC<ProductsListProps> = ({
 }) => {
   const { setQuery } = useQueryParams();
   const [initialPage, setInitialPage] = useState(1);
-  const page = useSearchParams().get('pageIndex') || 1;
+  const [noOfPages, setNoOfPages] = useState(1);
+  const page = useSearchParams().get('pageIndex');
 
   useEffect(() => {
     if (page) {
-      setInitialPage(Number(page));
+      const newPage = Number(page);
+      setInitialPage(newPage);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [page]);
+
+  useEffect(() => {
+    if (totalPages) {
+      setNoOfPages(totalPages);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [totalPages]);
 
   return (
     <Card shadow='none' className='w-full'>
@@ -35,20 +44,21 @@ export const ProductsList: FC<ProductsListProps> = ({
         {loadingProducts ? (
           <ProductSkeleton />
         ) : (
-          <div className='relative grid max-h-[800px] min-h-[500px] grid-flow-row grid-cols-1 gap-10 overflow-y-auto md:grid-cols-2 lg:grid-cols-3'>
-            {products?.map((product) => (
-              <ProductCard
-                loading={loadingProducts}
-                key={product.id}
-                product={product}
-              />
-            ))}
-          </div>
-        )}
-
-        {products?.length === 0 && !loadingProducts && (
-          <div className='text-center'>
-            <p>No products found.</p>
+          <div className='max-h-[800px] min-h-[500px]'>
+            <div className='relative grid grid-flow-row grid-cols-1 gap-10 overflow-y-auto md:grid-cols-2 lg:grid-cols-3'>
+              {products?.map((product) => (
+                <ProductCard
+                  loading={loadingProducts}
+                  key={product.id}
+                  product={product}
+                />
+              ))}
+            </div>
+            {products?.length === 0 && !loadingProducts && (
+              <div className='grid h-full w-full place-content-center text-center'>
+                <p className='text-header-100'>No products found.</p>
+              </div>
+            )}
           </div>
         )}
       </CardBody>
@@ -57,8 +67,7 @@ export const ProductsList: FC<ProductsListProps> = ({
         <Pagination
           onChange={(value) => setQuery({ pageIndex: value })}
           page={initialPage}
-          total={totalPages}
-          isDisabled={loadingProducts}
+          total={noOfPages}
         />
       </div>
     </Card>

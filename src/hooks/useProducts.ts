@@ -37,7 +37,7 @@ export const useGetProducts = (
 ) => {
   const {
     data: products,
-    isLoading,
+    isLoading: loadingProducts,
     isRefetching,
     isSuccess,
     isError,
@@ -70,7 +70,7 @@ export const useGetProducts = (
 
   return {
     products,
-    loadingProducts: isLoading,
+    loadingProducts,
     isRefetching,
     refetch,
     isSuccess,
