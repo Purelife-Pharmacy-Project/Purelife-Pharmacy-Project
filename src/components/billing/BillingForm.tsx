@@ -1,20 +1,23 @@
 'use client';
 
-import { useGetUser } from '@/hooks';
+import { useGetUser, useUpdateUserContactInfo } from '@/hooks';
 import { BillingPayload, billingSchema } from '@/services/billing/schema';
 import { User, UserType } from '@/services/user/types';
 import { inputBorderedRegular } from '@/theme';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Checkbox, Input } from '@nextui-org/react';
+import { Button, Checkbox, Input } from '@nextui-org/react';
 import { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 type BillingFormProps = {
-  onFinish: (data: Partial<UserType> | null) => void;
+  onUpdated: () => void;
 };
 
-export const BillingForm: FC<BillingFormProps> = ({ onFinish }) => {
+export const BillingForm: FC<BillingFormProps> = ({ onUpdated }) => {
   const { user } = useGetUser();
+  const { updateUserInfo, loadingUpdateUserInfo } = useUpdateUserContactInfo(
+    () => onUpdated()
+  );
 
   const defaultValues = {
     firstName: '',
@@ -50,24 +53,19 @@ export const BillingForm: FC<BillingFormProps> = ({ onFinish }) => {
     }
   }, [setValue, user]);
 
-  useEffect(() => {
-    if (isValid && isDirty) {
-      const formData = getValues();
-      const payload: Partial<UserType> = {
-        name: `${formData.firstName} ${formData.lastName}`,
-        email: formData.email,
-        phoneNumber: formData.phone,
-        contactAddress: formData.address,
-      };
-      onFinish(payload);
-    } else {
-      onFinish(null);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isValid, isDirty]);
+  const onSubmit = (data: BillingPayload) => {
+    const payload: Partial<UserType> = {
+      name: `${data.firstName} ${data.lastName}`,
+      email: data.email,
+      phoneNumber: data.phone,
+      contactAddress: data.address,
+    };
+
+    updateUserInfo(payload);
+  };
 
   return (
-    <form className='flex flex-col gap-6'>
+    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
       <div className='flex gap-4'>
         <Input
           radius='lg'
@@ -92,27 +90,6 @@ export const BillingForm: FC<BillingFormProps> = ({ onFinish }) => {
           classNames={inputBorderedRegular}
         />
       </div>
-      {/* <div className='relative mt-6 w-full'>
-        <Select
-          color='default'
-          {...register('country')}
-          errorMessage={errors.country?.message}
-          aria-label='Select a country'
-          labelPlacement='outside'
-          isRequired
-          classNames={selectBordered}
-          defaultSelectedKeys={[defaultValues.country || '']}
-          disabledKeys={['']}
-          label='Country/Region'
-        >
-          <SelectItem className='text-content' key={''} value=''>
-            Select a country
-          </SelectItem>
-          <SelectItem className='text-content' key={'nigeria'} value='nigeria'>
-            Nigeria
-          </SelectItem>
-        </Select>
-      </div> */}
       <div className='w-full'>
         <Input
           radius='lg'
@@ -125,52 +102,6 @@ export const BillingForm: FC<BillingFormProps> = ({ onFinish }) => {
           classNames={inputBorderedRegular}
         />
       </div>
-
-      {/* <div className='relative mt-6 w-full'>
-        <Select
-          color='default'
-          aria-label='delivery address'
-          labelPlacement='outside'
-          classNames={selectBordered}
-          defaultSelectedKeys={['0']}
-          label='Delivery Address'
-        >
-          <SelectItem key={0} value=''>
-            Select your location and see the price
-          </SelectItem>
-          <SelectItem key={1} value='ngn'>
-            Nigeria
-          </SelectItem>
-          <SelectItem key={2} value='us'>
-            United States
-          </SelectItem>
-        </Select>
-      </div> */}
-
-      {/* <div className='w-full'>
-        <Input
-          {...register('apartment')}
-          errorMessage={errors.apartment?.message}
-          radius='lg'
-          labelPlacement='outside'
-          isRequired
-          label='Apartment/Suite'
-          placeholder='Apartment, suite, etc. (optional)'
-          classNames={inputBorderedRegular}
-        />
-      </div>
-      <div className='w-full'>
-        <Input
-          {...register('city')}
-          errorMessage={errors.city?.message}
-          radius='lg'
-          labelPlacement='outside'
-          label='Town/City'
-          isRequired
-          placeholder='Town/City'
-          classNames={inputBorderedRegular}
-        />
-      </div> */}
       <div className='w-full'>
         <Input
           {...register('phone')}
@@ -223,6 +154,16 @@ export const BillingForm: FC<BillingFormProps> = ({ onFinish }) => {
           }}
         />
       </div> */}
+
+      <Button
+        type='submit'
+        color='primary'
+        className='mb-5 w-full'
+        isDisabled={!isValid || !isDirty || loadingUpdateUserInfo}
+        isLoading={loadingUpdateUserInfo}
+      >
+        Save Changes
+      </Button>
     </form>
   );
 };

@@ -70,14 +70,10 @@ export const CategoryProducts = () => {
           <ProductSearch
             searchString={searchString as string}
             onRefetch={refetchProducts}
-            loading={loadingProducts}
           />
           <div className='flex w-full items-center justify-end gap-4'>
             <p className='font-light'>Sort By:</p>
-            <ProductSortDropdown
-              onRefetch={() => {}}
-              loading={loadingProducts}
-            />
+            <ProductSortDropdown onRefetch={() => {}} />
           </div>
         </div>
         <div className='grid grid-flow-col grid-cols-[3fr_9fr] gap-4'>

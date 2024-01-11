@@ -1,7 +1,7 @@
 import { API_BASE_URL } from '@/constants';
 import UsersService from '@/services/user';
 import _axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 import { IApiErrorResponse, IApiResponse } from './types';
 
 class Api {
@@ -28,13 +28,13 @@ class Api {
     err: AxiosError<IApiErrorResponse<any>, any>
   ) => {
     let errorMessage = '';
-    console.log('err', err);
 
     if (err.response) {
-      const apiError: IApiErrorResponse<any> | string = err.response.data;
+      const errorResponse = err.response;
+      const apiError = err.response.data;
 
       // check if apiError is a string
-      if (this.isStringError(apiError)) {
+      if (this.isStringError(apiError) && apiError) {
         errorMessage = apiError;
         console.error(
           `Backend returned code ${err.code}, status: null, ` + 'data:',
@@ -46,23 +46,20 @@ class Api {
         );
       }
 
-      if (apiError.code === 'EXPIRED_TOKEN') {
+      if (errorResponse.status === 401) {
         UsersService.logoutUser();
 
-        useRouter().push(`/sign-in?redirectUrl=${window.location.pathname}`);
-      }
+        if (!this.hasToastedUnauthorizedError) {
+          toast.error(
+            'Your session has expired. Please sign in again to continue.'
+          );
+        }
 
-      if (
-        apiError.code === 'MISSING_TOKEN' &&
-        !this.hasToastedUnauthorizedError
-      ) {
-        UsersService.logoutUser();
+        setTimeout(() => {
+          return (window.location.href = `/sign-in?redirectUrl=${window.location.pathname}`);
+        }, 500);
 
-        const timeout = setTimeout(() => {
-          useRouter().push(`/sign-in?redirectUrl=${window.location.pathname}`);
-        }, 1000);
-
-        return () => clearTimeout(timeout);
+        this.hasToastedUnauthorizedError = true;
       }
 
       console.error(

@@ -4,16 +4,13 @@ import { FC } from 'react';
 
 type ProductSortDropdownProps = {
   onRefetch: () => void;
-  loading: boolean;
 };
 
 export const ProductSortDropdown: FC<ProductSortDropdownProps> = ({
   onRefetch,
-  loading,
 }) => {
   return (
     <Select
-      isDisabled={loading}
       labelPlacement='outside'
       color='default'
       aria-label='Select a category'

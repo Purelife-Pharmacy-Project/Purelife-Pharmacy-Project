@@ -7,11 +7,11 @@ export interface IApiPaginateResponse {
 
 export interface IApiResponse<T> {
   status: number;
-  code: string;
   title: string;
   message: string;
+  statusText: string;
   data: T;
-  meta?: IApiPaginateResponse;
+  config: any;
 }
 
 export interface IApiSuccessResponse<T> extends IApiResponse<T> {

@@ -1,13 +1,16 @@
 'use client';
+import { toNaira } from '@/helpers/utils';
 import { useCartStore } from '@/hooks';
 import { useStore } from '@/hooks/store';
 import { Button, Card, CardBody, Link } from '@nextui-org/react';
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import { BillingAddressModal } from '../billing/BillingAddressModal';
 
 type OrderSummaryProps = {};
 
 export const OrderSummary: FC<OrderSummaryProps> = () => {
   const summary = useStore(useCartStore, (state) => state)?.summary;
+  const [showDeliveryModal, setShowDeliveryModal] = useState(false);
 
   return (
     <Card shadow='none' className='w-full border border-gray-300 lg:w-[543px]'>
@@ -33,9 +36,20 @@ export const OrderSummary: FC<OrderSummaryProps> = () => {
           </div>
           <div className='flex justify-between border-b border-gray-300 py-4'>
             <p className='text-lg font-light text-header-100'>Delivery Fee</p>
-            <p className='max-w-[158px] text-end font-light italic text-content'>
-              Add delivery address on checkout page
-            </p>
+
+            <div className='grid gap-4'>
+              <Button
+                variant='bordered'
+                color='primary'
+                onClick={() => setShowDeliveryModal(true)}
+                className='max-w-[158px] text-end font-light'
+              >
+                View Address
+              </Button>
+              <p className='text-end text-lg font-semibold text-header-100'>
+                {toNaira(0)}
+              </p>
+            </div>
           </div>
           <div className='flex justify-between py-4'>
             <p className='text-lg font-light text-header-100'>Total</p>
@@ -54,6 +68,13 @@ export const OrderSummary: FC<OrderSummaryProps> = () => {
             Proceed to Billing
           </Button>
         </div>
+
+        {/* delivery address modal */}
+
+        <BillingAddressModal
+          isOpen={showDeliveryModal}
+          openChange={() => setShowDeliveryModal(false)}
+        />
       </CardBody>
     </Card>
   );

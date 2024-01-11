@@ -2,7 +2,6 @@ import { USER_TOKEN_KEY } from '@/constants';
 import Api from '@/helpers/api';
 import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 import { jwtDecode } from 'jwt-decode';
-import { toast } from 'sonner';
 import { LoginPayload, RegisterPayload } from './schema';
 import { LoginResponse, UserType } from './types';
 
@@ -86,7 +85,6 @@ class UsersService {
   public static logoutUser() {
     // remove auth token
     this.removeAuthToken();
-    return toast.success('You have been logged out successfully.');
   }
 }
 

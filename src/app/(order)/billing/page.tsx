@@ -1,19 +1,13 @@
-'use client';
 import { AppNavbar } from '@/components/Navbar';
-import { BillingForm } from '@/components/billing/BillingForm';
+import { BillingInfoCard } from '@/components/billing/BillingInfoCard';
 import { BillingOrderSummary } from '@/components/billing/BillingOrderSummary';
 import { BillingPaymentCard } from '@/components/billing/BillingPaymentCard';
 import { Footer } from '@/components/home/Footer';
 import { Section } from '@/components/home/Section';
-import { UserType } from '@/services/user/types';
 import { inputDefault } from '@/theme';
 import { Button, Input } from '@nextui-org/react';
-import { useState } from 'react';
 
 export default function BillingPage() {
-  const [billingData, setBillingData] = useState<Partial<UserType> | null>(
-    null
-  );
   return (
     <>
       <AppNavbar background='primaryLight' />
@@ -47,12 +41,12 @@ export default function BillingPage() {
                 Billing Details
               </p>
 
-              <BillingForm onFinish={(data) => setBillingData(data)} />
+              <BillingInfoCard />
             </div>
 
             <div className='grid h-max gap-6'>
               <BillingOrderSummary />
-              <BillingPaymentCard billingData={billingData!} />
+              <BillingPaymentCard />
             </div>
           </div>
         </Section>

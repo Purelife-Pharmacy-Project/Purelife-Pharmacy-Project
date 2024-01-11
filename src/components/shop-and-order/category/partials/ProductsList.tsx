@@ -1,11 +1,9 @@
-'use client';
-import { useQueryParams } from '@/hooks';
 import { Product } from '@/services/products/types';
-import { Card, CardBody, Pagination } from '@nextui-org/react';
-import { useSearchParams } from 'next/navigation';
-import { FC, useEffect, useState } from 'react';
+import { Card, CardBody } from '@nextui-org/react';
+import { FC } from 'react';
 import { ProductSkeleton } from '../skeletons/ProductSkeleton';
 import { ProductCard } from './ProductCard';
+import { ProductsPagination } from './ProductPagination';
 
 type ProductsListProps = {
   products: Product[] | undefined;
@@ -18,26 +16,6 @@ export const ProductsList: FC<ProductsListProps> = ({
   loadingProducts,
   totalPages,
 }) => {
-  const { setQuery } = useQueryParams();
-  const [initialPage, setInitialPage] = useState(1);
-  const [noOfPages, setNoOfPages] = useState(1);
-  const page = useSearchParams().get('pageIndex');
-
-  useEffect(() => {
-    if (page) {
-      const newPage = Number(page);
-      setInitialPage(newPage);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
-
-  useEffect(() => {
-    if (totalPages) {
-      setNoOfPages(totalPages);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [totalPages]);
-
   return (
     <Card shadow='none' className='w-full'>
       <CardBody className='lg:p-0'>
@@ -63,14 +41,7 @@ export const ProductsList: FC<ProductsListProps> = ({
         )}
       </CardBody>
 
-      <div className='mt-10 flex w-full justify-end'>
-        <Pagination
-          onChange={(value) => setQuery({ pageIndex: value })}
-          page={initialPage}
-          isDisabled={loadingProducts}
-          total={noOfPages}
-        />
-      </div>
+      <ProductsPagination totalPages={totalPages} />
     </Card>
   );
 };

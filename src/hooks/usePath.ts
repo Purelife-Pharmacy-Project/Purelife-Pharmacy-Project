@@ -6,6 +6,7 @@ export const useQueryParams = () => {
   const router = useRouter();
   const pathname = usePathname();
 
+  // TODO: check if the value is there and replace the value instead of adding it.
   const setQuery = useCallback(
     (paramsObj: { [key: string]: string | number | boolean }) => {
       const params = new URLSearchParams(urlParams);

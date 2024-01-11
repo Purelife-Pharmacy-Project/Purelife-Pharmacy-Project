@@ -6,16 +6,16 @@ import { FC, useEffect, useState } from 'react';
 
 type ProductsPriceRangeProps = {
   onRefetch: () => void;
-  loading: boolean;
+  loading?: boolean;
 };
 
 enum PriceRanges {
-  BELOW_1000 = `below 1000`,
-  ABOVE_1000 = `1000-2999`,
-  ABOVE_3999 = `3000-3999`,
-  ABOVE_4999 = `4000-4999`,
-  ABOVE_5999 = `5000-9999`,
-  ABOVE_9999 = `10000 above`,
+  BELOW_1000 = `below ₦1000`,
+  ABOVE_1000 = `₦1000 - ₦2999`,
+  ABOVE_3999 = `₦3000 - ₦3999`,
+  ABOVE_4999 = `₦4000 - ₦4999`,
+  ABOVE_5999 = `₦5000 - ₦9999`,
+  ABOVE_9999 = `₦10000 above`,
 }
 
 export const ProductsPriceRange: FC<ProductsPriceRangeProps> = ({
@@ -50,6 +50,8 @@ export const ProductsPriceRange: FC<ProductsPriceRangeProps> = ({
         default:
           return setRange(PriceRanges.BELOW_1000);
       }
+    } else {
+      handleReset();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -109,7 +111,7 @@ export const ProductsPriceRange: FC<ProductsPriceRangeProps> = ({
       </RadioGroup>
       {range ? (
         <div className='flex justify-end'>
-          <Button variant='faded' onClick={handleReset}>
+          <Button size='sm' variant='faded' onClick={handleReset}>
             Reset
           </Button>
         </div>

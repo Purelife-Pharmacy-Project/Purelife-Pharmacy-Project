@@ -162,13 +162,22 @@ export const AppNavbar = ({
                 <DropdownMenu aria-label='Static Actions'>
                   <DropdownItem
                     isReadOnly
-                    className='pointer-events-none text-content'
+                    className='pointer-events-none flex gap-2 text-content'
                     color='default'
                     key='profile'
                   >
                     {user?.name}
                   </DropdownItem>
                   <DropdownSection>
+                    <DropdownItem
+                      className='text-content'
+                      color='default'
+                      as={Link}
+                      href='/my-account'
+                      key='account'
+                    >
+                      My Account
+                    </DropdownItem>
                     <DropdownItem
                       key='logout'
                       onClick={handleLogout}

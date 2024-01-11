@@ -48,10 +48,8 @@ export const ConfirmationModal: FC<ConfirmModalProps> = ({
               <Button
                 radius='full'
                 size='lg'
-                variant={'bordered'}
-                className={
-                  'border-header-100 bg-white text-header-100 lg:px-10'
-                }
+                variant={'faded'}
+                className={' text-header-100 lg:px-10'}
                 onClick={openChange}
               >
                 Cancel
