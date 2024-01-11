@@ -29,7 +29,8 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({}) => {
       toast.warning('Oops! Your cart is empty.');
       router.push('/cart');
     }
-  }, [cart, router]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const clearCart = useStore(useCartStore, (state) => state)
     ?.clearCart as () => void;
