@@ -16,7 +16,7 @@ export const BillingAddressModal: FC<BillingAddressModalProps> = ({
       <ModalContent>
         <ModalHeader>
           <p className='text-2xl font-bold text-header-100'>
-            Billing information
+            Edit Billing information
           </p>
         </ModalHeader>
         <ModalBody>

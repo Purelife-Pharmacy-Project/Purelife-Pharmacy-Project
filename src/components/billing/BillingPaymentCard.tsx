@@ -12,7 +12,7 @@ import {
   RadioGroup,
 } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { Paystack, PaystackSuccessResponse } from '../paystack';
 
@@ -22,12 +22,20 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({}) => {
   const summary = useStore(useCartStore, (state) => state)?.summary;
   const { user } = useGetUser();
   const cart = useStore(useCartStore, (state) => state)?.cart;
+  const router = useRouter();
+
+  useEffect(() => {
+    if (cart && cart.length === 0) {
+      toast.warning('Oops! Your cart is empty.');
+      router.push('/cart');
+    }
+  }, [cart, router]);
+
   const clearCart = useStore(useCartStore, (state) => state)
     ?.clearCart as () => void;
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'bank_transfer'>(
     'card'
   );
-  const router = useRouter();
 
   const { createOrder, loadingCreateOrder } = useCreateOrder(() => {
     clearCart();

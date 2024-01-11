@@ -13,8 +13,10 @@ import {
   TableRow,
 } from '@nextui-org/react';
 import { useState } from 'react';
+import { useGetOrders } from '@/hooks';
 
 export const AccountTransactions = () => {
+  const { orders, loadingGetOrders } = useGetOrders();
   const [openTransactionDetailsModal, setOpenTransactionDetailsModal] =
     useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState<

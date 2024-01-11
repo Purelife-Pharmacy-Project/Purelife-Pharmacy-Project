@@ -4,8 +4,14 @@ import { IconBrowse } from '@/components/icons/IconBrowse';
 import { Line } from '@/library/ui/Line';
 import { inputDefault } from '@/theme';
 import { Button, Image, Input, Radio, RadioGroup } from '@nextui-org/react';
+import { useGetUser } from '@/hooks';
+import { useState } from 'react';
+import { BillingAddressModal } from '@/components/billing/BillingAddressModal';
 
 export const AccountPersonalForm = () => {
+  const { user, loadingUser } = useGetUser();
+  const [showEditProfileModal, setShowEditProfileModal] = useState(false);
+
   return (
     <div className='grid gap-6'>
       <form className='grid gap-6'>
@@ -13,8 +19,10 @@ export const AccountPersonalForm = () => {
           <IconBrowse />
         </div>
         <Input
-          label='Username'
+          label='Name'
           size='lg'
+          readOnly
+          defaultValue={user?.name}
           placeholder='Enter your username'
           labelPlacement='outside'
           autoComplete='personal-info'
@@ -26,6 +34,8 @@ export const AccountPersonalForm = () => {
             label='Email Address'
             labelPlacement='outside'
             size='lg'
+            readOnly
+            defaultValue={user?.email}
             placeholder='Enter your email address'
             type='email'
             classNames={inputDefault}
@@ -34,6 +44,8 @@ export const AccountPersonalForm = () => {
             label='Phone'
             type='tel'
             size='lg'
+            readOnly
+            defaultValue={user?.phoneNumber}
             placeholder='Enter your phone number'
             labelPlacement='outside'
             autoComplete='personal-info'
@@ -43,26 +55,35 @@ export const AccountPersonalForm = () => {
         </div>
 
         <Input
-          label='Password'
-          size='lg'
-          labelPlacement='outside'
-          placeholder='*** ***'
-          autoComplete='personal-info'
-          type='password'
-          classNames={inputDefault}
-        />
-        <Input
           label='Address'
           size='lg'
+          readOnly
+          defaultValue={
+            user?.contactAddress && user.contactAddress.trim() !== ''
+              ? user.contactAddress
+              : 'N/A'
+          }
           placeholder='Enter your address'
           labelPlacement='outside'
           autoComplete='personal-info'
           classNames={inputDefault}
         />
 
-        <Button color='primary' size='lg' radius='full' className='w-max px-10'>
+        <Button
+          color='primary'
+          isDisabled={loadingUser}
+          onClick={() => setShowEditProfileModal(true)}
+          size='lg'
+          radius='full'
+          className='w-max px-10'
+        >
           Edit Profile
         </Button>
+
+        <BillingAddressModal
+          isOpen={showEditProfileModal}
+          openChange={() => setShowEditProfileModal(false)}
+        />
       </form>
 
       <Line className='w-full' />

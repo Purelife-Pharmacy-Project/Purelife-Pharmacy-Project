@@ -65,7 +65,7 @@ class UsersService {
 
   public static async getUser() {
     const id = this.getUserFromToken().id;
-    if (!id) return null;
+    if (!id) return undefined;
     const response = (await Api.get<{ data: UserType; totalPage: number }>(
       `${this.USERS_API_BASE}?id=${id}`
     )) as unknown as { data: UserType[]; totalPage: number };

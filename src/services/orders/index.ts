@@ -7,21 +7,17 @@ class OrderService {
   constructor() {}
 
   public static async createOrder(order: CreateOrderPayload) {
-    const response = Api.post(`${this.ORDERS_API_BASE}/create`, order);
-
-    return response;
+    return Api.post(`${this.ORDERS_API_BASE}/create`, order);
   }
 
   public static async getAllCustomerOrders() {
-    const response = Api.get<{
+    return (await Api.get<{
       data: Order[];
       totalPage: number;
-    }>(`${this.ORDERS_API_BASE}/getByCustomerId`) as unknown as {
+    }>(`${this.ORDERS_API_BASE}/getByCustomerId`)) as unknown as {
       data: Order[];
       totalPage: number;
     };
-
-    return response;
   }
 }
 
