@@ -50,6 +50,7 @@ export const CreateAccountForm = () => {
         label='Full Name'
         type='text'
         autoComplete='new-name'
+        errorMessage={errors.email?.message}
         classNames={inputDefault}
         {...register('name')}
       />
@@ -57,6 +58,7 @@ export const CreateAccountForm = () => {
         label='Email'
         type='email'
         autoComplete='new-email'
+        errorMessage={errors.email?.message}
         classNames={inputDefault}
         {...register('email')}
       />
@@ -64,6 +66,7 @@ export const CreateAccountForm = () => {
         label='Password'
         type={passwordIsVisible ? 'text' : 'password'}
         autoComplete='new-password'
+        errorMessage={errors.password?.message}
         classNames={inputDefault}
         {...register('password')}
         endContent={
