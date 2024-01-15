@@ -1,10 +1,10 @@
 import { AppNavbar } from '@/components/Navbar';
 import { EarnedClients } from '@/components/home/EarnedClients';
 import { Footer } from '@/components/home/Footer';
-import { HealthServices } from '@/components/home/HealthServices';
 import { HomeHero } from '@/components/home/HomeHero';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Section } from '@/components/home/Section';
+import { TeleHealthServices } from '@/components/home/TeleHealthServices';
 import { ShopCategory } from '@/components/shop-and-order/ShopCategory';
 import { CategoryService } from '@/services/categories';
 import {
@@ -77,7 +77,7 @@ export default async function ShopAndOrder() {
 
         <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
           <Section className='bg-white'>
-            <HealthServices />
+            <TeleHealthServices />
           </Section>
         </div>
 

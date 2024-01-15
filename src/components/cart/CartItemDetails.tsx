@@ -1,26 +1,39 @@
 'use client';
-
 import { ProductQuantity } from '@/components/cart/ProductQuantity';
 import { IconBin } from '@/components/icons/IconBin';
-import { useCartStore } from '@/hooks';
+import { randomId } from '@/helpers/utils';
+import { useCartStore, useGetProductByProductId } from '@/hooks';
 import { useStore } from '@/hooks/store';
 import { CartType } from '@/services/cart/types';
 import { Button, Card, CardBody, Image } from '@nextui-org/react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { DeliveryModeTabs } from './DeliveryModeTabs';
+import { IconSpinner } from '../icons/IconSpinner';
+import { OrderSummary } from './OrderSummary';
 import { ConfirmationModal } from './modals/ConfirmationModal';
 
 export const CartItemDetails = () => {
   const itemId = usePathname().split('/')[2];
   const router = useRouter();
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const itemInStore = useStore(
+    useCartStore,
+    (state) => state?.cart.find((item) => item.product.id === Number(itemId))
+  );
+  const { addToCart } = useCartStore();
 
-  const item = useStore(useCartStore, (state) => state)?.getCartItem(itemId);
+  const { product, loadingProduct } = useGetProductByProductId(itemId);
 
   return (
     <>
-      {!item ? (
+      {loadingProduct ? (
+        <div className='flex w-full flex-col items-center justify-center gap-4'>
+          <p>Fetching Item</p>
+          <IconSpinner color='primary' />
+        </div>
+      ) : null}
+
+      {!loadingProduct && !product ? (
         <Card shadow='sm' className='self-center'>
           <CardBody className='flex items-center justify-start gap-6'>
             <p className='text-center text-lg text-content'>
@@ -35,7 +48,9 @@ export const CartItemDetails = () => {
             </Button>
           </CardBody>
         </Card>
-      ) : (
+      ) : null}
+
+      {product && (
         <div className='grid grid-cols-1 lg:grid-flow-col lg:grid-cols-2'>
           <Card shadow='none' className='w-full lg:w-[543px]'>
             <CardBody className='bg-primaryLight'>
@@ -43,7 +58,7 @@ export const CartItemDetails = () => {
                 <Image
                   alt='product image'
                   className='max-h-80 object-cover'
-                  src={item.product.imageInBinary}
+                  src={product?.imageInBinary}
                 />
               </div>
             </CardBody>
@@ -52,41 +67,68 @@ export const CartItemDetails = () => {
             <CardBody>
               <div className='grid gap-4'>
                 <h1 className='text-2xl font-semibold text-header-100'>
-                  {item?.product.name}
+                  {product?.name}
                 </h1>
                 <p className='text-lg font-light text-header-100'>
-                  {item?.product.description}
+                  {product?.description}
                 </p>
 
-                <p className='font-bold text-content'>{item?.product.amount}</p>
+                <p className='text-xl font-semibold text-primary'>
+                  {product?.amount}
+                </p>
 
-                <div className='mt-6 flex items-center justify-between'>
-                  <ProductQuantity cartItem={item as CartType} />
+                {itemInStore ? (
+                  <div className='mt-6 flex items-center justify-between'>
+                    <ProductQuantity cartItem={itemInStore as CartType} />
 
+                    <Button
+                      isIconOnly
+                      onClick={() => setShowConfirmationModal(true)}
+                      variant='faded'
+                    >
+                      <IconBin color='primary' />
+                    </Button>
+
+                    <ConfirmationModal
+                      productId={itemId}
+                      isOpen={showConfirmationModal}
+                      openChange={() => {
+                        setShowConfirmationModal(false);
+                      }}
+                    />
+                  </div>
+                ) : (
                   <Button
-                    isIconOnly
-                    onClick={() => setShowConfirmationModal(true)}
-                    variant='faded'
+                    className='w-max px-10'
+                    color='primary'
+                    radius='full'
+                    size='lg'
+                    isDisabled={loadingProduct}
+                    onClick={() => {
+                      const id = randomId();
+                      addToCart({
+                        id,
+                        unitsLeft: 3,
+                        product,
+                        quantity: 1,
+                      });
+                    }}
                   >
-                    <IconBin color='primary' />
+                    Add to Cart
                   </Button>
-
-                  <ConfirmationModal
-                    productId={itemId}
-                    isOpen={showConfirmationModal}
-                    openChange={() => setShowConfirmationModal(false)}
-                  />
-                </div>
+                )}
               </div>
             </CardBody>
           </Card>
         </div>
       )}
 
-      {item ? (
-        <div className='mt-6 grid w-full grid-flow-col grid-cols-1 lg:grid-cols-2'>
+      {product && itemInStore ? (
+        <div className='mt-20 grid w-full grid-flow-col grid-cols-1 lg:grid-cols-2'>
           <div className='hidden w-full lg:block'></div>
-          <DeliveryModeTabs />
+          <div className='flex w-full justify-end'>
+            <OrderSummary />
+          </div>
         </div>
       ) : null}
     </>

@@ -35,7 +35,7 @@ export default function Doctor() {
       </div>
 
       <section className='grid justify-center gap-6'>
-        <div className='mt-[250px] grid items-end'>
+        <div className='mt-[200px] grid items-end'>
           <Section className='relative grid grid-flow-row gap-6 pb-10 lg:grid-flow-col lg:grid-cols-[3fr_4fr]'>
             <div className='flex flex-col gap-6'>
               <h1 className='text-3xl font-bold text-header-100 lg:max-w-[370px]'>

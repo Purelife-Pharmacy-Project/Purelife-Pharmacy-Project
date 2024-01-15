@@ -100,7 +100,8 @@ export const LoginForm = () => {
           <Link href='/sign-in'>Forgot Password</Link>
         </p>
       </div>
-      <p>
+
+      <p className='mt-4'>
         Don&apos;t have an account?{' '}
         <Link color='primary' href='/create-account'>
           Create an account

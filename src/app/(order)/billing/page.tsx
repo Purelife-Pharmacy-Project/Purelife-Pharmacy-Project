@@ -37,10 +37,6 @@ export default function BillingPage() {
         <Section className='bg-white'>
           <div className='grid grid-cols-1 gap-6 lg:grid-flow-col lg:grid-cols-2'>
             <div className='flex flex-col gap-6'>
-              <p className='text-2xl font-semibold text-header-100'>
-                Billing Details
-              </p>
-
               <BillingInfoCard />
             </div>
 

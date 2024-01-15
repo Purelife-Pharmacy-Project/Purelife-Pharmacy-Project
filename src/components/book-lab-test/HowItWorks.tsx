@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Section } from '../home/Section';
 import { twMerge } from 'tailwind-merge';
+import { Section } from '../home/Section';
 
 type HowItWorksProps = {
   variant?: 'primary' | 'success';
@@ -41,7 +41,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ data, variant }) => {
                     {answer.icon}
                   </div>
                   <div className='mx-auto flex max-w-[330px] flex-col gap-1'>
-                    <p className='text-center text-xl text-content'>
+                    <p className='text-center text-xl leading-[18px] text-content'>
                       {answer.description}
                     </p>
                   </div>

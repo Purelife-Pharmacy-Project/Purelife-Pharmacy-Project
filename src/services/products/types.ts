@@ -15,12 +15,10 @@ export type ProductQueryParams = {
 export type ProductType = {
   id: number;
   name: string;
-  isActive: boolean;
   price: number;
   description: string;
   imageInBinary: Blob;
   categoryId: string;
-  manufacturerId: string;
   amount?: number;
   canBePurchased: boolean;
   canBeSold: boolean;
@@ -30,10 +28,8 @@ export class Product {
   public id: number;
   public name: string;
   public price: number;
-  public isActive: boolean;
   public description: string;
   public categoryId: string;
-  public manufacturerId: string;
   public imageInBinary: string;
   public amount: string;
   public canBePurchased: boolean;
@@ -42,10 +38,8 @@ export class Product {
   constructor(product: ProductType) {
     this.id = product.id;
     this.name = product.name;
-    this.isActive = product.isActive;
     this.price = product.price;
     this.categoryId = product.categoryId;
-    this.manufacturerId = product.manufacturerId;
     this.description = product.name || '';
     this.imageInBinary = product.imageInBinary
       ? `data:image/png;base64,${product.imageInBinary}`

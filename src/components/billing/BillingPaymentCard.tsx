@@ -97,11 +97,16 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({}) => {
             color='primary'
             size='md'
             isLoading={loadingCreateOrder}
+            isDisabled={
+              !user?.contactAddress || user?.contactAddress?.trim() === ''
+            }
             onClick={() => {
               const paymentButton = document.querySelector(
                 '#paymentButton > button'
               ) as HTMLButtonElement;
-              paymentButton?.click();
+              !user?.contactAddress || user?.contactAddress?.trim() === ''
+                ? toast.warning('Please add a delivery address')
+                : paymentButton?.click();
             }}
             radius='full'
             className='mt-6 w-full py-6'

@@ -1,5 +1,6 @@
 'use client';
 import { Button, Card, CardBody, Image } from '@nextui-org/react';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FC } from 'react';
 import { Section } from '../../home/Section';
@@ -57,13 +58,15 @@ export const CategoryHero: FC<CategoryHeroProps> = ({}) => {
                     <h1 className='text-2xl font-bold text-header-100 lg:text-4xl'>
                       {generateHero().title}
                     </h1>
-                    <p className='text-center text-base font-light text-content lg:max-w-[353px] lg:text-left lg:text-lg'>
+                    <p className='text-center text-base font-light leading-4 text-content lg:max-w-[353px] lg:text-left lg:text-lg'>
                       {generateHero().description}
                     </p>
                     <Button
                       radius='full'
-                      className='w-max px-20 py-8'
+                      className='w-max px-20 py-6'
                       color='primary'
+                      as={Link}
+                      href='#products'
                       size='lg'
                     >
                       Shop all

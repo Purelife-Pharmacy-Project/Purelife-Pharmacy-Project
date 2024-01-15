@@ -1,5 +1,5 @@
 import { IconBrowse } from '@/components/icons/IconBrowse';
-import { inputBordered, textAreaClassNames } from '@/theme';
+import { inputDefault } from '@/theme';
 import { Button, Input, Textarea } from '@nextui-org/react';
 
 export const PatientForm = () => {
@@ -7,13 +7,13 @@ export const PatientForm = () => {
     <form onSubmit={(e) => e.preventDefault()}>
       <div className='mb-8 flex flex-col-reverse gap-4 lg:flex-row'>
         <div className='grid w-full gap-8'>
-          <Input label='Full Name' classNames={inputBordered} />
+          <Input label='Full Name' classNames={inputDefault} />
           <Input
             label='Phone Number'
             inputMode='numeric'
-            classNames={inputBordered}
+            classNames={inputDefault}
           />
-          <div className='flex w-full flex-col items-center justify-center rounded-lg border border-primaryGreenDark bg-white py-20'>
+          <div className='flex w-full flex-col items-center justify-center rounded-lg bg-white py-20 shadow-sm'>
             <IconBrowse />
             <Button className='text-md font-light text-content' variant='light'>
               Upload your Prescription: Drag & Drop or Click to Browse
@@ -21,17 +21,12 @@ export const PatientForm = () => {
           </div>
         </div>
         <div className='flex w-full flex-col gap-8'>
-          <Input
-            label='Email Address'
-            type='email'
-            classNames={inputBordered}
-          />
+          <Input label='Email Address' type='email' classNames={inputDefault} />
           <div className='flex h-full'>
             <Textarea
               size='lg'
-              style={{ height: '310px' }}
               placeholder='Noted about your prescription'
-              classNames={textAreaClassNames}
+              classNames={inputDefault}
             />
           </div>
         </div>

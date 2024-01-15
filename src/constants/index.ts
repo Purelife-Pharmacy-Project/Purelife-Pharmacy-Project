@@ -8,7 +8,7 @@ export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '/api/v1';
 
 export const USER_TOKEN_KEY = 'user_token';
 
-export const healthServices = [
+export const teleHealthServices = [
   {
     icon: IconPill as ({
       color,
@@ -21,6 +21,7 @@ export const healthServices = [
     description:
       'Get your medications delivered to you at your preferred intervals.',
     url: '/drug-refill',
+    actionText: 'Subscribe',
   },
   {
     icon: IconLabs as ({
@@ -33,7 +34,8 @@ export const healthServices = [
     title: 'Book a lab test',
     description:
       'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
-    url: '/book-a-test',
+    url: '/book-lab-test',
+    actionText: 'Book Now',
   },
   {
     icon: IconFluidMed as ({
@@ -46,6 +48,7 @@ export const healthServices = [
     title: 'Get Vaccination',
     description: 'Choose from our expertly curated vaccines whenever you want.',
     url: '/get-vaccination',
+    actionText: 'Get Vaccinated',
   },
   {
     icon: IconDoctor as ({
@@ -59,6 +62,7 @@ export const healthServices = [
     description:
       'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
     url: '/find-a-doctor',
+    actionText: 'Consult Now',
   },
   {
     icon: IconPrescription as ({
@@ -72,6 +76,7 @@ export const healthServices = [
     description:
       'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
     url: '/upload-prescription',
+    actionText: 'Upload Now',
   },
 ];
 

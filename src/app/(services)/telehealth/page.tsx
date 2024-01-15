@@ -1,11 +1,11 @@
 import { AppNavbar } from '@/components/Navbar';
 import { EarnedClients } from '@/components/home/EarnedClients';
 import { Footer } from '@/components/home/Footer';
-import { HealthServices } from '@/components/home/HealthServices';
 import { HomeHero } from '@/components/home/HomeHero';
 import { HomeTransformation } from '@/components/home/HomeTransformation';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Section } from '@/components/home/Section';
+import { TeleHealthServices } from '@/components/home/TeleHealthServices';
 import { IconDoctor } from '@/components/icons/IconDoctor';
 import { IconFluidMed } from '@/components/icons/IconFluidMed';
 import { IconLabs } from '@/components/icons/IconLabs';
@@ -99,42 +99,25 @@ export default function Telehealth() {
               title='Health Packages and Medical Care Right in Your Home.'
               description='Explore a range of healthcare products, schedule laboratory tests, book vaccination appointments, and receive high-quality medical services from wherever you are in Nigeria.'
               ctaText='Start here'
-              ctaLink='#'
+              ctaLink='#teleHealthServices'
             />
           </Section>
         </div>
 
-        <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
-          <Section className='bg-white'>
-            <HomeTransformation data={transformationData} />
-          </Section>
-        </div>
+        <HomeTransformation data={transformationData} />
 
-        <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
-          <Section className='bg-white'>
-            <HealthServices />
-          </Section>
-        </div>
+        <div className='invisible mb-8' id='teleHealthServices'></div>
 
-        <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
-          <Section className='bg-white'>
-            <EarnedClients
-              earnedClients={earnedClients}
-              title='We got products over 300+ trusted manufacturers'
-            />
-          </Section>
-        </div>
+        <TeleHealthServices />
 
-        <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
-          <Section className='bg-white'>
-            <NewsLetterCard />
-          </Section>
-        </div>
-        <div className='flex justify-start md:grid md:justify-center lg:pb-10 lg:pt-[55px]'>
-          <Section className='bg-white'>
-            <Footer />
-          </Section>
-        </div>
+        <EarnedClients
+          earnedClients={earnedClients}
+          title='We got products over 300+ trusted manufacturers'
+        />
+
+        <NewsLetterCard />
+
+        <Footer />
       </main>
     </>
   );

@@ -39,12 +39,11 @@ export const FeaturedProducts: FC<FeaturedProductsProps> = ({
 
       <div className='mt-10 flex justify-center'>
         <Button
-          color='primary'
           as={Link}
           href='/shop-and-order'
-          className='px-8 py-8'
           radius='full'
           size='lg'
+          color='primary'
         >
           Shop & Order
         </Button>

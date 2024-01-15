@@ -34,6 +34,19 @@ class ProductService {
       JSON.stringify({ products, totalPages: response.totalPage })
     ) as { products: Product[]; totalPages: number };
   };
+
+  public static getProductByProductId = async (productId: string) => {
+    const response = (await Api.get<{
+      data: ProductType[];
+      totalPages: number;
+    }>(
+      `${this.PRODUCTS_API_BASE}/get-products?ProductId=${productId}`
+    )) as unknown as { data: ProductType[]; totalPages: number };
+
+    console.log(response.data[0]);
+
+    return new Product(response.data[0]);
+  };
 }
 
 export default ProductService;

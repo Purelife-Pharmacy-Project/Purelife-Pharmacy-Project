@@ -36,7 +36,7 @@ export const CartItem: FC<CartItemProps> = ({ product }) => {
 
           <Tooltip color='foreground' content={product.product.name}>
             <Link
-              href={`/cart/${product.id}`}
+              href={`/cart/${product.product.id}`}
               className='text-body max-w-[400px] break-words'
             >
               {product.product.name}

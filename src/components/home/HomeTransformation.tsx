@@ -1,7 +1,7 @@
-import React from 'react';
-import { Section } from './Section';
 import { BentArrowDown } from '@/library/illustrations/BentArrowDown';
 import { BentArrowUp } from '@/library/illustrations/BentArrowUp';
+import React from 'react';
+import { Section } from './Section';
 
 export type TransformationData = {
   stat: string;
@@ -14,7 +14,7 @@ export const HomeTransformation = ({
   data: TransformationData[];
 }) => {
   return (
-    <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
+    <div className='grid justify-center lg:py-4'>
       <Section className='bg-white'>
         <div className='grid justify-center gap-10'>
           <h1 className='max-w-none text-center text-3xl font-bold text-header-100 md:max-w-lg lg:text-4xl xl:max-w-3xl xl:text-start'>

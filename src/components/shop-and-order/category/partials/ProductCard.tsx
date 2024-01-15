@@ -1,10 +1,16 @@
 'use client';
 import { IconCart } from '@/components/icons/IconCart';
-import { IconShare } from '@/components/icons/IconShare';
 import { randomId } from '@/helpers/utils';
 import { useCartStore } from '@/hooks';
 import { Product } from '@/services/products/types';
-import { Button, Card, CardBody, CardFooter, Image } from '@nextui-org/react';
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  Image,
+  Link,
+} from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
 import { FC } from 'react';
 
@@ -38,49 +44,43 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
 
         <Image
           alt={product.name}
-          className='flex max-h-[200px] rounded-xl object-center'
           src={product.imageInBinary}
           classNames={{
-            wrapper: '!max-w-full !h-full !max-h-[200px]',
+            img: 'w-full h-full object-contain rounded-xl',
+            wrapper: '!max-w-full flex justify-center !h-full !max-h-[200px]',
           }}
         />
       </CardBody>
       <CardFooter className='grid w-full gap-3 px-0'>
         <div className='flex flex-col gap-2'>
-          <p className='break-words font-semibold text-header-100'>
-            {product.name}
-          </p>
+          <Link
+            href={`/cart/${product.id}`}
+            className='max-h-[50px] overflow-y-auto break-words font-semibold capitalize text-header-100'
+          >
+            {product.name?.toLowerCase()}
+          </Link>
           <p className='max-w-[200px] break-words font-medium text-header-100'>
             {product.amount}
           </p>
         </div>
-        <div className='flex justify-between'>
-          <Button
-            className='w-max border-header-100 text-header-100'
-            variant='bordered'
-            isDisabled={loading}
-            onClick={() => {
-              const id = randomId();
-              addToCart({
-                id,
-                unitsLeft: 3,
-                product,
-                quantity: 1,
-              });
-              router.push(`/cart/${id}`, { scroll: false });
-            }}
-          >
-            Buy
-          </Button>
-          <Button
-            isDisabled={loading}
-            variant='light'
-            size='sm'
-            className='w-max p-0'
-          >
-            <IconShare size={21} />
-          </Button>
-        </div>
+
+        <Button
+          className='w-2/5 border-header-100 text-header-100 hover:border-primary hover:bg-primary/10 hover:text-primary'
+          variant='bordered'
+          isDisabled={loading}
+          onClick={() => {
+            const id = randomId();
+            addToCart({
+              id,
+              unitsLeft: 3,
+              product,
+              quantity: 1,
+            });
+            router.push(`/cart/${id}`, { scroll: false });
+          }}
+        >
+          Buy
+        </Button>
       </CardFooter>
     </Card>
   );

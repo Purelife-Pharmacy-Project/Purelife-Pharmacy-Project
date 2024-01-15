@@ -9,7 +9,7 @@ import { OrderSummary } from './OrderSummary';
 type CartWrapperProps = {};
 
 export const CartWrapper: FC<CartWrapperProps> = ({}) => {
-  const cart = useStore(useCartStore, (state) => state)?.cart;
+  const cart = useStore(useCartStore, (state) => state)?.cart || [];
 
   return (
     <>

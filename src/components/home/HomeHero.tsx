@@ -1,8 +1,8 @@
+import { HeroImage } from '@/components/home/HeroImage';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import { FC } from 'react';
 import { Section } from './Section';
-import { HeroImage } from '@/components/home/HeroImage';
 
 interface HomeHeroProps {
   title: string;

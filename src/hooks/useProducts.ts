@@ -77,3 +77,24 @@ export const useGetProducts = (
     isError,
   };
 };
+
+export const useGetProductByProductId = (productId: string) => {
+  const {
+    data: product,
+    isLoading: loadingProduct,
+    isRefetching,
+    refetch,
+  } = useQuery({
+    queryKey: ['product', productId],
+    queryFn: () => ProductService.getProductByProductId(productId),
+    refetchOnWindowFocus: false,
+    enabled: !!productId,
+  });
+
+  return {
+    product,
+    loadingProduct,
+    isRefetching,
+    refetch,
+  };
+};

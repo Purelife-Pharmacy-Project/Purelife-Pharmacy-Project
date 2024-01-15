@@ -9,6 +9,7 @@ export default async function CategoryPage() {
       <AppNavbar background={'white'} />
       <main className='grid gap-6'>
         <CategoryHero />
+
         <CategoryProducts />
         <Footer />
       </main>

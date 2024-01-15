@@ -64,7 +64,7 @@ export const CategoryProducts = () => {
   );
 
   return (
-    <div className='grid justify-center lg:pb-10'>
+    <div id='products' className='grid justify-center lg:pb-10'>
       <Section className='grid gap-6 bg-white'>
         <div className='grid w-full grid-flow-col grid-cols-2 items-center justify-between gap-4'>
           <ProductSearch

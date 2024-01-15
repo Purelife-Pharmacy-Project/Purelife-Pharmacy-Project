@@ -25,7 +25,7 @@ export const HomePartners = () => {
     },
   ];
   return (
-    <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
+    <div className='grid justify-center lg:py-4'>
       <Section className='bg-white'>
         <div className='flex flex-col items-center gap-4 lg:flex-row lg:justify-between lg:gap-[143px]'>
           <p className='max-w-[211px] text-center text-header-100 lg:text-start'>

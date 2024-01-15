@@ -1,5 +1,5 @@
 'use client';
-import { inputBordered, selectBordered } from '@/theme';
+import { inputDefault, selectDefault } from '@/theme';
 import {
   Button,
   Card,
@@ -24,14 +24,14 @@ export const BookConsultationForm = () => {
               size='lg'
               placeholder='First Name'
               name='first-name'
-              classNames={inputBordered}
+              classNames={inputDefault}
               radius='md'
             />
             <Input
               size='lg'
               placeholder='Last Name'
               name='last-name'
-              classNames={inputBordered}
+              classNames={inputDefault}
               radius='md'
             />
           </div>
@@ -41,7 +41,7 @@ export const BookConsultationForm = () => {
               placeholder='Email'
               name='email'
               type='email'
-              classNames={inputBordered}
+              classNames={inputDefault}
               radius='md'
             />
             <Input
@@ -50,7 +50,7 @@ export const BookConsultationForm = () => {
               name='phone number'
               type='number'
               inputMode='numeric'
-              classNames={inputBordered}
+              classNames={inputDefault}
               radius='md'
             />
           </div>
@@ -60,7 +60,7 @@ export const BookConsultationForm = () => {
               placeholder='Date'
               name='date'
               type='date'
-              classNames={inputBordered}
+              classNames={inputDefault}
               radius='md'
               endContent={<IconCalendar color='content' />}
             />
@@ -68,7 +68,7 @@ export const BookConsultationForm = () => {
               size='lg'
               name='time'
               type='time'
-              classNames={inputBordered}
+              classNames={inputDefault}
               radius='md'
               endContent={<IconAlarm color='content' />}
             />
@@ -78,7 +78,7 @@ export const BookConsultationForm = () => {
             labelPlacement='outside'
             color='default'
             name='consultation-type'
-            classNames={selectBordered}
+            classNames={selectDefault}
             defaultSelectedKeys={['0']}
           >
             <SelectItem className='text-content' key={0}>
@@ -97,7 +97,7 @@ export const BookConsultationForm = () => {
             labelPlacement='outside'
             color='default'
             name='consultation-reason'
-            classNames={selectBordered}
+            classNames={selectDefault}
             defaultSelectedKeys={['0']}
           >
             <SelectItem className='text-content' key={0}>

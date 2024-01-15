@@ -28,17 +28,13 @@ export const goHome = () => {
 export function middleware(request: NextRequest) {
   // if the user is not authenticated, redirect them to the login page
   if (!isAuthenticated(request)) {
-    if (request.nextUrl.pathname.includes('login')) {
-      return NextResponse.redirect(new URL(`/`, request.url));
-    } else {
-      return NextResponse.next();
-    }
+    removeAuthorization(request.cookies);
+    return NextResponse.redirect(new URL(`/sign-in`, request.url));
+  } else {
+    return NextResponse.next();
   }
-
-  // if the user is authenticated, continue
-  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/my-account/:path*', '/billing/:path*'],
+  matcher: ['/my-account/:path*', '/billing'],
 };

@@ -42,16 +42,23 @@ export const inputBorderedRegular: SlotsToClasses<InputSlots> = {
   ],
 };
 
+export const selectDefault: SlotsToClasses<SelectSlots> = {
+  label: [
+    'text-content text-md group-data-[filled=true]:font-light font-light data-[hover=true]:bg-white',
+  ],
+  trigger: ['bg-white'],
+};
+
 export const selectBordered: SlotsToClasses<SelectSlots> = {
   label: [
-    'text-content text-md group-data-[filled=true]:font-light font-light',
+    'text-content text-md group-data-[filled=true]:font-light data-[hover=true]:bg-white font-light',
   ],
   trigger: ['border border-content bg-white'],
 };
 
 export const selectBorderedGray: SlotsToClasses<SelectSlots> = {
   label: [
-    'text-content text-md group-data-[filled=true]:font-light font-light',
+    'text-content text-md group-data-[filled=true]:font-light data-[hover=true]:bg-white font-light',
   ],
   trigger: ['border border-gray-400 bg-white'],
 };

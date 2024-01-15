@@ -1,17 +1,9 @@
 'use client';
+import { teleHealthServices } from '@/constants';
 import { Button, Card, CardBody, Link } from '@nextui-org/react';
 import { Section } from './Section';
-import { useMemo, useState } from 'react';
-import { healthServices } from '@/constants';
 
-export const HealthServices = () => {
-  const [showFull, setShowFull] = useState(false);
-  const _healthServices = useMemo(() => {
-    if (showFull) {
-      return healthServices;
-    }
-    return healthServices.slice(0, 3);
-  }, [showFull]);
+export const TeleHealthServices = () => {
   return (
     <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
@@ -26,20 +18,10 @@ export const HealthServices = () => {
                 schedule vaccinations all in one place.
               </p>
             </div>
-
-            <Button
-              radius='full'
-              size='lg'
-              className='border-header-100 bg-primaryLight px-12 text-header-100'
-              variant='bordered'
-              onClick={() => setShowFull(!showFull)}
-            >
-              {showFull ? 'View Less' : 'View All'}
-            </Button>
           </div>
 
           <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
-            {_healthServices.map((service, index) => (
+            {teleHealthServices.map((service, index) => (
               <Card key={index} shadow='none' radius='lg'>
                 <CardBody className='grid gap-5 bg-primaryLight p-6'>
                   <div className='grid h-[104px] w-[104px] place-content-center rounded-full bg-white'>
@@ -64,7 +46,7 @@ export const HealthServices = () => {
                     size='lg'
                     className='border-header-100 bg-white py-[28px] uppercase text-header-100'
                   >
-                    Learn More
+                    {service.actionText}
                   </Button>
                 </CardBody>
               </Card>

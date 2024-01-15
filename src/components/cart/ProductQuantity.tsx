@@ -24,7 +24,7 @@ export const ProductQuantity: FC<ProductQuantityProps> = ({
       >
         -
       </Button>
-      <p className='text-xl text-black'>{product?.quantity}</p>
+      <p className='text-xl text-black'>{product?.quantity || 0}</p>
 
       <Button
         isIconOnly

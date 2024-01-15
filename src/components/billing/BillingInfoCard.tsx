@@ -11,7 +11,21 @@ export const BillingInfoCard = () => {
 
   return (
     <Card shadow='none' className='bg-blueLight'>
-      <CardBody>
+      <CardBody className='grid gap-4 p-8'>
+        <div className='flex justify-between'>
+          <p className='text-2xl font-bold text-blue-900'>Billing Details</p>
+
+          <Button
+            variant='faded'
+            size='sm'
+            onClick={() => setShowDeliveryModal(true)}
+            className='font-medium text-blue-900'
+          >
+            Edit
+            <IconEdit size={14} color='blue-900' />
+          </Button>
+        </div>
+
         <div className='grid gap-6'>
           <div className='flex w-full justify-between'>
             <p className='text-light text-content'>Name</p>
@@ -37,18 +51,6 @@ export const BillingInfoCard = () => {
                 : 'N/A'}
             </p>
           </div>
-        </div>
-
-        <div className='flex justify-end'>
-          <Button
-            variant='bordered'
-            color='primary'
-            onClick={() => setShowDeliveryModal(true)}
-            className='mt-10'
-          >
-            Edit
-            <IconEdit size={18} color='primary' />
-          </Button>
         </div>
 
         {/* delivery address modal */}

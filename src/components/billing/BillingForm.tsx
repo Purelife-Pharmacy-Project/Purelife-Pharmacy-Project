@@ -61,6 +61,10 @@ export const BillingForm: FC<BillingFormProps> = ({ onUpdated }) => {
       contactAddress: data.address,
     };
 
+    if (data.createAccount) {
+      // if user chooses to create an account while editing billing information
+    }
+
     updateUserInfo(payload);
   };
 

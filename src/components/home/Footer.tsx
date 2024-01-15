@@ -1,7 +1,10 @@
+'use client';
 import { IconFacebook } from '@/components/icons/social/IconFacebook';
 import { IconInstagram } from '@/components/icons/social/IconInstagram';
 import { IconLinkedin } from '@/components/icons/social/IconLinkedin';
 import { IconTwitter } from '@/components/icons/social/IconTwitter';
+import { getCategoryUrl } from '@/helpers/utils';
+import { useGetCategories } from '@/hooks';
 import { Line } from '@/library/ui/Line';
 import { Link } from '@nextui-org/react';
 import Image from 'next/image';
@@ -9,6 +12,8 @@ import { FooterBase } from './FooterBase';
 import { Section } from './Section';
 
 export const Footer = () => {
+  const { categories: allCategories } = useGetCategories();
+
   const socialIcons = [
     {
       name: 'instagram',
@@ -33,20 +38,16 @@ export const Footer = () => {
       title: 'Shop and Order',
       links: [
         {
-          name: 'Shop by brand',
-          path: '#',
+          name: 'Shop health',
+          path: getCategoryUrl('health', allCategories),
         },
         {
           name: 'Shop Supermarket',
-          path: '#',
-        },
-        {
-          name: 'Shop health',
-          path: '#',
+          path: getCategoryUrl('supermarket', allCategories),
         },
         {
           name: 'Shop beauty',
-          path: '#',
+          path: getCategoryUrl('beauty', allCategories),
         },
       ],
     },
@@ -54,20 +55,24 @@ export const Footer = () => {
       title: 'Telehealth',
       links: [
         {
-          name: 'Order a lab test',
-          path: '#',
+          name: 'Book a lab test',
+          path: '/book-lab-test',
         },
         {
           name: 'Subscribe to drug refill',
-          path: '#',
+          path: '/drug-refill',
         },
         {
-          name: 'Book a lab test',
-          path: '#',
+          name: 'Upload Prescription',
+          path: '/get-vaccination',
         },
         {
-          name: 'Book vaccination',
-          path: '#',
+          name: 'Consult a doctor',
+          path: '/find-a-doctor',
+        },
+        {
+          name: 'Upload vaccination',
+          path: '/upload-prescription',
         },
       ],
     },
@@ -97,19 +102,19 @@ export const Footer = () => {
       links: [
         {
           name: '15b Admiralty Way, Lekki Phase 1, Lagos, Nigeria',
-          path: '#',
+          path: 'https://maps.app.goo.gl/8Z3DBWoYk41eTVos8',
         },
         {
           name: 'Plot 5, Block 137, Cananland street, off Elf Bus stop, Lekki, Lagos, Nigeria',
-          path: '#',
+          path: 'https://maps.app.goo.gl/a3iwccJu85MX6mf96',
         },
         {
           name: '(+234) 809 056 4568, (+234) 809 056 4568',
-          path: '#',
+          path: 'tel:+2348090564568',
         },
         {
           name: 'order@purelifepharmacy.ng',
-          path: '#',
+          path: 'mailto:order@purelifepharmacy.ng',
         },
       ],
     },
@@ -146,11 +151,13 @@ export const Footer = () => {
                 <p className='mb-5 h-max font-bold text-header-100'>
                   {content.title}
                 </p>
-                <div className='grid gap-2'>
+                <div className='grid gap-3'>
                   {content.links.map((link, index) => (
-                    <div key={index} className='max-w-[300px]'>
+                    <div key={index} className='max-w-[350px]'>
                       <Link
                         href={link.path}
+                        size='sm'
+                        target='_blank'
                         className='font-light text-content'
                       >
                         {link.name}
