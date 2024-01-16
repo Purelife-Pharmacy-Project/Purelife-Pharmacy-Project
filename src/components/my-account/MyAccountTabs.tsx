@@ -14,8 +14,8 @@ export const MyAccountTabs = ({ children }: { children: React.ReactNode }) => {
       path: '/my-account',
     },
     {
-      name: 'Transactions',
-      path: '/my-account/transactions',
+      name: 'Orders',
+      path: '/my-account/orders',
     },
     {
       name: 'Subscriptions',

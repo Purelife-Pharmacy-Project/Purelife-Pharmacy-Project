@@ -1,4 +1,5 @@
 import { EarnedClients } from '@/components/home/EarnedClients';
+import { HomeFaq } from '@/components/home/Faq';
 import { FeaturedProducts } from '@/components/home/FeaturedProducts';
 import { Footer } from '@/components/home/Footer';
 import { HomePageHero } from '@/components/home/HomePageHero';
@@ -78,6 +79,8 @@ export default async function Home() {
         />
 
         <WellnessBlogSection />
+
+        <HomeFaq />
 
         <ReportDrugReaction />
 

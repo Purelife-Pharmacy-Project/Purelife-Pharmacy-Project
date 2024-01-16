@@ -24,10 +24,10 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
     <div className='grid h-[calc(100vh-260px)] items-center justify-center bg-primaryLight'>
       <Section className='flex w-max flex-col items-center justify-between bg-primaryLight lg:flex lg:h-full xl:flex-row'>
         <div className='flex w-full flex-col gap-6 lg:justify-center'>
-          <h1 className='mx-auto max-w-[530px] text-center text-4xl font-bold text-header-100 lg:text-start lg:text-5xl xl:mx-0'>
+          <h1 className='mx-auto max-w-[250px] text-center text-2xl  font-bold text-header-100 sm:max-w-[300px] md:max-w-[530px] lg:text-start lg:text-5xl xl:mx-0'>
             {title}
           </h1>
-          <p className='mx-auto max-w-[498px] text-center text-base font-light leading-[30px] text-content lg:mx-0 lg:text-start lg:text-lg'>
+          <p className='mx-auto max-w-[250px] text-center text-base font-light leading-[30px] text-content sm:max-w-[300px] md:max-w-[498px] lg:mx-0 lg:text-start lg:text-lg'>
             {description}
           </p>
 

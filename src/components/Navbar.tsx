@@ -181,8 +181,8 @@ export const AppNavbar = ({
                     <DropdownItem
                       key='logout'
                       onClick={handleLogout}
-                      className='text-danger'
-                      color='danger'
+                      className='text-primary'
+                      color='primary'
                     >
                       Logout
                     </DropdownItem>
@@ -226,7 +226,11 @@ export const AppNavbar = ({
           </NavbarItem>
         </div>
         <NavbarItem>
-          <Link color='foreground' href='/shop-and-order'>
+          <Link
+            className='hidden sm:block'
+            color='foreground'
+            href='/shop-and-order'
+          >
             <Button radius='full' size='lg' color='primary'>
               Shop & Order
             </Button>
