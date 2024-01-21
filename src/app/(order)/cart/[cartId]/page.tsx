@@ -1,6 +1,7 @@
 import { AppNavbar } from '@/components/Navbar';
 import { CartItemDetails } from '@/components/cart/CartItemDetails';
 import { NoOfCartItems } from '@/components/cart/NoOfCartItems';
+import { Footer } from '@/components/home/Footer';
 import { Section } from '@/components/home/Section';
 
 export default function CartProductPage() {
@@ -21,6 +22,8 @@ export default function CartProductPage() {
           <CartItemDetails />
         </Section>
       </div>
+
+      <Footer />
     </>
   );
 }

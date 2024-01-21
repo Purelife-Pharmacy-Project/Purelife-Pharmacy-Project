@@ -13,7 +13,7 @@ export const TeleHealthServices = () => {
               <h1 className='text-start text-xl font-bold text-header-100 lg:text-4xl'>
                 Use our Convenient Telehealth Service.
               </h1>
-              <p className='text-content lg:max-w-[476px] lg:text-xl'>
+              <p className='font-light text-content lg:max-w-[476px] lg:text-xl'>
                 Subscribe to medication refills, book laboratory tests, and
                 schedule vaccinations all in one place.
               </p>

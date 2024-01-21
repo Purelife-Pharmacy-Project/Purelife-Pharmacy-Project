@@ -45,7 +45,7 @@ export const HomeShopAndOrder = () => {
               <h1 className='text-start text-2xl font-bold text-primaryGreenDark md:min-w-[476px] lg:text-4xl'>
                 Shop and Order
               </h1>
-              <p className='text-content lg:max-w-[524px] lg:text-lg'>
+              <p className='font-light text-content lg:max-w-[524px] lg:text-lg'>
                 Discover our one-stop shop for your health, supermarket, beauty
                 and skin essentials, and enjoy hassle-free ordering.
               </p>

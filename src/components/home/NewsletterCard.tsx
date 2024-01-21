@@ -4,7 +4,7 @@ import { Button, Card, CardBody, Input } from '@nextui-org/react';
 import { IconRocket } from '../icons/IconRocket';
 import { Section } from './Section';
 
-export const NewsLetterCard = async () => {
+export const NewsLetterCard = () => {
   return (
     <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
@@ -18,38 +18,38 @@ export const NewsLetterCard = async () => {
                 onSubmit={(e) => e.preventDefault()}
                 className='grid w-full gap-4'
               >
-                <div className='grid grid-flow-col gap-2'>
+                <div className='grid grid-flow-col  grid-cols-[5fr_5fr_2fr] items-end'>
                   <Input
                     labelPlacement='outside'
                     size='lg'
                     label='Name'
-                    radius='full'
+                    radius='none'
+                    className='rounded-none rounded-l-lg'
                     classNames={inputDefault}
                     type='text'
                     isRequired
-                    placeholder='Enter your name'
+                    placeholder='Name'
                   />
                   <Input
-                    radius='full'
+                    radius='none'
                     labelPlacement='outside'
                     size='lg'
                     label='Email Address'
                     type='email'
                     classNames={inputDefault}
                     isRequired
-                    placeholder='Enter your email address'
+                    placeholder='Email'
                   />
+                  <Button
+                    className='ml-auto rounded-none rounded-r-lg'
+                    size='lg'
+                    type='submit'
+                    color='primary'
+                    endContent={<IconRocket />}
+                  >
+                    Subscribe
+                  </Button>
                 </div>
-                <Button
-                  className='ml-auto'
-                  size='lg'
-                  type='submit'
-                  radius='full'
-                  color='primary'
-                  endContent={<IconRocket />}
-                >
-                  Subscribe
-                </Button>
               </form>
             </div>
           </CardBody>

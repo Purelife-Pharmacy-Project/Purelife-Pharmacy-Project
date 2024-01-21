@@ -22,7 +22,10 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
 
   return (
     <div className='grid h-[calc(100vh-260px)] items-center justify-center bg-primaryLight'>
-      <Section className='flex w-max flex-col items-center justify-between bg-primaryLight lg:flex lg:h-full xl:flex-row'>
+      <Section
+        className='relative flex
+    w-max flex-col items-center justify-between overflow-y-hidden overflow-x-visible  bg-primaryLight md:flex-row lg:flex lg:h-full'
+      >
         <div className='flex w-full flex-col gap-6 lg:justify-center'>
           <h1 className='mx-auto max-w-[250px] text-center text-2xl  font-bold text-header-100 sm:max-w-[300px] md:max-w-[530px] lg:text-start lg:text-5xl xl:mx-0'>
             {title}
@@ -43,16 +46,9 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
             </Button>
           </div>
         </div>
-        <div className='relative hidden justify-end md:block xl:hidden'>
+        <div className='hidden w-full lg:block lg:self-end'>
           <Image
-            className='h-[40vh] w-[60vw] overflow-visible object-cover'
-            src='/images/joyful-caring-couple.png'
-            alt='charming joyful youth couple'
-          />
-        </div>
-        <div className='hidden w-full self-end xl:block'>
-          <Image
-            className='overflow-visible rounded-t-lg bg-gradient-to-b from-white to-transparent object-cover xl:h-[55vh] xl:w-[50vw]'
+            className='overflow-visible rounded-t-lg bg-gradient-to-b from-white to-transparent object-cover lg:h-[55vh] lg:w-[50vw]'
             radius='none'
             src='/images/joyful-caring-couple.png'
             alt='charming joyful youth couple'

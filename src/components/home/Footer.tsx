@@ -18,18 +18,22 @@ export const Footer = () => {
     {
       name: 'instagram',
       icon: <IconInstagram />,
+      url: 'https://www.instagram.com/purelifepharmang?igsh=bHRncm85cXU1eTF6',
     },
     {
       name: 'facebook',
       icon: <IconFacebook />,
+      url: '#',
     },
     {
       name: 'linkedin',
       icon: <IconLinkedin />,
+      url: 'https://www.linkedin.com/company/purelife-pharmacy-ltd/',
     },
     {
       name: 'twitter',
       icon: <IconTwitter />,
+      url: '#',
     },
   ];
 
@@ -137,12 +141,13 @@ export const Footer = () => {
               </Link>
               <div className='flex gap-2'>
                 {socialIcons.map((socialIcon, index) => (
-                  <div
+                  <Link
                     key={index}
+                    href={socialIcon.url}
                     className='flex items-center justify-center rounded-full'
                   >
                     {socialIcon.icon}
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>

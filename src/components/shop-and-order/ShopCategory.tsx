@@ -60,7 +60,7 @@ export const ShopCategory = () => {
                 <h1 className='text-center text-4xl font-bold text-header-100 lg:text-start'>
                   {category.title}
                 </h1>
-                <p className='text-center text-content lg:max-w-[353px] lg:text-start lg:text-lg'>
+                <p className='text-center font-light text-content lg:max-w-[353px] lg:text-start lg:text-lg'>
                   {category.description}
                 </p>
                 <Button

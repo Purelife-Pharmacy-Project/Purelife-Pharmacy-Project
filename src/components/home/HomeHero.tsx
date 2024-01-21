@@ -24,7 +24,7 @@ export const HomeHero: FC<HomeHeroProps> = ({
             <h1 className='mx-auto max-w-[530px] text-center text-4xl font-bold text-header-100 lg:text-start lg:text-5xl'>
               {title}
             </h1>
-            <p className='mx-auto max-w-[498px] text-center text-base leading-[30px] text-content lg:mx-0 lg:text-start lg:text-lg'>
+            <p className='mx-auto  max-w-[498px] text-center text-base font-light leading-[30px] text-content lg:mx-0 lg:text-start lg:text-lg'>
               {description}
             </p>
 
