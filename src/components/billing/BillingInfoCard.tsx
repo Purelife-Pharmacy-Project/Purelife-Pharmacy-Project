@@ -18,7 +18,7 @@ export const BillingInfoCard = () => {
           <Button
             variant='faded'
             size='sm'
-            onClick={() => setShowDeliveryModal(true)}
+            onPress={() => setShowDeliveryModal(true)}
             className='font-medium text-blue-900'
           >
             Edit

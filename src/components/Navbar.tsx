@@ -180,7 +180,7 @@ export const AppNavbar = ({
                     </DropdownItem>
                     <DropdownItem
                       key='logout'
-                      onClick={handleLogout}
+                      onPress={handleLogout}
                       className='text-primary'
                       color='primary'
                     >

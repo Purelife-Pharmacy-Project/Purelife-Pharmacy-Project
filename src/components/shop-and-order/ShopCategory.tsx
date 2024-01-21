@@ -15,7 +15,6 @@ export const ShopCategory = () => {
     categories: allCategories,
     loadingCategories,
     isError,
-    isSuccess,
   } = useGetCategories();
 
   const categories = [

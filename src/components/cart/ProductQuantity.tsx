@@ -18,7 +18,7 @@ export const ProductQuantity: FC<ProductQuantityProps> = ({
       <Button
         isIconOnly
         isDisabled={product?.quantity === 1}
-        onClick={() => decreaseQuantity(product?.id)}
+        onPress={() => decreaseQuantity(product?.id)}
         variant='flat'
         className='w-full rounded-l-full bg-primaryLight text-2xl text-black'
       >
@@ -31,7 +31,7 @@ export const ProductQuantity: FC<ProductQuantityProps> = ({
         isDisabled={
           product?.unitsLeft === 0 || product?.quantity > product?.unitsLeft
         }
-        onClick={() => increaseQuantity(product?.id)}
+        onPress={() => increaseQuantity(product?.id)}
         variant='flat'
         className='w-full rounded-r-full bg-primaryLight text-2xl text-black'
       >

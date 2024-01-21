@@ -123,7 +123,7 @@ export const BookConsultationForm = () => {
             </div>
 
             <Button
-              onClick={() => setOpenCheckoutModal(true)}
+              onPress={() => setOpenCheckoutModal(true)}
               color='primary'
               radius='full'
               size='lg'

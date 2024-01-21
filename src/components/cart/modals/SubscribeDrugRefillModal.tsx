@@ -1,4 +1,6 @@
 'use client';
+import { IconCalendar } from '@/components/icons/IconCalendar';
+import { inputBorderedGray, selectBorderedGray } from '@/theme';
 import {
   Button,
   Card,
@@ -12,8 +14,6 @@ import {
   SelectItem,
 } from '@nextui-org/react';
 import { FC } from 'react';
-import { inputBorderedGray, selectBorderedGray } from '@/theme';
-import { IconCalendar } from '@/components/icons/IconCalendar';
 
 type SubscribeDrugRefillModalProps = {
   isOpen: boolean;
@@ -125,7 +125,7 @@ export const SubscribeDrugRefillModal: FC<SubscribeDrugRefillModalProps> = ({
                     className={
                       'border-header-100 bg-white text-header-100 lg:px-10'
                     }
-                    onClick={onClose}
+                    onPress={onClose}
                   >
                     Discard
                   </Button>
@@ -134,7 +134,7 @@ export const SubscribeDrugRefillModal: FC<SubscribeDrugRefillModalProps> = ({
                     size='lg'
                     color='primary'
                     className={'lg:px-10'}
-                    onClick={onClose}
+                    onPress={onClose}
                   >
                     Subscribe
                   </Button>

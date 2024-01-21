@@ -37,7 +37,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
           <div className='flex w-full justify-center lg:w-max lg:justify-start'>
             <Button
               radius='full'
-              onClick={ctaAction}
+              onPress={ctaAction}
               className='px-12 py-7'
               color='primary'
               size='lg'

@@ -48,7 +48,7 @@ export const CartItem: FC<CartItemProps> = ({ product }) => {
           <div className='flex items-center justify-end'>
             <Button
               isIconOnly
-              onClick={() => setOpenConfirmationModal(true)}
+              onPress={() => setOpenConfirmationModal(true)}
               variant='flat'
               className='rounded-full bg-transparent'
             >

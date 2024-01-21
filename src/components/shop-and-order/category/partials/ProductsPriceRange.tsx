@@ -111,7 +111,7 @@ export const ProductsPriceRange: FC<ProductsPriceRangeProps> = ({
       </RadioGroup>
       {range ? (
         <div className='flex justify-end'>
-          <Button size='sm' variant='faded' onClick={handleReset}>
+          <Button size='sm' variant='faded' onPress={handleReset}>
             Reset
           </Button>
         </div>

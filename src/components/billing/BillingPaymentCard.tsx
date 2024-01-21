@@ -100,7 +100,7 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({}) => {
             isDisabled={
               !user?.contactAddress || user?.contactAddress?.trim() === ''
             }
-            onClick={() => {
+            onPress={() => {
               const paymentButton = document.querySelector(
                 '#paymentButton > button'
               ) as HTMLButtonElement;

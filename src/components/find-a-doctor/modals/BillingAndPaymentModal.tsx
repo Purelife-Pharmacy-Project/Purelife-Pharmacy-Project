@@ -25,7 +25,7 @@ export const BillingAndPaymentModal: FC<BillingAndPaymentModalProps> = ({
           <>
             <ModalBody className='lg:p-12 lg:py-20'>
               <Button
-                onClick={onClose}
+                onPress={onClose}
                 className='mr-auto mt-4 flex p-4 pl-0 md:mt-0'
                 variant='light'
               >

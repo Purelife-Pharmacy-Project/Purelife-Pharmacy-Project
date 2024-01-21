@@ -100,7 +100,7 @@ export const ProductsManufacturersList: FC<ProductsManufacturersListProps> = ({
           !loadingManufacturers &&
           manufacturer !== '' && (
             <div className='flex justify-end'>
-              <Button variant='faded' onClick={handleReset}>
+              <Button variant='faded' onPress={handleReset}>
                 Reset
               </Button>
             </div>

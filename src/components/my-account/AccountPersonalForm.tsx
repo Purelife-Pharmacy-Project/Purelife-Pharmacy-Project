@@ -1,12 +1,12 @@
 'use client';
 
+import { BillingAddressModal } from '@/components/billing/BillingAddressModal';
 import { IconBrowse } from '@/components/icons/IconBrowse';
+import { useGetUser } from '@/hooks';
 import { Line } from '@/library/ui/Line';
 import { inputDefault } from '@/theme';
 import { Button, Image, Input, Radio, RadioGroup } from '@nextui-org/react';
-import { useGetUser } from '@/hooks';
 import { useState } from 'react';
-import { BillingAddressModal } from '@/components/billing/BillingAddressModal';
 
 export const AccountPersonalForm = () => {
   const { user, loadingUser } = useGetUser();
@@ -72,7 +72,7 @@ export const AccountPersonalForm = () => {
         <Button
           color='primary'
           isDisabled={loadingUser}
-          onClick={() => setShowEditProfileModal(true)}
+          onPress={() => setShowEditProfileModal(true)}
           size='lg'
           radius='full'
           className='w-max px-10'

@@ -34,7 +34,7 @@ export const FeaturedProduct: FC<FeaturedProductProps> = ({ product }) => {
         <Button
           className='border-header-100 bg-primaryLight text-header-100'
           variant='bordered'
-          onClick={() =>
+          onPress={() =>
             addToCart({
               id: randomId(),
               unitsLeft: 3,

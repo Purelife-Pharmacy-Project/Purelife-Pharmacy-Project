@@ -54,7 +54,7 @@ export const OrderSummary: FC<OrderSummaryProps> = () => {
               <Button
                 variant='bordered'
                 color='primary'
-                onClick={() => setShowDeliveryModal(true)}
+                onPress={() => setShowDeliveryModal(true)}
                 className='max-w-[158px] text-end font-light'
               >
                 View Address
@@ -73,7 +73,7 @@ export const OrderSummary: FC<OrderSummaryProps> = () => {
           <Button
             color='primary'
             size='lg'
-            onClick={() => {
+            onPress={() => {
               if (!user) {
                 toast.error('Please login to continue');
               }

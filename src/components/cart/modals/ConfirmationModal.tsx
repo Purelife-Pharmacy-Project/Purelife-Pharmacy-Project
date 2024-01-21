@@ -50,7 +50,7 @@ export const ConfirmationModal: FC<ConfirmModalProps> = ({
                 size='lg'
                 variant={'faded'}
                 className={' text-header-100 lg:px-10'}
-                onClick={openChange}
+                onPress={openChange}
               >
                 Cancel
               </Button>
@@ -59,7 +59,7 @@ export const ConfirmationModal: FC<ConfirmModalProps> = ({
                 size='lg'
                 color='primary'
                 className={'lg:px-10'}
-                onClick={handleRemove}
+                onPress={handleRemove}
               >
                 Remove item
               </Button>

@@ -29,7 +29,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
         <Button
           isIconOnly
           isDisabled={!product.canBeSold}
-          onClick={() =>
+          onPress={() =>
             addToCart({
               id: randomId(),
               unitsLeft: 3,
@@ -68,15 +68,14 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
           className='w-2/5 border-header-100 text-header-100 hover:border-primary hover:bg-primary/10 hover:text-primary'
           variant='bordered'
           isDisabled={loading}
-          onClick={() => {
-            const id = randomId();
+          onPress={() => {
             addToCart({
-              id,
-              unitsLeft: 3,
+              id: String(product.id),
+              unitsLeft: 5,
               product,
               quantity: 1,
             });
-            router.push(`/cart/${id}`, { scroll: false });
+            router.push(`/cart/${product.id}`, { scroll: false });
           }}
         >
           Buy

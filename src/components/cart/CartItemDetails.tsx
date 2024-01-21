@@ -40,7 +40,7 @@ export const CartItemDetails = () => {
               Nothing to see here
             </p>
             <Button
-              onClick={() => router.back()}
+              onPress={() => router.back()}
               color='primary'
               className='w-max'
             >
@@ -83,7 +83,7 @@ export const CartItemDetails = () => {
 
                     <Button
                       isIconOnly
-                      onClick={() => setShowConfirmationModal(true)}
+                      onPress={() => setShowConfirmationModal(true)}
                       variant='faded'
                     >
                       <IconBin color='primary' />
@@ -104,7 +104,7 @@ export const CartItemDetails = () => {
                     radius='full'
                     size='lg'
                     isDisabled={loadingProduct}
-                    onClick={() => {
+                    onPress={() => {
                       const id = randomId();
                       addToCart({
                         id,
