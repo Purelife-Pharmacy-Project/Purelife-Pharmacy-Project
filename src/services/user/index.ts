@@ -48,6 +48,31 @@ class UsersService {
     };
   }
 
+  public static decodeServerToken(token: string) {
+    const decoded = jwtDecode(token) as {
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier': string;
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress': string;
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name': string;
+      exp: number;
+      iss: string;
+      aud: string;
+    };
+
+    return {
+      id: decoded[
+        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+      ],
+      email:
+        decoded[
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
+        ],
+      name: decoded[
+        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
+      ],
+      exp: decoded.exp,
+    };
+  }
+
   public static async login(payload: LoginPayload) {
     const response = (await Api.post<LoginResponse>(
       `${this.USERS_API_BASE}/login`,
@@ -63,11 +88,24 @@ class UsersService {
     return data;
   }
 
+  public static async changePassword(payload: {
+    oldPassword: string;
+    newPassword: string;
+  }) {
+    const { data } = await Api.post(
+      `${this.USERS_API_BASE}/change-password`,
+      payload
+    );
+
+    return data;
+  }
+
   public static async getUser() {
-    const id = this.getUserFromToken().id;
-    if (!id) return undefined;
+    // this is the user id on the browser. the userId is the user id on the server
+    const clientUserId = this.getUserFromToken().id;
+
     const response = (await Api.get<{ data: UserType; totalPage: number }>(
-      `${this.USERS_API_BASE}?id=${id}`
+      `${this.USERS_API_BASE}?id=${clientUserId}`
     )) as unknown as { data: UserType[]; totalPage: number };
 
     return JSON.parse(JSON.stringify(response.data[0])) as UserType;

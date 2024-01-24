@@ -1,8 +1,8 @@
 'use client';
-import { usePathname } from 'next/navigation';
-import { IconTellehealthRound } from '@/components/icons/IconTellehealthRound';
 import { IconShopAndOrderRound } from '@/components/icons/IconShopAndOrderRound';
+import { IconTellehealthRound } from '@/components/icons/IconTellehealthRound';
 import { Card, CardBody, Image } from '@nextui-org/react';
+import { usePathname } from 'next/navigation';
 
 export const HeroImage = () => {
   const currentPath = usePathname();
@@ -13,13 +13,13 @@ export const HeroImage = () => {
         return '/images/joyful-caring-couple.png';
       case '/telehealth':
         return '/images/powerful-nurse.png';
-      case '/drug-refill':
+      case '/telehealth/drug-refill':
         return '/images/drug-refill-hero.png';
-      case '/upload-prescription':
+      case '/telehealth/upload-prescription':
         return '/images/serious-nurse.png';
-      case '/shop-and-order':
+      case '/telehealth/shop-and-order':
         return '/images/customer-smiling.png';
-      case '/get-vaccination':
+      case '/telehealth/get-vaccination':
         return '/images/patient-get-tested.png';
       default:
         return '/images/customer-smiling.png';
@@ -30,15 +30,15 @@ export const HeroImage = () => {
     switch (currentPath) {
       case '/':
         return 'charming joyful youth couple';
-      case '/telehealth':
+      case '/telehealth/telehealth':
         return 'powerful nurse';
-      case '/drug-refill':
+      case '/telehealth/drug-refill':
         return 'drug refill';
-      case '/upload-prescription':
+      case '/telehealth/upload-prescription':
         return 'nurse with prescription';
-      case '/shop-and-order':
+      case '/telehealth/shop-and-order':
         return 'customer smiling';
-      case '/get-vaccination':
+      case '/telehealth/get-vaccination':
         return 'patient getting tested';
       default:
         return 'hero image';
@@ -76,7 +76,7 @@ export const HeroImage = () => {
           />
         </CardBody>
       </Card>
-      {currentPath === '/' || currentPath === '/shop-and-order' ? (
+      {currentPath === '/' || currentPath === '/telehealth/shop-and-order' ? (
         <>
           <div className='absolute left-[-10px] top-[280px] z-10 flex items-center gap-3 rounded-md bg-white p-2 px-6 shadow-lg'>
             <IconTellehealthRound />

@@ -7,11 +7,21 @@ import { FC, useEffect, useState } from 'react';
 type ProductsPaginationProps = {
   totalPages: number;
   loading?: boolean;
+  color?:
+    | 'default'
+    | 'warning'
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger';
+  className?: string;
 };
 
 export const ProductsPagination: FC<ProductsPaginationProps> = ({
   totalPages,
   loading,
+  color,
+  className,
 }) => {
   const { setQuery } = useQueryParams();
   const [initialPage, setInitialPage] = useState(1);
@@ -35,14 +45,16 @@ export const ProductsPagination: FC<ProductsPaginationProps> = ({
 
   return (
     <div className='mt-10 flex w-full justify-end'>
-      {noOfPages && (
+      {noOfPages && noOfPages > 1 ? (
         <Pagination
           isDisabled={loading}
           onChange={(value) => setQuery({ pageIndex: value })}
           page={initialPage}
+          className={className}
           total={noOfPages}
+          color={color}
         />
-      )}
+      ) : null}
     </div>
   );
 };

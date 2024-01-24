@@ -19,7 +19,7 @@ export default function OrderStatusPage() {
 
           <Button
             as={Link}
-            href='/shop-and-order'
+            href='/telehealth/shop-and-order'
             color='primary'
             radius='full'
             size='lg'

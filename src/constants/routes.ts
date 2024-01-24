@@ -17,18 +17,18 @@ export const ROUTES = [
   },
   {
     name: 'Book a test',
-    path: '/book-lab-test',
+    path: '/telehealth/book-lab-test',
   },
   {
     name: 'Drug refill',
-    path: '/drug-refill',
+    path: '/telehealth/drug-refill',
   },
   {
     name: 'Shop and order',
-    path: '/shop-and-order',
+    path: '/telehealth/shop-and-order',
   },
   {
     name: 'telehealth',
-    path: '/telehealth',
+    path: '/telehealth/telehealth',
   },
 ];

@@ -19,6 +19,16 @@ class OrderService {
       totalPage: number;
     };
   }
+
+  public static async getOrderById(id: string) {
+    return (await Api.get<{
+      data: Order;
+      totalPage: number;
+    }>(`${this.ORDERS_API_BASE}/getById?id=${id}`)) as unknown as {
+      data: Order;
+      totalPage: number;
+    };
+  }
 }
 
 export default OrderService;

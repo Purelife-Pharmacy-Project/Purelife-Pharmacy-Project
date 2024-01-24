@@ -76,7 +76,7 @@ export const BillingForm: FC<BillingFormProps> = ({ onUpdated }) => {
           {...register('firstName')}
           errorMessage={errors.firstName?.message}
           labelPlacement='outside'
-          disabled={!!user}
+          disabled={!user}
           label='First name'
           isRequired
           placeholder='Enter your first name'
@@ -87,7 +87,7 @@ export const BillingForm: FC<BillingFormProps> = ({ onUpdated }) => {
           {...register('lastName')}
           errorMessage={errors.lastName?.message}
           labelPlacement='outside'
-          disabled={!!user}
+          disabled={!user}
           isRequired
           label='Last name'
           placeholder='Enter your last name'

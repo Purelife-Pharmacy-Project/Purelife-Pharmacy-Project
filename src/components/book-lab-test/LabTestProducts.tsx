@@ -1,32 +1,45 @@
-import { Button, Image, Pagination } from '@nextui-org/react';
+'use client';
+import { useGetLabTests } from '@/hooks/useLabTest';
+import { useSearchParams } from 'next/navigation';
 import { FC } from 'react';
 import { Section } from '../home/Section';
-import { DrugTestCard } from './DrugTestCard';
+import { ProductsPagination } from '../shop-and-order/category/partials/ProductPagination';
+import { LabTestCard } from './DrugTestCard';
+import { LabTestsSkeleton } from './skeleton/LabTestsSkeleton';
 
 interface LabTestProductsProps {}
 
 export const LabTestProducts: FC<LabTestProductsProps> = () => {
-  const categories = [
-    {
-      name: 'All',
-      image: '/images/care-package.png',
-    },
-    {
-      name: 'Sexual Health',
-      image: '/images/care-package.png',
-    },
-    {
-      name: "Women's Health",
-      image: '/images/care-package.png',
-    },
-    {
-      name: 'Men’s Health',
-      image: '/images/care-package.png',
-    },
-  ];
+  const searchParams = useSearchParams();
+  const pageIndex = Number(searchParams.get('pageIndex') || '1');
+
+  const { loadingLabTests, labTests } = useGetLabTests({
+    pageSize: 10,
+    pageIndex,
+  });
+
+  // const categories = [
+  //   {
+  //     name: 'All',
+  //     image: '/images/care-package.png',
+  //   },
+  //   {
+  //     name: 'Sexual Health',
+  //     image: '/images/care-package.png',
+  //   },
+  //   {
+  //     name: "Women's Health",
+  //     image: '/images/care-package.png',
+  //   },
+  //   {
+  //     name: 'Men’s Health',
+  //     image: '/images/care-package.png',
+  //   },
+  // ];
+
   return (
     <>
-      <div className='grid justify-center'>
+      {/* <div className='grid justify-center'>
         <Section className='bg-white'>
           <div className='grid gap-10 sm:grid-cols-2 lg:grid-flow-col lg:grid-cols-4'>
             {categories.map((category, index) => (
@@ -53,27 +66,26 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
             ))}
           </div>
         </Section>
-      </div>
+      </div> */}
 
       {/*products  */}
       <div className='min-h-fit w-full bg-gray-100'>
         <div className='grid justify-center'>
           <Section className='border-t-2 border-primaryGreen bg-transparent py-20'>
+            {loadingLabTests ? <LabTestsSkeleton /> : null}
+
             <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
-              {Array.from({ length: 5 })
-                .fill(0)
-                .map((_, index) => (
-                  <DrugTestCard key={index} />
-                ))}
+              {labTests?.data.map((test, index) => (
+                <LabTestCard test={test} key={index} />
+              ))}
             </div>
-            <div className='mt-8 flex justify-end'>
-              <Pagination
-                color='success'
-                className='text-white'
-                total={10}
-                initialPage={1}
-              />
-            </div>
+
+            <ProductsPagination
+              color='success'
+              loading={loadingLabTests}
+              className='text-white'
+              totalPages={labTests?.totalPages!}
+            />
           </Section>
         </div>
       </div>

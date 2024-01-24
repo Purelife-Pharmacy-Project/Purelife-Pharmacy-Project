@@ -60,23 +60,23 @@ export const Footer = () => {
       links: [
         {
           name: 'Book a lab test',
-          path: '/book-lab-test',
+          path: '/telehealth/book-lab-test',
         },
         {
           name: 'Subscribe to drug refill',
-          path: '/drug-refill',
+          path: '/telehealth/drug-refill',
         },
         {
           name: 'Upload Prescription',
-          path: '/get-vaccination',
+          path: '/telehealth/get-vaccination',
         },
         {
           name: 'Consult a doctor',
-          path: '/find-a-doctor',
+          path: '/telehealth/find-a-doctor',
         },
         {
           name: 'Upload vaccination',
-          path: '/upload-prescription',
+          path: '/telehealth/upload-prescription',
         },
       ],
     },

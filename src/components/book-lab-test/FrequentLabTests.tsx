@@ -1,6 +1,9 @@
-import { Button, Card, CardBody, CardFooter, Image } from '@nextui-org/react';
+'use client';
+import { useGetLabTests } from '@/hooks/useLabTest';
 import { FC } from 'react';
+import { FeaturedProduct } from '../home/FeaturedProduct';
 import { Section } from '../home/Section';
+import { FrequentLabTestsSkeleton } from './skeleton/FrequentLabTestsSkeleton';
 
 interface FrequentLabTestsProps {
   title?: string;
@@ -12,10 +15,13 @@ interface FrequentLabTestsProps {
   }[];
 }
 
-export const FrequentLabTests: FC<FrequentLabTestsProps> = ({
-  title,
-  products,
-}) => {
+export const FrequentLabTests: FC<FrequentLabTestsProps> = ({ title }) => {
+  const { loadingLabTests, labTests } = useGetLabTests({
+    pageSize: 3,
+  });
+
+  console.log(labTests);
+
   return (
     <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
@@ -24,36 +30,12 @@ export const FrequentLabTests: FC<FrequentLabTestsProps> = ({
             {title ? title : 'Featured Products'}
           </h1>
 
+          {loadingLabTests ? <FrequentLabTestsSkeleton /> : null}
+
           <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
-            {Array.from({ length: 3 })
-              .fill(0)
-              .map((_, index) => (
-                <Card key={index} shadow='none' className='w-full' radius='lg'>
-                  <CardBody className='bg-gray-100'>
-                    <Image
-                      alt='Card background'
-                      className='rounded-xl object-cover'
-                      src='/images/dummy-imagee.png'
-                    />
-                  </CardBody>
-                  <CardFooter className='flex w-full justify-between bg-gray-100'>
-                    <div>
-                      <p className='text-lg font-semibold text-primaryGreenDark'>
-                        Amino Pep 200ml
-                      </p>
-                      <p className='font-medium text-primaryGreenDark'>
-                        ₦2,550.00{' '}
-                      </p>
-                    </div>
-                    <Button
-                      className='border-primaryGreenDark bg-primaryGreenLight text-primaryGreenDark'
-                      variant='bordered'
-                    >
-                      Add to Cart
-                    </Button>
-                  </CardFooter>
-                </Card>
-              ))}
+            {labTests?.data?.map((test) => (
+              <FeaturedProduct key={test.id} product={test} />
+            ))}
           </div>
         </div>
       </Section>

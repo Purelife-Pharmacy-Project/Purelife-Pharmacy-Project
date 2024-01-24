@@ -5,7 +5,7 @@ export const ProductSkeleton = () => {
     <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
       {Array(6)
         .fill(0)
-        .map((item, index) => (
+        .map((_, index) => (
           <div key={index} className='grid gap-2'>
             <Skeleton
               className={'h-60 w-full rounded-xl bg-gray-100'}

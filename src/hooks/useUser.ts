@@ -81,6 +81,37 @@ export const useRegister = () => {
   };
 };
 
+export const useChangePassword = (
+  onSuccess?: () => void,
+  onError?: (error: string) => void
+) => {
+  const {
+    mutate: changePassword,
+    isPending: loadingChangePassword,
+    error: changePasswordError,
+    isSuccess,
+    isError,
+  } = useMutation({
+    mutationFn: (payload: { oldPassword: string; newPassword: string }) =>
+      UsersService.changePassword(payload),
+    onSuccess: () => {
+      toast.success('Password changed successfully');
+      onSuccess && onSuccess();
+    },
+    onError: (error: string) => {
+      onError && onError(error);
+    },
+  });
+
+  return {
+    changePassword,
+    loadingChangePassword,
+    changePasswordError,
+    isSuccess,
+    isError,
+  };
+};
+
 export const useUpdateUserContactInfo = (
   onSuccess?: () => void,
   onError?: (error: string) => void

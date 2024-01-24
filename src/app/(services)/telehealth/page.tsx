@@ -6,11 +6,6 @@ import { HomeTransformation } from '@/components/home/HomeTransformation';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Section } from '@/components/home/Section';
 import { TeleHealthServices } from '@/components/home/TeleHealthServices';
-import { IconDoctor } from '@/components/icons/IconDoctor';
-import { IconFluidMed } from '@/components/icons/IconFluidMed';
-import { IconLabs } from '@/components/icons/IconLabs';
-import { IconPill } from '@/components/icons/IconPill';
-import { IconPrescription } from '@/components/icons/IconPrescription';
 
 export default function Telehealth() {
   const transformationData = [
@@ -50,48 +45,9 @@ export default function Telehealth() {
       image: '/images/clients/laroche.png',
     },
   ];
-
-  const healthServicesFull = [
-    {
-      icon: <IconPill size={48} />,
-      title: 'Subscribe to a drug refill',
-      description:
-        'Get your medications delivered to you at your preferred intervals.',
-      url: '/drug-refill',
-    },
-    {
-      icon: <IconLabs color='primary' />,
-      title: 'Book a lab test',
-      description:
-        'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
-      url: '/book-lab-test',
-    },
-    {
-      icon: <IconFluidMed color='primary' />,
-      title: 'Get Vaccination',
-      description:
-        'Choose from our expertly curated vaccines whenever you want.',
-      url: '/get-vaccination',
-    },
-    {
-      icon: <IconDoctor size={48} color='primary' />,
-      title: 'Consult with a doctor',
-      description:
-        'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
-      url: '/find-a-doctor',
-    },
-    {
-      icon: <IconPrescription size={48} color='primary' />,
-      title: 'Upload Prescription',
-      description:
-        'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
-      url: '/upload-prescription',
-    },
-  ];
   return (
     <>
       <AppNavbar background='primaryLight' />
-
       <main className='grid gap-6'>
         <div className='grid justify-center bg-primaryLight'>
           <Section className='bg-primaryLight'>

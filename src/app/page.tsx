@@ -22,6 +22,7 @@ import {
 
 export default async function Home() {
   const queryClient = new QueryClient();
+
   await queryClient.prefetchQuery({
     queryKey: ['featured-products'],
     queryFn: () =>
@@ -49,7 +50,7 @@ export default async function Home() {
 
   return (
     <>
-      <AppNavbar background={'primaryLight'} />
+      <AppNavbar background='primaryLight' />
       <main className='grid gap-6'>
         <HomePageHero
           title='Your one-stop shop for wellness and lifestyle.'

@@ -18,7 +18,10 @@ export default async function ShopAndOrder() {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ['categories'],
-    queryFn: () => CategoryService.getAllCategories({}),
+    queryFn: () =>
+      CategoryService.getAllCategories({
+        pageSize: 50,
+      }),
   });
 
   const earnedClients = [
@@ -45,7 +48,7 @@ export default async function ShopAndOrder() {
   ];
   return (
     <>
-      <AppNavbar background={'primaryLight'} />
+      <AppNavbar background='primaryLight' />
       <main className='grid gap-6'>
         <div className='grid justify-center bg-primaryLight'>
           <Section className='bg-primaryLight'>

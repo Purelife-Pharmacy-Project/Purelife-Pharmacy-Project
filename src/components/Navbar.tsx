@@ -32,8 +32,10 @@ import { IconSearch } from './icons/IconSearch';
 
 export const AppNavbar = ({
   background = 'bg-inherit',
+  disabled = false,
 }: {
   background?: string;
+  disabled?: boolean;
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -42,7 +44,7 @@ export const AppNavbar = ({
   const cart = useStore(useCartStore, (state) => state)?.cart;
   const { user } = useGetUser();
 
-  const isActive = (path: string) => pathName.startsWith(path);
+  const isActive = (path: string) => path === pathName;
 
   const handleLogout = () => {
     UsersService.logoutUser();
@@ -58,7 +60,7 @@ export const AppNavbar = ({
     },
     {
       name: 'Shop & Order',
-      path: '/shop-and-order',
+      path: '/telehealth/shop-and-order',
     },
     {
       name: 'Sign in',
@@ -72,6 +74,7 @@ export const AppNavbar = ({
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
+      isBlurred={disabled}
       className={`py-4 text-foreground lg:pb-2 bg-${background}`}
       maxWidth='xl'
     >
@@ -111,9 +114,11 @@ export const AppNavbar = ({
           <NavbarItem className='text-lg leading-[27px] text-header-100'>
             <Link
               color='foreground'
-              href='/shop-and-order'
+              href='/telehealth/shop-and-order'
               className={
-                isActive('/shop-and-order') ? 'font-medium text-primary' : ''
+                isActive('/telehealth/shop-and-order')
+                  ? 'font-medium text-primary'
+                  : ''
               }
             >
               Shop & Order
@@ -162,7 +167,7 @@ export const AppNavbar = ({
                 <DropdownMenu aria-label='Static Actions'>
                   <DropdownItem
                     isReadOnly
-                    className='pointer-events-none flex gap-2 text-content'
+                    className='pointer-events-none flex gap-2 text-lg text-content'
                     color='default'
                     key='profile'
                   >
@@ -229,7 +234,7 @@ export const AppNavbar = ({
           <Link
             className='hidden sm:block'
             color='foreground'
-            href='/shop-and-order'
+            href='/telehealth/shop-and-order'
           >
             <Button radius='full' size='lg' color='primary'>
               Shop & Order

@@ -11,7 +11,7 @@ export const CategoryHero: FC<CategoryHeroProps> = ({}) => {
   const currentPath = usePathname();
 
   const generateHero = () => {
-    if (currentPath.startsWith('/shop-and-order/health')) {
+    if (currentPath.startsWith('/telehealth/shop-and-order/health')) {
       return {
         image: '/images/health-basket.png',
         title: 'Health Category',
@@ -19,7 +19,7 @@ export const CategoryHero: FC<CategoryHeroProps> = ({}) => {
         description:
           'Discover a wide range of healthcare and pharmaceutical products at budget-friendly rates.',
       };
-    } else if (currentPath.startsWith('/shop-and-order/beauty')) {
+    } else if (currentPath.startsWith('/telehealth/shop-and-order/beauty')) {
       return {
         image: '/images/beauty-kit.png',
         title: 'Beauty and Skin Care Category',
@@ -27,7 +27,9 @@ export const CategoryHero: FC<CategoryHeroProps> = ({}) => {
         description:
           'Get a sleek grasp on top-notch skincare and beauty products.',
       };
-    } else if (currentPath.startsWith('/shop-and-order/supermarket')) {
+    } else if (
+      currentPath.startsWith('/telehealth/shop-and-order/supermarket')
+    ) {
       return {
         image: '/images/shopping-cart.png',
         title: 'Supermarket Category',

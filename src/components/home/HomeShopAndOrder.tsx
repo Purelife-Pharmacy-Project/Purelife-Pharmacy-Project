@@ -54,7 +54,7 @@ export const HomeShopAndOrder = () => {
             <Button
               radius='full'
               as={Link}
-              href={'/shop-and-order'}
+              href={'/telehealth/shop-and-order'}
               size='lg'
               className='border-primaryGreenDark bg-primaryGreenLight px-12 text-primaryGreenDark'
               variant='bordered'

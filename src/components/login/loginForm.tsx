@@ -97,7 +97,7 @@ export const LoginForm = () => {
         </Button>
 
         <p className='text-center'>
-          <Link href='/sign-in'>Forgot Password</Link>
+          <Link href='/forgot-password'>Forgot Password</Link>
         </p>
       </div>
 
