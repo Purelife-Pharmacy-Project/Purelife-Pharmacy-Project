@@ -2,9 +2,9 @@
 import { useGetLabTests } from '@/hooks/useLabTest';
 import { useSearchParams } from 'next/navigation';
 import { FC } from 'react';
+import { TelehealthProductCard } from '../TelehealthProductCard';
 import { Section } from '../home/Section';
 import { ProductsPagination } from '../shop-and-order/category/partials/ProductPagination';
-import { LabTestCard } from './DrugTestCard';
 import { LabTestsSkeleton } from './skeleton/LabTestsSkeleton';
 
 interface LabTestProductsProps {}
@@ -14,7 +14,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
   const pageIndex = Number(searchParams.get('pageIndex') || '1');
 
   const { loadingLabTests, labTests } = useGetLabTests({
-    pageSize: 10,
+    pageSize: 3,
     pageIndex,
   });
 
@@ -76,7 +76,11 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
 
             <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
               {labTests?.data.map((test, index) => (
-                <LabTestCard test={test} key={index} />
+                <TelehealthProductCard
+                  color='primary'
+                  test={test}
+                  key={index}
+                />
               ))}
             </div>
 

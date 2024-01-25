@@ -1,14 +1,14 @@
 import { AppNavbar } from '@/components/Navbar';
-import { Section } from '@/components/home/Section';
-import { HomeHero } from '@/components/home/HomeHero';
-import { IconBrowse } from '@/components/icons/IconBrowse';
-import { IconHealthShield } from '@/components/icons/IconHealthShield';
-import { IconAddNotification } from '@/components/icons/IconAddNotification';
+import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
 import { VaccinationProducts } from '@/components/get-vaccination/VaccinationProducts';
-import { ReportDrugReaction } from '@/components/ReportDrugReaction';
-import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Footer } from '@/components/home/Footer';
+import { HomeHero } from '@/components/home/HomeHero';
+import { NewsLetterCard } from '@/components/home/NewsletterCard';
+import { Section } from '@/components/home/Section';
+import { IconAddNotification } from '@/components/icons/IconAddNotification';
+import { IconBrowse } from '@/components/icons/IconBrowse';
+import { IconHealthShield } from '@/components/icons/IconHealthShield';
 
 export default function GetVaccinationPage() {
   const howItWorksData: {

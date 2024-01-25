@@ -4,12 +4,17 @@ import { useCartStore } from '@/hooks';
 import { Product } from '@/services/products/types';
 import { Button, Card, CardBody, Link } from '@nextui-org/react';
 import { FC } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 type LabTestCardProps = {
   test: Product;
+  color: 'primary' | 'success';
 };
 
-export const LabTestCard: FC<LabTestCardProps> = ({ test }) => {
+export const TelehealthProductCard: FC<LabTestCardProps> = ({
+  test,
+  color = 'primary',
+}) => {
   const { addToCart } = useCartStore();
 
   return (
@@ -17,14 +22,22 @@ export const LabTestCard: FC<LabTestCardProps> = ({ test }) => {
       <CardBody className='grid gap-4 lg:p-8'>
         <Link
           href={`/cart/${test.id}`}
-          className='text-2xl font-semibold text-primaryGreenDark'
+          className={twMerge(
+            'text-2xl font-semibold',
+            color === 'success' ? 'text-primaryGreenDark' : 'text-header-100'
+          )}
         >
           {test.name}
         </Link>
         <p className='text-sm text-content'>{test.description}</p>
 
         <div className='flex items-center justify-between'>
-          <p className='text-xl font-semibold text-primaryGreenDark'>
+          <p
+            className={twMerge(
+              'text-xl font-semibold',
+              color === 'success' ? 'text-primaryGreenDark' : 'text-header-100'
+            )}
+          >
             {test.amount}
           </p>
 
@@ -37,7 +50,7 @@ export const LabTestCard: FC<LabTestCardProps> = ({ test }) => {
                 quantity: 1,
               })
             }
-            color='success'
+            color={color}
             className='px-8 text-white'
           >
             Add to cart
