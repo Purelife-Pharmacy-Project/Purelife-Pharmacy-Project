@@ -4,6 +4,7 @@ export * from './useLabTest';
 export * from './useManufacturers';
 export * from './useOrders';
 export * from './usePath';
+export * from './usePrescription';
 export * from './useProducts';
 export * from './useUser';
 export * from './useVaccine';

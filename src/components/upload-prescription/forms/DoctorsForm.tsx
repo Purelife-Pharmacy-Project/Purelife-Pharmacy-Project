@@ -1,55 +1,120 @@
-import { IconBrowse } from '@/components/icons/IconBrowse';
-import { inputDefault } from '@/theme';
+'use client';
+import { useCreateDoctorPrescription } from '@/hooks';
+import { FormMessage } from '@/library/ui/FormMessage';
+import {
+  DoctorsPayload,
+  doctorPrescriptionValidationSchema,
+} from '@/services/prescription/schema';
+import { inputBordered, prescriptionTextArea } from '@/theme';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input, Textarea } from '@nextui-org/react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { PrescriptionImageUpload } from '../PrescriptionImageUpload';
 
 export const DoctorsForm = () => {
+  const {
+    register,
+    setValue,
+    getValues,
+    reset,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<DoctorsPayload>({
+    resolver: zodResolver(doctorPrescriptionValidationSchema),
+  });
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const { createPrescription, loadingCreatePrescription } =
+    useCreateDoctorPrescription(
+      () => reset(),
+      (error) => setErrorMessage(error as string)
+    );
+
+  const onSubmit = (data: DoctorsPayload) => {
+    createPrescription(data);
+  };
+
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {false ? <FormMessage type='error' message={errorMessage!} /> : null}
+
+      {JSON.stringify(getValues())}
+
       <div className='mb-8 flex flex-col-reverse gap-4 lg:flex-row'>
         <div className='grid w-full gap-8'>
-          <Input label='Patient Name' classNames={inputDefault} />
           <Input
-            label='Patient Number'
-            type='number'
-            inputMode='numeric'
-            classNames={inputDefault}
+            label='Patient Name'
+            {...register('patientName')}
+            errorMessage={errors.patientName?.message}
+            classNames={inputBordered}
           />
           <Input
-            label='Phone Number'
+            label='Patient Number'
+            {...register('patientPhone')}
+            errorMessage={errors.patientPhone?.message}
+            type='tel'
+            minLength={10}
+            maxLength={13}
             inputMode='numeric'
-            classNames={inputDefault}
+            classNames={inputBordered}
+          />
+          <Input
+            label="Prescriber's Name"
+            {...register('prescriberName')}
+            errorMessage={errors.prescriberName?.message}
+            minLength={10}
+            maxLength={13}
+            classNames={inputBordered}
           />
           <Input
             label="Prescriber's Number"
-            type='number'
+            {...register('prescriberPhone')}
+            errorMessage={errors.prescriberPhone?.message}
+            type='tel'
+            minLength={10}
+            maxLength={13}
             inputMode='numeric'
-            classNames={inputDefault}
+            classNames={inputBordered}
           />
-          <div className='flex w-full flex-col items-center justify-center rounded-lg bg-white py-20'>
-            <IconBrowse />
-            <Button className='text-md font-light text-content' variant='light'>
-              Upload your Prescription: Drag & Drop or Click to Browse
-            </Button>
-          </div>
+          <PrescriptionImageUpload
+            onUpload={(imageUrl) =>
+              setValue('prescriptionUrl', imageUrl, {
+                shouldValidate: true,
+                shouldDirty: true,
+              })
+            }
+            error={errors.prescriptionUrl?.message}
+          />
         </div>
         <div className='flex w-full flex-col gap-8'>
           <Input
             label="Patient's email"
+            {...register('patientEmail')}
+            errorMessage={errors.patientEmail?.message}
             type='email'
-            classNames={inputDefault}
+            classNames={inputBordered}
           />
           <Input
             label="Prescriber's email"
+            {...register('prescriberEmail')}
+            errorMessage={errors.prescriberEmail?.message}
             type='email'
-            classNames={inputDefault}
+            classNames={inputBordered}
           />
-          <Input label='Hospital name' classNames={inputDefault} />
-          <div className='flex h-full'>
+          <Input
+            label='Hospital name'
+            {...register('hospitalName')}
+            errorMessage={errors.hospitalName?.message}
+            classNames={inputBordered}
+          />
+          <div className='flex h-full flex-grow'>
             <Textarea
               size='lg'
+              {...register('note')}
+              errorMessage={errors.note?.message}
               style={{ height: '310px' }}
               placeholder='Noted about your prescription'
-              classNames={inputDefault}
+              classNames={prescriptionTextArea}
             />
           </div>
         </div>
@@ -57,8 +122,10 @@ export const DoctorsForm = () => {
 
       <div className='flex justify-center'>
         <Button
+          type='submit'
+          isLoading={loadingCreatePrescription}
           color='success'
-          className='px-16 py-8 text-white'
+          className='px-16 py-7 text-white'
           radius='full'
           size='lg'
         >

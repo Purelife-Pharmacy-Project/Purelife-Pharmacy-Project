@@ -1,3 +1,5 @@
+import { AxiosRequestConfig } from 'axios';
+
 export interface IApiPaginateResponse {
   itemsPerPage: number;
   page: number;
@@ -28,3 +30,5 @@ export interface Document {
   createdAt: string;
   updatedAt: string;
 }
+
+export type CustomAxiosRequestConfig = {} & AxiosRequestConfig;

@@ -41,7 +41,7 @@ export const NewsLetterCard = () => {
                     placeholder='Email'
                   />
                   <Button
-                    className='ml-auto rounded-none rounded-r-lg'
+                    className='ml-auto rounded-none rounded-r-full'
                     size='lg'
                     type='submit'
                     color='primary'

@@ -76,6 +76,20 @@ export const inputDefault: SlotsToClasses<InputSlots> = {
   ],
 };
 
+export const prescriptionTextArea: SlotsToClasses<InputSlots> = {
+  label: ['text-content text-md font-light hidden'],
+  description: ['hidden'],
+  inputWrapper: [
+    'pr-2 py-4 flex items-start flex-grow',
+    'bg-white',
+    'shadow-none',
+    'text-content',
+    'border border-primaryGreenDark data-[hover=true]:bg-white',
+    'group-data-[focus=true]:bg-white',
+    'group-data-[active=true]:bg-white',
+  ],
+};
+
 export const textAreaClassNames: SlotsToClasses<InputSlots> = {
   label: ['text-content text-md font-light hidden'],
   description: ['hidden'],

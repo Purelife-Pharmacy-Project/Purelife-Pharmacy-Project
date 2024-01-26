@@ -2,7 +2,11 @@ import { API_BASE_URL } from '@/constants';
 import UsersService from '@/services/user';
 import _axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { toast } from 'sonner';
-import { IApiErrorResponse, IApiResponse } from './types';
+import {
+  CustomAxiosRequestConfig,
+  IApiErrorResponse,
+  IApiResponse,
+} from './types';
 
 class Api {
   private static hasToastedUnauthorizedError = false;
@@ -95,20 +99,22 @@ class Api {
 
   static async post<T extends Record<string, any>>(
     endpoint: string,
-    data: any
+    data: any,
+    config?: CustomAxiosRequestConfig
   ): Promise<IApiResponse<T>> {
     return this.axiosInstance
-      .post(endpoint, data)
+      .post(endpoint, data, config)
       .then(this.handleApiSuccess)
       .catch(this.handleApiError);
   }
 
   static async put<T extends Record<string, any>>(
     endpoint: string,
-    data: any
+    data: any,
+    config?: CustomAxiosRequestConfig
   ): Promise<IApiResponse<T>> {
     return this.axiosInstance
-      .put(endpoint, data)
+      .put(endpoint, data, config)
       .then(this.handleApiSuccess)
       .catch(this.handleApiError);
   }
