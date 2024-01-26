@@ -38,8 +38,6 @@ export const DoctorsForm = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       {false ? <FormMessage type='error' message={errorMessage!} /> : null}
 
-      {JSON.stringify(getValues())}
-
       <div className='mb-8 flex flex-col-reverse gap-4 lg:flex-row'>
         <div className='grid w-full gap-8'>
           <Input

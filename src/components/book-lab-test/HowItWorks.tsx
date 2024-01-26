@@ -41,7 +41,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ data, variant }) => {
                     {answer.icon}
                   </div>
                   <div className='mx-auto flex max-w-[330px] flex-col gap-1'>
-                    <p className='text-center text-xl leading-[18px] text-content'>
+                    <p className='text-center text-xl font-light text-content'>
                       {answer.description}
                     </p>
                   </div>
