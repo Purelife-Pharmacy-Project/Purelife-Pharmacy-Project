@@ -5,7 +5,6 @@ export const useGetFeaturedProducts = () => {
   const {
     data: products,
     isLoading,
-    isRefetching,
     refetch,
   } = useQuery({
     queryKey: ['featured-products'],
@@ -25,6 +24,44 @@ export const useGetFeaturedProducts = () => {
   };
 };
 
+export const useGetProductsByCategoryId = (params: {
+  categoryId?: string;
+  pageSize?: number;
+  searchStr?: string;
+  pageIndex?: number;
+}) => {
+  const {
+    data: products,
+    isLoading: loadingProducts,
+    isRefetching,
+    refetch,
+  } = useQuery({
+    queryKey: [
+      'products-by-category',
+      params.categoryId,
+      params.searchStr,
+      params.pageSize,
+      params.pageIndex,
+    ],
+    queryFn: () =>
+      ProductService.getAllProducts({
+        categoryId: params.categoryId,
+        pageSize: params.pageSize,
+        pageIndex: params.pageIndex,
+        name: params.searchStr,
+      }),
+    refetchOnWindowFocus: false,
+    enabled: !!params.categoryId || !!params.searchStr,
+  });
+
+  return {
+    products,
+    loadingProducts,
+    isRefetching,
+    refetch,
+  };
+};
+
 export const useGetProducts = (
   categoryId?: string,
   name?: string,
@@ -35,6 +72,14 @@ export const useGetProducts = (
   minPrice?: string,
   maxPrice?: string
 ) => {
+  const queryKeys = ['products'];
+  if (categoryId) queryKeys.push(categoryId);
+  if (name) queryKeys.push(name);
+  if (minPrice) queryKeys.push(minPrice);
+  if (maxPrice) queryKeys.push(maxPrice);
+  if (pageIndex) queryKeys.push(String(pageIndex));
+  if (pageSize) queryKeys.push(String(pageSize));
+
   const {
     data: products,
     isLoading: loadingProducts,
@@ -44,15 +89,7 @@ export const useGetProducts = (
     refetch,
   } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
-    queryKey: [
-      'products',
-      categoryId,
-      name,
-      minPrice,
-      maxPrice,
-      pageIndex,
-      pageSize,
-    ],
+    queryKey: queryKeys,
     queryFn: () =>
       ProductService.getAllProducts({
         categoryId,
@@ -64,7 +101,7 @@ export const useGetProducts = (
         minPrice,
         maxPrice,
       }),
-    enabled: !!categoryId || !!name || !!minPrice || !!maxPrice || !!pageIndex,
+    enabled: queryKeys.length > 1,
     refetchOnWindowFocus: false,
   });
 

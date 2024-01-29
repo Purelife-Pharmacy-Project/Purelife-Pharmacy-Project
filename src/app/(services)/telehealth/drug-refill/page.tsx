@@ -1,13 +1,19 @@
 import { AppNavbar } from '@/components/Navbar';
+import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
+import { DrugRefillHero } from '@/components/drug-refill/DrugRefillHero';
+import { Footer } from '@/components/home/Footer';
+import { NewsLetterCard } from '@/components/home/NewsletterCard';
+import { IconAddNotification } from '@/components/icons/IconAddNotification';
 import { IconBrowse } from '@/components/icons/IconBrowse';
 import { IconHealthShield } from '@/components/icons/IconHealthShield';
-import { IconAddNotification } from '@/components/icons/IconAddNotification';
-import { DrugRefillHero } from '@/components/drug-refill/DrugRefillHero';
-import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
-import { NewsLetterCard } from '@/components/home/NewsletterCard';
-import { Footer } from '@/components/home/Footer';
+import { CategoryService } from '@/services/categories';
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from '@tanstack/react-query';
 
-export default function DrugRefill() {
+export default async function DrugRefill() {
   const howItWorksData: {
     description: string;
     icon: JSX.Element;
@@ -28,11 +34,21 @@ export default function DrugRefill() {
       icon: <IconAddNotification size={60} color='success' />,
     },
   ];
+
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['categories'],
+    queryFn: () => CategoryService.getAllCategories({}),
+  });
+
   return (
     <>
       <AppNavbar background='primaryLight' />
       <main className='grid gap-6'>
-        <DrugRefillHero />
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <DrugRefillHero />
+        </HydrationBoundary>
 
         <div className='mt-[900px] md:mt-[700px] lg:mt-[652px]'>
           <HowItWorks data={howItWorksData} variant={'success'} />

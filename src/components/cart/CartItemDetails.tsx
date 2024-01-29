@@ -1,7 +1,6 @@
 'use client';
 import { ProductQuantity } from '@/components/cart/ProductQuantity';
 import { IconBin } from '@/components/icons/IconBin';
-import { randomId } from '@/helpers/utils';
 import { useCartStore, useGetProductByProductId } from '@/hooks';
 import { useStore } from '@/hooks/store';
 import { CartType } from '@/services/cart/types';
@@ -105,9 +104,8 @@ export const CartItemDetails = () => {
                     size='lg'
                     isDisabled={loadingProduct}
                     onPress={() => {
-                      const id = randomId();
                       addToCart({
-                        id,
+                        id: String(product.id),
                         unitsLeft: 3,
                         product,
                         quantity: 1,

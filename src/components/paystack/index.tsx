@@ -8,7 +8,7 @@ type PaystackProps = {
   email: string;
   ctaText: string;
   label: string;
-  paymentMethod: 'card' | 'bank_transfer';
+  paymentMethod?: 'card' | 'bank_transfer';
   onSuccess: (response: PaystackSuccessResponse) => void;
 };
 
@@ -26,7 +26,7 @@ export const Paystack: FC<PaystackProps> = ({
   email,
   ctaText,
   label,
-  paymentMethod,
+  paymentMethod = 'card',
   onSuccess,
 }) => {
   const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY || '';

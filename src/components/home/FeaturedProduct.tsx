@@ -1,5 +1,4 @@
 'use client';
-import { randomId } from '@/helpers/utils';
 import { useCartStore } from '@/hooks';
 import { Product } from '@/services/products/types';
 import { Button, Card, CardBody, CardFooter, Image } from '@nextui-org/react';
@@ -36,7 +35,7 @@ export const FeaturedProduct: FC<FeaturedProductProps> = ({ product }) => {
           variant='bordered'
           onPress={() =>
             addToCart({
-              id: randomId(),
+              id: String(product.id),
               unitsLeft: 3,
               product,
               quantity: 1,

@@ -1,6 +1,5 @@
 'use client';
 import { IconCart } from '@/components/icons/IconCart';
-import { randomId } from '@/helpers/utils';
 import { useCartStore } from '@/hooks';
 import { Product } from '@/services/products/types';
 import {
@@ -31,7 +30,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
           isDisabled={!product.canBeSold}
           onPress={() =>
             addToCart({
-              id: randomId(),
+              id: String(product.id),
               unitsLeft: 3,
               product,
               quantity: 1,

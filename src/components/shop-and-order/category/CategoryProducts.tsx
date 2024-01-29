@@ -11,7 +11,7 @@ import { ProductSortDropdown } from './partials/ProductsSortDropdown';
 export const CategoryProducts = () => {
   const currentPath = usePathname();
   const router = useRouter();
-  const category = currentPath.split('/')[2].split('-');
+  const category = currentPath.split('/')[3].split('-');
   const noId = category.length === 1;
   const categoryId = category.pop() || '1';
   const searchParams = useSearchParams();

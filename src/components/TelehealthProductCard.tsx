@@ -1,5 +1,4 @@
 'use client';
-import { randomId } from '@/helpers/utils';
 import { useCartStore } from '@/hooks';
 import { Product } from '@/services/products/types';
 import { Button, Card, CardBody, Link } from '@nextui-org/react';
@@ -44,7 +43,7 @@ export const TelehealthProductCard: FC<LabTestCardProps> = ({
           <Button
             onPress={() =>
               addToCart({
-                id: randomId(),
+                id: String(test.id),
                 unitsLeft: 3,
                 product: test,
                 quantity: 1,

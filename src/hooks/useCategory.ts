@@ -10,6 +10,7 @@ export const useGetCategories = () => {
   } = useQuery({
     queryKey: ['categories'],
     queryFn: () => CategoryService.getAllCategories({}),
+    refetchOnWindowFocus: false,
   });
 
   return {

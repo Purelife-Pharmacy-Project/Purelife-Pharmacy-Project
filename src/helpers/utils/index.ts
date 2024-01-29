@@ -12,7 +12,7 @@ export const getCategoryUrl = (
   )?.id;
 
   if (!categoryId) return '';
-  return `/shop-and-order/${category}-${categoryId}`;
+  return `/telehealth/shop-and-order/${category}-${categoryId}`;
 };
 
 export const toNaira = (amount: number) => {
