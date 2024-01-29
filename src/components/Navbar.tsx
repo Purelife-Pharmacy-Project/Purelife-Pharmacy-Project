@@ -1,17 +1,7 @@
 'use client';
-import { useCartStore, useGetUser } from '@/hooks';
-import { useStore } from '@/hooks/store';
-import UsersService from '@/services/user';
 import { inputDefault } from '@/theme';
 import {
-  Avatar,
-  Badge,
   Button,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownSection,
-  DropdownTrigger,
   Input,
   Link,
   Navbar,
@@ -22,12 +12,11 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from '@nextui-org/react';
-import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { IconCart } from './icons/IconCart';
-import { IconProfile } from './icons/IconProfile';
+import { NavbarCart } from './NavbarCart';
+import { NavbarUser } from './NavbarUser';
 import { IconSearch } from './icons/IconSearch';
 
 export const AppNavbar = ({
@@ -40,18 +29,8 @@ export const AppNavbar = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const pathName = usePathname();
-  const queryClient = useQueryClient();
-  const cart = useStore(useCartStore, (state) => state)?.cart;
-  const { user } = useGetUser();
 
   const isActive = (path: string) => path === pathName;
-
-  const handleLogout = () => {
-    UsersService.logoutUser();
-    queryClient.clear();
-
-    window.location.reload();
-  };
 
   const menuItems = [
     {
@@ -146,88 +125,10 @@ export const AppNavbar = ({
       >
         <div className='hidden md:flex md:gap-[22px]'>
           <NavbarItem className='flex items-center text-lg leading-[27px] text-header-100'>
-            {user ? (
-              <Dropdown showArrow>
-                <DropdownTrigger>
-                  <Button variant='light'>
-                    <Avatar
-                      size='sm'
-                      showFallback
-                      src={''}
-                      name={user && user.name[0]}
-                      classNames={{
-                        base: 'bg-primary/80',
-                        icon: 'text-primary',
-                        name: 'text-white text-base',
-                      }}
-                    />
-                    <span className='text-base'>Profile</span>
-                  </Button>
-                </DropdownTrigger>
-                <DropdownMenu aria-label='Static Actions'>
-                  <DropdownItem
-                    isReadOnly
-                    className='pointer-events-none flex gap-2 text-lg text-content'
-                    color='default'
-                    key='profile'
-                  >
-                    {user?.name}
-                  </DropdownItem>
-                  <DropdownSection>
-                    <DropdownItem
-                      className='text-content'
-                      color='default'
-                      as={Link}
-                      href='/my-account'
-                      key='account'
-                    >
-                      My Account
-                    </DropdownItem>
-                    <DropdownItem
-                      key='logout'
-                      onPress={handleLogout}
-                      className='text-primary'
-                      color='primary'
-                    >
-                      Logout
-                    </DropdownItem>
-                  </DropdownSection>
-                </DropdownMenu>
-              </Dropdown>
-            ) : (
-              <Link
-                color='foreground'
-                className={
-                  isActive('/sign-in') ? 'font-medium text-primary' : ''
-                }
-                href='/sign-in'
-              >
-                <div className='flex items-center gap-2'>
-                  <IconProfile
-                    color={isActive('/sign-in') ? 'primary' : 'header-100'}
-                    size={24}
-                  />
-                  <p>Sign in</p>
-                </div>
-              </Link>
-            )}
+            <NavbarUser isActive={isActive} />
           </NavbarItem>
           <NavbarItem className='flex items-center text-lg leading-[27px] text-header-100'>
-            <Link
-              className={isActive('/cart') ? 'font-medium text-primary' : ''}
-              color='foreground'
-              href='/cart'
-            >
-              <div className='flex items-center gap-2'>
-                <Badge content={cart?.length || 0} size='lg' color='primary'>
-                  <IconCart
-                    size={24}
-                    color={isActive('/cart') ? 'primary' : 'header-100'}
-                  />
-                </Badge>
-                <p>Cart</p>
-              </div>
-            </Link>
+            <NavbarCart isActive={isActive} />
           </NavbarItem>
         </div>
         <NavbarItem>
