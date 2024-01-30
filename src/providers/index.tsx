@@ -1,4 +1,5 @@
 'use client';
+import { TawkMessenger } from '@/components/TawkMessenger';
 import { NextUIProvider } from '@nextui-org/react';
 import NextTopLoader from 'nextjs-toploader';
 import { Toaster } from 'sonner';
@@ -11,6 +12,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
         <NextTopLoader height={2} color='#FF0028' showSpinner />
         {children}
         <Toaster richColors className='text-center' position='bottom-center' />
+        <TawkMessenger />
       </ReactQueryProvider>
     </NextUIProvider>
   );
