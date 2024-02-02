@@ -13,3 +13,25 @@ export type CreateSubscriptionPayload = {
   templateId: number;
   products: SubscriptionProduct[];
 };
+
+export type SubscriptionProductType = {
+  description: string;
+  subId: number;
+  productId: number;
+  quantity: number;
+};
+
+export type SubscriptionType = {
+  id: number;
+  products: SubscriptionProductType[];
+};
+
+export class Subscription {
+  id: number;
+  products: SubscriptionProductType[];
+
+  constructor(data: SubscriptionType) {
+    this.id = data.id;
+    this.products = data.products;
+  }
+}

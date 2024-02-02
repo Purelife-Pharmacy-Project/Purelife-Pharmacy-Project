@@ -41,10 +41,11 @@ export const TelehealthProductCard: FC<LabTestCardProps> = ({
           </p>
 
           <Button
+            disabled={test.quantity === 0}
             onPress={() =>
               addToCart({
                 id: String(test.id),
-                unitsLeft: 3,
+                unitsLeft: test.quantity as number,
                 product: test,
                 quantity: 1,
               })

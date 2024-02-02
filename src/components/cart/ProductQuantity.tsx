@@ -17,7 +17,11 @@ export const ProductQuantity: FC<ProductQuantityProps> = ({
     <div className='flex w-[120px] items-center justify-center gap-2 rounded-full bg-primaryLight'>
       <Button
         isIconOnly
-        isDisabled={product?.quantity === 1}
+        isDisabled={
+          product?.unitsLeft === 1 ||
+          product?.quantity === 0 ||
+          product?.quantity === 1
+        }
         onPress={() => decreaseQuantity(product?.id)}
         variant='flat'
         className='w-full rounded-l-full bg-primaryLight text-2xl text-black'
@@ -28,9 +32,7 @@ export const ProductQuantity: FC<ProductQuantityProps> = ({
 
       <Button
         isIconOnly
-        isDisabled={
-          product?.unitsLeft === 0 || product?.quantity > product?.unitsLeft
-        }
+        isDisabled={product.quantity <= product.unitsLeft}
         onPress={() => increaseQuantity(product?.id)}
         variant='flat'
         className='w-full rounded-r-full bg-primaryLight text-2xl text-black'

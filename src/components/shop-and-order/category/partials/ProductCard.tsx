@@ -27,11 +27,11 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
       <CardBody className='relative overflow-visible px-0 py-2'>
         <Button
           isIconOnly
-          isDisabled={!product.canBeSold}
+          isDisabled={product.quantity === 0}
           onPress={() =>
             addToCart({
               id: String(product.id),
-              unitsLeft: 3,
+              unitsLeft: product.quantity as number,
               product,
               quantity: 1,
             })
@@ -70,7 +70,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
           onPress={() => {
             addToCart({
               id: String(product.id),
-              unitsLeft: 5,
+              unitsLeft: product.quantity as number,
               product,
               quantity: 1,
             });

@@ -106,7 +106,7 @@ export const CartItemDetails = () => {
                     onPress={() => {
                       addToCart({
                         id: String(product.id),
-                        unitsLeft: 3,
+                        unitsLeft: product.quantity as number,
                         product,
                         quantity: 1,
                       });

@@ -24,7 +24,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
     <div className='grid h-[calc(100vh-260px)] items-center justify-center bg-primaryLight'>
       <Section
         className='relative flex
-    w-max flex-col items-center justify-between overflow-y-hidden overflow-x-visible  bg-primaryLight md:flex-row lg:flex lg:h-full'
+    w-max flex-col items-center justify-between overflow-x-visible  bg-primaryLight md:flex-row lg:flex lg:h-full'
       >
         <div className='flex w-full flex-col gap-6 lg:justify-center'>
           <h1 className='mx-auto max-w-[250px] text-center text-2xl  font-bold text-header-100 sm:max-w-[300px] md:max-w-[530px] lg:text-start lg:text-5xl xl:mx-0'>

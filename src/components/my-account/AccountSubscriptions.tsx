@@ -1,4 +1,5 @@
 'use client';
+import { useGetSubscriptionsByCustomerId } from '@/hooks';
 import { AccountSubscription } from '@/services/user/types';
 import {
   Table,
@@ -12,6 +13,8 @@ import { useState } from 'react';
 import { SubscriptionDetailsModal } from './modals/SubscriptionDetailsModal';
 
 export const AccountSubscriptions = () => {
+  const { loadingSubscriptions, subscriptions } =
+    useGetSubscriptionsByCustomerId();
   const [openSubscriptionDetailsModal, setOpenSubscriptionDetailsModal] =
     useState(false);
   const [selectedSubscription, setSelectedSubscription] = useState<

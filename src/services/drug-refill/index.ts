@@ -1,6 +1,10 @@
 import Api from '@/helpers/api';
 import UsersService from '../user';
-import { CreateSubscriptionPayload, SubscriptionTemp } from './types';
+import {
+  CreateSubscriptionPayload,
+  SubscriptionTemp,
+  SubscriptionType,
+} from './types';
 
 export class DrugRefillService {
   private static SUBSCRIPTION_API_BASE = '/Subscription';
@@ -12,6 +16,18 @@ export class DrugRefillService {
     const response = (await Api.get<SubscriptionTemp[]>(
       `${this.SUBSCRIPTION_TEMP_BASE}/get-sub-template`
     )) as unknown as SubscriptionTemp[];
+
+    return response;
+  }
+
+  public static async getSubscriptionsByCustomerId() {
+    const response = (await Api.get<{
+      data: SubscriptionType[];
+      totalPage: number;
+    }>(`${this.SUBSCRIPTION_API_BASE}/getByCustomerId`)) as unknown as {
+      data: SubscriptionType[];
+      totalPage: number;
+    };
 
     return response;
   }

@@ -1,6 +1,6 @@
 import { IconShare } from '@/components/icons/IconShare';
 import { TransactionDetailsBlock } from '@/components/my-account/TransactionDetailsBlock';
-import { AccountTransaction } from '@/services/user/types';
+import { Order } from '@/services/orders/types';
 import {
   Modal,
   ModalBody,
@@ -14,7 +14,7 @@ import { FC } from 'react';
 interface TransactionDetailsModalProps {
   isOpen: boolean;
   onOpenChange: () => void;
-  transaction: AccountTransaction | undefined;
+  transaction: Order | undefined;
 }
 export const TransactionDetailsModal: FC<TransactionDetailsModalProps> = ({
   isOpen,
@@ -33,14 +33,14 @@ export const TransactionDetailsModal: FC<TransactionDetailsModalProps> = ({
           <>
             <ModalHeader>
               <p className='text-xl font-bold text-header-100'>
-                Order ID: {transaction?.orderId}
+                Order ID: {transaction?.id}
               </p>
             </ModalHeader>
             <ModalBody>
               <div className='divide grid divide-y divide-gray-200'>
                 <TransactionDetailsBlock
-                  title='Description'
-                  content={transaction?.description}
+                  title='No. of Products'
+                  content={transaction?.products.length}
                 />
                 <TransactionDetailsBlock
                   title='Status'

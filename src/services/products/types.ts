@@ -22,6 +22,7 @@ export type ProductType = {
   amount?: number;
   canBePurchased: boolean;
   canBeSold: boolean;
+  quantity?: number;
 };
 
 export class Product {
@@ -34,18 +35,20 @@ export class Product {
   public amount: string;
   public canBePurchased: boolean;
   public canBeSold: boolean;
+  public quantity?: number;
 
   constructor(product: ProductType) {
     this.id = product.id;
     this.name = product.name;
     this.price = product.price;
     this.categoryId = product.categoryId;
-    this.description = product.name || '';
+    this.description = product.description || '';
     this.imageInBinary = product.imageInBinary
       ? `data:image/png;base64,${product.imageInBinary}`
       : '/images/care-package.png';
     this.amount = toNaira(this.price);
     this.canBePurchased = product.canBePurchased;
     this.canBeSold = product.canBeSold;
+    this.quantity = Math.max(0, product.quantity as number) || 1;
   }
 }

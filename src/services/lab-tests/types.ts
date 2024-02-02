@@ -16,6 +16,7 @@ export type LabTestType = {
   canBeSold: boolean;
   description: string;
   imageInBinary: string | null;
+  quantity?: number;
 };
 
 export class LabTest {
@@ -28,6 +29,7 @@ export class LabTest {
   public imageInBinary: string;
   public amount: string;
   public categoryId: string;
+  public quantity?: number;
 
   constructor(test: LabTestType) {
     this.id = test.id;
@@ -41,5 +43,6 @@ export class LabTest {
       : '/images/care-package.png';
     this.amount = toNaira(this.price);
     this.categoryId = '';
+    this.quantity = Math.max(0, test.quantity as number) || 1;
   }
 }

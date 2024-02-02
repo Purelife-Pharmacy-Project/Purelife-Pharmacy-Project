@@ -1,10 +1,9 @@
 'use client';
 import { TransactionDetailsModal } from '@/components/my-account/modals/TransactionDetailsModal';
+import { useGetOrders } from '@/hooks';
+import { OrderType } from '@/services/orders/types';
 import {
-  AccountTransaction,
-  AccountTransactionStatus,
-} from '@/services/user/types';
-import {
+  Spinner,
   Table,
   TableBody,
   TableCell,
@@ -13,14 +12,13 @@ import {
   TableRow,
 } from '@nextui-org/react';
 import { useState } from 'react';
-import { useGetOrders } from '@/hooks';
 
 export const AccountTransactions = () => {
   const { orders, loadingGetOrders } = useGetOrders();
   const [openTransactionDetailsModal, setOpenTransactionDetailsModal] =
     useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState<
-    AccountTransaction | undefined
+    OrderType | undefined
   >(undefined);
 
   const columns = [
@@ -33,39 +31,12 @@ export const AccountTransactions = () => {
       label: 'Status',
     },
     {
-      key: 'description',
-      label: 'Description',
-    },
-    {
-      key: 'date',
-      label: 'Date',
+      key: 'noOfProducts',
+      label: 'No. of Products',
     },
     {
       key: 'price',
       label: 'Price',
-    },
-  ];
-  const data: AccountTransaction[] = [
-    {
-      orderId: '23748437',
-      status: AccountTransactionStatus.Pending,
-      description: 'Lonart 20mg Tablet',
-      date: '25 Oct 2023',
-      amount: '₦ 1500.00',
-    },
-    {
-      orderId: '23748438',
-      status: AccountTransactionStatus.Failed,
-      description: 'Lonart 20mg Tablet',
-      date: '25 Oct 2023',
-      amount: '₦ 1500.00',
-    },
-    {
-      orderId: '23748439',
-      status: AccountTransactionStatus.Pending,
-      description: 'Lonart 20mg Tablet',
-      date: '25 Oct 2023',
-      amount: '₦ 1500.00',
     },
   ];
   return (
@@ -75,15 +46,19 @@ export const AccountTransactions = () => {
         shadow='none'
         selectionMode='single'
         onRowAction={(key) => {
-          const item = data.find((item) => item.orderId === key);
-          setSelectedTransaction(item);
-          setOpenTransactionDetailsModal(true);
+          const item = orders?.data?.find((item) => item.id === Number(key));
+
+          if (item) {
+            setSelectedTransaction(item);
+            setOpenTransactionDetailsModal(true);
+          }
         }}
         aria-label='My Account transactions'
         removeWrapper
         classNames={{
           tbody: 'text-base',
           th: 'text-sm bg-transparent text-semibold text-header-100',
+          tr: 'hover:bg-primary/10 rounded-xl hover:cursor-pointer',
           td: 'group-data-[odd=true]:before:bg-white text-light py-4 text-header-100',
         }}
       >
@@ -92,14 +67,18 @@ export const AccountTransactions = () => {
             <TableColumn key={column.key}>{column.label}</TableColumn>
           )}
         </TableHeader>
-        <TableBody items={data} emptyContent={'No rows to display.'}>
+        <TableBody
+          items={orders?.data || []}
+          emptyContent={loadingGetOrders ? ' ' : 'No orders to display.'}
+          loadingContent={<Spinner size='sm' />}
+          isLoading={loadingGetOrders}
+        >
           {(item) => (
-            <TableRow key={item.orderId}>
-              <TableCell>{item.orderId}</TableCell>
+            <TableRow key={item.id}>
+              <TableCell className='rounded-l-xl'>{item.id}</TableCell>
               <TableCell>{item.status}</TableCell>
-              <TableCell>{item.description}</TableCell>
-              <TableCell>{item.date}</TableCell>
-              <TableCell>{item.amount}</TableCell>
+              <TableCell>{item.products.length}</TableCell>
+              <TableCell className='rounded-r-xl'>{item.amount}</TableCell>
             </TableRow>
           )}
         </TableBody>

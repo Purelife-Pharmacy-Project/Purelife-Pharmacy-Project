@@ -1,5 +1,5 @@
 import Api from '@/helpers/api';
-import { CreateOrderPayload, Order } from './types';
+import { CreateOrderPayload, Order, OrderType } from './types';
 
 class OrderService {
   private static ORDERS_API_BASE = '/Order';
@@ -11,21 +11,28 @@ class OrderService {
   }
 
   public static async getAllCustomerOrders() {
-    return (await Api.get<{
-      data: Order[];
+    const response = (await Api.get<{
+      data: OrderType[];
       totalPage: number;
     }>(`${this.ORDERS_API_BASE}/getByCustomerId`)) as unknown as {
-      data: Order[];
+      data: OrderType[];
       totalPage: number;
+    };
+
+    const orders = response.data.map((order) => new Order(order));
+
+    return {
+      data: orders,
+      totalPage: response.totalPage,
     };
   }
 
   public static async getOrderById(id: string) {
     return (await Api.get<{
-      data: Order;
+      data: OrderType;
       totalPage: number;
     }>(`${this.ORDERS_API_BASE}/getById?id=${id}`)) as unknown as {
-      data: Order;
+      data: OrderType;
       totalPage: number;
     };
   }

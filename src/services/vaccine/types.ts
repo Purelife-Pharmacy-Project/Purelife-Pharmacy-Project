@@ -18,6 +18,7 @@ export class Vaccine {
   amount: string;
   categoryId: string;
   imageInBinary: string | null;
+  quantity?: number;
 
   constructor(vaccine: ProductType) {
     this.id = vaccine.id;
@@ -31,5 +32,6 @@ export class Vaccine {
       : '/images/care-package.png';
     this.amount = toNaira(this.price);
     this.categoryId = '';
+    this.quantity = Math.max(0, vaccine.quantity as number) || 1;
   }
 }

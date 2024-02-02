@@ -61,18 +61,42 @@ export const useCartStore = create<CartState>()(
           );
 
           // if item is in cart, just update the quantity
-          cartItem && cartItem.product.canBeSold
-            ? cartItem.quantity++
-            : state.cart.push(cart);
+          if (cartItem?.unitsLeft === 0) {
+            return {
+              cart: state.cart,
+            };
+          }
 
-          // update the summary
-          state.setSummary(state.summary);
+          if (cartItem) {
+            if (cartItem.quantity < cartItem.unitsLeft) {
+              cartItem.quantity++;
+              // update the summary
+              state.setSummary(state.summary);
 
-          toast.success('Item added to cart');
+              toast.info('Item already in cart, quantity increased');
 
-          return {
-            cart: state.cart,
-          };
+              return {
+                cart: state.cart,
+              };
+            } else {
+              toast.error('Item out of stock');
+              return {
+                cart: state.cart,
+              };
+            }
+          } else {
+            // if item is not in cart, add it to cart
+            state.cart.push(cart);
+
+            toast.success('Item added to cart');
+
+            // update the summary
+            state.setSummary(state.summary);
+
+            return {
+              cart: state.cart,
+            };
+          }
         }),
       removeFromCart: (cartId) => {
         set((state) => {
@@ -101,7 +125,9 @@ export const useCartStore = create<CartState>()(
           return {
             cart: state.cart.map((cartItem) => {
               if (cartItem.id === cartId) {
-                cartItem.quantity++;
+                cartItem.quantity < cartItem.unitsLeft
+                  ? cartItem.quantity++
+                  : toast.error('Item out of stock');
               }
               return cartItem;
             }),
@@ -132,7 +158,9 @@ export const useCartStore = create<CartState>()(
           return {
             cart: state.cart.map((cartItem) => {
               if (cartItem.id === cartId) {
-                cartItem.quantity--;
+                cartItem.quantity < cartItem.unitsLeft
+                  ? cartItem.quantity--
+                  : toast.error('Item out of stock');
               }
               return cartItem;
             }),

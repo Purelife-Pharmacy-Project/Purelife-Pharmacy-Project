@@ -13,8 +13,7 @@ export const useGetOrders = () => {
   });
 
   return {
-    orders: orders?.data,
-    totalPages: orders?.totalPage,
+    orders: orders,
     loadingGetOrders,
     errorGetOrders,
   };

@@ -36,7 +36,7 @@ export const FeaturedProduct: FC<FeaturedProductProps> = ({ product }) => {
           onPress={() =>
             addToCart({
               id: String(product.id),
-              unitsLeft: 3,
+              unitsLeft: product.quantity as number,
               product,
               quantity: 1,
             })

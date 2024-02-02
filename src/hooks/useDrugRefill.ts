@@ -21,6 +21,24 @@ export const useGetSubscriptionTempList = () => {
   };
 };
 
+export const useGetSubscriptionsByCustomerId = () => {
+  const {
+    data: subscriptions,
+    isLoading: loadingSubscriptions,
+    refetch,
+  } = useQuery({
+    queryKey: ['subscriptions'],
+    queryFn: () => DrugRefillService.getSubscriptionsByCustomerId(),
+    refetchOnWindowFocus: false,
+  });
+
+  return {
+    subscriptions,
+    loadingSubscriptions,
+    refetch,
+  };
+};
+
 export const useCreateSubscription = (
   onSuccess?: () => void,
   onError?: (error: Error) => void
