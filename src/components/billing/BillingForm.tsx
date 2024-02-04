@@ -11,9 +11,10 @@ import { useForm } from 'react-hook-form';
 
 type BillingFormProps = {
   onUpdated: () => void;
+  isProfile?: boolean;
 };
 
-export const BillingForm: FC<BillingFormProps> = ({ onUpdated }) => {
+export const BillingForm: FC<BillingFormProps> = ({ onUpdated, isProfile }) => {
   const { user } = useGetUser();
   const { updateUserInfo, loadingUpdateUserInfo } = useUpdateUserContactInfo(
     () => onUpdated()
@@ -162,7 +163,9 @@ export const BillingForm: FC<BillingFormProps> = ({ onUpdated }) => {
       <Button
         type='submit'
         color='primary'
-        className='mb-5 w-full'
+        size={isProfile ? 'lg' : 'md'}
+        radius={isProfile ? 'full' : 'lg'}
+        className={isProfile ? 'mb-5 w-max ' : 'w-full'}
         isDisabled={!isValid || !isDirty || loadingUpdateUserInfo}
         isLoading={loadingUpdateUserInfo}
       >

@@ -17,7 +17,7 @@ export const EarnedClients: FC<EarnedClientsProps> = ({
   return (
     <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
-        <div className='grid gap-20'>
+        <div className='grid gap-5 md:gap-20'>
           <div className='flex justify-center'>
             <h1 className='text-center text-2xl font-bold lg:max-w-[557px] lg:text-4xl'>
               {title}

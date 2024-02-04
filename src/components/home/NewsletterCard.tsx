@@ -11,20 +11,20 @@ export const NewsLetterCard = () => {
         <Card shadow='none'>
           <CardBody className='bg-primaryLight'>
             <div className='flex w-full flex-col items-center justify-between gap-4 p-1 md:flex-row md:p-4 lg:gap-0 lg:p-20'>
-              <h1 className='w-full text-center text-3xl font-bold text-header-100 lg:text-start lg:text-4xl xl:max-w-[500px]'>
+              <h1 className='w-full text-center text-2xl font-bold text-header-100 lg:text-start lg:text-4xl xl:max-w-[500px]'>
                 Sign up for amazing health and lifestyle deals
               </h1>
               <form
                 onSubmit={(e) => e.preventDefault()}
                 className='grid w-full gap-4'
               >
-                <div className='grid grid-flow-col  grid-cols-[5fr_5fr_2fr] items-end'>
+                <div className='grid items-end gap-2 lg:grid-flow-col lg:grid-cols-[5fr_5fr_2fr] lg:gap-0'>
                   <Input
                     labelPlacement='outside'
                     size='lg'
                     label='Name'
                     radius='none'
-                    className='rounded-none rounded-l-lg'
+                    className='rounded-lg lg:rounded-none lg:rounded-l-lg'
                     classNames={inputDefault}
                     type='text'
                     isRequired
@@ -36,12 +36,13 @@ export const NewsLetterCard = () => {
                     size='lg'
                     label='Email Address'
                     type='email'
+                    className='rounded-lg lg:rounded-none'
                     classNames={inputDefault}
                     isRequired
                     placeholder='Email'
                   />
                   <Button
-                    className='ml-auto rounded-none rounded-r-full'
+                    className='rounded-full lg:ml-auto lg:rounded-r-full'
                     size='lg'
                     type='submit'
                     color='primary'

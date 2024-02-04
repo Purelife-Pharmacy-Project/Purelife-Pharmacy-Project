@@ -1,10 +1,10 @@
 'use client';
 import { Quotes } from '@/library/illustrations/Quotes';
 import { Image } from '@nextui-org/react';
-import { Section } from './Section';
+import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { motion } from 'framer-motion';
+import { Section } from './Section';
 
 export const Testimonials = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -111,7 +111,7 @@ export const Testimonials = () => {
     >
       <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
         <Section className='bg-primaryGreenLight'>
-          <div className='flex flex-col justify-center gap-4  lg:flex-row lg:justify-between lg:gap-0'>
+          <div className='flex flex-col justify-center gap-4 lg:flex-row lg:justify-between lg:gap-0'>
             <h1 className='text-center text-4xl font-bold text-primaryGreenDark lg:text-start'>
               People ❤️ Purelife
             </h1>
@@ -149,9 +149,9 @@ export const Testimonials = () => {
             <div className='relative w-full lg:w-[699px]'>
               <Quotes />
               {shouldRender && (
-                <div className='absolute mt-10 max-w-[680px]'>
+                <div className='absolute mt-3 max-w-[680px] md:mt-10'>
                   <motion.p
-                    className='left-5 top-10 text-medium lg:text-2xl'
+                    className='left-5 top-10 text-center text-medium md:text-start lg:text-2xl'
                     initial={{ opacity: 0 }}
                     key={testimonials[activeIndex].testimonial}
                     animate={{ opacity: 1 }}
@@ -162,7 +162,7 @@ export const Testimonials = () => {
                   </motion.p>
 
                   <motion.span
-                    className='mt-8 block font-bold text-primaryGreenDark lg:text-2xl'
+                    className='mt-3 block text-center font-bold text-primaryGreenDark md:mt-8 md:text-start lg:text-2xl'
                     initial={{ opacity: 0 }}
                     key={testimonials[activeIndex].name}
                     animate={{ opacity: 1 }}

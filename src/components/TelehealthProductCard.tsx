@@ -30,7 +30,7 @@ export const TelehealthProductCard: FC<LabTestCardProps> = ({
         </Link>
         <p className='text-sm text-content'>{test.description}</p>
 
-        <div className='flex items-center justify-between'>
+        <div className='flex flex-col items-start gap-2 md:flex-row md:justify-between md:gap-0 lg:items-center'>
           <p
             className={twMerge(
               'text-xl font-semibold',

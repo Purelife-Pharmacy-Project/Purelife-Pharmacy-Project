@@ -128,7 +128,7 @@ export const Footer = () => {
     <div className='flex justify-start md:grid md:justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
         <footer className='mx-auto grid w-full gap-8 pb-10'>
-          <div className='grid grid-flow-dense gap-24 sm:grid-cols-2 lg:grid-flow-col'>
+          <div className='grid grid-flow-dense gap-8 sm:grid-cols-2 md:gap-24 lg:grid-flow-col'>
             <div className='flex flex-col gap-2 md:col-span-2 lg:col-span-1'>
               <Link href='/'>
                 <Image

@@ -129,7 +129,7 @@ export const AboutDrugCard: FC<AboutDrugCardProps> = ({
   };
 
   return (
-    <section className='absolute w-full'>
+    <section className='w-full md:absolute'>
       <Card
         shadow='none'
         style={{

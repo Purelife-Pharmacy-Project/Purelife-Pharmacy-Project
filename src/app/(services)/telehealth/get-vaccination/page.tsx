@@ -42,11 +42,12 @@ export default function GetVaccinationPage() {
               title='Select for our loads of Vaccines for your health'
               description='Schedule laboratory tests, book vaccination appointments, and receive high-quality medical services from the convenience of wherever you are in Nigeria.'
               ctaText='Start here'
-              ctaLink='#'
+              ctaLink='#products'
             />
           </Section>
         </div>
 
+        <div id='products' className='invisible'></div>
         <HowItWorks data={howItWorksData} variant={'primary'} />
 
         <VaccinationProducts />

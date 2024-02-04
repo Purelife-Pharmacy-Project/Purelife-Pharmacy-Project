@@ -1,16 +1,9 @@
 import { IconChat } from '@/components/icons/IconChat';
-import { IconFaQ } from '@/components/icons/IconFaq';
 import { IconLock } from '@/components/icons/IconLock';
-import { IconLogout } from '@/components/icons/IconLogout';
 import Link from 'next/link';
 
 export default function MyAccountSettingsPage() {
   const links = [
-    {
-      name: 'FAQs',
-      path: '/my-account/settings/faq',
-      icon: <IconFaQ color='header-100' />,
-    },
     {
       name: 'Support/Help',
       path: '/my-account/settings/support',
@@ -20,11 +13,6 @@ export default function MyAccountSettingsPage() {
       name: 'Change Password',
       path: '/my-account/settings/change-password',
       icon: <IconLock color='header-100' />,
-    },
-    {
-      name: 'Logout',
-      path: '#',
-      icon: <IconLogout color='header-100' />,
     },
   ];
 

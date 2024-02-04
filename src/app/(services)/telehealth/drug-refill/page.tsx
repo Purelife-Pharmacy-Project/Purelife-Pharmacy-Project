@@ -50,7 +50,7 @@ export default async function DrugRefill() {
           <DrugRefillHero />
         </HydrationBoundary>
 
-        <div className='mt-[900px] md:mt-[700px] lg:mt-[652px]'>
+        <div className='mt-0 md:mt-[700px] lg:mt-[652px]'>
           <HowItWorks data={howItWorksData} variant={'success'} />
         </div>
 

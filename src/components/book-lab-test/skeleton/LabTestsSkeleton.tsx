@@ -8,7 +8,9 @@ export const LabTestsSkeleton = () => {
         .map((_, index) => (
           <Skeleton
             key={index}
-            className={'h-[300px] w-[384px] rounded-xl bg-white'}
+            className={
+              'h-[300px] w-[200px] rounded-xl bg-white sm:w-[350px] lg:w-[384px]'
+            }
           ></Skeleton>
         ))}
     </div>

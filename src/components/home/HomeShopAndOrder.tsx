@@ -71,7 +71,7 @@ export const HomeShopAndOrder = () => {
                     {category.icon}
                   </div>
                   <div className='grid h-max gap-2'>
-                    <p className='mb-[66px] max-w-[227px] text-lg font-medium text-primaryGreenDark'>
+                    <p className='mb-0 max-w-[227px] text-lg font-medium text-primaryGreenDark lg:mb-[66px]'>
                       {category.title}
                     </p>
                   </div>
@@ -81,7 +81,7 @@ export const HomeShopAndOrder = () => {
                     href={category.url}
                     radius='sm'
                     size='lg'
-                    className='border-primaryGreenDark bg-white py-[28px] uppercase text-primaryGreenDark'
+                    className='border-primaryGreenDark bg-white uppercase text-primaryGreenDark lg:py-[28px]'
                   >
                     Shop all
                   </Button>
