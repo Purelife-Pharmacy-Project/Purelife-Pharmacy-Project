@@ -19,7 +19,7 @@ export const HomeHero: FC<HomeHeroProps> = ({
   return (
     <div className='grid h-[calc(100vh-88px)] items-center justify-center bg-primaryLight'>
       <Section className='bg-primaryLight'>
-        <div className='justify-between md:flex-col lg:flex-row lg:gap-10'>
+        <div className='flex flex-col justify-between lg:flex-row lg:gap-10'>
           <div className='flex flex-col gap-6 lg:justify-center'>
             <h1 className='mx-auto max-w-[530px] text-center text-2xl font-bold text-header-100 md:text-4xl lg:text-start lg:text-5xl'>
               {title}
@@ -41,7 +41,7 @@ export const HomeHero: FC<HomeHeroProps> = ({
               </Button>
             </div>
           </div>
-          <div className='relative mt-6 hidden justify-end md:flex lg:mt-0'>
+          <div className='relative mt-6 flex justify-end lg:mt-0'>
             <HeroImage />
           </div>
         </div>

@@ -21,7 +21,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
       ?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });
 
   return (
-    <div className='grid h-[calc(100vh-260px)] items-center justify-center bg-primaryLight'>
+    <div className='grid h-max items-center justify-center bg-primaryLight md:h-[calc(100vh-260px)]'>
       <Section
         className='relative flex
     w-max flex-col items-center justify-between overflow-x-visible  bg-primaryLight md:flex-row lg:flex lg:h-full'
@@ -38,7 +38,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
             <Button
               radius='full'
               onPress={ctaAction}
-              className='px-12 py-7'
+              className='px-12 py-6'
               color='primary'
               size='lg'
             >
@@ -46,9 +46,9 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
             </Button>
           </div>
         </div>
-        <div className='hidden w-full lg:block lg:self-end'>
+        <div className='flex w-full justify-center self-end'>
           <Image
-            className='overflow-visible rounded-t-lg bg-gradient-to-b from-white to-transparent object-cover lg:h-[55vh] lg:w-[50vw]'
+            className='h-[35vh] w-[25vw] overflow-visible rounded-t-lg bg-gradient-to-b from-white to-transparent object-cover lg:h-[55vh] lg:w-[50vw]'
             radius='none'
             src='/images/joyful-caring-couple.png'
             alt='charming joyful youth couple'

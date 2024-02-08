@@ -78,13 +78,17 @@ export const HeroImage = () => {
       </Card>
       {currentPath === '/' || currentPath === '/telehealth/shop-and-order' ? (
         <>
-          <div className='absolute left-[-10px] top-[280px] z-10 flex items-center gap-3 rounded-md bg-white p-2 px-6 shadow-lg'>
+          <div className='absolute left-[-10px] top-28 z-10 flex items-center gap-3 rounded-md bg-white p-2 shadow-lg lg:top-[280px] lg:px-6'>
             <IconTellehealthRound />
-            <p className='text-sm font-bold text-header-100'>TeleHealth</p>
+            <p className='text-xs font-bold text-header-100 md:text-sm'>
+              TeleHealth
+            </p>
           </div>
-          <div className='absolute  right-[-10px] top-[380px] z-10 flex items-center gap-3 rounded-md bg-white p-2 px-6 shadow-lg'>
+          <div className='absolute right-[-10px] top-48 z-10 flex items-center gap-3 rounded-md bg-white p-2 shadow-lg lg:top-[380px] lg:px-6'>
             <IconShopAndOrderRound />
-            <p className='text-sm font-bold text-header-100'>Shop & Order</p>
+            <p className='text-xs font-bold text-header-100 md:text-sm'>
+              Shop & Order
+            </p>
           </div>
         </>
       ) : null}
@@ -92,12 +96,15 @@ export const HeroImage = () => {
       {currentPath === '/telehealth' ? (
         <Card
           shadow='none'
-          className='absolute -bottom-14 left-9 mx-auto bg-transparent'
+          className='absolute -bottom-14 left-0 mx-auto bg-transparent md:left-9'
         >
           <CardBody className='flex justify-center'>
             <div className='grid w-full grid-flow-col grid-cols-3 items-center gap-4'>
               {teleHealthImages.map((image, index) => (
-                <div className='z-20 rounded-[20px] bg-white p-2' key={index}>
+                <div
+                  className='z-20 rounded-2xl bg-white p-2 md:rounded-[20px]'
+                  key={index}
+                >
                   <Image
                     width={145}
                     height={145}

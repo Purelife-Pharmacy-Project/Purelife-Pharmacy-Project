@@ -61,11 +61,7 @@ export const AppNavbar = ({
         justify='start'
         className='grid grid-flow-col gap-6 data-[justify=start]:flex-grow-0'
       >
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-          className='sm:hidden'
-        />
-        <NavbarBrand className='w-max flex-none flex-grow-0'>
+        <NavbarBrand className='w-28 flex-none flex-grow-0 lg:w-max'>
           <Link href='/'>
             <Image
               src='/app-logo.png'
@@ -142,6 +138,13 @@ export const AppNavbar = ({
             </Button>
           </Link>
         </NavbarItem>
+        <NavbarItem className='flex items-center text-lg leading-[27px] text-header-100 sm:hidden'>
+          <NavbarCart isActive={isActive} />
+        </NavbarItem>
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          className='sm:hidden'
+        />
       </NavbarContent>
 
       <NavbarMenu className='bg-background pt-10'>
