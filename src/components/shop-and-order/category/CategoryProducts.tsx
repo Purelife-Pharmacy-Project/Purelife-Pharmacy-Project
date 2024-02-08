@@ -71,12 +71,12 @@ export const CategoryProducts = () => {
             searchString={searchString as string}
             onRefetch={refetchProducts}
           />
-          <div className='flex w-full items-center justify-end gap-4'>
-            <p className='font-light'>Sort By:</p>
+          <div className='flex w-full flex-col items-center justify-end gap-6 md:flex-row md:gap-4'>
+            <p className='hidden font-light md:block'>Sort By:</p>
             <ProductSortDropdown onRefetch={() => {}} />
           </div>
         </div>
-        <div className='grid grid-flow-col grid-cols-[3fr_9fr] gap-4'>
+        <div className='grid gap-4 lg:grid-flow-col lg:grid-cols-[3fr_9fr]'>
           {/* sidebar */}
           <ProductsFilterContainer
             categoryId={categoryId}

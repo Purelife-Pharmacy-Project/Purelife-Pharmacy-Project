@@ -57,15 +57,15 @@ export const CategoryHero: FC<CategoryHeroProps> = ({}) => {
               <div className='grid w-full gap-4 p-1 md:p-4 lg:p-20'>
                 <div className='flex gap-2 '>
                   <div className='grid gap-4'>
-                    <h1 className='text-2xl font-bold text-header-100 lg:text-4xl'>
+                    <h1 className='text-center text-2xl font-bold text-header-100 lg:text-start lg:text-4xl'>
                       {generateHero().title}
                     </h1>
-                    <p className='text-center text-base font-light leading-4 text-content lg:max-w-[353px] lg:text-left lg:text-lg'>
+                    <p className='text-center text-base font-light  leading-4 text-content lg:max-w-[353px] lg:text-start lg:text-lg'>
                       {generateHero().description}
                     </p>
                     <Button
                       radius='full'
-                      className='w-max px-20 py-6'
+                      className='mx-auto w-max px-20 py-6 lg:mx-0'
                       color='primary'
                       as={Link}
                       href='#products'

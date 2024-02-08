@@ -90,7 +90,7 @@ export const ProductsPriceRange: FC<ProductsPriceRangeProps> = ({
   }, [range]);
 
   return (
-    <>
+    <section>
       <RadioGroup
         label={'Price'}
         value={range!}
@@ -116,6 +116,6 @@ export const ProductsPriceRange: FC<ProductsPriceRangeProps> = ({
           </Button>
         </div>
       ) : null}
-    </>
+    </section>
   );
 };

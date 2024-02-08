@@ -13,7 +13,8 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = ({
     <Select
       labelPlacement='outside'
       color='default'
-      aria-label='Select a category'
+      label=''
+      aria-labelledby='sort-products'
       size='lg'
       className='w-[200px]'
       defaultSelectedKeys={['0']}
