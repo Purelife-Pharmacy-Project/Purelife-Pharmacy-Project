@@ -46,10 +46,12 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
             </Button>
           </div>
         </div>
-        <div className='flex w-full justify-center self-end'>
+        <div className='mt-4 flex w-full justify-center self-end md:mt-0'>
           <Image
-            className='h-[35vh] w-[25vw] overflow-visible rounded-t-lg bg-gradient-to-b from-white to-transparent object-cover lg:h-[55vh] lg:w-[50vw]'
+            className='overflow-visible rounded-t-lg bg-gradient-to-b from-white to-transparent object-cover lg:!h-[55vh] lg:!w-[50vw]'
             radius='none'
+            width={300}
+            height={200}
             src='/images/joyful-caring-couple.png'
             alt='charming joyful youth couple'
           />
