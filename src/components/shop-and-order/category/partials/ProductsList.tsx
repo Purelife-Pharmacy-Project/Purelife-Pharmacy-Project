@@ -41,14 +41,12 @@ export const ProductsList: FC<ProductsListProps> = ({
         )}
       </CardBody>
 
-      {!loadingProducts && (
-        <ProductsPagination
-          color='primary'
-          loading={loadingProducts}
-          className='text-white'
-          totalPages={totalPages}
-        />
-      )}
+      <ProductsPagination
+        color='primary'
+        loading={loadingProducts}
+        className='text-white'
+        totalPages={totalPages}
+      />
     </Card>
   );
 };

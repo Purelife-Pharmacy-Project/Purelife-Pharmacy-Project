@@ -36,14 +36,12 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
           </div>
 
           <div className='mt-8 flex justify-end'>
-            {!loadingVaccines && (
-              <ProductsPagination
-                totalPages={vaccines?.totalPages!}
-                className='text-white'
-                color='primary'
-                loading={loadingVaccines}
-              />
-            )}
+            <ProductsPagination
+              totalPages={vaccines?.totalPages!}
+              className='text-white'
+              color='primary'
+              loading={loadingVaccines}
+            />
           </div>
         </Section>
       </div>

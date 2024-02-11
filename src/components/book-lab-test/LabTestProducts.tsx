@@ -11,9 +11,9 @@ interface LabTestProductsProps {}
 
 export const LabTestProducts: FC<LabTestProductsProps> = () => {
   const searchParams = useSearchParams();
-  const pageIndex = Number(searchParams.get('pageIndex'));
+  const pageIndex = Number(searchParams.get('pageIndex')) || 1;
 
-  const { loadingLabTests, labTests } = useGetLabTests({
+  const { loadingLabTests, labTests, isSuccess } = useGetLabTests({
     pageSize: 6,
     pageIndex,
   });
@@ -35,14 +35,12 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
               ))}
             </div>
 
-            {!loadingLabTests && (
-              <ProductsPagination
-                color='primary'
-                loading={loadingLabTests}
-                className='text-white'
-                totalPages={labTests?.totalPages as number}
-              />
-            )}
+            <ProductsPagination
+              color='primary'
+              loading={loadingLabTests}
+              className='text-white'
+              totalPages={labTests?.totalPages as number}
+            />
           </Section>
         </div>
       </div>

@@ -15,6 +15,7 @@ export const useGetLabTests = (params: {
     data: labTests,
     isLoading: loadingLabTests,
     refetch: refetchLabTests,
+    isSuccess,
   } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: queryKeys,
@@ -26,5 +27,6 @@ export const useGetLabTests = (params: {
     labTests,
     loadingLabTests,
     refetchLabTests,
+    isSuccess,
   };
 };
