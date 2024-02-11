@@ -20,8 +20,6 @@ export const FrequentLabTests: FC<FrequentLabTestsProps> = ({ title }) => {
     pageSize: 3,
   });
 
-  console.log(labTests);
-
   return (
     <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
@@ -33,8 +31,8 @@ export const FrequentLabTests: FC<FrequentLabTestsProps> = ({ title }) => {
           {loadingLabTests ? <FrequentLabTestsSkeleton /> : null}
 
           <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
-            {labTests?.data?.map((test) => (
-              <FeaturedProduct key={test.id} product={test} />
+            {labTests?.data?.map((test, index) => (
+              <FeaturedProduct key={index} product={test} />
             ))}
           </div>
         </div>

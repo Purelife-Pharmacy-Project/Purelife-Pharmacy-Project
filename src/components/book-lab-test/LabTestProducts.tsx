@@ -11,66 +11,17 @@ interface LabTestProductsProps {}
 
 export const LabTestProducts: FC<LabTestProductsProps> = () => {
   const searchParams = useSearchParams();
-  const pageIndex = Number(searchParams.get('pageIndex') || '1');
+  const pageIndex = Number(searchParams.get('pageIndex'));
 
   const { loadingLabTests, labTests } = useGetLabTests({
-    pageSize: 3,
+    pageSize: 6,
     pageIndex,
   });
 
-  // const categories = [
-  //   {
-  //     name: 'All',
-  //     image: '/images/care-package.png',
-  //   },
-  //   {
-  //     name: 'Sexual Health',
-  //     image: '/images/care-package.png',
-  //   },
-  //   {
-  //     name: "Women's Health",
-  //     image: '/images/care-package.png',
-  //   },
-  //   {
-  //     name: 'Men’s Health',
-  //     image: '/images/care-package.png',
-  //   },
-  // ];
-
   return (
     <>
-      {/* <div className='grid justify-center'>
-        <Section className='bg-white'>
-          <div className='grid gap-10 sm:grid-cols-2 lg:grid-flow-col lg:grid-cols-4'>
-            {categories.map((category, index) => (
-              <Button
-                variant='flat'
-                key={index}
-                className='flex h-max flex-col gap-2 border-none bg-transparent py-2'
-              >
-                <div className='flex justify-center'>
-                  <Image
-                    radius='full'
-                    src={category.image}
-                    alt={category.name}
-                    width={140}
-                    height={140}
-                  />
-                </div>
-                <div className='flex justify-center'>
-                  <p className='text-center text-lg font-medium text-header-100'>
-                    {category.name}
-                  </p>
-                </div>
-              </Button>
-            ))}
-          </div>
-        </Section>
-      </div> */}
-
-      {/*products  */}
       <div className='min-h-fit w-full bg-gray-100'>
-        <div className='grid justify-center'>
+        <div className='md:grid md:justify-center'>
           <Section className='border-t-2 border-primaryGreen bg-transparent py-20'>
             {loadingLabTests ? <LabTestsSkeleton /> : null}
 
@@ -84,12 +35,14 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
               ))}
             </div>
 
-            <ProductsPagination
-              color='success'
-              loading={loadingLabTests}
-              className='text-white'
-              totalPages={labTests?.totalPages!}
-            />
+            {!loadingLabTests && (
+              <ProductsPagination
+                color='primary'
+                loading={loadingLabTests}
+                className='text-white'
+                totalPages={labTests?.totalPages as number}
+              />
+            )}
           </Section>
         </div>
       </div>

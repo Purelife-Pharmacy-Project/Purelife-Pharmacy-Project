@@ -13,7 +13,7 @@ export const FeaturedProduct: FC<FeaturedProductProps> = ({ product }) => {
 
   return (
     <Card shadow='none' className='w-full bg-gray-100' radius='lg'>
-      <CardBody className='overflow-visible px-2 pt-2 md:px-3 md:py-2 md:pt-0'>
+      <CardBody className='overflow-visible px-2 pt-2 md:px-3 md:py-2'>
         <Image
           alt={product.name}
           className='h-full w-full rounded-xl object-cover'

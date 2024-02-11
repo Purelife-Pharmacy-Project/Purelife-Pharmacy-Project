@@ -2,6 +2,7 @@
 import { useGetProducts } from '@/hooks';
 import { Card, CardBody } from '@nextui-org/react';
 import { FC } from 'react';
+import { MobileProductsByPrice } from './MobileProductsByPrice';
 import { ProductsPriceRange } from './ProductsPriceRange';
 
 type ProductsFilterContainerProps = {
@@ -17,7 +18,11 @@ export const ProductsFilterContainer: FC<ProductsFilterContainerProps> = ({
   minPrice,
   maxPrice,
 }) => {
-  const { refetch: refetchProducts, loadingProducts } = useGetProducts(
+  const {
+    refetch: refetchProducts,
+    isRefetching,
+    loadingProducts,
+  } = useGetProducts(
     categoryId as string,
     searchString,
     undefined,
@@ -29,22 +34,35 @@ export const ProductsFilterContainer: FC<ProductsFilterContainerProps> = ({
   );
 
   return (
-    <Card shadow='none' className='h-max bg-primaryLight'>
-      <CardBody>
-        <h1 className='mb-4 text-2xl font-semibold text-header-100'>Filter</h1>
+    <>
+      <div className='md:hidden'>
+        <MobileProductsByPrice
+          categoryId={categoryId}
+          searchString={searchString}
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+        />
+      </div>
 
-        <div className='grid gap-4'>
-          {/* <ProductsManufacturersList
+      <Card shadow='none' className='hidden h-max bg-primaryLight md:block'>
+        <CardBody>
+          <h1 className='mb-4 text-2xl font-semibold text-header-100'>
+            Filter
+          </h1>
+
+          <div className='grid gap-4'>
+            {/* <ProductsManufacturersList
             categoryId={categoryId}
             manufacturerId={manufacturerId}
             onRefetch={refetchProducts}
           /> */}
-          <ProductsPriceRange
-            loading={loadingProducts}
-            onRefetch={refetchProducts}
-          />
-        </div>
-      </CardBody>
-    </Card>
+            <ProductsPriceRange
+              loading={loadingProducts || isRefetching}
+              onRefetch={refetchProducts}
+            />
+          </div>
+        </CardBody>
+      </Card>
+    </>
   );
 };

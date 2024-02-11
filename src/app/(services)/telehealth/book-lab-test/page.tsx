@@ -10,12 +10,6 @@ import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { IconAddNotification } from '@/components/icons/IconAddNotification';
 import { IconBrowse } from '@/components/icons/IconBrowse';
 import { IconHealthShield } from '@/components/icons/IconHealthShield';
-import { LabTestService } from '@/services/lab-tests';
-import {
-  HydrationBoundary,
-  QueryClient,
-  dehydrate,
-} from '@tanstack/react-query';
 
 export default async function BookATest() {
   const howItWorksData: {
@@ -39,16 +33,6 @@ export default async function BookATest() {
     },
   ];
 
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery({
-    queryKey: ['lab-tests'],
-    queryFn: () =>
-      LabTestService.getLabTests({
-        pageSize: 3,
-      }),
-  });
-
   return (
     <>
       <AppNavbar background='white' />
@@ -57,9 +41,7 @@ export default async function BookATest() {
 
         <WhyBookATest />
 
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <FrequentLabTests title='Frequently Scheduled Lab Tests' />
-        </HydrationBoundary>
+        <FrequentLabTests title='Frequently Scheduled Lab Tests' />
 
         <LabTestProducts />
 

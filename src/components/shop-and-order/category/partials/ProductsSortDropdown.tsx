@@ -13,6 +13,7 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = ({
     <Select
       labelPlacement='outside'
       color='default'
+      isDisabled
       label=''
       aria-labelledby='sort-products'
       size='lg'

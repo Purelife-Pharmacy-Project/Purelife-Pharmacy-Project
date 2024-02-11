@@ -24,13 +24,15 @@ export const ProductsPagination: FC<ProductsPaginationProps> = ({
   className,
 }) => {
   const { setQuery } = useQueryParams();
-  const [initialPage, setInitialPage] = useState(1);
-  const [noOfPages, setNoOfPages] = useState<number | undefined>(undefined);
+  const [initialPage, setInitialPage] = useState<number>(1);
+  const [noOfPages, setNoOfPages] = useState<number>(1);
+
   const page = useSearchParams().get('pageIndex');
 
   useEffect(() => {
     if (page) {
       const newPage = Number(page);
+      console.log('newPage', newPage);
       setInitialPage(newPage);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -40,12 +42,16 @@ export const ProductsPagination: FC<ProductsPaginationProps> = ({
     if (totalPages) {
       setNoOfPages(totalPages);
     }
+    if (page) {
+      const newPage = Number(page);
+      setInitialPage(newPage);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className='mt-10 flex w-full justify-end'>
-      {noOfPages && noOfPages > 1 ? (
+      {noOfPages > 1 ? (
         <Pagination
           isDisabled={loading}
           onChange={(value) => setQuery({ pageIndex: value })}

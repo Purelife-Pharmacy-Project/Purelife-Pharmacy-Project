@@ -7,19 +7,17 @@ export const useGetVaccines = (params: {
   pageSize?: number;
   pageIndex?: number;
 }) => {
+  const queryKeys = [
+    'vaccines',
+    ...Object.values(params).filter((param) => !!param),
+  ];
   const {
     data: vaccines,
     isLoading: loadingVaccines,
     refetch: refetchVaccines,
   } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
-    queryKey: [
-      'vaccines',
-      params.name,
-      params.productId,
-      params.pageSize,
-      params.pageIndex,
-    ],
+    queryKey: queryKeys,
     queryFn: () => VaccineService.getAllVaccines(params),
   });
 
