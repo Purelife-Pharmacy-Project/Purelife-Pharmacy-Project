@@ -3,6 +3,7 @@ import { CreateOrderPayload, Order, OrderType } from './types';
 
 class OrderService {
   private static ORDERS_API_BASE = '/Order';
+  private static COUPONS_API_BASE = '/Coupon';
 
   constructor() {}
 
@@ -34,6 +35,12 @@ class OrderService {
     }>(`${this.ORDERS_API_BASE}/getById?id=${id}`)) as unknown as {
       data: OrderType;
       totalPage: number;
+    };
+  }
+
+  private static async getCoupon(code: string) {
+    return (await Api.get(`${this.COUPONS_API_BASE}?couponCode=${code}`)) as {
+      data: any;
     };
   }
 }

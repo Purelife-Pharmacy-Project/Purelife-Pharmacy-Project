@@ -44,3 +44,10 @@ export class Order {
     );
   }
 }
+
+export type CouponType = {
+  message: string;
+  discountPercentage: number;
+  couponName: string;
+  lineProductId: number;
+};

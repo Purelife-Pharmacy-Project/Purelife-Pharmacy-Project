@@ -3,7 +3,7 @@ import { Section } from '../home/Section';
 
 export const BookATestHero = () => {
   return (
-    <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
+    <div className='lg:grid lg:justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
         <Card shadow='none'>
           <CardBody className='bg-primaryGreenLight'>

@@ -44,7 +44,7 @@ export const CreateAccountForm = () => {
     registerUser(data);
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='grid gap-8'>
+    <form onSubmit={handleSubmit(onSubmit)} className='grid gap-8 md:w-[554px]'>
       {isError ? <FormMessage type='error' message={registerError!} /> : null}
       <Input
         label='Full Name'

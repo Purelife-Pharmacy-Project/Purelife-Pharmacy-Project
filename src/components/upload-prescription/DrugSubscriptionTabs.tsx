@@ -6,7 +6,7 @@ import { PatientForm } from './forms/PatientForm';
 
 export const DrugSubscriptionTabs = () => {
   return (
-    <div className='grid justify-center pt-10 lg:pb-10'>
+    <div className='pt-10 lg:grid lg:justify-center lg:pb-10'>
       <Section className='bg-white'>
         <div className='grid gap-10'>
           <Tabs

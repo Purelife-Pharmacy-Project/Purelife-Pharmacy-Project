@@ -21,7 +21,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
 
   return (
     <div className='min-h-fit w-full bg-gray-100'>
-      <div className='grid justify-center'>
+      <div className='lg:grid lg:justify-center'>
         <Section className='border-t-2 border-primary bg-transparent py-20'>
           {loadingVaccines ? <LabTestsSkeleton /> : null}
 

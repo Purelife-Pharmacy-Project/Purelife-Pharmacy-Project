@@ -12,7 +12,7 @@ type HowItWorksProps = {
 
 export const HowItWorks: FC<HowItWorksProps> = ({ data, variant }) => {
   return (
-    <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
+    <div className='lg:grid lg:justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
         <div className='grid gap-10'>
           <h1

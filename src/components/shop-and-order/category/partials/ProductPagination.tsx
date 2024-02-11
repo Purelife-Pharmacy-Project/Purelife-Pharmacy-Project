@@ -40,7 +40,7 @@ export const ProductsPagination: FC<ProductsPaginationProps> = ({
   }, [page, totalPages]);
 
   return (
-    <div className='mt-10 flex w-full items-center justify-between'>
+    <div className='mt-10 flex w-full flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-0'>
       <div>
         {!loading && (
           <div className='flex gap-1'>

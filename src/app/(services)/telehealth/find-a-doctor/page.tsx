@@ -39,15 +39,15 @@ export default function FindADoctor() {
             title='Book an appointment with Doctors at Purelife'
             description='Easily purchase your everyday essentials from wherever you are.'
             ctaText='Consult Now'
-            ctaLink='#'
+            ctaLink='#doctors'
           />
         </div>
 
         <HowItWorks data={howItWorksData} variant='primary' />
 
-        <div className='grid justify-center bg-primaryLight'>
-          <div className='grid justify-center bg-primaryLight'>
-            <Section className='bg-primaryLight py-20'>
+        <div id='doctors' className='bg-primaryLight lg:grid lg:justify-center'>
+          <div className='bg-primaryLight lg:grid lg:justify-center'>
+            <Section className='bg-primaryLight py-4 lg:py-20'>
               <div className='grid grid-flow-dense grid-cols-1 gap-4 md:grid-cols-2'>
                 {Array(5)
                   .fill(0)

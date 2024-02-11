@@ -12,7 +12,7 @@ export default function CartPage() {
       <AppNavbar background={'primaryLight'} />
 
       <SubscribeDrugRefillModal isOpen={false} />
-      <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
+      <div className='lg:grid lg:justify-center lg:pb-10 lg:pt-[55px]'>
         <Section className='mt-8 bg-white lg:mt-0'>
           <h1 className='text-2xl font-bold text-header-100 lg:text-4xl'>
             Your Cart

@@ -3,7 +3,7 @@ import { Button, Chip, Image, Link } from '@nextui-org/react';
 export const DoctorCard = () => {
   return (
     <div className='p-5'>
-      <div className='flex flex-col items-center gap-2 md:flex-row lg:gap-4'>
+      <div className='flex-col items-center gap-4 sm:flex sm:flex-row lg:gap-4'>
         <div className='h-60 w-60 rounded-lg'>
           <Image
             src='/images/image-fallback.png'
@@ -28,7 +28,7 @@ export const DoctorCard = () => {
           <Button
             color='primary'
             as={Link}
-            href='/find-a-doctor/1'
+            href='/telehealth/find-a-doctor/1'
             size='md'
             radius='full'
             className='w-max px-8'

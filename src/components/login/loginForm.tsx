@@ -54,7 +54,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='grid gap-4'>
+    <form onSubmit={handleSubmit(onSubmit)} className='grid gap-4 md:w-[554px]'>
       {isError ? <FormMessage type='error' message={loginError!} /> : null}
       <Input
         {...register('email')}
@@ -83,7 +83,7 @@ export const LoginForm = () => {
         }
       />
 
-      <div className='flex items-center justify-start gap-4'>
+      <div className='flex flex-col items-center justify-start gap-4 md:flex-row'>
         <Button
           type='submit'
           size='lg'
@@ -97,7 +97,9 @@ export const LoginForm = () => {
         </Button>
 
         <p className='text-center'>
-          <Link href='/forgot-password'>Forgot Password</Link>
+          <Link isDisabled href='/forgot-password'>
+            Forgot Password
+          </Link>
         </p>
       </div>
 

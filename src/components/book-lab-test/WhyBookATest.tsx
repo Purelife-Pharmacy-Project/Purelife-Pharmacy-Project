@@ -31,34 +31,36 @@ export const WhyBookATest = () => {
     },
   ];
   return (
-    <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
+    <div className='lg:grid lg:justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
-        <div className='grid w-full justify-center'>
+        <div className='w-full lg:grid lg:justify-center'>
           <div className='flex gap-4'>
             <div className='flex w-full flex-col gap-6'>
               <p className='h-max text-2xl font-bold text-primaryGreenDark lg:text-4xl'>
                 Why Book a Test with Us?
               </p>
-              {answersToQuestions.map((answer, index) => {
-                return (
-                  <div
-                    key={index}
-                    className='grid grid-flow-row place-content-start gap-4 lg:grid-flow-col'
-                  >
-                    <div className='grid h-20 w-20 place-content-center items-center rounded-full bg-primaryGreenLight'>
-                      {answer.icon}
+              <div className='grid grid-flow-dense grid-cols-2 gap-6 lg:flex lg:flex-col lg:gap-6'>
+                {answersToQuestions.map((answer, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className='grid grid-flow-row place-content-start gap-4 lg:grid-flow-col'
+                    >
+                      <div className='grid h-20 w-20 place-content-center items-center rounded-full bg-primaryGreenLight'>
+                        {answer.icon}
+                      </div>
+                      <div className='flex flex-col gap-1 '>
+                        <p className='text-lg font-medium text-primaryGreenDark'>
+                          {answer.title}
+                        </p>
+                        <p className='text-lg font-light text-content'>
+                          {answer.description}
+                        </p>
+                      </div>
                     </div>
-                    <div className='flex flex-col gap-1 '>
-                      <p className='text-lg font-medium text-primaryGreenDark'>
-                        {answer.title}
-                      </p>
-                      <p className='text-lg font-light text-content'>
-                        {answer.description}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
             <div className='relative hidden w-full lg:flex lg:justify-end'>
               <Image

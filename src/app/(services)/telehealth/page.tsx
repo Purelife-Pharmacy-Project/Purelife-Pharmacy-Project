@@ -49,7 +49,7 @@ export default function Telehealth() {
     <>
       <AppNavbar background='primaryLight' />
       <main className='grid gap-6'>
-        <div className='grid justify-center bg-primaryLight'>
+        <div className='bg-primaryLight lg:grid lg:justify-center'>
           <Section className='bg-primaryLight'>
             <HomeHero
               title='Health Packages and Medical Care Right in Your Home.'

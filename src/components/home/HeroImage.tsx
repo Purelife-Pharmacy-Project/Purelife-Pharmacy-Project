@@ -16,7 +16,7 @@ export const HeroImage = () => {
       case '/telehealth/drug-refill':
         return '/images/drug-refill-hero.png';
       case '/telehealth/upload-prescription':
-        return '/images/serious-nurse.png';
+        return '/images/senior-nurse.png';
       case '/telehealth/shop-and-order':
         return '/images/customer-smiling.png';
       case '/telehealth/get-vaccination':
