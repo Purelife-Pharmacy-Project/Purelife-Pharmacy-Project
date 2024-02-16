@@ -15,6 +15,7 @@ import { useRouter } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { Paystack, PaystackSuccessResponse } from '../paystack';
+import { BillingAddressForm } from './BillingAddressForm';
 
 type BillingPaymentCardProps = {};
 
@@ -66,12 +67,17 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({}) => {
       <CardBody className='p-8 lg:p-12'>
         <div className='grid gap-4'>
           <div className='grid gap-6'>
+            <BillingAddressForm />
             <div className='flex justify-between pb-3'>
               <RadioGroup
+                label='Payment Method'
                 value={paymentMethod}
                 onValueChange={(value) =>
                   setPaymentMethod(value as 'card' | 'bank_transfer')
                 }
+                classNames={{
+                  label: 'text-header-100',
+                }}
               >
                 <Radio value='bank_transfer'>Direct Bank Transfer</Radio>
                 <Radio value='card'>Pay via Debit/ Credit/ ATM card</Radio>

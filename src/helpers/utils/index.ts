@@ -34,3 +34,9 @@ export const filteredQueryParams = <T extends Record<string, unknown>>(
     .map(([key, value]) => `${key}=${value}`)
     .join('&');
 };
+
+export const removeHtmlTags = (html: string) => {
+  const newString = html.replace(/(<([^>]+)>)/gi, '');
+
+  return newString === '' ? 'nil' : newString;
+};

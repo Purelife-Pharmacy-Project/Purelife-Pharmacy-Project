@@ -47,6 +47,14 @@ class ProductService {
 
     return new Product(response.data[0]);
   };
+
+  public static getDeliveryAddresses = async () => {
+    const response = await Api.get<{ data: any[] }>(
+      `${this.PRODUCTS_API_BASE}/get-delivery`
+    );
+
+    return response.data;
+  };
 }
 
 export default ProductService;

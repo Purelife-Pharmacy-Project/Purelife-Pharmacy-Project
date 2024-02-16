@@ -1,4 +1,4 @@
-import { toNaira } from '@/helpers/utils';
+import { removeHtmlTags, toNaira } from '@/helpers/utils';
 
 export type LabTestQueryParams = {
   name?: string;
@@ -37,7 +37,7 @@ export class LabTest {
     this.price = test.price;
     this.canBePurchased = test.canBePurchased;
     this.canBeSold = test.canBeSold;
-    this.description = test.description;
+    this.description = removeHtmlTags(test.description);
     this.imageInBinary = test.imageInBinary
       ? `data:image/png;base64,${test.imageInBinary}`
       : '/images/care-package.png';

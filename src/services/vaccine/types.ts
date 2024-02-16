@@ -1,4 +1,4 @@
-import { toNaira } from '@/helpers/utils';
+import { removeHtmlTags, toNaira } from '@/helpers/utils';
 import { ProductType } from '../products/types';
 
 export type VaccineQueryParams = {
@@ -26,7 +26,7 @@ export class Vaccine {
     this.price = vaccine.price;
     this.canBePurchased = vaccine.canBePurchased;
     this.canBeSold = vaccine.canBeSold;
-    this.description = vaccine.description;
+    this.description = removeHtmlTags(vaccine.description);
     this.imageInBinary = vaccine.imageInBinary
       ? `data:image/png;base64,${vaccine.imageInBinary}`
       : '/images/care-package.png';

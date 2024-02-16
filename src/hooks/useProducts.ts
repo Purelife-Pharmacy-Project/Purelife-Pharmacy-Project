@@ -135,3 +135,21 @@ export const useGetProductByProductId = (productId: string) => {
     refetch,
   };
 };
+
+export const useGetDeliveryAddresses = () => {
+  const {
+    data: addresses,
+    isLoading: loadingAddresses,
+    refetch,
+  } = useQuery({
+    queryKey: ['delivery-addresses'],
+    queryFn: ProductService.getDeliveryAddresses,
+    refetchOnWindowFocus: false,
+  });
+
+  return {
+    addresses,
+    loadingAddresses,
+    refetch,
+  };
+};

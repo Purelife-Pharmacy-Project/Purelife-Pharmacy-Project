@@ -1,3 +1,5 @@
+import { removeHtmlTags } from '@/helpers/utils';
+
 export enum AccountTransactionStatus {
   Pending = 'Pending',
   Completed = 'Completed',
@@ -44,7 +46,7 @@ export class User {
     this.name = user.name;
     this.email = user.email;
     this.phoneNumber = user.phoneNumber;
-    this.contactAddress = user.contactAddress;
+    this.contactAddress = removeHtmlTags(user.contactAddress);
   }
 
   get firstName() {
