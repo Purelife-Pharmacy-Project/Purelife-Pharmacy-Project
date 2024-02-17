@@ -1,4 +1,5 @@
 import { toNaira } from '@/helpers/utils';
+import { Blob } from 'buffer';
 
 export type ProductQueryParams = {
   categoryId?: string;

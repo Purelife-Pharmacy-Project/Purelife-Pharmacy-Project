@@ -1,12 +1,16 @@
+import { toNaira } from '@/helpers/utils';
 import { useGetDeliveryAddresses } from '@/hooks';
 import { selectBorderedGray } from '@/theme';
 import { Select, SelectItem } from '@nextui-org/react';
+import { FC } from 'react';
 
 type BillingAddressFormProps = {
   onSelect: (value: string) => void;
 };
 
-export const BillingAddressForm = () => {
+export const BillingAddressForm: FC<BillingAddressFormProps> = ({
+  onSelect,
+}) => {
   const { addresses, loadingAddresses } = useGetDeliveryAddresses();
 
   return (
@@ -16,19 +20,30 @@ export const BillingAddressForm = () => {
       </label>
       <Select
         size={'lg'}
+        isDisabled={loadingAddresses}
         aria-label='Select duration'
         placeholder='Select a location'
         classNames={selectBorderedGray}
+        defaultValue={addresses?.[0]?.id ?? ''}
+        onChange={(e) => onSelect(e.target.value)}
         labelPlacement='outside'
         name='location'
-        defaultValue={1}
       >
-        <SelectItem className='py-3 text-black' key={1} value='lagos'>
-          Lagos
-        </SelectItem>
-        <SelectItem className='py-3 text-black' key={2} value='abuja'>
-          Abuja
-        </SelectItem>
+        {addresses?.map((address) => (
+          <SelectItem
+            className='py-2 text-header-100'
+            key={address.id}
+            textValue={address.name}
+            value={address.id}
+          >
+            <div className='flex items-center justify-between'>
+              <span>{address.name}</span>
+              <span className='text-right font-medium'>
+                {toNaira(address.price)}
+              </span>
+            </div>
+          </SelectItem>
+        )) ?? []}
       </Select>
     </div>
   );

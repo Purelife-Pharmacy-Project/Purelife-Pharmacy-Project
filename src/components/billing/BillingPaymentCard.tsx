@@ -38,6 +38,7 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({}) => {
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'bank_transfer'>(
     'card'
   );
+  const [deliveryAddress, setDeliveryAddress] = useState<string>('');
 
   const { createOrder, loadingCreateOrder } = useCreateOrder(() => {
     clearCart();
@@ -49,7 +50,7 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({}) => {
     if (!response) return;
 
     const payload: CreateOrderPayload = {
-      billingAddress: user?.contactAddress as string,
+      billingAddress: deliveryAddress,
       customerId: user?.id as number,
       products: cart?.map((product) => ({
         productId: product.product.id,
@@ -67,7 +68,7 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({}) => {
       <CardBody className='p-8 lg:p-12'>
         <div className='grid gap-4'>
           <div className='grid gap-6'>
-            <BillingAddressForm />
+            <BillingAddressForm onSelect={setDeliveryAddress} />
             <div className='flex justify-between pb-3'>
               <RadioGroup
                 label='Payment Method'

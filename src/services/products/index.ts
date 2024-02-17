@@ -49,9 +49,9 @@ class ProductService {
   };
 
   public static getDeliveryAddresses = async () => {
-    const response = await Api.get<{ data: any[] }>(
+    const response = (await Api.get<{ data: ProductType[] }>(
       `${this.PRODUCTS_API_BASE}/get-delivery`
-    );
+    )) as unknown as { data: ProductType[] };
 
     return response.data;
   };
