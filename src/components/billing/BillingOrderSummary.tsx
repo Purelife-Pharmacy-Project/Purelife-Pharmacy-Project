@@ -3,7 +3,8 @@ import { toNaira } from '@/helpers/utils';
 import { useCartStore, useCreateOrder, useGetUser } from '@/hooks';
 import { useStore } from '@/hooks/store';
 import { CreateOrderPayload, OrderProduct } from '@/services/orders/types';
-import { Card, CardBody } from '@nextui-org/react';
+import { Button, Card, CardBody } from '@nextui-org/react';
+import { goToApplyCoupon } from '../cart/OrderSummary';
 import { IconSpinner } from '../icons/IconSpinner';
 
 export const BillingOrderSummary = () => {
@@ -49,9 +50,20 @@ export const BillingOrderSummary = () => {
 
             <div className='flex justify-between pb-3'>
               <p className='text-lg font-light text-header-100'>Discount</p>
-              <p className='text-lg font-semibold text-primaryGreen'>
-                {summary?.couponPercentage}% Off
-              </p>
+              {summary?.couponPercentage === 0 ? (
+                <Button
+                  variant='flat'
+                  disabled
+                  className='font-semibold text-header-100'
+                  onPress={() => goToApplyCoupon()}
+                >
+                  Apply coupon
+                </Button>
+              ) : (
+                <p className='text-lg font-semibold text-primaryGreen'>
+                  {summary?.couponPercentage}% Off
+                </p>
+              )}
             </div>
             <div className='flex justify-between border-b border-gray-300 pb-3'>
               <p className='text-lg font-light text-header-100'>Delivery Fee</p>

@@ -1,4 +1,5 @@
 'use client';
+import { removeHtmlTags } from '@/helpers/utils';
 import { useGetUser } from '@/hooks';
 import { Button, Card, CardBody } from '@nextui-org/react';
 import { useState } from 'react';
@@ -47,7 +48,7 @@ export const BillingInfoCard = () => {
 
             <p className='font-medium text-header-100'>
               {user?.contactAddress && user?.contactAddress.trim() !== ''
-                ? user?.contactAddress
+                ? removeHtmlTags(user?.contactAddress)
                 : 'N/A'}
             </p>
           </div>

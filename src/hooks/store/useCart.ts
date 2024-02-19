@@ -73,7 +73,7 @@ export const useCartStore = create<CartState>()(
                   : item
               );
             } else {
-              toast.error('Item out of stock');
+              toast.error('Item(s) out of stock');
               return {
                 cart: [...state.cart],
               };
@@ -82,6 +82,7 @@ export const useCartStore = create<CartState>()(
             newCart = [...state.cart, cart];
           }
 
+          toast.success('Item(s) added to cart');
           return {
             cart: newCart,
             summary: {
@@ -97,18 +98,29 @@ export const useCartStore = create<CartState>()(
             },
           };
         }),
-      clearCart: () => set({ cart: [] }),
+      clearCart: () =>
+        set({
+          cart: [],
+          summary: {
+            totalPayableAmount: toNaira(0),
+            deliveryFee: toNaira(0),
+            couponPercentage: 0,
+            totalCartAmount: 0,
+          },
+        }),
       removeFromCart: (productId: number) =>
         set((state) => {
           if (state.cart.length === 1) {
             state.clearCart();
 
+            toast.success('Item(s) removed from cart');
             return { cart: [] };
           } else {
             const newCart = state.cart.filter(
               (item) => item.product.id !== productId
             );
 
+            toast.success('Item(s) removed from cart');
             return {
               cart: newCart,
               summary: {

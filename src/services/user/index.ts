@@ -3,7 +3,7 @@ import Api from '@/helpers/api';
 import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 import { jwtDecode } from 'jwt-decode';
 import { LoginPayload, RegisterPayload } from './schema';
-import { LoginResponse, UserType } from './types';
+import { LoginResponse, User, UserType } from './types';
 
 class UsersService {
   private static USERS_API_BASE = '/Contact';
@@ -108,7 +108,7 @@ class UsersService {
       `${this.USERS_API_BASE}?id=${clientUserId}`
     )) as unknown as { data: UserType[]; totalPage: number };
 
-    return JSON.parse(JSON.stringify(response.data[0])) as UserType;
+    return JSON.parse(JSON.stringify(new User(response.data[0]))) as UserType;
   }
 
   public static async updateUser(payload: Partial<UserType>) {

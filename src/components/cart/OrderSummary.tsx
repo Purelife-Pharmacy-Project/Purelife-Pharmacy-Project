@@ -9,6 +9,19 @@ import { BillingAddressModal } from '../billing/BillingAddressModal';
 
 type OrderSummaryProps = {};
 
+export const goToApplyCoupon = () => {
+  const couponInput = document.getElementById('coupon-input');
+
+  if (couponInput) {
+    couponInput.focus();
+
+    couponInput.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+    });
+  }
+};
+
 export const OrderSummary: FC<OrderSummaryProps> = () => {
   const summary = useStore(useCartStore, (state) => state)?.summary;
 
@@ -21,19 +34,6 @@ export const OrderSummary: FC<OrderSummaryProps> = () => {
       console.log({ summary });
     }
   }, [summary]);
-
-  const goToApplyCoupon = () => {
-    const couponInput = document.getElementById('coupon-input');
-
-    if (couponInput) {
-      couponInput.focus();
-
-      couponInput.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-      });
-    }
-  };
 
   return (
     <Card shadow='none' className='w-full border border-gray-300 lg:w-[543px]'>

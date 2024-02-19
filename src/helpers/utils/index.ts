@@ -41,17 +41,9 @@ export const filteredQueryParams = <T extends Record<string, unknown>>(
 };
 
 export const removeHtmlTags = (html: string) => {
-  // Check if the string is surrounded by p tags
-  const pTagRegex = /^<p>(.*)<\/p>$/i;
-  const match = html.match(pTagRegex);
-
-  if (match) {
-    // If it is, remove the p tags
-    return match[1];
-  }
-
-  // If it's not, remove all HTML tags as before
+  // Remove all HTML tags
   const newString = html.replace(/(<([^>]+)>)/gi, '');
 
+  // If the new string is empty, return 'nil'
   return newString === '' ? 'nil' : newString;
 };
