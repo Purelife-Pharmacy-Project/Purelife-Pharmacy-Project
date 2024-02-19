@@ -1,4 +1,5 @@
 'use client';
+import { fromNaira } from '@/helpers/utils';
 import {
   useCartStore,
   useCreateOrder,
@@ -59,7 +60,6 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({}) => {
 
     const payload: CreateOrderPayload = {
       billingAddress: deliveryAddress,
-      customerId: user?.id as number,
       products: cart?.map((product) => ({
         productId: product.product.id,
         quantity: product.quantity,
@@ -142,7 +142,7 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({}) => {
 
           <div className='hidden' id='paymentButton'>
             <Paystack
-              amount={summary?.totalAmount as number}
+              amount={fromNaira(summary?.totalPayableAmount || '0')}
               paymentMethod={paymentMethod}
               email={user?.email as string}
               ctaText='Pay Now'

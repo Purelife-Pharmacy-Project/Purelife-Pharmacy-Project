@@ -8,8 +8,8 @@ export type OrderProduct = {
 };
 
 export type CreateOrderPayload = {
-  customerId: number;
-  billingAddress: string;
+  customerId?: number;
+  billingAddress?: string;
   products: OrderProduct[];
 };
 
@@ -50,4 +50,12 @@ export type CouponType = {
   discountPercentage: number;
   couponName: string;
   lineProductId: number;
+};
+
+export type ApplyCouponPayload = {
+  couponCode: string;
+  couponName: string;
+  productLineId: string;
+  orderId: string;
+  couponPrice: number;
 };

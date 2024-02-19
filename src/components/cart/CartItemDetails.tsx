@@ -89,7 +89,7 @@ export const CartItemDetails = () => {
                     </Button>
 
                     <ConfirmationModal
-                      productId={itemId}
+                      productId={Number(itemId)}
                       isOpen={showConfirmationModal}
                       openChange={() => {
                         setShowConfirmationModal(false);
@@ -105,8 +105,7 @@ export const CartItemDetails = () => {
                     isDisabled={loadingProduct}
                     onPress={() => {
                       addToCart({
-                        id: String(product.id),
-                        unitsLeft: product.quantity as number,
+                        id: product.id,
                         product,
                         quantity: 1,
                       });

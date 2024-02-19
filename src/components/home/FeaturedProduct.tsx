@@ -36,8 +36,7 @@ export const FeaturedProduct: FC<FeaturedProductProps> = ({ product }) => {
             variant='bordered'
             onPress={() =>
               addToCart({
-                id: String(product.id),
-                unitsLeft: product.quantity as number,
+                id: product.id,
                 product,
                 quantity: 1,
               })

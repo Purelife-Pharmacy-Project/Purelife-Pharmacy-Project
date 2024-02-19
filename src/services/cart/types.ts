@@ -1,8 +1,7 @@
 import { Product } from '../products/types';
 
 export type CartType = {
-  id: string;
-  unitsLeft: number;
+  id: number;
   product: Product;
   quantity: number;
 };

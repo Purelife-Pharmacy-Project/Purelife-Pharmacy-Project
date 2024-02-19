@@ -12,7 +12,7 @@ import { FC } from 'react';
 type ConfirmModalProps = {
   isOpen: boolean;
   openChange: () => void;
-  productId: string;
+  productId: number;
 };
 
 export const ConfirmationModal: FC<ConfirmModalProps> = ({

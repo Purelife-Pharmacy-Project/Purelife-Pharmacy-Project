@@ -30,8 +30,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
           isDisabled={product.quantity === 0}
           onPress={() =>
             addToCart({
-              id: String(product.id),
-              unitsLeft: product.quantity as number,
+              id: product.id,
               product,
               quantity: 1,
             })
@@ -69,8 +68,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
           isDisabled={loading}
           onPress={() => {
             addToCart({
-              id: String(product.id),
-              unitsLeft: product.quantity as number,
+              id: product.id,
               product,
               quantity: 1,
             });

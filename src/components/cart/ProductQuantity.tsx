@@ -11,18 +11,18 @@ type ProductQuantityProps = {
 export const ProductQuantity: FC<ProductQuantityProps> = ({
   cartItem: product,
 }) => {
-  const { increaseQuantity, decreaseQuantity } = useCartStore();
+  const { addToCart } = useCartStore();
 
   return (
     <div className='flex w-[120px] items-center justify-center gap-2 rounded-full bg-primaryLight'>
       <Button
         isIconOnly
         isDisabled={
-          product?.unitsLeft === 1 ||
+          product?.product.quantity === 1 ||
           product?.quantity === 0 ||
           product?.quantity === 1
         }
-        onPress={() => decreaseQuantity(product?.id)}
+        onPress={() => addToCart(product)}
         variant='flat'
         className='w-full rounded-l-full bg-primaryLight text-2xl text-black'
       >
@@ -32,8 +32,8 @@ export const ProductQuantity: FC<ProductQuantityProps> = ({
 
       <Button
         isIconOnly
-        isDisabled={product.quantity <= product.unitsLeft}
-        onPress={() => increaseQuantity(product?.id)}
+        isDisabled={product.quantity <= (product?.product.quantity as number)}
+        onPress={() => addToCart(product)}
         variant='flat'
         className='w-full rounded-r-full bg-primaryLight text-2xl text-black'
       >

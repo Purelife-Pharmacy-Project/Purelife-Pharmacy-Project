@@ -6,24 +6,39 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 export type CartSummary = {
-  total: string;
-  subTotal: string;
-  discount: string;
+  totalPayableAmount: string;
   deliveryFee: string;
-  totalAmount: number;
+  couponPercentage?: number;
+  totalCartAmount: number;
 };
 
 type CartState = {
   cart: CartType[];
   summary: CartSummary;
-  setSummary: (summary: CartSummary) => void;
   setDeliveryFee: (deliveryFee: number) => void;
   addToCart: (cart: CartType) => void;
-  getCartItem: (cartId: string) => CartType | undefined;
-  removeFromCart: (cartId: string) => void;
-  increaseQuantity: (cartId: string) => void;
-  decreaseQuantity: (cartId: string) => void;
+  getCartItem: (productId: number) => CartType | undefined;
+  setCouponPercentage: (couponPercentage: number) => void;
+  removeFromCart: (productId: number) => void;
   clearCart: () => void;
+};
+
+const calculatedTotalCartAmount = (cart: CartType[]) =>
+  cart.reduce((acc, cart) => acc + cart.product.price * cart.quantity, 0);
+
+const calculatedPayableAmount = (
+  cart: CartType[],
+  deliveryFee: number,
+  couponPercentage: number | undefined
+) => {
+  const totalCartAmount = calculatedTotalCartAmount(cart);
+
+  if (couponPercentage && couponPercentage > 0) {
+    const discount = (totalCartAmount * couponPercentage) / 100;
+    return totalCartAmount + deliveryFee - discount;
+  }
+
+  return totalCartAmount + deliveryFee;
 };
 
 export const useCartStore = create<CartState>()(
@@ -31,198 +46,124 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       cart: [] as CartType[],
       summary: {
-        total: toNaira(0),
-        subTotal: toNaira(0),
+        totalPayableAmount: toNaira(0),
         deliveryFee: toNaira(0),
-        discount: toNaira(0),
-        totalAmount: 0,
-      },
-      // when make a cart action we need to update the summary
-      setSummary: () =>
-        set((state) => {
-          const totalAmount = state.cart.reduce(
-            (acc, cart) =>
-              acc +
-              cart.product.price * cart.quantity +
-              (fromNaira(state.summary.deliveryFee) || 0),
-            0
-          );
-          return {
-            summary: {
-              ...state.summary,
-              subTotal: toNaira(totalAmount),
-              deliveryFee: toNaira(0),
-              total: toNaira(totalAmount),
-              totalAmount,
-            },
-          };
-        }),
-      setDeliveryFee: (deliveryFee) => {
-        set((state) => {
-          return {
-            summary: {
-              ...state.summary,
-              deliveryFee: toNaira(deliveryFee),
-              total: toNaira(state.summary.totalAmount + deliveryFee),
-              totalAmount: state.summary.totalAmount + deliveryFee,
-            },
-          };
-        });
-      },
-      getCartItem: (cartId) => {
-        return get().cart.find((cartItem) => cartItem.id === cartId);
+        couponPercentage: 0,
+        totalCartAmount: 0,
       },
       addToCart: (cart) =>
         set((state) => {
-          // check if item is already in cart
           const cartItem = state.cart.find(
             (item) => item.product.id === cart.product.id
           );
 
-          // if item is in cart, just update the quantity
-          if (cartItem?.unitsLeft === 0) {
+          if (cartItem && cartItem.product.quantity === 0) {
             return {
-              cart: state.cart,
+              cart: [...state.cart],
             };
           }
 
+          let newCart;
+
           if (cartItem) {
-            if (cartItem.quantity < cartItem.unitsLeft) {
-              cartItem.quantity++;
-              // update the summary
-              state.setSummary(state.summary);
-
-              toast.info('Item already in cart, quantity increased');
-
-              return {
-                cart: state.cart,
-              };
+            if (cartItem.quantity < (cartItem?.product.quantity as number)) {
+              newCart = state.cart.map((item) =>
+                item.product.id === cart.product.id
+                  ? { ...item, quantity: item.quantity + 1 }
+                  : item
+              );
             } else {
               toast.error('Item out of stock');
               return {
-                cart: state.cart,
+                cart: [...state.cart],
               };
             }
           } else {
-            // if item is not in cart, add it to cart
-            state.cart.push(cart);
-
-            toast.success('Item added to cart');
-
-            // update the summary
-            state.setSummary(state.summary);
-
-            return {
-              cart: state.cart,
-            };
+            newCart = [...state.cart, cart];
           }
+
+          return {
+            cart: newCart,
+            summary: {
+              ...state.summary,
+              totalCartAmount: calculatedTotalCartAmount(newCart),
+              totalPayableAmount: toNaira(
+                calculatedPayableAmount(
+                  newCart,
+                  fromNaira(state.summary.deliveryFee),
+                  state.summary.couponPercentage
+                )
+              ),
+            },
+          };
         }),
-      removeFromCart: (cartId) => {
+      clearCart: () => set({ cart: [] }),
+      removeFromCart: (productId: number) =>
         set((state) => {
           if (state.cart.length === 1) {
+            state.clearCart();
+
+            return { cart: [] };
+          } else {
+            const newCart = state.cart.filter(
+              (item) => item.product.id !== productId
+            );
+
             return {
-              cart: [],
+              cart: newCart,
               summary: {
-                total: toNaira(0),
-                deliveryFee: toNaira(0),
-                subTotal: toNaira(0),
-                discount: toNaira(0),
-                totalAmount: 0,
+                ...state.summary,
+                totalCartAmount: calculatedTotalCartAmount(newCart),
+                totalPayableAmount: toNaira(
+                  calculatedPayableAmount(
+                    newCart,
+                    fromNaira(state.summary.deliveryFee),
+                    state.summary.couponPercentage
+                  )
+                ),
               },
             };
           }
-
-          // update the summary
-          state.setSummary(state.summary);
-
-          return {
-            cart: state.cart.filter((cartItem) => cartItem.id !== cartId),
-          };
-        });
-      },
-      increaseQuantity: (cartId) => {
+        }),
+      setDeliveryFee: (deliveryFee: number) =>
         set((state) => {
           return {
-            cart: state.cart.map((cartItem) => {
-              if (cartItem.id === cartId) {
-                cartItem.quantity < cartItem.unitsLeft
-                  ? cartItem.quantity++
-                  : toast.error('Item out of stock');
-              }
-              return cartItem;
-            }),
             summary: {
               ...state.summary,
-              totalAmount: state.cart.reduce(
-                (acc, cart) => acc + cart.product.price * cart.quantity,
-                0
-              ),
-              subTotal: toNaira(
-                state.cart.reduce(
-                  (acc, cart) => acc + cart.product.price * cart.quantity,
-                  0
-                )
-              ),
-              total: toNaira(
-                state.cart.reduce(
-                  (acc, cart) => acc + cart.product.price * cart.quantity,
-                  0
+              totalCartAmount: calculatedTotalCartAmount(state.cart),
+              deliveryFee: toNaira(deliveryFee),
+              totalPayableAmount: toNaira(
+                calculatedPayableAmount(
+                  state.cart,
+                  deliveryFee,
+                  state.summary.couponPercentage
                 )
               ),
             },
           };
-        });
-      },
-      decreaseQuantity: (cartId) => {
+        }),
+      setCouponPercentage: (couponPercentage: number) =>
         set((state) => {
+          toast.success('Coupon Applied');
           return {
-            cart: state.cart.map((cartItem) => {
-              if (cartItem.id === cartId) {
-                cartItem.quantity < cartItem.unitsLeft
-                  ? cartItem.quantity--
-                  : toast.error('Item out of stock');
-              }
-              return cartItem;
-            }),
             summary: {
               ...state.summary,
-              totalAmount: state.cart.reduce(
-                (acc, cart) => acc + cart.product.price * cart.quantity,
-                0
-              ),
-              subTotal: toNaira(
-                state.cart.reduce(
-                  (acc, cart) => acc + cart.product.price * cart.quantity,
-                  0
-                )
-              ),
-              total: toNaira(
-                state.cart.reduce(
-                  (acc, cart) => acc + cart.product.price * cart.quantity,
-                  0
+              couponPercentage,
+              totalPayableAmount: toNaira(
+                calculatedPayableAmount(
+                  state.cart,
+                  fromNaira(state.summary.deliveryFee),
+                  couponPercentage
                 )
               ),
             },
           };
-        });
-      },
-      clearCart: () => {
-        set(() => {
-          return {
-            cart: [],
-            summary: {
-              total: toNaira(0),
-              deliveryFee: toNaira(0),
-              subTotal: toNaira(0),
-              discount: toNaira(0),
-              totalAmount: 0,
-            },
-          };
-        });
-      },
+        }),
+      getCartItem: (productId: number) =>
+        get().cart.find((item) => item.product.id === productId),
     }),
     {
-      name: 'cart-storage',
+      name: '__storage__',
     }
   )
 );

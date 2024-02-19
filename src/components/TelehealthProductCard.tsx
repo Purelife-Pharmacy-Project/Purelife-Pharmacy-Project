@@ -44,8 +44,7 @@ export const TelehealthProductCard: FC<LabTestCardProps> = ({
             disabled={test.quantity === 0}
             onPress={() =>
               addToCart({
-                id: String(test.id),
-                unitsLeft: test.quantity as number,
+                id: test.id,
                 product: test,
                 quantity: 1,
               })

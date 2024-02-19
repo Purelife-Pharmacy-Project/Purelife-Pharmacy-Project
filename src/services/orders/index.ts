@@ -1,5 +1,12 @@
 import Api from '@/helpers/api';
-import { CreateOrderPayload, Order, OrderType } from './types';
+import UsersService from '../user';
+import {
+  ApplyCouponPayload,
+  CouponType,
+  CreateOrderPayload,
+  Order,
+  OrderType,
+} from './types';
 
 class OrderService {
   private static ORDERS_API_BASE = '/Order';
@@ -8,7 +15,12 @@ class OrderService {
   constructor() {}
 
   public static async createOrder(order: CreateOrderPayload) {
-    return Api.post(`${this.ORDERS_API_BASE}/create`, order);
+    const userId = UsersService.getUserFromToken().id;
+
+    return Api.post(`${this.ORDERS_API_BASE}/create`, {
+      ...order,
+      customerId: userId,
+    });
   }
 
   public static async getAllCustomerOrders() {
@@ -38,8 +50,16 @@ class OrderService {
     };
   }
 
-  private static async getCoupon(code: string) {
-    return (await Api.get(`${this.COUPONS_API_BASE}?couponCode=${code}`)) as {
+  public static async getCoupon(code: string) {
+    const response = (await Api.get<CouponType>(
+      `${this.COUPONS_API_BASE}?couponCode=${code}`
+    )) as unknown as CouponType;
+
+    return response;
+  }
+
+  public static async applyCouponToOrder(payload: ApplyCouponPayload) {
+    return (await Api.post(`${this.COUPONS_API_BASE}/apply`, payload)) as {
       data: any;
     };
   }
