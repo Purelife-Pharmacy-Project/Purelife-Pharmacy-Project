@@ -45,5 +45,5 @@ export const removeHtmlTags = (html: string) => {
   const newString = html.replace(/(<([^>]+)>)/gi, '');
 
   // If the new string is empty, return 'nil'
-  return newString === '' ? 'nil' : newString;
+  return newString === '' ? '_' : newString;
 };

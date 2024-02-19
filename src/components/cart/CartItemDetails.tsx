@@ -1,6 +1,7 @@
 'use client';
 import { ProductQuantity } from '@/components/cart/ProductQuantity';
 import { IconBin } from '@/components/icons/IconBin';
+import { removeHtmlTags } from '@/helpers/utils';
 import { useCartStore, useGetProductByProductId } from '@/hooks';
 import { useStore } from '@/hooks/store';
 import { CartType } from '@/services/cart/types';
@@ -69,7 +70,7 @@ export const CartItemDetails = () => {
                   {product?.name}
                 </h1>
                 <p className='text-lg font-light text-header-100'>
-                  {product?.description}
+                  {removeHtmlTags(product?.description)}
                 </p>
 
                 <p className='text-xl font-semibold text-primary'>
