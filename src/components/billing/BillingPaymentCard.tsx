@@ -1,5 +1,10 @@
 'use client';
-import { useCartStore, useCreateOrder, useGetUser } from '@/hooks';
+import {
+  useCartStore,
+  useCreateOrder,
+  useGetDeliveryAddresses,
+  useGetUser,
+} from '@/hooks';
 import { useStore } from '@/hooks/store';
 import { CreateOrderPayload, OrderProduct } from '@/services/orders/types';
 import {
@@ -25,6 +30,8 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({}) => {
   const cart = useStore(useCartStore, (state) => state)?.cart;
   const router = useRouter();
 
+  const { setDeliveryFee } = useCartStore();
+
   useEffect(() => {
     if (cart && cart.length === 0) {
       toast.warning('Oops! Your cart is empty.');
@@ -39,6 +46,7 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({}) => {
     'card'
   );
   const [deliveryAddress, setDeliveryAddress] = useState<string>('');
+  const { addresses, loadingAddresses } = useGetDeliveryAddresses();
 
   const { createOrder, loadingCreateOrder } = useCreateOrder(() => {
     clearCart();
@@ -63,12 +71,23 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({}) => {
     createOrder(payload);
   };
 
+  const handleSelectBillingAddress = (value: string) => {
+    setDeliveryAddress(value);
+    const address = addresses?.find((address) => address.id === Number(value));
+
+    setDeliveryFee(address?.price as number);
+  };
+
   return (
     <Card shadow='none' className='w-full bg-primaryLight'>
       <CardBody className='p-8 lg:p-12'>
         <div className='grid gap-4'>
           <div className='grid gap-6'>
-            <BillingAddressForm onSelect={setDeliveryAddress} />
+            <BillingAddressForm
+              addresses={addresses!}
+              loadingAddresses={loadingAddresses}
+              onSelect={handleSelectBillingAddress}
+            />
             <div className='flex justify-between pb-3'>
               <RadioGroup
                 label='Payment Method'

@@ -1,14 +1,15 @@
-import { toNaira } from '@/helpers/utils';
+import { fromNaira, toNaira } from '@/helpers/utils';
 import { CartType } from '@/services/cart/types';
 import type {} from '@redux-devtools/extension'; // required for devtools typing
 import { toast } from 'sonner';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-type CartSummary = {
+export type CartSummary = {
   total: string;
   subTotal: string;
   discount: string;
+  deliveryFee: string;
   totalAmount: number;
 };
 
@@ -16,6 +17,7 @@ type CartState = {
   cart: CartType[];
   summary: CartSummary;
   setSummary: (summary: CartSummary) => void;
+  setDeliveryFee: (deliveryFee: number) => void;
   addToCart: (cart: CartType) => void;
   getCartItem: (cartId: string) => CartType | undefined;
   removeFromCart: (cartId: string) => void;
@@ -31,6 +33,7 @@ export const useCartStore = create<CartState>()(
       summary: {
         total: toNaira(0),
         subTotal: toNaira(0),
+        deliveryFee: toNaira(0),
         discount: toNaira(0),
         totalAmount: 0,
       },
@@ -38,18 +41,34 @@ export const useCartStore = create<CartState>()(
       setSummary: () =>
         set((state) => {
           const totalAmount = state.cart.reduce(
-            (acc, cart) => acc + cart.product.price * cart.quantity,
+            (acc, cart) =>
+              acc +
+              cart.product.price * cart.quantity +
+              (fromNaira(state.summary.deliveryFee) || 0),
             0
           );
           return {
             summary: {
               ...state.summary,
               subTotal: toNaira(totalAmount),
+              deliveryFee: toNaira(0),
               total: toNaira(totalAmount),
               totalAmount,
             },
           };
         }),
+      setDeliveryFee: (deliveryFee) => {
+        set((state) => {
+          return {
+            summary: {
+              ...state.summary,
+              deliveryFee: toNaira(deliveryFee),
+              total: toNaira(state.summary.totalAmount + deliveryFee),
+              totalAmount: state.summary.totalAmount + deliveryFee,
+            },
+          };
+        });
+      },
       getCartItem: (cartId) => {
         return get().cart.find((cartItem) => cartItem.id === cartId);
       },
@@ -105,6 +124,7 @@ export const useCartStore = create<CartState>()(
               cart: [],
               summary: {
                 total: toNaira(0),
+                deliveryFee: toNaira(0),
                 subTotal: toNaira(0),
                 discount: toNaira(0),
                 totalAmount: 0,
@@ -192,6 +212,7 @@ export const useCartStore = create<CartState>()(
             cart: [],
             summary: {
               total: toNaira(0),
+              deliveryFee: toNaira(0),
               subTotal: toNaira(0),
               discount: toNaira(0),
               totalAmount: 0,

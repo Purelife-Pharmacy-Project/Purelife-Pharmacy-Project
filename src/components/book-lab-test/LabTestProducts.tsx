@@ -1,5 +1,5 @@
 'use client';
-import { useGetCategories } from '@/hooks';
+import { useGetCategories, useQueryParams } from '@/hooks';
 import { useGetLabTests } from '@/hooks/useLabTest';
 import { Button, Image } from '@nextui-org/react';
 import { useSearchParams } from 'next/navigation';
@@ -14,10 +14,14 @@ interface LabTestProductsProps {}
 export const LabTestProducts: FC<LabTestProductsProps> = () => {
   const searchParams = useSearchParams();
   const pageIndex = Number(searchParams.get('pageIndex')) || 1;
+  const category = searchParams.get('category');
+
+  const { setQuery, removeQuery } = useQueryParams();
 
   const { loadingLabTests, labTests } = useGetLabTests({
     pageSize: 6,
     pageIndex,
+    categoryId: category ? Number(category) : undefined,
   });
 
   const { categories } = useGetCategories();
@@ -43,6 +47,17 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
       ]
     : [];
 
+  const handleFilterByCategory = (
+    categoryId: string | number,
+    name: string
+  ) => {
+    if (categoryId === 0 || categoryId === '0') {
+      return removeQuery(['category']);
+    } else {
+      setQuery({ category: categoryId });
+    }
+  };
+
   return (
     <>
       <div className='grid justify-center'>
@@ -52,7 +67,11 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
               <Button
                 variant='flat'
                 key={index}
+                isDisabled={loadingLabTests}
                 radius='full'
+                onClick={() =>
+                  handleFilterByCategory(String(category.id), category.name)
+                }
                 className='flex h-max flex-col gap-2 border-none bg-transparent py-2'
               >
                 <div className='flex justify-center'>

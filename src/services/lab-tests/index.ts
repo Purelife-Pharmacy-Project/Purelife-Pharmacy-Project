@@ -13,6 +13,7 @@ export class LabTestService {
       ProductId: params.productId,
       PageSize: params.pageSize,
       PageIndex: params.pageIndex,
+      CategoryId: params.categoryId,
     });
 
     const response = (await Api.get(

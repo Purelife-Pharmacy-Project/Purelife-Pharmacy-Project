@@ -1,18 +1,20 @@
 import { toNaira } from '@/helpers/utils';
-import { useGetDeliveryAddresses } from '@/hooks';
+import { ProductType } from '@/services/products/types';
 import { selectBorderedGray } from '@/theme';
 import { Select, SelectItem } from '@nextui-org/react';
 import { FC } from 'react';
 
 type BillingAddressFormProps = {
   onSelect: (value: string) => void;
+  addresses: ProductType[];
+  loadingAddresses: boolean;
 };
 
 export const BillingAddressForm: FC<BillingAddressFormProps> = ({
   onSelect,
+  addresses,
+  loadingAddresses,
 }) => {
-  const { addresses, loadingAddresses } = useGetDeliveryAddresses();
-
   return (
     <div className='grid gap-1'>
       <label htmlFor='location' className='text-header-100'>

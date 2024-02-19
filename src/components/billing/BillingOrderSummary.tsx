@@ -36,7 +36,7 @@ export const BillingOrderSummary = () => {
             <div className='flex justify-between border-b border-gray-300 pb-3'>
               <p className='text-lg font-light text-header-100'>Delivery Fee</p>
               <p className='text-md font-light text-header-100'>
-                {summary?.discount}{' '}
+                {summary?.deliveryFee}{' '}
               </p>
             </div>
             <div className='flex justify-between'>

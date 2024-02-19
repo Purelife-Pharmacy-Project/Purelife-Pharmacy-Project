@@ -22,6 +22,11 @@ export const toNaira = (amount: number) => {
   });
 };
 
+export const fromNaira = (amount: string) => {
+  const numberAmount = Number(amount.replace(/[^0-9.-]+/g, ''));
+  return numberAmount;
+};
+
 export const randomId = () => {
   return (new Date().getTime() * 0.5).toString(36);
 };
@@ -36,6 +41,16 @@ export const filteredQueryParams = <T extends Record<string, unknown>>(
 };
 
 export const removeHtmlTags = (html: string) => {
+  // Check if the string is surrounded by p tags
+  const pTagRegex = /^<p>(.*)<\/p>$/i;
+  const match = html.match(pTagRegex);
+
+  if (match) {
+    // If it is, remove the p tags
+    return match[1];
+  }
+
+  // If it's not, remove all HTML tags as before
   const newString = html.replace(/(<([^>]+)>)/gi, '');
 
   return newString === '' ? 'nil' : newString;

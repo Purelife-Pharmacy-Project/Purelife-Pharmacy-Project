@@ -5,6 +5,7 @@ export type LabTestQueryParams = {
   productId?: string;
   pageSize?: number;
   pageIndex?: number;
+  categoryId?: number;
 };
 
 export type LabTestType = {
@@ -17,6 +18,7 @@ export type LabTestType = {
   description: string;
   imageInBinary: string | null;
   quantity?: number;
+  categoryId: number;
 };
 
 export class LabTest {
@@ -28,7 +30,7 @@ export class LabTest {
   public description: string;
   public imageInBinary: string;
   public amount: string;
-  public categoryId: string;
+  public categoryId: number;
   public quantity?: number;
 
   constructor(test: LabTestType) {
@@ -42,7 +44,7 @@ export class LabTest {
       ? `data:image/png;base64,${test.imageInBinary}`
       : '/images/care-package.png';
     this.amount = toNaira(this.price);
-    this.categoryId = '';
+    this.categoryId = test.categoryId;
     this.quantity = Math.max(0, test.quantity as number) || 1;
   }
 }
