@@ -25,9 +25,9 @@ export default function Doctor() {
               <p className='text-lg font-light'>General Partitioner</p>
               <Chip
                 size={'lg'}
-                className='text-dark mt-2 bg-primaryLight text-sm font-light'
+                className='text-dark bg-white text-sm font-light'
               >
-                🏆 8 Years Experience
+                8 Years Experience
               </Chip>
             </div>
           </div>
@@ -36,12 +36,12 @@ export default function Doctor() {
 
       <section className='grid justify-center gap-6'>
         <div className='mt-[200px] grid items-end'>
-          <Section className='relative grid grid-flow-row gap-6 pb-10 lg:grid-flow-col lg:grid-cols-[3fr_4fr]'>
+          <Section className='relative pb-10 lg:grid-flow-col lg:grid-cols-[3fr_4fr]'>
             <div className='flex flex-col gap-6'>
               <h1 className='text-3xl font-bold text-header-100 lg:max-w-[370px]'>
-                About Dr. Francis Odeyemi
+                About <br /> Dr. Francis Odeyemi
               </h1>
-              <p className='w-full whitespace-normal leading-9 text-content'>
+              <p className='w-full max-w-[758px] whitespace-normal leading-9 text-content'>
                 Lorem ipsum dolor sit amet consectetur. Phasellus mi vehicula
                 vitae sit nisi vulputate sit ut etiam. Arcu ac habitant quam
                 pulvinar ultrices sed tortor felis ante. Aliquam sed mattis nibh
@@ -52,8 +52,8 @@ export default function Doctor() {
                 tortor odio.
               </p>
             </div>
-            <BookConsultationForm />
           </Section>
+          <BookConsultationForm />
         </div>
       </section>
 
