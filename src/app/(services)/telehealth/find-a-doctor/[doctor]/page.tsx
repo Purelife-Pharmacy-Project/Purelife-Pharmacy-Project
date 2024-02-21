@@ -22,7 +22,7 @@ export default function Doctor() {
               <p className='break-words text-xl font-bold lg:text-4xl'>
                 Dr. Francis Odeyemi
               </p>
-              <p className='text-lg font-light'>General Partitioner</p>
+              <p className='text-lg font-light'>General Practitioner</p>
               <Chip
                 size={'lg'}
                 className='text-dark bg-white text-sm font-light'
