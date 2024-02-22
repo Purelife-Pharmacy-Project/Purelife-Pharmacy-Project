@@ -87,6 +87,22 @@ export const consultDoctorFormValidationSchema = z.object({
     .max(100),
 });
 
+export const bookSlotValidationSchema = z.object({
+  summary: string({
+    required_error: 'Summary is required',
+  })
+    .min(1)
+    .max(100),
+  startTime: string({
+    required_error: 'Start time is required',
+  }),
+  endTime: string({
+    required_error: 'End time is required',
+  }),
+});
+
 export type ConsultDoctorFormPayload = z.infer<
   typeof consultDoctorFormValidationSchema
 >;
+
+export type CreateEventPayload = z.infer<typeof bookSlotValidationSchema>;

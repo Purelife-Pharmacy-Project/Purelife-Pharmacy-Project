@@ -1,4 +1,9 @@
 'use client';
+import { useGetUser } from '@/hooks';
+import {
+  useCreateCalendarEvent,
+  useGetAvailableTimeSlots,
+} from '@/hooks/useConsultDoctor';
 import {
   useGetAlcoholConsumptionEnum,
   useGetConditionEnum,
@@ -23,13 +28,22 @@ import {
   SelectItem,
   Textarea,
 } from '@nextui-org/react';
-import { useState } from 'react';
+import debounce from 'lodash/debounce';
+import { FormEvent, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { IconAlarm } from '../icons/IconAlarm';
+import { toast } from 'sonner';
+import { twMerge } from 'tailwind-merge';
 import { IconCalendar } from '../icons/IconCalendar';
 import { BillingAndPaymentModal } from './modals/BillingAndPaymentModal';
 
 export const BookConsultationForm = () => {
+  const [calendarDate, setCalendarDate] = useState<string | undefined>(
+    undefined
+  );
+  const [calendarTime, setCalendarTime] = useState<string | undefined>(
+    undefined
+  );
+
   const [openCheckoutModal, setOpenCheckoutModal] = useState(false);
   const { data: conditions, isLoading: loadingConditions } =
     useGetConditionEnum();
@@ -39,6 +53,16 @@ export const BookConsultationForm = () => {
     useGetMedsAllergyEnum();
   const { data: alcoholConsumptions, isLoading: loadingAlcoholConsumptions } =
     useGetAlcoholConsumptionEnum();
+  const { data: availableTimeSlots, isLoading: loadingAvailableTimeSlots } =
+    useGetAvailableTimeSlots(calendarDate!);
+  const { mutate: createCalendarEvent, isPending: isCreatingCalendarEvent } =
+    useCreateCalendarEvent({
+      onSuccess: () => {
+        toast.success('Slot booked successfully');
+        setIsBooked(true);
+      },
+    });
+  const userEmail = useGetUser().user?.email;
 
   const genericAnswers = [
     {
@@ -50,7 +74,6 @@ export const BookConsultationForm = () => {
       value: false,
     },
   ];
-
   const stringGenericAnswers = [
     {
       name: 'Yes',
@@ -72,16 +95,128 @@ export const BookConsultationForm = () => {
     resolver: zodResolver(consultDoctorFormValidationSchema),
   });
 
+  const handleDateDebounce = debounce((value: string) => {
+    const date = value.split('-').join('/');
+    setCalendarDate(date);
+  }, 500);
+
   const onSubmit: SubmitHandler<ConsultDoctorFormPayload> = (data) => {
     console.log(data);
+  };
+
+  const [isBooked, setIsBooked] = useState(false);
+
+  const combineDateAndTime = (date: string, time: string): string => {
+    const [hours, minutes, period] = time.match(/\d+|AM|PM/g) as string[];
+    const adjustedHours =
+      (parseInt(hours, 10) % 12) + (period === 'PM' ? 12 : 0);
+    return new Date(
+      `${date}T${adjustedHours.toString().padStart(2, '0')}:${minutes.padStart(
+        2,
+        '0'
+      )}:00.000Z`
+    ).toISOString();
+  };
+
+  const booksSlotOnSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const date = calendarDate?.split('/').join('-');
+    const dateTime = combineDateAndTime(date!, calendarTime!);
+
+    const payload = {
+      summary: 'Consultation',
+      startTime: dateTime,
+      endTime: dateTime,
+      userEmail: userEmail!,
+    };
+
+    if (!isBooked) {
+      createCalendarEvent(payload);
+    }
   };
 
   return (
     <Card shadow='none' className='bg-primaryLight p-5'>
       <CardBody>
+        <p className='mb-4 text-2xl font-semibold text-header-100'>
+          Book a slot
+        </p>
+        <form
+          onSubmit={booksSlotOnSubmit}
+          className='grid gap-4 md:max-w-[50%] md:flex-row'
+        >
+          <Input
+            size='lg'
+            placeholder='date'
+            type='date'
+            min={new Date().toISOString().split('T')[0]}
+            isDisabled={isBooked || isCreatingCalendarEvent}
+            isRequired
+            label='Choose when you want to see your doctor'
+            labelPlacement='outside'
+            classNames={inputBordered}
+            radius='md'
+            endContent={<IconCalendar color='content' />}
+            onChange={(e) => handleDateDebounce(e.target.value)}
+          />
+
+          <div className='grid gap-2'>
+            <Select
+              size='lg'
+              label='Choose Time'
+              isRequired
+              isDisabled={
+                loadingAvailableTimeSlots ||
+                !availableTimeSlots ||
+                isCreatingCalendarEvent ||
+                isBooked
+              }
+              placeholder='Select time'
+              labelPlacement='outside'
+              color='default'
+              description='Select a 30mins time slot'
+              classNames={selectBordered}
+              onChange={(e) => {
+                setCalendarTime(e.target.value);
+              }}
+            >
+              {availableTimeSlots?.map((timeSlot, index) => (
+                <SelectItem
+                  className='text-content'
+                  value={timeSlot}
+                  key={timeSlot.toString()}
+                >
+                  {timeSlot}
+                </SelectItem>
+              )) ?? []}
+            </Select>
+            {loadingAvailableTimeSlots && (
+              <p className='text-xs'>Loading time slots...</p>
+            )}
+          </div>
+
+          <Button
+            color='primary'
+            type='submit'
+            isLoading={isCreatingCalendarEvent}
+            className='max-w-fit px-8'
+            radius='full'
+            size='sm'
+          >
+            Book Slot
+          </Button>
+        </form>
+
+        <div className='mt-8 h-[1px] w-full bg-header-100'></div>
+        <p className='my-4 text-2xl font-semibold text-header-100'>
+          Enter information
+        </p>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='grid gap-6 md:max-w-[80%]'
+          className={twMerge(
+            'grid gap-6 md:max-w-[80%]',
+            isBooked ? '' : 'pointer-events-none cursor-not-allowed blur-sm'
+          )}
         >
           <div className='flex flex-col gap-4 md:flex-row'>
             <Input
@@ -279,6 +414,7 @@ export const BookConsultationForm = () => {
           <div className='grid gap-2 md:max-w-[50%]'>
             <Select
               size='lg'
+              isDisabled={loadingMedsAllergies}
               label='Do you have any allergies to medication?'
               placeholder='Choose answer'
               labelPlacement='outside'
@@ -286,15 +422,15 @@ export const BookConsultationForm = () => {
               classNames={selectBordered}
               {...register('medsAllergy')}
             >
-              {stringGenericAnswers.map((answer, index) => (
+              {medsAllergies?.map((answer, index) => (
                 <SelectItem
                   className='text-content'
                   key={index}
-                  value={answer.value}
+                  value={answer.name}
                 >
                   {answer.name}
                 </SelectItem>
-              ))}
+              )) ?? []}
             </Select>
           </div>
           <Select
@@ -402,31 +538,6 @@ export const BookConsultationForm = () => {
             {errors.alcoholConsumption && (
               <InputError message={errors.alcoholConsumption.message} />
             )}
-          </div>
-
-          <div className='h-[1px] w-full bg-header-100'></div>
-          <p className='text-2xl font-semibold text-header-100'>Book a slot</p>
-          <div className='grid gap-4 md:max-w-[50%] md:flex-row'>
-            <Input
-              size='lg'
-              placeholder='Choose Date'
-              type='date'
-              label='Choose when you want to see your doctor'
-              labelPlacement='outside'
-              classNames={inputBordered}
-              radius='md'
-              endContent={<IconCalendar color='content' />}
-            />
-            <Input
-              size='lg'
-              type='time'
-              label='Time'
-              placeholder='00:00'
-              labelPlacement='outside'
-              classNames={inputBordered}
-              radius='md'
-              endContent={<IconAlarm color='content' />}
-            />
           </div>
 
           <div className='grid gap-4 md:flex-row'>

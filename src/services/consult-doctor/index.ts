@@ -17,10 +17,10 @@ export class ConsultDoctorClass {
     return response;
   }
 
-  public static async getAvailableTimeSlots() {
-    const response = await Api.get<string[]>(
-      `${this.CALENDAR_API_BASE}/available-slot`
-    );
+  public static async getAvailableTimeSlots(date: string) {
+    const response = (await Api.get<string[]>(
+      `${this.CALENDAR_API_BASE}/available-slot?day=${date}`
+    )) as unknown as string[];
     return response;
   }
 

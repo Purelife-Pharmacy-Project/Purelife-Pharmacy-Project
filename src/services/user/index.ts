@@ -104,6 +104,10 @@ class UsersService {
     // this is the user id on the browser. the userId is the user id on the server
     const clientUserId = this.getUserFromToken().id;
 
+    if (!clientUserId) {
+      this.logoutUser();
+    }
+
     const response = (await Api.get<{ data: UserType; totalPage: number }>(
       `${this.USERS_API_BASE}?id=${clientUserId}`
     )) as unknown as { data: UserType[]; totalPage: number };
