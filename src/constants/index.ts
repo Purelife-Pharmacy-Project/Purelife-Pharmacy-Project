@@ -91,8 +91,8 @@ export const teleHealthServices = [
     title: 'Book Emergency',
     description:
       "We're here for you when things go wrong, big or small. Count on us to prioritize your safety and well-being",
-    url: '#',
-    actionText: 'Coming soon',
+    url: '/telehealth/book-emergency',
+    actionText: 'Learn More',
   },
   {
     icon: IconWellness as ({
