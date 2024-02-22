@@ -1,6 +1,6 @@
 'use client';
 import { teleHealthServices } from '@/constants';
-import { Button, Card, CardBody, Link } from '@nextui-org/react';
+import { Button, Card, CardBody, Image, Link } from '@nextui-org/react';
 import { Section } from './Section';
 
 export const TeleHealthServices = () => {
@@ -51,6 +51,41 @@ export const TeleHealthServices = () => {
                 </CardBody>
               </Card>
             ))}
+            <Card
+              shadow='none'
+              radius='lg'
+              className='h-full w-full flex-grow bg-primaryLight pl-6 md:col-span-1 lg:col-span-2'
+            >
+              <div className='grid h-full items-center lg:grid-flow-col  lg:grid-cols-2'>
+                <CardBody>
+                  <div className='flex h-full flex-col justify-center gap-5'>
+                    <p className='w-full text-3xl font-extrabold text-header-100 lg:max-w-[384px]'>
+                      Are you a healthcare provider interested in partnering
+                      with us?
+                    </p>
+                    <Button
+                      as={Link}
+                      href='#'
+                      radius='full'
+                      className='w-max px-10'
+                      size='lg'
+                      color='primary'
+                    >
+                      Start Here
+                    </Button>
+                  </div>
+                </CardBody>
+                <div className='flex h-full items-end justify-end'>
+                  <Image
+                    className='h-full w-full object-contain align-bottom'
+                    src='/images/healthcare-doctor.png'
+                    width={630}
+                    height={630}
+                    alt='telehealth partner'
+                  />
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </Section>

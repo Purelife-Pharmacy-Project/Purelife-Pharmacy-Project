@@ -10,21 +10,21 @@ export const Testimonials = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const testimonials = [
     {
-      name: 'Amanam Israel',
+      name: 'Aisosa Urhoghide',
       testimonial:
-        "You can't buy peace of mind but you can join Purelife. There's so much less to worry about when you can get advice before you need it and answers when you need them.",
+        "Purelife Pharmacy is the best. It's your go-to for all health needs, with top-notch service. No matter how rare your medication, they've got you covered. I recommend them anytime.",
       image: 'https://i.pravatar.cc/150',
     },
     {
-      name: 'Victor Oluwasegun',
+      name: 'Abigeal Remilekun',
       testimonial:
-        'I have been a member of Purelife for over 2 years now and I can say that it has been a wonderful experience. I have been able to get quality healthcare services at a very affordable rate.',
+        'Purelife Pharmacy has great customer service. They always greet me whenever I visit the shop, and I also receive phone calls and text messages after getting my medication.',
       image: 'https://i.pravatar.cc/150?u=a042581f4e29026704d',
     },
     {
-      name: 'Billie Eilish',
+      name: 'Mmeme Amune',
       testimonial:
-        'So far, I have had a great experience with Purelife. I have been able to get value off the shop and order and buy quality healthcare services at a very affordable rate. ',
+        "I love this pharmacy. I went there for my toddler's meds, and when they started throwing up, the staff were super helpful. Their prices were fair, and they didn’t push the most expensive products on me right away. I’m definitely a fan!",
       image: 'https://i.pravatar.cc/150?u=fake@pravatar.com',
     },
   ];
@@ -129,8 +129,8 @@ export const Testimonials = () => {
                     backgroundOrigin: 'border-box',
                   }}
                   className={twMerge(
-                    'h-max rounded-full border-2 border-gray-300 transition duration-500',
-                    [activeIndex === index ? 'border-primary' : '']
+                    'h-max rounded-full border-4 border-gray-300 transition duration-500',
+                    [activeIndex === index ? 'border-success' : '']
                   )}
                 >
                   <Image

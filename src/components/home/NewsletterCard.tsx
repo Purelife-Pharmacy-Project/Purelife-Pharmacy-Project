@@ -6,12 +6,12 @@ import { Section } from './Section';
 
 export const NewsLetterCard = () => {
   return (
-    <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
+    <div className='lg:pb-10 lg:pt-[55px] xl:grid xl:justify-center'>
       <Section className='bg-white'>
-        <Card shadow='none'>
+        <Card shadow='none' fullWidth>
           <CardBody className='bg-primaryLight'>
-            <div className='flex w-full flex-col items-center justify-between gap-4 p-1 md:flex-row md:p-4 lg:gap-0 lg:p-20'>
-              <h1 className='w-full text-center text-2xl font-bold text-header-100 lg:text-start lg:text-4xl xl:max-w-[500px]'>
+            <div className='flex w-full flex-col items-center justify-between gap-4 p-1 md:p-4 lg:gap-0 lg:p-20 xl:flex-row'>
+              <h1 className='w-full text-center text-2xl font-bold text-header-100 md:text-start lg:text-4xl xl:max-w-[500px]'>
                 Sign up for amazing health and lifestyle deals
               </h1>
               <form

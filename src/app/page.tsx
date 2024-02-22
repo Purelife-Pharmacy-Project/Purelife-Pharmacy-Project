@@ -13,7 +13,6 @@ import { WellnessBlogSection } from '@/components/home/WellnessBlogSection';
 import { AppNavbar } from '@/components/Navbar';
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { earnedClients } from '@/constants';
-import ProductService from '@/services/products';
 import {
   dehydrate,
   HydrationBoundary,
@@ -23,15 +22,15 @@ import {
 export default async function Home() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
-    queryKey: ['featured-products'],
-    queryFn: () =>
-      ProductService.getAllProducts({
-        active: true,
-        pageSize: 3,
-        pageIndex: 1,
-      }),
-  });
+  // await queryClient.prefetchQuery({
+  //   queryKey: ['featured-products'],
+  //   queryFn: () =>
+  //     ProductService.getAllProducts({
+  //       active: true,
+  //       pageSize: 3,
+  //       pageIndex: 1,
+  //     }),
+  // });
 
   const transformationData = [
     {

@@ -14,14 +14,14 @@ export const HomeTransformation = ({
   data: TransformationData[];
 }) => {
   return (
-    <div className='grid justify-center lg:py-4'>
+    <div className='lg:py-4 xl:grid xl:justify-center'>
       <Section className='bg-white'>
         <div className='grid justify-center gap-10'>
           <h1 className='max-w-none text-center text-3xl font-bold text-header-100 md:max-w-lg lg:text-4xl xl:max-w-3xl xl:text-start'>
             Join 100,000+ who have transformed their lives with Purelife
             Pharmacy.
           </h1>
-          <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-flow-col lg:grid-cols-5'>
+          <div className='grid grid-flow-row grid-cols-1 gap-6 md:grid-cols-2 lg:grid-flow-col lg:grid-cols-5 xl:gap-10'>
             {data.map((item, index) => (
               <React.Fragment key={index}>
                 <div

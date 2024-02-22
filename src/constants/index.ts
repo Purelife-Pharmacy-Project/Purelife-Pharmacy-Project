@@ -1,8 +1,10 @@
 import { IconDoctor } from '@/components/icons/IconDoctor';
+import { IconEmergency } from '@/components/icons/IconEmergency';
 import { IconFluidMed } from '@/components/icons/IconFluidMed';
 import { IconLabs } from '@/components/icons/IconLabs';
 import { IconPill } from '@/components/icons/IconPill';
 import { IconPrescription } from '@/components/icons/IconPrescription';
+import { IconWellness } from '@/components/icons/IconWellness';
 
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '/api/v1';
 
@@ -77,6 +79,34 @@ export const teleHealthServices = [
       'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
     url: '/telehealth/upload-prescription',
     actionText: 'Upload Now',
+  },
+  {
+    icon: IconEmergency as ({
+      color,
+      size,
+    }: {
+      color?: string;
+      size?: number;
+    }) => JSX.Element,
+    title: 'Book Emergency',
+    description:
+      "We're here for you when things go wrong, big or small. Count on us to prioritize your safety and well-being",
+    url: '#',
+    actionText: 'Coming soon',
+  },
+  {
+    icon: IconWellness as ({
+      color,
+      size,
+    }: {
+      color?: string;
+      size?: number;
+    }) => JSX.Element,
+    title: 'Pure Wellness',
+    description:
+      'Get Health insurance, nutrition, and customize diet and fitness plans to embark on a journey towards holistic well-being.',
+    url: '#',
+    actionText: 'Coming soon',
   },
 ];
 

@@ -37,7 +37,7 @@ export const HomeShopAndOrder = () => {
     },
   ];
   return (
-    <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
+    <div className='lg:pb-10 lg:pt-[55px] xl:grid xl:justify-center'>
       <Section className='bg-white'>
         <div className='grid gap-10'>
           <div className='flex flex-col justify-between gap-4 md:flex-row md:gap-0'>

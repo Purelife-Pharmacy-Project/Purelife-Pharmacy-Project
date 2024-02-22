@@ -74,7 +74,7 @@ export const AppNavbar = ({
           </Link>
         </NavbarBrand>
 
-        <div className='hidden md:flex md:gap-[22px]'>
+        <div className='hidden md:gap-[22px] lg:flex'>
           <NavbarItem className='text-lg leading-[27px] text-header-100'>
             <Link
               color='foreground'
@@ -102,7 +102,7 @@ export const AppNavbar = ({
         </div>
       </NavbarContent>
 
-      <NavbarContent justify='center' className='hidden w-full sm:flex'>
+      <NavbarContent justify='center' className='hidden w-full lg:flex'>
         <Input
           radius='full'
           color='default'
@@ -119,7 +119,7 @@ export const AppNavbar = ({
         className='grid w-max grid-flow-col gap-6 data-[justify=end]:flex-grow-0'
         justify='end'
       >
-        <div className='hidden md:flex md:gap-[22px]'>
+        <div className='hidden md:gap-[22px] lg:flex'>
           <NavbarItem className='flex items-center text-lg leading-[27px] text-header-100'>
             <NavbarUser isActive={isActive} />
           </NavbarItem>
@@ -127,23 +127,23 @@ export const AppNavbar = ({
             <NavbarCart isActive={isActive} />
           </NavbarItem>
         </div>
-        <NavbarItem>
-          <Link
-            className='hidden sm:block'
-            color='foreground'
+        <NavbarItem className='hidden lg:block'>
+          <Button
+            as={Link}
             href='/telehealth/shop-and-order'
+            radius='full'
+            size='lg'
+            color='primary'
           >
-            <Button radius='full' size='lg' color='primary'>
-              Shop & Order
-            </Button>
-          </Link>
+            Shop & Order
+          </Button>
         </NavbarItem>
-        <NavbarItem className='flex items-center text-lg leading-[27px] text-header-100 sm:hidden'>
+        <NavbarItem className='flex items-center text-lg leading-[27px] text-header-100 lg:hidden'>
           <NavbarCart isActive={isActive} />
         </NavbarItem>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-          className='sm:hidden'
+          className='lg:hidden'
         />
       </NavbarContent>
 

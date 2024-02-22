@@ -125,9 +125,9 @@ export const Footer = () => {
   ];
 
   return (
-    <div className='flex justify-start md:grid md:justify-center lg:pb-10 lg:pt-[55px]'>
+    <div className='flex w-full justify-start sm:w-3/5 md:grid md:justify-center lg:w-full lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
-        <footer className='mx-auto grid w-full gap-8 pb-10'>
+        <footer className='mx-auto grid w-full gap-4 pb-10 lg:gap-8'>
           <div className='grid grid-flow-dense gap-8 sm:grid-cols-2 md:gap-24 lg:grid-flow-col'>
             <div className='flex flex-col gap-2 md:col-span-2 lg:col-span-1'>
               <Link href='/'>
