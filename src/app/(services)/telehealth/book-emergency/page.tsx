@@ -66,7 +66,7 @@ export default function BookEmergencyPage() {
 
         <HowItWorks data={howItWorksData} variant={'primary'} />
 
-        <div className='mb-10 grid gap-14'>
+        <div className='mb-10 grid md:gap-20'>
           {featuresData.map((data, i) => (
             <FeatureCard key={i} data={data} />
           ))}
