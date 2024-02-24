@@ -51,7 +51,7 @@ export const BillingAndPaymentModal: FC<BillingAndPaymentModalProps> = ({
                   <div className='grid gap-2'>
                     <p className='text-sm text-foreground'>Consultation Fee</p>
                     <p className='text-3xl font-bold text-primary'>
-                      {toNaira(amount)}
+                      $10/{toNaira(10000)}
                     </p>
                   </div>
                 </div>

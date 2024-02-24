@@ -53,7 +53,7 @@ export default async function Home() {
       <AppNavbar background='primaryLight' />
       <main className='grid gap-6'>
         <HomePageHero
-          title='Your one-stop shop for wellness and lifestyle.'
+          title='Your one-stop for wellness and lifestyle.'
           description='Schedule laboratory tests, book vaccination appointments, and receive high-quality medical services from the convenience of wherever you are in Nigeria.'
           ctaText='Start here'
           ctaLink='#teleHealthServices'

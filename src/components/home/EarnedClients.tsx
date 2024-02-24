@@ -24,7 +24,7 @@ export const EarnedClients: FC<EarnedClientsProps> = ({
             </h1>
           </div>
 
-          <div className='mx-auto grid w-4/5 grid-flow-col grid-cols-1 items-center justify-center gap-2 md:grid-cols-2 lg:grid-cols-5'>
+          <div className='mx-auto grid w-4/5 grid-flow-col grid-cols-1 items-center justify-center gap-2 md:grid-cols-2 lg:grid-cols-4'>
             {earnedClients.map((client, index) => (
               <Image
                 key={index}

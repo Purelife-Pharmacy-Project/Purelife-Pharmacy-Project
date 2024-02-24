@@ -600,7 +600,7 @@ export const BookConsultationForm = () => {
             <div className='grid gap-2'>
               <p className='text-sm font-medium uppercase'>Consultation Fee:</p>
               <p className='text-3xl font-bold text-primary'>
-                {toNaira(20000)}
+                $10/{toNaira(10000)}
               </p>
             </div>
 

@@ -112,23 +112,19 @@ export const teleHealthServices = [
 
 export const earnedClients = [
   {
-    name: 'IFitness',
-    image: '/images/clients/iFitness.png',
+    name: 'Dermatologie',
+    image: '/images/clients/dermatologie.png',
   },
   {
-    name: 'Buy Asap',
-    image: '/images/clients/buyAsap.png',
+    name: 'Novo Care',
+    image: '/images/clients/novo-care.png',
   },
   {
-    name: 'Nike',
-    image: '/images/clients/nike.png',
+    name: 'Pure fitness',
+    image: '/images/clients/pure-fitness.png',
   },
   {
-    name: 'Gallant Biz',
-    image: '/images/clients/gallantBiz.png',
-  },
-  {
-    name: 'Laroche',
-    image: '/images/clients/laroche.png',
+    name: 'Reckitt',
+    image: '/images/clients/reckitt.png',
   },
 ];

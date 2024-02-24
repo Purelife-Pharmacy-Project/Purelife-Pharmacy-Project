@@ -42,6 +42,10 @@ export const AppNavbar = ({
       path: '/telehealth/shop-and-order',
     },
     {
+      name: 'Partner with us',
+      path: '#',
+    },
+    {
       name: 'Sign in',
       path: '/sign-in',
     },
@@ -97,6 +101,17 @@ export const AppNavbar = ({
               }
             >
               Shop & Order
+            </Link>
+          </NavbarItem>
+          <NavbarItem className='text-lg leading-[27px] text-header-100'>
+            <Link
+              color='foreground'
+              href='#'
+              className={
+                isActive('/partner-with-us') ? 'font-medium text-primary' : ''
+              }
+            >
+              Partner with us
             </Link>
           </NavbarItem>
         </div>
