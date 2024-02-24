@@ -49,7 +49,7 @@ export default function FindADoctor() {
           <div className='bg-primaryLight lg:grid lg:justify-center'>
             <Section className='bg-primaryLight py-4 lg:py-20'>
               <div className='grid grid-flow-dense grid-cols-1 gap-4 md:grid-cols-2'>
-                {Array(5)
+                {Array(1)
                   .fill(0)
                   .map((_, i) => (
                     <DoctorCard key={i} />

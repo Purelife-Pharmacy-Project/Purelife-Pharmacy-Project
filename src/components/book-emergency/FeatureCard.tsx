@@ -21,8 +21,10 @@ export const FeatureCard: FC<FeatureCardProps> = ({ data }) => {
         <Card shadow='none' radius='lg'>
           <div
             className={twMerge(
-              'flex items-center justify-between gap-4 md:px-28',
-              data?.direction === 'left' ? 'flex-row' : 'flex-row-reverse'
+              'flex items-center justify-center gap-4 md:justify-between md:px-28',
+              data?.direction === 'left'
+                ? 'flex-col-reverse md:flex-row'
+                : 'flex-col-reverse md:flex-row-reverse'
             )}
           >
             <CardBody className='py-6'>
@@ -33,7 +35,7 @@ export const FeatureCard: FC<FeatureCardProps> = ({ data }) => {
                 )}
               >
                 <div className='flex flex-col justify-start gap-5'>
-                  <h1 className='max-w-[385px] text-center text-4xl font-bold text-header-100 lg:text-start'>
+                  <h1 className='max-w-4/5 text-center text-2xl font-bold text-header-100 lg:text-start lg:text-4xl'>
                     {data?.title}
                   </h1>
                   <p className='text-center font-light text-content lg:max-w-[353px] lg:text-start lg:text-lg'>
@@ -44,7 +46,7 @@ export const FeatureCard: FC<FeatureCardProps> = ({ data }) => {
                     href={data?.ctaLink}
                     radius='full'
                     color='primary'
-                    className='w-max px-12 py-6'
+                    className='mx-auto w-max px-12 py-6 md:mx-0'
                   >
                     {data?.ctaText}
                   </Button>
@@ -53,15 +55,17 @@ export const FeatureCard: FC<FeatureCardProps> = ({ data }) => {
             </CardBody>
             <div
               className={twMerge(
-                'hidden h-full w-full lg:flex',
-                data?.direction === 'left' ? 'justify-end' : 'justify-start'
+                'flex h-full w-full lg:flex',
+                data?.direction === 'left'
+                  ? 'justify-center md:justify-end'
+                  : 'justify-center md:justify-start'
               )}
             >
               <Image
                 width={400}
                 height={600}
                 src={data?.icon}
-                className='object-cover'
+                className='object-cover '
                 alt='image'
               />
             </div>

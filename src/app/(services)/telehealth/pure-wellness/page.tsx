@@ -9,24 +9,24 @@ import { IconAddNotification } from '@/components/icons/IconAddNotification';
 import { IconBrowse } from '@/components/icons/IconBrowse';
 import { IconHealthShield } from '@/components/icons/IconHealthShield';
 
-export default function BookEmergencyPage() {
+export default function PureWellnessPage() {
   const howItWorksData: {
     description: string;
     icon: JSX.Element;
   }[] = [
     {
       description:
-        'Reach out to our emergency hotline or visit our pharmacy in person to notify us of your situation.',
+        'Complete a lifestyle assessment to define your goals and challenges.',
       icon: <IconBrowse size={48} color='primary' />,
     },
     {
       description:
-        'Our trained team springs into action immediately, providing expert assistance tailored to your emergency needs.',
+        "We'll create a personalized plan based on your unique needs and preferences.",
       icon: <IconHealthShield size={60} color='primary' />,
     },
     {
       description:
-        "Get speedy care for wound cleaning, first aid, or advanced medical needs. We're here for you, putting your safety first.",
+        'Follow your plan with support and adjustments along the way for optimal results.',
       icon: <IconAddNotification size={60} color='primary' />,
     },
   ];
@@ -61,17 +61,19 @@ export default function BookEmergencyPage() {
       direction: 'left',
     },
   ];
+
   return (
     <>
       <AppNavbar background='primaryLight' />
 
       <main className='grid gap-6'>
         <HomeHero
-          title='Emergency Care 
-          at Your Fingertips'
-          description="We're here to act fast when you need it most. From small accidents to big emergencies, we've got your back. Your safety is our priority."
-          ctaText='Start here'
-          ctaLink='#teleHealthServices'
+          title='Get a personalized 
+                    wellness plan for 
+                    your lifestyle.'
+          description='Tailored solutions for your unique needs. Achieve balance and vitality with a wellness plan designed just for you.'
+          ctaText='Start Here'
+          ctaLink='#'
         />
 
         <HowItWorks data={howItWorksData} variant={'primary'} />

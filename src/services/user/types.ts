@@ -12,14 +12,6 @@ export type AccountTransaction = {
   status: AccountTransactionStatus;
 };
 
-export type AccountSubscription = {
-  id: number;
-  medication: string;
-  date: string;
-  refillFrequency: string;
-  refillDate: string;
-};
-
 export type UserType = {
   id: number;
   name: string;

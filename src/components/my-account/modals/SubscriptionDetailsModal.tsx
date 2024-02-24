@@ -1,5 +1,4 @@
 import { IconShare } from '@/components/icons/IconShare';
-import { AccountSubscription } from '@/services/user/types';
 import {
   Button,
   Modal,
@@ -14,7 +13,10 @@ import { TransactionDetailsBlock } from '../TransactionDetailsBlock';
 interface SubscriptionDetailsModalProps {
   isOpen: boolean;
   onOpenChange: () => void;
-  subscription: AccountSubscription | undefined;
+  subscription: {
+    medication: string;
+    refillFrequency: string | number;
+  };
 }
 
 export const SubscriptionDetailsModal: FC<SubscriptionDetailsModalProps> = ({
@@ -47,15 +49,6 @@ export const SubscriptionDetailsModal: FC<SubscriptionDetailsModalProps> = ({
                   <TransactionDetailsBlock
                     title='Refill Frequency'
                     content={subscription?.refillFrequency}
-                  />
-                  <TransactionDetailsBlock
-                    title='Refill Date'
-                    content={subscription?.refillDate}
-                  />
-                  <TransactionDetailsBlock
-                    title='Date Created'
-                    content={subscription?.date}
-                    contentClass={'font-bold'}
                   />
                 </div>
               </ModalBody>

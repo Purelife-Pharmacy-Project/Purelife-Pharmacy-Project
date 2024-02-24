@@ -105,8 +105,8 @@ export const teleHealthServices = [
     title: 'Pure Wellness',
     description:
       'Get Health insurance, nutrition, and customize diet and fitness plans to embark on a journey towards holistic well-being.',
-    url: '#',
-    actionText: 'Coming soon',
+    url: '/telehealth/pure-wellness',
+    actionText: 'Learn More',
   },
 ];
 

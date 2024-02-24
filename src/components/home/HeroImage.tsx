@@ -21,6 +21,8 @@ export const HeroImage = () => {
         return '/images/customer-smiling.png';
       case '/telehealth/get-vaccination':
         return '/images/patient-get-tested.png';
+      case '/telehealth/pure-wellness':
+        return '/images/purelife-wellness.jpg';
       default:
         return '/images/customer-smiling.png';
     }

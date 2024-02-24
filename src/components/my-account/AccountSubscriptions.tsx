@@ -1,7 +1,8 @@
 'use client';
 import { useGetSubscriptionsByCustomerId } from '@/hooks';
-import { AccountSubscription } from '@/services/user/types';
+import { SubscriptionType } from '@/services/drug-refill/types';
 import {
+  Spinner,
   Table,
   TableBody,
   TableCell,
@@ -18,7 +19,7 @@ export const AccountSubscriptions = () => {
   const [openSubscriptionDetailsModal, setOpenSubscriptionDetailsModal] =
     useState(false);
   const [selectedSubscription, setSelectedSubscription] = useState<
-    AccountSubscription | undefined
+    SubscriptionType | undefined
   >(undefined);
 
   const columns = [
@@ -30,32 +31,23 @@ export const AccountSubscriptions = () => {
       key: 'refillFrequency',
       label: 'Refill Frequency',
     },
-    {
-      key: 'date',
-      label: 'Date Created',
-    },
-    {
-      key: 'refillDate',
-      label: 'Date of Refill',
-    },
   ];
 
-  const data: AccountSubscription[] = [
-    {
-      id: 1,
-      medication: 'Acebutolol',
-      refillFrequency: '2',
-      refillDate: '25 Oct 2023',
-      date: '25 Oct 2023',
-    },
-    {
-      id: 2,
-      medication: 'Acebutolol',
-      refillFrequency: '2',
-      refillDate: '25 Oct 2023',
-      date: '25 Oct 2023',
-    },
-  ];
+  const getSubscriptionName = (subscription: SubscriptionType) => {
+    return subscription &&
+      subscription.products &&
+      subscription.products.length > 0
+      ? subscription.products[0].description || 'NIL'
+      : '_';
+  };
+  const getRefillFrequency = (subscription: SubscriptionType) => {
+    return subscription &&
+      subscription.products &&
+      subscription.products.length > 0
+      ? subscription.products[0].quantity || 'NIL'
+      : 'NIL';
+  };
+
   return (
     <>
       <Table
@@ -69,7 +61,9 @@ export const AccountSubscriptions = () => {
           td: 'group-data-[odd=true]:before:bg-white text-light py-4 text-header-100',
         }}
         onRowAction={(key) => {
-          const item = data.find((item) => item.id === Number(key));
+          const item = subscriptions?.data.find(
+            (item) => item.id === Number(key)
+          );
           setSelectedSubscription(item);
           setOpenSubscriptionDetailsModal(true);
         }}
@@ -79,13 +73,19 @@ export const AccountSubscriptions = () => {
             <TableColumn key={column.key}>{column.label}</TableColumn>
           )}
         </TableHeader>
-        <TableBody items={data} emptyContent={'No rows to display.'}>
+
+        <TableBody
+          items={subscriptions?.data || []}
+          loadingContent={<Spinner size='sm' />}
+          isLoading={loadingSubscriptions}
+          emptyContent={
+            loadingSubscriptions ? ' ' : 'No subscriptions to display.'
+          }
+        >
           {(item) => (
             <TableRow key={item.id}>
-              <TableCell>{item.medication}</TableCell>
-              <TableCell>{item.refillFrequency}</TableCell>
-              <TableCell>{item.refillDate}</TableCell>
-              <TableCell>{item.date}</TableCell>
+              <TableCell>{getSubscriptionName(item)}</TableCell>
+              <TableCell>{getRefillFrequency(item)}</TableCell>
             </TableRow>
           )}
         </TableBody>
@@ -96,7 +96,10 @@ export const AccountSubscriptions = () => {
         onOpenChange={() =>
           setOpenSubscriptionDetailsModal(!openSubscriptionDetailsModal)
         }
-        subscription={selectedSubscription}
+        subscription={{
+          medication: getSubscriptionName(selectedSubscription!),
+          refillFrequency: getRefillFrequency(selectedSubscription!),
+        }}
       />
     </>
   );
