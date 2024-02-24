@@ -124,9 +124,12 @@ export const AppNavbar = ({
           classNames={inputDefault}
           size='lg'
           type='text'
-          isClearable
           placeholder='Search Purelife'
-          startContent={<IconSearch />}
+          endContent={
+            <div className='rounded-full bg-primaryLight p-2'>
+              <IconSearch color='header-100' />
+            </div>
+          }
         />
       </NavbarContent>
 
