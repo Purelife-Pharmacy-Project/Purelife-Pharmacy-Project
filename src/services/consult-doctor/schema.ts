@@ -41,11 +41,9 @@ export const consultDoctorFormValidationSchema = z.object({
       required_error: 'Symptoms is required',
     })
   ).min(1, 'Symptoms is required'),
-  alcoholConsumption: array(
-    string({
-      required_error: 'Alcohol consumption is required',
-    })
-  ).min(1, 'Alcohol consumption is required'),
+  alcoholConsumption: string({
+    required_error: 'Alcohol consumption is required',
+  }),
   takingMeds: string({
     required_error: 'Taking meds is required',
   }),

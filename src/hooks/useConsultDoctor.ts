@@ -1,6 +1,8 @@
 import { ConsultDoctorClass } from '@/services/consult-doctor';
-import { ConsultDoctorFormPayload } from '@/services/consult-doctor/schema';
-import { CreateEventPayload } from '@/services/consult-doctor/types';
+import {
+  CreateEventPayload,
+  ModifiedConsultDoctorFormPayload,
+} from '@/services/consult-doctor/types';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 export const useGetAvailableTimeSlots = (date: string) => {
@@ -14,7 +16,7 @@ export const useGetAvailableTimeSlots = (date: string) => {
 export const useSubmitConsultDoctorForm = () => {
   return useMutation({
     mutationKey: ['submit-consult-doctor-form'],
-    mutationFn: async (payload: ConsultDoctorFormPayload) =>
+    mutationFn: async (payload: ModifiedConsultDoctorFormPayload) =>
       ConsultDoctorClass.submitConsultDoctorForm(payload),
   });
 };

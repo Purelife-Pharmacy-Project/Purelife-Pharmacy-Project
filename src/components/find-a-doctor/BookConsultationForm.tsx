@@ -1,8 +1,9 @@
 'use client';
-import { useGetUser } from '@/hooks';
+import { toNaira } from '@/helpers/utils';
 import {
   useCreateCalendarEvent,
   useGetAvailableTimeSlots,
+  useSubmitConsultDoctorForm,
 } from '@/hooks/useConsultDoctor';
 import {
   useGetAlcoholConsumptionEnum,
@@ -16,6 +17,7 @@ import {
   ConsultDoctorFormPayload,
   consultDoctorFormValidationSchema,
 } from '@/services/consult-doctor/schema';
+import { ModifiedConsultDoctorFormPayload } from '@/services/consult-doctor/types';
 import { inputBordered, selectBordered, textAreaClassNames } from '@/theme';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -62,9 +64,13 @@ export const BookConsultationForm = () => {
         setIsBooked(true);
       },
     });
-  const userEmail = useGetUser().user?.email;
 
-  const genericAnswers = [
+  const {
+    mutate: submitConsultDoctorForm,
+    isPending: isSubmittingConsultDoctorForm,
+  } = useSubmitConsultDoctorForm();
+
+  const genericAnswers: BooleanEnumType[] = [
     {
       name: 'Yes',
       value: true,
@@ -101,10 +107,52 @@ export const BookConsultationForm = () => {
   }, 500);
 
   const onSubmit: SubmitHandler<ConsultDoctorFormPayload> = (data) => {
-    console.log(data);
+    setOpenCheckoutModal(true);
   };
 
-  const [isBooked, setIsBooked] = useState(false);
+  const onCloseCheckoutModal = () => {
+    setOpenCheckoutModal(false);
+
+    const data = getValues();
+
+    if (genders && alcoholConsumptions && medsAllergies) {
+      const payload: ModifiedConsultDoctorFormPayload = {
+        ...data,
+        gender: (genders[data.gender as keyof typeof genders] as EnumType).name,
+        alcoholConsumption: (
+          alcoholConsumptions[
+            data.alcoholConsumption as keyof typeof alcoholConsumptions
+          ] as EnumType
+        ).name,
+        medsAllergy: (
+          medsAllergies[
+            data.medsAllergy as keyof typeof medsAllergies
+          ] as EnumType
+        ).name,
+        takingMeds: (
+          genericAnswers[
+            data.takingMeds as keyof typeof genericAnswers
+          ] as BooleanEnumType
+        ).value,
+        illegalDrugHistory: (
+          genericAnswers[
+            Number(data.illegalDrugHistory as string) as number
+          ] as BooleanEnumType
+        ).value,
+        tobaccoUsage: (
+          genericAnswers[
+            data.tobaccoUsage as keyof typeof genericAnswers
+          ] as BooleanEnumType
+        ).value,
+      };
+
+      submitConsultDoctorForm(payload);
+
+      setOpenCheckoutModal(true);
+    }
+  };
+
+  const [isBooked, setIsBooked] = useState(true);
 
   const combineDateAndTime = (date: string, time: string): string => {
     const [hours, minutes, period] = time.match(/\d+|AM|PM/g) as string[];
@@ -127,7 +175,6 @@ export const BookConsultationForm = () => {
       summary: 'Consultation',
       startTime: dateTime,
       endTime: dateTime,
-      userEmail: userEmail!,
     };
 
     if (!isBooked) {
@@ -165,11 +212,9 @@ export const BookConsultationForm = () => {
               size='lg'
               label='Choose Time'
               isRequired
+              isLoading={loadingAvailableTimeSlots}
               isDisabled={
-                loadingAvailableTimeSlots ||
-                !availableTimeSlots ||
-                isCreatingCalendarEvent ||
-                isBooked
+                !availableTimeSlots || isCreatingCalendarEvent || isBooked
               }
               placeholder='Select time'
               labelPlacement='outside'
@@ -190,14 +235,12 @@ export const BookConsultationForm = () => {
                 </SelectItem>
               )) ?? []}
             </Select>
-            {loadingAvailableTimeSlots && (
-              <p className='text-xs'>Loading time slots...</p>
-            )}
           </div>
 
           <Button
             color='primary'
             type='submit'
+            isDisabled={isBooked}
             isLoading={isCreatingCalendarEvent}
             className='max-w-fit px-8'
             radius='full'
@@ -268,7 +311,7 @@ export const BookConsultationForm = () => {
                 <SelectItem
                   className='text-content'
                   value={gender.value}
-                  key={index}
+                  key={String(gender.value)}
                 >
                   {gender.name}
                 </SelectItem>
@@ -324,7 +367,9 @@ export const BookConsultationForm = () => {
                       onChange={(e) => {
                         const value = e.target.checked
                           ? [...field.value, condition.name]
-                          : field.value.filter((v) => v !== condition.name);
+                          : field.value.filter(
+                              (v: string) => v !== condition.name
+                            );
                         field.onChange(value);
                       }}
                       color='primary'
@@ -390,11 +435,11 @@ export const BookConsultationForm = () => {
               {...register('takingMeds')}
               errorMessage={errors.takingMeds?.message}
             >
-              {stringGenericAnswers.map((answer, index) => (
+              {genericAnswers.map((answer, index) => (
                 <SelectItem
                   className='text-content'
                   key={index}
-                  value={answer.value}
+                  value={Number(answer.value)}
                 >
                   {answer.name}
                 </SelectItem>
@@ -496,48 +541,29 @@ export const BookConsultationForm = () => {
             </Select>
           </div>
           <div className='flex flex-col'>
-            <label
-              htmlFor='conditions'
-              className='text-md block origin-top-left pb-1.5 font-light text-content transition-all !duration-200 !ease-out will-change-auto motion-reduce:transition-none'
-            >
-              How often do you consume alcohol?
-            </label>
-
-            <div className='grid grid-cols-2 gap-4 md:max-w-[50%]'>
-              {loadingAlcoholConsumptions ? (
-                <p>Loading consumptions...</p>
-              ) : null}
-
-              {alcoholConsumptions?.map((alcoholConsumption, index) => (
-                <Controller
-                  key={index}
-                  name='alcoholConsumption'
-                  control={control}
-                  defaultValue={[]}
-                  render={({ field }) => (
-                    <Checkbox
-                      checked={field.value.includes(alcoholConsumption.name)}
-                      onChange={(e) => {
-                        const value = e.target.checked
-                          ? [...field.value, alcoholConsumption.name]
-                          : field.value.filter(
-                              (v) => v !== alcoholConsumption.name
-                            );
-                        field.onChange(value);
-                      }}
-                      color='primary'
-                      className='w-full'
-                    >
-                      {alcoholConsumption.name}
-                    </Checkbox>
-                  )}
-                />
-              ))}
+            <div className='md:max-w-[50%]'>
+              <Select
+                size='lg'
+                isLoading={loadingAlcoholConsumptions}
+                label='How often do you consume alcohol?'
+                placeholder='Choose answer'
+                labelPlacement='outside'
+                color='default'
+                classNames={selectBordered}
+                {...register('alcoholConsumption')}
+                errorMessage={errors.alcoholConsumption?.message}
+              >
+                {alcoholConsumptions?.map((answer, index) => (
+                  <SelectItem
+                    className='text-content'
+                    key={index}
+                    value={answer.name}
+                  >
+                    {answer.name}
+                  </SelectItem>
+                )) ?? []}
+              </Select>
             </div>
-
-            {errors.alcoholConsumption && (
-              <InputError message={errors.alcoholConsumption.message} />
-            )}
           </div>
 
           <div className='grid gap-4 md:flex-row'>
@@ -572,25 +598,29 @@ export const BookConsultationForm = () => {
 
           <div className='flex w-full flex-col gap-6 md:w-[50%] md:flex-row md:items-center md:justify-between md:gap-0 lg:mt-10'>
             <div className='grid gap-2'>
-              <p className='text-sm font-medium uppercase'>Fee:</p>
-              <p className='text-3xl font-bold text-primary'>N10,000</p>
+              <p className='text-sm font-medium uppercase'>Consultation Fee:</p>
+              <p className='text-3xl font-bold text-primary'>
+                {toNaira(20000)}
+              </p>
             </div>
 
             <Button
-              // onPress={() => setOpenCheckoutModal(true)}
               color='primary'
-              // type='submit'
+              type='submit'
+              isLoading={isSubmittingConsultDoctorForm}
               radius='full'
               size='lg'
               className='px-8'
             >
-              Continue
+              Save and Continue
             </Button>
           </div>
         </form>
         <BillingAndPaymentModal
           isOpen={openCheckoutModal}
-          onClose={() => setOpenCheckoutModal(false)}
+          onClose={onCloseCheckoutModal}
+          toggleModal={() => setOpenCheckoutModal(false)}
+          amount={20000}
         />
       </CardBody>
     </Card>

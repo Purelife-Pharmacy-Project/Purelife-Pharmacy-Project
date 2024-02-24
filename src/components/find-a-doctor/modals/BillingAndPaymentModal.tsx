@@ -1,31 +1,36 @@
 import { BillingPaymentCard } from '@/components/billing/BillingPaymentCard';
 import { IconChevronLeft } from '@/components/icons/IconChevronLeft';
+import { toNaira } from '@/helpers/utils';
 import { Button, Modal, ModalBody, ModalContent } from '@nextui-org/react';
 import { FC } from 'react';
 
 interface BillingAndPaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
+  toggleModal: () => void;
+  amount: number;
 }
 
 export const BillingAndPaymentModal: FC<BillingAndPaymentModalProps> = ({
   isOpen,
+  toggleModal,
   onClose,
+  amount,
 }) => {
   return (
     <Modal
       isDismissable
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={toggleModal}
       size='4xl'
       hideCloseButton
     >
       <ModalContent>
-        {(onClose) => (
+        {(toggleModal) => (
           <>
             <ModalBody className='lg:p-12 lg:py-20'>
               <Button
-                onPress={onClose}
+                onPress={toggleModal}
                 className='mr-auto mt-4 flex p-4 pl-0 md:mt-0'
                 variant='light'
               >
@@ -45,11 +50,17 @@ export const BillingAndPaymentModal: FC<BillingAndPaymentModalProps> = ({
 
                   <div className='grid gap-2'>
                     <p className='text-sm text-foreground'>Consultation Fee</p>
-                    <p className='text-3xl font-bold text-primary'>N10,000</p>
+                    <p className='text-3xl font-bold text-primary'>
+                      {toNaira(amount)}
+                    </p>
                   </div>
                 </div>
 
-                <BillingPaymentCard />
+                <BillingPaymentCard
+                  amount={20000}
+                  hideDeliveryAddress
+                  onPaymentSuccess={onClose}
+                />
               </div>
             </ModalBody>
           </>

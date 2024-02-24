@@ -23,9 +23,17 @@ import { toast } from 'sonner';
 import { Paystack, PaystackSuccessResponse } from '../paystack';
 import { BillingAddressForm } from './BillingAddressForm';
 
-type BillingPaymentCardProps = {};
+type BillingPaymentCardProps = {
+  hideDeliveryAddress?: boolean;
+  amount?: number;
+  onPaymentSuccess?: () => void;
+};
 
-export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({}) => {
+export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
+  hideDeliveryAddress = false,
+  amount,
+  onPaymentSuccess,
+}) => {
   const summary = useStore(useCartStore, (state) => state)?.summary;
   const { user } = useGetUser();
   const cart = useStore(useCartStore, (state) => state)?.cart;
@@ -47,7 +55,8 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({}) => {
     'card'
   );
   const [deliveryAddress, setDeliveryAddress] = useState<string>('');
-  const { addresses, loadingAddresses } = useGetDeliveryAddresses();
+  const { addresses, loadingAddresses } =
+    useGetDeliveryAddresses(hideDeliveryAddress);
 
   const { createOrder, loadingCreateOrder } = useCreateOrder(() => {
     clearCart();
@@ -83,11 +92,13 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({}) => {
       <CardBody className='p-8 lg:p-12'>
         <div className='grid gap-4'>
           <div className='grid gap-6'>
-            <BillingAddressForm
-              addresses={addresses!}
-              loadingAddresses={loadingAddresses}
-              onSelect={handleSelectBillingAddress}
-            />
+            {!hideDeliveryAddress ? (
+              <BillingAddressForm
+                addresses={addresses!}
+                loadingAddresses={loadingAddresses}
+                onSelect={handleSelectBillingAddress}
+              />
+            ) : null}
             <div className='flex justify-between pb-3'>
               <RadioGroup
                 label='Payment Method'
@@ -124,13 +135,15 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({}) => {
             size='md'
             isLoading={loadingCreateOrder}
             isDisabled={
-              !user?.contactAddress || user?.contactAddress?.trim() === ''
+              (!hideDeliveryAddress && !user?.contactAddress) ||
+              user?.contactAddress?.trim() === ''
             }
             onPress={() => {
               const paymentButton = document.querySelector(
                 '#paymentButton > button'
               ) as HTMLButtonElement;
-              !user?.contactAddress || user?.contactAddress?.trim() === ''
+              (!hideDeliveryAddress && !user?.contactAddress) ||
+              user?.contactAddress?.trim() === ''
                 ? toast.warning('Please add a delivery address')
                 : paymentButton?.click();
             }}
@@ -142,12 +155,16 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({}) => {
 
           <div className='hidden' id='paymentButton'>
             <Paystack
-              amount={fromNaira(summary?.totalPayableAmount || '0')}
+              amount={amount || fromNaira(summary?.totalPayableAmount || '0')}
               paymentMethod={paymentMethod}
               email={user?.email as string}
               ctaText='Pay Now'
               label='Shop and Order'
-              onSuccess={(response) => handlePaymentSuccess(response)}
+              onSuccess={(response) => {
+                onPaymentSuccess
+                  ? onPaymentSuccess()
+                  : handlePaymentSuccess(response);
+              }}
             />
           </div>
         </div>

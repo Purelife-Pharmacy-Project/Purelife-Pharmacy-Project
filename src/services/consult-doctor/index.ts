@@ -1,6 +1,5 @@
 import Api from '@/helpers/api';
-import { ConsultDoctorFormPayload } from './schema';
-import { CreateEventPayload } from './types';
+import { CreateEventPayload, ModifiedConsultDoctorFormPayload } from './types';
 
 export class ConsultDoctorClass {
   private static CALENDAR_API_BASE = '/Calendar';
@@ -8,10 +7,10 @@ export class ConsultDoctorClass {
   constructor() {}
 
   public static async submitConsultDoctorForm(
-    payload: ConsultDoctorFormPayload
+    payload: ModifiedConsultDoctorFormPayload
   ) {
     const response = await Api.post(
-      `${this.CALENDAR_API_BASE}/consult-doctor`,
+      `${this.CALENDAR_API_BASE}/submit-form`,
       payload
     );
     return response;

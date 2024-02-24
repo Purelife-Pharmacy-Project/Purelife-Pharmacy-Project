@@ -136,7 +136,7 @@ export const useGetProductByProductId = (productId: string) => {
   };
 };
 
-export const useGetDeliveryAddresses = () => {
+export const useGetDeliveryAddresses = (shouldFetch: boolean = true) => {
   const {
     data: addresses,
     isLoading: loadingAddresses,
@@ -145,6 +145,7 @@ export const useGetDeliveryAddresses = () => {
     queryKey: ['delivery-addresses'],
     queryFn: ProductService.getDeliveryAddresses,
     refetchOnWindowFocus: false,
+    enabled: shouldFetch,
   });
 
   return {
