@@ -10,13 +10,14 @@ import {
 
 class Api {
   private static hasToastedUnauthorizedError = false;
+  private static auth_token = UsersService.loadAuthToken();
 
   private static axiosInstance = _axios.create({
     baseURL: `${API_BASE_URL}/`,
     timeout: 1000 * 60, // 60 seconds
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${UsersService.loadAuthToken()}`,
+      Authorization: `Bearer ${this.auth_token}`,
     },
   });
 

@@ -8,7 +8,6 @@ import {
 import {
   useGetAlcoholConsumptionEnum,
   useGetConditionEnum,
-  useGetGenderEnum,
   useGetMedsAllergyEnum,
   useGetSymptomEnum,
 } from '@/hooks/useEnum';
@@ -32,14 +31,15 @@ import {
 } from '@nextui-org/react';
 import debounce from 'lodash/debounce';
 import { FormEvent, useState } from 'react';
+import DatePicker from 'react-datepicker';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { twMerge } from 'tailwind-merge';
-import { IconCalendar } from '../icons/IconCalendar';
 import { BillingAndPaymentModal } from './modals/BillingAndPaymentModal';
 
 export const BookConsultationForm = () => {
-  const [calendarDate, setCalendarDate] = useState<string | undefined>(
+  const [calendarDate, setCalendarDate] = useState<Date | string>();
+  const [formattedDate, setFormattedDate] = useState<string | undefined>(
     undefined
   );
   const [calendarTime, setCalendarTime] = useState<string | undefined>(
@@ -50,13 +50,12 @@ export const BookConsultationForm = () => {
   const { data: conditions, isLoading: loadingConditions } =
     useGetConditionEnum();
   const { data: symptoms, isLoading: loadingSymptoms } = useGetSymptomEnum();
-  const { data: genders, isLoading: loadingGenders } = useGetGenderEnum();
   const { data: medsAllergies, isLoading: loadingMedsAllergies } =
     useGetMedsAllergyEnum();
   const { data: alcoholConsumptions, isLoading: loadingAlcoholConsumptions } =
     useGetAlcoholConsumptionEnum();
   const { data: availableTimeSlots, isLoading: loadingAvailableTimeSlots } =
-    useGetAvailableTimeSlots(calendarDate!);
+    useGetAvailableTimeSlots(formattedDate as string);
   const { mutate: createCalendarEvent, isPending: isCreatingCalendarEvent } =
     useCreateCalendarEvent({
       onSuccess: () => {
@@ -66,9 +65,34 @@ export const BookConsultationForm = () => {
     });
 
   const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    getValues,
+    formState: { errors },
+  } = useForm<ConsultDoctorFormPayload>({
+    resolver: zodResolver(consultDoctorFormValidationSchema),
+  });
+
+  const {
     mutate: submitConsultDoctorForm,
     isPending: isSubmittingConsultDoctorForm,
-  } = useSubmitConsultDoctorForm();
+  } = useSubmitConsultDoctorForm({
+    onSuccess: () => {
+      reset();
+      setIsBooked(false);
+      setCalendarDate(undefined);
+      setCalendarTime(undefined);
+      toast.success('Information saved successfully');
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const weekend = (date: Date | string) => new Date() < date;
+  const minDate = new Date();
 
   const genericAnswers: BooleanEnumType[] = [
     {
@@ -80,30 +104,29 @@ export const BookConsultationForm = () => {
       value: false,
     },
   ];
-  const stringGenericAnswers = [
+  const genderAnswers = [
     {
-      name: 'Yes',
-      value: 'yes',
+      name: 'Male',
+      value: 'male',
     },
     {
-      name: 'No',
-      value: 'no',
+      name: 'Female',
+      value: 'female',
+    },
+    {
+      name: 'Prefer not to say',
+      value: 'other',
     },
   ];
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    getValues,
-    formState: { errors },
-  } = useForm<ConsultDoctorFormPayload>({
-    resolver: zodResolver(consultDoctorFormValidationSchema),
-  });
-
   const handleDateDebounce = debounce((value: string) => {
     const date = value.split('-').join('/');
-    setCalendarDate(date);
+    setFormattedDate(date);
+    setCalendarDate(value);
+
+    if (calendarTime) {
+      setCalendarTime(undefined);
+    }
   }, 500);
 
   const onSubmit: SubmitHandler<ConsultDoctorFormPayload> = (data) => {
@@ -115,10 +138,12 @@ export const BookConsultationForm = () => {
 
     const data = getValues();
 
-    if (genders && alcoholConsumptions && medsAllergies) {
+    if (alcoholConsumptions && medsAllergies) {
       const payload: ModifiedConsultDoctorFormPayload = {
         ...data,
-        gender: (genders[data.gender as keyof typeof genders] as EnumType).name,
+        gender: (
+          genderAnswers[data.gender as keyof typeof genderAnswers] as EnumType
+        ).value,
         alcoholConsumption: (
           alcoholConsumptions[
             data.alcoholConsumption as keyof typeof alcoholConsumptions
@@ -147,12 +172,10 @@ export const BookConsultationForm = () => {
       };
 
       submitConsultDoctorForm(payload);
-
-      setOpenCheckoutModal(true);
     }
   };
 
-  const [isBooked, setIsBooked] = useState(true);
+  const [isBooked, setIsBooked] = useState(false);
 
   const combineDateAndTime = (date: string, time: string): string => {
     const [hours, minutes, period] = time.match(/\d+|AM|PM/g) as string[];
@@ -168,8 +191,8 @@ export const BookConsultationForm = () => {
 
   const booksSlotOnSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const date = calendarDate?.split('/').join('-');
-    const dateTime = combineDateAndTime(date!, calendarTime!);
+    const date = (formattedDate as string)?.split('/').join('-');
+    const dateTime = combineDateAndTime(date!, formattedDate!);
 
     const payload = {
       summary: 'Consultation',
@@ -192,20 +215,31 @@ export const BookConsultationForm = () => {
           onSubmit={booksSlotOnSubmit}
           className='grid gap-4 md:max-w-[50%] md:flex-row'
         >
-          <Input
-            size='lg'
-            placeholder='date'
-            type='date'
-            min={new Date().toISOString().split('T')[0]}
-            isDisabled={isBooked || isCreatingCalendarEvent}
-            isRequired
-            label='Choose when you want to see your doctor'
-            labelPlacement='outside'
-            classNames={inputBordered}
-            radius='md'
-            endContent={<IconCalendar color='content' />}
-            onChange={(e) => handleDateDebounce(e.target.value)}
-          />
+          <div className='grid'>
+            <label
+              htmlFor='date'
+              className='text-md block origin-top-left pb-1.5 font-light text-content transition-all !duration-200 !ease-out will-change-auto motion-reduce:transition-none'
+            >
+              Choose when you want to see your doctor
+            </label>
+            <DatePicker
+              filterDate={weekend}
+              placeholderText='Select date'
+              selected={calendarDate as Date}
+              minDate={minDate}
+              disabled={isBooked || isCreatingCalendarEvent}
+              onChange={(date: Date) => {
+                if (date) {
+                  const formattedDate = date.toISOString().split('T')[0];
+                  handleDateDebounce(formattedDate);
+                  setCalendarDate(date);
+                }
+              }}
+              className='w-full rounded-xl  border-1 border-header-100 px-4 py-3 disabled:border-header-100/40 disabled:opacity-50'
+              name='date'
+              dateFormat={'dd/MM/yyyy'}
+            />
+          </div>
 
           <div className='grid gap-2'>
             <Select
@@ -298,7 +332,6 @@ export const BookConsultationForm = () => {
 
             <Select
               size='lg'
-              isDisabled={loadingGenders}
               label='What is your gender'
               placeholder='Select your gender'
               labelPlacement='outside'
@@ -307,11 +340,11 @@ export const BookConsultationForm = () => {
               errorMessage={errors.gender?.message}
               {...register('gender')}
             >
-              {genders?.map((gender, index) => (
+              {genderAnswers?.map((gender, index) => (
                 <SelectItem
                   className='text-content'
                   value={gender.value}
-                  key={String(gender.value)}
+                  key={index}
                 >
                   {gender.name}
                 </SelectItem>
@@ -596,7 +629,7 @@ export const BookConsultationForm = () => {
             privacy policy
           </p>
 
-          <div className='flex w-full flex-col gap-6 md:w-[50%] md:flex-row md:items-center md:justify-between md:gap-0 lg:mt-10'>
+          <div className='flex w-full flex-col gap-6 lg:mt-10 lg:flex-row lg:items-center lg:justify-between lg:gap-0 xl:w-[50%]'>
             <div className='grid gap-2'>
               <p className='text-sm font-medium uppercase'>Consultation Fee:</p>
               <p className='text-3xl font-bold text-primary'>
@@ -620,7 +653,7 @@ export const BookConsultationForm = () => {
           isOpen={openCheckoutModal}
           onClose={onCloseCheckoutModal}
           toggleModal={() => setOpenCheckoutModal(false)}
-          amount={20000}
+          amount={10000}
         />
       </CardBody>
     </Card>

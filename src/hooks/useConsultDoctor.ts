@@ -13,11 +13,15 @@ export const useGetAvailableTimeSlots = (date: string) => {
   });
 };
 
-export const useSubmitConsultDoctorForm = () => {
+export const useSubmitConsultDoctorForm = (mutationOptions: {
+  onSuccess?: (data: any) => void;
+  onError?: (error: any) => void;
+}) => {
   return useMutation({
     mutationKey: ['submit-consult-doctor-form'],
     mutationFn: async (payload: ModifiedConsultDoctorFormPayload) =>
       ConsultDoctorClass.submitConsultDoctorForm(payload),
+    ...mutationOptions,
   });
 };
 

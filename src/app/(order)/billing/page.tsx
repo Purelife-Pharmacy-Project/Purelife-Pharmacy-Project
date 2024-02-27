@@ -28,7 +28,7 @@ export default function BillingPage() {
 
             <div className='grid h-max gap-6'>
               <BillingOrderSummary />
-              <BillingPaymentCard />
+              <BillingPaymentCard shouldFetchAddresses />
             </div>
           </div>
         </Section>

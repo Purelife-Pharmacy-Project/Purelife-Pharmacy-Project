@@ -23,7 +23,7 @@ export const BillingAddressForm: FC<BillingAddressFormProps> = ({
       <Select
         size={'lg'}
         isDisabled={loadingAddresses}
-        aria-label='Select duration'
+        aria-label='Select delivery location'
         placeholder='Select a location'
         classNames={selectBorderedGray}
         defaultValue={addresses?.[0]?.id ?? ''}

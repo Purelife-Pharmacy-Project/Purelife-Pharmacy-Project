@@ -11,7 +11,7 @@ export default function Doctor() {
 
       <div className='grid justify-center gap-6 bg-primaryLight'>
         <Section className='relative h-[10vh] w-screen bg-primaryLight lg:h-[30vh]'>
-          <div className='absolute top-[50px] flex w-max flex-col items-start gap-4 lg:top-[140px] lg:flex-row lg:gap-10'>
+          <div className='absolute bottom-[-180px] flex w-max flex-col items-start gap-4 lg:bottom-[-120px] lg:flex-row lg:gap-10'>
             <Avatar
               name='Francis Odeyemi'
               size='lg'
@@ -25,7 +25,7 @@ export default function Doctor() {
               <p className='text-lg font-light'>General Practitioner</p>
               <Chip
                 size={'lg'}
-                className='text-dark bg-white text-sm font-light'
+                className='text-dark bg-gray-300 text-sm font-light lg:bg-white'
               >
                 8 Years Experience
               </Chip>
@@ -34,7 +34,7 @@ export default function Doctor() {
         </Section>
       </div>
 
-      <section className='grid justify-center gap-6'>
+      <section className='xl:grid xl:justify-center xl:gap-6'>
         <div className='mt-[200px] grid items-end'>
           <Section className='relative pb-10 lg:grid-flow-col lg:grid-cols-[3fr_4fr]'>
             <div className='flex flex-col gap-6'>

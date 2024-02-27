@@ -24,13 +24,13 @@ import { Paystack, PaystackSuccessResponse } from '../paystack';
 import { BillingAddressForm } from './BillingAddressForm';
 
 type BillingPaymentCardProps = {
-  hideDeliveryAddress?: boolean;
+  shouldFetchAddresses?: boolean;
   amount?: number;
   onPaymentSuccess?: () => void;
 };
 
 export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
-  hideDeliveryAddress = false,
+  shouldFetchAddresses = false,
   amount,
   onPaymentSuccess,
 }) => {
@@ -56,7 +56,7 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
   );
   const [deliveryAddress, setDeliveryAddress] = useState<string>('');
   const { addresses, loadingAddresses } =
-    useGetDeliveryAddresses(hideDeliveryAddress);
+    useGetDeliveryAddresses(shouldFetchAddresses);
 
   const { createOrder, loadingCreateOrder } = useCreateOrder(() => {
     clearCart();
@@ -92,7 +92,7 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
       <CardBody className='p-8 lg:p-12'>
         <div className='grid gap-4'>
           <div className='grid gap-6'>
-            {!hideDeliveryAddress ? (
+            {shouldFetchAddresses ? (
               <BillingAddressForm
                 addresses={addresses!}
                 loadingAddresses={loadingAddresses}
@@ -135,14 +135,14 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
             size='md'
             isLoading={loadingCreateOrder}
             isDisabled={
-              (!hideDeliveryAddress && !user?.contactAddress) ||
+              (!shouldFetchAddresses && !user?.contactAddress) ||
               user?.contactAddress?.trim() === ''
             }
             onPress={() => {
               const paymentButton = document.querySelector(
                 '#paymentButton > button'
               ) as HTMLButtonElement;
-              (!hideDeliveryAddress && !user?.contactAddress) ||
+              (!shouldFetchAddresses && !user?.contactAddress) ||
               user?.contactAddress?.trim() === ''
                 ? toast.warning('Please add a delivery address')
                 : paymentButton?.click();

@@ -57,8 +57,8 @@ export const BillingAndPaymentModal: FC<BillingAndPaymentModalProps> = ({
                 </div>
 
                 <BillingPaymentCard
-                  amount={20000}
-                  hideDeliveryAddress
+                  amount={amount}
+                  shouldFetchAddresses={false}
                   onPaymentSuccess={onClose}
                 />
               </div>

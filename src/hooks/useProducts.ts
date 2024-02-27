@@ -136,7 +136,7 @@ export const useGetProductByProductId = (productId: string) => {
   };
 };
 
-export const useGetDeliveryAddresses = (shouldFetch: boolean = true) => {
+export const useGetDeliveryAddresses = (shouldFetch: boolean) => {
   const {
     data: addresses,
     isLoading: loadingAddresses,
