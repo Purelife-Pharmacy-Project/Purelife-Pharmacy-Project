@@ -1,5 +1,6 @@
 'use client';
 
+import { removeHtmlTags } from '@/helpers/utils';
 import { useGetUser, useUpdateUserContactInfo } from '@/hooks';
 import { BillingPayload, billingSchema } from '@/services/billing/schema';
 import { User, UserType } from '@/services/user/types';
@@ -50,7 +51,7 @@ export const BillingForm: FC<BillingFormProps> = ({ onUpdated, isProfile }) => {
       setValue('lastName', _user.lastName);
       setValue('email', _user.email);
       setValue('phone', _user.phoneNumber);
-      setValue('address', _user.contactAddress);
+      setValue('address', removeHtmlTags(_user.contactAddress));
     }
   }, [setValue, user]);
 

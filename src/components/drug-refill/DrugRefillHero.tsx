@@ -95,7 +95,6 @@ export const DrugRefillHero: FC<DrugRefillHeroProps> = ({}) => {
                   radius='full'
                   type='search'
                   ref={searchInputRef}
-                  isRequired
                   onChange={(e) => handleInputChange(e.target.value)}
                   onFocus={() => setShowSearchResults(true)}
                   onBlur={() => {

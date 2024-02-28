@@ -1,7 +1,71 @@
-import { Button, Card, CardBody, Input } from '@nextui-org/react';
+'use client';
+import { useCartStore, useGetLabTests } from '@/hooks';
+import { Product } from '@/services/products/types';
+import {
+  Button,
+  Card,
+  CardBody,
+  Image,
+  Input,
+  Spinner,
+} from '@nextui-org/react';
+import debounce from 'lodash/debounce';
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { Section } from '../home/Section';
+import { IconSearch } from '../icons/IconSearch';
 
-export const BookATestHero = () => {
+type BookATestHeroProps = {};
+
+export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
+  const [searchStr, setSearchStr] = useState<string | undefined>('');
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchResultsRef = useRef<HTMLDivElement>(null);
+
+  const [showSearchResults, setShowSearchResults] = useState(false);
+  const { addToCart } = useCartStore();
+
+  const handleDebouncedSearch = debounce((value: string) => {
+    setSearchStr(value);
+  }, 800);
+
+  const handleProductClick = (product: Product) => {
+    if (searchResultsRef.current) {
+      searchResultsRef.current.style.display = 'none';
+    }
+
+    addToCart({
+      id: product.id,
+      product,
+      quantity: 1,
+    });
+
+    console.log('product', product);
+  };
+
+  const { loadingLabTests, labTests, refetchLabTests } = useGetLabTests({
+    name: searchStr,
+    pageSize: 10,
+    pageIndex: 1,
+  });
+
+  const filteredTests = labTests?.data.filter(
+    (test) => test.name?.toLowerCase().includes(searchStr?.toLowerCase() || '')
+  );
+
+  useEffect(() => {
+    if (filteredTests?.length === 0) {
+      refetchLabTests();
+    }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filteredTests]);
+
+  const handleInputChange = useCallback(
+    (value: string) => {
+      handleDebouncedSearch(value);
+    },
+    [handleDebouncedSearch]
+  );
+
   return (
     <div className='lg:grid lg:justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
@@ -12,34 +76,87 @@ export const BookATestHero = () => {
                 Sign up for amazing health and lifestyle deals
               </h1>
 
-              <Input
-                size='lg'
-                radius='full'
-                type='Search'
-                isRequired
-                classNames={{
-                  input: ['py-6'],
-                  inputWrapper: [
-                    'h-max',
-                    'pr-2',
-                    'bg-white',
-                    'focus-within:bg-white',
-                    'focus:bg-white',
-                    'hover:bg-white',
-                  ],
-                }}
-                endContent={
-                  <Button
-                    color='success'
-                    className='px-10 text-white lg:px-12'
-                    radius='full'
-                    size='lg'
+              <div className='relative'>
+                <Input
+                  size='lg'
+                  radius='full'
+                  type='Search'
+                  ref={searchInputRef}
+                  onChange={(e) => handleInputChange(e.target.value)}
+                  onFocus={() => setShowSearchResults(true)}
+                  onBlur={() => {
+                    setTimeout(() => {
+                      setShowSearchResults(false);
+                    }, 200);
+                  }}
+                  classNames={{
+                    input: ['py-6'],
+                    inputWrapper: [
+                      'h-max',
+                      'pr-2',
+                      'bg-whit',
+                      'shadow-none',
+                      'text-black capitalize',
+                      'data-[hover=true]:bg-white',
+                      'group-data-[focus=true]:bg-white transition-all group-data-[focus=true]:shadow-md',
+                      'group-data-[active=true]:bg-white',
+                    ],
+                  }}
+                  startContent={<IconSearch size={24} color='success' />}
+                  placeholder='Search all tests here'
+                />
+
+                {showSearchResults ? (
+                  <Card
+                    shadow='sm'
+                    radius='lg'
+                    ref={searchResultsRef}
+                    className='-bottom-15 absolute z-20 mt-2 max-h-[300px] w-full overflow-y-auto'
                   >
-                    Shop & Order
-                  </Button>
-                }
-                placeholder='Search all tests here'
-              />
+                    <CardBody>
+                      {!loadingLabTests && filteredTests?.length === 0 ? (
+                        <p className='text-body text-center'>
+                          No products found
+                        </p>
+                      ) : null}
+
+                      {loadingLabTests ? (
+                        <div className='flex justify-center'>
+                          <Spinner size='sm' color='success' />
+                        </div>
+                      ) : null}
+
+                      {!loadingLabTests && (
+                        <div className='grid gap-4'>
+                          {filteredTests?.map((product) => (
+                            <Button
+                              variant='light'
+                              size='lg'
+                              type='button'
+                              onPress={() => handleProductClick(product)}
+                              key={product.id}
+                              className='grid h-max grid-flow-col grid-cols-[1fr_8fr_3fr] items-center gap-3 p-2'
+                            >
+                              <Image
+                                width={60}
+                                height={60}
+                                className='max-h-14 object-contain'
+                                radius='md'
+                                src={product.imageInBinary}
+                                alt={''}
+                              />
+
+                              <p className='text-body max-w-[200px] break-words text-start capitalize'>
+                                {product.name?.toLowerCase()}
+                              </p>
+                            </Button>
+                          ))}
+                        </div>
+                      )}
+                    </CardBody>
+                  </Card>
+                ) : null}
+              </div>
             </div>
           </CardBody>
         </Card>

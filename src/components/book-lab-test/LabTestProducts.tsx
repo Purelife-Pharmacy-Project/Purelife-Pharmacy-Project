@@ -1,15 +1,22 @@
 'use client';
 import { useGetCategories, useQueryParams } from '@/hooks';
 import { useGetLabTests } from '@/hooks/useLabTest';
-import { Button, Image } from '@nextui-org/react';
 import { useSearchParams } from 'next/navigation';
 import { FC } from 'react';
+import { twMerge } from 'tailwind-merge';
 import { TelehealthProductCard } from '../TelehealthProductCard';
 import { Section } from '../home/Section';
+import { IconPill } from '../icons/IconPill';
 import { ProductsPagination } from '../shop-and-order/category/partials/ProductPagination';
 import { LabTestsSkeleton } from './skeleton/LabTestsSkeleton';
 
-interface LabTestProductsProps {}
+type LabTestProductsProps = {};
+
+enum CategoryNames {
+  MEN = "MEN'S HEALTH",
+  WOMEN = "WOMEN'S HEALTH",
+  SEXUAL = 'SEXUAL HEALTH',
+}
 
 export const LabTestProducts: FC<LabTestProductsProps> = () => {
   const searchParams = useSearchParams();
@@ -19,7 +26,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
   const { setQuery, removeQuery } = useQueryParams();
 
   const { loadingLabTests, labTests } = useGetLabTests({
-    pageSize: 6,
+    pageSize: 12,
     pageIndex,
     categoryId: category ? Number(category) : undefined,
   });
@@ -30,21 +37,30 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
   const filteredData = categories
     ?.filter(
       (item) =>
-        item.name.toLowerCase() === "men's health" ||
-        item.name.toLowerCase() === "women's health" ||
-        item.name.toLowerCase() === 'sexual health'
+        item.name === CategoryNames.MEN ||
+        item.name === CategoryNames.WOMEN ||
+        item.name === CategoryNames.SEXUAL
     )
     .map((item) => ({
       id: item.id,
       name: item.name,
-      image: '/images/care-package.png',
     }));
 
+  const getCategoryIcon = (name: string) => {
+    switch (name) {
+      case CategoryNames.MEN:
+        return <IconPill size={24} color='white' />;
+      case CategoryNames.WOMEN:
+        return <IconPill size={24} color='white' />;
+      case CategoryNames.SEXUAL:
+        return <IconPill size={24} color='white' />;
+      default:
+        return <IconPill size={24} color='white' />;
+    }
+  };
+
   const labTestCategories = filteredData
-    ? [
-        { id: 0, name: 'All', image: '/images/care-package.png' },
-        ...filteredData,
-      ]
+    ? [{ id: 0, name: 'All', icon: '' }, ...filteredData]
     : [];
 
   const handleFilterByCategory = (
@@ -63,32 +79,35 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
       <div className='grid justify-center'>
         <Section className='bg-white'>
           <div className='grid gap-10 sm:grid-cols-2 lg:grid-flow-col lg:grid-cols-4'>
-            {labTestCategories?.map((category, index) => (
-              <Button
-                variant='flat'
-                key={index}
-                isDisabled={loadingLabTests}
-                radius='full'
-                onClick={() =>
-                  handleFilterByCategory(String(category.id), category.name)
-                }
-                className='flex h-max flex-col gap-2 border-none bg-transparent py-2'
-              >
+            {labTestCategories?.map((_c, index) => (
+              <div key={index} className='grid justify-center gap-2'>
+                {getCategoryIcon('')}
+                {/* <Button
+                  isDisabled={loadingLabTests}
+                  radius='full'
+                  onClick={() => handleFilterByCategory(String(_c.id), _c.name)}
+                  className={twMerge(
+                    'flex h-[140px] w-[140px] items-center justify-center bg-primaryGreenLight',
+                    category === String(_c.id)
+                      ? 'border-3 border-primaryGreen'
+                      : 'border-3 border-transparent'
+                  )}
+                >
+                  {getCategoryIcon(_c.name)}
+                </Button> */}
                 <div className='flex justify-center'>
-                  <Image
-                    radius='full'
-                    src={category.image}
-                    alt={category.name}
-                    width={140}
-                    height={140}
-                  />
-                </div>
-                <div className='flex justify-center'>
-                  <p className='text-center text-lg font-medium capitalize text-header-100'>
-                    {category.name?.toLowerCase()}
+                  <p
+                    className={twMerge(
+                      'text-center text-lg font-medium capitalize',
+                      category === String(_c.id)
+                        ? 'text-primaryGreen'
+                        : 'text-header-100'
+                    )}
+                  >
+                    {_c.name?.toLowerCase()}
                   </p>
                 </div>
-              </Button>
+              </div>
             ))}
           </div>
         </Section>
@@ -102,7 +121,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
             <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
               {labTests?.data.map((test, index) => (
                 <TelehealthProductCard
-                  color='primary'
+                  color='success'
                   test={test}
                   key={index}
                 />
@@ -110,7 +129,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
             </div>
 
             <ProductsPagination
-              color='primary'
+              color='success'
               loading={loadingLabTests}
               className='text-white'
               totalPages={labTests?.totalPages as number}
