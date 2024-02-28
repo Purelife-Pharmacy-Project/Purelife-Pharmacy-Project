@@ -94,7 +94,7 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
                     inputWrapper: [
                       'h-max',
                       'pr-2',
-                      'bg-whit',
+                      'bg-white',
                       'shadow-none',
                       'text-black capitalize',
                       'data-[hover=true]:bg-white',
