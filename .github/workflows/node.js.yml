@@ -20,9 +20,9 @@ jobs:
           key: ${{ secrets.PURELIFE_KEY }}
           port: ${{ secrets.PURELIFE_PORT }}
           script: |
-             cd /usr/Purelife-Pharmacy
-             git pull origin dev
+             cd /usr/Purelife-Pharmacy-Project
+             git pull origin deployment
              docker build -t purelife-frontend .
              docker rm -f purelife-frontend
-             docker run --restart always --name purelife-frontend -d -p 3400:3000 --env-file ./.env purelife-frontend
+             docker run --name purelife-frontend --restart always -d -p 3400:3000 --env-file ./.env purelife-frontend
           
