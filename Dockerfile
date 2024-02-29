@@ -1,10 +1,8 @@
-FROM node:18-alpine
+FROM node:18-alpine AS builder
 
-WORKDIR /purelife-frontend
+WORKDIR /app
 
 COPY package*.json ./
-
-RUN npm config set fetch-retry-maxtimeout 300000000000
 
 COPY . .
 
@@ -14,6 +12,15 @@ RUN npm install
 
 RUN npm run build --if-present
 
+
+#FROM node:18-alpine AS runner
+
+#WORKDIR /app
+
+#COPY --from=builder /app/.next ./.next
+#COPY --from=builder /app/.next/standalone ./.next/standalone
+#COPY --from=builder /app/.next/static ./.next/standalone/.next/static
+#COPY --from=builder /app/public ./.next/standalone/public
 EXPOSE 3000
 
 CMD [ "npm", "start" ]
