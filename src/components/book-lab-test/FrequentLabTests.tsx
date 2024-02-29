@@ -15,7 +15,10 @@ interface FrequentLabTestsProps {
   }[];
 }
 
-export const FrequentLabTests: FC<FrequentLabTestsProps> = ({ title }) => {
+export const FrequentLabTests: FC<FrequentLabTestsProps> = ({
+  title,
+  products,
+}) => {
   const { loadingLabTests, labTests } = useGetLabTests({
     pageSize: 3,
   });
