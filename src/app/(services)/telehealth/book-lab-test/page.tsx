@@ -39,11 +39,11 @@ export default async function BookATest() {
       <main className='grid gap-6'>
         <BookATestHero />
 
-        <WhyBookATest />
-
         <FrequentLabTests title='Frequently Scheduled Lab Tests' />
 
         <LabTestProducts />
+
+        <WhyBookATest />
 
         <HowItWorks data={howItWorksData} />
 

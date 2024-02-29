@@ -48,9 +48,10 @@ export default function GetVaccinationPage() {
         </div>
 
         <div id='products' className='invisible'></div>
-        <HowItWorks data={howItWorksData} variant={'primary'} />
 
         <VaccinationProducts />
+
+        <HowItWorks data={howItWorksData} variant={'primary'} />
 
         <ReportDrugReaction />
 

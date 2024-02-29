@@ -33,32 +33,22 @@ export default function BookEmergencyPage() {
 
   const featuresData: FeatureCard[] = [
     {
-      title: 'Get a personalized meal plan just for you',
+      title: 'Wound cleaning available at our pharmacy.',
       description:
-        'Eat better, live better. Our personalized meal plans are designed just for you, making healthy eating easy and enjoyable.',
+        "Need wound care? Swing by our pharmacy. Our team will make sure it's cleaned right, so you can heal up quickly.",
       ctaText: 'Launching soon',
       ctaLink: '#',
-      icon: '/images/meal-plan.jpg',
+      icon: '/images/patch-up.jpg',
       direction: 'left',
     },
     {
-      title:
-        'Get health insurance and enjoy discounts on all your health needs.',
+      title: 'Get an ambulance for any emergency.',
       description:
-        'Stay healthy without breaking the bank. Our health insurance offers discounts on all your medical needs.',
+        "Immediate help when you need it most. Don't hesitate to call for an ambulance in any emergency situation.",
       ctaText: 'Launching soon',
       ctaLink: '#',
-      icon: '/images/blood-pressure.jpg',
+      icon: '/images/ambulance.jpg',
       direction: 'right',
-    },
-    {
-      title: 'Subscribe to our fitness plan to improve your well-being.',
-      description:
-        'Elevate your health journey with our tailored fitness plan. Join today and experience the transformation towards a healthier, happier you.',
-      ctaText: 'Launching soon',
-      ctaLink: '#',
-      icon: '/images/workout.jpg',
-      direction: 'left',
     },
   ];
   return (

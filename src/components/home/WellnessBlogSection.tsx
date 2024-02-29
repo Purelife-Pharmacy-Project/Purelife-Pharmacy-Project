@@ -3,6 +3,36 @@ import { BlogCard } from '../blog/BlogCard';
 import { Section } from './Section';
 
 export const WellnessBlogSection = () => {
+  const blogPosts = [
+    {
+      title: 'The effects of drug abuse',
+      category: 'Medicine',
+      description:
+        'Drug abuse has a ripple effect that impacts not only the user but everyone around...',
+      date: '1 Day ago',
+      image: '/images/dummy-image.jpeg',
+      link: '#',
+    },
+    {
+      title: 'Ulcer signs we ignore',
+      category: 'Rest',
+      description:
+        "Ulcer signs are more common than you think and can be easily ignored. It's important to...",
+      date: '1 Day ago',
+      image: '/images/dummy-image.jpeg',
+      link: '#',
+    },
+    {
+      title: 'Endometriosis',
+      category: 'Health',
+      description:
+        "Endometriosis is a medical condition that affects many women. If you're not familiar...",
+      date: '1 Day ago',
+      image: '/images/dummy-image.jpeg',
+      link: '#',
+    },
+  ];
+
   return (
     <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
       <Section>
@@ -28,12 +58,10 @@ export const WellnessBlogSection = () => {
             </Button>
           </div>
 
-          <div className='grid grid-flow-dense gap-10 sm:grid-cols-2 lg:grid-flow-col'>
-            {Array(3)
-              .fill(null)
-              .map((_, index) => (
-                <BlogCard key={index} />
-              ))}
+          <div className='grid grid-cols-2 lg:grid-cols-3'>
+            {blogPosts.map((post, index) => (
+              <BlogCard key={index} post={post} />
+            ))}
           </div>
         </div>
       </Section>
