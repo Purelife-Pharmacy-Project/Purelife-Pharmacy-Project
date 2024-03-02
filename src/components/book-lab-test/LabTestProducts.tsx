@@ -6,13 +6,16 @@ import { FC } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { TelehealthProductCard } from '../TelehealthProductCard';
 import { Section } from '../home/Section';
-import { IconPill } from '../icons/IconPill';
 import { ProductsPagination } from '../shop-and-order/category/partials/ProductPagination';
 import { LabTestsSkeleton } from './skeleton/LabTestsSkeleton';
+import { Button } from '@nextui-org/react';
+import { IconLabs } from '@/components/icons/IconLabs';
+import { IconWomen } from '@/components/icons/IconWomen';
 
 type LabTestProductsProps = {};
 
 enum CategoryNames {
+  ALL = 'All',
   MEN = "MEN'S HEALTH",
   WOMEN = "WOMEN'S HEALTH",
   SEXUAL = 'SEXUAL HEALTH',
@@ -37,9 +40,9 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
   const filteredData = categories
     ?.filter(
       (item) =>
-        item.name === CategoryNames.MEN ||
+        item.name === CategoryNames.SEXUAL ||
         item.name === CategoryNames.WOMEN ||
-        item.name === CategoryNames.SEXUAL
+        item.name === CategoryNames.MEN
     )
     .map((item) => ({
       id: item.id,
@@ -47,20 +50,23 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
     }));
 
   const getCategoryIcon = (name: string) => {
+    console.log(name);
     switch (name) {
       case CategoryNames.MEN:
-        return <IconPill size={24} color='white' />;
+        return '';
       case CategoryNames.WOMEN:
-        return <IconPill size={24} color='white' />;
+        return <IconWomen size={61} color='success' />;
       case CategoryNames.SEXUAL:
-        return <IconPill size={24} color='white' />;
+        return '';
+      case CategoryNames.ALL:
+        return <IconLabs color='success' />;
       default:
-        return <IconPill size={24} color='white' />;
+        return <IconLabs size={61} color='success' />;
     }
   };
 
   const labTestCategories = filteredData
-    ? [{ id: 0, name: 'All', icon: '' }, ...filteredData]
+    ? [...filteredData, { id: 0, name: 'All', icon: '' }]
     : [];
 
   const handleFilterByCategory = (
@@ -81,8 +87,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
           <div className='grid gap-10 sm:grid-cols-2 lg:grid-flow-col lg:grid-cols-4'>
             {labTestCategories?.map((_c, index) => (
               <div key={index} className='grid justify-center gap-2'>
-                {getCategoryIcon('')}
-                {/* <Button
+                <Button
                   isDisabled={loadingLabTests}
                   radius='full'
                   onClick={() => handleFilterByCategory(String(_c.id), _c.name)}
@@ -94,7 +99,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                   )}
                 >
                   {getCategoryIcon(_c.name)}
-                </Button> */}
+                </Button>
                 <div className='flex justify-center'>
                   <p
                     className={twMerge(
