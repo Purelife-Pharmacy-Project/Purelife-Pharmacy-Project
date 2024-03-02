@@ -26,7 +26,6 @@ export const BillingAddressForm: FC<BillingAddressFormProps> = ({
         aria-label='Select delivery location'
         placeholder='Select a location'
         classNames={selectBorderedGray}
-        defaultValue={addresses?.[0]?.id ?? ''}
         onChange={(e) => onSelect(e.target.value)}
         labelPlacement='outside'
         name='location'
