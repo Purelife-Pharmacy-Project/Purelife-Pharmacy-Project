@@ -22,7 +22,7 @@ export const IconPill = ({
         width={size}
         height={size}
       >
-        <rect width={size} height={size} fill='#D9D9D9' />
+        <rect width={size} height={size} />
       </mask>
       <g mask='url(#mask0_416_846)'>
         <path
