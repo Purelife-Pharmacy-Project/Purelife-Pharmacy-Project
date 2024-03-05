@@ -1,16 +1,18 @@
 'use client';
+import { IconWomen } from '@/components/icons/IconWomen';
 import { useGetCategories, useQueryParams } from '@/hooks';
 import { useGetLabTests } from '@/hooks/useLabTest';
+import { Button } from '@nextui-org/react';
 import { useSearchParams } from 'next/navigation';
 import { FC } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { TelehealthProductCard } from '../TelehealthProductCard';
 import { Section } from '../home/Section';
+import { IconHealthShield } from '../icons/IconHealthShield';
+import { IconMensHealth } from '../icons/IconMensHealth';
+import { IconStethoscope } from '../icons/IconStethoscope';
 import { ProductsPagination } from '../shop-and-order/category/partials/ProductPagination';
 import { LabTestsSkeleton } from './skeleton/LabTestsSkeleton';
-import { Button } from '@nextui-org/react';
-import { IconLabs } from '@/components/icons/IconLabs';
-import { IconWomen } from '@/components/icons/IconWomen';
 
 type LabTestProductsProps = {};
 
@@ -50,18 +52,17 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
     }));
 
   const getCategoryIcon = (name: string) => {
-    console.log(name);
     switch (name) {
       case CategoryNames.MEN:
-        return '';
+        return <IconMensHealth size={75} color='success' />;
       case CategoryNames.WOMEN:
-        return <IconWomen size={61} color='success' />;
+        return <IconWomen size={75} color='success' />;
       case CategoryNames.SEXUAL:
-        return '';
+        return <IconHealthShield size={75} color='success' />;
       case CategoryNames.ALL:
-        return <IconLabs color='success' />;
+        return <IconStethoscope color='success' />;
       default:
-        return <IconLabs size={61} color='success' />;
+        return <IconStethoscope size={75} color='success' />;
     }
   };
 
@@ -88,11 +89,12 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
             {labTestCategories?.map((_c, index) => (
               <div key={index} className='grid justify-center gap-2'>
                 <Button
-                  isDisabled={loadingLabTests}
+                  disabled={loadingLabTests}
                   radius='full'
+                  isIconOnly
                   onClick={() => handleFilterByCategory(String(_c.id), _c.name)}
                   className={twMerge(
-                    'flex h-[140px] w-[140px] items-center justify-center bg-primaryGreenLight',
+                    'flex h-[140px] w-[140px] items-center justify-center bg-primaryGreenLight p-0',
                     category === String(_c.id)
                       ? 'border-3 border-primaryGreen'
                       : 'border-3 border-transparent'

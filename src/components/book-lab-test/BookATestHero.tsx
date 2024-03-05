@@ -69,8 +69,8 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
   return (
     <div className='lg:grid lg:justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
-        <Card shadow='none'>
-          <CardBody className='bg-primaryGreenLight'>
+        <div>
+          <div className='bg-primaryGreenLight'>
             <div className='grid w-full gap-4 p-1 md:p-4 lg:p-20'>
               <h1 className='w-full text-center text-3xl font-bold text-primaryGreenDark lg:text-4xl'>
                 Sign up for amazing health and lifestyle deals
@@ -135,7 +135,7 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
                               type='button'
                               onPress={() => handleProductClick(product)}
                               key={product.id}
-                              className='grid h-max grid-flow-col grid-cols-[1fr_8fr_3fr] items-center gap-3 p-2'
+                              className='group grid h-max grid-flow-col grid-cols-[1fr_8fr_3fr] items-center gap-3 p-2'
                             >
                               <Image
                                 width={60}
@@ -149,6 +149,10 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
                               <p className='text-body max-w-[200px] break-words text-start capitalize'>
                                 {product.name?.toLowerCase()}
                               </p>
+
+                              <p className='hidden text-primaryGreenDark group-hover:block'>
+                                Click to Add to Cart
+                              </p>
                             </Button>
                           ))}
                         </div>
@@ -158,8 +162,8 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
                 ) : null}
               </div>
             </div>
-          </CardBody>
-        </Card>
+          </div>
+        </div>
       </Section>
     </div>
   );

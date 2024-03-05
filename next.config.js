@@ -1,3 +1,4 @@
+const MillionLint = require('@million/lint');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -20,5 +21,6 @@ const nextConfig = {
     ];
   },
 };
-
-module.exports = nextConfig;
+module.exports = MillionLint.next({
+  rsc: true,
+})(nextConfig);
