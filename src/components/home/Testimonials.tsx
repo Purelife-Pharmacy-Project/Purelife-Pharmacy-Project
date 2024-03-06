@@ -1,6 +1,6 @@
 'use client';
 import { Quotes } from '@/library/illustrations/Quotes';
-import { Image } from '@nextui-org/react';
+import { Button } from '@nextui-org/react';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
@@ -13,19 +13,36 @@ export const Testimonials = () => {
       name: 'Aisosa Urhoghide',
       testimonial:
         "Purelife Pharmacy is the best. It's your go-to for all health needs, with top-notch service. No matter how rare your medication, they've got you covered. I recommend them anytime.",
-      image: 'https://i.pravatar.cc/150',
     },
     {
       name: 'Abigeal Remilekun',
       testimonial:
         'Purelife Pharmacy has great customer service. They always greet me whenever I visit the shop, and I also receive phone calls and text messages after getting my medication.',
-      image: 'https://i.pravatar.cc/150?u=a042581f4e29026704d',
     },
     {
       name: 'Mmeme Amune',
       testimonial:
         "I love this pharmacy. I went there for my toddler's meds, and when they started throwing up, the staff were super helpful. Their prices were fair, and they didn’t push the most expensive products on me right away. I’m definitely a fan!",
-      image: 'https://i.pravatar.cc/150?u=fake@pravatar.com',
+    },
+    {
+      name: 'Emmanuel Ohaeri',
+      testimonial:
+        'Nice, organized, clean, and smart pharmacy that deals with a variety of pharmaceutical products, beverages, and outstanding cosmetics. Customer satisfaction is their priority goal.  You can make your choice in person or through ordering and delivery',
+    },
+    {
+      name: 'Ogedengbe Patience',
+      testimonial:
+        'Great friendly service, smiling faces, and knowledgeable staff. A much better customer experience.',
+    },
+    {
+      name: 'Osang Caleb',
+      testimonial:
+        'There is no place like Purelife Pharmacy; the experience here is overwhelming, and customer service is simply unparalleled.',
+    },
+    {
+      name: 'Seunfunmi Omale',
+      testimonial:
+        "Great ambiance, spacious. The highlight for me is the hospitality and excellence of the members of the staff. Overall, it's a good store with a good variety.",
     },
   ];
   const [startInterval, setStartInterval] = useState(false);
@@ -90,58 +107,34 @@ export const Testimonials = () => {
     }, 3000);
   }, [activeIndex, startInterval]);
 
-  // const handleOnButtonSwitch = () => {
-  //   setStartInterval(false);
-  //   clearInterval(timerRef.current);
-  //
-  //   setActiveIndex((prev: number) => {
-  //     if (prev === testimonials.length - 1) {
-  //       return 0;
-  //     }
-  //     return prev + 1;
-  //   });
-  //
-  //   setShouldRender(true); // Show the testimonial immediately after button click
-  // };
-
   return (
     <div
       ref={elementRef}
       className='h-max min-h-[380px] w-full bg-primaryGreenLight py-6 lg:min-h-[484px] lg:py-0'
     >
-      <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
+      <div className='lg:grid lg:justify-center lg:pb-10 lg:pt-[55px]'>
         <Section className='bg-primaryGreenLight'>
-          <div className='flex flex-col justify-center gap-4 lg:flex-row lg:justify-between lg:gap-0'>
+          <div className='flex flex-col items-center justify-between gap-4 lg:flex-row lg:justify-between lg:gap-0'>
             <h1 className='text-center text-4xl font-bold text-primaryGreenDark lg:text-start'>
               People ❤️ Purelife
             </h1>
 
-            <div className='flex justify-center gap-2'>
+            <div className='flex h-max w-2/5 justify-center gap-2'>
               {testimonials.map((testimonial, index) => (
-                <div
+                <Button
+                  variant='flat'
                   key={index}
-                  // onClick={handleOnButtonSwitch}
-                  style={{
-                    borderImage:
-                      'linear-gradient(white, white), radial-gradient(circle at top left, #f00,#3020ff)',
-                    borderImageSlice: 1,
-                    backgroundClip: 'padding-box',
-                    backgroundOrigin: 'border-box',
-                  }}
+                  isIconOnly
                   className={twMerge(
-                    'h-max rounded-full border-4 border-gray-300 transition duration-500',
-                    [activeIndex === index ? 'border-success' : '']
+                    'h-[9px] w-6 cursor-pointer rounded-full bg-green-100',
+                    index === activeIndex && 'bg-success'
                   )}
-                >
-                  <Image
-                    className={twMerge('h-10 w-10', [
-                      activeIndex === index ? '' : 'grayscale',
-                    ])}
-                    radius='full'
-                    alt='customer'
-                    src={testimonial.image}
-                  />
-                </div>
+                  onClick={() => {
+                    setStartInterval(false);
+                    setActiveIndex(index);
+                    setShouldRender(true);
+                  }}
+                ></Button>
               ))}
             </div>
           </div>

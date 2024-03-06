@@ -8,7 +8,7 @@ import './globals.css';
 const bricolage = Bricolage_Grotesque({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Purelife Web',
+  title: 'Purelife Health',
   description: 'your one-stop shop for wellness and lifestyle',
 };
 
