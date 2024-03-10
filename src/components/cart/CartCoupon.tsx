@@ -4,6 +4,7 @@ import { useStore } from '@/hooks/store';
 import { useApplyCoupons, useGetCoupon } from '@/hooks/useCoupons';
 import { Button, Input } from '@nextui-org/react';
 import { useState } from 'react';
+import { inputDefault } from '@/theme';
 
 export const CartCoupon = () => {
   const store = useStore(useCartStore, (state) => state);
@@ -52,6 +53,7 @@ export const CartCoupon = () => {
         onValueChange={(value) => setCodeValue(value)}
         id='coupon-input'
         placeholder='Enter a promo code'
+        classNames={inputDefault}
         endContent={
           <Button
             color='primary'
