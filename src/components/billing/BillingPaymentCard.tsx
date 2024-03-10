@@ -1,5 +1,5 @@
 'use client';
-import { fromNaira } from '@/helpers/utils';
+import { fromNaira, toNaira } from '@/helpers/utils';
 import {
   useCartStore,
   useCreateOrder,
@@ -22,6 +22,7 @@ import { FC, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { Paystack, PaystackSuccessResponse } from '../paystack';
 import { BillingAddressForm } from './BillingAddressForm';
+import { ProductType } from '@/services/products/types';
 
 type BillingPaymentCardProps = {
   shouldFetchAddresses?: boolean;
@@ -57,6 +58,9 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
   const [deliveryAddress, setDeliveryAddress] = useState<string>('');
   const { addresses, loadingAddresses } =
     useGetDeliveryAddresses(shouldFetchAddresses);
+  const [selectedAddress, setSelectedAddress] = useState<
+    ProductType | undefined
+  >(undefined);
 
   const { createOrder, loadingCreateOrder } = useCreateOrder(() => {
     clearCart();
@@ -67,14 +71,23 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
   const handlePaymentSuccess = (response: PaystackSuccessResponse) => {
     if (!response) return;
 
+    const cartProducts = cart?.map((product) => ({
+      productId: product.product.id,
+      quantity: product.quantity,
+      description: product.product.description,
+      priceUnit: product.product.price,
+    })) as OrderProduct[];
+
+    const deliveryProduct = {
+      productId: selectedAddress?.id as number,
+      quantity: 1,
+      description: 'Delivery Fee',
+      priceUnit: selectedAddress?.price,
+    } as OrderProduct;
+
     const payload: CreateOrderPayload = {
       billingAddress: deliveryAddress,
-      products: cart?.map((product) => ({
-        productId: product.product.id,
-        quantity: product.quantity,
-        description: product.product.description,
-        priceUnit: product.product.price,
-      })) as OrderProduct[],
+      products: [...cartProducts, deliveryProduct],
     };
 
     createOrder(payload);
@@ -84,6 +97,8 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
     setDeliveryAddress(value);
     const address = addresses?.find((address) => address.id === Number(value));
 
+    setSelectedAddress(address);
+    toast.info(`Delivery fee: ${toNaira(Number(address?.price))} added`);
     setDeliveryFee(address?.price as number);
   };
 
