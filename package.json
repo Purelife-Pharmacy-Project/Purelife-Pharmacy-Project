@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
-    "@million/lint": "^0.0.66",
     "@nextui-org/react": "^2.1.13",
     "@react-rxjs/core": "^0.10.7",
     "@react-rxjs/utils": "^0.9.7",
@@ -26,7 +25,6 @@
     "framer-motion": "^10.16.4",
     "jwt-decode": "^4.0.0",
     "lodash.debounce": "^4.0.8",
-    "million": "^3.0.4",
     "next": "^14.1.0",
     "nextjs-toploader": "^1.6.4",
     "react": "^18.2.0",
