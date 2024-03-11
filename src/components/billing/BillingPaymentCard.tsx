@@ -81,7 +81,7 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
     const deliveryProduct = {
       productId: selectedAddress?.id as number,
       quantity: 1,
-      description: 'Delivery Fee',
+      description: selectedAddress?.name,
       priceUnit: selectedAddress?.price,
     } as OrderProduct;
 
