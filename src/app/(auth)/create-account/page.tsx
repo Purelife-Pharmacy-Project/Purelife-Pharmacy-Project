@@ -7,7 +7,7 @@ export default function CreateAccountPage() {
   return (
     <>
       <AppNavbar />
-      <main className='mb-10 grid h-max justify-center md:mb-0 lg:h-[60vh]'>
+      <main className='mb-10 grid h-screen justify-center md:mb-0'>
         <div className='mt-12 flex w-full flex-col gap-6'>
           <h1 className='text-center text-2xl font-semibold  text-header-100 lg:text-4xl'>
             Create a Secure Account
