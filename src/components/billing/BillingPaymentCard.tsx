@@ -8,6 +8,8 @@ import {
 } from '@/hooks';
 import { useStore } from '@/hooks/store';
 import { CreateOrderPayload, OrderProduct } from '@/services/orders/types';
+import { ProductType } from '@/services/products/types';
+import { selectBorderedGray } from '@/theme';
 import {
   Button,
   Card,
@@ -16,19 +18,22 @@ import {
   Link,
   Radio,
   RadioGroup,
+  Select,
+  SelectItem,
 } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { Paystack, PaystackSuccessResponse } from '../paystack';
 import { BillingAddressForm } from './BillingAddressForm';
-import { ProductType } from '@/services/products/types';
 
 type BillingPaymentCardProps = {
   shouldFetchAddresses?: boolean;
   amount?: number;
   onPaymentSuccess?: () => void;
 };
+
+type DeliveryMethod = 'home-delivery' | 'pick-up';
 
 export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
   shouldFetchAddresses = false,
@@ -59,7 +64,10 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
   const { addresses, loadingAddresses } =
     useGetDeliveryAddresses(shouldFetchAddresses);
   const [selectedAddress, setSelectedAddress] = useState<
-    ProductType | undefined
+    Partial<ProductType> | undefined
+  >(undefined);
+  const [deliveryMethod, setDeliveryMethod] = useState<
+    DeliveryMethod | undefined
   >(undefined);
 
   const { createOrder, loadingCreateOrder } = useCreateOrder(() => {
@@ -102,12 +110,77 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
     setDeliveryFee(address?.price as number);
   };
 
+  // pick up station
+  const pickUpStations = [
+    {
+      id: 1,
+      value: '15b Admiralty Way, Lekki Phase 1, Lagos, Nigeria',
+    },
+    {
+      id: 2,
+      value:
+        'Plot 5, Block 137, Cananland street, off Elf Bus stop, Lekki, Lagos, Nigeria',
+    },
+  ];
+  const onSelectPickupStation = (value: string) => {
+    setDeliveryAddress(value);
+    const address = pickUpStations?.find(
+      (address) => address.id === Number(value)
+    );
+
+    setSelectedAddress({
+      name: address?.value as string,
+      price: 0,
+      id: address?.id as number,
+      description: address?.value as string,
+    });
+
+    toast.info('Pick up station selected.');
+  };
+
   return (
     <Card shadow='none' className='w-full bg-primaryLight'>
       <CardBody className='p-8 lg:p-12'>
         <div className='grid gap-4'>
           <div className='grid gap-6'>
-            {shouldFetchAddresses ? (
+            <div className='flex flex-col gap-2 border-b border-gray-300'>
+              <p className='font-medium text-header-100'>Delivery Mode</p>
+              <RadioGroup
+                value={deliveryMethod}
+                onValueChange={(value) =>
+                  setDeliveryMethod(value as DeliveryMethod)
+                }
+              >
+                <Radio value='home-delivery'>Home Delivery</Radio>
+                <Radio value='pick-up'>Pick Up</Radio>
+              </RadioGroup>
+            </div>
+            {deliveryMethod === 'pick-up' ? (
+              <div className='flex'>
+                <Select
+                  size={'lg'}
+                  isDisabled={loadingAddresses}
+                  aria-label='Select Pickup Store'
+                  placeholder='Select a pickup store'
+                  classNames={selectBorderedGray}
+                  onChange={(e) => onSelectPickupStation(e.target.value)}
+                  labelPlacement='outside'
+                  name='location'
+                >
+                  {pickUpStations?.map((address) => (
+                    <SelectItem
+                      className='py-2 text-header-100'
+                      key={address?.id}
+                      textValue={address?.value}
+                      value={address?.id}
+                    >
+                      <span>{address.value}</span>
+                    </SelectItem>
+                  )) ?? []}
+                </Select>
+              </div>
+            ) : null}
+            {shouldFetchAddresses && deliveryMethod === 'home-delivery' ? (
               <BillingAddressForm
                 addresses={addresses!}
                 loadingAddresses={loadingAddresses}
@@ -151,7 +224,8 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
             isLoading={loadingCreateOrder}
             isDisabled={
               (!shouldFetchAddresses && !user?.contactAddress) ||
-              user?.contactAddress?.trim() === ''
+              user?.contactAddress?.trim() === '' ||
+              !deliveryMethod
             }
             onPress={() => {
               const paymentButton = document.querySelector(
