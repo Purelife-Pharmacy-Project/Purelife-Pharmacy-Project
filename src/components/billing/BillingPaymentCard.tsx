@@ -1,5 +1,5 @@
 'use client';
-import { fromNaira, toNaira } from '@/helpers/utils';
+import { fromNaira, removeHtmlTags, toNaira } from '@/helpers/utils';
 import {
   useCartStore,
   useCreateOrder,
@@ -9,12 +9,13 @@ import {
 import { useStore } from '@/hooks/store';
 import { CreateOrderPayload, OrderProduct } from '@/services/orders/types';
 import { ProductType } from '@/services/products/types';
-import { selectBorderedGray } from '@/theme';
+import { inputBorderedRegular, selectBordered } from '@/theme';
 import {
   Button,
   Card,
   CardBody,
   Image,
+  Input,
   Link,
   Radio,
   RadioGroup,
@@ -69,6 +70,9 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
   const [deliveryMethod, setDeliveryMethod] = useState<
     DeliveryMethod | undefined
   >(undefined);
+  const [phoneNumber, setPhoneNumber] = useState<string>(
+    user?.phoneNumber || ''
+  );
 
   const { createOrder, loadingCreateOrder } = useCreateOrder(() => {
     clearCart();
@@ -82,14 +86,14 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
     const cartProducts = cart?.map((product) => ({
       productId: product.product.id,
       quantity: product.quantity,
-      description: product.product.description,
+      description: removeHtmlTags(product.product.description),
       priceUnit: product.product.price,
     })) as OrderProduct[];
 
     const deliveryProduct = {
       productId: selectedAddress?.id as number,
       quantity: 1,
-      description: selectedAddress?.name,
+      description: `${selectedAddress?.name} - ${phoneNumber}`,
       priceUnit: selectedAddress?.price,
     } as OrderProduct;
 
@@ -116,11 +120,11 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
       id: 1,
       value: '15b Admiralty Way, Lekki Phase 1, Lagos, Nigeria',
     },
-    {
-      id: 2,
-      value:
-        'Plot 5, Block 137, Cananland street, off Elf Bus stop, Lekki, Lagos, Nigeria',
-    },
+    // {
+    //   id: 2,
+    //   value:
+    //     'Plot 5, Block 137, Cananland street, off Elf Bus stop, Lekki, Lagos, Nigeria',
+    // },
   ];
   const onSelectPickupStation = (value: string) => {
     setDeliveryAddress(value);
@@ -131,12 +135,18 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
     setSelectedAddress({
       name: address?.value as string,
       price: 0,
-      id: address?.id as number,
-      description: address?.value as string,
+      id: 1115,
+      description: `${address?.value}` as string,
     });
 
-    toast.info('Pick up station selected.');
+    toast.info('Pick up store selected.');
   };
+
+  useEffect(() => {
+    if (cart && cart?.length === 0) {
+      router.push('/cart');
+    }
+  }, [cart]);
 
   return (
     <Card shadow='none' className='w-full bg-primaryLight'>
@@ -156,13 +166,13 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
               </RadioGroup>
             </div>
             {deliveryMethod === 'pick-up' ? (
-              <div className='flex'>
+              <div className='flex w-full flex-col gap-4'>
                 <Select
                   size={'lg'}
-                  isDisabled={loadingAddresses}
+                  label='Select Pickup Store'
                   aria-label='Select Pickup Store'
                   placeholder='Select a pickup store'
-                  classNames={selectBorderedGray}
+                  classNames={selectBordered}
                   onChange={(e) => onSelectPickupStation(e.target.value)}
                   labelPlacement='outside'
                   name='location'
@@ -178,6 +188,21 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
                     </SelectItem>
                   )) ?? []}
                 </Select>
+
+                <Input
+                  size='lg'
+                  label='Your phone number (for pick up)'
+                  placeholder='Phone Number'
+                  required
+                  type='number'
+                  maxLength={15}
+                  inputMode='numeric'
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  labelPlacement='outside'
+                  classNames={inputBorderedRegular}
+                  name='phone number'
+                />
               </div>
             ) : null}
             {shouldFetchAddresses && deliveryMethod === 'home-delivery' ? (
@@ -225,7 +250,8 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
             isDisabled={
               (!shouldFetchAddresses && !user?.contactAddress) ||
               user?.contactAddress?.trim() === '' ||
-              !deliveryMethod
+              !deliveryMethod ||
+              (deliveryMethod === 'pick-up' && phoneNumber === '')
             }
             onPress={() => {
               const paymentButton = document.querySelector(
