@@ -20,13 +20,14 @@ export default function Doctor() {
           <Section className='relative pb-10 lg:grid-flow-col lg:grid-cols-[3fr_4fr]'>
             <div className='flex flex-col gap-6'>
               <h1 className='text-4xl font-bold text-header-100 lg:max-w-[500px]'>
-                About <br /> Dr. Francis Odeyemi
+                About <br /> Dr. Ike Emmanuel Chinedum
               </h1>
               <div className='text-md grid w-full gap-0.5 whitespace-normal leading-9 text-content lg:max-w-[758px]'>
                 <p className='mb-2'>
-                  Dr. Francis Odeyemi is a skilled Medical Doctor with degrees
-                  in MBBS and Physiology from Bingham University. He&apos;s
-                  recognized by the General Medical Council (GMC) in the UK.
+                  Dr. Ike Emmanuel Chinedum is a skilled Medical Doctor with
+                  degrees in MBBS and Physiology from Bingham University.
+                  He&apos;s recognized by the General Medical Council (GMC) in
+                  the UK.
                 </p>
 
                 <p className='mb-2'>
@@ -44,13 +45,19 @@ export default function Doctor() {
                 </p>
 
                 <p className='mb-2'>
-                  Known for his diligence and adaptability, Dr. Odeyemi is
+                  With over four years of experience, Dr. Chinedum has worked at
+                  respected institutions such as Reddington Hospital and Golden
+                  Cross Infirmiry Hospital. His dedication to patient care,
+                  especially in cardiology, is well-known.
+                </p>
+                <p className='mb-2'>
+                  Known for his diligence and adaptability, Dr. Chinedum is
                   committed to continuous learning and professional growth. He
                   strives to stay updated with the latest advancements in
                   healthcare.
                 </p>
                 <p className='mb-2'>
-                  Dr. Odeyemi&apos;s dedication to excellence makes him a
+                  Dr. Chinedum&apos;s dedication to excellence makes him a
                   valuable asset in the medical field, where he aims to
                   contribute significantly to patient care and research.
                 </p>
