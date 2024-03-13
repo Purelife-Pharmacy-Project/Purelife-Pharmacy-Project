@@ -1,7 +1,7 @@
 'use client';
 import { useCartStore, useGetUser } from '@/hooks';
 import { useStore } from '@/hooks/store';
-import { Button, Card, CardBody, Radio, RadioGroup } from '@nextui-org/react';
+import { Button, Card, CardBody } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -40,14 +40,6 @@ export const OrderSummary: FC<OrderSummaryProps> = () => {
       <CardBody>
         <div className='grid gap-4'>
           <h1 className='text-2xl font-bold text-header-100'>Order Summary</h1>
-
-          <div className='flex justify-between border-b border-gray-300 py-4'>
-            <p className='text-lg font-light text-header-100'>Delivery Mode</p>
-            <RadioGroup isDisabled defaultValue='pick-up'>
-              <Radio value='home-delivery'>Home Delivery</Radio>
-              <Radio value='pick-up'>Pick Up</Radio>
-            </RadioGroup>
-          </div>
 
           <div className='flex justify-between py-4'>
             <p className='text-lg font-light text-header-100'>Discount</p>
