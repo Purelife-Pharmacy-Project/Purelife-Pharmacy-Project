@@ -57,7 +57,7 @@ export const CategoryHero: FC<CategoryHeroProps> = ({}) => {
               <div className='grid w-full gap-4 p-1 md:p-4 lg:p-20'>
                 <div className='flex gap-2 '>
                   <div className='grid gap-4'>
-                    <h1 className='text-center text-2xl font-bold text-header-100 lg:text-start lg:text-4xl'>
+                    <h1 className='text-center text-xl font-black text-header-100 lg:text-start lg:text-4xl lg:font-bold'>
                       {generateHero().title}
                     </h1>
                     <p className='text-center text-base font-light  leading-4 text-content lg:max-w-[353px] lg:text-start lg:text-lg'>

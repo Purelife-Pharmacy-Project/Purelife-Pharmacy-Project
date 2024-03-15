@@ -146,7 +146,7 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
     if (cart && cart?.length === 0) {
       router.push('/cart');
     }
-  }, [cart]);
+  }, [cart, router]);
 
   return (
     <Card shadow='none' className='w-full bg-primaryLight'>

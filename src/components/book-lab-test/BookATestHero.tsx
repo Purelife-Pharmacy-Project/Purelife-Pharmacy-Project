@@ -38,8 +38,6 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
       product,
       quantity: 1,
     });
-
-    console.log('product', product);
   };
 
   const { loadingLabTests, labTests, refetchLabTests } = useGetLabTests({

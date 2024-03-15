@@ -1,6 +1,6 @@
 'use client';
 import { teleHealthServices } from '@/constants';
-import { Button, Card, CardBody, Image, Link } from '@nextui-org/react';
+import { Button, Card, CardBody, Chip, Image, Link } from '@nextui-org/react';
 import { Section } from './Section';
 
 export const TeleHealthServices = () => {
@@ -24,12 +24,25 @@ export const TeleHealthServices = () => {
             {teleHealthServices.map((service, index) => (
               <Card key={index} shadow='none' radius='lg'>
                 <CardBody className='grid gap-5 bg-primaryLight p-6'>
-                  <div className='grid h-[104px] w-[104px] place-content-center rounded-full bg-white'>
-                    {service.icon({
-                      size: 48,
-                      color: 'primary',
-                    })}
+                  <div className='flex justify-between'>
+                    <div className='grid h-[104px] w-[104px] place-content-center rounded-full bg-white'>
+                      {service.icon({
+                        size: 48,
+                        color: 'primary',
+                      })}
+                    </div>
+
+                    {!service.isAvailable && (
+                      <Chip
+                        size='sm'
+                        className='text-xs font-light'
+                        color='primary'
+                      >
+                        Coming soon
+                      </Chip>
+                    )}
                   </div>
+
                   <div className='grid h-max gap-2'>
                     <p className='text-xl font-medium text-header-100'>
                       {service.title}
@@ -41,6 +54,7 @@ export const TeleHealthServices = () => {
                   <Button
                     as={Link}
                     href={service.url}
+                    isDisabled={!service.isAvailable}
                     variant='bordered'
                     radius='sm'
                     size='lg'

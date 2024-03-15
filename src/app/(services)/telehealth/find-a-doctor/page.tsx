@@ -7,6 +7,7 @@ import { Section } from '@/components/home/Section';
 import { IconAddNotification } from '@/components/icons/IconAddNotification';
 import { IconBrowse } from '@/components/icons/IconBrowse';
 import { IconHealthShield } from '@/components/icons/IconHealthShield';
+import { allDoctors } from '@/helpers/mocks/doctors';
 
 export default function FindADoctor() {
   const howItWorksData: {
@@ -29,9 +30,10 @@ export default function FindADoctor() {
       icon: <IconAddNotification size={60} color='primary' />,
     },
   ];
+
   return (
     <>
-      <AppNavbar background='primaryLight' />
+      <AppNavbar background={'primaryLight'} />
 
       <main className='grid gap-6'>
         <div className='grid justify-center bg-primaryLight'>
@@ -49,11 +51,9 @@ export default function FindADoctor() {
           <div className='bg-primaryLight lg:grid lg:justify-center'>
             <Section className='bg-primaryLight py-4 lg:py-20'>
               <div className='grid grid-flow-dense grid-cols-1 gap-4 md:grid-cols-2'>
-                {Array(1)
-                  .fill(0)
-                  .map((_, i) => (
-                    <DoctorCard key={i} />
-                  ))}
+                {allDoctors.map((doctor, i) => (
+                  <DoctorCard key={doctor.slug} doctor={doctor} />
+                ))}
               </div>
             </Section>
           </div>

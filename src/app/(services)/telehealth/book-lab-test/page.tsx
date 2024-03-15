@@ -35,7 +35,7 @@ export default async function BookATest() {
 
   return (
     <>
-      <AppNavbar background='white' />
+      <AppNavbar background={'white'} />
       <main className='grid gap-6'>
         <BookATestHero />
 

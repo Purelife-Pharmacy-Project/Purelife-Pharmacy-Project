@@ -1,8 +1,6 @@
 'use client';
-import { inputDefault } from '@/theme';
 import {
   Button,
-  Input,
   Link,
   Navbar,
   NavbarBrand,
@@ -17,10 +15,10 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { NavbarCart } from './NavbarCart';
 import { NavbarUser } from './NavbarUser';
-import { IconSearch } from './icons/IconSearch';
+import { NavbarSearch } from '@/components/NavbarSearch';
 
 export const AppNavbar = ({
-  background = 'bg-inherit',
+  background = 'inherit',
   disabled = false,
 }: {
   background?: string;
@@ -118,19 +116,7 @@ export const AppNavbar = ({
       </NavbarContent>
 
       <NavbarContent justify='center' className='hidden w-full lg:flex'>
-        <Input
-          radius='full'
-          color='default'
-          classNames={inputDefault}
-          size='lg'
-          type='text'
-          placeholder='Search Purelife'
-          endContent={
-            <div className='rounded-full bg-primaryLight p-2'>
-              <IconSearch color='header-100' />
-            </div>
-          }
-        />
+        <NavbarSearch />
       </NavbarContent>
 
       <NavbarContent
