@@ -42,6 +42,13 @@ export const FeaturedProducts: FC<FeaturedProductsProps> = ({
               ))}
             </div>
           )}
+
+          {(!loadingFeaturedProducts && !allProducts) ||
+          allProducts?.products.length === 0 ? (
+            <p className='text-center text-sm text-header-100'>
+              Oops. No products yet
+            </p>
+          ) : null}
         </div>
       </Section>
 
