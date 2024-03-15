@@ -4,6 +4,7 @@ import { Button, Link } from '@nextui-org/react';
 import { FC } from 'react';
 import { FeaturedProduct } from './FeaturedProduct';
 import { Section } from './Section';
+import { IconSpinner } from '@/components/icons/IconSpinner';
 
 interface FeaturedProductsProps {
   title?: string;
@@ -19,7 +20,8 @@ export const FeaturedProducts: FC<FeaturedProductsProps> = ({
   title,
   products,
 }) => {
-  const { products: allProducts } = useGetFeaturedProducts();
+  const { products: allProducts, loadingFeaturedProducts } =
+    useGetFeaturedProducts();
 
   return (
     <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
@@ -29,11 +31,17 @@ export const FeaturedProducts: FC<FeaturedProductsProps> = ({
             {title ? title : 'Featured Products'}
           </h1>
 
-          <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
-            {allProducts?.products?.map((product) => (
-              <FeaturedProduct key={product.id} product={product} />
-            ))}
-          </div>
+          {loadingFeaturedProducts ? (
+            <div className='flex w-full flex-col items-center justify-center gap-4'>
+              <IconSpinner color='primary' />
+            </div>
+          ) : (
+            <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
+              {allProducts?.products?.map((product) => (
+                <FeaturedProduct key={product.id} product={product} />
+              ))}
+            </div>
+          )}
         </div>
       </Section>
 

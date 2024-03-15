@@ -24,6 +24,7 @@ export const teleHealthServices = [
       'Get your medications delivered to you at your preferred intervals.',
     url: '/telehealth/drug-refill',
     actionText: 'Subscribe',
+    isAvailable: true,
   },
   {
     icon: IconLabs as ({
@@ -38,6 +39,7 @@ export const teleHealthServices = [
       'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
     url: '/telehealth/book-lab-test',
     actionText: 'Book Now',
+    isAvailable: true,
   },
   {
     icon: IconFluidMed as ({
@@ -51,6 +53,7 @@ export const teleHealthServices = [
     description: 'Choose from our expertly curated vaccines whenever you want.',
     url: '/telehealth/get-vaccination',
     actionText: 'Get Vaccinated',
+    isAvailable: true,
   },
   {
     icon: IconDoctor as ({
@@ -62,9 +65,11 @@ export const teleHealthServices = [
     }) => JSX.Element,
     title: 'Consult with a doctor',
     description:
-      'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
+      'Consult with our team of healthcare professionals and specialists, anytime, anywhere\n' +
+      '\n',
     url: '/telehealth/find-a-doctor',
     actionText: 'Consult Now',
+    isAvailable: true,
   },
   {
     icon: IconPrescription as ({
@@ -76,9 +81,10 @@ export const teleHealthServices = [
     }) => JSX.Element,
     title: 'Upload Prescription',
     description:
-      'Choose from our over 500 effective test packages, aimed at providing you with the best health care possible.',
+      'Ease Your Healthcare Journey as we manage and secure your prescriptions with ease',
     url: '/telehealth/upload-prescription',
     actionText: 'Upload Now',
+    isAvailable: true,
   },
   {
     icon: IconEmergency as ({
@@ -91,8 +97,10 @@ export const teleHealthServices = [
     title: 'Book Emergency',
     description:
       "We're here for you when things go wrong, big or small. Count on us to prioritize your safety and well-being",
-    url: '/telehealth/book-emergency',
-    actionText: 'Learn More',
+    // url: '/telehealth/book-emergency',
+    url: '#',
+    actionText: 'Book Now',
+    isAvailable: false,
   },
   {
     icon: IconWellness as ({
@@ -105,8 +113,10 @@ export const teleHealthServices = [
     title: 'Pure Wellness',
     description:
       'Get Health insurance, nutrition, and customize diet and fitness plans to embark on a journey towards holistic well-being.',
-    url: '/telehealth/pure-wellness',
+    // url: '/telehealth/pure-wellness',
+    url: '#',
     actionText: 'Learn More',
+    isAvailable: false,
   },
 ];
 

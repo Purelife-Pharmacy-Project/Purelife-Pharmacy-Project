@@ -20,3 +20,12 @@ export type ModifiedConsultDoctorFormPayload = {
   medsDescription?: string | undefined;
   tobaccoUsage: boolean;
 };
+
+export type IDoctor = {
+  slug: string;
+  name: string;
+  title: string;
+  yearsOfExperience: number;
+  description: string;
+  image: string;
+};

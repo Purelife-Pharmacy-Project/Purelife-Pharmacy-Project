@@ -5,7 +5,7 @@ import { removeHtmlTags } from '@/helpers/utils';
 import { useCartStore, useGetProductByProductId } from '@/hooks';
 import { useStore } from '@/hooks/store';
 import { CartType } from '@/services/cart/types';
-import { Button, Card, CardBody, Image } from '@nextui-org/react';
+import { Button, Card, CardBody, Image, Link } from '@nextui-org/react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { IconSpinner } from '../icons/IconSpinner';
@@ -63,9 +63,9 @@ export const CartItemDetails = () => {
               </div>
             </CardBody>
           </Card>
-          <Card shadow='none' className='w-full'>
+          <Card shadow='none' className='h-full w-full'>
             <CardBody>
-              <div className='grid gap-4'>
+              <div className='grid h-full gap-4'>
                 <h1 className='text-2xl font-semibold text-header-100'>
                   {product?.name}
                 </h1>
@@ -115,6 +115,18 @@ export const CartItemDetails = () => {
                     Add to Cart
                   </Button>
                 )}
+
+                <Button
+                  as={Link}
+                  href='/telehealth/shop-and-order'
+                  radius='md'
+                  className={'self-end'}
+                  size={'lg'}
+                  color='default'
+                  fullWidth
+                >
+                  Continue Shopping
+                </Button>
               </div>
             </CardBody>
           </Card>

@@ -20,7 +20,7 @@ import { NavbarUser } from './NavbarUser';
 import { IconSearch } from './icons/IconSearch';
 
 export const AppNavbar = ({
-  background = 'bg-inherit',
+  background = 'inherit',
   disabled = false,
 }: {
   background?: string;
