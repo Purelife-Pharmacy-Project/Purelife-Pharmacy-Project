@@ -2,7 +2,6 @@
 import { useGetProducts } from '@/hooks';
 import { Card, CardBody } from '@nextui-org/react';
 import { FC } from 'react';
-import { MobileProductsByPrice } from './MobileProductsByPrice';
 import { ProductsPriceRange } from './ProductsPriceRange';
 
 type ProductsFilterContainerProps = {
@@ -35,16 +34,7 @@ export const ProductsFilterContainer: FC<ProductsFilterContainerProps> = ({
 
   return (
     <>
-      <div className='md:hidden'>
-        <MobileProductsByPrice
-          categoryId={categoryId}
-          searchString={searchString}
-          minPrice={minPrice}
-          maxPrice={maxPrice}
-        />
-      </div>
-
-      <Card shadow='none' className='hidden h-max bg-primaryLight md:block'>
+      <Card shadow='none' className='hidden h-max bg-primaryLight lg:block'>
         <CardBody>
           <h1 className='mb-4 text-2xl font-semibold text-header-100'>
             Filter

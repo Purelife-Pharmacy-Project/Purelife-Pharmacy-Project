@@ -96,7 +96,7 @@ export const NavbarSearch = () => {
           shadow='sm'
           radius='lg'
           ref={searchResultsRef}
-          className='-bottom-15 absolute z-20 mt-2 max-h-[200px] w-[373px] overflow-y-auto'
+          className='-bottom-15 absolute z-20 mt-2 max-h-[400px] w-[400px] overflow-y-auto'
         >
           <CardBody>
             {!loadingProducts && filteredProducts?.length === 0 ? (
@@ -129,11 +129,11 @@ export const NavbarSearch = () => {
                       alt={''}
                     />
 
-                    <p className='text-body max-w-[200px] break-words text-start capitalize'>
+                    <p className='text-body max-w-[150px] truncate text-start text-sm capitalize'>
                       {product.name?.toLowerCase()}
                     </p>
 
-                    <p className='hidden text-primaryGreenDark group-hover:block'>
+                    <p className='hidden text-xs text-primaryGreenDark group-hover:block'>
                       Click to Add to Cart
                     </p>
                   </Button>

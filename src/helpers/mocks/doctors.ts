@@ -19,4 +19,13 @@ export const allDoctors: IDoctor[] = [
     description:
       'Dr. Salako is an experienced Audiologist and Speech-Language Pathologist focusing on childhood speech issues, with a research emphasis.',
   },
+  {
+    slug: 'ifeoluwa-olatunji',
+    name: 'Ifeoluwa Olatunji',
+    image: '/images/doctors/doctor-ifeoluwa.png',
+    title: 'Cosmetologist',
+    yearsOfExperience: 5,
+    description:
+      'Ifeoluwa Olatunji, a dedicated cosmetologist, offers personalized skincare, makeup, and hair solutions. With expertise and passion, she helps clients enhance their natural beauty and feel confident.',
+  },
 ];

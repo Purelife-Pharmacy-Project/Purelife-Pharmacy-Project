@@ -10,6 +10,7 @@ import {
 } from '@nextui-org/react';
 import { FC } from 'react';
 import { ProductsPriceRange } from './ProductsPriceRange';
+import { IconFilter } from '@/components/icons/IconFilter';
 
 type MobileProductsByPriceProps = {
   categoryId: string;
@@ -39,7 +40,14 @@ export const MobileProductsByPrice: FC<MobileProductsByPriceProps> = ({
 
   return (
     <>
-      <Button fullWidth variant='bordered' onPress={onOpen}>
+      <Button
+        size={'lg'}
+        radius={'full'}
+        className={'ml-auto w-full border border-gray-300'}
+        variant={'bordered'}
+        onPress={onOpen}
+        endContent={<IconFilter color={'header-100'} size={24} />}
+      >
         Filter
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>

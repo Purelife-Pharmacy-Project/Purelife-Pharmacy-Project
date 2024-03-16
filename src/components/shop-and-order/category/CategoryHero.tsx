@@ -49,23 +49,28 @@ export const CategoryHero: FC<CategoryHeroProps> = ({}) => {
   };
 
   return (
-    <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
+    <div className='lg:grid lg:justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
-        <Card shadow='none' className={generateHero().bgColor} radius='lg'>
-          <div className='flex items-center justify-between gap-4'>
-            <CardBody>
-              <div className='grid w-full gap-4 p-1 md:p-4 lg:p-20'>
-                <div className='flex gap-2 '>
+        <Card
+          shadow='none'
+          fullWidth
+          className={generateHero().bgColor}
+          radius='lg'
+        >
+          <div className='flex flex-col-reverse items-center justify-center md:flex-row md:justify-between lg:gap-4'>
+            <CardBody className={'md:p-auto pt-0'}>
+              <div className='grid w-full justify-center gap-4 p-1 md:p-4 lg:p-20'>
+                <div className='flex w-full gap-2'>
                   <div className='grid gap-4'>
-                    <h1 className='text-center text-xl font-black text-header-100 lg:text-start lg:text-4xl lg:font-bold'>
+                    <h1 className='text-center text-xl font-black text-header-100 md:text-start md:text-2xl lg:text-4xl lg:font-bold'>
                       {generateHero().title}
                     </h1>
-                    <p className='text-center text-base font-light  leading-4 text-content lg:max-w-[353px] lg:text-start lg:text-lg'>
+                    <p className='text-center text-base font-light  leading-4 text-content md:text-start lg:max-w-[353px] lg:text-lg'>
                       {generateHero().description}
                     </p>
                     <Button
                       radius='full'
-                      className='mx-auto w-max px-20 py-6 lg:mx-0'
+                      className='mx-auto w-max px-20 py-6 md:mx-0'
                       color='primary'
                       as={Link}
                       href='#products'
@@ -77,13 +82,11 @@ export const CategoryHero: FC<CategoryHeroProps> = ({}) => {
                 </div>
               </div>
             </CardBody>
-            <div className='mr-20 hidden justify-center lg:flex'>
+            <div className='flex justify-center md:mr-20'>
               <Image
-                width={600}
-                height={600}
                 src={generateHero().image}
-                className='object-cover'
-                alt='image'
+                className='mx-auto h-60 w-60 object-contain md:w-[400px] lg:w-[600px]'
+                alt={generateHero().title}
               />
             </div>
           </div>
