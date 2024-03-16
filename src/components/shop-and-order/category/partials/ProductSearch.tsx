@@ -3,6 +3,7 @@ import { useQueryParams } from '@/hooks';
 import { Input } from '@nextui-org/react';
 import debounce from 'lodash/debounce';
 import { FC, useCallback, useEffect, useState } from 'react';
+import { inputBorderedGray } from '@/theme';
 
 type ProductSearchProps = {
   searchString: string;
@@ -42,10 +43,16 @@ export const ProductSearch: FC<ProductSearchProps> = ({
   return (
     <Input
       type='text'
+      radius={'full'}
+      color={'default'}
       isClearable
-      variant={'flat'}
       size={'lg'}
-      startContent={<IconSearch />}
+      startContent={
+        <div className='rounded-full bg-primaryLight p-2'>
+          <IconSearch color='header-100' />
+        </div>
+      }
+      classNames={inputBorderedGray}
       placeholder='Find a product'
       defaultValue={searchString}
       onChange={(e) => handleInputChange(e.target.value)}

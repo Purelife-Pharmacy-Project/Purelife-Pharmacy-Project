@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { Section } from '../../home/Section';
 import { ProductsFilterContainer } from './partials/ProductsFilterContainer';
 import { ProductsList } from './partials/ProductsList';
-import { ProductSortDropdown } from './partials/ProductsSortDropdown';
+import { MobileProductsByPrice } from '@/components/shop-and-order/category/partials/MobileProductsByPrice';
 
 export const CategoryProducts = () => {
   const currentPath = usePathname();
@@ -22,7 +22,7 @@ export const CategoryProducts = () => {
   const pageIndex = searchParams.get('pageIndex') || 1;
 
   useEffect(() => {
-    const invalidId = !!Number.isNaN(Number(categoryId));
+    const invalidId = Number.isNaN(Number(categoryId));
     const invalidSearchString = !!(searchString && searchString.length === 0);
     const invalidMinPrice = !!(minPrice && isNaN(Number(minPrice)));
     const invalidMaxPrice = !!(maxPrice && isNaN(Number(maxPrice)));
@@ -66,15 +66,25 @@ export const CategoryProducts = () => {
   return (
     <div id='products' className='lg:grid lg:justify-center lg:pb-10'>
       <Section className='grid gap-4 bg-white'>
-        <div className='grid w-full grid-flow-col grid-cols-2 items-center justify-between gap-4'>
+        <div className='grid w-full grid-flow-col grid-cols-[10fr_2fr] items-center justify-between gap-2 lg:grid-cols-2 lg:gap-4'>
           <ProductSearch
             searchString={searchString as string}
             onRefetch={refetchProducts}
           />
-          <div className='flex w-full flex-col items-center justify-end gap-6 md:flex-row md:gap-4'>
-            <p className='hidden font-light md:block'>Sort By:</p>
-            <ProductSortDropdown onRefetch={() => {}} />
+
+          <div className={'block lg:hidden'}>
+            <MobileProductsByPrice
+              categoryId={categoryId}
+              searchString={searchString as string}
+              minPrice={minPrice}
+              maxPrice={maxPrice}
+            />
           </div>
+
+          {/*<div className='flex w-full flex-col items-center justify-end gap-6 md:flex-row md:gap-4'>*/}
+          {/*  <p className='hidden font-light md:block'>Sort By:</p>*/}
+          {/*  <ProductSortDropdown onRefetch={() => {}} />*/}
+          {/*</div>*/}
         </div>
         <div className='grid gap-4 lg:grid-flow-col lg:grid-cols-[3fr_9fr]'>
           {/* sidebar */}
