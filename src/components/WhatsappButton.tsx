@@ -4,7 +4,7 @@ import { IconWhatsapp } from '@/components/icons/social/IconWhatsapp';
 export const WhatsappButton = () => {
   return (
     <Button
-      className='fixed bottom-4 right-4 h-[60px] w-[60px] p-2 shadow-md lg:bottom-24 lg:right-8'
+      className='fixed bottom-24 right-6 h-14 w-14 p-2 shadow-md lg:bottom-24 lg:right-6 lg:h-[60px] lg:w-[60px]'
       color='success'
       size='lg'
       radius={'full'}
