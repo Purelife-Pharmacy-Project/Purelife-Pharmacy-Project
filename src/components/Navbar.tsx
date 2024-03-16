@@ -104,7 +104,6 @@ export const AppNavbar = ({
           <NavbarItem className='text-lg leading-[27px] text-header-100'>
             <Link
               color='foreground'
-              href='#'
               className={
                 isActive('/partner-with-us') ? 'font-medium text-primary' : ''
               }
