@@ -6,17 +6,23 @@ import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Section } from '@/components/home/Section';
 import { TeleHealthServices } from '@/components/home/TeleHealthServices';
 import { ShopCategory } from '@/components/shop-and-order/ShopCategory';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
+import { CategoryService } from '@/services/categories';
 
 export default async function ShopAndOrder() {
   // Prefetch categories
-  // const queryClient = new QueryClient();
-  // await queryClient.prefetchQuery({
-  //   queryKey: ['categories'],
-  //   queryFn: () =>
-  //     CategoryService.getAllCategories({
-  //       pageSize: 50,
-  //     }),
-  // });
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ['categories'],
+    queryFn: () =>
+      CategoryService.getAllCategories({
+        pageSize: 50,
+      }),
+  });
 
   const earnedClients = [
     {
@@ -57,9 +63,9 @@ export default async function ShopAndOrder() {
 
         <div className='grid justify-center lg:pt-[55px]'>
           <Section>
-            {/*<HydrationBoundary state={dehydrate(queryClient)}>*/}
-            <ShopCategory />
-            {/*</HydrationBoundary>*/}
+            <HydrationBoundary state={dehydrate(queryClient)}>
+              <ShopCategory />
+            </HydrationBoundary>
           </Section>
         </div>
 
