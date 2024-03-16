@@ -1,5 +1,5 @@
 'use client';
-import { Button, Image } from '@nextui-org/react';
+import { Button, Image, Link } from '@nextui-org/react';
 import { FC } from 'react';
 import { IconShopAndOrderRound } from '../icons/IconShopAndOrderRound';
 import { IconTellehealthRound } from '../icons/IconTellehealthRound';
@@ -17,10 +17,10 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
   ctaText = 'Start here',
   ctaLink = '#',
 }) => {
-  const ctaAction = () =>
-    document
-      .querySelector(ctaLink)
-      ?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });
+  // const ctaAction = () =>
+  //   document
+  //     .querySelector(ctaLink)
+  //     ?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });
 
   return (
     <div className='h-[calc(100vh-260px)] w-full items-center bg-primaryLight xl:grid xl:justify-center'>
@@ -36,7 +36,8 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
           <div className='flex w-full justify-center lg:w-max lg:justify-start'>
             <Button
               radius='full'
-              onPress={ctaAction}
+              as={Link}
+              href={ctaLink}
               className='px-12 py-6'
               color='primary'
               size='lg'
