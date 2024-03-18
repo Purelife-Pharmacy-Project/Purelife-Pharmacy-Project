@@ -28,4 +28,13 @@ export const allDoctors: IDoctor[] = [
     description:
       'Ifeoluwa Olatunji, a dedicated cosmetologist, offers personalized skincare, makeup, and hair solutions. With expertise and passion, she helps clients enhance their natural beauty and feel confident.',
   },
+  {
+    slug: 'helen-afolayan',
+    name: 'Helen Afolayan',
+    image: '/images/doctors/doctor-helen.png',
+    title: 'Pharmacist',
+    yearsOfExperience: 5,
+    description:
+      "Helen, a seasoned health professional with six years of experience in pharmaceutical sales and health organizations. Passionate about community pharmacy, she's known for excellence and analytical thinking.",
+  },
 ];

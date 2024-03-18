@@ -117,8 +117,8 @@ export const Footer = () => {
           path: 'tel:+2348090564568',
         },
         {
-          name: 'order@purelifepharmacy.ng',
-          path: 'mailto:order@purelifepharmacy.ng',
+          name: 'hello@purelifehealth.io',
+          path: 'mailto:hello@purelifehealth.io',
         },
       ],
     },

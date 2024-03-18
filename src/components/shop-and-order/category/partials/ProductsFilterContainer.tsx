@@ -5,7 +5,7 @@ import { FC } from 'react';
 import { ProductsPriceRange } from './ProductsPriceRange';
 
 type ProductsFilterContainerProps = {
-  categoryId: string;
+  categoryId?: string;
   searchString: string;
   minPrice: string | undefined;
   maxPrice: string | undefined;
