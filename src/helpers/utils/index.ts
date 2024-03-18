@@ -47,3 +47,15 @@ export const removeHtmlTags = (html: string) => {
   // If the new string is empty, return 'nil'
   return newString === '' ? '_' : newString;
 };
+
+export const filteredCategories = (
+  categories: CategoryType[] | undefined,
+  allowedCategories: string[]
+) => {
+  if (!categories) return [];
+  const formatted = categories?.filter((category) =>
+    allowedCategories.includes(category.name?.toLowerCase())
+  );
+
+  if (formatted) return [{ id: 'all', name: 'All' }, ...formatted];
+};

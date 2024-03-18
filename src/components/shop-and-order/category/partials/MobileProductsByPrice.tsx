@@ -1,4 +1,6 @@
-import { useGetProducts } from '@/hooks';
+import { IconFilter } from '@/components/icons/IconFilter';
+import { filteredCategories } from '@/helpers/utils';
+import { useGetCategories, useGetProducts, useQueryParams } from '@/hooks';
 import {
   Button,
   Modal,
@@ -6,14 +8,16 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Radio,
+  RadioGroup,
   useDisclosure,
 } from '@nextui-org/react';
+import { usePathname } from 'next/navigation';
 import { FC } from 'react';
 import { ProductsPriceRange } from './ProductsPriceRange';
-import { IconFilter } from '@/components/icons/IconFilter';
 
 type MobileProductsByPriceProps = {
-  categoryId: string;
+  categoryId?: string;
   searchString: string;
   minPrice: string | undefined;
   maxPrice: string | undefined;
@@ -26,6 +30,12 @@ export const MobileProductsByPrice: FC<MobileProductsByPriceProps> = ({
   maxPrice,
 }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { loadingCategories, categories } = useGetCategories();
+  const { setQuery, removeQuery } = useQueryParams();
+  const currentPath = usePathname();
+
+  const allowedCategories = ['health', 'beauty', 'supermarket', 'general'];
+  const isShopPage = currentPath === '/shop';
 
   const { refetch: refetchProducts, loadingProducts } = useGetProducts(
     categoryId as string,
@@ -37,6 +47,14 @@ export const MobileProductsByPrice: FC<MobileProductsByPriceProps> = ({
     minPrice,
     maxPrice
   );
+
+  const handleSelectCategory = (categoryId: string) => {
+    if (categoryId === 'all') {
+      removeQuery(['categoryId']);
+    } else {
+      setQuery({ categoryId });
+    }
+  };
 
   return (
     <>
@@ -58,10 +76,28 @@ export const MobileProductsByPrice: FC<MobileProductsByPriceProps> = ({
                 Filter by
               </ModalHeader>
               <ModalBody className='mb-4'>
-                <ProductsPriceRange
-                  loading={loadingProducts}
-                  onRefetch={refetchProducts}
-                />
+                <div className='grid gap-4'>
+                  <ProductsPriceRange
+                    loading={false}
+                    onRefetch={refetchProducts}
+                  />
+
+                  {isShopPage && (
+                    <RadioGroup
+                      isDisabled={loadingCategories || loadingProducts}
+                      label='Select category'
+                      onChange={(e) => handleSelectCategory(e.target.value)}
+                    >
+                      {filteredCategories(categories, allowedCategories)?.map(
+                        (category, index) => (
+                          <Radio key={index} value={category.id}>
+                            {category.name}
+                          </Radio>
+                        )
+                      )}
+                    </RadioGroup>
+                  )}
+                </div>
               </ModalBody>
               <ModalFooter>
                 <Button

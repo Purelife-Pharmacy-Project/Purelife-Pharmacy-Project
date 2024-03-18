@@ -50,7 +50,7 @@ export default async function Home() {
           title='Your one-stop for wellness and lifestyle.'
           description='Schedule laboratory tests, book vaccination appointments, and receive high-quality medical services from the convenience of wherever you are in Nigeria.'
           ctaText='Shop All'
-          ctaLink='/telehealth/shop-and-order'
+          ctaLink='/shop'
         />
 
         <HomePartners />
