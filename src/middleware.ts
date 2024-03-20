@@ -29,7 +29,10 @@ export function middleware(request: NextRequest) {
   // if the user is not authenticated, redirect them to the login page
   if (!isAuthenticated(request)) {
     removeAuthorization(request.cookies);
-    return NextResponse.redirect(new URL(`/sign-in`, request.url));
+    const currentRoute = request.nextUrl.pathname;
+    return NextResponse.redirect(
+      new URL(`/sign-in?redirectUrl=${currentRoute}`, request.url)
+    );
   } else {
     return NextResponse.next();
   }

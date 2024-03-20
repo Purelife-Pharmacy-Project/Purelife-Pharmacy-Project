@@ -153,18 +153,20 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
       <CardBody className='p-8 lg:p-12'>
         <div className='grid gap-4'>
           <div className='grid gap-6'>
-            <div className='flex flex-col gap-2 border-b border-gray-300'>
-              <p className='font-medium text-header-100'>Delivery Mode</p>
-              <RadioGroup
-                value={deliveryMethod}
-                onValueChange={(value) =>
-                  setDeliveryMethod(value as DeliveryMethod)
-                }
-              >
-                <Radio value='home-delivery'>Home Delivery</Radio>
-                <Radio value='pick-up'>Pick Up</Radio>
-              </RadioGroup>
-            </div>
+            {shouldFetchAddresses && (
+              <div className='flex flex-col gap-2 border-b border-gray-300'>
+                <p className='font-medium text-header-100'>Delivery Mode</p>
+                <RadioGroup
+                  value={deliveryMethod}
+                  onValueChange={(value) =>
+                    setDeliveryMethod(value as DeliveryMethod)
+                  }
+                >
+                  <Radio value='home-delivery'>Home Delivery</Radio>
+                  <Radio value='pick-up'>Pick Up</Radio>
+                </RadioGroup>
+              </div>
+            )}
             {deliveryMethod === 'pick-up' ? (
               <div className='flex w-full flex-col gap-4'>
                 <Select
