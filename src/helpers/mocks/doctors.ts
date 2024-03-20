@@ -4,7 +4,7 @@ export const allDoctors: IDoctor[] = [
   {
     slug: 'ike-emmanuel',
     name: 'Dr. Ike Emmanuel Chinedum',
-    title: 'General Partitioner',
+    title: 'General Practitioner',
     image: '/images/doctors/doctor-ike.png',
     yearsOfExperience: 5,
     description:
@@ -14,7 +14,7 @@ export const allDoctors: IDoctor[] = [
     slug: 'salako',
     name: 'Dr. Saloko',
     image: '/images/doctors/doctor-saloko.png',
-    title: 'General Partitioner',
+    title: 'General Practitioner',
     yearsOfExperience: 5,
     description:
       'Dr. Salako is an experienced Audiologist and Speech-Language Pathologist focusing on childhood speech issues, with a research emphasis.',
@@ -36,5 +36,14 @@ export const allDoctors: IDoctor[] = [
     yearsOfExperience: 5,
     description:
       "Helen, a seasoned health professional with six years of experience in pharmaceutical sales and health organizations. Passionate about community pharmacy, she's known for excellence and analytical thinking.",
+  },
+  {
+    slug: 'oluwadamilola-sanni',
+    name: 'Oluwadamilola Sanni',
+    image: '/images/doctors/doctor-oluwadamilola.png',
+    title: 'General Practitioner',
+    yearsOfExperience: 5,
+    description:
+      'Dr. Oluwadamilola Sanni is a Family Physician and Rural Health Knowledge Translator at Olabisi Onabanjo University Teaching Hospital (OOUTH).',
   },
 ];

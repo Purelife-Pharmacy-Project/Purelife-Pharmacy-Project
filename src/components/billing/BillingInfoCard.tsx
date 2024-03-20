@@ -31,17 +31,19 @@ export const BillingInfoCard = () => {
           <div className='flex w-full justify-between'>
             <p className='text-light text-content'>Name</p>
 
-            <p className='font-medium text-header-100'>{user?.name}</p>
+            <p className='font-medium text-header-100'>{user?.name || '_'}</p>
           </div>
           <div className='flex w-full justify-between'>
             <p className='text-light text-content'>Email</p>
 
-            <p className='font-medium text-header-100'>{user?.email}</p>
+            <p className='font-medium text-header-100'>{user?.email || '_'}</p>
           </div>
           <div className='flex w-full justify-between'>
             <p className='text-light text-content'>Phone number</p>
 
-            <p className='font-medium text-header-100'>{user?.phoneNumber}</p>
+            <p className='font-medium text-header-100'>
+              {user?.phoneNumber || '_'}
+            </p>
           </div>
           <div className='flex w-full justify-between'>
             <p className='text-light text-content'>Contact Address</p>

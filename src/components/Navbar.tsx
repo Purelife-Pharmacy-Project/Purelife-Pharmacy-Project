@@ -1,4 +1,5 @@
 'use client';
+import { NavbarSearch } from '@/components/NavbarSearch';
 import {
   Button,
   Link,
@@ -15,7 +16,6 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { NavbarCart } from './NavbarCart';
 import { NavbarUser } from './NavbarUser';
-import { NavbarSearch } from '@/components/NavbarSearch';
 
 export const AppNavbar = ({
   background = 'inherit',
@@ -41,7 +41,7 @@ export const AppNavbar = ({
     },
     {
       name: 'Partner with us',
-      path: '#',
+      path: '/partner-with-us',
     },
     {
       name: 'Sign in',
@@ -104,6 +104,7 @@ export const AppNavbar = ({
           <NavbarItem className='text-lg leading-[27px] text-header-100'>
             <Link
               color='foreground'
+              href='/partner-with-us'
               className={
                 isActive('/partner-with-us') ? 'font-medium text-primary' : ''
               }

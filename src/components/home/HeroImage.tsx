@@ -27,6 +27,8 @@ export const HeroImage = () => {
         return '/images/purelife-wellness.jpg';
       case '/telehealth/find-a-doctor':
         return '/images/consult-doctor.png';
+      case '/partner-with-us':
+        return '/images/partner-with-us.png';
       default:
         return '/images/customer-smiling.png';
     }

@@ -42,7 +42,7 @@ export class LabTest {
     this.description = removeHtmlTags(test.description);
     this.imageInBinary = test.imageInBinary
       ? `data:image/png;base64,${test.imageInBinary}`
-      : '/images/care-package.png';
+      : '/images/purelife-fallback.png';
     this.amount = toNaira(this.price);
     this.categoryId = test.categoryId;
     this.quantity = Math.max(0, test.quantity as number) || 1;

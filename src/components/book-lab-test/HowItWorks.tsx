@@ -40,8 +40,8 @@ export const HowItWorks: FC<HowItWorksProps> = ({ data, variant }) => {
                   >
                     {answer.icon}
                   </div>
-                  <div className='mx-auto flex max-w-[330px] flex-col gap-1'>
-                    <p className='text-center text-xl font-light text-content'>
+                  <div className='mx-auto flex max-w-[290px] flex-col gap-1'>
+                    <p className='text-center text-lg font-light text-black'>
                       {answer.description}
                     </p>
                   </div>

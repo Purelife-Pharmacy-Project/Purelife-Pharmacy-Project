@@ -29,7 +29,7 @@ export class Vaccine {
     this.description = removeHtmlTags(vaccine.description);
     this.imageInBinary = vaccine.imageInBinary
       ? `data:image/png;base64,${vaccine.imageInBinary}`
-      : '/images/care-package.png';
+      : '/images/purelife-fallback.png';
     this.amount = toNaira(this.price);
     this.categoryId = '';
     this.quantity = Math.max(0, vaccine.quantity as number) || 1;

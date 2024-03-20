@@ -4,9 +4,9 @@ import { DoctorCard } from '@/components/find-a-doctor/DoctorCard';
 import { Footer } from '@/components/home/Footer';
 import { HomeHero } from '@/components/home/HomeHero';
 import { Section } from '@/components/home/Section';
-import { IconAddNotification } from '@/components/icons/IconAddNotification';
-import { IconBrowse } from '@/components/icons/IconBrowse';
-import { IconHealthShield } from '@/components/icons/IconHealthShield';
+import { IconCalendarTime } from '@/components/icons/IconCalendarTime';
+import { IconPen } from '@/components/icons/IconPen';
+import { IconProfessional } from '@/components/icons/IconProfessional';
 import { allDoctors } from '@/helpers/mocks/doctors';
 
 export default function FindADoctor() {
@@ -16,18 +16,18 @@ export default function FindADoctor() {
   }[] = [
     {
       description:
-        'Search for tests and packages and seamlessly book a home sample collection.',
-      icon: <IconBrowse size={48} color='primary' />,
+        'Select the specific health professional you would like to consult with.',
+      icon: <IconProfessional size={48} color='primary' />,
     },
     {
       description:
-        'We will send a certified professional to your place to assist you with the sample collection',
-      icon: <IconHealthShield size={60} color='primary' />,
+        'Choose a time, provide name, contact info, reason. Appointment confirmed, professional assigned for consultation.',
+      icon: <IconPen size={60} color='primary' />,
     },
     {
       description:
-        'We will email you the reports. You can also access your reports within your account on the Purelife app',
-      icon: <IconAddNotification size={60} color='primary' />,
+        'Your appointment will be confirmed, and a health professional will be assigned to you for your consultation.',
+      icon: <IconCalendarTime size={60} color='primary' />,
     },
   ];
 

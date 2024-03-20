@@ -17,7 +17,7 @@ export const HomeHero: FC<HomeHeroProps> = ({
   ctaLink = '#',
 }) => {
   return (
-    <div className='grid h-[calc(100vh-88px)] items-center justify-center bg-primaryLight'>
+    <div className='grid h-max items-center justify-center bg-primaryLight pb-4 sm:h-[calc(100vh-88px)] md:pb-0'>
       <Section className='bg-primaryLight'>
         <div className='flex flex-col justify-between lg:flex-row lg:gap-10'>
           <div className='flex flex-col gap-6 lg:justify-center'>
@@ -28,18 +28,20 @@ export const HomeHero: FC<HomeHeroProps> = ({
               {description}
             </p>
 
-            <div className='flex w-full justify-center lg:w-max lg:justify-start'>
-              <Button
-                as={Link}
-                href={ctaLink}
-                radius='full'
-                className='px-12 py-6'
-                color='primary'
-                size='lg'
-              >
-                {ctaText}
-              </Button>
-            </div>
+            {ctaText !== '' && (
+              <div className='flex w-full justify-center lg:w-max lg:justify-start'>
+                <Button
+                  as={Link}
+                  href={ctaLink}
+                  radius='full'
+                  className='px-12 py-6'
+                  color='primary'
+                  size='lg'
+                >
+                  {ctaText}
+                </Button>
+              </div>
+            )}
           </div>
           <div className='relative mt-6 flex justify-end lg:mt-0'>
             <HeroImage />
