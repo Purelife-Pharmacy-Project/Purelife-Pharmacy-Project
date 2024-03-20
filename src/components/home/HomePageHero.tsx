@@ -55,19 +55,25 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
             src='/images/joyful-caring-couple.png'
             alt='charming joyful youth couple'
           />
-          <div className='absolute bottom-10 left-[-7px] z-10 flex items-center gap-3 rounded-md bg-white p-1.5 shadow-lg md:bottom-[105px] lg:px-6 lg:py-2.5'>
+          <Link
+            href='/telehealth'
+            className='absolute bottom-10 left-[-7px] z-10 flex items-center gap-3 rounded-md bg-white p-1.5 shadow-lg md:bottom-[105px] lg:px-6 lg:py-2.5'
+          >
             <IconTellehealthRound />
             <p className='text-xs font-bold text-header-100 md:text-sm'>
               TeleHealth
             </p>
-          </div>
+          </Link>
 
-          <div className='absolute bottom-2 right-[-7px] z-10 flex items-center gap-3 rounded-md bg-white p-1.5 shadow-lg md:bottom-[25px] lg:px-6 lg:py-2.5'>
+          <Link
+            href='/telehealth/shop-and-order'
+            className='absolute bottom-2 right-[-7px] z-10 flex items-center gap-3 rounded-md bg-white p-1.5 shadow-lg md:bottom-[25px] lg:px-6 lg:py-2.5'
+          >
             <IconShopAndOrderRound />
             <p className='text-xs font-bold text-header-100 md:text-sm'>
               Shop & Order
             </p>
-          </div>
+          </Link>
         </div>
       </Section>
     </div>
