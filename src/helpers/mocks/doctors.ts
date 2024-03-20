@@ -40,7 +40,7 @@ export const allDoctors: IDoctor[] = [
   {
     slug: 'oluwadamilola-sanni',
     name: 'Oluwadamilola Sanni',
-    image: '/images/doctors/doctor-oluwadamilola.png',
+    image: '/images/doctors/doctor-Oluwadamilola.png',
     title: 'General Practitioner',
     yearsOfExperience: 5,
     description:
