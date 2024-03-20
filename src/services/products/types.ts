@@ -46,7 +46,7 @@ export class Product {
     this.description = product.description || '';
     this.imageInBinary = product.imageInBinary
       ? `data:image/png;base64,${product.imageInBinary}`
-      : '/images/care-package.png';
+      : '/images/purelife-fallback.png';
     this.amount = toNaira(this.price);
     this.canBePurchased = product.canBePurchased;
     this.canBeSold = product.canBeSold;
