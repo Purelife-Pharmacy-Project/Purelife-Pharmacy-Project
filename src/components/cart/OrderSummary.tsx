@@ -80,9 +80,7 @@ export const OrderSummary: FC<OrderSummaryProps> = () => {
               if (!user) {
                 toast.error('Please login to continue');
               }
-              setTimeout(() => {
-                router.push('/billing');
-              }, 500);
+              router.push('/billing');
             }}
             radius='full'
             className='w-full py-6'

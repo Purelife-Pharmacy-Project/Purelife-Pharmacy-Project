@@ -42,7 +42,7 @@ export const filteredQueryParams = <T extends Record<string, unknown>>(
 
 export const removeHtmlTags = (html: string) => {
   // Remove all HTML tags
-  const newString = html.replace(/(<([^>]+)>)/gi, '');
+  const newString = html?.replace(/(<([^>]+)>)/gi, '');
 
   // If the new string is empty, return 'nil'
   return newString === '' ? '_' : newString;
