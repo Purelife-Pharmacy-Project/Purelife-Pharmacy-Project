@@ -102,6 +102,7 @@ export const MobileProductsByPrice: FC<MobileProductsByPriceProps> = ({
               <ModalFooter>
                 <Button
                   color='primary'
+                  fullWidth
                   onPress={() => {
                     onClose();
                   }}
