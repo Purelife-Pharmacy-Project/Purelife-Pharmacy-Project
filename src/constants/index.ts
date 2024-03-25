@@ -79,7 +79,7 @@ export const teleHealthServices = [
     }) => JSX.Element,
     title: 'Upload Prescription',
     description:
-      'Ease Your Healthcare Journey as we manage and secure your prescriptions with ease',
+      'Ease Your Healthcare Journey as we manage and secure your prescriptions with ease.',
     url: '/telehealth/upload-prescription',
     actionText: 'Upload Now',
     isAvailable: true,
