@@ -9,31 +9,33 @@ type ProductQuantityProps = {
 };
 
 export const ProductQuantity: FC<ProductQuantityProps> = ({
-  cartItem: product,
+  cartItem: cartItem,
 }) => {
-  const { addToCart } = useCartStore();
+  const { addToCart, removeFromCart } = useCartStore();
 
   return (
     <div className='flex w-[120px] items-center justify-center gap-2 rounded-full bg-primaryLight'>
       <Button
         isIconOnly
         isDisabled={
-          product?.product.quantity === 1 ||
-          product?.quantity === 0 ||
-          product?.quantity === 1
+          cartItem?.product.quantity === 1 ||
+          cartItem?.quantity === 0 ||
+          cartItem?.quantity === 1
         }
-        onPress={() => addToCart(product)}
+        onPress={() => removeFromCart(cartItem.id)}
         variant='flat'
         className='w-full rounded-l-full bg-primaryLight text-2xl text-black'
       >
         -
       </Button>
-      <p className='text-xl text-black'>{product?.quantity || 0}</p>
+      <p className='text-xl text-black'>{cartItem?.quantity || 0}</p>
 
       <Button
         isIconOnly
-        isDisabled={product.quantity <= (product?.product.quantity as number)}
-        onPress={() => addToCart(product)}
+        isDisabled={
+          cartItem.quantity === (cartItem?.product.quantity as number)
+        }
+        onPress={() => addToCart(cartItem)}
         variant='flat'
         className='w-full rounded-r-full bg-primaryLight text-2xl text-black'
       >

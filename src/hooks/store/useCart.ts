@@ -3,7 +3,7 @@ import { CartType } from '@/services/cart/types';
 import type {} from '@redux-devtools/extension'; // required for devtools typing
 import { toast } from 'sonner';
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
 
 export type CartSummary = {
   totalPayableAmount: string;
@@ -42,85 +42,48 @@ const calculatedPayableAmount = (
 };
 
 export const useCartStore = create<CartState>()(
-  persist(
-    (set, get) => ({
-      cart: [] as CartType[],
-      summary: {
-        totalPayableAmount: toNaira(0),
-        deliveryFee: toNaira(0),
-        couponPercentage: 0,
-        totalCartAmount: 0,
-      },
-      addToCart: (cart) =>
-        set((state) => {
-          const cartItem = state.cart.find(
-            (item) => item.product.id === cart.product.id
-          );
+  devtools(
+    persist(
+      (set, get) => ({
+        cart: [] as CartType[],
+        summary: {
+          totalPayableAmount: toNaira(0),
+          deliveryFee: toNaira(0),
+          couponPercentage: 0,
+          totalCartAmount: 0,
+        },
+        addToCart: (cart) =>
+          set((state) => {
+            const cartItem = state.cart.find(
+              (item) => item.product.id === cart.product.id
+            );
 
-          if (cartItem && cartItem.product.quantity === 0) {
-            return {
-              cart: [...state.cart],
-            };
-          }
-
-          let newCart;
-
-          if (cartItem) {
-            if (cartItem.quantity < (cartItem?.product.quantity as number)) {
-              newCart = state.cart.map((item) =>
-                item.product.id === cart.product.id
-                  ? { ...item, quantity: item.quantity + 1 }
-                  : item
-              );
-            } else {
-              toast.error('Item(s) out of stock');
+            if (cartItem && cartItem.product.quantity === 0) {
               return {
                 cart: [...state.cart],
               };
             }
-          } else {
-            newCart = [...state.cart, cart];
-          }
 
-          toast.success('Item(s) added to cart');
-          return {
-            cart: newCart,
-            summary: {
-              ...state.summary,
-              totalCartAmount: calculatedTotalCartAmount(newCart),
-              totalPayableAmount: toNaira(
-                calculatedPayableAmount(
-                  newCart,
-                  fromNaira(state.summary.deliveryFee),
-                  state.summary.couponPercentage
-                )
-              ),
-            },
-          };
-        }),
-      clearCart: () =>
-        set({
-          cart: [],
-          summary: {
-            totalPayableAmount: toNaira(0),
-            deliveryFee: toNaira(0),
-            couponPercentage: 0,
-            totalCartAmount: 0,
-          },
-        }),
-      removeFromCart: (productId: number) =>
-        set((state) => {
-          if (state.cart.length === 1) {
-            state.clearCart();
+            let newCart;
 
-            toast.success('Item(s) removed from cart');
-            return { cart: [] };
-          } else {
-            const newCart = state.cart.filter(
-              (item) => item.product.id !== productId
-            );
+            if (cartItem) {
+              if (cartItem.quantity < (cartItem?.product.quantity as number)) {
+                newCart = state.cart.map((item) =>
+                  item.product.id === cart.product.id
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
+                );
+              } else {
+                toast.error('Item(s) out of stock');
+                return {
+                  cart: [...state.cart],
+                };
+              }
+            } else {
+              newCart = [...state.cart, cart];
+            }
 
-            toast.success('Item(s) removed from cart');
+            toast.success('Item(s) added to cart');
             return {
               cart: newCart,
               summary: {
@@ -135,47 +98,114 @@ export const useCartStore = create<CartState>()(
                 ),
               },
             };
-          }
-        }),
-      setDeliveryFee: (deliveryFee: number) =>
-        set((state) => {
-          return {
+          }),
+        clearCart: () =>
+          set({
+            cart: [],
             summary: {
-              ...state.summary,
-              totalCartAmount: calculatedTotalCartAmount(state.cart),
-              deliveryFee: toNaira(deliveryFee),
-              totalPayableAmount: toNaira(
-                calculatedPayableAmount(
-                  state.cart,
-                  deliveryFee,
-                  state.summary.couponPercentage
-                )
-              ),
+              totalPayableAmount: toNaira(0),
+              deliveryFee: toNaira(0),
+              couponPercentage: 0,
+              totalCartAmount: 0,
             },
-          };
-        }),
-      setCouponPercentage: (couponPercentage: number) =>
-        set((state) => {
-          toast.success('Coupon Applied');
-          return {
-            summary: {
-              ...state.summary,
-              couponPercentage,
-              totalPayableAmount: toNaira(
-                calculatedPayableAmount(
-                  state.cart,
-                  fromNaira(state.summary.deliveryFee),
-                  couponPercentage
-                )
-              ),
-            },
-          };
-        }),
-      getCartItem: (productId: number) =>
-        get().cart.find((item) => item.product.id === productId),
-    }),
-    {
-      name: '__storage__',
-    }
+          }),
+        removeFromCart: (productId: number) =>
+          set((state) => {
+            if (state.cart.length === 1) {
+              state.clearCart();
+
+              toast.success('Item(s) removed from cart');
+              return { cart: [] };
+            } else {
+              const cartItem = state.cart.find(
+                (item) => item.product.id === productId
+              );
+
+              if (cartItem && cartItem?.quantity > 1) {
+                const newCart = state.cart.map((item) =>
+                  item.product.id === productId
+                    ? { ...item, quantity: item.quantity - 1 }
+                    : item
+                );
+
+                toast.success('Item(s) removed from cart');
+                return {
+                  cart: newCart,
+                  summary: {
+                    ...state.summary,
+                    totalCartAmount: calculatedTotalCartAmount(newCart),
+                    totalPayableAmount: toNaira(
+                      calculatedPayableAmount(
+                        newCart,
+                        fromNaira(state.summary.deliveryFee),
+                        state.summary.couponPercentage
+                      )
+                    ),
+                  },
+                };
+              } else {
+                const newCart = state.cart.filter(
+                  (item) => item.product.id !== productId
+                );
+
+                toast.success('Item(s) removed from cart');
+                return {
+                  cart: newCart,
+                  summary: {
+                    ...state.summary,
+                    totalCartAmount: calculatedTotalCartAmount(newCart),
+                    totalPayableAmount: toNaira(
+                      calculatedPayableAmount(
+                        newCart,
+                        fromNaira(state.summary.deliveryFee),
+                        state.summary.couponPercentage
+                      )
+                    ),
+                  },
+                };
+              }
+            }
+          }),
+        setDeliveryFee: (deliveryFee: number) =>
+          set((state) => {
+            return {
+              summary: {
+                ...state.summary,
+                totalCartAmount: calculatedTotalCartAmount(state.cart),
+                deliveryFee: toNaira(deliveryFee),
+                totalPayableAmount: toNaira(
+                  calculatedPayableAmount(
+                    state.cart,
+                    deliveryFee,
+                    state.summary.couponPercentage
+                  )
+                ),
+              },
+            };
+          }),
+        setCouponPercentage: (couponPercentage: number) =>
+          set((state) => {
+            toast.success('Coupon Applied');
+            return {
+              summary: {
+                ...state.summary,
+                couponPercentage,
+                totalPayableAmount: toNaira(
+                  calculatedPayableAmount(
+                    state.cart,
+                    fromNaira(state.summary.deliveryFee),
+                    couponPercentage
+                  )
+                ),
+              },
+            };
+          }),
+        getCartItem: (productId: number) =>
+          get().cart.find((item) => item.product.id === productId),
+      }),
+      {
+        name: '__storage__',
+      }
+    )
   )
 );
