@@ -1,16 +1,21 @@
 import { VaccineService } from '@/services/vaccine';
+import { VaccineQueryParams } from '@/services/vaccine/types';
 import { useQuery } from '@tanstack/react-query';
 
-export const useGetVaccines = (params: {
-  name?: string;
-  productId?: number;
-  pageSize?: number;
-  pageIndex?: number;
-}) => {
+export const useGetVaccines = ({
+  name,
+  productId,
+  pageSize,
+  pageIndex,
+}: VaccineQueryParams = {}) => {
   const queryKeys = [
     'vaccines',
-    ...Object.values(params).filter((param) => !!param),
-  ];
+    name,
+    String(productId),
+    String(pageIndex),
+    String(pageSize),
+  ].filter(Boolean);
+
   const {
     data: vaccines,
     isLoading: loadingVaccines,
@@ -18,7 +23,15 @@ export const useGetVaccines = (params: {
   } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: queryKeys,
-    queryFn: () => VaccineService.getAllVaccines(params),
+    queryFn: () =>
+      VaccineService.getAllVaccines({
+        name,
+        productId,
+        pageSize,
+        pageIndex,
+      }),
+    enabled: !!name || !!productId || !!pageSize || !!pageIndex,
+    refetchOnWindowFocus: false,
   });
 
   return {

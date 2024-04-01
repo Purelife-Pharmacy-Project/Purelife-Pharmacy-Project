@@ -37,16 +37,15 @@ export const MobileProductsByPrice: FC<MobileProductsByPriceProps> = ({
   const allowedCategories = ['health', 'beauty', 'supermarket', 'general'];
   const isShopPage = currentPath === '/shop';
 
-  const { refetch: refetchProducts, loadingProducts } = useGetProducts(
-    categoryId as string,
-    searchString,
-    undefined,
-    undefined,
-    true,
-    undefined,
-    minPrice,
-    maxPrice
-  );
+  const { refetch: refetchProducts, loadingProducts } = useGetProducts({
+    categoryId: categoryId as string,
+    name: searchString,
+    pageSize: 20,
+    pageIndex: 1,
+    active: true,
+    minPrice: minPrice,
+    maxPrice: maxPrice,
+  });
 
   const handleSelectCategory = (categoryId: string) => {
     if (categoryId === 'all') {

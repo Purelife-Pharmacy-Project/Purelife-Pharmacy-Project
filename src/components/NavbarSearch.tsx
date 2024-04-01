@@ -1,6 +1,8 @@
 'use client';
-import { inputDefault } from '@/theme';
 import { IconSearch } from '@/components/icons/IconSearch';
+import { useCartStore, useGetProducts } from '@/hooks';
+import { Product } from '@/services/products/types';
+import { inputDefault } from '@/theme';
 import {
   Button,
   Card,
@@ -9,10 +11,8 @@ import {
   Input,
   Spinner,
 } from '@nextui-org/react';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { useCartStore, useGetProducts } from '@/hooks';
 import debounce from 'lodash/debounce';
-import { Product } from '@/services/products/types';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export const NavbarSearch = () => {
   const [searchStr, setSearchStr] = useState<string | undefined>('');
@@ -38,16 +38,9 @@ export const NavbarSearch = () => {
     });
   };
 
-  const { loadingProducts, products, refetch } = useGetProducts(
-    undefined,
-    searchStr as string,
-    10,
-    undefined,
-    true,
-    undefined,
-    undefined,
-    undefined
-  );
+  const { loadingProducts, products, refetch } = useGetProducts({
+    name: searchStr,
+  });
 
   const filteredProducts = products?.products.filter(
     (product: Product) =>
