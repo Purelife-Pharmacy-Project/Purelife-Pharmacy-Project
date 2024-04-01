@@ -2,21 +2,40 @@ import { LabTestService } from '@/services/lab-tests';
 import { LabTestQueryParams } from '@/services/lab-tests/types';
 import { useQuery } from '@tanstack/react-query';
 
-export const useGetLabTests = (params: LabTestQueryParams) => {
+export const useGetLabTests = ({
+  productId,
+  name,
+  pageSize,
+  pageIndex,
+  categoryId,
+}: LabTestQueryParams = {}) => {
   const queryKeys = [
     'lab-tests',
-    ...Object.values(params).filter((param) => !!param),
-  ];
+    productId,
+    name,
+    String(pageIndex),
+    String(pageSize),
+    categoryId,
+  ].filter(Boolean);
 
   const {
     data: labTests,
     isLoading: loadingLabTests,
-    refetch: refetchLabTests,
     isSuccess,
+    isError,
+    refetch: refetchLabTests,
   } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: queryKeys,
-    queryFn: () => LabTestService.getLabTests(params),
+    queryFn: () =>
+      LabTestService.getLabTests({
+        productId,
+        name,
+        pageSize,
+        pageIndex,
+        categoryId,
+      }),
+    enabled: !!name || !!productId || !!pageIndex || !!categoryId,
     refetchOnWindowFocus: false,
   });
 
@@ -25,5 +44,6 @@ export const useGetLabTests = (params: LabTestQueryParams) => {
     loadingLabTests,
     refetchLabTests,
     isSuccess,
+    isError,
   };
 };

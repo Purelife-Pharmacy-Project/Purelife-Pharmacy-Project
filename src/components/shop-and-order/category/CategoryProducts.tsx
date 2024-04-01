@@ -24,17 +24,15 @@ export const CategoryProducts = () => {
     refetch: refetchProducts,
     products,
     loadingProducts,
-    isRefetching,
-  } = useGetProducts(
-    categoryId as string,
-    searchString as string,
-    20,
-    Number(pageIndex),
-    true,
-    undefined,
-    minPrice,
-    maxPrice
-  );
+  } = useGetProducts({
+    categoryId: categoryId as string,
+    name: searchString as string,
+    pageSize: 20,
+    pageIndex: Number(pageIndex),
+    active: true,
+    minPrice: minPrice,
+    maxPrice: maxPrice,
+  });
 
   return (
     <div id='products' className='lg:grid lg:justify-center lg:pb-10'>

@@ -21,16 +21,15 @@ export const ProductsFilterContainer: FC<ProductsFilterContainerProps> = ({
     refetch: refetchProducts,
     isRefetching,
     loadingProducts,
-  } = useGetProducts(
-    categoryId as string,
-    searchString,
-    undefined,
-    undefined,
-    true,
-    undefined,
-    minPrice,
-    maxPrice
-  );
+  } = useGetProducts({
+    categoryId: categoryId as string,
+    name: searchString,
+    pageSize: 20,
+    pageIndex: 1,
+    active: true,
+    minPrice: minPrice,
+    maxPrice: maxPrice,
+  });
 
   return (
     <>
@@ -47,7 +46,7 @@ export const ProductsFilterContainer: FC<ProductsFilterContainerProps> = ({
             onRefetch={refetchProducts}
           /> */}
             <ProductsPriceRange
-              loading={loadingProducts || isRefetching}
+              loading={loadingProducts}
               onRefetch={refetchProducts}
             />
           </div>

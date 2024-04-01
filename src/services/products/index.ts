@@ -29,10 +29,15 @@ class ProductService {
       totalPage: number;
     };
 
+    console.log(response.data);
+
     const products = response.data?.map((product) => new Product(product));
-    return JSON.parse(
-      JSON.stringify({ products, totalPages: response.totalPage })
-    ) as { products: Product[]; totalPages: number };
+
+    // return JSON.parse(
+    //   JSON.stringify({ products, totalPages: response.totalPage })
+    // ) as { products: Product[]; totalPages: number };
+
+    return { products, totalPages: response.totalPage };
   };
 
   public static getProductByProductId = async (productId: string) => {

@@ -47,7 +47,7 @@ export default function GetVaccinationPage() {
           </Section>
         </div>
 
-        <div id='products' className='invisible'></div>
+        <div id='products' className='hidden'></div>
 
         <VaccinationProducts />
 

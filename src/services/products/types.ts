@@ -1,4 +1,4 @@
-import { toNaira } from '@/helpers/utils';
+import { removeHtmlTags, toNaira } from '@/helpers/utils';
 import { Blob } from 'buffer';
 
 export type ProductQueryParams = {
@@ -43,7 +43,7 @@ export class Product {
     this.name = product.name;
     this.price = product.price;
     this.categoryId = product.categoryId;
-    this.description = product.description || '';
+    this.description = removeHtmlTags(product.description) || '';
     this.imageInBinary = product.imageInBinary
       ? `data:image/png;base64,${product.imageInBinary}`
       : '/images/purelife-fallback.png';
