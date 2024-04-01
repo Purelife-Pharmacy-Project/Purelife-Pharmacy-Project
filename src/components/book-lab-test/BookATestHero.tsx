@@ -52,7 +52,7 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
 
   useEffect(() => {
     if (filteredTests?.length === 0) {
-      refetchLabTests();
+      refetchLabTests().then(() => {});
     }
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredTests]);
