@@ -81,6 +81,10 @@ export const metadata: Metadata = {
     'Outbreak',
     'Wellness Programs',
     'Chronic Condition',
+    'Healthcare Quality',
+    'Meal Plan',
+    'Fitness',
+    'Consult Doctor',
   ],
   openGraph: {
     title: 'Purelife Health',
