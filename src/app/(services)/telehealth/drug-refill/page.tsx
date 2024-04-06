@@ -8,12 +8,19 @@ import { IconBrowse } from '@/components/icons/IconBrowse';
 import { IconHealthShield } from '@/components/icons/IconHealthShield';
 import { CategoryService } from '@/services/categories';
 import {
+  dehydrate,
   HydrationBoundary,
   QueryClient,
-  dehydrate,
 } from '@tanstack/react-query';
 
 export default async function DrugRefill() {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['categories'],
+    queryFn: () => CategoryService.getAllCategories({}),
+  });
+
   const howItWorksData: {
     description: string;
     icon: JSX.Element;
@@ -35,16 +42,9 @@ export default async function DrugRefill() {
     },
   ];
 
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery({
-    queryKey: ['categories'],
-    queryFn: () => CategoryService.getAllCategories({}),
-  });
-
   return (
     <>
-      <AppNavbar background='primaryLight' />
+      <AppNavbar background={'primaryLight'} />
       <main className='grid gap-6'>
         <HydrationBoundary state={dehydrate(queryClient)}>
           <DrugRefillHero />
