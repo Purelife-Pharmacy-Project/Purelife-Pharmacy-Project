@@ -5,11 +5,17 @@ import { Bricolage_Grotesque } from 'next/font/google';
 import React from 'react';
 import './globals.css';
 
-const bricolage = Bricolage_Grotesque({ subsets: ['latin'] });
+const bricolage = Bricolage_Grotesque({
+  subsets: ['latin'],
+  adjustFontFallback: false,
+  variable: '--font-grotesque',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Purelife Health',
   description: 'your one-stop shop for wellness and lifestyle',
+  metadataBase: new URL('https://purelifehealth.io'),
   keywords: [
     'Telehealth Africa',
     'Telemedicine services in Africa',
@@ -89,6 +95,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Purelife Health',
     description: 'your one-stop shop for wellness and lifestyle',
+    siteName: 'Purelife Health',
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://purelifehealth.io',
     images: [
       {
         url: '/public/app-logo.png',
