@@ -10,7 +10,7 @@ export const WellnessBlogSection = () => {
       description:
         'Drug abuse has a ripple effect that impacts not only the user but everyone around...',
       date: '1 Day ago',
-      image: 'https://placehold.co/600x400',
+      image: '/images/blog/drug-abuse.jpeg',
       link: '#',
     },
     {
@@ -19,7 +19,7 @@ export const WellnessBlogSection = () => {
       description:
         "Ulcer signs are more common than you think and can be easily ignored. It's important to...",
       date: '1 Day ago',
-      image: 'https://placehold.co/600x400',
+      image: '/images/blog/ulcer.jpeg',
       link: '#',
     },
     {
@@ -28,7 +28,7 @@ export const WellnessBlogSection = () => {
       description:
         "Endometriosis is a medical condition that affects many women. If you're not familiar...",
       date: '1 Day ago',
-      image: 'https://placehold.co/600x400',
+      image: '/images/blog/pregnancy.jpeg',
       link: '#',
     },
   ];
