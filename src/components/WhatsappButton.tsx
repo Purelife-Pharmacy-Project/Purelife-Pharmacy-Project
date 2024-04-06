@@ -1,5 +1,5 @@
-import { Button, Link } from '@nextui-org/react';
 import { IconWhatsapp } from '@/components/icons/social/IconWhatsapp';
+import { Button, Link } from '@nextui-org/react';
 
 export const WhatsappButton = () => {
   return (
@@ -9,6 +9,7 @@ export const WhatsappButton = () => {
       size='lg'
       radius={'full'}
       as={Link}
+      target='_blank'
       isIconOnly
       href={'https://wa.me/2348090564568'}
     >

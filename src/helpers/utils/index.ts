@@ -9,10 +9,10 @@ export const getCategoryUrl = (
   if (!allCategories) return '';
   const categoryId = allCategories?.find(
     (c) => c.name?.toLowerCase() === category
-  )?.id;
+  )?.name;
 
   if (!categoryId) return '';
-  return `/telehealth/shop-and-order/${category}-${categoryId}`;
+  return `/telehealth/shop-and-order/${category?.toLowerCase()}`;
 };
 
 export const toNaira = (amount: number) => {
@@ -23,8 +23,7 @@ export const toNaira = (amount: number) => {
 };
 
 export const fromNaira = (amount: string) => {
-  const numberAmount = Number(amount.replace(/[^0-9.-]+/g, ''));
-  return numberAmount;
+  return Number(amount.replace(/[^0-9.-]+/g, ''));
 };
 
 export const randomId = () => {
@@ -53,9 +52,10 @@ export const filteredCategories = (
   allowedCategories: string[]
 ) => {
   if (!categories) return [];
+
   const formatted = categories?.filter((category) =>
     allowedCategories.includes(category.name?.toLowerCase())
   );
 
-  if (formatted) return [{ id: 'all', name: 'All' }, ...formatted];
+  if (formatted) return [{ id: 'all', name: 'all' }, ...formatted];
 };

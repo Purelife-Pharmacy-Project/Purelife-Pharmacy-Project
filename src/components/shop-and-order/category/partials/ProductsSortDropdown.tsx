@@ -3,12 +3,12 @@ import { IconFilter } from '@/components/icons/IconFilter';
 import { filteredCategories } from '@/helpers/utils';
 import { useGetCategories, useQueryParams } from '@/hooks';
 import { selectBorderedGrayLight } from '@/theme';
-import { Select, SelectItem, Selection } from '@nextui-org/react';
+import { Select, Selection, SelectItem } from '@nextui-org/react';
 import { useSearchParams } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 
 type ProductSortDropdownProps = {
-  loadingProducts: boolean;
+  loadingProducts?: boolean;
 };
 
 export const ProductSortDropdown: FC<ProductSortDropdownProps> = ({
@@ -16,16 +16,17 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = ({
 }) => {
   const { categories, loadingCategories } = useGetCategories();
   const { setQuery, removeQuery } = useQueryParams();
-  const currentCategory = useSearchParams().get('categoryId');
+  const currentCategory = useSearchParams().get('category');
 
   const allowedCategories = ['health', 'beauty', 'supermarket', 'general'];
+
   const [selectedValue, setSelectedValue] = useState<Selection>(
     new Set(['all'])
   );
 
   useEffect(() => {
     if (!currentCategory) {
-      removeQuery(['categoryId']);
+      removeQuery(['category']);
     } else {
       const set = new Set([currentCategory]);
       setSelectedValue(set);
@@ -33,20 +34,21 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleSelectCategory = (categoryId: string) => {
-    if (String(categoryId)?.toLowerCase() === 'all') {
-      removeQuery(['categoryId']);
+  const handleSelectCategory = (category: string) => {
+    if (String(category)?.toLowerCase() === 'all') {
+      removeQuery(['category']);
     } else {
-      setQuery({ categoryId });
+      setQuery({ category: category?.toLowerCase() });
     }
   };
 
   useEffect(() => {
+    console.log(selectedValue);
     if (selectedValue) {
-      const id = Array.from(Array.from(selectedValue))[0];
+      const category = Array.from(Array.from(selectedValue))[0];
 
-      if (id) {
-        handleSelectCategory(id as string);
+      if (category) {
+        handleSelectCategory(category as string);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -57,7 +59,7 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = ({
       labelPlacement='outside'
       placeholder='Filter By'
       color='default'
-      isDisabled={loadingCategories || loadingProducts}
+      isDisabled={loadingCategories || !categories || loadingProducts}
       label=''
       radius='full'
       classNames={selectBorderedGrayLight}
@@ -71,7 +73,7 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = ({
       {(filteredCategories(categories, allowedCategories) || []).map(
         (category) => (
           <SelectItem
-            key={category.id}
+            key={category.name}
             className='capitalize text-content'
             value={category.name}
           >

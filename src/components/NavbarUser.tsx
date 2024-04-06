@@ -1,6 +1,6 @@
 'use client';
 
-import { useGetUser } from '@/hooks';
+import { useCartStore, useGetUser } from '@/hooks';
 import UsersService from '@/services/user';
 import {
   Avatar,
@@ -22,6 +22,7 @@ type NavbarUserProps = {
 
 export const NavbarUser: FC<NavbarUserProps> = ({ isActive }) => {
   const { user } = useGetUser();
+  const store = useCartStore();
 
   const queryClient = useQueryClient();
 
@@ -30,6 +31,7 @@ export const NavbarUser: FC<NavbarUserProps> = ({ isActive }) => {
     queryClient.clear();
 
     window.location.reload();
+    store.clearCart();
   };
   return (
     <>

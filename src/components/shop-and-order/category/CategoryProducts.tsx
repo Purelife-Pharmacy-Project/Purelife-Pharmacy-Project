@@ -1,7 +1,7 @@
 'use client';
 import { MobileProductsByPrice } from '@/components/shop-and-order/category/partials/MobileProductsByPrice';
 import { ProductSearch } from '@/components/shop-and-order/category/partials/ProductSearch';
-import { useGetProducts } from '@/hooks';
+import { useGetCategories, useGetProducts } from '@/hooks';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Section } from '../../home/Section';
 import { ProductsFilterContainer } from './partials/ProductsFilterContainer';
@@ -9,16 +9,33 @@ import { ProductsList } from './partials/ProductsList';
 import { ProductSortDropdown } from './partials/ProductsSortDropdown';
 
 export const CategoryProducts = () => {
+  const { categories } = useGetCategories();
+
   const currentPath = usePathname();
-  const category = currentPath.split('/')[3]?.split('-');
   const searchParams = useSearchParams();
+
+  const category = usePathname().split('/').pop();
   const isShopPage = currentPath === '/shop';
+
+  const getCategoryId = () => {
+    const category = currentPath.split('/').pop();
+    const categoryParam = searchParams.get('category');
+
+    if (isShopPage) {
+      return categories?.find(
+        (c) => c.name?.toLowerCase() === categoryParam?.toLowerCase()
+      )?.id;
+    }
+    return categories?.find(
+      (c) => c.name?.toLowerCase() === category?.toLowerCase()
+    )?.id;
+  };
 
   const searchString = searchParams.get('searchString') || undefined;
   const minPrice = searchParams.get('minPrice') || undefined;
   const maxPrice = searchParams.get('maxPrice') || undefined;
   const pageIndex = searchParams.get('pageIndex') || 1;
-  const categoryId = searchParams.get('categoryId') || category?.pop();
+  const categoryId = getCategoryId();
 
   const {
     refetch: refetchProducts,
@@ -38,17 +55,9 @@ export const CategoryProducts = () => {
     <div id='products' className='lg:grid lg:justify-center lg:pb-10'>
       <Section className='grid gap-4 bg-white'>
         <div className='mt-6 grid w-full grid-cols-[10fr_2fr]  items-center justify-between gap-2 lg:mt-0 lg:grid-cols-2 lg:gap-4'>
-          <ProductSearch
-            searchString={searchString as string}
-            onRefetch={refetchProducts}
-          />
+          <ProductSearch loadingProducts={loadingProducts} />
           <div className={'block lg:hidden'}>
-            <MobileProductsByPrice
-              categoryId={categoryId}
-              searchString={searchString as string}
-              minPrice={minPrice}
-              maxPrice={maxPrice}
-            />
+            <MobileProductsByPrice loadingProducts={loadingProducts} />
           </div>
           {isShopPage ? (
             <div className='hidden w-full justify-end lg:flex'>
@@ -58,12 +67,8 @@ export const CategoryProducts = () => {
         </div>
         <div className='grid gap-4 lg:grid-flow-col lg:grid-cols-[3fr_9fr]'>
           {/* sidebar */}
-          <ProductsFilterContainer
-            categoryId={categoryId}
-            searchString={searchString as string}
-            minPrice={minPrice}
-            maxPrice={maxPrice}
-          />
+          <ProductsFilterContainer />
+
           {/* products */}
           <ProductsList
             products={products?.products}

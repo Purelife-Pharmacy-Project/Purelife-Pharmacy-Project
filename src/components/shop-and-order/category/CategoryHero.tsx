@@ -59,7 +59,7 @@ export const CategoryHero: FC<CategoryHeroProps> = ({}) => {
         >
           <div className='flex flex-col-reverse items-center justify-center md:flex-row md:justify-between lg:gap-4'>
             <CardBody className={'md:p-auto pt-0'}>
-              <div className='grid w-full justify-center gap-4 p-1 md:p-4 lg:p-20'>
+              <div className='grid w-full justify-start gap-4 p-1 md:p-4 lg:p-20'>
                 <div className='flex w-full gap-2'>
                   <div className='grid gap-4'>
                     <h1 className='text-center text-xl font-black text-header-100 md:text-start md:text-2xl lg:text-4xl lg:font-bold'>
