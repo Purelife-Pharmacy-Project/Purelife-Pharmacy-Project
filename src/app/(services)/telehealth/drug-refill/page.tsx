@@ -6,20 +6,14 @@ import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { IconAddNotification } from '@/components/icons/IconAddNotification';
 import { IconBrowse } from '@/components/icons/IconBrowse';
 import { IconHealthShield } from '@/components/icons/IconHealthShield';
-import { CategoryService } from '@/services/categories';
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from '@tanstack/react-query';
 
 export default async function DrugRefill() {
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery({
-    queryKey: ['categories'],
-    queryFn: () => CategoryService.getAllCategories({}),
-  });
+  // const queryClient = new QueryClient();
+  //
+  // await queryClient.prefetchQuery({
+  //   queryKey: ['categories'],
+  //   queryFn: () => CategoryService.getAllCategories({}),
+  // });
 
   const howItWorksData: {
     description: string;
@@ -46,9 +40,9 @@ export default async function DrugRefill() {
     <>
       <AppNavbar background={'primaryLight'} />
       <main className='grid gap-6'>
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <DrugRefillHero />
-        </HydrationBoundary>
+        {/*<HydrationBoundary state={dehydrate(queryClient)}>*/}
+        <DrugRefillHero />
+        {/*</HydrationBoundary>*/}
 
         <div className='mt-0 md:mt-[700px] lg:mt-[652px]'>
           <HowItWorks data={howItWorksData} variant={'success'} />
