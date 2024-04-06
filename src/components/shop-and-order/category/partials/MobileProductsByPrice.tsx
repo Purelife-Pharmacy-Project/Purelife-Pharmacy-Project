@@ -1,6 +1,6 @@
 import { IconFilter } from '@/components/icons/IconFilter';
 import { filteredCategories } from '@/helpers/utils';
-import { useGetCategories, useGetProducts, useQueryParams } from '@/hooks';
+import { useGetCategories, useQueryParams } from '@/hooks';
 import {
   Button,
   Modal,
@@ -17,17 +17,11 @@ import { FC } from 'react';
 import { ProductsPriceRange } from './ProductsPriceRange';
 
 type MobileProductsByPriceProps = {
-  categoryId?: string;
-  searchString: string;
-  minPrice: string | undefined;
-  maxPrice: string | undefined;
+  loadingProducts?: boolean;
 };
 
 export const MobileProductsByPrice: FC<MobileProductsByPriceProps> = ({
-  categoryId,
-  searchString,
-  minPrice,
-  maxPrice,
+  loadingProducts,
 }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { loadingCategories, categories } = useGetCategories();
@@ -37,21 +31,11 @@ export const MobileProductsByPrice: FC<MobileProductsByPriceProps> = ({
   const allowedCategories = ['health', 'beauty', 'supermarket', 'general'];
   const isShopPage = currentPath === '/shop';
 
-  const { refetch: refetchProducts, loadingProducts } = useGetProducts({
-    categoryId: categoryId as string,
-    name: searchString,
-    pageSize: 20,
-    pageIndex: 1,
-    active: true,
-    minPrice: minPrice,
-    maxPrice: maxPrice,
-  });
-
-  const handleSelectCategory = (categoryId: string) => {
-    if (categoryId === 'all') {
-      removeQuery(['categoryId']);
+  const handleSelectCategory = (category: string) => {
+    if (category === 'all') {
+      removeQuery(['category']);
     } else {
-      setQuery({ categoryId });
+      setQuery({ category: category?.toLowerCase() });
     }
   };
 
@@ -60,6 +44,7 @@ export const MobileProductsByPrice: FC<MobileProductsByPriceProps> = ({
       <Button
         size={'lg'}
         radius={'full'}
+        isDisabled={loadingCategories || !categories || loadingProducts}
         className={'ml-auto w-full border border-gray-300'}
         variant={'bordered'}
         onPress={onOpen}
@@ -76,21 +61,17 @@ export const MobileProductsByPrice: FC<MobileProductsByPriceProps> = ({
               </ModalHeader>
               <ModalBody className='mb-4'>
                 <div className='grid gap-4'>
-                  <ProductsPriceRange
-                    loading={false}
-                    onRefetch={refetchProducts}
-                  />
+                  <ProductsPriceRange />
 
                   {isShopPage && (
                     <RadioGroup
-                      isDisabled={loadingCategories || loadingProducts}
                       label='Select category'
                       onChange={(e) => handleSelectCategory(e.target.value)}
                     >
                       {filteredCategories(categories, allowedCategories)?.map(
                         (category, index) => (
-                          <Radio key={index} value={category.id}>
-                            {category.name}
+                          <Radio key={index} value={category.name}>
+                            {category.name?.toLowerCase()}
                           </Radio>
                         )
                       )}

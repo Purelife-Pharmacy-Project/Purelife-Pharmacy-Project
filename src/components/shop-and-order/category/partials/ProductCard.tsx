@@ -24,7 +24,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
 
   return (
     <Card shadow='none' className='w-full' radius='lg'>
-      <CardBody className='relative overflow-visible px-0 py-2'>
+      <CardBody className='relative h-max overflow-visible p-0'>
         <Button
           isIconOnly
           isDisabled={product.quantity === 0}
@@ -35,7 +35,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
               quantity: 1,
             })
           }
-          className='absolute right-4 top-5 z-20 rounded-full bg-primary/40 p-0 shadow-md'
+          className='absolute right-4 top-4 z-20 rounded-full bg-primary/40 p-0 shadow-md'
         >
           <IconCart color='white' />
         </Button>
@@ -44,8 +44,9 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
           alt={product.name}
           src={product.imageInBinary}
           classNames={{
-            img: 'w-full h-full object-contain rounded-xl',
-            wrapper: '!max-w-full flex justify-center !h-full !max-h-[200px]',
+            img: 'w-full h-full object-contain',
+            wrapper:
+              '!max-w-full flex justify-center rounded-xl items-center !h-full !max-h-[200px]',
           }}
         />
       </CardBody>
@@ -53,7 +54,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
         <div className='flex flex-col gap-2'>
           <Link
             href={`/cart/${product.id}`}
-            className='max-h-[50px] overflow-y-auto break-words font-semibold capitalize text-header-100'
+            className='max-h-[60px] overflow-y-auto break-words font-semibold capitalize text-header-100 hover:underline'
           >
             {product.name?.toLowerCase()}
           </Link>
@@ -63,8 +64,9 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
         </div>
 
         <Button
-          className='w-2/5 border-header-100 text-header-100 hover:border-primary hover:bg-primary/10 hover:text-primary'
+          className='border-header-100 text-header-100 hover:border-primary hover:bg-primary/10 hover:text-primary'
           variant='bordered'
+          fullWidth
           isDisabled={loading}
           onPress={() => {
             addToCart({
@@ -75,7 +77,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
             router.push(`/cart/${product.id}`, { scroll: false });
           }}
         >
-          Buy
+          Buy now
         </Button>
       </CardFooter>
     </Card>
