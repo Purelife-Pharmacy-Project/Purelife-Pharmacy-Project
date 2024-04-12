@@ -23,7 +23,7 @@ export const DoctorCard: FC<DoctorCardProps> = ({ doctor }) => {
             <h3 className='text-xl font-bold'>{doctor.name}</h3>
             <p className='text-lg font-light'>{doctor.title} </p>
             <Chip className='mt-2 bg-white text-sm font-light'>
-              {doctor.yearsOfExperience}+ Years Experience
+              Over {doctor.yearsOfExperience} Years Experience
             </Chip>
           </div>
           <p className='max-w-4/5 font-light text-content'>
