@@ -1,9 +1,9 @@
 import { IconSearch } from '@/components/icons/IconSearch';
 import { useQueryParams } from '@/hooks';
+import { inputBorderedGray } from '@/theme';
 import { Input } from '@nextui-org/react';
 import debounce from 'lodash/debounce';
 import { FC, useCallback, useEffect, useState } from 'react';
-import { inputBorderedGray } from '@/theme';
 
 type ProductSearchProps = {
   loadingProducts?: boolean;
@@ -23,6 +23,7 @@ export const ProductSearch: FC<ProductSearchProps> = ({ loadingProducts }) => {
       removeQuery(['searchString']);
     } else {
       setSearchStr(searchStr);
+      removeQuery(['category']);
       setQuery({ searchString: searchStr || '' });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

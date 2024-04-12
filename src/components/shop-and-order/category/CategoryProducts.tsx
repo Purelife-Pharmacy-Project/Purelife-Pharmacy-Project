@@ -42,7 +42,7 @@ export const CategoryProducts = () => {
     products,
     loadingProducts,
   } = useGetProducts({
-    categoryId: categoryId as string,
+    categoryId: searchString ? undefined : (categoryId as string),
     name: searchString as string,
     pageSize: 20,
     pageIndex: Number(pageIndex),
