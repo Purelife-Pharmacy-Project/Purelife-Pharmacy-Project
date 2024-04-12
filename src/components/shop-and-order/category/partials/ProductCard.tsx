@@ -4,6 +4,7 @@ import { useCartStore } from '@/hooks';
 import { Product } from '@/services/products/types';
 import {
   Button,
+  ButtonGroup,
   Card,
   CardBody,
   CardFooter,
@@ -25,21 +26,6 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
   return (
     <Card shadow='none' className='w-full' radius='lg'>
       <CardBody className='relative h-max overflow-visible p-0'>
-        <Button
-          isIconOnly
-          isDisabled={product.quantity === 0}
-          onPress={() =>
-            addToCart({
-              id: product.id,
-              product,
-              quantity: 1,
-            })
-          }
-          className='absolute right-4 top-4 z-20 rounded-full bg-primary/40 p-0 shadow-md'
-        >
-          <IconCart color='white' />
-        </Button>
-
         <Image
           alt={product.name}
           src={product.imageInBinary}
@@ -63,7 +49,33 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
           </p>
         </div>
 
-        <Button
+        <ButtonGroup fullWidth>
+          <Button
+            variant='flat'
+            as={Link}
+            href={`/cart/${product.id}`}
+            isDisabled={product.quantity === 0}
+          >
+            Buy now
+          </Button>
+          <Button
+            color='primary'
+            className='flex items-center gap-2'
+            isDisabled={product.quantity === 0}
+            onPress={() =>
+              addToCart({
+                id: product.id,
+                product,
+                quantity: 1,
+              })
+            }
+          >
+            <IconCart size={20} />
+            Add to cart
+          </Button>
+        </ButtonGroup>
+
+        {/* <Button
           className='border-header-100 text-header-100 hover:border-primary hover:bg-primary/10 hover:text-primary'
           variant='bordered'
           fullWidth
@@ -78,7 +90,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
           }}
         >
           Buy now
-        </Button>
+        </Button> */}
       </CardFooter>
     </Card>
   );

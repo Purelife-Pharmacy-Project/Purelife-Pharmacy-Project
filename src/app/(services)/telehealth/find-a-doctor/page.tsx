@@ -39,7 +39,7 @@ export default function FindADoctor() {
         <div className='grid justify-center bg-primaryLight'>
           <HomeHero
             title='Book an appointment with Doctors at Purelife'
-            description='Easily purchase your everyday essentials from wherever you are.'
+            description='Take the first step towards a healthier you. Book your appointment with one of our dedicated doctors at Purelife and embark on your journey to wellness today.'
             ctaText='Consult Now'
             ctaLink='#doctors'
           />
