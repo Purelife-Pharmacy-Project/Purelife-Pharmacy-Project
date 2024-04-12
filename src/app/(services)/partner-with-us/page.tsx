@@ -54,7 +54,7 @@ export default function PartnerWithUs() {
         <div className='lg:grid lg:justify-center'>
           <Section>
             <Card shadow='none' className='bg-primaryLight'>
-              <CardBody className='grid gap-4 bg-primaryLight p-6 blur-sm'>
+              <CardBody className='grid gap-4 bg-primaryLight p-6'>
                 <div className='flex w-full justify-between p-2'>
                   <div className='flex w-full flex-col gap-2 md:flex-row'>
                     <Input
@@ -156,7 +156,7 @@ export default function PartnerWithUs() {
                   <Button
                     radius='full'
                     isDisabled
-                    className='w-max px-10'
+                    className='w-full px-10 lg:w-max'
                     size='lg'
                     color='primary'
                   >
