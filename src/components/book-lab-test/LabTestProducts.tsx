@@ -17,10 +17,10 @@ import { LabTestsSkeleton } from './skeleton/LabTestsSkeleton';
 type LabTestProductsProps = {};
 
 enum CategoryNames {
-  ALL = 'All',
-  MEN = "MEN'S HEALTH",
-  WOMEN = "WOMEN'S HEALTH",
-  SEXUAL = 'SEXUAL HEALTH',
+  ALL = 'all',
+  MEN = 'Men',
+  WOMEN = 'Women',
+  SEXUAL = 'Sexual',
 }
 
 export const LabTestProducts: FC<LabTestProductsProps> = () => {
@@ -38,7 +38,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
 
   const { categories } = useGetCategories();
 
-  // Filter out "Men's Health", "Women's Health", and "Sexual Health"
+  // Filter out categories that are not related to lab tests
   const filteredData = categories
     ?.filter(
       (item) =>

@@ -25,24 +25,34 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
         <Section className='border-t-2 border-primary bg-transparent py-20'>
           {loadingVaccines ? <LabTestsSkeleton /> : null}
 
-          <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
-            {vaccines?.data.map((vaccine, index) => (
-              <TelehealthProductCard
-                color='primary'
-                test={vaccine}
-                key={index}
-              />
-            ))}
-          </div>
+          {vaccines?.data && vaccines?.data.length > 0 && !loadingVaccines ? (
+            <div className='grid w-full gap-6'>
+              <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
+                {vaccines?.data.map((vaccine, index) => (
+                  <TelehealthProductCard
+                    color='primary'
+                    test={vaccine}
+                    key={index}
+                  />
+                ))}
+              </div>
 
-          <div className='mt-8 flex justify-end'>
-            <ProductsPagination
-              totalPages={vaccines?.totalPages!}
-              className='text-white'
-              color='primary'
-              loading={loadingVaccines}
-            />
-          </div>
+              <div className='mt-8 flex justify-end'>
+                <ProductsPagination
+                  totalPages={vaccines?.totalPages!}
+                  className='text-white'
+                  color='primary'
+                  loading={loadingVaccines}
+                />
+              </div>
+            </div>
+          ) : null}
+
+          {!loadingVaccines && vaccines?.data.length === 0 ? (
+            <div className='grid w-full place-content-center'>
+              <p className='text-center font-medium'>No Vaccines Yet</p>
+            </div>
+          ) : null}
         </Section>
       </div>
     </div>
