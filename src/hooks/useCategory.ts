@@ -9,7 +9,10 @@ export const useGetCategories = () => {
     isError,
   } = useQuery({
     queryKey: ['categories'],
-    queryFn: () => CategoryService.getAllCategories({}),
+    queryFn: () =>
+      CategoryService.getAllCategories({
+        pageSize: 100,
+      }),
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 60 * 24, // 24 hours
   });
