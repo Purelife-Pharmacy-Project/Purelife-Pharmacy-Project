@@ -155,7 +155,9 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
 
             {!loadingLabTests && labTests?.data.length === 0 ? (
               <div className='grid w-full place-content-center'>
-                <p className='text-center font-medium'>No Lab Tests Yet</p>
+                <p className='text-center font-medium'>
+                  No Lab Tests Yet. Try again
+                </p>
               </div>
             ) : null}
           </Section>

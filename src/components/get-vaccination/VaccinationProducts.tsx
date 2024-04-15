@@ -50,7 +50,9 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
 
           {!loadingVaccines && vaccines?.data.length === 0 ? (
             <div className='grid w-full place-content-center'>
-              <p className='text-center font-medium'>No Vaccines Yet</p>
+              <p className='text-center font-medium'>
+                No Vaccines Yet. Try again
+              </p>
             </div>
           ) : null}
         </Section>
