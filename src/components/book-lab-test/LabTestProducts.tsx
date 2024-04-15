@@ -85,38 +85,45 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
     <>
       <div className='grid justify-center'>
         <Section className='bg-white'>
-          <div className='grid gap-10 sm:grid-cols-2 lg:grid-flow-col lg:grid-cols-4'>
-            {labTestCategories?.map((_c, index) => (
-              <div key={index} className='grid justify-center gap-2'>
-                <Button
-                  disabled={loadingLabTests}
-                  radius='full'
-                  isIconOnly
-                  onClick={() => handleFilterByCategory(String(_c.id), _c.name)}
-                  className={twMerge(
-                    'flex h-[140px] w-[140px] items-center justify-center bg-primaryGreenLight p-0',
-                    category === String(_c.id)
-                      ? 'border-3 border-primaryGreen'
-                      : 'border-3 border-transparent'
-                  )}
-                >
-                  {getCategoryIcon(_c.name)}
-                </Button>
-                <div className='flex justify-center'>
-                  <p
+          {
+            <div className='grid gap-10 sm:grid-cols-2 lg:grid-flow-col lg:grid-cols-4'>
+              {labTestCategories?.map((_c, index) => (
+                <div key={index} className='gap-2 xl:grid xl:justify-center'>
+                  <Button
+                    isDisabled={
+                      loadingLabTests ||
+                      (labTests?.data && labTests?.data.length === 0)
+                    }
+                    radius='full'
+                    isIconOnly
+                    onPress={() =>
+                      handleFilterByCategory(String(_c.id), _c.name)
+                    }
                     className={twMerge(
-                      'text-center text-lg font-medium capitalize',
+                      'flex h-[140px] w-[140px] items-center justify-center bg-primaryGreenLight p-0',
                       category === String(_c.id)
-                        ? 'text-primaryGreen'
-                        : 'text-header-100'
+                        ? 'border-3 border-primaryGreen'
+                        : 'border-3 border-transparent'
                     )}
                   >
-                    {_c.name?.toLowerCase()}
-                  </p>
+                    {getCategoryIcon(_c.name)}
+                  </Button>
+                  <div className='flex justify-center'>
+                    <p
+                      className={twMerge(
+                        'text-center text-lg font-medium capitalize',
+                        category === String(_c.id)
+                          ? 'text-primaryGreen'
+                          : 'text-header-100'
+                      )}
+                    >
+                      {_c.name?.toLowerCase()}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          }
         </Section>
       </div>
       {/* Products */}
@@ -125,22 +132,32 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
           <Section className='border-t-2 border-primaryGreen bg-transparent py-20'>
             {loadingLabTests ? <LabTestsSkeleton /> : null}
 
-            <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
-              {labTests?.data.map((test, index) => (
-                <TelehealthProductCard
-                  color='success'
-                  test={test}
-                  key={index}
-                />
-              ))}
-            </div>
+            {labTests?.data && labTests?.data.length > 0 && !loadingLabTests ? (
+              <div className='grid w-full gap-6'>
+                <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
+                  {labTests.data?.map((test, index) => (
+                    <TelehealthProductCard
+                      color='success'
+                      test={test}
+                      key={index}
+                    />
+                  ))}
+                </div>
 
-            <ProductsPagination
-              color='success'
-              loading={loadingLabTests}
-              className='text-white'
-              totalPages={labTests?.totalPages as number}
-            />
+                <ProductsPagination
+                  color='success'
+                  loading={loadingLabTests}
+                  className='text-white'
+                  totalPages={labTests?.totalPages as number}
+                />
+              </div>
+            ) : null}
+
+            {!loadingLabTests && labTests?.data.length === 0 ? (
+              <div className='grid w-full place-content-center'>
+                <p className='text-center font-medium'>No Lab Tests Yet</p>
+              </div>
+            ) : null}
           </Section>
         </div>
       </div>
