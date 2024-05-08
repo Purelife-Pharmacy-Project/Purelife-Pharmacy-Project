@@ -57,5 +57,7 @@ export const filteredCategories = (
     allowedCategories.includes(category.name?.toLowerCase())
   );
 
+  console.log(formatted);
+
   if (formatted) return [{ id: 'all', name: 'all' }, ...formatted];
 };

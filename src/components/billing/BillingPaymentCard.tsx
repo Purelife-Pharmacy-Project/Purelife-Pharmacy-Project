@@ -87,14 +87,14 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
       productId: product.product.id,
       quantity: product.quantity,
       description: removeHtmlTags(product.product.description),
-      priceUnit: product.product.price,
+      priceUnit: product.product.lst_price,
     })) as OrderProduct[];
 
     const deliveryProduct = {
       productId: selectedAddress?.id as number,
       quantity: 1,
       description: `${selectedAddress?.name} - ${phoneNumber}`,
-      priceUnit: selectedAddress?.price,
+      priceUnit: selectedAddress?.lst_price,
     } as OrderProduct;
 
     const payload: CreateOrderPayload = {
@@ -110,8 +110,8 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
     const address = addresses?.find((address) => address.id === Number(value));
 
     setSelectedAddress(address);
-    toast.info(`Delivery fee: ${toNaira(Number(address?.price))} added`);
-    setDeliveryFee(address?.price as number);
+    toast.info(`Delivery fee: ${toNaira(Number(address?.lst_price))} added`);
+    setDeliveryFee(address?.lst_price as number);
   };
 
   // pick up station
@@ -134,7 +134,7 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
 
     setSelectedAddress({
       name: address?.value as string,
-      price: 0,
+      lst_price: 0,
       id: 1115,
       description: `${address?.value}` as string,
     });

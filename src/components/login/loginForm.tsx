@@ -59,7 +59,7 @@ export const LoginForm = () => {
       <Input
         {...register('email')}
         label='Email'
-        autoComplete='new-email'
+        autoComplete='email'
         errorMessage={errors.email?.message}
         type='email'
         classNames={inputDefault}
@@ -67,7 +67,7 @@ export const LoginForm = () => {
       <Input
         {...register('password')}
         label='Password'
-        autoComplete='new-password'
+        autoComplete='password'
         errorMessage={errors.password?.message}
         type={passwordIsVisible ? 'text' : 'password'}
         classNames={inputDefault}

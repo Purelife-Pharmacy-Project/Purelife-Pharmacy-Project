@@ -20,7 +20,7 @@ export const FeaturedProduct: FC<FeaturedProductProps> = ({ product }) => {
           classNames={{
             wrapper: '!max-w-full !h-full !max-h-[200px]',
           }}
-          src={product.imageInBinary}
+          src={product.image_1024}
         />
       </CardBody>
       <CardFooter>

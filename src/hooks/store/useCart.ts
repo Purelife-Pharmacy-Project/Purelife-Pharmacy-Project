@@ -24,7 +24,7 @@ type CartState = {
 };
 
 const calculatedTotalCartAmount = (cart: CartType[]) =>
-  cart.reduce((acc, cart) => acc + cart.product.price * cart.quantity, 0);
+  cart.reduce((acc, cart) => acc + cart.product.lst_price * cart.quantity, 0);
 
 const calculatedPayableAmount = (
   cart: CartType[],

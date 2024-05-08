@@ -1,5 +1,5 @@
 'use client';
-import { useCartStore, useGetLabTests } from '@/hooks';
+import { useCartStore, useGetProducts } from '@/hooks';
 import { Product } from '@/services/products/types';
 import {
   Button,
@@ -10,7 +10,7 @@ import {
   Spinner,
 } from '@nextui-org/react';
 import debounce from 'lodash/debounce';
-import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { FC, useCallback, useRef, useState } from 'react';
 import { Section } from '../home/Section';
 import { IconSearch } from '../icons/IconSearch';
 
@@ -40,22 +40,26 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
     });
   };
 
-  const { loadingLabTests, labTests, refetchLabTests } = useGetLabTests({
-    name: searchStr,
-    pageSize: 10,
-    pageIndex: 1,
+  const {
+    loadingProducts: loadingLabTests,
+    products: labTests,
+    refetch: refetchLabTests,
+  } = useGetProducts({
+    limit: 12,
+    offset: 1,
+    categoryId: '17',
   });
 
-  const filteredTests = labTests?.data.filter(
+  const filteredTests = labTests?.products.filter(
     (test) => test.name?.toLowerCase().includes(searchStr?.toLowerCase() || '')
   );
 
-  useEffect(() => {
-    if (filteredTests?.length === 0) {
-      refetchLabTests().then(() => {});
-    }
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filteredTests]);
+  // useEffect(() => {
+  //   if (filteredTests && filteredTests?.length === 0) {
+  //     // refetchLabTests().then(() => {});
+  //   }
+  //   //eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [filteredTests]);
 
   const handleInputChange = useCallback(
     (value: string) => {
@@ -114,7 +118,7 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
                     <CardBody>
                       {!loadingLabTests && filteredTests?.length === 0 ? (
                         <p className='text-body text-center'>
-                          No products found
+                          No lab tests found
                         </p>
                       ) : null}
 
@@ -140,7 +144,7 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
                                 height={60}
                                 className='max-h-14 object-contain'
                                 radius='md'
-                                src={product.imageInBinary}
+                                src={product.image_1024}
                                 alt={''}
                               />
 

@@ -11,31 +11,48 @@ class ProductService {
 
   public static getAllProducts = async (params: ProductQueryParams) => {
     const queryParams = filteredQueryParams({
-      Active: params.active,
-      PageSize: params.pageSize,
-      PageIndex: params.pageIndex,
-      Name: params.name,
-      CategoryId: params.categoryId,
-      ProductId: params.productId,
-      'PriceRange.MinPrice': params.minPrice,
-      'PriceRange.MaxPrice': params.maxPrice,
+      // NEW PARAMS
+      IsPublished: true,
+      CategoryId: params.CategoryId,
+      MinListPrice: params.MinListPrice || 0,
+      MaxListPrice: params.MaxListPrice || 1000000,
+      Limit: params.Limit,
+      Offset: params.offset,
+      name: params.name,
+
+      // OLD PARAMS
+      // Active: params.active,
+      // PageSize: params.pageSize,
+      // PageIndex: params.pageIndex,
+      // Name: params.name,
+      // CategoryId: params.categoryId,
+      // ProductId: params.productId,
+      // 'PriceRange.MinPrice': params.minPrice,
+      // 'PriceRange.MaxPrice': params.maxPrice,
     });
 
     const response = (await Api.get<{
       data: ProductType[];
       totalPage: number;
-    }>(`${this.PRODUCTS_API_BASE}/get-products?${queryParams}`)) as unknown as {
-      data: ProductType[];
+    }>(
+      `${this.PRODUCTS_API_BASE}/fetch-products?${
+        queryParams +
+        '&Fields=name&Fields=lst_price&Fields=image_1024&Fields=categ_id'
+      }`
+    )) as unknown as {
+      result: ProductType[];
       totalPage: number;
     };
 
-    const products = response.data?.map((product) => new Product(product));
+    const products = (response.result || [])?.map(
+      (product) => new Product(product)
+    );
 
     // return JSON.parse(
     //   JSON.stringify({ products, totalPages: response.totalPage })
     // ) as { products: Product[]; totalPages: number };
 
-    return { products, totalPages: response.totalPage };
+    return { products, totalPages: 100 };
   };
 
   public static getProductByProductId = async (productId: string) => {

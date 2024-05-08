@@ -9,29 +9,25 @@ export type VaccineQueryParams = {
 };
 
 export class Vaccine {
-  id: number;
-  name: string;
-  price: number;
-  canBePurchased: boolean;
-  canBeSold: boolean;
-  description: string;
-  amount: string;
-  categoryId: string;
-  imageInBinary: string | null;
-  quantity?: number;
+  public id: number;
+  public name: string;
+  public lst_price: number;
+  public description: string;
+  public amount: string;
+  public categ_id: string;
+  public image_1024: string | null;
+  public quantity?: number;
 
   constructor(vaccine: ProductType) {
     this.id = vaccine.id;
     this.name = vaccine.name;
-    this.price = vaccine.price;
-    this.canBePurchased = vaccine.canBePurchased;
-    this.canBeSold = vaccine.canBeSold;
+    this.lst_price = vaccine.lst_price;
     this.description = removeHtmlTags(vaccine.description);
-    this.imageInBinary = vaccine.imageInBinary
-      ? `data:image/png;base64,${vaccine.imageInBinary}`
+    this.image_1024 = vaccine.image_1024
+      ? `data:image/png;base64,${vaccine.image_1024}`
       : '/images/purelife-fallback.png';
-    this.amount = toNaira(this.price);
-    this.categoryId = '';
-    this.quantity = Math.max(0, vaccine.quantity as number) || 1;
+    this.amount = toNaira(this.lst_price);
+    this.categ_id = vaccine.categ_id ? String(vaccine.categ_id[0]) : '';
+    this.quantity = 1000000000000;
   }
 }

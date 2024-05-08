@@ -24,7 +24,7 @@ export const CartItem: FC<CartItemProps> = ({ product }) => {
               <Image
                 className='h-14 w-14 object-cover'
                 radius='md'
-                src={product.product.imageInBinary}
+                src={product.product.image_1024}
                 alt={product.product.name}
               />
               <Link
@@ -48,7 +48,7 @@ export const CartItem: FC<CartItemProps> = ({ product }) => {
             <div className='flex w-full items-center justify-between gap-2'>
               <ProductQuantity cartItem={product} />
               <p className='text-lg font-medium'>
-                {toNaira(product.product.price * product.quantity)}
+                {toNaira(product.product.lst_price * product.quantity)}
               </p>
             </div>
           </div>
@@ -61,7 +61,7 @@ export const CartItem: FC<CartItemProps> = ({ product }) => {
             height={80}
             className='object-contain md:max-h-14'
             radius='md'
-            src={product.product.imageInBinary}
+            src={product.product.image_1024}
             alt={product.product.name}
           />
 
@@ -73,7 +73,7 @@ export const CartItem: FC<CartItemProps> = ({ product }) => {
           </Link>
 
           <p className='font-medium'>
-            {toNaira(product.product.price * product.quantity)}
+            {toNaira(product.product.lst_price * product.quantity)}
           </p>
           <ProductQuantity cartItem={product} />
           <div className='flex items-center justify-end'>

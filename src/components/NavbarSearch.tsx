@@ -118,7 +118,7 @@ export const NavbarSearch = () => {
                       height={60}
                       className='max-h-14 object-contain'
                       radius='md'
-                      src={product.imageInBinary}
+                      src={product.image_1024}
                       alt={''}
                     />
 

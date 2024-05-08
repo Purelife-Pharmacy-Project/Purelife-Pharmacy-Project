@@ -58,7 +58,7 @@ export const CartItemDetails = () => {
                 <Image
                   alt='product image'
                   className='max-h-80 object-cover'
-                  src={product?.imageInBinary}
+                  src={product?.image_1024}
                 />
               </div>
             </CardBody>

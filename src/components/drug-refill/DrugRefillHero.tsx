@@ -43,8 +43,8 @@ export const DrugRefillHero: FC<DrugRefillHeroProps> = ({}) => {
   } = useGetProductsByCategoryId({
     categoryId: getHealthCategoryId(),
     searchStr,
-    pageSize: 10,
-    pageIndex: 1,
+    limit: 10,
+    offset: 1,
   });
 
   const handleProductClick = (product: Product) => {
@@ -149,7 +149,7 @@ export const DrugRefillHero: FC<DrugRefillHeroProps> = ({}) => {
                               onPress={() =>
                                 handleProductClick({
                                   ...product,
-                                  categoryId: getHealthCategoryId()!,
+                                  categ_id: getHealthCategoryId()!,
                                 })
                               }
                               key={product.id}
@@ -160,7 +160,7 @@ export const DrugRefillHero: FC<DrugRefillHeroProps> = ({}) => {
                                 height={60}
                                 className='max-h-14 object-contain'
                                 radius='md'
-                                src={product.imageInBinary}
+                                src={product.image_1024}
                                 alt={''}
                               />
 

@@ -28,7 +28,8 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
       <CardBody className='relative h-max overflow-visible p-0'>
         <Image
           alt={product.name}
-          src={product.imageInBinary}
+          fallbackSrc='/images/purelife-fallback.png'
+          src={product.image_1024}
           classNames={{
             img: 'w-full h-full object-contain',
             wrapper:

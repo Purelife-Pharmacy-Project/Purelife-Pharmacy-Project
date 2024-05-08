@@ -109,7 +109,7 @@ export const AboutDrugCard: FC<AboutDrugCardProps> = ({
   };
 
   const totalAmount = productSubscriptionList.reduce(
-    (acc, item) => acc + item.product.price * item.quantity,
+    (acc, item) => acc + item.product.lst_price * item.quantity,
     0
   );
 
@@ -121,7 +121,7 @@ export const AboutDrugCard: FC<AboutDrugCardProps> = ({
       products: productSubscriptionList.map((item) => ({
         productId: item.product.id,
         quantity: item.quantity,
-        priceUnit: item.product.price,
+        priceUnit: item.product.lst_price,
       })),
     };
 

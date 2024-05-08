@@ -44,11 +44,10 @@ export const CategoryProducts = () => {
   } = useGetProducts({
     categoryId: searchString ? undefined : (categoryId as string),
     name: searchString as string,
-    pageSize: 20,
-    pageIndex: Number(pageIndex),
-    active: true,
-    minPrice: minPrice,
-    maxPrice: maxPrice,
+    limit: 20,
+    offset: Number(pageIndex),
+    MinListPrice: minPrice ? Number(minPrice) : undefined,
+    MaxListPrice: maxPrice ? Number(maxPrice) : undefined,
   });
 
   return (
