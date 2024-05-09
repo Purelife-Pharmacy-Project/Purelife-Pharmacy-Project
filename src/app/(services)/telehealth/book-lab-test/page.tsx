@@ -1,4 +1,4 @@
-import { AppNavbar } from '@/components/Navbar';
+import { AppNavbar } from '@/components/AppNavbar';
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { BookATestHero } from '@/components/book-lab-test/BookATestHero';
 import { FrequentLabTests } from '@/components/book-lab-test/FrequentLabTests';

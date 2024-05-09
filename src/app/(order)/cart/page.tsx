@@ -1,4 +1,4 @@
-import { AppNavbar } from '@/components/Navbar';
+import { AppNavbar } from '@/components/AppNavbar';
 import { CartCoupon } from '@/components/cart/CartCoupon';
 import { CartWrapper } from '@/components/cart/CartWrapper';
 import { NoOfCartItems } from '@/components/cart/NoOfCartItems';

@@ -1,7 +1,7 @@
-import { AppNavbar } from '@/components/Navbar';
+import { AppNavbar } from '@/components/AppNavbar';
+import { ForgotPasswordForm } from '@/components/forgot-password/ForgotPasswordForm';
 import { Footer } from '@/components/home/Footer';
 import { Card, CardBody } from '@nextui-org/react';
-import { ForgotPasswordForm } from '@/components/forgot-password/ForgotPasswordForm';
 
 export default function ForgotPasswordPage() {
   return (

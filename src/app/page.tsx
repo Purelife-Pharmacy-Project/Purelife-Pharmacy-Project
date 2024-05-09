@@ -1,3 +1,4 @@
+import { AppNavbar } from '@/components/AppNavbar';
 import { EarnedClients } from '@/components/home/EarnedClients';
 import { HomeFaq } from '@/components/home/Faq';
 import { FeaturedProducts } from '@/components/home/FeaturedProducts';
@@ -10,7 +11,6 @@ import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { TeleHealthServices } from '@/components/home/TeleHealthServices';
 import { Testimonials } from '@/components/home/Testimonials';
 import { WellnessBlogSection } from '@/components/home/WellnessBlogSection';
-import { AppNavbar } from '@/components/Navbar';
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { earnedClients } from '@/constants';
 

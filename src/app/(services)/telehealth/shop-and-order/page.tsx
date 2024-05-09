@@ -1,9 +1,9 @@
+import { AppNavbar } from '@/components/AppNavbar';
 import { EarnedClients } from '@/components/home/EarnedClients';
 import { Footer } from '@/components/home/Footer';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Section } from '@/components/home/Section';
 import { TeleHealthServices } from '@/components/home/TeleHealthServices';
-import { AppNavbar } from '@/components/Navbar';
 import { ShopCategory } from '@/components/shop-and-order/ShopCategory';
 import { CategoryService } from '@/services/categories';
 import {

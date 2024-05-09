@@ -1,4 +1,4 @@
-import { AppNavbar } from '@/components/Navbar';
+import { AppNavbar } from '@/components/AppNavbar';
 import { Footer } from '@/components/home/Footer';
 import { CategoryProducts } from '@/components/shop-and-order/category/CategoryProducts';
 

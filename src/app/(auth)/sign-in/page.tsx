@@ -1,4 +1,4 @@
-import { AppNavbar } from '@/components/Navbar';
+import { AppNavbar } from '@/components/AppNavbar';
 import { Footer } from '@/components/home/Footer';
 import { LoginForm } from '@/components/login/loginForm';
 import { Card, CardBody } from '@nextui-org/react';

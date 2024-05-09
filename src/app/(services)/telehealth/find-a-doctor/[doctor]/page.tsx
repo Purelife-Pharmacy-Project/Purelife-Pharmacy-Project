@@ -1,5 +1,5 @@
 'use client';
-import { AppNavbar } from '@/components/Navbar';
+import { AppNavbar } from '@/components/AppNavbar';
 import { BookConsultationForm } from '@/components/find-a-doctor/BookConsultationForm';
 import { DoctorCard } from '@/components/find-a-doctor/DoctorCard';
 import { Footer } from '@/components/home/Footer';

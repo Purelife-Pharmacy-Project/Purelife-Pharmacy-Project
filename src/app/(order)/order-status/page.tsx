@@ -1,4 +1,4 @@
-import { AppNavbar } from '@/components/Navbar';
+import { AppNavbar } from '@/components/AppNavbar';
 import { Footer } from '@/components/home/Footer';
 import { IconSuccessCheck } from '@/components/icons/IconSuccessCheck';
 import { Button, Link } from '@nextui-org/react';

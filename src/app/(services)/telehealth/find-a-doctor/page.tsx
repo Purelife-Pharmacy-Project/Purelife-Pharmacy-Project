@@ -1,4 +1,4 @@
-import { AppNavbar } from '@/components/Navbar';
+import { AppNavbar } from '@/components/AppNavbar';
 import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
 import { DoctorCard } from '@/components/find-a-doctor/DoctorCard';
 import { Footer } from '@/components/home/Footer';

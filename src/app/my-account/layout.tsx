@@ -1,4 +1,4 @@
-import { AppNavbar } from '@/components/Navbar';
+import { AppNavbar } from '@/components/AppNavbar';
 import { Footer } from '@/components/home/Footer';
 import { Section } from '@/components/home/Section';
 import { MyAccountTabs } from '@/components/my-account/MyAccountTabs';

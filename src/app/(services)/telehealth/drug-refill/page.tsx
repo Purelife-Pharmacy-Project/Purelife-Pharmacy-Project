@@ -1,4 +1,4 @@
-import { AppNavbar } from '@/components/Navbar';
+import { AppNavbar } from '@/components/AppNavbar';
 import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
 import { DrugRefillHero } from '@/components/drug-refill/DrugRefillHero';
 import { Footer } from '@/components/home/Footer';

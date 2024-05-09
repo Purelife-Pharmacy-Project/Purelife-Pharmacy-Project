@@ -1,4 +1,4 @@
-import { AppNavbar } from '@/components/Navbar';
+import { AppNavbar } from '@/components/AppNavbar';
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
 import { VaccinationProducts } from '@/components/get-vaccination/VaccinationProducts';

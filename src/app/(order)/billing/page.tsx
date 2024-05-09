@@ -1,4 +1,4 @@
-import { AppNavbar } from '@/components/Navbar';
+import { AppNavbar } from '@/components/AppNavbar';
 import { BillingInfoCard } from '@/components/billing/BillingInfoCard';
 import { BillingOrderSummary } from '@/components/billing/BillingOrderSummary';
 import { BillingPaymentCard } from '@/components/billing/BillingPaymentCard';
