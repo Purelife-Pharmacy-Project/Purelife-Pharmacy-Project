@@ -45,7 +45,7 @@ export class Product {
   constructor(product: ProductType) {
     this.id = product.id;
     this.name = product.name;
-    this.lst_price = product.lst_price;
+    this.lst_price = product.lst_price || 0;
     this.categ_id = String(product.categ_id[0]);
     this.description = removeHtmlTags(product.description) || '';
     this.image_1024 = product.image_1024
