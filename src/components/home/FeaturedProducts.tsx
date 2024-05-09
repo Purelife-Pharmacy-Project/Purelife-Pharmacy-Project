@@ -1,10 +1,10 @@
 'use client';
+import { ProductCardSkeleton } from '@/components/shop-and-order/category/skeletons/ProductCardSkeleton';
 import { useGetFeaturedProducts } from '@/hooks';
 import { Button, Link } from '@nextui-org/react';
 import { FC } from 'react';
 import { FeaturedProduct } from './FeaturedProduct';
 import { Section } from './Section';
-import { IconSpinner } from '@/components/icons/IconSpinner';
 
 interface FeaturedProductsProps {
   title?: string;
@@ -32,8 +32,13 @@ export const FeaturedProducts: FC<FeaturedProductsProps> = ({
           </h1>
 
           {loadingFeaturedProducts ? (
-            <div className='flex w-full flex-col items-center justify-center gap-4'>
-              <IconSpinner color='primary' />
+            <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
+              {/* <IconSpinner color='primary' /> */}
+              {Array(3)
+                .fill(0)
+                .map((_, index) => (
+                  <ProductCardSkeleton key={index} />
+                ))}
             </div>
           ) : (
             <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>

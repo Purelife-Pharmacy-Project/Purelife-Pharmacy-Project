@@ -23,28 +23,28 @@ export const FeaturedProduct: FC<FeaturedProductProps> = ({ product }) => {
           src={product.image_1024}
         />
       </CardBody>
-      <CardFooter>
+      <CardFooter className='grid gap-3'>
         <div className='flex w-full justify-between gap-2'>
           <div className='grid gap-2'>
-            <p className='max-w-[230px] items-center break-words text-base font-semibold text-header-100'>
+            <p className='w-[3/4] items-center break-words text-base font-semibold text-header-100'>
               {product.name}
             </p>
             <p className='font-medium text-header-100'>{product.amount}</p>
           </div>
-          <Button
-            className='items-center border-header-100 bg-primaryLight text-header-100'
-            variant='bordered'
-            onPress={() =>
-              addToCart({
-                id: product.id,
-                product,
-                quantity: 1,
-              })
-            }
-          >
-            Add to Cart
-          </Button>
         </div>
+        <Button
+          className='items-center border-header-100 bg-primaryLight py-6 text-header-100'
+          variant='bordered'
+          onPress={() =>
+            addToCart({
+              id: product.id,
+              product,
+              quantity: 1,
+            })
+          }
+        >
+          Add to Cart
+        </Button>
       </CardFooter>
     </Card>
   );

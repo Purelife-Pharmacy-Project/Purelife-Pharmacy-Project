@@ -34,7 +34,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
     useGetProducts({
       limit: 12,
       offset: pageIndex,
-      categoryId: category || '17',
+      categoryId: category || '21',
     });
 
   // Filter out categories that are not related to lab tests
@@ -144,13 +144,6 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                     />
                   ))}
                 </div>
-
-                <ProductsPagination
-                  color='success'
-                  loading={loadingLabTests}
-                  className='text-white'
-                  totalPages={labTests?.totalPages as number}
-                />
               </div>
             ) : null}
 
@@ -160,6 +153,15 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                   No Lab Tests Yet. Try again
                 </p>
               </div>
+            ) : null}
+
+            {!loadingLabTests && labTests?.products ? (
+              <ProductsPagination
+                color='success'
+                loading={loadingLabTests}
+                className='text-white'
+                totalPages={labTests?.totalPages as number}
+              />
             ) : null}
           </Section>
         </div>
