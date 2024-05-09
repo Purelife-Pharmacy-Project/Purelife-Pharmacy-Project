@@ -1,4 +1,3 @@
-import { AppNavbar } from '@/components/AppNavbar';
 import { EarnedClients } from '@/components/home/EarnedClients';
 import { Footer } from '@/components/home/Footer';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
@@ -47,7 +46,6 @@ export default async function ShopAndOrder() {
   ];
   return (
     <>
-      <AppNavbar background={'primaryLight'} />
       <main className='grid gap-6'>
         {/* <div className='grid justify-center bg-primaryLight'>
           <Section className='bg-primaryLight'>

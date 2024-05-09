@@ -1,5 +1,6 @@
 'use client';
 import { NavbarSearch } from '@/components/NavbarSearch';
+import { useLogout } from '@/hooks';
 import {
   Button,
   Link,
@@ -26,9 +27,25 @@ export const AppNavbar = ({
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const pathName = usePathname();
+  const currentPath = usePathname();
 
-  const isActive = (path: string) => path === pathName;
+  const isActive = (path: string) => path === currentPath;
+
+  const { logout } = useLogout();
+
+  const getNavbarBackground = () => {
+    switch (currentPath) {
+      case '/sign-in':
+        return '';
+      case '/create-account':
+        return '';
+      case '/cart':
+        return '';
+
+      default:
+        return 'bg-primaryLight';
+    }
+  };
 
   const menuItems = [
     {
@@ -56,7 +73,7 @@ export const AppNavbar = ({
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
       isBlurred={disabled}
-      className={`py-4 text-foreground lg:pb-2 bg-${background}`}
+      className={`py-4 text-foreground lg:pb-2 ${getNavbarBackground()}`}
       maxWidth='xl'
     >
       <NavbarContent
@@ -75,6 +92,20 @@ export const AppNavbar = ({
             />
           </Link>
         </NavbarBrand>
+
+        {/* Silent Logout Button */}
+        <button
+          type='button'
+          role='button'
+          id='logout-btn'
+          className=' pointer-events-none invisible absolute z-0'
+          onClick={() => {
+            console.log('hello');
+            logout();
+          }}
+        >
+          hello
+        </button>
 
         <div className='hidden md:gap-[22px] lg:flex'>
           <NavbarItem className='text-lg leading-[27px] text-header-100'>

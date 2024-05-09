@@ -1,4 +1,3 @@
-import { AppNavbar } from '@/components/AppNavbar';
 import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
 import { Footer } from '@/components/home/Footer';
 import { HomeHero } from '@/components/home/HomeHero';
@@ -31,7 +30,6 @@ export default function UploadPrescriptionPage() {
   ];
   return (
     <>
-      <AppNavbar background='primaryLight' />
       <main className='grid gap-6'>
         <HomeHero
           title="Get us Your Doctor's Prescription, and Get an On-time Refill"

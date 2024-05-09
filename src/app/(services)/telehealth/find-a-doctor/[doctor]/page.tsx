@@ -1,5 +1,4 @@
 'use client';
-import { AppNavbar } from '@/components/AppNavbar';
 import { BookConsultationForm } from '@/components/find-a-doctor/BookConsultationForm';
 import { DoctorCard } from '@/components/find-a-doctor/DoctorCard';
 import { Footer } from '@/components/home/Footer';
@@ -17,8 +16,6 @@ export default function Doctor() {
 
   return (
     <>
-      <AppNavbar background={'primaryLight'} />
-
       <div className='grid justify-center gap-6 bg-primaryLight'>
         <Section className='relative flex h-max w-screen items-center bg-primaryLight lg:h-[40vh]'>
           <DoctorCard doctor={doctorData!} />

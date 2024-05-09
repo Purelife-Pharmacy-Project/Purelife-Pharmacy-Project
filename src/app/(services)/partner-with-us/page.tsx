@@ -1,4 +1,3 @@
-import { AppNavbar } from '@/components/AppNavbar';
 import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
 import { Footer } from '@/components/home/Footer';
 import { HomeHero } from '@/components/home/HomeHero';
@@ -33,8 +32,6 @@ export default function PartnerWithUs() {
 
   return (
     <>
-      <AppNavbar background='primaryLight' />
-
       <main className='grid gap-6'>
         <div className='bg-primaryLight lg:grid lg:justify-center'>
           <Section className='bg-primaryLight'>

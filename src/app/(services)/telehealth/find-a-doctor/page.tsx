@@ -1,4 +1,3 @@
-import { AppNavbar } from '@/components/AppNavbar';
 import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
 import { DoctorCard } from '@/components/find-a-doctor/DoctorCard';
 import { Footer } from '@/components/home/Footer';
@@ -33,8 +32,6 @@ export default function FindADoctor() {
 
   return (
     <>
-      <AppNavbar background={'primaryLight'} />
-
       <main className='grid gap-6'>
         <div className='grid justify-center bg-primaryLight'>
           <HomeHero

@@ -1,4 +1,3 @@
-import { AppNavbar } from '@/components/AppNavbar';
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { FeatureCard } from '@/components/book-emergency/FeatureCard';
 import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
@@ -64,8 +63,6 @@ export default function PureWellnessPage() {
 
   return (
     <>
-      <AppNavbar background='primaryLight' />
-
       <main className='grid gap-6'>
         <HomeHero
           title='Get a personalized 

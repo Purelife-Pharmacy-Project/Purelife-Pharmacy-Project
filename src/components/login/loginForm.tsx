@@ -59,20 +59,22 @@ export const LoginForm = () => {
       <Input
         {...register('email')}
         label='Email'
-        autoComplete='email'
+        autoComplete='user-email'
         errorMessage={errors.email?.message}
+        isInvalid={!!errors.email}
         type='email'
         classNames={inputDefault}
       />
       <Input
         {...register('password')}
         label='Password'
-        autoComplete='password'
+        autoComplete='user-password'
         errorMessage={errors.password?.message}
+        isInvalid={!!errors.password}
         type={passwordIsVisible ? 'text' : 'password'}
         classNames={inputDefault}
         endContent={
-          <button className='px-2' onClick={toggleVisibility}>
+          <button type='button' className='px-2' onClick={toggleVisibility}>
             {' '}
             {passwordIsVisible ? (
               <IconEyeClose color='content' />

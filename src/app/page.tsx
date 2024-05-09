@@ -1,4 +1,3 @@
-import { AppNavbar } from '@/components/AppNavbar';
 import { EarnedClients } from '@/components/home/EarnedClients';
 import { HomeFaq } from '@/components/home/Faq';
 import { FeaturedProducts } from '@/components/home/FeaturedProducts';
@@ -44,7 +43,6 @@ export default async function Home() {
 
   return (
     <>
-      <AppNavbar background={'primaryLight'} />
       <main className='grid gap-6'>
         <HomePageHero
           title='Your one-stop for wellness and lifestyle.'

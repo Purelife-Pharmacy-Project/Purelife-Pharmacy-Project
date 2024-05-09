@@ -26,16 +26,45 @@ export const goHome = () => {
 };
 
 export function middleware(request: NextRequest) {
-  // if the user is not authenticated, redirect them to the login page
-  if (!isAuthenticated(request)) {
+  const url = new URL(request.url);
+  const origin = url.origin;
+  const pathname = url.pathname;
+  const currentRoute = request.nextUrl.pathname;
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-url', request.url);
+  requestHeaders.set('x-origin', origin);
+  requestHeaders.set('x-pathname', pathname);
+
+  const isLoggedIn = isAuthenticated(request);
+
+  if (currentRoute === '/sign-in') {
+    if (isLoggedIn) {
+      // if the user is already authenticated, redirect them to the home page
+      return NextResponse.redirect(new URL('/', request.nextUrl.origin));
+    }
+
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
+  }
+
+  if (!isLoggedIn) {
+    // if the user is not authenticated, redirect them to the login page
     removeAuthorization(request.cookies);
-    const currentRoute = request.nextUrl.pathname;
+
+    // store the current route in the query string to redirect the user back to the current route after login
     return NextResponse.redirect(
       new URL(`/sign-in?redirectUrl=${currentRoute}`, request.url)
     );
-  } else {
-    return NextResponse.next();
   }
+
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
 }
 
 export const config = {

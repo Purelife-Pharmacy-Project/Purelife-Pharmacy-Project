@@ -1,4 +1,3 @@
-import { AppNavbar } from '@/components/AppNavbar';
 import { Footer } from '@/components/home/Footer';
 import { IconSuccessCheck } from '@/components/icons/IconSuccessCheck';
 import { Button, Link } from '@nextui-org/react';
@@ -6,7 +5,6 @@ import { Button, Link } from '@nextui-org/react';
 export default function OrderStatusPage() {
   return (
     <>
-      <AppNavbar background='primaryLight' />
       <div className='grid h-[800px] w-full place-content-center'>
         <div className='grid w-[270px] items-center gap-6'>
           <IconSuccessCheck />

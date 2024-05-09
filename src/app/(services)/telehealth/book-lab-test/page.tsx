@@ -1,4 +1,3 @@
-import { AppNavbar } from '@/components/AppNavbar';
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { BookATestHero } from '@/components/book-lab-test/BookATestHero';
 import { FrequentLabTests } from '@/components/book-lab-test/FrequentLabTests';
@@ -35,7 +34,6 @@ export default async function BookATest() {
 
   return (
     <>
-      <AppNavbar background={'white'} />
       <main className='grid gap-6'>
         <BookATestHero />
 
