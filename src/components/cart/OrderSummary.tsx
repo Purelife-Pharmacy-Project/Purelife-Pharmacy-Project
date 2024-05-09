@@ -3,7 +3,7 @@ import { useCartStore, useGetUser } from '@/hooks';
 import { useStore } from '@/hooks/store';
 import { Button, Card, CardBody } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { toast } from 'sonner';
 import { BillingAddressModal } from '../billing/BillingAddressModal';
 
@@ -28,12 +28,6 @@ export const OrderSummary: FC<OrderSummaryProps> = () => {
   const [showDeliveryModal, setShowDeliveryModal] = useState(false);
   const { user } = useGetUser();
   const router = useRouter();
-
-  useEffect(() => {
-    if (summary) {
-      console.log({ summary });
-    }
-  }, [summary]);
 
   return (
     <Card shadow='none' className='w-full border border-gray-300 lg:w-[543px]'>

@@ -1,11 +1,5 @@
 import { AppNavbar } from '@/components/AppNavbar';
-import { getUserSession } from '@/helpers/api/index.server';
 import { Providers } from '@/providers';
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from '@tanstack/react-query';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 import { Bricolage_Grotesque } from 'next/font/google';
@@ -122,20 +116,20 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ['user'],
-    queryFn: () => getUserSession(),
-  });
+  // const queryClient = new QueryClient();
+  // await queryClient.prefetchQuery({
+  //   queryKey: ['user'],
+  //   queryFn: () => getUserSession(),
+  // });
 
   return (
     <html lang='en'>
       <body className={bricolage.className}>
         <Providers>
           <main className='bg-background text-foreground light'>
-            <HydrationBoundary state={dehydrate(queryClient)}>
-              <AppNavbar />
-            </HydrationBoundary>
+            {/* <HydrationBoundary state={dehydrate(queryClient)}> */}
+            <AppNavbar />
+            {/* </HydrationBoundary> */}
 
             {children}
           </main>

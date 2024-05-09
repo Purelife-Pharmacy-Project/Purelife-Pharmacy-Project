@@ -1,9 +1,10 @@
+'use server';
+
 import { API_BASE_URL, USER_TOKEN_KEY } from '@/constants';
 import { User, UserType } from '@/services/user/types';
 import _axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 import { toast } from 'sonner';
 import { isServer } from '../utils';
 
@@ -18,9 +19,9 @@ export const serverAxiosInstance = _axios.create({
 // Server Interceptors
 let hasHandledUnauthorizedError = false;
 const cookieStore = cookies();
-const token = cookieStore.get(USER_TOKEN_KEY)?.value || '';
 
 serverAxiosInstance.interceptors.request.use(async (config) => {
+  const token = cookieStore.get(USER_TOKEN_KEY)?.value || '';
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -30,6 +31,7 @@ serverAxiosInstance.interceptors.request.use(async (config) => {
 
 serverAxiosInstance.interceptors.response.use(
   async (response) => {
+    const token = cookieStore.get(USER_TOKEN_KEY)?.value || '';
     hasHandledUnauthorizedError = false;
 
     if (response.headers.Authorization) return response;
@@ -56,7 +58,7 @@ serverAxiosInstance.interceptors.response.use(
               logoutBtn.click();
             }
 
-            redirect(`/sign-in?redirectUrl=${window.location.pathname}`);
+            // redirect(`/sign-in?redirectUrl=${window.location.pathname}`);
           }
         }
       }
@@ -67,6 +69,7 @@ serverAxiosInstance.interceptors.response.use(
 );
 
 export const getUserIdFromServerToken = () => {
+  const token = cookieStore.get(USER_TOKEN_KEY)?.value || '';
   if (token) {
     const decoded = jwtDecode(token) as {
       'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier': string;
@@ -93,10 +96,7 @@ export const getUserIdFromServerToken = () => {
   }
 };
 
-export const removeServerSession = () => {};
-
 export const getUserSession = async () => {
-  // TODO: continue here
   const userId = getUserIdFromServerToken()?.id;
 
   if (!userId) {

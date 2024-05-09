@@ -6,6 +6,7 @@ export const isAuthenticated = (request: NextRequest) => {
   const cookies = request.cookies;
 
   if (cookies) {
+    console.log('cookies', cookies);
     return (
       !!cookies.get(USER_TOKEN_KEY)?.value &&
       request.cookies.get(USER_TOKEN_KEY)?.value !== ''

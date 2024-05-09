@@ -1,7 +1,7 @@
 import { Footer } from '@/components/home/Footer';
 import { LoginForm } from '@/components/login/loginForm';
 import { Card, CardBody } from '@nextui-org/react';
-import { Suspense } from 'react';
+// import { Suspense } from 'react';
 
 export default function LoginPage() {
   return (
@@ -16,9 +16,9 @@ export default function LoginPage() {
             shadow='none'
           >
             <CardBody className='p-8 lg:p-12'>
-              <Suspense>
-                <LoginForm />
-              </Suspense>
+              {/* <Suspense> */}
+              <LoginForm />
+              {/* </Suspense> */}
             </CardBody>
           </Card>
         </div>
