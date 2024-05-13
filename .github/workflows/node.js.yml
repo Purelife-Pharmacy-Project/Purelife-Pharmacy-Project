@@ -1,28 +1,49 @@
 name: Reach Admin Pipeline
 
-on: 
-   push:
-     branches: [ deployment, main ]
-   pull_request: 
-     branches: [ deployment, main ]
+on:
+  push:
+    branches: [deployment, dev]
+  pull_request:
+    branches: [deployment, dev]
 
 jobs:
-  staging:  
+
+  staging:
     name: PURELIFE PHARMACY FRONTEND
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
+
     steps:
-      - name: remote ssh commands 
-        if: ${{ github.ref == 'refs/heads/deployment' }}
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.PURELIFE_SERVER }}
-          username: ${{ secrets.PURELIFE_USER }}
-          key: ${{ secrets.PURELIFE_KEY }}
-          port: ${{ secrets.PURELIFE_PORT }}
-          script: |
-             cd /usr/Purelife-Pharmacy-Project
-             git pull origin deployment
-             docker build -t purelife-frontend .
-             docker rm -f purelife-frontend
-             docker run --name purelife-frontend --restart always -d -p 3400:3000 --env-file ./.env purelife-frontend
-          
+    - name: Remote SSH Commands (Deployment)
+      if: ${{ github.ref == 'refs/heads/deployment' }}
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.PURELIFE_SERVER }}
+        username: ${{ secrets.PURELIFE_USER }}
+        key: ${{ secrets.PURELIFE_KEY }}
+        port: ${{ secrets.PURELIFE_PORT }}
+        script: |
+          cd /usr/Purelife-Pharmacy-Project
+          git pull origin deployment
+          docker build -t purelife-frontend .
+          docker rm -f purelife-frontend
+          docker run --name purelife-frontend --restart always -d -p 3400:3000 --env-file ./.env purelife-frontend
+
+  production:
+    name: PURELIFE dev
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Remote SSH Commands (Main)
+      if: ${{ github.ref == 'refs/heads/dev' }}
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.FI_SERVER }}
+        username: ${{ secrets.FI_USER }}
+        key: ${{ secrets.FI_KEY }}
+        port: ${{ secrets.FI_PORT }}
+        script: |
+          cd /usr/fi-server-project
+          git pull origin dev
+          docker build -t purelife-frontend .
+          docker rm -f purelife-frontend
+          docker run --name purelife-frontend --restart always -d -p 3400:3000 --env-file ./.env purelife-frontend
