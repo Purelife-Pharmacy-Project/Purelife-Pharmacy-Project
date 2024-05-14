@@ -46,4 +46,4 @@ jobs:
           sudo git pull origin dev
           sudo docker build -t purelife-frontend .
           sudo docker rm -f purelife-frontend
-          sudo docker run --name purelife-frontend --restart always -d -p 3400:3000 --env-file ./.env purelife-frontend
+          sudo docker run --name purelife-frontend --restart always -d -p 3400:3000 purelife-frontend
