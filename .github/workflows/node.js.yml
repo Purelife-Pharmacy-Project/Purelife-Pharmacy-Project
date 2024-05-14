@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Remote SSH Commands (Main)
+    - name: Remote SSH Commands (dev)
       if: ${{ github.ref == 'refs/heads/dev' }}
       uses: appleboy/ssh-action@master
       with:
