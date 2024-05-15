@@ -2,7 +2,6 @@ import { IconDoctor } from '@/components/icons/IconDoctor';
 import { IconFluidMed } from '@/components/icons/IconFluidMed';
 import { IconLabs } from '@/components/icons/IconLabs';
 import { IconPill } from '@/components/icons/IconPill';
-import { IconPrescription } from '@/components/icons/IconPrescription';
 
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '/api/v1';
 
@@ -69,21 +68,21 @@ export const teleHealthServices = [
     actionText: 'Consult Now',
     isAvailable: true,
   },
-  {
-    icon: IconPrescription as ({
-      color,
-      size,
-    }: {
-      color?: string;
-      size?: number;
-    }) => JSX.Element,
-    title: 'Upload Prescription',
-    description:
-      'Ease Your Healthcare Journey as we manage and secure your prescriptions with ease.',
-    url: '/telehealth/upload-prescription',
-    actionText: 'Upload Now',
-    isAvailable: true,
-  },
+  // {
+  //   icon: IconPrescription as ({
+  //     color,
+  //     size,
+  //   }: {
+  //     color?: string;
+  //     size?: number;
+  //   }) => JSX.Element,
+  //   title: 'Upload Prescription',
+  //   description:
+  //     'Ease Your Healthcare Journey as we manage and secure your prescriptions with ease.',
+  //   url: '/telehealth/upload-prescription',
+  //   actionText: 'Upload Now',
+  //   isAvailable: true,
+  // },
   // {
   //   icon: IconEmergency as ({
   //     color,

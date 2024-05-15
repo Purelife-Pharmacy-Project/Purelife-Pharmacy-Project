@@ -50,8 +50,7 @@ export const CreateAccountForm = () => {
         label='Full Name'
         type='text'
         autoComplete='new-name'
-        errorMessage={errors.email?.message}
-        isInvalid
+        errorMessage={errors.name?.message}
         classNames={inputDefault}
         {...register('name')}
       />
