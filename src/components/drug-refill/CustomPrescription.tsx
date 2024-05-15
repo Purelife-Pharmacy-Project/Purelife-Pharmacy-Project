@@ -1,6 +1,7 @@
 import { IconPlusSolid } from '@/components/icons/IconPlusSolid';
 import { Button, useDisclosure } from '@nextui-org/react';
 import { CustomPrescriptionForm } from './modals/CustomPrescriptionForm';
+import { CustomPrescriptionSuccess } from './modals/CustomPrescriptionSuccess';
 import { SelectCustomerRole } from './modals/SelectCustomerRole';
 
 export const CustomPrescription = () => {
@@ -12,6 +13,8 @@ export const CustomPrescription = () => {
     isOpen: isCustomPrescriptionOpen,
     onOpenChange: onOpenCustomPrescriptionChange,
   } = useDisclosure();
+
+  const { isOpen: isSuccess, onOpenChange: onOpenSuccess } = useDisclosure();
 
   return (
     <>
@@ -37,12 +40,27 @@ export const CustomPrescription = () => {
 
       <SelectCustomerRole
         isOpen={isSelectCustomerRoleOpen}
-        onOpenChange={onOpenSelectCustomerRoleChange}
+        onOpenChange={() => {
+          onOpenSelectCustomerRoleChange();
+          setTimeout(() => {
+            onOpenCustomPrescriptionChange();
+          }, 500);
+        }}
       />
 
       <CustomPrescriptionForm
         isOpen={isCustomPrescriptionOpen}
-        onOpenChange={onOpenCustomPrescriptionChange}
+        onOpenChange={() => {
+          onOpenCustomPrescriptionChange();
+          setTimeout(() => {
+            onOpenSuccess();
+          }, 500);
+        }}
+      />
+
+      <CustomPrescriptionSuccess
+        isOpen={isSuccess}
+        onOpenChange={onOpenSuccess}
       />
     </>
   );

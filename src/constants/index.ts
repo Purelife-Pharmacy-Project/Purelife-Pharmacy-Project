@@ -135,3 +135,18 @@ export const earnedClients = [
     image: '/images/clients/reckitt.png',
   },
 ];
+
+export const genderAnswers = [
+  {
+    name: 'Male',
+    value: 'male',
+  },
+  {
+    name: 'Female',
+    value: 'female',
+  },
+  {
+    name: 'Prefer not to say',
+    value: 'other',
+  },
+];
