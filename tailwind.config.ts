@@ -35,6 +35,9 @@ const config: Config = {
           200: '#D9D9D9',
           300: '#F4F4F4',
         },
+        green: {
+          100: '#83FFB4',
+        },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

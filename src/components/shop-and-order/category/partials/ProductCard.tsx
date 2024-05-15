@@ -4,6 +4,7 @@ import { useCartStore } from '@/hooks';
 import { Product } from '@/services/products/types';
 import {
   Button,
+  ButtonGroup,
   Card,
   CardBody,
   CardFooter,
@@ -24,28 +25,15 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
 
   return (
     <Card shadow='none' className='w-full' radius='lg'>
-      <CardBody className='relative overflow-visible px-0 py-2'>
-        <Button
-          isIconOnly
-          isDisabled={product.quantity === 0}
-          onPress={() =>
-            addToCart({
-              id: product.id,
-              product,
-              quantity: 1,
-            })
-          }
-          className='absolute right-4 top-5 z-20 rounded-full bg-primary/40 p-0 shadow-md'
-        >
-          <IconCart color='white' />
-        </Button>
-
+      <CardBody className='relative h-max overflow-visible p-0'>
         <Image
           alt={product.name}
-          src={product.imageInBinary}
+          fallbackSrc='/images/purelife-fallback.png'
+          src={product.image_1024}
           classNames={{
-            img: 'w-full h-full object-contain rounded-xl',
-            wrapper: '!max-w-full flex justify-center !h-full !max-h-[200px]',
+            img: 'w-full h-full object-contain',
+            wrapper:
+              '!max-w-full flex justify-center rounded-xl items-center !h-full !max-h-[200px]',
           }}
         />
       </CardBody>
@@ -53,7 +41,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
         <div className='flex flex-col gap-2'>
           <Link
             href={`/cart/${product.id}`}
-            className='max-h-[50px] overflow-y-auto break-words font-semibold capitalize text-header-100'
+            className='max-h-[60px] overflow-y-auto break-words font-semibold capitalize text-header-100 hover:underline'
           >
             {product.name?.toLowerCase()}
           </Link>
@@ -62,9 +50,36 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
           </p>
         </div>
 
-        <Button
-          className='w-2/5 border-header-100 text-header-100 hover:border-primary hover:bg-primary/10 hover:text-primary'
+        <ButtonGroup fullWidth>
+          <Button
+            variant='flat'
+            as={Link}
+            href={`/cart/${product.id}`}
+            isDisabled={product.quantity === 0}
+          >
+            Buy now
+          </Button>
+          <Button
+            color='primary'
+            className='flex items-center gap-2'
+            isDisabled={product.quantity === 0}
+            onPress={() =>
+              addToCart({
+                id: product.id,
+                product,
+                quantity: 1,
+              })
+            }
+          >
+            <IconCart size={20} />
+            Add to cart
+          </Button>
+        </ButtonGroup>
+
+        {/* <Button
+          className='border-header-100 text-header-100 hover:border-primary hover:bg-primary/10 hover:text-primary'
           variant='bordered'
+          fullWidth
           isDisabled={loading}
           onPress={() => {
             addToCart({
@@ -75,8 +90,8 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
             router.push(`/cart/${product.id}`, { scroll: false });
           }}
         >
-          Buy
-        </Button>
+          Buy now
+        </Button> */}
       </CardFooter>
     </Card>
   );

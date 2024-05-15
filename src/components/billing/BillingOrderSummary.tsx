@@ -21,7 +21,7 @@ export const BillingOrderSummary = () => {
         productId: product.product.id,
         quantity: product.quantity,
         description: product.product.description,
-        priceUnit: product.product.price,
+        priceUnit: product.product.lst_price,
       })) as OrderProduct[],
     };
 

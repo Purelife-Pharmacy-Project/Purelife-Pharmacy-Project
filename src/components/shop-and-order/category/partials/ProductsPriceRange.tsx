@@ -4,10 +4,7 @@ import { Button, Radio, RadioGroup } from '@nextui-org/react';
 import { useSearchParams } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 
-type ProductsPriceRangeProps = {
-  onRefetch: () => void;
-  loading?: boolean;
-};
+type ProductsPriceRangeProps = {};
 
 enum PriceRanges {
   BELOW_1000 = `below ₦1000`,
@@ -18,10 +15,7 @@ enum PriceRanges {
   ABOVE_9999 = `₦10000 above`,
 }
 
-export const ProductsPriceRange: FC<ProductsPriceRangeProps> = ({
-  onRefetch,
-  loading,
-}) => {
+export const ProductsPriceRange: FC<ProductsPriceRangeProps> = ({}) => {
   const [range, setRange] = useState<string | null>(null);
   const { setQuery, removeQuery } = useQueryParams();
 
@@ -84,7 +78,6 @@ export const ProductsPriceRange: FC<ProductsPriceRangeProps> = ({
   useEffect(() => {
     if (range) {
       handleSetPrice();
-      onRefetch();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [range]);
@@ -94,7 +87,6 @@ export const ProductsPriceRange: FC<ProductsPriceRangeProps> = ({
       <RadioGroup
         label={'Price'}
         value={range!}
-        isDisabled={loading}
         onValueChange={(value) => setRange(value as string)}
         classNames={{
           label: 'font-semibold text-header-100',

@@ -12,6 +12,6 @@ COPY . .
 
 RUN npm run build --if-present
 
-EXPOSE 3000
+EXPOSE 3829
 
 CMD [ "npm", "start" ]

@@ -1,4 +1,3 @@
-import { AppNavbar } from '@/components/Navbar';
 import { BillingInfoCard } from '@/components/billing/BillingInfoCard';
 import { BillingOrderSummary } from '@/components/billing/BillingOrderSummary';
 import { BillingPaymentCard } from '@/components/billing/BillingPaymentCard';
@@ -9,8 +8,6 @@ import { Section } from '@/components/home/Section';
 export default function BillingPage() {
   return (
     <>
-      <AppNavbar background='primaryLight' />
-
       <div className='grid justify-center bg-primaryLight py-8'>
         <Section className='bg-primaryLight'>
           <div className='flex items-center gap-4'>

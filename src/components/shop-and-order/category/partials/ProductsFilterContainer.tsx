@@ -1,65 +1,23 @@
 'use client';
-import { useGetProducts } from '@/hooks';
 import { Card, CardBody } from '@nextui-org/react';
 import { FC } from 'react';
-import { MobileProductsByPrice } from './MobileProductsByPrice';
 import { ProductsPriceRange } from './ProductsPriceRange';
 
-type ProductsFilterContainerProps = {
-  categoryId: string;
-  searchString: string;
-  minPrice: string | undefined;
-  maxPrice: string | undefined;
-};
+type ProductsFilterContainerProps = {};
 
-export const ProductsFilterContainer: FC<ProductsFilterContainerProps> = ({
-  categoryId,
-  searchString,
-  minPrice,
-  maxPrice,
-}) => {
-  const {
-    refetch: refetchProducts,
-    isRefetching,
-    loadingProducts,
-  } = useGetProducts(
-    categoryId as string,
-    searchString,
-    undefined,
-    undefined,
-    true,
-    undefined,
-    minPrice,
-    maxPrice
-  );
-
+export const ProductsFilterContainer: FC<
+  ProductsFilterContainerProps
+> = ({}) => {
   return (
     <>
-      <div className='md:hidden'>
-        <MobileProductsByPrice
-          categoryId={categoryId}
-          searchString={searchString}
-          minPrice={minPrice}
-          maxPrice={maxPrice}
-        />
-      </div>
-
-      <Card shadow='none' className='hidden h-max bg-primaryLight md:block'>
+      <Card shadow='none' className='hidden h-max bg-primaryLight lg:block'>
         <CardBody>
           <h1 className='mb-4 text-2xl font-semibold text-header-100'>
             Filter
           </h1>
 
           <div className='grid gap-4'>
-            {/* <ProductsManufacturersList
-            categoryId={categoryId}
-            manufacturerId={manufacturerId}
-            onRefetch={refetchProducts}
-          /> */}
-            <ProductsPriceRange
-              loading={loadingProducts || isRefetching}
-              onRefetch={refetchProducts}
-            />
+            <ProductsPriceRange />
           </div>
         </CardBody>
       </Card>

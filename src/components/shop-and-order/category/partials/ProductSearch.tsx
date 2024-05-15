@@ -1,19 +1,16 @@
 import { IconSearch } from '@/components/icons/IconSearch';
 import { useQueryParams } from '@/hooks';
+import { inputBorderedGray } from '@/theme';
 import { Input } from '@nextui-org/react';
 import debounce from 'lodash/debounce';
 import { FC, useCallback, useEffect, useState } from 'react';
 
 type ProductSearchProps = {
-  searchString: string;
-  onRefetch: () => void;
+  loadingProducts?: boolean;
 };
 
-export const ProductSearch: FC<ProductSearchProps> = ({
-  searchString,
-  onRefetch,
-}) => {
-  const [searchStr, setSearchStr] = useState<string | null>(searchString);
+export const ProductSearch: FC<ProductSearchProps> = ({ loadingProducts }) => {
+  const [searchStr, setSearchStr] = useState<string | null>('');
   const { setQuery, removeQuery } = useQueryParams();
 
   const handleDebouncedSearch = debounce((value: string) => {
@@ -24,11 +21,10 @@ export const ProductSearch: FC<ProductSearchProps> = ({
   useEffect(() => {
     if (!searchStr || searchStr === '') {
       removeQuery(['searchString']);
-      onRefetch();
     } else {
       setSearchStr(searchStr);
+      removeQuery(['category']);
       setQuery({ searchString: searchStr || '' });
-      onRefetch();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchStr]);
@@ -42,12 +38,19 @@ export const ProductSearch: FC<ProductSearchProps> = ({
   return (
     <Input
       type='text'
+      radius={'full'}
+      color={'default'}
       isClearable
-      variant={'flat'}
+      isDisabled={loadingProducts}
       size={'lg'}
-      startContent={<IconSearch />}
+      startContent={
+        <div className='rounded-full bg-primaryLight p-2'>
+          <IconSearch color='header-100' />
+        </div>
+      }
+      classNames={inputBorderedGray}
       placeholder='Find a product'
-      defaultValue={searchString}
+      defaultValue={searchStr || ''}
       onChange={(e) => handleInputChange(e.target.value)}
       onClear={() => handleInputChange('')}
     />

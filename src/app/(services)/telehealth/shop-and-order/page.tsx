@@ -1,16 +1,14 @@
-import { AppNavbar } from '@/components/Navbar';
 import { EarnedClients } from '@/components/home/EarnedClients';
 import { Footer } from '@/components/home/Footer';
-import { HomeHero } from '@/components/home/HomeHero';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Section } from '@/components/home/Section';
 import { TeleHealthServices } from '@/components/home/TeleHealthServices';
 import { ShopCategory } from '@/components/shop-and-order/ShopCategory';
 import { CategoryService } from '@/services/categories';
 import {
+  dehydrate,
   HydrationBoundary,
   QueryClient,
-  dehydrate,
 } from '@tanstack/react-query';
 
 export default async function ShopAndOrder() {
@@ -48,9 +46,8 @@ export default async function ShopAndOrder() {
   ];
   return (
     <>
-      <AppNavbar background='primaryLight' />
       <main className='grid gap-6'>
-        <div className='grid justify-center bg-primaryLight'>
+        {/* <div className='grid justify-center bg-primaryLight'>
           <Section className='bg-primaryLight'>
             <HomeHero
               title='Your Wellness is Only a Shopping Order Away'
@@ -59,7 +56,7 @@ export default async function ShopAndOrder() {
               ctaLink='#'
             />
           </Section>
-        </div>
+        </div> */}
 
         <div className='grid justify-center lg:pt-[55px]'>
           <Section>

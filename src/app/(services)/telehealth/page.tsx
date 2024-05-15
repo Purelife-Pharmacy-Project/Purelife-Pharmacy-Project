@@ -1,4 +1,3 @@
-import { AppNavbar } from '@/components/Navbar';
 import { EarnedClients } from '@/components/home/EarnedClients';
 import { Footer } from '@/components/home/Footer';
 import { HomeHero } from '@/components/home/HomeHero';
@@ -6,6 +5,7 @@ import { HomeTransformation } from '@/components/home/HomeTransformation';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Section } from '@/components/home/Section';
 import { TeleHealthServices } from '@/components/home/TeleHealthServices';
+import { earnedClients } from '@/constants';
 
 export default function Telehealth() {
   const transformationData = [
@@ -23,31 +23,8 @@ export default function Telehealth() {
     },
   ];
 
-  const earnedClients = [
-    {
-      name: 'IFitness',
-      image: '/images/clients/iFitness.png',
-    },
-    {
-      name: 'Buy Asap',
-      image: '/images/clients/buyAsap.png',
-    },
-    {
-      name: 'Nike',
-      image: '/images/clients/nike.png',
-    },
-    {
-      name: 'Gallant Biz',
-      image: '/images/clients/gallantBiz.png',
-    },
-    {
-      name: 'Laroche',
-      image: '/images/clients/laroche.png',
-    },
-  ];
   return (
     <>
-      <AppNavbar background='primaryLight' />
       <main className='grid gap-6'>
         <div className='bg-primaryLight lg:grid lg:justify-center'>
           <Section className='bg-primaryLight'>

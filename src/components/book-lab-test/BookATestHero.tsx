@@ -1,5 +1,5 @@
 'use client';
-import { useCartStore, useGetLabTests } from '@/hooks';
+import { useCartStore, useGetProducts } from '@/hooks';
 import { Product } from '@/services/products/types';
 import {
   Button,
@@ -10,7 +10,7 @@ import {
   Spinner,
 } from '@nextui-org/react';
 import debounce from 'lodash/debounce';
-import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { FC, useCallback, useRef, useState } from 'react';
 import { Section } from '../home/Section';
 import { IconSearch } from '../icons/IconSearch';
 
@@ -38,26 +38,28 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
       product,
       quantity: 1,
     });
-
-    console.log('product', product);
   };
 
-  const { loadingLabTests, labTests, refetchLabTests } = useGetLabTests({
-    name: searchStr,
-    pageSize: 10,
-    pageIndex: 1,
+  const {
+    loadingProducts: loadingLabTests,
+    products: labTests,
+    refetch: refetchLabTests,
+  } = useGetProducts({
+    limit: 12,
+    offset: 1,
+    categoryId: '17',
   });
 
-  const filteredTests = labTests?.data.filter(
+  const filteredTests = labTests?.products.filter(
     (test) => test.name?.toLowerCase().includes(searchStr?.toLowerCase() || '')
   );
 
-  useEffect(() => {
-    if (filteredTests?.length === 0) {
-      refetchLabTests();
-    }
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filteredTests]);
+  // useEffect(() => {
+  //   if (filteredTests && filteredTests?.length === 0) {
+  //     // refetchLabTests().then(() => {});
+  //   }
+  //   //eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [filteredTests]);
 
   const handleInputChange = useCallback(
     (value: string) => {
@@ -69,8 +71,8 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
   return (
     <div className='lg:grid lg:justify-center lg:pb-10 lg:pt-[55px]'>
       <Section className='bg-white'>
-        <Card shadow='none'>
-          <CardBody className='bg-primaryGreenLight'>
+        <div>
+          <div className='bg-primaryGreenLight'>
             <div className='grid w-full gap-4 p-1 md:p-4 lg:p-20'>
               <h1 className='w-full text-center text-3xl font-bold text-primaryGreenDark lg:text-4xl'>
                 Sign up for amazing health and lifestyle deals
@@ -116,7 +118,7 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
                     <CardBody>
                       {!loadingLabTests && filteredTests?.length === 0 ? (
                         <p className='text-body text-center'>
-                          No products found
+                          No lab tests found
                         </p>
                       ) : null}
 
@@ -135,19 +137,23 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
                               type='button'
                               onPress={() => handleProductClick(product)}
                               key={product.id}
-                              className='grid h-max grid-flow-col grid-cols-[1fr_8fr_3fr] items-center gap-3 p-2'
+                              className='group grid h-max grid-flow-col grid-cols-[1fr_8fr_3fr] items-center gap-3 p-2'
                             >
                               <Image
                                 width={60}
                                 height={60}
                                 className='max-h-14 object-contain'
                                 radius='md'
-                                src={product.imageInBinary}
+                                src={product.image_1024}
                                 alt={''}
                               />
 
                               <p className='text-body max-w-[200px] break-words text-start capitalize'>
                                 {product.name?.toLowerCase()}
+                              </p>
+
+                              <p className='hidden text-primaryGreenDark group-hover:block'>
+                                Click to Add to Cart
                               </p>
                             </Button>
                           ))}
@@ -158,8 +164,8 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
                 ) : null}
               </div>
             </div>
-          </CardBody>
-        </Card>
+          </div>
+        </div>
       </Section>
     </div>
   );

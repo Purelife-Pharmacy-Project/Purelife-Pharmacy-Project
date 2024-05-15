@@ -10,28 +10,21 @@ import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { TeleHealthServices } from '@/components/home/TeleHealthServices';
 import { Testimonials } from '@/components/home/Testimonials';
 import { WellnessBlogSection } from '@/components/home/WellnessBlogSection';
-import { AppNavbar } from '@/components/Navbar';
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { earnedClients } from '@/constants';
-import ProductService from '@/services/products';
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from '@tanstack/react-query';
 
 export default async function Home() {
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery({
-    queryKey: ['featured-products'],
-    queryFn: () =>
-      ProductService.getAllProducts({
-        active: true,
-        pageSize: 3,
-        pageIndex: 1,
-      }),
-  });
+  // const queryClient = new QueryClient();
+  //
+  // await queryClient.prefetchQuery({
+  //   queryKey: ['featured-products'],
+  //   queryFn: () =>
+  //     ProductService.getAllProducts({
+  //       active: true,
+  //       pageSize: 3,
+  //       pageIndex: 1,
+  //     }),
+  // });
 
   const transformationData = [
     {
@@ -50,13 +43,12 @@ export default async function Home() {
 
   return (
     <>
-      <AppNavbar background='primaryLight' />
       <main className='grid gap-6'>
         <HomePageHero
           title='Your one-stop for wellness and lifestyle.'
           description='Schedule laboratory tests, book vaccination appointments, and receive high-quality medical services from the convenience of wherever you are in Nigeria.'
-          ctaText='Start here'
-          ctaLink='#teleHealthServices'
+          ctaText='Shop All'
+          ctaLink='/shop'
         />
 
         <HomePartners />
@@ -67,10 +59,10 @@ export default async function Home() {
 
         <TeleHealthServices />
 
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <HomeShopAndOrder />
-          <FeaturedProducts />
-        </HydrationBoundary>
+        {/*<HydrationBoundary state={dehydrate(queryClient)}>*/}
+        <HomeShopAndOrder />
+        <FeaturedProducts />
+        {/*</HydrationBoundary>*/}
 
         <Testimonials />
 

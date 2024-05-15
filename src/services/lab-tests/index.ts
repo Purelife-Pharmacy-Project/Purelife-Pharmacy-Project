@@ -1,7 +1,7 @@
 import Api from '@/helpers/api';
 import { filteredQueryParams } from '@/helpers/utils';
-import { Product } from '../products/types';
-import { LabTest, LabTestQueryParams, LabTestType } from './types';
+import { Product, ProductType } from '../products/types';
+import { LabTest, LabTestQueryParams } from './types';
 
 export class LabTestService {
   private static LAB_TEST_API_BASE = '/LabTest';
@@ -18,7 +18,7 @@ export class LabTestService {
 
     const response = (await Api.get(
       `${this.LAB_TEST_API_BASE}/get-labtest?${queryParams}`
-    )) as unknown as { data: LabTestType[]; totalPage: number };
+    )) as unknown as { data: ProductType[]; totalPage: number };
 
     const tests = response.data?.map((test) => new LabTest(test));
 

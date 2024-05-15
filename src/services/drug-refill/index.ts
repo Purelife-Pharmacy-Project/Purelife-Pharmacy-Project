@@ -17,7 +17,7 @@ export class DrugRefillService {
       `${this.SUBSCRIPTION_TEMP_BASE}/get-sub-template`
     )) as unknown as SubscriptionTemp[];
 
-    return response;
+    return response || [];
   }
 
   public static async getSubscriptionsByCustomerId() {

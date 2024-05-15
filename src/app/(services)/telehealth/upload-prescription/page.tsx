@@ -1,12 +1,11 @@
-import { AppNavbar } from '@/components/Navbar';
-import { IconPill } from '@/components/icons/IconPill';
-import { IconDrugPrescription } from '@/components/icons/IconDrugPrescription';
-import { IconAddNotification } from '@/components/icons/IconAddNotification';
-import { HomeHero } from '@/components/home/HomeHero';
 import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
-import { DrugSubscriptionTabs } from '@/components/upload-prescription/DrugSubscriptionTabs';
-import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Footer } from '@/components/home/Footer';
+import { HomeHero } from '@/components/home/HomeHero';
+import { NewsLetterCard } from '@/components/home/NewsletterCard';
+import { IconAddNotification } from '@/components/icons/IconAddNotification';
+import { IconDrugPrescription } from '@/components/icons/IconDrugPrescription';
+import { IconPill } from '@/components/icons/IconPill';
+import { DrugSubscriptionTabs } from '@/components/upload-prescription/DrugSubscriptionTabs';
 
 export default function UploadPrescriptionPage() {
   const howItWorksData: {
@@ -31,7 +30,6 @@ export default function UploadPrescriptionPage() {
   ];
   return (
     <>
-      <AppNavbar background='primaryLight' />
       <main className='grid gap-6'>
         <HomeHero
           title="Get us Your Doctor's Prescription, and Get an On-time Refill"

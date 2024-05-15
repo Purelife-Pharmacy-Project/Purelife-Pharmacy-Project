@@ -1,7 +1,9 @@
+import { USER_TOKEN_KEY } from '@/constants';
 import UsersService from '@/services/user';
 import { LoginPayload, RegisterPayload } from '@/services/user/schema';
 import { UserType } from '@/services/user/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { deleteCookie } from 'cookies-next';
 import { toast } from 'sonner';
 
 export const useGetUser = () => {
@@ -142,5 +144,21 @@ export const useUpdateUserContactInfo = (
     user,
     isSuccess,
     isError,
+  };
+};
+
+export const useLogout = () => {
+  const queryClient = useQueryClient();
+
+  const logout = () => {
+    UsersService.logoutUser();
+    queryClient.removeQueries();
+    queryClient.clear();
+
+    deleteCookie(USER_TOKEN_KEY);
+  };
+
+  return {
+    logout,
   };
 };

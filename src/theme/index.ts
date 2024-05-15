@@ -63,6 +63,14 @@ export const selectBorderedGray: SlotsToClasses<SelectSlots> = {
   trigger: ['border border-gray-400 bg-white'],
 };
 
+export const selectBorderedGrayLight: SlotsToClasses<SelectSlots> = {
+  label: [
+    'text-content text-md group-data-[filled=true]:font-light data-[hover=true]:bg-white font-light',
+  ],
+  value: ['text-content capitalize'],
+  trigger: ['border border-gray-300 bg-white'],
+};
+
 export const inputDefault: SlotsToClasses<InputSlots> = {
   label: ['text-content text-md font-light'],
   inputWrapper: [

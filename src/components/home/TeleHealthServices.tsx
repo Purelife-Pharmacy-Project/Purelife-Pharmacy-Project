@@ -1,6 +1,6 @@
 'use client';
 import { teleHealthServices } from '@/constants';
-import { Button, Card, CardBody, Image, Link } from '@nextui-org/react';
+import { Button, Card, CardBody, Chip, Image, Link } from '@nextui-org/react';
 import { Section } from './Section';
 
 export const TeleHealthServices = () => {
@@ -24,12 +24,25 @@ export const TeleHealthServices = () => {
             {teleHealthServices.map((service, index) => (
               <Card key={index} shadow='none' radius='lg'>
                 <CardBody className='grid gap-5 bg-primaryLight p-6'>
-                  <div className='grid h-[104px] w-[104px] place-content-center rounded-full bg-white'>
-                    {service.icon({
-                      size: 48,
-                      color: 'primary',
-                    })}
+                  <div className='flex justify-between'>
+                    <div className='grid h-[104px] w-[104px] place-content-center rounded-full bg-white'>
+                      {service.icon({
+                        size: 48,
+                        color: 'primary',
+                      })}
+                    </div>
+
+                    {!service.isAvailable && (
+                      <Chip
+                        size='sm'
+                        className='text-xs font-light'
+                        color='primary'
+                      >
+                        Coming soon
+                      </Chip>
+                    )}
                   </div>
+
                   <div className='grid h-max gap-2'>
                     <p className='text-xl font-medium text-header-100'>
                       {service.title}
@@ -41,6 +54,7 @@ export const TeleHealthServices = () => {
                   <Button
                     as={Link}
                     href={service.url}
+                    isDisabled={!service.isAvailable}
                     variant='bordered'
                     radius='sm'
                     size='lg'
@@ -54,18 +68,18 @@ export const TeleHealthServices = () => {
             <Card
               shadow='none'
               radius='lg'
-              className='h-full w-full flex-grow bg-primaryLight pl-6 md:col-span-1 lg:col-span-2'
+              className='h-full w-full flex-grow bg-primaryLight md:col-span-2'
             >
-              <div className='grid h-full items-center lg:grid-flow-col  lg:grid-cols-2'>
+              <div className='relative grid h-full max-h-[384px] items-start p-4 xl:p-8'>
                 <CardBody>
-                  <div className='flex h-full flex-col justify-center gap-5'>
+                  <div className='flex h-full flex-col justify-center gap-6'>
                     <p className='w-full text-3xl font-extrabold text-header-100 lg:max-w-[384px]'>
                       Are you a healthcare provider interested in partnering
                       with us?
                     </p>
                     <Button
                       as={Link}
-                      href='#'
+                      href='/partner-with-us'
                       radius='full'
                       className='w-max px-10'
                       size='lg'
@@ -75,12 +89,12 @@ export const TeleHealthServices = () => {
                     </Button>
                   </div>
                 </CardBody>
-                <div className='flex h-full items-end justify-end'>
+                <div className='absolute bottom-0 right-2'>
                   <Image
-                    className='h-full w-full object-contain align-bottom'
+                    className='w-20 object-cover align-bottom sm:w-40 lg:w-auto'
                     src='/images/healthcare-doctor.png'
-                    width={630}
-                    height={630}
+                    width={300}
+                    height={150}
                     alt='telehealth partner'
                   />
                 </div>

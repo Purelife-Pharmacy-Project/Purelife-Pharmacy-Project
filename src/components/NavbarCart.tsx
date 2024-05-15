@@ -19,7 +19,12 @@ export const NavbarCart: FC<NavbarCartProps> = ({ isActive }) => {
       href='/cart'
     >
       <div className='flex items-center gap-2'>
-        <Badge content={cart?.length || 0} size='lg' color='primary'>
+        <Badge
+          isInvisible={!cart}
+          content={cart?.length || '0'}
+          size='lg'
+          color='primary'
+        >
           <IconCart
             size={24}
             color={isActive('/cart') ? 'primary' : 'header-100'}

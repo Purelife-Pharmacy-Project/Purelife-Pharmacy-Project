@@ -1,4 +1,3 @@
-import { AppNavbar } from '@/components/Navbar';
 import { Footer } from '@/components/home/Footer';
 import { Section } from '@/components/home/Section';
 import { MyAccountTabs } from '@/components/my-account/MyAccountTabs';
@@ -10,7 +9,6 @@ export default function MyAccountLayout({
 }) {
   return (
     <>
-      <AppNavbar />
       <main className='grid gap-6'>
         <div className='mt-20 grid justify-center bg-primaryLight py-6'>
           <Section className='bg-primaryLight'>

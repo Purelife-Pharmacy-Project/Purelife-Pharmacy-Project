@@ -1,4 +1,6 @@
-import { useGetProducts } from '@/hooks';
+import { IconFilter } from '@/components/icons/IconFilter';
+import { filteredCategories } from '@/helpers/utils';
+import { useGetCategories, useQueryParams } from '@/hooks';
 import {
   Button,
   Modal,
@@ -6,40 +8,48 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Radio,
+  RadioGroup,
   useDisclosure,
 } from '@nextui-org/react';
+import { usePathname } from 'next/navigation';
 import { FC } from 'react';
 import { ProductsPriceRange } from './ProductsPriceRange';
 
 type MobileProductsByPriceProps = {
-  categoryId: string;
-  searchString: string;
-  minPrice: string | undefined;
-  maxPrice: string | undefined;
+  loadingProducts?: boolean;
 };
 
 export const MobileProductsByPrice: FC<MobileProductsByPriceProps> = ({
-  categoryId,
-  searchString,
-  minPrice,
-  maxPrice,
+  loadingProducts,
 }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { loadingCategories, categories } = useGetCategories();
+  const { setQuery, removeQuery } = useQueryParams();
+  const currentPath = usePathname();
 
-  const { refetch: refetchProducts, loadingProducts } = useGetProducts(
-    categoryId as string,
-    searchString,
-    undefined,
-    undefined,
-    true,
-    undefined,
-    minPrice,
-    maxPrice
-  );
+  const allowedCategories = ['health', 'beauty', 'supermarket', 'general'];
+  const isShopPage = currentPath === '/shop';
+
+  const handleSelectCategory = (category: string) => {
+    if (category === 'all') {
+      removeQuery(['category']);
+    } else {
+      setQuery({ category: category?.toLowerCase() });
+    }
+  };
 
   return (
     <>
-      <Button fullWidth variant='bordered' onPress={onOpen}>
+      <Button
+        size={'lg'}
+        radius={'full'}
+        isDisabled={loadingCategories || !categories || loadingProducts}
+        className={'ml-auto w-full border border-gray-300'}
+        variant={'bordered'}
+        onPress={onOpen}
+        endContent={<IconFilter color={'header-100'} size={24} />}
+      >
         Filter
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -50,14 +60,29 @@ export const MobileProductsByPrice: FC<MobileProductsByPriceProps> = ({
                 Filter by
               </ModalHeader>
               <ModalBody className='mb-4'>
-                <ProductsPriceRange
-                  loading={loadingProducts}
-                  onRefetch={refetchProducts}
-                />
+                <div className='grid gap-4'>
+                  <ProductsPriceRange />
+
+                  {isShopPage && (
+                    <RadioGroup
+                      label='Select category'
+                      onChange={(e) => handleSelectCategory(e.target.value)}
+                    >
+                      {filteredCategories(categories, allowedCategories)?.map(
+                        (category, index) => (
+                          <Radio key={index} value={category.name}>
+                            {category.name?.toLowerCase()}
+                          </Radio>
+                        )
+                      )}
+                    </RadioGroup>
+                  )}
+                </div>
               </ModalBody>
               <ModalFooter>
                 <Button
                   color='primary'
+                  fullWidth
                   onPress={() => {
                     onClose();
                   }}

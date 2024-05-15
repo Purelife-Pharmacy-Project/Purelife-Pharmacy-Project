@@ -82,11 +82,12 @@ export const DrugRefillModal: FC<DrugRefillModalProps> = ({
               </div>
             </div>
 
-            <div className='my-5 flex justify-end'>
+            <div className='my-5 flex lg:justify-end'>
               <div className='flex justify-center'>
                 <Button
                   radius='full'
                   size='lg'
+                  fullWidth
                   isDisabled={!product}
                   onPress={() => {
                     handleAddSubscription();

@@ -1,5 +1,5 @@
 'use client';
-import { Button, Image } from '@nextui-org/react';
+import { Button, Image, Link } from '@nextui-org/react';
 import { FC } from 'react';
 import { IconShopAndOrderRound } from '../icons/IconShopAndOrderRound';
 import { IconTellehealthRound } from '../icons/IconTellehealthRound';
@@ -17,14 +17,14 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
   ctaText = 'Start here',
   ctaLink = '#',
 }) => {
-  const ctaAction = () =>
-    document
-      .querySelector(ctaLink)
-      ?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });
+  // const ctaAction = () =>
+  //   document
+  //     .querySelector(ctaLink)
+  //     ?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });
 
   return (
-    <div className='h-[calc(100vh-260px)] w-full items-center bg-primaryLight xl:grid xl:justify-center'>
-      <Section className='relative flex h-full w-full flex-col items-center justify-between  overflow-x-visible bg-primaryLight lg:flex lg:flex-row'>
+    <div className='w-full items-center bg-primaryLight md:h-[calc(100vh-260px)] xl:grid xl:justify-center'>
+      <Section className='relative flex h-full w-full flex-col items-center justify-between overflow-x-visible bg-primaryLight lg:flex lg:flex-row'>
         <div className='mt-20 flex w-full flex-col justify-start gap-6 lg:mt-0 lg:justify-center'>
           <h1 className='mx-auto w-4/5  text-center text-2xl font-bold  text-header-100 sm:max-w-[300px] md:max-w-[250px] lg:mx-0 lg:max-w-[530px] lg:text-start lg:text-5xl'>
             {title}
@@ -36,7 +36,8 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
           <div className='flex w-full justify-center lg:w-max lg:justify-start'>
             <Button
               radius='full'
-              onPress={ctaAction}
+              as={Link}
+              href={ctaLink}
               className='px-12 py-6'
               color='primary'
               size='lg'
@@ -54,19 +55,25 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
             src='/images/joyful-caring-couple.png'
             alt='charming joyful youth couple'
           />
-          <div className='absolute bottom-10 left-[-7px] z-10 flex items-center gap-3 rounded-md bg-white p-1.5 shadow-lg md:bottom-[105px] lg:px-6 lg:py-2.5'>
+          <Link
+            href='/telehealth'
+            className='absolute bottom-10 left-[-7px] z-10 flex items-center gap-3 rounded-md bg-white p-1.5 shadow-lg md:bottom-[105px] lg:px-6 lg:py-2.5'
+          >
             <IconTellehealthRound />
             <p className='text-xs font-bold text-header-100 md:text-sm'>
               TeleHealth
             </p>
-          </div>
+          </Link>
 
-          <div className='absolute bottom-2 right-[-7px] z-10 flex items-center gap-3 rounded-md bg-white p-1.5 shadow-lg md:bottom-[25px] lg:px-6 lg:py-2.5'>
+          <Link
+            href='/telehealth/shop-and-order'
+            className='absolute bottom-2 right-[-7px] z-10 flex items-center gap-3 rounded-md bg-white p-1.5 shadow-lg md:bottom-[25px] lg:px-6 lg:py-2.5'
+          >
             <IconShopAndOrderRound />
             <p className='text-xs font-bold text-header-100 md:text-sm'>
               Shop & Order
             </p>
-          </div>
+          </Link>
         </div>
       </Section>
     </div>

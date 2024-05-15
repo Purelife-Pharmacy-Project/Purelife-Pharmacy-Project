@@ -58,16 +58,16 @@ export const CartItemDetails = () => {
                 <Image
                   alt='product image'
                   className='max-h-80 object-cover'
-                  src={product?.imageInBinary}
+                  src={product?.image_1024}
                 />
               </div>
             </CardBody>
           </Card>
-          <Card shadow='none' className='w-full'>
+          <Card shadow='none' className='h-full w-full'>
             <CardBody>
-              <div className='grid gap-4'>
-                <h1 className='text-2xl font-semibold text-header-100'>
-                  {product?.name}
+              <div className='grid h-full gap-2'>
+                <h1 className='text-2xl font-semibold capitalize text-header-100'>
+                  {product?.name?.toLowerCase()}
                 </h1>
                 <p className='text-lg font-light text-header-100'>
                   {removeHtmlTags(product?.description)}
@@ -115,6 +115,18 @@ export const CartItemDetails = () => {
                     Add to Cart
                   </Button>
                 )}
+
+                <Button
+                  onPress={() => router.back()}
+                  radius='md'
+                  className={'self-end'}
+                  size={'lg'}
+                  color='primary'
+                  variant='bordered'
+                  fullWidth
+                >
+                  Continue Shopping
+                </Button>
               </div>
             </CardBody>
           </Card>

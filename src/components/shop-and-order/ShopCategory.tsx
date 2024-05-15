@@ -53,13 +53,13 @@ export const ShopCategory = () => {
           className={category.bgColor}
           radius='lg'
         >
-          <div className='flex items-center justify-between gap-4'>
+          <div className='flex flex-col-reverse items-center justify-center gap-4 lg:flex-row lg:justify-between'>
             <CardBody className='p-6 lg:p-20'>
               <div className='flex flex-col gap-4'>
-                <h1 className='text-center text-4xl font-bold text-header-100 lg:text-start'>
+                <h1 className='text-center text-2xl font-bold text-header-100 lg:text-start lg:text-4xl'>
                   {category.title}
                 </h1>
-                <p className='text-center font-light text-content lg:max-w-[353px] lg:text-start lg:text-lg'>
+                <p className='text-center text-sm font-light text-content lg:max-w-[353px] lg:text-start lg:text-lg'>
                   {category.description}
                 </p>
                 <Button
@@ -77,12 +77,10 @@ export const ShopCategory = () => {
                 </Button>
               </div>
             </CardBody>
-            <div className='mr-20 hidden justify-center lg:flex'>
+            <div className='flex justify-center lg:mr-20'>
               <Image
-                width={600}
-                height={600}
                 src={category.image}
-                className='object-cover'
+                className='mx-auto h-60 w-60 object-contain lg:w-[600px]'
                 alt='image'
               />
             </div>

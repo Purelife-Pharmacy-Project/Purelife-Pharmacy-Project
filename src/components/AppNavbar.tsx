@@ -1,8 +1,8 @@
 'use client';
-import { inputDefault } from '@/theme';
+import { NavbarSearch } from '@/components/NavbarSearch';
+import { useLogout } from '@/hooks';
 import {
   Button,
-  Input,
   Link,
   Navbar,
   NavbarBrand,
@@ -17,10 +17,9 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { NavbarCart } from './NavbarCart';
 import { NavbarUser } from './NavbarUser';
-import { IconSearch } from './icons/IconSearch';
 
 export const AppNavbar = ({
-  background = 'bg-inherit',
+  background = 'inherit',
   disabled = false,
 }: {
   background?: string;
@@ -28,9 +27,25 @@ export const AppNavbar = ({
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const pathName = usePathname();
+  const currentPath = usePathname();
 
-  const isActive = (path: string) => path === pathName;
+  const isActive = (path: string) => path === currentPath;
+
+  const { logout } = useLogout();
+
+  const getNavbarBackground = () => {
+    switch (currentPath) {
+      case '/sign-in':
+        return '';
+      case '/create-account':
+        return '';
+      case '/cart':
+        return '';
+
+      default:
+        return 'bg-primaryLight';
+    }
+  };
 
   const menuItems = [
     {
@@ -43,7 +58,7 @@ export const AppNavbar = ({
     },
     {
       name: 'Partner with us',
-      path: '#',
+      path: '/partner-with-us',
     },
     {
       name: 'Sign in',
@@ -58,7 +73,7 @@ export const AppNavbar = ({
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
       isBlurred={disabled}
-      className={`py-4 text-foreground lg:pb-2 bg-${background}`}
+      className={`py-4 text-foreground lg:pb-2 ${getNavbarBackground()}`}
       maxWidth='xl'
     >
       <NavbarContent
@@ -77,6 +92,20 @@ export const AppNavbar = ({
             />
           </Link>
         </NavbarBrand>
+
+        {/* Silent Logout Button */}
+        <button
+          type='button'
+          role='button'
+          id='logout-btn'
+          className=' pointer-events-none invisible absolute z-0'
+          onClick={() => {
+            console.log('hello');
+            logout();
+          }}
+        >
+          hello
+        </button>
 
         <div className='hidden md:gap-[22px] lg:flex'>
           <NavbarItem className='text-lg leading-[27px] text-header-100'>
@@ -106,7 +135,7 @@ export const AppNavbar = ({
           <NavbarItem className='text-lg leading-[27px] text-header-100'>
             <Link
               color='foreground'
-              href='#'
+              href='/partner-with-us'
               className={
                 isActive('/partner-with-us') ? 'font-medium text-primary' : ''
               }
@@ -118,19 +147,7 @@ export const AppNavbar = ({
       </NavbarContent>
 
       <NavbarContent justify='center' className='hidden w-full lg:flex'>
-        <Input
-          radius='full'
-          color='default'
-          classNames={inputDefault}
-          size='lg'
-          type='text'
-          placeholder='Search Purelife'
-          endContent={
-            <div className='rounded-full bg-primaryLight p-2'>
-              <IconSearch color='header-100' />
-            </div>
-          }
-        />
+        <NavbarSearch />
       </NavbarContent>
 
       <NavbarContent

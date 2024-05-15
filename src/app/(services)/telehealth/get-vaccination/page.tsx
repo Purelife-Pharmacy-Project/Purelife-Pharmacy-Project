@@ -1,4 +1,3 @@
-import { AppNavbar } from '@/components/Navbar';
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
 import { VaccinationProducts } from '@/components/get-vaccination/VaccinationProducts';
@@ -34,7 +33,6 @@ export default function GetVaccinationPage() {
 
   return (
     <>
-      <AppNavbar background='primaryLight' />
       <main className='grid gap-20'>
         <div className='grid justify-center bg-primaryLight'>
           <Section className='bg-primaryLight'>
@@ -47,7 +45,7 @@ export default function GetVaccinationPage() {
           </Section>
         </div>
 
-        <div id='products' className='invisible'></div>
+        <div id='products' className='hidden'></div>
 
         <VaccinationProducts />
 

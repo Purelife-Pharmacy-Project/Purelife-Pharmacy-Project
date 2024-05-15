@@ -1,25 +1,31 @@
-import { toNaira } from '@/helpers/utils';
+import { removeHtmlTags, toNaira } from '@/helpers/utils';
 import { Blob } from 'buffer';
 
 export type ProductQueryParams = {
-  categoryId?: string;
+  // name?: string;
+  // pageSize?: number;
+  // pageIndex?: number;
+  // active?: boolean;
+  // productId?: string;
+  // manufacturerId?: string;
+  // minPrice?: string;
+  // maxPrice?: string;
+  isPublished?: boolean;
+  CategoryId?: string;
+  MinListPrice?: number;
+  MaxListPrice?: number;
+  Limit?: number;
+  offset?: number;
   name?: string;
-  pageSize?: number;
-  pageIndex?: number;
-  active?: boolean;
-  productId?: string;
-  manufacturerId?: string;
-  minPrice?: string;
-  maxPrice?: string;
 };
 
 export type ProductType = {
   id: number;
   name: string;
-  price: number;
+  lst_price: number;
   description: string;
-  imageInBinary: Blob;
-  categoryId: string;
+  image_1024: Blob;
+  categ_id: [number, string];
   amount?: number;
   canBePurchased: boolean;
   canBeSold: boolean;
@@ -29,27 +35,24 @@ export type ProductType = {
 export class Product {
   public id: number;
   public name: string;
-  public price: number;
+  public image_1024: string;
+  public lst_price: number;
   public description: string;
-  public categoryId: string;
-  public imageInBinary: string;
+  public categ_id: string;
   public amount: string;
-  public canBePurchased: boolean;
-  public canBeSold: boolean;
   public quantity?: number;
 
   constructor(product: ProductType) {
     this.id = product.id;
     this.name = product.name;
-    this.price = product.price;
-    this.categoryId = product.categoryId;
-    this.description = product.description || '';
-    this.imageInBinary = product.imageInBinary
-      ? `data:image/png;base64,${product.imageInBinary}`
-      : '/images/care-package.png';
-    this.amount = toNaira(this.price);
-    this.canBePurchased = product.canBePurchased;
-    this.canBeSold = product.canBeSold;
-    this.quantity = Math.max(0, product.quantity as number) || 1;
+    this.lst_price = product.lst_price || 0;
+    this.categ_id = String(product.categ_id[0]);
+    this.description = removeHtmlTags(product.description) || '';
+    this.image_1024 = product.image_1024
+      ? `data:image/png;base64,${product.image_1024}`
+      : '/images/purelife-fallback.png';
+    this.amount = toNaira(this.lst_price);
+    this.quantity = 1000000000000;
+    // this.quantity = Math.max(0, product.quantity as number) || 1;
   }
 }

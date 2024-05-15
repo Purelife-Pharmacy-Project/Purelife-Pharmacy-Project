@@ -50,7 +50,7 @@ export const CreateAccountForm = () => {
         label='Full Name'
         type='text'
         autoComplete='new-name'
-        errorMessage={errors.email?.message}
+        errorMessage={errors.name?.message}
         classNames={inputDefault}
         {...register('name')}
       />
@@ -70,7 +70,7 @@ export const CreateAccountForm = () => {
         classNames={inputDefault}
         {...register('password')}
         endContent={
-          <button className='px-2' onClick={toggleVisibility}>
+          <button type='button' className='px-2' onClick={toggleVisibility}>
             {' '}
             {passwordIsVisible ? (
               <IconEyeClose color='content' />

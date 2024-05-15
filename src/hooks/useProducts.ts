@@ -10,9 +10,8 @@ export const useGetFeaturedProducts = () => {
     queryKey: ['featured-products'],
     queryFn: () =>
       ProductService.getAllProducts({
-        active: true,
-        pageSize: 3,
-        pageIndex: 1,
+        Limit: 3,
+        offset: 1,
       }),
     refetchOnWindowFocus: false,
   });
@@ -26,9 +25,9 @@ export const useGetFeaturedProducts = () => {
 
 export const useGetProductsByCategoryId = (params: {
   categoryId?: string;
-  pageSize?: number;
+  limit?: number;
   searchStr?: string;
-  pageIndex?: number;
+  offset?: number;
 }) => {
   const {
     data: products,
@@ -40,14 +39,14 @@ export const useGetProductsByCategoryId = (params: {
       'products-by-category',
       params.categoryId,
       params.searchStr,
-      params.pageSize,
-      params.pageIndex,
+      params.limit,
+      params.offset,
     ],
     queryFn: () =>
       ProductService.getAllProducts({
-        categoryId: params.categoryId,
-        pageSize: params.pageSize,
-        pageIndex: params.pageIndex,
+        CategoryId: params.categoryId,
+        Limit: params.limit,
+        offset: params.offset,
         name: params.searchStr,
       }),
     refetchOnWindowFocus: false,
@@ -62,23 +61,30 @@ export const useGetProductsByCategoryId = (params: {
   };
 };
 
-export const useGetProducts = (
-  categoryId?: string,
-  name?: string,
-  pageSize?: number,
-  pageIndex?: number,
-  active?: boolean,
-  productId?: string,
-  minPrice?: string,
-  maxPrice?: string
-) => {
-  const queryKeys = ['products'];
-  if (categoryId) queryKeys.push(categoryId);
-  if (name) queryKeys.push(name);
-  if (minPrice) queryKeys.push(minPrice);
-  if (maxPrice) queryKeys.push(maxPrice);
-  if (pageIndex) queryKeys.push(String(pageIndex));
-  if (pageSize) queryKeys.push(String(pageSize));
+export const useGetProducts = ({
+  categoryId,
+  name,
+  limit,
+  offset,
+  MinListPrice,
+  MaxListPrice,
+}: {
+  categoryId?: string;
+  name?: string;
+  limit?: number;
+  offset?: number;
+  MinListPrice?: number;
+  MaxListPrice?: number;
+} = {}) => {
+  const queryKeys = [
+    'products',
+    categoryId,
+    name,
+    MinListPrice,
+    MaxListPrice,
+    String(offset),
+    String(limit),
+  ].filter(Boolean);
 
   const {
     data: products,
@@ -92,16 +98,20 @@ export const useGetProducts = (
     queryKey: queryKeys,
     queryFn: () =>
       ProductService.getAllProducts({
-        categoryId,
+        CategoryId: categoryId,
         name,
-        pageSize,
-        pageIndex,
-        active,
-        productId,
-        minPrice,
-        maxPrice,
+        Limit: limit,
+        offset,
+        MinListPrice,
+        MaxListPrice,
       }),
-    enabled: queryKeys.length > 1,
+    enabled:
+      !!name ||
+      !!categoryId ||
+      !!limit ||
+      !!offset ||
+      !!MinListPrice ||
+      !!MinListPrice,
     refetchOnWindowFocus: false,
   });
 

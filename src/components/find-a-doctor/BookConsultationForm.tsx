@@ -34,7 +34,6 @@ import { FormEvent, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { twMerge } from 'tailwind-merge';
 import { BillingAndPaymentModal } from './modals/BillingAndPaymentModal';
 
 export const BookConsultationForm = () => {
@@ -93,6 +92,7 @@ export const BookConsultationForm = () => {
 
   const weekend = (date: Date | string) => new Date() < date;
   const minDate = new Date();
+  const [isBooked, setIsBooked] = useState(false);
 
   const genericAnswers: BooleanEnumType[] = [
     {
@@ -171,11 +171,11 @@ export const BookConsultationForm = () => {
         ).value,
       };
 
-      submitConsultDoctorForm(payload);
+      if (isBooked) {
+        submitConsultDoctorForm(payload);
+      }
     }
   };
-
-  const [isBooked, setIsBooked] = useState(false);
 
   const combineDateAndTime = (date: string, time: string): string => {
     const [hours, minutes, period] = time.match(/\d+|AM|PM/g) as string[];
@@ -290,10 +290,7 @@ export const BookConsultationForm = () => {
         </p>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className={twMerge(
-            'grid gap-6 md:max-w-[80%]',
-            isBooked ? '' : 'pointer-events-none cursor-not-allowed blur-sm'
-          )}
+          className='grid gap-6 md:max-w-[80%]'
         >
           <div className='flex flex-col gap-4 md:flex-row'>
             <Input
@@ -640,6 +637,7 @@ export const BookConsultationForm = () => {
             <Button
               color='primary'
               type='submit'
+              isDisabled={!isBooked}
               isLoading={isSubmittingConsultDoctorForm}
               radius='full'
               size='lg'
