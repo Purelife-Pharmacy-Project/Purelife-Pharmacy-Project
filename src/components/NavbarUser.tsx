@@ -1,6 +1,6 @@
 'use client';
 
-import { useCartStore, useGetUser } from '@/hooks';
+import { useCartStore, useGetPartner } from '@/hooks';
 import UsersService from '@/services/user';
 import {
   Avatar,
@@ -21,7 +21,7 @@ type NavbarUserProps = {
 };
 
 export const NavbarUser: FC<NavbarUserProps> = ({ isActive }) => {
-  const { user } = useGetUser();
+  const { partner } = useGetPartner();
   const store = useCartStore();
 
   const queryClient = useQueryClient();
@@ -35,7 +35,7 @@ export const NavbarUser: FC<NavbarUserProps> = ({ isActive }) => {
   };
   return (
     <>
-      {user ? (
+      {partner ? (
         <Dropdown showArrow>
           <DropdownTrigger>
             <Button variant='light'>
@@ -43,7 +43,7 @@ export const NavbarUser: FC<NavbarUserProps> = ({ isActive }) => {
                 size='sm'
                 showFallback
                 src={''}
-                name={user && user.name[0]}
+                name={partner && partner.name.substring(0, 1)}
                 classNames={{
                   base: 'bg-primary/80',
                   icon: 'text-primary',
@@ -60,7 +60,7 @@ export const NavbarUser: FC<NavbarUserProps> = ({ isActive }) => {
               color='default'
               key='profile'
             >
-              {user?.name}
+              {partner && partner.name}
             </DropdownItem>
             <DropdownSection>
               <DropdownItem

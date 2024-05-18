@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import isMobilePhone from 'validator/es/lib/isMobilePhone';
 
 // const passwordRegex =
 //   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.]).{8,}$/;
@@ -32,6 +33,16 @@ export const registerValidationSchema = z.object({
   //   'Password should have 8 characters, have at least one uppercase letter, one lowercase letter, one number, and one special character'
   // ),
   name: z.string().min(1).max(100),
+  phoneNumber: z
+    .string()
+    .refine(isMobilePhone, 'Please enter a valid phone number'),
+  address: z
+    .string()
+    .max(255, { message: 'Password must be less than 255 characters' }),
+  stateId: z.number(),
+  cityId: z.number(),
+  companyType: z.string().default('person'),
+  countryId: z.number().default(163),
 });
 
 export const changePasswordValidationSchema = z.object({

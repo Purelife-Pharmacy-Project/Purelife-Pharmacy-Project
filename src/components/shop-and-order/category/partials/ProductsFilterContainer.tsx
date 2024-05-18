@@ -2,6 +2,7 @@
 import { Card, CardBody } from '@nextui-org/react';
 import { FC } from 'react';
 import { ProductsPriceRange } from './ProductsPriceRange';
+import { ProductSortDropdown } from '@/components/shop-and-order/category/partials/ProductsSortDropdown';
 
 type ProductsFilterContainerProps = {};
 
@@ -17,6 +18,8 @@ export const ProductsFilterContainer: FC<
           </h1>
 
           <div className='grid gap-4'>
+            <ProductSortDropdown />
+
             <ProductsPriceRange />
           </div>
         </CardBody>

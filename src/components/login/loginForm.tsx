@@ -50,7 +50,9 @@ export const LoginForm = () => {
   });
 
   const onSubmit: SubmitHandler<LoginPayload> = (data) => {
-    loginUser(data);
+    try {
+      loginUser(data);
+    } catch (e) {}
   };
 
   return (

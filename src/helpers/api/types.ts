@@ -1,5 +1,11 @@
 import { AxiosRequestConfig } from 'axios';
 
+export type OdooResponseType<T> = {
+  id: string | null;
+  result: T | false;
+  error: string | null;
+};
+
 export interface IApiPaginateResponse {
   itemsPerPage: number;
   page: number;

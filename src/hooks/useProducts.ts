@@ -1,5 +1,5 @@
 import ProductService from '@/services/products';
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 export const useGetFeaturedProducts = () => {
   const {
@@ -63,28 +63,26 @@ export const useGetProductsByCategoryId = (params: {
 
 export const useGetProducts = ({
   categoryId,
-  name,
   limit,
-  offset,
   MinListPrice,
   MaxListPrice,
+  isPublished,
 }: {
   categoryId?: string;
-  name?: string;
   limit?: number;
   offset?: number;
   MinListPrice?: number;
   MaxListPrice?: number;
+  isPublished?: boolean;
 } = {}) => {
   const queryKeys = [
     'products',
     categoryId,
-    name,
     MinListPrice,
     MaxListPrice,
-    String(offset),
     String(limit),
-  ].filter(Boolean);
+    isPublished,
+  ];
 
   const {
     data: products,
@@ -93,26 +91,27 @@ export const useGetProducts = ({
     isSuccess,
     isError,
     refetch,
-  } = useQuery({
-    // eslint-disable-next-line @tanstack/query/exhaustive-deps
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+  } = useInfiniteQuery({
     queryKey: queryKeys,
-    queryFn: () =>
-      ProductService.getAllProducts({
+    queryFn: async ({ pageParam }) => {
+      return await ProductService.getAllProducts({
         CategoryId: categoryId,
-        name,
         Limit: limit,
-        offset,
+        offset: pageParam,
         MinListPrice,
         MaxListPrice,
-      }),
-    enabled:
-      !!name ||
-      !!categoryId ||
-      !!limit ||
-      !!offset ||
-      !!MinListPrice ||
-      !!MinListPrice,
+        isPublished,
+      });
+    },
+    enabled: !!categoryId || !!limit || !!MinListPrice || !!MaxListPrice,
     refetchOnWindowFocus: false,
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.length ? allPages.length * lastPage.length : undefined;
+    },
   });
 
   return {
@@ -122,6 +121,65 @@ export const useGetProducts = ({
     refetch,
     isSuccess,
     isError,
+    fetchProductNextPage: fetchNextPage,
+    isFetchingProductNextPage: isFetchingNextPage,
+    productHasNextPage: hasNextPage,
+  };
+};
+
+export const useSearchProducts = ({
+  searchQuery,
+  offset,
+  limit,
+}: {
+  searchQuery?: string;
+  offset: number;
+  limit: number;
+}) => {
+  const queryKeys = [
+    'search-products',
+    String(offset),
+    String(limit),
+    searchQuery,
+  ].filter(Boolean);
+
+  const {
+    data: products,
+    isLoading: loadingFilteredProducts,
+    isRefetching,
+    isSuccess,
+    isError,
+    refetch,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+  } = useInfiniteQuery({
+    // eslint-disable-next-line @tanstack/query/exhaustive-deps
+    queryKey: queryKeys,
+    queryFn: ({ pageParam }) =>
+      ProductService.searchProducts({
+        searchQuery,
+        Limit: limit,
+        offset: pageParam,
+      }),
+    enabled: !!searchQuery?.length && (!!limit || !!offset),
+    refetchOnWindowFocus: false,
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.length ? allPages.length * lastPage.length : undefined;
+    },
+  });
+
+  return {
+    filteredProducts: products,
+    loadingFilteredProducts,
+    isRefetching,
+    refetch,
+    isSuccess,
+    isError,
+    fetchFilteredProductNextPage: fetchNextPage,
+    isFetchingFilteredProductNextPage: isFetchingNextPage,
+    filteredProductHasNextPage: hasNextPage,
   };
 };
 

@@ -1,14 +1,14 @@
 'use client';
-import { fromNaira, removeHtmlTags, toNaira } from '@/helpers/utils';
+import { fromNaira, toNaira } from '@/helpers/utils';
 import {
   useCartStore,
   useCreateOrder,
-  useGetDeliveryAddresses,
-  useGetUser,
+  useGetPartner,
+  useGetProducts,
 } from '@/hooks';
 import { useStore } from '@/hooks/store';
 import { CreateOrderPayload, OrderProduct } from '@/services/orders/types';
-import { ProductType } from '@/services/products/types';
+import { Product } from '@/services/products/types';
 import { inputBorderedRegular, selectBordered } from '@/theme';
 import {
   Button,
@@ -23,10 +23,11 @@ import {
   SelectItem,
 } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { Paystack, PaystackSuccessResponse } from '../paystack';
 import { BillingAddressForm } from './BillingAddressForm';
+import { DELIVERY_LOCATIONS_CATEGORY_ID } from '@/constants';
 
 type BillingPaymentCardProps = {
   shouldFetchAddresses?: boolean;
@@ -42,7 +43,9 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
   onPaymentSuccess,
 }) => {
   const summary = useStore(useCartStore, (state) => state)?.summary;
-  const { user } = useGetUser();
+  const deliveryDetails = useStore(useCartStore, (state) => state)
+    ?.deliveryDetails;
+  const { partner } = useGetPartner();
   const cart = useStore(useCartStore, (state) => state)?.cart;
   const router = useRouter();
 
@@ -62,33 +65,44 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
     'card'
   );
   const [deliveryAddress, setDeliveryAddress] = useState<string>('');
-  const { addresses, loadingAddresses } =
-    useGetDeliveryAddresses(shouldFetchAddresses);
+  const { products, loadingProducts: loadingAddresses } = useGetProducts({
+    categoryId: DELIVERY_LOCATIONS_CATEGORY_ID,
+    isPublished: false,
+    limit: 10000000,
+  });
+
+  const addresses = useMemo(() => {
+    return (
+      products?.pages.reduce((acc, page) => {
+        return [...acc, ...page];
+      }, []) || []
+    );
+  }, [products]);
+
   const [selectedAddress, setSelectedAddress] = useState<
-    Partial<ProductType> | undefined
+    Partial<Product> | undefined
   >(undefined);
   const [deliveryMethod, setDeliveryMethod] = useState<
     DeliveryMethod | undefined
   >(undefined);
   const [phoneNumber, setPhoneNumber] = useState<string>(
-    user?.phoneNumber || ''
+    partner?.phoneNumber || ''
   );
 
-  const { createOrder, loadingCreateOrder } = useCreateOrder(() => {
-    clearCart();
-    toast.success('Order created successfully');
-    router.push('/order-status');
-  });
+  const { createOrder, loadingCreateOrder, successCreateOrder, data } =
+    useCreateOrder(() => {
+      clearCart();
+      toast.success('Order created successfully');
+      router.push('/order-status');
+    });
 
   const handlePaymentSuccess = (response: PaystackSuccessResponse) => {
     if (!response) return;
 
     const cartProducts = cart?.map((product) => ({
       productId: product.product.id,
-      quantity: product.quantity,
-      description: removeHtmlTags(product.product.description),
-      priceUnit: product.product.lst_price,
-    })) as OrderProduct[];
+      productQuantity: product.quantity,
+    }));
 
     const deliveryProduct = {
       productId: selectedAddress?.id as number,
@@ -98,8 +112,48 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
     } as OrderProduct;
 
     const payload: CreateOrderPayload = {
-      billingAddress: deliveryAddress,
-      products: [...cartProducts, deliveryProduct],
+      partnerId: +(
+        deliveryDetails?.id ||
+        process.env.NEXT_PUBLIC_GUEST_ID ||
+        '0'
+      ),
+      address: deliveryDetails?.contactAddress || '',
+      email: deliveryDetails?.email || '',
+      phoneNumber: deliveryDetails?.phoneNumber || '',
+      name: deliveryDetails?.name || '',
+      products: cartProducts || [],
+    };
+
+    createOrder(payload);
+  };
+
+  const handleCreateOrder = () => {
+    const cartProducts = cart?.map((product) => ({
+      productId: product.product.id,
+      productQuantity: product.quantity,
+    }));
+
+    const deliveryProduct = {
+      productId: selectedAddress?.id as number,
+      productQuantity: 1,
+      description: `${selectedAddress?.name} - ${phoneNumber}`,
+      priceUnit: selectedAddress?.lst_price,
+    };
+
+    const payload: CreateOrderPayload = {
+      partnerId: +(
+        deliveryDetails?.id ||
+        process.env.NEXT_PUBLIC_GUEST_ID ||
+        '0'
+      ),
+      address:
+        deliveryProduct.productId === 1115
+          ? ''
+          : deliveryDetails?.contactAddress || '',
+      email: deliveryDetails?.email || '',
+      phoneNumber: deliveryDetails?.phoneNumber || '',
+      name: deliveryDetails?.name || '',
+      products: [...(cartProducts || []), deliveryProduct],
     };
 
     createOrder(payload);
@@ -108,10 +162,11 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
   const handleSelectBillingAddress = (value: string) => {
     setDeliveryAddress(value);
     const address = addresses?.find((address) => address.id === Number(value));
-
-    setSelectedAddress(address);
-    toast.info(`Delivery fee: ${toNaira(Number(address?.lst_price))} added`);
-    setDeliveryFee(address?.lst_price as number);
+    if (address) {
+      setSelectedAddress(address);
+      toast.info(`Delivery fee: ${toNaira(Number(address?.lst_price))} added`);
+      setDeliveryFee(address?.lst_price as number);
+    }
   };
 
   // pick up station
@@ -147,6 +202,12 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
       router.push('/cart');
     }
   }, [cart, router]);
+
+  useEffect(() => {
+    if (successCreateOrder && data) {
+      window.location.href = data.authorization_url;
+    }
+  }, [successCreateOrder, data]);
 
   return (
     <Card shadow='none' className='w-full bg-primaryLight'>
@@ -212,6 +273,7 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
                 addresses={addresses!}
                 loadingAddresses={loadingAddresses}
                 onSelect={handleSelectBillingAddress}
+                selectedAddress={selectedAddress}
               />
             ) : null}
             <div className='flex justify-between pb-3'>
@@ -250,20 +312,13 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
             size='md'
             isLoading={loadingCreateOrder}
             isDisabled={
-              (!shouldFetchAddresses && !user?.contactAddress) ||
-              user?.contactAddress?.trim() === '' ||
+              (!shouldFetchAddresses && !partner?.contactAddress) ||
+              partner?.contactAddress?.trim() === '' ||
               !deliveryMethod ||
-              (deliveryMethod === 'pick-up' && phoneNumber === '')
+              (deliveryMethod === 'pick-up' && phoneNumber === '') ||
+              !selectedAddress
             }
-            onPress={() => {
-              const paymentButton = document.querySelector(
-                '#paymentButton > button'
-              ) as HTMLButtonElement;
-              (!shouldFetchAddresses && !user?.contactAddress) ||
-              user?.contactAddress?.trim() === ''
-                ? toast.warning('Please add a delivery address')
-                : paymentButton?.click();
-            }}
+            onPress={handleCreateOrder}
             radius='full'
             className='mt-6 w-full py-6'
           >
@@ -274,7 +329,7 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
             <Paystack
               amount={amount || fromNaira(summary?.totalPayableAmount || '0')}
               paymentMethod={paymentMethod}
-              email={user?.email as string}
+              email={partner?.email as string}
               ctaText='Pay Now'
               label='Shop and Order'
               onSuccess={(response) => {

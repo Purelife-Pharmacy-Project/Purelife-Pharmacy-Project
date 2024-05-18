@@ -4,7 +4,6 @@ import { useStore } from '@/hooks/store';
 import { Button, Card, CardBody } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
 import { FC, useState } from 'react';
-import { toast } from 'sonner';
 import { BillingAddressModal } from '../billing/BillingAddressModal';
 
 type OrderSummaryProps = {};
@@ -67,20 +66,31 @@ export const OrderSummary: FC<OrderSummaryProps> = () => {
               {summary?.totalPayableAmount}
             </p>
           </div>
-          <Button
-            color='primary'
-            size='lg'
-            onPress={() => {
-              if (!user) {
-                toast.error('Please login to continue');
-              }
-              router.push('/billing');
-            }}
-            radius='full'
-            className='w-full py-6'
-          >
-            Proceed to Billing
-          </Button>
+          <div className='flex items-center gap-4'>
+            <Button
+              color='primary'
+              size='lg'
+              onPress={() => {
+                router.push(`/sign-in?redirectUrl=/billing`);
+              }}
+              radius='full'
+              className='w-full py-6'
+            >
+              Login to continue
+            </Button>
+            <p className='text-lg font-bold text-header-100'>OR</p>
+            <Button
+              color='default'
+              size='lg'
+              onPress={() => {
+                router.push('/billing');
+              }}
+              radius='full'
+              className='w-full py-6'
+            >
+              Checkout as Guest
+            </Button>
+          </div>
         </div>
 
         {/* delivery address modal */}

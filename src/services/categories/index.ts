@@ -1,25 +1,31 @@
 import Api from '@/helpers/api';
 import { filteredQueryParams } from '@/helpers/utils';
-import { CategoryQueryParams, CategoryType } from '@/services/categories/types';
+import {
+  CategoryQueryParams,
+  CategoryResponse,
+} from '@/services/categories/types';
 
 export class CategoryService {
-  private static CATEGORIES_API_BASE = '/Category';
+  private static CATEGORIES_API_BASE = '/Product';
 
   public static getAllCategories = async (params: CategoryQueryParams) => {
     const queryParams = filteredQueryParams({
       PageSize: params.pageSize,
       PageIndex: params.pageIndex,
       CategoryId: params.categoryId,
+      Fields: 'name',
     });
 
-    const response = (await Api.get<{
-      data: CategoryType[];
-      totalPage: number;
-    }>(`${this.CATEGORIES_API_BASE}/get-all?${queryParams}`)) as unknown as {
-      data: CategoryType[];
-      totalPage: number;
-    };
+    const response = (await Api.get<CategoryResponse>(
+      `${this.CATEGORIES_API_BASE}/list-product-categories?${queryParams}`
+    )) as unknown as CategoryResponse;
 
-    return JSON.parse(JSON.stringify(response.data)) as CategoryType[];
+    console.log();
+
+    if (response.error) {
+      throw 'Error getting category';
+    }
+
+    return response.result || [];
   };
 }
