@@ -2,9 +2,9 @@ name: Reach Admin Pipeline
 
 on:
   push:
-    branches: [deployment, dev]
+    branches: [deployment, boluDev]
   pull_request:
-    branches: [deployment, dev]
+    branches: [deployment, boluDev]
 
 jobs:
 
@@ -34,7 +34,7 @@ jobs:
 
     steps:
     - name: Remote SSH Commands (dev)
-      if: ${{ github.ref == 'refs/heads/dev' }}
+      if: ${{ github.ref == 'refs/heads/boluDev' }}
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.FI_SERVER }}
@@ -43,7 +43,7 @@ jobs:
         port: ${{ secrets.FI_PORT }}
         script: |
           cd /usr/fi-server-project
-          sudo git pull origin dev
+          sudo git pull origin boluDev
           sudo docker build -t purelife-frontend .
           sudo docker rm -f purelife-frontend
           sudo docker run --name purelife-frontend --restart always -d -p 3400:3000 purelife-frontend
