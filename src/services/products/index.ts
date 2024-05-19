@@ -86,7 +86,7 @@ class ProductService {
       canBePurchased: true,
       canBeSold: true,
       categ_id: [0, ''],
-      id: 0,
+      id: +response.result[0].id,
     });
   };
 
