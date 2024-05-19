@@ -72,12 +72,14 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
       limit: 10000000,
     });
 
+  const excludeAddressIds = [62943];
+
   const addresses = useMemo(() => {
     return (
       products?.pages.reduce((acc, page) => {
         return [...acc, ...page];
       }, []) || []
-    );
+    ).filter((item) => !excludeAddressIds.includes(item.id));
   }, [products]);
 
   const [selectedAddress, setSelectedAddress] = useState<
