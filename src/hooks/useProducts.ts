@@ -63,6 +63,70 @@ export const useGetProductsByCategoryId = (params: {
 
 export const useGetProducts = ({
   categoryId,
+  name,
+  limit,
+  offset,
+  MinListPrice,
+  MaxListPrice,
+}: {
+  categoryId?: string;
+  name?: string;
+  limit?: number;
+  offset?: number;
+  MinListPrice?: number;
+  MaxListPrice?: number;
+} = {}) => {
+  const queryKeys = [
+    'products',
+    categoryId,
+    name,
+    MinListPrice,
+    MaxListPrice,
+    String(offset),
+    String(limit),
+  ].filter(Boolean);
+
+  const {
+    data: products,
+    isLoading: loadingProducts,
+    isRefetching,
+    isSuccess,
+    isError,
+    refetch,
+  } = useQuery({
+    // eslint-disable-next-line @tanstack/query/exhaustive-deps
+    queryKey: queryKeys,
+    queryFn: () =>
+      ProductService.getAllProducts({
+        CategoryId: categoryId,
+        name,
+        Limit: limit,
+        offset,
+        MinListPrice,
+        MaxListPrice,
+      }),
+    enabled:
+      !!name ||
+      !!categoryId ||
+      !!limit ||
+      !!offset ||
+      !!MinListPrice ||
+      !!MinListPrice,
+    refetchOnWindowFocus: false,
+  });
+
+  return {
+    products,
+    loadingProducts,
+    isRefetching,
+    refetch,
+    isSuccess,
+    isError,
+  };
+};
+
+export const useGetProductsInfinity = ({
+  categoryId,
   limit,
   MinListPrice,
   MaxListPrice,

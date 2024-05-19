@@ -50,7 +50,7 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
     categoryId: '17',
   });
 
-  const filteredTests = labTests?.products.filter(
+  const filteredTests = labTests?.filter(
     (test) => test.name?.toLowerCase().includes(searchStr?.toLowerCase() || '')
   );
 

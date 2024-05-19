@@ -4,7 +4,7 @@ import {
   useCartStore,
   useCreateOrder,
   useGetPartner,
-  useGetProducts,
+  useGetProductsInfinity,
 } from '@/hooks';
 import { useStore } from '@/hooks/store';
 import { CreateOrderPayload, OrderProduct } from '@/services/orders/types';
@@ -65,11 +65,12 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
     'card'
   );
   const [deliveryAddress, setDeliveryAddress] = useState<string>('');
-  const { products, loadingProducts: loadingAddresses } = useGetProducts({
-    categoryId: DELIVERY_LOCATIONS_CATEGORY_ID,
-    isPublished: false,
-    limit: 10000000,
-  });
+  const { products, loadingProducts: loadingAddresses } =
+    useGetProductsInfinity({
+      categoryId: DELIVERY_LOCATIONS_CATEGORY_ID,
+      isPublished: false,
+      limit: 10000000,
+    });
 
   const addresses = useMemo(() => {
     return (

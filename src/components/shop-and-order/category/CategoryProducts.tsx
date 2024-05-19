@@ -1,7 +1,11 @@
 'use client';
 import { MobileProductsByPrice } from '@/components/shop-and-order/category/partials/MobileProductsByPrice';
 import { ProductSearch } from '@/components/shop-and-order/category/partials/ProductSearch';
-import { useGetCategories, useGetProducts, useSearchProducts } from '@/hooks';
+import {
+  useGetCategories,
+  useGetProductsInfinity,
+  useSearchProducts,
+} from '@/hooks';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Section } from '../../home/Section';
 import { ProductsFilterContainer } from './partials/ProductsFilterContainer';
@@ -44,7 +48,7 @@ export const CategoryProducts = () => {
     isFetchingProductNextPage,
     fetchProductNextPage,
     productHasNextPage,
-  } = useGetProducts({
+  } = useGetProductsInfinity({
     categoryId: categoryId?.toString(),
     limit,
     MinListPrice: minPrice ? Number(minPrice) : undefined,

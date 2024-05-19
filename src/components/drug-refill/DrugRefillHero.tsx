@@ -1,6 +1,6 @@
 'use client';
 import { Section } from '@/components/home/Section';
-import { useGetCategories, useGetProductsByCategoryId } from '@/hooks';
+import { useGetCategories, useGetProducts } from '@/hooks';
 import { Product } from '@/services/products/types';
 import {
   Button,
@@ -37,9 +37,9 @@ export const DrugRefillHero: FC<DrugRefillHeroProps> = ({}) => {
     categories?.find((category) => category.name?.toLowerCase() === 'health')
       ?.id;
 
-  const { loadingProducts, products } = useGetProductsByCategoryId({
+  const { loadingProducts, products } = useGetProducts({
     categoryId: getHealthCategoryId(),
-    searchStr,
+    name: searchStr,
     limit: 10,
     offset: 1,
   });
@@ -52,7 +52,7 @@ export const DrugRefillHero: FC<DrugRefillHeroProps> = ({}) => {
     setSelectedProduct(product);
   };
 
-  const filteredProducts = products?.products.filter(
+  const filteredProducts = products?.filter(
     (product) =>
       product.name?.toLowerCase().includes(searchStr?.toLowerCase() || '')
   );
@@ -140,7 +140,7 @@ export const DrugRefillHero: FC<DrugRefillHeroProps> = ({}) => {
                                 handleProductClick({
                                   ...product,
                                   categ_id: getHealthCategoryId()!,
-                                })
+                                } as unknown as Product)
                               }
                               key={product.id}
                               className='grid h-max grid-flow-col grid-cols-[1fr_8fr_3fr] items-center gap-3 p-2'
