@@ -1,10 +1,11 @@
 'use client';
-import { useCartStore, useGetUser } from '@/hooks';
+import { useCartStore, useGetPartner } from '@/hooks';
 import { useStore } from '@/hooks/store';
 import { Button, Card, CardBody } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
 import { FC, useState } from 'react';
 import { BillingAddressModal } from '../billing/BillingAddressModal';
+import { CircularProgress } from '@nextui-org/progress';
 
 type OrderSummaryProps = {};
 
@@ -25,7 +26,7 @@ export const OrderSummary: FC<OrderSummaryProps> = () => {
   const summary = useStore(useCartStore, (state) => state)?.summary;
 
   const [showDeliveryModal, setShowDeliveryModal] = useState(false);
-  const { user } = useGetUser();
+  const { partner, loadingPartner } = useGetPartner();
   const router = useRouter();
 
   return (
@@ -66,31 +67,49 @@ export const OrderSummary: FC<OrderSummaryProps> = () => {
               {summary?.totalPayableAmount}
             </p>
           </div>
-          <div className='flex items-center gap-4'>
+          {loadingPartner ? (
+            <div className='flex items-center justify-center'>
+              <CircularProgress aria-label='Loading...' />
+            </div>
+          ) : partner ? (
             <Button
               color='primary'
               size='lg'
               onPress={() => {
-                router.push(`/sign-in?redirectUrl=/billing`);
+                router.push(`/billing`);
               }}
               radius='full'
               className='w-full py-6'
             >
-              Login to continue
+              Continue to Billing
             </Button>
-            <p className='text-lg font-bold text-header-100'>OR</p>
-            <Button
-              color='default'
-              size='lg'
-              onPress={() => {
-                router.push('/billing');
-              }}
-              radius='full'
-              className='w-full py-6'
-            >
-              Checkout as Guest
-            </Button>
-          </div>
+          ) : (
+            <div className='flex items-center gap-4'>
+              <Button
+                color='primary'
+                size='lg'
+                onPress={() => {
+                  router.push(`/sign-in?redirectUrl=/billing`);
+                }}
+                radius='full'
+                className='w-full py-6'
+              >
+                Login to continue
+              </Button>
+              <p className='text-lg font-bold text-header-100'>OR</p>
+              <Button
+                color='default'
+                size='lg'
+                onPress={() => {
+                  router.push('/billing');
+                }}
+                radius='full'
+                className='w-full py-6'
+              >
+                Checkout as Guest
+              </Button>
+            </div>
+          )}
         </div>
 
         {/* delivery address modal */}
