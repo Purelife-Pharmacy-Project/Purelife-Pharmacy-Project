@@ -1,9 +1,9 @@
 import { fromNaira, toNaira } from '@/helpers/utils';
 import { CartType } from '@/services/cart/types';
-import type {} from '@redux-devtools/extension'; // required for devtools typing
 import { toast } from 'sonner';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
+import { UserType } from '@/services/user/types';
 
 export type CartSummary = {
   totalPayableAmount: string;
@@ -16,11 +16,13 @@ type CartState = {
   cart: CartType[];
   summary: CartSummary;
   setDeliveryFee: (deliveryFee: number) => void;
+  setDeliveryDetails: (user: UserType) => void;
   addToCart: (cart: CartType) => void;
   getCartItem: (productId: number) => CartType | undefined;
   setCouponPercentage: (couponPercentage: number) => void;
   removeFromCart: (productId: number) => void;
   clearCart: () => void;
+  deliveryDetails: UserType;
 };
 
 const calculatedTotalCartAmount = (cart: CartType[]) =>
@@ -44,6 +46,7 @@ const calculatedPayableAmount = (
 export const useCartStore = create<CartState>()(
   devtools(
     persist(
+      // @ts-ignore
       (set, get) => ({
         cart: [] as CartType[],
         summary: {
@@ -52,6 +55,7 @@ export const useCartStore = create<CartState>()(
           couponPercentage: 0,
           totalCartAmount: 0,
         },
+        deliveryDetails: {} as UserType,
         addToCart: (cart) =>
           set((state) => {
             const cartItem = state.cart.find(
@@ -108,6 +112,7 @@ export const useCartStore = create<CartState>()(
               couponPercentage: 0,
               totalCartAmount: 0,
             },
+            deliveryDetails: {} as UserType,
           }),
         removeFromCart: (productId: number) =>
           set((state) => {
@@ -202,6 +207,14 @@ export const useCartStore = create<CartState>()(
           }),
         getCartItem: (productId: number) =>
           get().cart.find((item) => item.product.id === productId),
+
+        setDeliveryDetails: (details: UserType) =>
+          set((state) => {
+            return {
+              ...state,
+              deliveryDetails: details,
+            };
+          }),
       }),
       {
         name: '__storage__',

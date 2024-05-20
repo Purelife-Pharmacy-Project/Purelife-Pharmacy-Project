@@ -1,25 +1,47 @@
-import { USER_TOKEN_KEY } from '@/constants';
+import { PARTNER_ID_KEY, USER_ID_KEY, USER_TOKEN_KEY } from '@/constants';
 import UsersService from '@/services/user';
 import { LoginPayload, RegisterPayload } from '@/services/user/schema';
 import { UserType } from '@/services/user/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { deleteCookie } from 'cookies-next';
 import { toast } from 'sonner';
+import { useCartStore } from '@/hooks/store/useCart';
 
 export const useGetUser = () => {
   const {
-    data: user,
+    data,
     isLoading: loadingUser,
     error: getUserError,
   } = useQuery({
     queryKey: ['user'],
     queryFn: () => UsersService.getUser(),
+    enabled: !!UsersService.getUserFromToken()?.id,
+  });
+
+  const tempUser = UsersService.getUserFromToken();
+
+  return {
+    user: tempUser,
+    loadingUser,
+    getUserError,
+  };
+};
+
+export const useGetPartner = () => {
+  const {
+    data: partner,
+    isLoading: loadingPartner,
+    error: getPartnerError,
+  } = useQuery({
+    queryKey: ['partner'],
+    queryFn: () => UsersService.getPartner(),
+    enabled: !!UsersService.getUserFromToken()?.id,
   });
 
   return {
-    user,
-    loadingUser,
-    getUserError,
+    partner,
+    loadingPartner,
+    getPartnerError,
   };
 };
 
@@ -51,6 +73,10 @@ export const useLogin = (
       queryKey: ['user'],
       queryFn: () => UsersService.getUser(),
     });
+    queryClient.fetchQuery({
+      queryKey: ['partner'],
+      queryFn: () => UsersService.getPartner(),
+    });
   }
 
   return {
@@ -63,15 +89,24 @@ export const useLogin = (
   };
 };
 
-export const useRegister = () => {
+export const useRegister = (
+  onSuccess?: () => void,
+  onError?: (error: string) => void
+) => {
   const {
     mutate: registerUser,
     isPending: loadingRegister,
     error: registerError,
     isSuccess,
     isError,
-  } = useMutation<Record<string, unknown>, string, RegisterPayload, unknown>({
+  } = useMutation<any, string, RegisterPayload, unknown>({
     mutationFn: (payload: RegisterPayload) => UsersService.register(payload),
+    onSuccess: () => {
+      onSuccess?.();
+    },
+    onError: (error) => {
+      onError?.(error);
+    },
   });
 
   return {
@@ -150,12 +185,18 @@ export const useUpdateUserContactInfo = (
 export const useLogout = () => {
   const queryClient = useQueryClient();
 
+  const { clearCart } = useCartStore();
+
   const logout = () => {
     UsersService.logoutUser();
     queryClient.removeQueries();
     queryClient.clear();
 
     deleteCookie(USER_TOKEN_KEY);
+    deleteCookie(USER_ID_KEY);
+    deleteCookie(PARTNER_ID_KEY);
+
+    clearCart();
   };
 
   return {

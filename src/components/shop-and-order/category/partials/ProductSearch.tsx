@@ -4,13 +4,17 @@ import { inputBorderedGray } from '@/theme';
 import { Input } from '@nextui-org/react';
 import debounce from 'lodash/debounce';
 import { FC, useCallback, useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 type ProductSearchProps = {
   loadingProducts?: boolean;
 };
 
 export const ProductSearch: FC<ProductSearchProps> = ({ loadingProducts }) => {
-  const [searchStr, setSearchStr] = useState<string | null>('');
+  const searchParams = useSearchParams();
+  const [searchStr, setSearchStr] = useState<string | null>(
+    searchParams.get('searchString')
+  );
   const { setQuery, removeQuery } = useQueryParams();
 
   const handleDebouncedSearch = debounce((value: string) => {

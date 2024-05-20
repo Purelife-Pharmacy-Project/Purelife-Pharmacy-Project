@@ -70,5 +70,5 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   // matcher: ['/my-account/:path*', '/billing', '/telehealth/drug-refill'],
-  matcher: ['/my-account/:path*', '/billing'],
+  matcher: ['/my-account/:path*'],
 };

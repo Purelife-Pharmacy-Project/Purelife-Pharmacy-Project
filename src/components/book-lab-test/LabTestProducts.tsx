@@ -90,8 +90,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                 <div key={index} className='gap-2 xl:grid xl:justify-center'>
                   <Button
                     isDisabled={
-                      loadingLabTests ||
-                      (labTests?.products && labTests.products?.length === 0)
+                      loadingLabTests || (labTests && labTests?.length === 0)
                     }
                     radius='full'
                     isIconOnly
@@ -131,12 +130,10 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
           <Section className='border-t-2 border-primaryGreen bg-transparent py-20'>
             {loadingLabTests ? <LabTestsSkeleton /> : null}
 
-            {labTests?.products &&
-            labTests?.products.length > 0 &&
-            !loadingLabTests ? (
+            {labTests && labTests?.length > 0 && !loadingLabTests ? (
               <div className='grid w-full gap-6'>
                 <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
-                  {labTests.products?.map((test, index) => (
+                  {labTests?.map((test, index) => (
                     <TelehealthProductCard
                       color='success'
                       test={test}
@@ -147,7 +144,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
               </div>
             ) : null}
 
-            {!loadingLabTests && labTests?.products.length === 0 ? (
+            {!loadingLabTests && labTests?.length === 0 ? (
               <div className='grid w-full place-content-center'>
                 <p className='text-center font-medium'>
                   No Lab Tests Yet. Try again
@@ -155,12 +152,12 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
               </div>
             ) : null}
 
-            {!loadingLabTests && labTests?.products ? (
+            {!loadingLabTests && labTests ? (
               <ProductsPagination
                 color='success'
                 loading={loadingLabTests}
                 className='text-white'
-                totalPages={labTests?.totalPages as number}
+                totalPages={100}
               />
             ) : null}
           </Section>

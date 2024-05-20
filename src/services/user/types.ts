@@ -1,3 +1,5 @@
+import { OdooResponseType } from '@/helpers/api/types';
+
 export enum AccountTransactionStatus {
   Pending = 'Pending',
   Completed = 'Completed',
@@ -20,9 +22,30 @@ export type UserType = {
   contactAddress: string;
 };
 
+export type PartnerApiType = {} & OdooResponseType<
+  Array<{
+    id: number;
+    partner_id: [number, string];
+    email: string;
+    phone: string;
+    contact_address: string;
+  }>
+>;
+
+export type PartnerType = {
+  id: number;
+  name: string;
+};
+
 export type LoginResponse = {
   token: string;
-} & UserType;
+} & OdooResponseType<number>;
+
+export type RegisterResponse = {} & OdooResponseType<[string, string, number]>;
+
+export type FetchLocationsResponse = {} & OdooResponseType<
+  Array<{ id: number; name: string }>
+>;
 
 export class User {
   public id: number;

@@ -42,14 +42,14 @@ export const FeaturedProducts: FC<FeaturedProductsProps> = ({
             </div>
           ) : (
             <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
-              {allProducts?.products?.map((product) => (
+              {allProducts?.map((product) => (
                 <FeaturedProduct key={product.id} product={product} />
               ))}
             </div>
           )}
 
           {(!loadingFeaturedProducts && !allProducts) ||
-          allProducts?.products.length === 0 ? (
+          allProducts?.length === 0 ? (
             <p className='text-center text-sm text-header-100'>
               Oops. No products yet
             </p>
@@ -58,13 +58,7 @@ export const FeaturedProducts: FC<FeaturedProductsProps> = ({
       </Section>
 
       <div className='mt-10 flex justify-center'>
-        <Button
-          as={Link}
-          href='/shop-and-order'
-          radius='full'
-          size='lg'
-          color='primary'
-        >
+        <Button as={Link} href='/shop' radius='full' size='lg' color='primary'>
           Shop & Order
         </Button>
       </div>

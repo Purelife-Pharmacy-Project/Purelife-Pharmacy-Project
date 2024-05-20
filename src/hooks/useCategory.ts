@@ -13,8 +13,8 @@ export const useGetCategories = () => {
       CategoryService.getAllCategories({
         pageSize: 100,
       }),
-    refetchOnWindowFocus: false,
-    staleTime: 1000 * 60 * 60 * 24, // 24 hours
+    // refetchOnWindowFocus: true,
+    // staleTime: 1000 * 60 * 60 * 24, // 24 hours
   });
 
   return {

@@ -1,5 +1,4 @@
 import { removeHtmlTags, toNaira } from '@/helpers/utils';
-import { Blob } from 'buffer';
 
 export type ProductQueryParams = {
   // name?: string;
@@ -17,6 +16,7 @@ export type ProductQueryParams = {
   Limit?: number;
   offset?: number;
   name?: string;
+  searchQuery?: string;
 };
 
 export type ProductType = {
@@ -24,7 +24,7 @@ export type ProductType = {
   name: string;
   lst_price: number;
   description: string;
-  image_1024: Blob;
+  image_1024: any;
   categ_id: [number, string];
   amount?: number;
   canBePurchased: boolean;
@@ -38,7 +38,6 @@ export class Product {
   public image_1024: string;
   public lst_price: number;
   public description: string;
-  public categ_id: string;
   public amount: string;
   public quantity?: number;
 
@@ -46,7 +45,6 @@ export class Product {
     this.id = product.id;
     this.name = product.name;
     this.lst_price = product.lst_price || 0;
-    this.categ_id = String(product.categ_id[0]);
     this.description = removeHtmlTags(product.description) || '';
     this.image_1024 = product.image_1024
       ? `data:image/png;base64,${product.image_1024}`

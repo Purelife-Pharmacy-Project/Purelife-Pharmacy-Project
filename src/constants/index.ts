@@ -6,6 +6,9 @@ import { IconPill } from '@/components/icons/IconPill';
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '/api/v1';
 
 export const USER_TOKEN_KEY = 'user_token';
+export const USER_ID_KEY = 'user_id';
+export const PARTNER_ID_KEY = 'partner_id';
+export const DELIVERY_LOCATIONS_CATEGORY_ID = '16';
 
 export const teleHealthServices = [
   {

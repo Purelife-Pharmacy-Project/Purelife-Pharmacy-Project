@@ -33,7 +33,7 @@ export class DrugRefillService {
   }
 
   public static async createSubscription(payload: CreateSubscriptionPayload) {
-    const userId = UsersService.getUserFromToken().id;
+    const userId = UsersService.getUserFromToken()?.id || '';
 
     const response = (await Api.post<{}>(
       `${this.SUBSCRIPTION_API_BASE}/create`,

@@ -3,18 +3,23 @@ import { Card, CardBody } from '@nextui-org/react';
 import { FC } from 'react';
 import { ProductSkeleton } from '../skeletons/ProductSkeleton';
 import { ProductCard } from './ProductCard';
-import { ProductsPagination } from './ProductPagination';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { ProductCardSkeleton } from '@/components/shop-and-order/category/skeletons/ProductCardSkeleton';
 
 type ProductsListProps = {
-  products: Product[] | undefined;
+  products: Product[];
   loadingProducts: boolean;
-  totalPages: number;
+  isFetchingNextPage?: boolean;
+  fetchNextPage: () => void;
+  hasNextPage: boolean;
 };
 
 export const ProductsList: FC<ProductsListProps> = ({
   products,
   loadingProducts,
-  totalPages,
+  isFetchingNextPage,
+  fetchNextPage,
+  hasNextPage,
 }) => {
   return (
     <Card shadow='none' className='w-full'>
@@ -23,7 +28,21 @@ export const ProductsList: FC<ProductsListProps> = ({
           <ProductSkeleton />
         ) : (
           <div className='max-h-[800px] min-h-[500px]'>
-            <div className='relative grid grid-flow-row grid-cols-1 gap-10 overflow-y-auto md:grid-cols-2 lg:grid-cols-3'>
+            <InfiniteScroll
+              next={fetchNextPage}
+              hasMore={hasNextPage}
+              loader={
+                <>
+                  {Array(6)
+                    .fill(0)
+                    .map((_, index) => (
+                      <ProductCardSkeleton key={index} />
+                    ))}
+                </>
+              }
+              dataLength={products?.length}
+              className='relative grid grid-flow-row grid-cols-1 gap-10 overflow-y-auto md:grid-cols-2 lg:grid-cols-3'
+            >
               {products?.map((product) => (
                 <ProductCard
                   loading={loadingProducts}
@@ -31,7 +50,7 @@ export const ProductsList: FC<ProductsListProps> = ({
                   product={product}
                 />
               ))}
-            </div>
+            </InfiniteScroll>
             {products?.length === 0 && !loadingProducts && (
               <div className='grid h-full w-full place-content-center text-center'>
                 <p className='text-header-100'>No products found.</p>
@@ -40,13 +59,6 @@ export const ProductsList: FC<ProductsListProps> = ({
           </div>
         )}
       </CardBody>
-
-      <ProductsPagination
-        color='primary'
-        loading={loadingProducts}
-        className='text-white'
-        totalPages={totalPages}
-      />
     </Card>
   );
 };

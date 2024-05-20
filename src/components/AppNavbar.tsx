@@ -122,7 +122,7 @@ export const AppNavbar = ({
           <NavbarItem className='text-lg leading-[27px] text-header-100'>
             <Link
               color='foreground'
-              href='/telehealth/shop-and-order'
+              href='/shop'
               className={
                 isActive('/telehealth/shop-and-order')
                   ? 'font-medium text-primary'

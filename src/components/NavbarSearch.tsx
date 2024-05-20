@@ -1,6 +1,6 @@
 'use client';
 import { IconSearch } from '@/components/icons/IconSearch';
-import { useCartStore, useGetProducts } from '@/hooks';
+import { useSearchProducts } from '@/hooks';
 import { Product } from '@/services/products/types';
 import { inputDefault } from '@/theme';
 import {
@@ -12,7 +12,8 @@ import {
   Spinner,
 } from '@nextui-org/react';
 import debounce from 'lodash/debounce';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export const NavbarSearch = () => {
   const [searchStr, setSearchStr] = useState<string | undefined>('');
@@ -20,7 +21,8 @@ export const NavbarSearch = () => {
   const searchResultsRef = useRef<HTMLDivElement>(null);
 
   const [showSearchResults, setShowSearchResults] = useState(false);
-  const { addToCart } = useCartStore();
+
+  const router = useRouter();
 
   const handleDebouncedSearch = debounce((value: string) => {
     setSearchStr(value);
@@ -30,25 +32,27 @@ export const NavbarSearch = () => {
     if (searchResultsRef.current) {
       searchResultsRef.current.style.display = 'none';
     }
-
-    addToCart({
-      id: product.id,
-      product,
-      quantity: 1,
-    });
+    router.push(`/cart/${product.id}`);
+    // toast.success('Item added to cart successfully!');
   };
 
-  const { loadingProducts, products, refetch } = useGetProducts({
-    name: searchStr,
-  });
+  const { loadingFilteredProducts, filteredProducts, refetch } =
+    useSearchProducts({
+      searchQuery: searchStr !== '' ? searchStr : undefined,
+      limit: 20,
+      offset: 0,
+    });
 
-  const filteredProducts = products?.products.filter(
-    (product: Product) =>
-      product.name?.toLowerCase().includes(searchStr?.toLowerCase() || '')
-  );
+  const filteredItems = useMemo(() => {
+    return (
+      filteredProducts?.pages.reduce((acc, page) => {
+        return [...acc, ...page];
+      }, []) || []
+    );
+  }, [filteredProducts]);
 
   useEffect(() => {
-    if (filteredProducts?.length === 0) {
+    if (filteredItems?.length === 0) {
       refetch().then(() => {});
     }
     //eslint-disable-next-line react-hooks/exhaustive-deps
@@ -92,19 +96,19 @@ export const NavbarSearch = () => {
           className='-bottom-15 absolute z-20 mt-2 max-h-[400px] w-[400px] overflow-y-auto'
         >
           <CardBody>
-            {!loadingProducts && filteredProducts?.length === 0 ? (
+            {!loadingFilteredProducts && filteredItems?.length === 0 ? (
               <p className='text-body text-center'>No products found</p>
             ) : null}
 
-            {loadingProducts ? (
+            {loadingFilteredProducts ? (
               <div className='flex justify-center'>
                 <Spinner size='sm' color='primary' />
               </div>
             ) : null}
 
-            {!loadingProducts && (
+            {!loadingFilteredProducts && (
               <div className='grid gap-4'>
-                {filteredProducts?.map((product: Product) => (
+                {filteredItems?.map((product: Product) => (
                   <Button
                     variant='light'
                     size='lg'
@@ -126,8 +130,12 @@ export const NavbarSearch = () => {
                       {product.name?.toLowerCase()}
                     </p>
 
+                    <p className='text-body max-w-[150px] truncate text-start text-sm capitalize'>
+                      ₦{product.lst_price.toLocaleString()}
+                    </p>
+
                     <p className='hidden text-xs text-primaryGreenDark group-hover:block'>
-                      Click to Add to Cart
+                      Click to View
                     </p>
                   </Button>
                 ))}
