@@ -24,6 +24,7 @@ export const useCreateOrder = (
   onError?: (error: unknown) => void
 ) => {
   const {
+    data,
     mutate: createOrder,
     isPending: loadingCreateOrder,
     isError: errorCreateOrder,
@@ -31,8 +32,10 @@ export const useCreateOrder = (
   } = useMutation({
     mutationFn: (payload: CreateOrderPayload) =>
       OrderService.createOrder(payload),
-    onSuccess: () => {
-      onSuccess && onSuccess();
+    onSuccess: (data) => {
+      if (data) {
+        onSuccess && onSuccess();
+      }
     },
     onError: (error) => {
       onError && onError(error);
@@ -40,6 +43,7 @@ export const useCreateOrder = (
   });
 
   return {
+    data,
     createOrder,
     loadingCreateOrder,
     errorCreateOrder,

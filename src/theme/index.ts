@@ -54,6 +54,7 @@ export const selectBordered: SlotsToClasses<SelectSlots> = {
     'text-content text-md group-data-[filled=true]:font-light data-[hover=true]:bg-white font-light',
   ],
   trigger: ['border border-content bg-white'],
+  listbox: ['text-black'],
 };
 
 export const selectBorderedGray: SlotsToClasses<SelectSlots> = {
@@ -61,6 +62,7 @@ export const selectBorderedGray: SlotsToClasses<SelectSlots> = {
     'text-content text-md group-data-[filled=true]:font-light data-[hover=true]:bg-white font-light',
   ],
   trigger: ['border border-gray-400 bg-white'],
+  listbox: ['text-black'],
 };
 
 export const selectBorderedGrayLight: SlotsToClasses<SelectSlots> = {
@@ -69,6 +71,7 @@ export const selectBorderedGrayLight: SlotsToClasses<SelectSlots> = {
   ],
   value: ['text-content capitalize'],
   trigger: ['border border-gray-300 bg-white'],
+  listbox: ['text-black'],
 };
 
 export const inputDefault: SlotsToClasses<InputSlots> = {
@@ -95,6 +98,14 @@ export const prescriptionTextArea: SlotsToClasses<InputSlots> = {
     'border border-primaryGreenDark data-[hover=true]:bg-white',
     'group-data-[focus=true]:bg-white',
     'group-data-[active=true]:bg-white',
+  ],
+};
+
+export const textAreaDefault: SlotsToClasses<InputSlots> = {
+  label: ['text-content text-md font-light'],
+  description: ['hidden'],
+  inputWrapper: [
+    'pr-2 py-4 flex items-start bg-white shadow-none text-content border data-[hover=true]:bg-white group-data-[focus=true]:bg-white group-data-[active=true]:bg-white',
   ],
 };
 

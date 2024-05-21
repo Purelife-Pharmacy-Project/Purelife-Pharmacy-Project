@@ -1,14 +1,25 @@
 'use client';
 
-import { useRegister } from '@/hooks';
+import { useGetCities, useGetStates, useRegister } from '@/hooks';
 import { FormMessage } from '@/library/ui/FormMessage';
 import {
   RegisterPayload,
   registerValidationSchema,
 } from '@/services/user/schema';
-import { inputDefault } from '@/theme';
+import {
+  inputDefault,
+  selectBorderedGrayLight,
+  textAreaDefault,
+} from '@/theme';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Input, Link } from '@nextui-org/react';
+import {
+  Button,
+  Input,
+  Link,
+  Select,
+  SelectItem,
+  Textarea,
+} from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -23,9 +34,13 @@ export const CreateAccountForm = () => {
     handleSubmit,
     getValues,
     formState: { errors },
+    watch,
+    setValue,
   } = useForm<RegisterPayload>({
     resolver: zodResolver(registerValidationSchema),
   });
+
+  const state = watch('stateId');
 
   const router = useRouter();
   const [passwordIsVisible, setPasswordIsVisible] = useState(false);
@@ -35,6 +50,9 @@ export const CreateAccountForm = () => {
   const { registerUser, loadingRegister, registerError, isSuccess, isError } =
     useRegister();
 
+  const { states, loadingStates } = useGetStates();
+  const { cities, loadingCities } = useGetCities(+(state || 0));
+
   if (isSuccess) {
     toast.success('Account created successfully');
     router.push(`/sign-in?user=${getValues('email')}`);
@@ -43,24 +61,71 @@ export const CreateAccountForm = () => {
   const onSubmit: SubmitHandler<RegisterPayload> = (data) => {
     registerUser(data);
   };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='grid gap-8 md:w-[554px]'>
+    <form
+      onSubmit={handleSubmit(onSubmit, console.log)}
+      className='grid gap-8 md:w-[554px]'
+    >
       {isError ? <FormMessage type='error' message={registerError!} /> : null}
       <Input
         label='Full Name'
         type='text'
         autoComplete='new-name'
-        errorMessage={errors.email?.message}
+        errorMessage={errors.name?.message}
         classNames={inputDefault}
         {...register('name')}
       />
       <Input
         label='Email'
         type='email'
-        autoComplete='new-email'
+        autoComplete='email'
         errorMessage={errors.email?.message}
         classNames={inputDefault}
         {...register('email')}
+      />
+      <Input
+        label='Phone Number'
+        type='tel'
+        autoComplete='tel'
+        errorMessage={errors.phoneNumber?.message}
+        classNames={inputDefault}
+        {...register('phoneNumber')}
+      />
+      <Select
+        items={states || []}
+        isLoading={loadingStates}
+        label='State'
+        errorMessage={errors.stateId?.message}
+        classNames={selectBorderedGrayLight}
+        onChange={(value) => setValue('stateId', +value.target.value)}
+      >
+        {(item) => (
+          <SelectItem value={+item.id} key={item.id} className='capitalize'>
+            {item.name}
+          </SelectItem>
+        )}
+      </Select>
+      <Select
+        items={cities || []}
+        isLoading={loadingCities}
+        label='City'
+        errorMessage={errors.cityId?.message}
+        classNames={selectBorderedGrayLight}
+        onChange={(value) => setValue('cityId', +value.target.value)}
+      >
+        {(item) => (
+          <SelectItem value={item.id} key={item.id} className='capitalize'>
+            {item.name}
+          </SelectItem>
+        )}
+      </Select>
+      <Textarea
+        label='Address'
+        autoComplete='street-address'
+        classNames={textAreaDefault}
+        errorMessage={errors.address?.message}
+        {...register('address')}
       />
       <Input
         label='Password'
@@ -70,7 +135,7 @@ export const CreateAccountForm = () => {
         classNames={inputDefault}
         {...register('password')}
         endContent={
-          <button className='px-2' onClick={toggleVisibility}>
+          <button type='button' className='px-2' onClick={toggleVisibility}>
             {' '}
             {passwordIsVisible ? (
               <IconEyeClose color='content' />

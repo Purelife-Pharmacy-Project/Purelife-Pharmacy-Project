@@ -3,19 +3,24 @@ import { Footer } from '@/components/home/Footer';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Section } from '@/components/home/Section';
 import { TeleHealthServices } from '@/components/home/TeleHealthServices';
-import { AppNavbar } from '@/components/Navbar';
 import { ShopCategory } from '@/components/shop-and-order/ShopCategory';
+import { CategoryService } from '@/services/categories';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
 
 export default async function ShopAndOrder() {
   // Prefetch categories
-  // const queryClient = new QueryClient();
-  // await queryClient.prefetchQuery({
-  //   queryKey: ['categories'],
-  //   queryFn: () =>
-  //     CategoryService.getAllCategories({
-  //       pageSize: 50,
-  //     }),
-  // });
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ['categories'],
+    queryFn: () =>
+      CategoryService.getAllCategories({
+        pageSize: 50,
+      }),
+  });
 
   const earnedClients = [
     {
@@ -41,7 +46,6 @@ export default async function ShopAndOrder() {
   ];
   return (
     <>
-      <AppNavbar background={'primaryLight'} />
       <main className='grid gap-6'>
         {/* <div className='grid justify-center bg-primaryLight'>
           <Section className='bg-primaryLight'>
@@ -56,9 +60,9 @@ export default async function ShopAndOrder() {
 
         <div className='grid justify-center lg:pt-[55px]'>
           <Section>
-            {/*<HydrationBoundary state={dehydrate(queryClient)}>*/}
-            <ShopCategory />
-            {/*</HydrationBoundary>*/}
+            <HydrationBoundary state={dehydrate(queryClient)}>
+              <ShopCategory />
+            </HydrationBoundary>
           </Section>
         </div>
 

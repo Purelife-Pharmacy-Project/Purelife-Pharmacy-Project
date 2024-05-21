@@ -1,6 +1,6 @@
 'use client';
 import { Section } from '@/components/home/Section';
-import { useGetCategories, useGetProductsByCategoryId } from '@/hooks';
+import { useGetCategories, useGetProducts } from '@/hooks';
 import { Product } from '@/services/products/types';
 import {
   Button,
@@ -11,9 +11,10 @@ import {
   Spinner,
 } from '@nextui-org/react';
 import debounce from 'lodash/debounce';
-import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { FC, useCallback, useRef, useState } from 'react';
 import { IconSearch } from '../icons/IconSearch';
 import { AboutDrugCard } from './AboutDrugCard';
+import { CustomPrescription } from './CustomPrescription';
 
 type DrugRefillHeroProps = {};
 
@@ -36,15 +37,11 @@ export const DrugRefillHero: FC<DrugRefillHeroProps> = ({}) => {
     categories?.find((category) => category.name?.toLowerCase() === 'health')
       ?.id;
 
-  const {
-    loadingProducts,
-    products,
-    refetch: refetchProducts,
-  } = useGetProductsByCategoryId({
+  const { loadingProducts, products } = useGetProducts({
     categoryId: getHealthCategoryId(),
-    searchStr,
-    pageSize: 10,
-    pageIndex: 1,
+    name: searchStr,
+    limit: 10,
+    offset: 1,
   });
 
   const handleProductClick = (product: Product) => {
@@ -55,17 +52,10 @@ export const DrugRefillHero: FC<DrugRefillHeroProps> = ({}) => {
     setSelectedProduct(product);
   };
 
-  const filteredProducts = products?.products.filter(
+  const filteredProducts = products?.filter(
     (product) =>
       product.name?.toLowerCase().includes(searchStr?.toLowerCase() || '')
   );
-
-  useEffect(() => {
-    if (filteredProducts?.length === 0) {
-      refetchProducts();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filteredProducts]);
 
   const handleInputChange = useCallback(
     (value: string) => {
@@ -75,7 +65,7 @@ export const DrugRefillHero: FC<DrugRefillHeroProps> = ({}) => {
   );
 
   return (
-    <div className='grid justify-center bg-primaryLight lg:pb-10 lg:pt-[55px]'>
+    <div className='grid h-[calc(100vh-540px)] justify-center bg-primaryLight lg:pb-10 lg:pt-[55px]'>
       <Section className='relative bg-primaryLight'>
         <div className='relative'>
           <div className='bg-primaryLight p-3'>
@@ -103,7 +93,7 @@ export const DrugRefillHero: FC<DrugRefillHeroProps> = ({}) => {
                     }, 200);
                   }}
                   classNames={{
-                    input: ['py-6'],
+                    input: ['py-6 font-light text-lg'],
                     inputWrapper: [
                       'h-max',
                       'pr-2',
@@ -149,8 +139,8 @@ export const DrugRefillHero: FC<DrugRefillHeroProps> = ({}) => {
                               onPress={() =>
                                 handleProductClick({
                                   ...product,
-                                  categoryId: getHealthCategoryId()!,
-                                })
+                                  categ_id: getHealthCategoryId()!,
+                                } as unknown as Product)
                               }
                               key={product.id}
                               className='grid h-max grid-flow-col grid-cols-[1fr_8fr_3fr] items-center gap-3 p-2'
@@ -160,7 +150,7 @@ export const DrugRefillHero: FC<DrugRefillHeroProps> = ({}) => {
                                 height={60}
                                 className='max-h-14 object-contain'
                                 radius='md'
-                                src={product.imageInBinary}
+                                src={product.image_1024}
                                 alt={''}
                               />
 
@@ -178,6 +168,10 @@ export const DrugRefillHero: FC<DrugRefillHeroProps> = ({}) => {
             </div>
           </div>
         </div>
+
+        {/* Upload custom Prescription */}
+
+        <CustomPrescription />
 
         <AboutDrugCard
           product={selectedProduct}

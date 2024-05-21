@@ -10,7 +10,6 @@ import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { TeleHealthServices } from '@/components/home/TeleHealthServices';
 import { Testimonials } from '@/components/home/Testimonials';
 import { WellnessBlogSection } from '@/components/home/WellnessBlogSection';
-import { AppNavbar } from '@/components/Navbar';
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { earnedClients } from '@/constants';
 
@@ -44,7 +43,6 @@ export default async function Home() {
 
   return (
     <>
-      <AppNavbar background={'primaryLight'} />
       <main className='grid gap-6'>
         <HomePageHero
           title='Your one-stop for wellness and lifestyle.'

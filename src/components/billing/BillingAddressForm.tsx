@@ -1,37 +1,40 @@
 import { toNaira } from '@/helpers/utils';
-import { ProductType } from '@/services/products/types';
+import { Product } from '@/services/products/types';
 import { selectBorderedGray } from '@/theme';
-import { Select, SelectItem } from '@nextui-org/react';
+import { Autocomplete, AutocompleteItem } from '@nextui-org/react';
 import { FC } from 'react';
 
 type BillingAddressFormProps = {
   onSelect: (value: string) => void;
-  addresses: ProductType[];
+  addresses: Product[];
   loadingAddresses: boolean;
+  selectedAddress: Partial<Product> | undefined;
 };
 
 export const BillingAddressForm: FC<BillingAddressFormProps> = ({
   onSelect,
   addresses,
   loadingAddresses,
+  selectedAddress,
 }) => {
   return (
     <div className='grid gap-1'>
       <label htmlFor='location' className='text-header-100'>
         Select your delivery location
       </label>
-      <Select
+      <Autocomplete
         size={'lg'}
         isDisabled={loadingAddresses}
         aria-label='Select delivery location'
         placeholder='Select a location'
         classNames={selectBorderedGray}
-        onChange={(e) => onSelect(e.target.value)}
+        onSelectionChange={(e) => onSelect(e?.toString() || '')}
         labelPlacement='outside'
         name='location'
+        selectedKey={selectedAddress?.id?.toString()}
       >
         {addresses?.map((address) => (
-          <SelectItem
+          <AutocompleteItem
             className='py-2 text-header-100'
             key={address.id}
             textValue={address.name}
@@ -40,12 +43,12 @@ export const BillingAddressForm: FC<BillingAddressFormProps> = ({
             <div className='flex items-center justify-between'>
               <span>{address.name}</span>
               <span className='text-right font-medium'>
-                {toNaira(address.price)}
+                {toNaira(address.lst_price)}
               </span>
             </div>
-          </SelectItem>
+          </AutocompleteItem>
         )) ?? []}
-      </Select>
+      </Autocomplete>
     </div>
   );
 };

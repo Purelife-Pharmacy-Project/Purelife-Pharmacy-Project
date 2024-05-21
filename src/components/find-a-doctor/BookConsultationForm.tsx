@@ -1,4 +1,5 @@
 'use client';
+import { genderAnswers } from '@/constants';
 import { toNaira } from '@/helpers/utils';
 import {
   useCreateCalendarEvent,
@@ -102,20 +103,6 @@ export const BookConsultationForm = () => {
     {
       name: 'No',
       value: false,
-    },
-  ];
-  const genderAnswers = [
-    {
-      name: 'Male',
-      value: 'male',
-    },
-    {
-      name: 'Female',
-      value: 'female',
-    },
-    {
-      name: 'Prefer not to say',
-      value: 'other',
     },
   ];
 

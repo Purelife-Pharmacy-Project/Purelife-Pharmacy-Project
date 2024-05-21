@@ -1,4 +1,5 @@
 import { removeHtmlTags, toNaira } from '@/helpers/utils';
+import { ProductType } from '../products/types';
 
 export type LabTestQueryParams = {
   name?: string;
@@ -16,35 +17,31 @@ export type LabTestType = {
   productId: string;
   canBeSold: boolean;
   description: string;
-  imageInBinary: string | null;
+  image_1024: string | null;
   quantity?: number;
   categoryId: number;
 };
 
 export class LabTest {
-  public id: string;
+  public id: number;
   public name: string;
-  public price: number;
-  public canBePurchased: boolean;
-  public canBeSold: boolean;
+  public lst_price: number;
   public description: string;
-  public imageInBinary: string;
+  public image_1024: string;
   public amount: string;
-  public categoryId: number;
+  public categ_id: string;
   public quantity?: number;
 
-  constructor(test: LabTestType) {
+  constructor(test: ProductType) {
     this.id = test.id;
     this.name = test.name;
-    this.price = test.price;
-    this.canBePurchased = test.canBePurchased;
-    this.canBeSold = test.canBeSold;
+    this.lst_price = test.lst_price;
     this.description = removeHtmlTags(test.description);
-    this.imageInBinary = test.imageInBinary
-      ? `data:image/png;base64,${test.imageInBinary}`
+    this.image_1024 = test.image_1024
+      ? `data:image/png;base64,${test.image_1024}`
       : '/images/purelife-fallback.png';
-    this.amount = toNaira(this.price);
-    this.categoryId = test.categoryId;
-    this.quantity = Math.max(0, test.quantity as number) || 1;
+    this.amount = toNaira(this.lst_price);
+    this.categ_id = String(test.categ_id[0]);
+    this.quantity = 1000000000000;
   }
 }

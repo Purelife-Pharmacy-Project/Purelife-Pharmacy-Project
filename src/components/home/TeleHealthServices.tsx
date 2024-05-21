@@ -68,11 +68,11 @@ export const TeleHealthServices = () => {
             <Card
               shadow='none'
               radius='lg'
-              className='h-full w-full flex-grow bg-primaryLight md:col-span-1 lg:col-span-1'
+              className='h-full w-full flex-grow bg-primaryLight md:col-span-2'
             >
-              <div className='grid h-full items-center'>
+              <div className='relative grid h-full max-h-[384px] items-start p-4 xl:p-8'>
                 <CardBody>
-                  <div className='flex h-full flex-col justify-center gap-5'>
+                  <div className='flex h-full flex-col justify-center gap-6'>
                     <p className='w-full text-3xl font-extrabold text-header-100 lg:max-w-[384px]'>
                       Are you a healthcare provider interested in partnering
                       with us?
@@ -89,12 +89,12 @@ export const TeleHealthServices = () => {
                     </Button>
                   </div>
                 </CardBody>
-                <div className='flex h-full items-end justify-end'>
+                <div className='absolute bottom-0 right-2'>
                   <Image
-                    className='object-cover align-bottom'
+                    className='w-20 object-cover align-bottom sm:w-40 lg:w-auto'
                     src='/images/healthcare-doctor.png'
-                    width={190}
-                    height={190}
+                    width={300}
+                    height={150}
                     alt='telehealth partner'
                   />
                 </div>

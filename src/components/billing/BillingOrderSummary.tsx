@@ -1,8 +1,7 @@
 'use client';
 import { toNaira } from '@/helpers/utils';
-import { useCartStore, useCreateOrder, useGetUser } from '@/hooks';
+import { useCartStore, useGetUser } from '@/hooks';
 import { useStore } from '@/hooks/store';
-import { CreateOrderPayload, OrderProduct } from '@/services/orders/types';
 import { Button, Card, CardBody } from '@nextui-org/react';
 import { goToApplyCoupon } from '../cart/OrderSummary';
 import { IconSpinner } from '../icons/IconSpinner';
@@ -12,21 +11,6 @@ export const BillingOrderSummary = () => {
   const cart = useStore(useCartStore, (state) => state)?.cart;
 
   const user = useGetUser();
-
-  const { createOrder, loadingCreateOrder } = useCreateOrder();
-
-  const handleCreateOrder = () => {
-    const order: CreateOrderPayload = {
-      products: cart?.map((product) => ({
-        productId: product.product.id,
-        quantity: product.quantity,
-        description: product.product.description,
-        priceUnit: product.product.price,
-      })) as OrderProduct[],
-    };
-
-    createOrder(order);
-  };
 
   return (
     <Card shadow='none' className='w-full bg-primaryLight'>

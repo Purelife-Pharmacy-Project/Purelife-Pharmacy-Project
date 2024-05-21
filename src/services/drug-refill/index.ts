@@ -17,7 +17,7 @@ export class DrugRefillService {
       `${this.SUBSCRIPTION_TEMP_BASE}/get-sub-template`
     )) as unknown as SubscriptionTemp[];
 
-    return response;
+    return response || [];
   }
 
   public static async getSubscriptionsByCustomerId() {
@@ -33,7 +33,7 @@ export class DrugRefillService {
   }
 
   public static async createSubscription(payload: CreateSubscriptionPayload) {
-    const userId = UsersService.getUserFromToken().id;
+    const userId = UsersService.getUserFromToken()?.id || '';
 
     const response = (await Api.post<{}>(
       `${this.SUBSCRIPTION_API_BASE}/create`,

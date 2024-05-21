@@ -28,7 +28,7 @@ export const TelehealthProductCard: FC<LabTestCardProps> = ({
         >
           {test.name}
         </Link>
-        <p className='text-sm text-content'>{test.description}</p>
+        <p className='text-sm text-content'>{test.description || '_'}</p>
 
         <div className='flex flex-col items-start gap-2 md:flex-row md:justify-between md:gap-0 lg:items-center'>
           <p

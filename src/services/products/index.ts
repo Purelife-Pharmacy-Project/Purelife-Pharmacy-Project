@@ -5,50 +5,89 @@ import {
   ProductQueryParams,
   ProductType,
 } from '@/services/products/types';
+import { OdooResponseType } from '@/helpers/api/types';
 
 class ProductService {
   private static PRODUCTS_API_BASE = '/Product';
 
   public static getAllProducts = async (params: ProductQueryParams) => {
     const queryParams = filteredQueryParams({
-      Active: params.active,
-      PageSize: params.pageSize,
-      PageIndex: params.pageIndex,
-      Name: params.name,
-      CategoryId: params.categoryId,
-      ProductId: params.productId,
-      'PriceRange.MinPrice': params.minPrice,
-      'PriceRange.MaxPrice': params.maxPrice,
+      IsPublished: params.isPublished ?? true,
+      MinListPrice: params.MinListPrice || 0,
+      MaxListPrice: params.MaxListPrice || 1000000,
+      Limit: params.Limit,
+      Offset: params.offset,
+      CategoryId: params.CategoryId,
     });
 
     const response = (await Api.get<{
       data: ProductType[];
-      totalPage: number;
-    }>(`${this.PRODUCTS_API_BASE}/get-products?${queryParams}`)) as unknown as {
-      data: ProductType[];
-      totalPage: number;
+    }>(
+      `${this.PRODUCTS_API_BASE}/fetch-products?${
+        queryParams + '&Fields=name&Fields=lst_price&Fields=image_1024'
+      }`
+    )) as unknown as {
+      result: ProductType[];
     };
 
-    const products = response.data?.map((product) => new Product(product));
+    return (response.result || [])?.map((product) => new Product(product));
+  };
 
-    // return JSON.parse(
-    //   JSON.stringify({ products, totalPages: response.totalPage })
-    // ) as { products: Product[]; totalPages: number };
+  public static searchProducts = async (params: ProductQueryParams) => {
+    const queryParams = filteredQueryParams({
+      IsPublished: true,
+      Limit: params.Limit,
+      Offset: params.offset,
+      SearchQuery: params.searchQuery,
+    });
 
-    return { products, totalPages: response.totalPage };
+    const response = (await Api.get<{
+      data: ProductType[];
+    }>(
+      `${this.PRODUCTS_API_BASE}/search-products?${
+        queryParams + '&Fields=name&Fields=lst_price&Fields=image_1024'
+      }`
+    )) as unknown as {
+      result: ProductType[];
+    };
+
+    return (response.result || [])?.map((product) => new Product(product));
   };
 
   public static getProductByProductId = async (productId: string) => {
-    const response = (await Api.get<{
-      data: ProductType[];
-      totalPages: number;
-    }>(
-      `${this.PRODUCTS_API_BASE}/get-products?ProductId=${productId}`
-    )) as unknown as { data: ProductType[]; totalPages: number };
+    const response = (await Api.get<
+      OdooResponseType<
+        Array<{
+          id: string;
+          name: string;
+          lst_price: number;
+          image_256: number;
+        }>
+      >
+    >(
+      `${this.PRODUCTS_API_BASE}/get-by-id?productId=${productId}`
+    )) as unknown as OdooResponseType<
+      Array<{
+        id: string;
+        name: string;
+        lst_price: number;
+        image_256: number;
+      }>
+    >;
 
-    console.log(response.data[0]);
+    if (response.error || !response.result) {
+      throw 'Unable to fetch Item';
+    }
 
-    return new Product(response.data[0]);
+    return new Product({
+      ...response.result[0],
+      image_1024: response.result[0].image_256,
+      description: '',
+      canBePurchased: true,
+      canBeSold: true,
+      categ_id: [0, ''],
+      id: +response.result[0].id,
+    });
   };
 
   public static getDeliveryAddresses = async () => {

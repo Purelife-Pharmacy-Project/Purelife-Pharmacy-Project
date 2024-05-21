@@ -1,4 +1,3 @@
-import { AppNavbar } from '@/components/Navbar';
 import { CartCoupon } from '@/components/cart/CartCoupon';
 import { CartWrapper } from '@/components/cart/CartWrapper';
 import { NoOfCartItems } from '@/components/cart/NoOfCartItems';
@@ -9,8 +8,6 @@ import { Section } from '@/components/home/Section';
 export default function CartPage() {
   return (
     <>
-      <AppNavbar background={'primaryLight'} />
-
       <SubscribeDrugRefillModal isOpen={false} />
       <div className='lg:grid lg:justify-center lg:pb-10 lg:pt-[55px]'>
         <Section className='mt-8 bg-white lg:mt-0'>

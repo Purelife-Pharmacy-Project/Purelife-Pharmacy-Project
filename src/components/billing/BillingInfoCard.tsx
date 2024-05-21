@@ -1,14 +1,22 @@
 'use client';
 import { removeHtmlTags } from '@/helpers/utils';
-import { useGetUser } from '@/hooks';
+import { useCartStore, useGetPartner } from '@/hooks';
 import { Button, Card, CardBody } from '@nextui-org/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IconEdit } from '../icons/IconEdit';
 import { BillingAddressModal } from './BillingAddressModal';
 
 export const BillingInfoCard = () => {
-  const { user } = useGetUser();
+  const { partner } = useGetPartner();
   const [showDeliveryModal, setShowDeliveryModal] = useState(false);
+
+  const { deliveryDetails, setDeliveryDetails } = useCartStore();
+
+  useEffect(() => {
+    if (partner && Object.keys(deliveryDetails).length <= 0) {
+      setDeliveryDetails(partner);
+    }
+  }, [partner, deliveryDetails]);
 
   return (
     <Card shadow='none' className='bg-blueLight'>
@@ -16,43 +24,63 @@ export const BillingInfoCard = () => {
         <div className='flex justify-between'>
           <p className='text-2xl font-bold text-blue-900'>Billing Details</p>
 
-          <Button
-            variant='faded'
-            size='sm'
-            onPress={() => setShowDeliveryModal(true)}
-            className='font-medium text-blue-900'
-          >
-            Edit
-            <IconEdit size={14} color='blue-900' />
-          </Button>
+          {!Object.keys(deliveryDetails).length ? (
+            <Button
+              variant='faded'
+              size='sm'
+              onPress={() => setShowDeliveryModal(true)}
+              className='font-medium text-blue-900'
+            >
+              Edit
+              <IconEdit size={14} color='blue-900' />
+            </Button>
+          ) : null}
         </div>
 
         <div className='grid gap-6'>
           <div className='flex w-full justify-between'>
             <p className='text-light text-content'>Name</p>
 
-            <p className='font-medium text-header-100'>{user?.name || '_'}</p>
+            <p className='font-medium text-header-100'>
+              {deliveryDetails?.name || '_'}
+            </p>
           </div>
           <div className='flex w-full justify-between'>
             <p className='text-light text-content'>Email</p>
 
-            <p className='font-medium text-header-100'>{user?.email || '_'}</p>
+            <p className='font-medium text-header-100'>
+              {deliveryDetails?.email || '_'}
+            </p>
           </div>
           <div className='flex w-full justify-between'>
             <p className='text-light text-content'>Phone number</p>
 
             <p className='font-medium text-header-100'>
-              {user?.phoneNumber || '_'}
+              {deliveryDetails?.phoneNumber || '_'}
             </p>
           </div>
           <div className='flex w-full justify-between'>
             <p className='text-light text-content'>Contact Address</p>
 
-            <p className='font-medium text-header-100'>
-              {user?.contactAddress && user?.contactAddress.trim() !== ''
-                ? removeHtmlTags(user?.contactAddress)
-                : 'N/A'}
-            </p>
+            <div className='flex flex-col gap-1'>
+              <p className='font-medium text-header-100'>
+                {deliveryDetails?.contactAddress &&
+                deliveryDetails?.contactAddress.trim() !== ''
+                  ? removeHtmlTags(deliveryDetails?.contactAddress)
+                  : 'N/A'}
+              </p>
+              {deliveryDetails?.contactAddress === partner?.contactAddress &&
+              Object.keys(deliveryDetails).length ? (
+                <Button
+                  variant='faded'
+                  size='sm'
+                  onPress={() => setShowDeliveryModal(true)}
+                  className='self-end font-medium text-blue-900'
+                >
+                  Send to a different address
+                </Button>
+              ) : null}
+            </div>
           </div>
         </div>
 

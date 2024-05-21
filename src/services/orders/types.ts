@@ -1,4 +1,5 @@
 import { toNaira } from '@/helpers/utils';
+import { OdooResponseType } from '@/helpers/api/types';
 
 export type OrderProduct = {
   productId: number;
@@ -8,10 +9,18 @@ export type OrderProduct = {
 };
 
 export type CreateOrderPayload = {
-  customerId?: number;
-  billingAddress?: string;
-  products: OrderProduct[];
+  partnerId: number;
+  address: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  products: Array<{
+    productId: number;
+    productQuantity: number;
+  }>;
 };
+
+export type CreateOrderResponse = {} & OdooResponseType<number>;
 
 export type OrderType = {
   id: number;

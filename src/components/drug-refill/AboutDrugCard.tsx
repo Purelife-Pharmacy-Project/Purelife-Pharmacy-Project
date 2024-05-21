@@ -109,7 +109,7 @@ export const AboutDrugCard: FC<AboutDrugCardProps> = ({
   };
 
   const totalAmount = productSubscriptionList.reduce(
-    (acc, item) => acc + item.product.price * item.quantity,
+    (acc, item) => acc + item.product.lst_price * item.quantity,
     0
   );
 
@@ -121,7 +121,7 @@ export const AboutDrugCard: FC<AboutDrugCardProps> = ({
       products: productSubscriptionList.map((item) => ({
         productId: item.product.id,
         quantity: item.quantity,
-        priceUnit: item.product.price,
+        priceUnit: item.product.lst_price,
       })),
     };
 
@@ -253,45 +253,51 @@ export const AboutDrugCard: FC<AboutDrugCardProps> = ({
                               />
                             </div>
                           </div>
-                          {/* <div className='flex justify-between border-b border-gray-300 py-4'>
-                            <p className='text-lg font-light text-header-100'>
-                              Subscription Plan
-                            </p>
-                            <RadioGroup
-                              isDisabled={
-                                loadingSubscriptionTempList ||
-                                !subscription.product
-                              }
-                              defaultValue={subscription.subscriptionId}
-                              onValueChange={(value) => {
-                                const newProductSubscriptionList =
-                                  productSubscriptionList.map((item) => {
-                                    if (
-                                      item.product.id ===
-                                      subscription.product.id
-                                    ) {
-                                      return {
-                                        ...item,
-                                        subscriptionId: value,
-                                      };
-                                    }
-                                    return item;
-                                  });
+                          {subscriptionTempList &&
+                            subscriptionTempList.length > 0 && (
+                              <div className='flex justify-between border-b border-gray-300 py-4'>
+                                <p className='text-lg font-light text-header-100'>
+                                  Subscription Plan
+                                </p>
+                                <RadioGroup
+                                  isDisabled={
+                                    loadingSubscriptionTempList ||
+                                    !subscription.product
+                                  }
+                                  defaultValue={subscription.subscriptionId}
+                                  onValueChange={(value) => {
+                                    const newProductSubscriptionList =
+                                      productSubscriptionList.map((item) => {
+                                        if (
+                                          item.product.id ===
+                                          subscription.product.id
+                                        ) {
+                                          return {
+                                            ...item,
+                                            subscriptionId: value,
+                                          };
+                                        }
+                                        return item;
+                                      });
 
-                                setProductSubscriptionList(
-                                  newProductSubscriptionList
-                                );
-                              }}
-                              orientation='horizontal'
-                              className='flex flex-col gap-4 lg:flex-row'
-                            >
-                              {subscriptionTempList?.map((item) => (
-                                <Radio key={item.id} value={String(item.id)}>
-                                  {item.name}
-                                </Radio>
-                              ))}
-                            </RadioGroup>
-                          </div> */}
+                                    setProductSubscriptionList(
+                                      newProductSubscriptionList
+                                    );
+                                  }}
+                                  orientation='horizontal'
+                                  className='flex flex-col gap-4 lg:flex-row'
+                                >
+                                  {subscriptionTempList?.map((item) => (
+                                    <Radio
+                                      key={item.id}
+                                      value={String(item.id)}
+                                    >
+                                      {item.name}
+                                    </Radio>
+                                  ))}
+                                </RadioGroup>
+                              </div>
+                            )}
                         </div>
 
                         <div className='my-5 flex justify-end'>

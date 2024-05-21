@@ -1,7 +1,6 @@
 'use client';
 import { IconWomen } from '@/components/icons/IconWomen';
-import { useGetCategories, useQueryParams } from '@/hooks';
-import { useGetLabTests } from '@/hooks/useLabTest';
+import { useGetCategories, useGetProducts, useQueryParams } from '@/hooks';
 import { Button } from '@nextui-org/react';
 import { useSearchParams } from 'next/navigation';
 import { FC } from 'react';
@@ -26,17 +25,17 @@ enum CategoryNames {
 export const LabTestProducts: FC<LabTestProductsProps> = () => {
   const searchParams = useSearchParams();
   const pageIndex = Number(searchParams.get('pageIndex')) || 1;
-  const category = searchParams.get('category');
+  const category = searchParams.get('category') || undefined;
 
   const { setQuery, removeQuery } = useQueryParams();
-
-  const { loadingLabTests, labTests } = useGetLabTests({
-    pageSize: 12,
-    pageIndex,
-    categoryId: category ? Number(category) : undefined,
-  });
-
   const { categories } = useGetCategories();
+
+  const { loadingProducts: loadingLabTests, products: labTests } =
+    useGetProducts({
+      limit: 12,
+      offset: pageIndex,
+      categoryId: category || '21',
+    });
 
   // Filter out categories that are not related to lab tests
   const filteredData = categories
@@ -91,8 +90,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                 <div key={index} className='gap-2 xl:grid xl:justify-center'>
                   <Button
                     isDisabled={
-                      loadingLabTests ||
-                      (labTests?.data && labTests?.data.length === 0)
+                      loadingLabTests || (labTests && labTests?.length === 0)
                     }
                     radius='full'
                     isIconOnly
@@ -132,10 +130,10 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
           <Section className='border-t-2 border-primaryGreen bg-transparent py-20'>
             {loadingLabTests ? <LabTestsSkeleton /> : null}
 
-            {labTests?.data && labTests?.data.length > 0 && !loadingLabTests ? (
+            {labTests && labTests?.length > 0 && !loadingLabTests ? (
               <div className='grid w-full gap-6'>
                 <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
-                  {labTests.data?.map((test, index) => (
+                  {labTests?.map((test, index) => (
                     <TelehealthProductCard
                       color='success'
                       test={test}
@@ -143,22 +141,24 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                     />
                   ))}
                 </div>
-
-                <ProductsPagination
-                  color='success'
-                  loading={loadingLabTests}
-                  className='text-white'
-                  totalPages={labTests?.totalPages as number}
-                />
               </div>
             ) : null}
 
-            {!loadingLabTests && labTests?.data.length === 0 ? (
+            {!loadingLabTests && labTests?.length === 0 ? (
               <div className='grid w-full place-content-center'>
                 <p className='text-center font-medium'>
                   No Lab Tests Yet. Try again
                 </p>
               </div>
+            ) : null}
+
+            {!loadingLabTests && labTests ? (
+              <ProductsPagination
+                color='success'
+                loading={loadingLabTests}
+                className='text-white'
+                totalPages={100}
+              />
             ) : null}
           </Section>
         </div>

@@ -1,4 +1,3 @@
-import { AppNavbar } from '@/components/Navbar';
 import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
 import { DrugRefillHero } from '@/components/drug-refill/DrugRefillHero';
 import { Footer } from '@/components/home/Footer';
@@ -38,7 +37,6 @@ export default async function DrugRefill() {
 
   return (
     <>
-      <AppNavbar background={'primaryLight'} />
       <main className='grid gap-6'>
         {/*<HydrationBoundary state={dehydrate(queryClient)}>*/}
         <DrugRefillHero />

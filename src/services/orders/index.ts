@@ -1,5 +1,4 @@
 import Api from '@/helpers/api';
-import UsersService from '../user';
 import {
   ApplyCouponPayload,
   CouponType,
@@ -7,20 +6,59 @@ import {
   Order,
   OrderType,
 } from './types';
+import {
+  InitiateTransactionResponse,
+  OrderResponse,
+  ReadSaleResponse,
+} from '@/services/cart/types';
 
 class OrderService {
-  private static ORDERS_API_BASE = '/Order';
+  private static ORDERS_API_BASE = '/Sales';
   private static COUPONS_API_BASE = '/Coupon';
 
   constructor() {}
 
   public static async createOrder(order: CreateOrderPayload) {
-    const userId = UsersService.getUserFromToken().id;
+    const response = (await Api.post<OrderResponse>(
+      `${this.ORDERS_API_BASE}/create-bulk-sale`,
+      order
+    )) as unknown as OrderResponse;
 
-    return Api.post(`${this.ORDERS_API_BASE}/create`, {
-      ...order,
-      customerId: userId,
-    });
+    if (response.error || !response.result) {
+      throw 'Unable to create order';
+    }
+
+    const salesOrderId = response.result;
+
+    const salesResponse = (await Api.get<ReadSaleResponse>(
+      `${this.ORDERS_API_BASE}/read-sale?SaleOrderId=${salesOrderId}`
+    )) as unknown as ReadSaleResponse;
+
+    if (salesResponse.error || !salesResponse.result) {
+      throw 'Unable to read sale';
+    }
+
+    const transactionResponse = (await Api.post<InitiateTransactionResponse>(
+      `Transactions/create-and-initiate`,
+      {
+        partnerId: order.partnerId,
+        amount: salesResponse.result[0].amount_total,
+        currencyId: 120,
+        paymentType: 'inbound',
+        journalId: 17,
+        paymentMethodLineId: 22,
+        reference: salesResponse.result[0].name,
+        email: order.email,
+        acquirerId: 16,
+        salesOrderIds: [{ id: 4, salesId: salesOrderId }],
+      }
+    )) as unknown as InitiateTransactionResponse;
+
+    if (transactionResponse.error) {
+      throw 'Unable to create transaction';
+    }
+
+    return transactionResponse.data;
   }
 
   public static async getAllCustomerOrders() {

@@ -1,4 +1,3 @@
-import { AppNavbar } from '@/components/Navbar';
 import { EarnedClients } from '@/components/home/EarnedClients';
 import { Footer } from '@/components/home/Footer';
 import { HomeHero } from '@/components/home/HomeHero';
@@ -26,7 +25,6 @@ export default function Telehealth() {
 
   return (
     <>
-      <AppNavbar background='primaryLight' />
       <main className='grid gap-6'>
         <div className='bg-primaryLight lg:grid lg:justify-center'>
           <Section className='bg-primaryLight'>
