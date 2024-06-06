@@ -42,7 +42,7 @@ jobs:
         key: ${{ secrets.FI_KEY }}
         port: ${{ secrets.FI_PORT }}
         script: |
-          cd /usr/fi-server-project/Purelife-Pharmacy-Project
+          cd /usr/staging-projects/fi-staging-projects/Purelife-Pharmacy-Project
           sudo git pull origin boluDev
           sudo docker build -t purelife-frontend .
           sudo docker rm -f purelife-frontend
