@@ -75,7 +75,7 @@ export const Footer = () => {
           path: '/telehealth/find-a-doctor',
         },
         {
-          name: 'Upload vaccination',
+          name: 'Book a vaccination',
           path: '/telehealth/upload-prescription',
         },
       ],
