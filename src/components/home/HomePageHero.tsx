@@ -60,7 +60,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
             className='absolute bottom-10 left-[-7px] z-10 flex items-center gap-3 rounded-md bg-white p-1.5 shadow-lg md:bottom-[105px] lg:px-6 lg:py-2.5'
           >
             <IconTellehealthRound />
-            <p className='text-xs font-bold text-header-100 md:text-sm'>
+            <p className='text-sm font-bold text-primary md:text-base'>
               TeleHealth
             </p>
           </Link>
@@ -70,8 +70,8 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
             className='absolute bottom-2 right-[-7px] z-10 flex items-center gap-3 rounded-md bg-white p-1.5 shadow-lg md:bottom-[25px] lg:px-6 lg:py-2.5'
           >
             <IconShopAndOrderRound />
-            <p className='text-xs font-bold text-header-100 md:text-sm'>
-              Shop & Order
+            <p className='text-sm font-bold text-primary md:text-base'>
+              Pharmacy
             </p>
           </Link>
         </div>
