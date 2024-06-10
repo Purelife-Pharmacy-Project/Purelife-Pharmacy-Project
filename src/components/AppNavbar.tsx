@@ -53,7 +53,7 @@ export const AppNavbar = ({
       path: '/telehealth',
     },
     {
-      name: 'Shop & Order',
+      name: 'Pharmacy',
       path: '/telehealth/shop-and-order',
     },
     {
@@ -129,7 +129,7 @@ export const AppNavbar = ({
                   : ''
               }
             >
-              Shop & Order
+              Pharmacy
             </Link>
           </NavbarItem>
           <NavbarItem className='text-lg leading-[27px] text-header-100'>
