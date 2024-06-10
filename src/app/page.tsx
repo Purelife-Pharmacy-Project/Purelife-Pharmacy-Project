@@ -45,10 +45,16 @@ export default async function Home() {
     <>
       <main className='grid gap-6'>
         <HomePageHero
-          title='Pharmacy and Telemedicine in one click'
+          title='Simplify your health journey with one click!'
           description='Saves time, unlimited access, quality service and providers, authentic medications and one-stop shop.'
           ctaText='Shop All'
           ctaLink='/shop'
+          features={[
+            'unlimited access',
+            'quality providers',
+            'authentic medications',
+            'saves time',
+          ]}
         />
 
         <HomePartners />

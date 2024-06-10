@@ -1,21 +1,22 @@
 'use client';
 import { Button, Image, Link } from '@nextui-org/react';
 import { FC } from 'react';
-import { IconShopAndOrderRound } from '../icons/IconShopAndOrderRound';
-import { IconTellehealthRound } from '../icons/IconTellehealthRound';
 import { Section } from './Section';
+import { IconDoubleCheck } from '@/components/icons/IconDoubleCheck';
 
 interface HomePageHeroProps {
   title: string;
   description: string;
   ctaText: string;
   ctaLink: string;
+  features: string[];
 }
 export const HomePageHero: FC<HomePageHeroProps> = ({
   title = 'Your the one-stop shop for wellness and lifestyle.',
   description = 'Schedule laboratory tests, book vaccination appointments, and receive high-quality medical services from the convenience of wherever you are in Nigeria.',
   ctaText = 'Start here',
   ctaLink = '#',
+  features,
 }) => {
   // const ctaAction = () =>
   //   document
@@ -29,20 +30,39 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
           <h1 className='mx-auto w-4/5  text-center text-2xl font-bold  text-header-100 sm:max-w-[300px] md:max-w-[250px] lg:mx-0 lg:max-w-[530px] lg:text-start lg:text-5xl'>
             {title}
           </h1>
-          <p className='mx-auto w-full text-center text-base font-light leading-[30px] text-content sm:max-w-[300px] md:max-w-[250px] lg:mx-0 lg:max-w-[498px] lg:text-start lg:text-lg'>
-            {description}
+          <p className='mx-auto flex w-full flex-wrap gap-x-1.5 gap-y-4 text-center text-base font-light leading-[30px] text-content sm:max-w-[300px] md:max-w-[250px] lg:mx-0 lg:max-w-[498px] lg:text-start lg:text-lg'>
+            {features.map((feature) => (
+              <span key={feature} className='flex items-center gap-2'>
+                <span className='grid h-6 w-6 place-content-center rounded-full bg-white text-sm text-primary'>
+                  <IconDoubleCheck size={14} />
+                </span>
+                <span className='font-medium first-letter:uppercase lg:text-lg'>
+                  {feature}
+                </span>
+              </span>
+            ))}
           </p>
 
-          <div className='flex w-full justify-center lg:w-max lg:justify-start'>
+          <div className='flex w-full justify-center gap-3 lg:w-max lg:justify-start'>
             <Button
               radius='full'
               as={Link}
-              href={ctaLink}
-              className='px-12 py-6'
+              href='/telehealth'
+              className='px-12 py-6 font-medium'
               color='primary'
               size='lg'
             >
-              {ctaText}
+              Telehealth
+            </Button>
+            <Button
+              radius='full'
+              as={Link}
+              href='/telehealth/shop-and-order'
+              className='border-header-100 bg-white px-12 py-6 font-medium text-header-100'
+              variant='bordered'
+              size='lg'
+            >
+              Pharmacy
             </Button>
           </div>
         </div>
@@ -55,25 +75,6 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
             src='/images/joyful-caring-couple.png'
             alt='charming joyful youth couple'
           />
-          <Link
-            href='/telehealth'
-            className='absolute bottom-10 left-[-7px] z-10 flex items-center gap-3 rounded-md bg-white p-1.5 shadow-lg md:bottom-[105px] lg:px-6 lg:py-2.5'
-          >
-            <IconTellehealthRound />
-            <p className='text-sm font-bold text-primary md:text-base'>
-              TeleHealth
-            </p>
-          </Link>
-
-          <Link
-            href='/telehealth/shop-and-order'
-            className='absolute bottom-2 right-[-7px] z-10 flex items-center gap-3 rounded-md bg-white p-1.5 shadow-lg md:bottom-[25px] lg:px-6 lg:py-2.5'
-          >
-            <IconShopAndOrderRound />
-            <p className='text-sm font-bold text-primary md:text-base'>
-              Pharmacy
-            </p>
-          </Link>
         </div>
       </Section>
     </div>

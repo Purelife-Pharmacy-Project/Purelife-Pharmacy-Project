@@ -28,7 +28,7 @@ export const HomePartners = () => {
     <div className='lg:py-4 xl:grid xl:justify-center'>
       <Section className='bg-white'>
         <div className='flex flex-col items-center gap-4 lg:flex-row lg:justify-between lg:gap-[143px]'>
-          <p className='max-w-[211px] text-center text-header-100 lg:text-start'>
+          <p className='max-w-[211px] text-center font-medium text-header-100  lg:text-start'>
             We are partners with over 30+ Health Providers
           </p>
           <div className='mx-auto grid grid-flow-dense grid-cols-2 gap-[39.31px] md:mx-0 md:grid-cols-4 lg:grid-flow-col'>
