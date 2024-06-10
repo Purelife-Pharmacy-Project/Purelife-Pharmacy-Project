@@ -12,6 +12,6 @@ RUN npm install
 
 RUN npm run build --if-present
 
-EXPOSE 3829
+EXPOSE 3400
 
 CMD [ "npm", "start" ]
