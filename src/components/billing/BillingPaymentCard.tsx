@@ -75,12 +75,16 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
   const excludeAddressIds = [62943];
 
   const addresses = useMemo(() => {
-    return (
+    const items =
       products?.pages.reduce((acc, page) => {
         return [...acc, ...page];
-      }, []) || []
-    ).filter((item) => !excludeAddressIds.includes(item.id));
-  }, [products]);
+      }, []) || [];
+    // if (summary && summary.totalCartAmount >= 15000) {
+    return items.filter((item) => excludeAddressIds.includes(item.id));
+    // } else {
+    //   return items.filter((item) => !excludeAddressIds.includes(item.id));
+    // }
+  }, [products, summary]);
 
   const [selectedAddress, setSelectedAddress] = useState<
     Partial<Product> | undefined
