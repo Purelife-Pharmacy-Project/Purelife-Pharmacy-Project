@@ -79,11 +79,11 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
       products?.pages.reduce((acc, page) => {
         return [...acc, ...page];
       }, []) || [];
-    if (summary && summary.totalCartAmount >= 15000) {
-      return items.filter((item) => excludeAddressIds.includes(item.id));
-    } else {
-      return items.filter((item) => !excludeAddressIds.includes(item.id));
-    }
+    // if (summary && summary.totalCartAmount >= 15000) {
+    return items.filter((item) => excludeAddressIds.includes(item.id));
+    // } else {
+    //   return items.filter((item) => !excludeAddressIds.includes(item.id));
+    // }
   }, [products, summary]);
 
   const [selectedAddress, setSelectedAddress] = useState<
