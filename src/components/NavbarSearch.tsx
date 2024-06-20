@@ -52,11 +52,11 @@ export const NavbarSearch = () => {
   }, [filteredProducts]);
 
   useEffect(() => {
-    if (filteredItems?.length === 0) {
+    if (filteredItems?.length === 0 && searchStr !== '') {
       refetch().then(() => {});
     }
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filteredProducts]);
+  }, [filteredProducts, searchStr]);
 
   const handleInputChange = useCallback(
     (value: string) => {
