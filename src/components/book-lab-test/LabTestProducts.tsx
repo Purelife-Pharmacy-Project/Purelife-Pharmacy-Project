@@ -1,17 +1,21 @@
 'use client';
 import { IconWomen } from '@/components/icons/IconWomen';
-import { useGetCategories, useGetProducts, useQueryParams } from '@/hooks';
-import { Button } from '@nextui-org/react';
+import {
+  useGetCategories,
+  useGetProductsInfinity,
+  useQueryParams,
+} from '@/hooks';
+import { Button, Skeleton } from '@nextui-org/react';
 import { useSearchParams } from 'next/navigation';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { TelehealthProductCard } from '../TelehealthProductCard';
 import { Section } from '../home/Section';
 import { IconHealthShield } from '../icons/IconHealthShield';
 import { IconMensHealth } from '../icons/IconMensHealth';
 import { IconStethoscope } from '../icons/IconStethoscope';
-import { ProductsPagination } from '../shop-and-order/category/partials/ProductPagination';
 import { LabTestsSkeleton } from './skeleton/LabTestsSkeleton';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 type LabTestProductsProps = {};
 
@@ -30,12 +34,21 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
   const { setQuery, removeQuery } = useQueryParams();
   const { categories } = useGetCategories();
 
-  const { loadingProducts: loadingLabTests, products: labTests } =
-    useGetProducts({
-      limit: 12,
-      offset: pageIndex,
-      categoryId: category || '21',
-    });
+  const {
+    products,
+    loadingProducts: loadingLabTests,
+    fetchProductNextPage,
+    productHasNextPage,
+  } = useGetProductsInfinity({
+    categoryId: category || '21',
+    limit: 12,
+  });
+
+  const labTests = useMemo(() => {
+    return products?.pages.reduce((acc, page) => {
+      return [...acc, ...page];
+    }, []);
+  }, [products]);
 
   // Filter out categories that are not related to lab tests
   const filteredData = categories
@@ -132,7 +145,27 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
 
             {labTests && labTests?.length > 0 && !loadingLabTests ? (
               <div className='grid w-full gap-6'>
-                <div className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'>
+                <InfiniteScroll
+                  next={fetchProductNextPage}
+                  hasMore={productHasNextPage}
+                  loader={
+                    <>
+                      {Array(6)
+                        .fill(0)
+                        .map((_, index) => (
+                          <Skeleton
+                            key={index}
+                            className={
+                              'h-[188px] w-full rounded-xl bg-white sm:w-[350px] lg:w-[384px]'
+                            }
+                          ></Skeleton>
+                        ))}
+                    </>
+                  }
+                  scrollThreshold={0.4}
+                  dataLength={labTests?.length}
+                  className='relative grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'
+                >
                   {labTests?.map((test, index) => (
                     <TelehealthProductCard
                       color='success'
@@ -140,7 +173,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                       key={index}
                     />
                   ))}
-                </div>
+                </InfiniteScroll>
               </div>
             ) : null}
 
@@ -150,15 +183,6 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                   No Lab Tests Yet. Try again
                 </p>
               </div>
-            ) : null}
-
-            {!loadingLabTests && labTests ? (
-              <ProductsPagination
-                color='success'
-                loading={loadingLabTests}
-                className='text-white'
-                totalPages={100}
-              />
             ) : null}
           </Section>
         </div>
