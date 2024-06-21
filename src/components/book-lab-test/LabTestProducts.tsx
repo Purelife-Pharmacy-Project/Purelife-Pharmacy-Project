@@ -5,9 +5,9 @@ import {
   useGetProductsInfinity,
   useQueryParams,
 } from '@/hooks';
-import { Button, Skeleton } from '@nextui-org/react';
+import { Button, Input, Skeleton } from '@nextui-org/react';
 import { useSearchParams } from 'next/navigation';
-import { FC, useMemo } from 'react';
+import { FC, useCallback, useMemo, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { TelehealthProductCard } from '../TelehealthProductCard';
 import { Section } from '../home/Section';
@@ -16,6 +16,9 @@ import { IconMensHealth } from '../icons/IconMensHealth';
 import { IconStethoscope } from '../icons/IconStethoscope';
 import { LabTestsSkeleton } from './skeleton/LabTestsSkeleton';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import clsx from 'clsx';
+import debounce from 'lodash/debounce';
+import { IconSearch } from '@/components/icons/IconSearch';
 
 type LabTestProductsProps = {};
 
@@ -28,11 +31,16 @@ enum CategoryNames {
 
 export const LabTestProducts: FC<LabTestProductsProps> = () => {
   const searchParams = useSearchParams();
-  const pageIndex = Number(searchParams.get('pageIndex')) || 1;
   const category = searchParams.get('category') || undefined;
+
+  const [searchStr, setSearchStr] = useState<string | undefined>('');
 
   const { setQuery, removeQuery } = useQueryParams();
   const { categories } = useGetCategories();
+
+  const handleDebouncedSearch = debounce((value: string) => {
+    setSearchStr(value);
+  }, 800);
 
   const {
     products,
@@ -50,6 +58,15 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
     }, []);
   }, [products]);
 
+  const filteredLabTests = useMemo(() => {
+    if (!searchStr) {
+      return labTests;
+    }
+    return labTests?.filter((test) =>
+      test.name.toLowerCase().includes(searchStr?.toLowerCase())
+    );
+  }, [searchStr, labTests]);
+
   // Filter out categories that are not related to lab tests
   const filteredData = categories
     ?.filter(
@@ -63,14 +80,47 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
       name: item.name,
     }));
 
-  const getCategoryIcon = (name: string) => {
+  const getCategoryIcon = (name: string, active?: boolean) => {
     switch (name) {
       case CategoryNames.MEN:
-        return <IconMensHealth size={75} color='success' />;
+        return (
+          <IconMensHealth
+            className={clsx(
+              {
+                'text-success': active,
+                'text-[#BFBFBF]': !active,
+              },
+              'lg:scale-[2]'
+            )}
+            size={32}
+          />
+        );
       case CategoryNames.WOMEN:
-        return <IconWomen size={75} color='success' />;
+        return (
+          <IconWomen
+            className={clsx(
+              {
+                'text-success': active,
+                'text-[#BFBFBF]': !active,
+              },
+              'lg:scale-[2]'
+            )}
+            size={32}
+          />
+        );
       case CategoryNames.SEXUAL:
-        return <IconHealthShield size={75} color='success' />;
+        return (
+          <IconHealthShield
+            className={clsx(
+              {
+                'text-success': active,
+                'text-[#BFBFBF]': !active,
+              },
+              'lg:scale-[2]'
+            )}
+            size={40}
+          />
+        );
       case CategoryNames.ALL:
         return <IconStethoscope color='success' />;
       default:
@@ -78,9 +128,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
     }
   };
 
-  const labTestCategories = filteredData
-    ? [...filteredData, { id: 0, name: 'All', icon: '' }]
-    : [];
+  const labTestCategories = filteredData;
 
   const handleFilterByCategory = (
     categoryId: string | number,
@@ -93,14 +141,21 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
     }
   };
 
+  const handleInputChange = useCallback(
+    (value: string) => {
+      handleDebouncedSearch(value);
+    },
+    [handleDebouncedSearch]
+  );
+
   return (
     <>
-      <div className='grid justify-center'>
+      <div className='grid'>
         <Section className='bg-white'>
           {
-            <div className='grid gap-10 sm:grid-cols-2 lg:grid-flow-col lg:grid-cols-4'>
+            <div className='grid grid-flow-col gap-10'>
               {labTestCategories?.map((_c, index) => (
-                <div key={index} className='gap-2 xl:grid xl:justify-center'>
+                <div key={index} className='grid justify-center gap-2'>
                   <Button
                     isDisabled={
                       loadingLabTests || (labTests && labTests?.length === 0)
@@ -110,14 +165,14 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                     onPress={() =>
                       handleFilterByCategory(String(_c.id), _c.name)
                     }
-                    className={twMerge(
-                      'flex h-[140px] w-[140px] items-center justify-center bg-primaryGreenLight p-0',
+                    className={clsx(
+                      'flex h-[62px] w-[62px] items-center justify-center lg:h-[140px] lg:w-[140px]',
                       category === String(_c.id)
-                        ? 'border-3 border-primaryGreen'
-                        : 'border-3 border-transparent'
+                        ? 'bg-primaryGreenLight'
+                        : 'bg-[#F8F7F8]'
                     )}
                   >
-                    {getCategoryIcon(_c.name)}
+                    {getCategoryIcon(_c.name, category === String(_c.id))}
                   </Button>
                   <div className='flex justify-center'>
                     <p
@@ -140,10 +195,36 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
       {/* Products */}
       <div className='min-h-fit w-full bg-gray-100'>
         <div className='md:grid md:justify-center'>
-          <Section className='border-t-2 border-primaryGreen bg-transparent py-20'>
+          <Section className='border-t-2 border-primaryGreen bg-transparent py-10'>
+            <div className='relative my-10'>
+              <Input
+                size='lg'
+                radius='full'
+                type='Search'
+                onChange={(e) => handleInputChange(e.target.value)}
+                classNames={{
+                  input: ['py-6'],
+                  inputWrapper: [
+                    'h-max',
+                    'pr-2',
+                    'bg-white',
+                    'shadow-none',
+                    'text-black capitalize',
+                    'data-[hover=true]:bg-white',
+                    'group-data-[focus=true]:bg-white transition-all group-data-[focus=true]:shadow-md',
+                    'group-data-[active=true]:bg-white',
+                  ],
+                }}
+                startContent={<IconSearch size={24} color='success' />}
+                placeholder='Search all tests here'
+              />
+            </div>
+
             {loadingLabTests ? <LabTestsSkeleton /> : null}
 
-            {labTests && labTests?.length > 0 && !loadingLabTests ? (
+            {filteredLabTests &&
+            filteredLabTests?.length > 0 &&
+            !loadingLabTests ? (
               <div className='grid w-full gap-6'>
                 <InfiniteScroll
                   next={fetchProductNextPage}
@@ -163,10 +244,10 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                     </>
                   }
                   scrollThreshold={0.4}
-                  dataLength={labTests?.length}
+                  dataLength={filteredLabTests?.length}
                   className='relative grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'
                 >
-                  {labTests?.map((test, index) => (
+                  {filteredLabTests?.map((test, index) => (
                     <TelehealthProductCard
                       color='success'
                       test={test}
@@ -177,7 +258,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
               </div>
             ) : null}
 
-            {!loadingLabTests && labTests?.length === 0 ? (
+            {!loadingLabTests && filteredLabTests?.length === 0 ? (
               <div className='grid w-full place-content-center'>
                 <p className='text-center font-medium'>
                   No Lab Tests Yet. Try again
