@@ -1,27 +1,38 @@
-export const IconHealthShield = ({ color = 'inherit', size = 48 }) => {
+export const IconHealthShield = ({
+  color = 'inherit',
+  size = 48,
+  className = '',
+}) => {
   return (
     <svg
       width={size}
       height={size}
-      viewBox='0 0 57 57'
+      viewBox='0 0 35 35'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
+      className={className}
     >
       <mask
-        id='mask0_416_1545'
+        id='mask0_93_113'
         style={{ maskType: 'alpha' }}
         maskUnits='userSpaceOnUse'
         x='0'
         y='0'
-        width={size}
-        height={size}
+        width='35'
+        height='35'
       >
-        <rect width={size} height={size} fill='#D9D9D9' />
+        <rect
+          x='0.80933'
+          y='0.919434'
+          width='33.4122'
+          height='33.4122'
+          fill='currentColor'
+        />
       </mask>
-      <g mask='url(#mask0_416_1545)'>
+      <g mask='url(#mask0_93_113)'>
         <path
-          d='M24.5808 36.2863H31.604V30.4336H37.4566V23.4105H31.604V17.5579H24.5808V23.4105H18.7282V30.4336H24.5808V36.2863ZM28.0924 51.5031C22.669 50.1375 18.1917 47.0258 14.6606 42.1681C11.1296 37.3105 9.36401 31.9163 9.36401 25.9857V11.7053L28.0924 4.68213L46.8208 11.7053V25.9857C46.8208 31.9163 45.0552 37.3105 41.5241 42.1681C37.9931 47.0258 33.5158 50.1375 28.0924 51.5031Z'
-          className={`fill-current text-${color}`}
+          d='M15.4271 22.4984H19.6036V19.018H23.084V14.8415H19.6036V11.3611H15.4271V14.8415H11.9466V19.018H15.4271V22.4984ZM17.5153 31.5476C14.2901 30.7355 11.6276 28.885 9.52772 25.9963C7.42786 23.1075 6.37793 19.8997 6.37793 16.3729V7.88062L17.5153 3.7041L28.6527 7.88062V16.3729C28.6527 19.8997 27.6028 23.1075 25.5029 25.9963C23.403 28.885 20.7405 30.7355 17.5153 31.5476Z'
+          fill='currentColor'
         />
       </g>
     </svg>

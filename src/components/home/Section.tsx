@@ -11,7 +11,7 @@ export const Section = ({
   return (
     <section
       className={twMerge(
-        'xl:max-w-1024 w-full bg-background px-4 lg:px-6 xl:w-1024',
+        'xl:max-w-1024 mx-auto w-full bg-background px-4 lg:px-6 xl:w-1024',
         className
       )}
     >

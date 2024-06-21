@@ -75,6 +75,9 @@ export const AppNavbar = ({
       isBlurred={disabled}
       className={`py-4 text-foreground lg:pb-2 ${getNavbarBackground()}`}
       maxWidth='xl'
+      classNames={{
+        menu: 'top-[70px]',
+      }}
     >
       <NavbarContent
         justify='start'

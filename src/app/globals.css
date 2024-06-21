@@ -40,3 +40,13 @@ input[type='date']::-webkit-calendar-picker-indicator {
 input[type='time']::-webkit-calendar-picker-indicator {
   display: none;
 }
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
