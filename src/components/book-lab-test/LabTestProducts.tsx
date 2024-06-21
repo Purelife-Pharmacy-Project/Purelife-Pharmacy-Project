@@ -196,7 +196,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
       <div className='min-h-fit w-full bg-gray-100'>
         <div className='md:grid md:justify-center'>
           <Section className='border-t-2 border-primaryGreen bg-transparent py-10'>
-            <div className='relative my-10'>
+            <div className='relative mx-auto my-10 w-11/12'>
               <Input
                 size='lg'
                 radius='full'
