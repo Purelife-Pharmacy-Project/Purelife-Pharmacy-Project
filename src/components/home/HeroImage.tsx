@@ -27,6 +27,8 @@ export const HeroImage = () => {
         return '/images/purelife-wellness.jpg';
       case '/telehealth/find-a-doctor':
         return '/images/consult-doctor.png';
+      case '/lifestyle':
+        return '/images/women-in-park.png';
       case '/partner-with-us':
         return '/images/partner-with-us.png';
       default:
@@ -76,8 +78,8 @@ export const HeroImage = () => {
       >
         <CardBody className={currentPath === '/' ? 'p-0' : 'p-3'}>
           <Image
-            width={600}
-            height={600}
+            width={currentPath === '/lifestyle' ? 450 : 600}
+            height={currentPath === '/lifestyle' ? 450 : 600}
             className='rounded-lg'
             src={getImage()}
             alt={getAlt()}

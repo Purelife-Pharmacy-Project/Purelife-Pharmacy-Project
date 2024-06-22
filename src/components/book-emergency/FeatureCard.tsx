@@ -38,7 +38,7 @@ export const FeatureCard: FC<FeatureCardProps> = ({ data }) => {
                   <h1 className='max-w-4/5 text-center text-2xl font-bold text-header-100 lg:text-start lg:text-4xl'>
                     {data?.title}
                   </h1>
-                  <p className='text-center font-light text-content lg:max-w-[353px] lg:text-start lg:text-lg'>
+                  <p className='text-center font-light text-content lg:max-w-[424px] lg:text-start lg:text-lg'>
                     {data?.description}
                   </p>
                   <Button

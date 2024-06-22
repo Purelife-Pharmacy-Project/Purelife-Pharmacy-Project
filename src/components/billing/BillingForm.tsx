@@ -139,10 +139,7 @@ export const BillingForm: FC<BillingFormProps> = ({ onUpdated, isProfile }) => {
   );
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit, console.log)}
-      className='flex flex-col gap-6'
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
       {error ? <FormMessage type='error' message={error!} /> : null}
       {!Object.keys(deliveryDetails).length ? (
         <div className='flex gap-4'>

@@ -49,12 +49,16 @@ export const AppNavbar = ({
 
   const menuItems = [
     {
+      name: 'Pharmacy',
+      path: '/telehealth/shop-and-order',
+    },
+    {
       name: 'Telehealth',
       path: '/telehealth',
     },
     {
-      name: 'Pharmacy',
-      path: '/telehealth/shop-and-order',
+      name: 'Lifestyle',
+      path: '/lifestyle',
     },
     {
       name: 'Partner with us',
@@ -76,7 +80,7 @@ export const AppNavbar = ({
       className={`py-4 text-foreground lg:pb-2 ${getNavbarBackground()}`}
       maxWidth='xl'
       classNames={{
-        menu: 'top-[70px]',
+        menu: 'top-[120px]',
       }}
     >
       <NavbarContent
@@ -114,17 +118,6 @@ export const AppNavbar = ({
           <NavbarItem className='text-lg leading-[27px] text-header-100'>
             <Link
               color='foreground'
-              href='/telehealth'
-              className={
-                isActive('/telehealth') ? 'font-medium text-primary' : ''
-              }
-            >
-              Telehealth
-            </Link>
-          </NavbarItem>
-          <NavbarItem className='text-lg leading-[27px] text-header-100'>
-            <Link
-              color='foreground'
               href='/shop'
               className={
                 isActive('/telehealth/shop-and-order')
@@ -138,12 +131,23 @@ export const AppNavbar = ({
           <NavbarItem className='text-lg leading-[27px] text-header-100'>
             <Link
               color='foreground'
-              href='/partner-with-us'
+              href='/telehealth'
               className={
-                isActive('/partner-with-us') ? 'font-medium text-primary' : ''
+                isActive('/telehealth') ? 'font-medium text-primary' : ''
               }
             >
-              Partner with us
+              Telehealth
+            </Link>
+          </NavbarItem>
+          <NavbarItem className='text-lg leading-[27px] text-header-100'>
+            <Link
+              color='foreground'
+              href='/lifestyle'
+              className={
+                isActive('/lifestyle') ? 'font-medium text-primary' : ''
+              }
+            >
+              Lifestyle
             </Link>
           </NavbarItem>
         </div>
@@ -186,6 +190,17 @@ export const AppNavbar = ({
       </NavbarContent>
 
       <NavbarMenu className='bg-background pt-10'>
+        <NavbarMenuItem>
+          <Link
+            color={isActive('/') ? 'primary' : 'foreground'}
+            href='/'
+            className='w-full font-medium lg:hidden'
+            size='lg'
+          >
+            Home
+          </Link>
+        </NavbarMenuItem>
+
         {menuItems.map((link, index) => (
           <NavbarMenuItem key={index}>
             <Link

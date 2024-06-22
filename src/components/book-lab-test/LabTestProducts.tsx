@@ -24,9 +24,9 @@ type LabTestProductsProps = {};
 
 enum CategoryNames {
   ALL = 'all',
-  MEN = 'Men',
-  WOMEN = 'Women',
-  SEXUAL = 'Sexual',
+  MEN = "Men's Health",
+  WOMEN = "Women's Health",
+  SEXUAL = 'Sexual Health',
 }
 
 export const LabTestProducts: FC<LabTestProductsProps> = () => {
@@ -68,17 +68,11 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
   }, [searchStr, labTests]);
 
   // Filter out categories that are not related to lab tests
-  const filteredData = categories
-    ?.filter(
-      (item) =>
-        item.name === CategoryNames.SEXUAL ||
-        item.name === CategoryNames.WOMEN ||
-        item.name === CategoryNames.MEN
-    )
-    .map((item) => ({
-      id: item.id,
-      name: item.name,
-    }));
+  const filteredData = [
+    { id: 19, name: "Men's Health" },
+    { id: 20, name: "Women's Health" },
+    { id: 21, name: 'Sexual Health' },
+  ];
 
   const getCategoryIcon = (name: string, active?: boolean) => {
     switch (name) {
@@ -153,7 +147,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
       <div className='grid'>
         <Section className='bg-white'>
           {
-            <div className='grid grid-flow-col gap-10'>
+            <div className='flex justify-between gap-6 px-5 lg:justify-start lg:gap-10'>
               {labTestCategories?.map((_c, index) => (
                 <div key={index} className='grid justify-center gap-2'>
                   <Button
@@ -166,7 +160,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                       handleFilterByCategory(String(_c.id), _c.name)
                     }
                     className={clsx(
-                      'flex h-[62px] w-[62px] items-center justify-center lg:h-[140px] lg:w-[140px]',
+                      'flex h-[62px] w-[62px] items-center justify-center lg:h-[120px] lg:w-[120px]',
                       category === String(_c.id)
                         ? 'bg-primaryGreenLight'
                         : 'bg-[#F8F7F8]'
@@ -177,7 +171,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                   <div className='flex justify-center'>
                     <p
                       className={twMerge(
-                        'text-center text-lg font-medium capitalize',
+                        'text-center text-[8px] font-medium capitalize lg:text-sm',
                         category === String(_c.id)
                           ? 'text-primaryGreen'
                           : 'text-header-100'
@@ -195,7 +189,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
       {/* Products */}
       <div className='min-h-fit w-full bg-gray-100'>
         <div className='md:grid md:justify-center'>
-          <Section className='border-t-2 border-primaryGreen bg-transparent py-10'>
+          <Section className='bg-transparent py-10'>
             <div className='relative mx-auto my-10 w-11/12'>
               <Input
                 size='lg'
