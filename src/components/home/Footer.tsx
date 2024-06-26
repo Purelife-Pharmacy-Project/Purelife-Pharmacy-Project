@@ -84,6 +84,14 @@ export const Footer = () => {
       title: 'Company',
       links: [
         {
+          name: 'Lifestyle',
+          path: '/lifestyle',
+        },
+        {
+          name: 'Partner with us',
+          path: '/partner-with-us',
+        },
+        {
           name: 'About us',
           path: '#',
         },

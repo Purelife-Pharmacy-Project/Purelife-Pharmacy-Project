@@ -29,7 +29,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
   return (
     <div className='w-full items-center bg-primaryLight md:h-[calc(100vh-260px)] xl:grid xl:justify-center'>
       <Section className='relative flex h-full w-full flex-col items-center justify-between overflow-x-visible bg-primaryLight lg:flex lg:flex-row'>
-        <div className='mt-20 flex w-full flex-col justify-start gap-6 lg:mt-0 lg:justify-center'>
+        <div className='flex w-full flex-col justify-start gap-6 lg:mt-0 lg:justify-center'>
           <h1 className='mx-auto w-4/5  text-center text-2xl font-bold capitalize  text-header-100 sm:max-w-[300px] md:max-w-[250px] lg:mx-0 lg:max-w-[415px] lg:text-start lg:text-5xl'>
             {title}
           </h1>

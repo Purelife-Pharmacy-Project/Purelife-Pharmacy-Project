@@ -1,6 +1,5 @@
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { BookATestHero } from '@/components/book-lab-test/BookATestHero';
-import { FrequentLabTests } from '@/components/book-lab-test/FrequentLabTests';
 import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
 import { LabTestProducts } from '@/components/book-lab-test/LabTestProducts';
 import { WhyBookATest } from '@/components/book-lab-test/WhyBookATest';
@@ -37,7 +36,7 @@ export default async function BookATest() {
       <main className='grid gap-6'>
         <BookATestHero />
 
-        <FrequentLabTests title='Frequently Scheduled Lab Tests' />
+        {/*<FrequentLabTests title='Frequently Scheduled Lab Tests' />*/}
 
         <LabTestProducts />
 

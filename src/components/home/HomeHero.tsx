@@ -17,11 +17,11 @@ export const HomeHero: FC<HomeHeroProps> = ({
   ctaLink = '#',
 }) => {
   return (
-    <div className='grid h-max items-center justify-center bg-primaryLight pb-4 sm:h-[calc(100vh-88px)] md:pb-0'>
+    <div className='grid h-max items-center justify-center bg-primaryLight pb-4 md:pb-0 lg:h-max lg:py-10'>
       <Section className='bg-primaryLight'>
         <div className='flex flex-col justify-between lg:flex-row lg:gap-10'>
           <div className='flex flex-col gap-6 lg:justify-center'>
-            <h1 className='mx-auto w-4/5  text-center text-2xl font-bold  text-header-100 sm:max-w-[300px] md:max-w-[250px] lg:mx-0 lg:max-w-[530px] lg:text-start lg:text-5xl'>
+            <h1 className='text-balance mx-auto w-4/5  text-center text-2xl font-bold  text-header-100 sm:max-w-[300px] md:max-w-[250px] lg:mx-0 lg:w-full lg:max-w-[530px] lg:text-start lg:text-5xl'>
               {title}
             </h1>
             <p className='mx-auto w-full text-center text-base font-light leading-[30px] text-content sm:max-w-[300px] md:max-w-full lg:mx-0 lg:max-w-[498px] lg:text-start lg:text-lg'>

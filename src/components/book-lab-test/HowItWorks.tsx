@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { Section } from '../home/Section';
+import clsx from 'clsx';
 
 type HowItWorksProps = {
   variant?: 'primary' | 'success';
@@ -8,11 +9,21 @@ type HowItWorksProps = {
     description: string;
     icon: JSX.Element;
   }[];
+  className?: string;
 };
 
-export const HowItWorks: FC<HowItWorksProps> = ({ data, variant }) => {
+export const HowItWorks: FC<HowItWorksProps> = ({
+  data,
+  className,
+  variant,
+}) => {
   return (
-    <div className='lg:grid lg:justify-center lg:pb-10 lg:pt-[55px]'>
+    <div
+      className={clsx(
+        'lg:grid lg:justify-center lg:pb-10 lg:pt-[55px]',
+        className
+      )}
+    >
       <Section className='bg-white'>
         <div className='grid gap-10'>
           <h1
@@ -40,8 +51,8 @@ export const HowItWorks: FC<HowItWorksProps> = ({ data, variant }) => {
                   >
                     {answer.icon}
                   </div>
-                  <div className='mx-auto flex max-w-[290px] flex-col gap-1'>
-                    <p className='text-center text-lg font-light text-black'>
+                  <div className='mx-auto flex max-w-[275px] flex-col gap-1'>
+                    <p className='text-balance text-center text-lg font-light text-black'>
                       {answer.description}
                     </p>
                   </div>

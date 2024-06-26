@@ -135,6 +135,14 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
   };
 
   const handleCreateOrder = () => {
+    if (selectedAddress?.id != 1115 && !partner?.contactAddress) {
+      toast.error('Please fill in your billing details');
+      return document.getElementById('details')?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest',
+      });
+    }
     const cartProducts = cart?.map((product) => ({
       productId: product.product.id,
       productQuantity: product.quantity,
@@ -319,8 +327,7 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
             size='md'
             isLoading={loadingCreateOrder}
             isDisabled={
-              (!shouldFetchAddresses && !partner?.contactAddress) ||
-              partner?.contactAddress?.trim() === '' ||
+              !shouldFetchAddresses ||
               !deliveryMethod ||
               (deliveryMethod === 'pick-up' && phoneNumber === '') ||
               !selectedAddress
