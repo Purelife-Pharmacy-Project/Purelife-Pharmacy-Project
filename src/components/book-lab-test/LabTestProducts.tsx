@@ -7,7 +7,7 @@ import {
 } from '@/hooks';
 import { Button, Input, Skeleton } from '@nextui-org/react';
 import { useSearchParams } from 'next/navigation';
-import { FC, useCallback, useMemo, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { TelehealthProductCard } from '../TelehealthProductCard';
 import { Section } from '../home/Section';
@@ -24,6 +24,7 @@ type LabTestProductsProps = {};
 
 enum CategoryNames {
   ALL = 'all',
+  GENERAL = 'General',
   MEN = "Men's Health",
   WOMEN = "Women's Health",
   SEXUAL = 'Sexual Health',
@@ -69,6 +70,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
 
   // Filter out categories that are not related to lab tests
   const filteredData = [
+    { id: 18, name: 'General' },
     { id: 19, name: "Men's Health" },
     { id: 20, name: "Women's Health" },
     { id: 21, name: 'Sexual Health' },
@@ -116,9 +118,31 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
           />
         );
       case CategoryNames.ALL:
-        return <IconStethoscope color='success' />;
+        return (
+          <IconStethoscope
+            className={clsx(
+              {
+                'text-success': active,
+                'text-[#BFBFBF]': !active,
+              },
+              'lg:scale-[2]'
+            )}
+            size={40}
+          />
+        );
       default:
-        return <IconStethoscope size={75} color='success' />;
+        return (
+          <IconStethoscope
+            className={clsx(
+              {
+                'text-success': active,
+                'text-[#BFBFBF]': !active,
+              },
+              'lg:scale-[2]'
+            )}
+            size={40}
+          />
+        );
     }
   };
 
@@ -141,6 +165,10 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
     },
     [handleDebouncedSearch]
   );
+
+  useEffect(() => {
+    handleFilterByCategory(18, '');
+  }, []);
 
   return (
     <>
