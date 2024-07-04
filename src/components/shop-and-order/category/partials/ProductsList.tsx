@@ -41,7 +41,7 @@ export const ProductsList: FC<ProductsListProps> = ({
                 </>
               }
               dataLength={products?.length}
-              className='relative grid grid-flow-row grid-cols-1 gap-10 overflow-y-auto md:grid-cols-2 lg:grid-cols-3'
+              className='relative grid grid-flow-row grid-cols-2 gap-10 overflow-y-auto md:grid-cols-2 lg:grid-cols-3'
             >
               {products?.map((product) => (
                 <ProductCard

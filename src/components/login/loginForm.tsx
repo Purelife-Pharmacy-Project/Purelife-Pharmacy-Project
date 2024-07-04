@@ -77,7 +77,6 @@ export const LoginForm = () => {
         classNames={inputDefault}
         endContent={
           <button type='button' className='px-2' onClick={toggleVisibility}>
-            {' '}
             {passwordIsVisible ? (
               <IconEyeClose color='content' />
             ) : (

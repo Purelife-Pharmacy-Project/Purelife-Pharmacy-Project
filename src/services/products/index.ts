@@ -24,7 +24,8 @@ class ProductService {
       data: ProductType[];
     }>(
       `${this.PRODUCTS_API_BASE}/fetch-products?${
-        queryParams + '&Fields=name&Fields=lst_price&Fields=image_1024'
+        queryParams +
+        '&Fields=name&Fields=lst_price&Fields=image_1024&Fields=product_uom_qty'
       }`
     )) as unknown as {
       result: ProductType[];
