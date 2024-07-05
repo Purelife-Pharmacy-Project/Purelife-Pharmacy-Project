@@ -23,7 +23,7 @@ export const CartItemDetails = () => {
   const { addToCart } = useCartStore();
 
   const { product, loadingProduct } = useGetProductByProductId(itemId);
-
+  console.log(product);
   return (
     <>
       {loadingProduct ? (
