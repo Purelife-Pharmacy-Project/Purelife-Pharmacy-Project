@@ -71,7 +71,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
           }
         >
           <IconCart size={20} />
-          Add to cart
+          {outOfStock ? 'Out of stock' : 'Add to cart'}
         </Button>
 
         {/* <Button

@@ -100,10 +100,11 @@ export const CartItemDetails = () => {
                 ) : (
                   <Button
                     className='w-max px-10'
-                    color='primary'
+                    color={product.quantity == 0 ? 'default' : 'primary'}
+                    variant={product.quantity == 0 ? 'bordered' : 'solid'}
                     radius='full'
                     size='lg'
-                    isDisabled={loadingProduct}
+                    isDisabled={loadingProduct || product.quantity == 0}
                     onPress={() => {
                       addToCart({
                         id: product.id,
@@ -112,7 +113,7 @@ export const CartItemDetails = () => {
                       });
                     }}
                   >
-                    Add to Cart
+                    {product.quantity == 0 ? 'Out of stock' : 'Add to cart'}
                   </Button>
                 )}
 

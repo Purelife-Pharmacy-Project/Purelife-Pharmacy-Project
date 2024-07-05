@@ -46,7 +46,8 @@ class ProductService {
       data: ProductType[];
     }>(
       `${this.PRODUCTS_API_BASE}/search-products?${
-        queryParams + '&Fields=name&Fields=lst_price&Fields=image_1024'
+        queryParams +
+        '&Fields=name&Fields=lst_price&Fields=image_1024&Fields=product_uom_qty'
       }`
     )) as unknown as {
       result: ProductType[];
@@ -63,6 +64,7 @@ class ProductService {
           name: string;
           lst_price: number;
           image_256: number;
+          product_uom_qty: number;
         }>
       >
     >(
@@ -73,6 +75,7 @@ class ProductService {
         name: string;
         lst_price: number;
         image_256: number;
+        product_uom_qty: number;
       }>
     >;
 
@@ -87,6 +90,7 @@ class ProductService {
       canBePurchased: true,
       canBeSold: true,
       categ_id: [0, ''],
+      quantity: response.result[0].product_uom_qty,
       id: +response.result[0].id,
     });
   };
