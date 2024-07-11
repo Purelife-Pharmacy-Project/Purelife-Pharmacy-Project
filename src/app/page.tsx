@@ -1,17 +1,18 @@
-import { EarnedClients } from '@/components/home/EarnedClients';
-import { HomeFaq } from '@/components/home/Faq';
-import { FeaturedProducts } from '@/components/home/FeaturedProducts';
 import { Footer } from '@/components/home/Footer';
 import { HomePageHero } from '@/components/home/HomePageHero';
 import { HomePartners } from '@/components/home/HomePartners';
-import { HomeShopAndOrder } from '@/components/home/HomeShopAndOrder';
-import { HomeTransformation } from '@/components/home/HomeTransformation';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
-import { TeleHealthServices } from '@/components/home/TeleHealthServices';
+import { Categories } from '@/components/home/Categories';
 import { Testimonials } from '@/components/home/Testimonials';
-import { WellnessBlogSection } from '@/components/home/WellnessBlogSection';
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
-import { earnedClients } from '@/constants';
+import { NavbarSearch } from '@/components/NavbarSearch';
+import HotOffersProduct from '@/components/home/HotOffersProduct';
+import BestSellers from '@/components/home/BestSellers';
+import PersonalizedPlan from '@/components/home/PersonalizedPlan';
+import HandpickedForYou from '@/components/home/HandpickedForYou';
+import ExploreTests from '@/components/home/ExploreTests';
+import DiscoverTopProducts from '@/components/home/DiscoverTopProducts';
+import HealthOfferings from '@/components/home/HealthOfferings';
 
 export default async function Home() {
   // const queryClient = new QueryClient();
@@ -43,43 +44,60 @@ export default async function Home() {
 
   return (
     <>
-      <main className='grid gap-6'>
+      <main className='grid gap-6 lg:gap-10'>
+        <div className='relative mx-6 lg:hidden'>
+          <NavbarSearch />
+        </div>
         <HomePageHero
-          title='Simplify your health journey.'
+          title='Simplify your health journey with one click.'
           description='Saves time, unlimited access, quality service and providers, authentic medications and one-stop shop.'
           ctaText='Shop All'
           ctaLink='/shop'
           features={[
-            'unlimited access',
-            'quality providers',
-            'authentic medications',
+            'shop pharmacy',
+            'consult with a doctor',
+            'book a lab test',
             'saves time',
+          ]}
+          featuresWithLinks={[
+            { label: 'shop pharmacy', href: '/shop' },
+            { label: 'consult with a doctor', href: '/' },
+            { label: 'book a vaccination', href: '/' },
+            { label: 'book a lab test', href: '/' },
           ]}
         />
 
         <HomePartners />
 
-        <HomeTransformation data={transformationData} />
+        <HotOffersProduct />
 
-        <div className='invisible mb-8' id='teleHealthServices'></div>
+        <Categories />
 
-        <TeleHealthServices />
+        <BestSellers />
 
-        {/*<HydrationBoundary state={dehydrate(queryClient)}>*/}
-        <HomeShopAndOrder />
-        <FeaturedProducts />
-        {/*</HydrationBoundary>*/}
+        <div className='invisible mb-4' id='teleHealthServices'></div>
+
+        <HealthOfferings />
+
+        <div className='invisible mb-4' id='teleHealthServices'></div>
+
+        <DiscoverTopProducts />
+
+        <div className='invisible mb-4' id='teleHealthServices'></div>
+
+        <ExploreTests />
+
+        <div className='invisible mb-4' id='teleHealthServices'></div>
+
+        <HandpickedForYou />
+
+        <div className='invisible mb-4' id='teleHealthServices'></div>
+
+        <PersonalizedPlan />
+
+        <div className='invisible mb-4' id='teleHealthServices'></div>
 
         <Testimonials />
-
-        <EarnedClients
-          earnedClients={earnedClients}
-          title='We have earned the trust of 300+ Clients'
-        />
-
-        <WellnessBlogSection />
-
-        <HomeFaq />
 
         <ReportDrugReaction />
 

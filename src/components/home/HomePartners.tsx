@@ -25,7 +25,7 @@ export const HomePartners = () => {
     },
   ];
   return (
-    <div className='lg:py-4 xl:grid xl:justify-center'>
+    <div className='lg:-mt-8 lg:py-4 xl:-mt-12 xl:grid xl:justify-center'>
       <Section className='bg-white'>
         <div className='flex flex-col items-center gap-4 lg:flex-row lg:justify-between lg:gap-[143px]'>
           <p className='max-w-[211px] text-center font-medium text-header-100  lg:text-start'>
@@ -38,7 +38,7 @@ export const HomePartners = () => {
                   width={120}
                   height={40}
                   radius='none'
-                  className='object-contain grayscale'
+                  className='object-contain'
                   src={partner.image}
                   alt={partner.name}
                 />

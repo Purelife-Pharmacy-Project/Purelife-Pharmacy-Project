@@ -1,11 +1,8 @@
 'use client';
-import { Card, CardBody, Image, Link } from '@nextui-org/react';
+import { Image, Link } from '@nextui-org/react';
 import { FC } from 'react';
 import { Section } from './Section';
-import { IconDoubleCheck } from '@/components/icons/IconDoubleCheck';
-import IconHomeHealth from '@/components/icons/IconHomeHealth';
-import IconCardiology from '@/components/icons/IconCardiology';
-import IconBookmarkStar from '@/components/icons/IconBookmarkStar';
+import { IconArrowRight } from '@/components/icons/IconArrowRight';
 
 interface HomePageHeroProps {
   title: string;
@@ -13,6 +10,7 @@ interface HomePageHeroProps {
   ctaText: string;
   ctaLink: string;
   features: string[];
+  featuresWithLinks: Array<{ label: string; href: string }>;
 }
 export const HomePageHero: FC<HomePageHeroProps> = ({
   title = '',
@@ -20,92 +18,50 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
   ctaText = 'Start here',
   ctaLink = '#',
   features,
+  featuresWithLinks,
 }) => {
-  // const ctaAction = () =>
-  //   document
-  //     .querySelector(ctaLink)
-  //     ?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });
-
   return (
-    <div className='w-full items-center bg-primaryLight md:h-[calc(100vh-260px)] xl:grid xl:justify-center'>
-      <Section className='relative flex h-full w-full flex-col items-center justify-between overflow-x-visible bg-primaryLight lg:flex lg:flex-row'>
-        <div className='flex w-full flex-col justify-start gap-6 lg:mt-0 lg:justify-center'>
-          <h1 className='mx-auto w-4/5  text-center text-2xl font-bold capitalize  text-header-100 sm:max-w-[300px] md:max-w-[250px] lg:mx-0 lg:max-w-[415px] lg:text-start lg:text-5xl'>
+    <div className='relative w-full items-center bg-primaryLight md:min-h-[calc(100vh-260px)] lg:bg-transparent xl:grid xl:justify-center'>
+      <div
+        className='absolute left-0 top-0 hidden h-full w-full lg:block'
+        style={{
+          backgroundImage:
+            'url(/images/pharamacist-smiling.png), linear-gradient(to right,#000000, #0000004D)',
+          backgroundPosition: 'right',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'auto 100%',
+        }}
+      ></div>
+      <div className='absolute left-0 top-0 z-[2] hidden h-full w-5/6 bg-gradient-to-r from-black/100 from-40% to-black/0 lg:block'></div>
+      <Section className='relative z-[3] flex h-full w-full flex-col items-center justify-between overflow-x-visible bg-primaryLight px-6 lg:flex lg:flex-row lg:!bg-transparent'>
+        <div className='mt-8 flex w-full flex-col justify-start gap-6 lg:mt-0 lg:justify-center'>
+          <h1 className='text-start text-3xl font-bold capitalize text-header-100 lg:mx-0 lg:max-w-[550px] lg:text-start lg:text-5xl lg:text-white'>
             {title}
           </h1>
-          <p className='mx-auto flex w-full flex-wrap gap-x-1.5 gap-y-4 text-center text-base font-light leading-[30px] text-content sm:max-w-[300px] md:max-w-[250px] lg:mx-0 lg:max-w-[498px] lg:text-start lg:text-lg'>
-            {features.map((feature) => (
-              <span key={feature} className='flex items-center gap-2'>
-                <span className='grid h-6 w-6 place-content-center rounded-full bg-white text-sm text-primary'>
-                  <IconDoubleCheck size={14} />
+          <p className='grid grid-cols-1 gap-x-5 gap-y-3.5 md:grid-cols-2 lg:max-w-[605px]'>
+            {featuresWithLinks.map((feature) => (
+              <Link
+                className='flex items-center justify-between rounded-[10px] bg-white px-5 py-4'
+                key={feature.label}
+                href={feature.href}
+              >
+                <span className='capitalize text-header-100'>
+                  {feature.label}
                 </span>
-                <span className='font-medium first-letter:uppercase lg:text-lg'>
-                  {feature}
+                <span className='grid h-7 w-7 place-content-center rounded-full bg-[#F4F4F4]'>
+                  <IconArrowRight className='text-primary' size={12} />
                 </span>
-              </span>
+              </Link>
             ))}
           </p>
-
-          <div className='flex w-full justify-center gap-3 lg:w-max lg:justify-start'>
-            <Link href='/telehealth/shop-and-order'>
-              <Card className='w-fit cursor-pointer bg-white px-4 py-1.5 shadow-sm transition-all hover:shadow-md lg:w-[175px] lg:px-4 lg:pb-6 lg:pt-8'>
-                <CardBody className='flex flex-col justify-center p-0'>
-                  <span className='mx-auto mb-2 grid h-16 w-16 place-content-center rounded-full bg-[#f4f4f4] p-4'>
-                    <IconHomeHealth className='grid h-7 w-7 place-content-center' />
-                  </span>
-                  <h2 className='text-center text-sm capitalize text-header-100 lg:text-base lg:font-bold lg:leading-[30px]'>
-                    Pharmacy
-                  </h2>
-                  <p className='hidden break-words text-center text-[8px] font-medium leading-[11px] lg:block'>
-                    Shop for your health, supermarket, beauty and skin
-                    essentials.
-                  </p>
-                </CardBody>
-              </Card>
-            </Link>
-
-            <Link href='/telehealth'>
-              <Card className='w-fit cursor-pointer bg-white px-4 py-1.5 shadow-sm transition-all hover:shadow-md lg:w-[175px] lg:px-4 lg:pb-6 lg:pt-8'>
-                <CardBody className='flex flex-col justify-center p-0'>
-                  <span className='mx-auto mb-2 grid h-16 w-16 place-content-center rounded-full bg-[#f4f4f4] p-4'>
-                    <IconCardiology className='h-7 w-7' />
-                  </span>
-                  <h2 className='text-center text-sm capitalize text-header-100 lg:text-base lg:font-bold lg:leading-[30px]'>
-                    Telehealth
-                  </h2>
-                  <p className='hidden break-words text-center text-[8px] font-medium leading-[11px] lg:block'>
-                    Book lab tests, consult a doctor, and access quality medical
-                    services.
-                  </p>
-                </CardBody>
-              </Card>
-            </Link>
-
-            <Link href=''>
-              <Card className='w-fit cursor-pointer bg-white px-4 py-1.5 shadow-sm transition-all hover:shadow-md lg:w-[175px] lg:px-4 lg:pb-6 lg:pt-8'>
-                <CardBody className='flex flex-col justify-center p-0'>
-                  <span className='mx-auto mb-2 grid h-16 w-16 place-content-center rounded-full bg-[#f4f4f4] p-4'>
-                    <IconBookmarkStar className='h-7 w-7 ' />
-                  </span>
-                  <h2 className='text-center text-sm capitalize text-header-100 lg:text-base lg:font-bold lg:leading-[30px]'>
-                    Lifestyle
-                  </h2>
-                  <p className='hidden text-center text-[8px] font-medium leading-[11px] lg:block'>
-                    Get a custom meal plan, health insurance, and tailored
-                    fitness plans.
-                  </p>
-                </CardBody>
-              </Card>
-            </Link>
-          </div>
         </div>
-        <div className='relative mt-4 flex w-full justify-center self-end md:mt-0'>
+        <div className='relative mb-9 mt-6 flex w-full justify-center self-end  lg:hidden'>
           <Image
-            className='overflow-visible rounded-t-lg from-white to-transparent object-cover lg:!h-[55vh] lg:!w-[50vw] lg:bg-gradient-to-b'
-            radius='none'
-            width={300}
+            className='overflow-hidden from-white to-transparent object-cover lg:!h-[55vh] lg:!w-[50vw] lg:bg-gradient-to-b'
+            radius='lg'
+            width={400}
             height={200}
-            src='/images/joyful-caring-couple.png'
+            src='/images/pharamacist-smiling.png'
             alt='charming joyful youth couple'
           />
         </div>

@@ -43,7 +43,7 @@ export const AppNavbar = ({
         return '';
 
       default:
-        return 'bg-primaryLight';
+        return 'bg-white';
     }
   };
 

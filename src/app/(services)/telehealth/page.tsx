@@ -4,7 +4,7 @@ import { HomeHero } from '@/components/home/HomeHero';
 import { HomeTransformation } from '@/components/home/HomeTransformation';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Section } from '@/components/home/Section';
-import { TeleHealthServices } from '@/components/home/TeleHealthServices';
+import { Categories } from '@/components/home/Categories';
 import { earnedClients } from '@/constants';
 
 export default function Telehealth() {
@@ -41,7 +41,7 @@ export default function Telehealth() {
 
         <div className='invisible mb-8' id='teleHealthServices'></div>
 
-        <TeleHealthServices />
+        <Categories />
 
         <EarnedClients
           earnedClients={earnedClients}
