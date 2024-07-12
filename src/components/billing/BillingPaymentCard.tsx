@@ -135,7 +135,7 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
   };
 
   const handleCreateOrder = () => {
-    if (selectedAddress?.id != 1115 && !partner?.contactAddress) {
+    if (selectedAddress?.id != 1115 && !deliveryDetails?.contactAddress) {
       toast.error('Please fill in your billing details');
       return document.getElementById('details')?.scrollIntoView({
         behavior: 'smooth',
