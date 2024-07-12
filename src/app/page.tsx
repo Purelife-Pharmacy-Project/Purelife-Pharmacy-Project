@@ -61,9 +61,15 @@ export default async function Home() {
           ]}
           featuresWithLinks={[
             { label: 'shop pharmacy', href: '/shop' },
-            { label: 'consult with a doctor', href: '/' },
-            { label: 'book a vaccination', href: '/' },
-            { label: 'book a lab test', href: '/' },
+            {
+              label: 'consult with a doctor',
+              href: '/telehealth/find-a-doctor',
+            },
+            {
+              label: 'book a vaccination',
+              href: '/telehealth/get-vaccination',
+            },
+            { label: 'book a lab test', href: '/telehealth/book-lab-test' },
           ]}
         />
 

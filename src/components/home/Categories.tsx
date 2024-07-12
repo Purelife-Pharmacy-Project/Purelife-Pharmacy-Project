@@ -4,10 +4,22 @@ import { Section } from './Section';
 import React, { useRef } from 'react';
 
 const categories = [
-  { category: 'Shop Supermarket', href: '', image: '/images/supermarket.png' },
-  { category: 'Shop Skin Care', href: '', image: '/images/category-skin.png' },
-  { category: 'Shop Beauty', href: '', image: '/images/category-beauty.png' },
-  { category: 'Shop Health', href: '', image: '/images/category-health.png' },
+  {
+    category: 'Supermarket',
+    href: '/shop?category=supermarket',
+    image: '/images/supermarket.png',
+  },
+  { category: 'Skin Care', href: '', image: '/images/category-skin.png' },
+  {
+    category: 'Beauty',
+    href: '/shop?category=beauty',
+    image: '/images/category-beauty.png',
+  },
+  {
+    category: 'Health',
+    href: '/shop?category=health',
+    image: '/images/category-health.png',
+  },
 ];
 
 export const Categories = () => {
@@ -61,8 +73,10 @@ export const Categories = () => {
                 {category.category}
               </p>
               <Button
+                as='a'
                 className='w-[83px] bg-primaryLight text-[10px] font-medium text-primary lg:w-[134px] lg:text-sm'
                 radius='full'
+                href={category.href}
               >
                 Shop Now
               </Button>

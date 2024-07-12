@@ -27,7 +27,7 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = ({}) => {
     if (!currentCategory) {
       removeQuery(['category']);
     } else {
-      setSelectedValue(currentCategory);
+      setSelectedValue(currentCategory.toUpperCase());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
