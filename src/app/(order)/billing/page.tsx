@@ -19,7 +19,10 @@ export default function BillingPage() {
       <div className='grid justify-center pt-8 lg:pb-10'>
         <Section className='bg-white'>
           <div className='grid grid-cols-1 gap-6 lg:grid-flow-col lg:grid-cols-2'>
-            <div className='order-last flex flex-col gap-6 md:order-first'>
+            <div
+              id='details'
+              className='order-last flex scroll-mt-24 flex-col gap-6 md:order-first'
+            >
               <BillingInfoCard />
             </div>
 
