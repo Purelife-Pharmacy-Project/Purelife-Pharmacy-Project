@@ -103,7 +103,7 @@ export const metadata: Metadata = {
     url: 'https://purelifehealth.io',
     images: [
       {
-        url: '/public/app-logo.png',
+        url: '/app-logo.png',
         width: 400,
         height: 400,
         alt: 'Purelife Health',

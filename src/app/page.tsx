@@ -75,33 +75,39 @@ export default async function Home() {
 
         <HomePartners />
 
+        <div className='invisible mb-4'></div>
+
         <HotOffersProduct />
+
+        <div className='invisible mb-4'></div>
 
         <Categories />
 
+        <div className='invisible mb-4'></div>
+
         <BestSellers />
 
-        <div className='invisible mb-4' id='teleHealthServices'></div>
+        <div className='invisible mb-4'></div>
 
         <HealthOfferings />
 
-        <div className='invisible mb-4' id='teleHealthServices'></div>
+        <div className='invisible mb-4'></div>
 
         <DiscoverTopProducts />
 
-        <div className='invisible mb-4' id='teleHealthServices'></div>
+        <div className='invisible mb-4'></div>
 
         <ExploreTests />
 
-        <div className='invisible mb-4' id='teleHealthServices'></div>
+        <div className='invisible mb-4'></div>
 
         <HandpickedForYou />
 
-        <div className='invisible mb-4' id='teleHealthServices'></div>
+        <div className='invisible mb-4'></div>
 
         <PersonalizedPlan />
 
-        <div className='invisible mb-4' id='teleHealthServices'></div>
+        <div className='invisible mb-4'></div>
 
         <Testimonials />
 

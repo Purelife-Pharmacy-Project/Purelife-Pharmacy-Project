@@ -59,7 +59,6 @@ export const filteredCategories = (
 
   if (formatted)
     return [
-      { id: 'all', name: 'all' },
       ...formatted.filter((value, index) => formatted.indexOf(value) === index),
     ];
 };

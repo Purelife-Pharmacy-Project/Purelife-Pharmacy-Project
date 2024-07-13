@@ -18,6 +18,7 @@ class ProductService {
       Limit: params.Limit,
       Offset: params.offset,
       CategoryId: params.CategoryId,
+      SubCategoryId: params.SubCategoryId,
     });
 
     const response = (await Api.get<{

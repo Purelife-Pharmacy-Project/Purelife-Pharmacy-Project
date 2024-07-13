@@ -1,6 +1,7 @@
 import React from 'react';
 import { Section } from '@/components/home/Section';
 import { Button, Card, CardBody, Image } from '@nextui-org/react';
+import clsx from 'clsx';
 
 type Prop = {};
 
@@ -9,25 +10,25 @@ const data = [
     title: 'Shop our top tests now and enjoy a 20% discount!',
     image: '/images/holding-blood-tube.png',
     cta: 'Shop all test',
-    ctaLink: '',
+    ctaLink: '/telehealth/book-lab-test',
   },
   {
     title: 'Explore popular vaccines and get 20% off your order!',
     image: '/images/getting-injection.png',
     cta: 'Shop all vaccines',
-    ctaLink: '',
+    ctaLink: '/telehealth/get-vaccination',
   },
   {
     title: 'Book an instant consultation with a doctor',
     image: '/images/doctor-consulting.png',
     cta: 'Book Session',
-    ctaLink: '',
+    ctaLink: '/telehealth/find-a-doctor',
   },
   {
     title: 'For healthier skin and beauty, speak to our cosmetologist.',
     image: '/images/skin-care.png',
     cta: 'Book Session',
-    ctaLink: '',
+    ctaLink: '/telehealth/find-a-doctor',
   },
   {
     title: 'Subscribe for a drug refill for your prescriptions',
@@ -39,7 +40,7 @@ const data = [
     title: 'Want to improve your health? Talk to our pharmacist.',
     image: '/images/smiling-nurse.png',
     cta: 'Book Session',
-    ctaLink: '',
+    ctaLink: '/telehealth/find-a-doctor',
   },
 ];
 
@@ -53,15 +54,22 @@ const HealthOfferings: React.FC<Prop> = () => {
         {data.map((offering) => (
           <Card key={offering.title} className='border border-[#EFEFEF]'>
             <CardBody className='flex flex-row gap-5 px-8 py-5'>
-              <div className='my-auto flex flex-col'>
+              <div className='my-auto flex flex-col gap-3'>
                 <p className='font-medium lg:text-lg xl:text-2xl'>
-                  Shop our top tests now and enjoy a 20% discount!
+                  {offering.title}
                 </p>
                 <Button
-                  className='w-[118px] bg-primaryLight text-xs font-medium text-primary lg:text-sm'
+                  as={offering.ctaLink ? 'a' : 'button'}
+                  className={clsx(
+                    'w-[150px] bg-primaryLight text-xs font-medium text-primary lg:text-sm',
+                    { 'bg-transparent text-default': !offering.ctaLink }
+                  )}
                   radius='sm'
+                  disabled={!offering.ctaLink}
+                  href={offering.ctaLink}
+                  variant={offering.ctaLink ? 'solid' : 'bordered'}
                 >
-                  Shop Now
+                  {offering.ctaLink ? offering.cta : 'Coming soon'}
                 </Button>
               </div>
               <Image

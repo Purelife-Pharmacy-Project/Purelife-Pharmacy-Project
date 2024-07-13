@@ -47,8 +47,10 @@ const DiscoverTopProducts: React.FC<Prop> = () => {
               enhanced intimacy.
             </p>
             <Button
+              as='a'
               className='mt-auto w-[150px] bg-primaryLight text-sm font-medium text-primary'
               radius='full'
+              href='/shop?category=sexual-health'
             >
               Shop Now
             </Button>

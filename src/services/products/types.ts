@@ -11,6 +11,7 @@ export type ProductQueryParams = {
   // maxPrice?: string;
   isPublished?: boolean;
   CategoryId?: string;
+  SubCategoryId?: string;
   MinListPrice?: number;
   MaxListPrice?: number;
   Limit?: number;

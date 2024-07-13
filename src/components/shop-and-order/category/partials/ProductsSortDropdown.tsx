@@ -13,6 +13,7 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = ({}) => {
   const currentCategory = useSearchParams().get('category');
 
   const allowedCategories = [
+    'all',
     'health',
     'beauty',
     'supermarket',

@@ -1,23 +1,26 @@
 'use client';
 
 import React from 'react';
-import { useGetFeaturedProducts } from '@/hooks';
+import { useGetProductsByCategoryId } from '@/hooks';
 import ProductRow from './ProductRow';
 import ProductCard from '@/components/home/ProductCard';
 import { ProductLoadingSkeleton } from '@/components/home/Skeletons';
 
 type Prop = {};
 
+const CATEGORY_ID = '25';
+
 const HotOffersProduct: React.FC<Prop> = () => {
-  const { products: allProducts, loadingFeaturedProducts } =
-    useGetFeaturedProducts();
+  const { products: allProducts, loadingProducts } = useGetProductsByCategoryId(
+    { categoryId: CATEGORY_ID }
+  );
   return (
     <div>
       <ProductRow
         title='Hot New Offers🔥'
-        moreLink=''
+        moreLink='/shop?category=health-new-offers'
         products={allProducts}
-        isLoading={loadingFeaturedProducts}
+        isLoading={loadingProducts}
         emptyMessage='Oops. No products yet'
         ProductComp={ProductCard}
         loader={<ProductLoadingSkeleton />}

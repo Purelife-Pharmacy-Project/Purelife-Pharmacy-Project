@@ -9,7 +9,11 @@ const categories = [
     href: '/shop?category=supermarket',
     image: '/images/supermarket.png',
   },
-  { category: 'Skin Care', href: '', image: '/images/category-skin.png' },
+  {
+    category: 'Skin Care',
+    href: '/shop?category=skincare',
+    image: '/images/category-skin.png',
+  },
   {
     category: 'Beauty',
     href: '/shop?category=beauty',
@@ -37,8 +41,8 @@ export const Categories = () => {
         className='absolute left-2 top-1/2 z-20 grid h-6 w-6 -translate-y-1/2 place-content-center rounded-full bg-[#FFEAED] shadow-md md:hidden'
       >
         <svg
-          width='7'
-          height='6'
+          width='10'
+          height='9'
           viewBox='0 0 7 6'
           fill='none'
           xmlns='http://www.w3.org/2000/svg'
