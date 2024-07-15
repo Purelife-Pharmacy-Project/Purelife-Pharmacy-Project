@@ -21,18 +21,18 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
   featuresWithLinks,
 }) => {
   return (
-    <div className='relative w-full items-center bg-primaryLight md:min-h-[calc(100vh-260px)] lg:bg-transparent xl:grid xl:justify-center'>
+    <div className='relative w-full items-center bg-primaryLight md:min-h-[calc(100vh-260px)] lg:bg-transparent xl:grid xl:min-h-[539px] xl:justify-center'>
       <div
         className='absolute left-0 top-0 hidden h-full w-full lg:block'
         style={{
           backgroundImage:
-            'url(/images/pharamacist-smiling.png), linear-gradient(to right,#000000, #0000004D)',
+            'url(/images/family-playing.png), linear-gradient(to right,#000000, #0000004D)',
           backgroundPosition: 'right',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'auto 100%',
         }}
       ></div>
-      <div className='absolute left-0 top-0 z-[2] hidden h-full w-5/6 bg-gradient-to-r from-black/100 from-40% to-black/0 lg:block'></div>
+      <div className='absolute left-0 top-0 z-[2] hidden h-full w-5/6 bg-gradient-to-r from-black/100 from-60% to-black/0 lg:block'></div>
       <Section className='relative z-[3] flex h-full w-full flex-col items-center justify-between overflow-x-visible bg-[#FFE5E9] px-6 lg:flex lg:flex-row lg:!bg-transparent'>
         <div className='mt-8 flex w-full flex-col justify-start gap-6 lg:mt-0 lg:justify-center'>
           <h1 className='text-start text-3xl font-bold capitalize text-header-100 lg:mx-0 lg:max-w-[550px] lg:text-start lg:text-5xl lg:text-white'>
@@ -61,7 +61,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({
             radius='lg'
             width={400}
             height={200}
-            src='/images/pharamacist-smiling.png'
+            src='/images/family-playing.png'
             alt='charming joyful youth couple'
           />
         </div>
