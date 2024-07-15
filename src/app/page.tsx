@@ -41,7 +41,6 @@ export default async function Home() {
       description: 'Of members would recommend to friends & family.',
     },
   ];
-
   return (
     <>
       <main className='grid gap-6 lg:gap-10'>

@@ -1,16 +1,8 @@
 'use client';
-import { IconCart } from '@/components/icons/IconCart';
-import { useCartStore } from '@/hooks';
 import { Product } from '@/services/products/types';
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  Image,
-  Link,
-} from '@nextui-org/react';
-import { FC, useMemo } from 'react';
+import { Card, CardBody, CardFooter, Image, Link } from '@nextui-org/react';
+import { FC } from 'react';
+import AddToCartBtn from '@/components/cart/AddToCartBtn';
 
 type ProductCardProps = {
   product: Product;
@@ -18,16 +10,6 @@ type ProductCardProps = {
 };
 
 export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
-  const { addToCart, cart } = useCartStore();
-
-  const outOfStock = useMemo(
-    () =>
-      product.quantity === 0 ||
-      cart.find((item) => item.id === product.id)?.quantity ===
-        product.quantity,
-    [cart, product]
-  );
-
   return (
     <Card shadow='none' className='w-full' radius='lg'>
       <CardBody className='relative h-max overflow-visible p-0'>
@@ -55,24 +37,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
           </p>
         </div>
 
-        <Button
-          color={outOfStock ? 'default' : 'primary'}
-          variant={outOfStock ? 'bordered' : 'solid'}
-          className='flex items-center gap-2'
-          radius='sm'
-          size='lg'
-          isDisabled={outOfStock}
-          onPress={() =>
-            addToCart({
-              id: product.id,
-              product,
-              quantity: 1,
-            })
-          }
-        >
-          <IconCart size={20} />
-          {outOfStock ? 'Out of stock' : 'Add to cart'}
-        </Button>
+        <AddToCartBtn product={product} className='flex items-center gap-2' />
 
         {/* <Button
           className='border-header-100 text-header-100 hover:border-primary hover:bg-primary/10 hover:text-primary'
