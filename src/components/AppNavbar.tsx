@@ -172,7 +172,7 @@ export const AppNavbar = ({
         <NavbarItem className='hidden lg:block'>
           <Button
             as={Link}
-            href='/telehealth/shop-and-order'
+            href='/shop?category=health'
             radius='full'
             size='lg'
             color='primary'
