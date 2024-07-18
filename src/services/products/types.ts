@@ -31,7 +31,7 @@ export type ProductType = {
   canBePurchased: boolean;
   canBeSold: boolean;
   quantity?: number;
-  product_uom_qty?: number;
+  product_stock_available_qty?: number;
 };
 
 export class Product {
@@ -53,8 +53,8 @@ export class Product {
       : '/images/purelife-fallback.png';
     this.amount = toNaira(this.lst_price);
     this.quantity =
-      product.product_uom_qty != undefined
-        ? product.product_uom_qty
+      product.product_stock_available_qty != undefined
+        ? product.product_stock_available_qty
         : 1000000000000;
     // this.quantity = Math.max(0, product.quantity as number) || 1;
   }
