@@ -25,7 +25,7 @@ class ProductService {
     }>(
       `${this.PRODUCTS_API_BASE}/fetch-products?${
         queryParams +
-        '&Fields=name&Fields=lst_price&Fields=image_1024&Fields=product_uom_qty'
+        '&Fields=name&Fields=lst_price&Fields=image_1024&Fields=product_stock_available_qty'
       }`
     )) as unknown as {
       result: ProductType[];
@@ -47,7 +47,7 @@ class ProductService {
     }>(
       `${this.PRODUCTS_API_BASE}/search-products?${
         queryParams +
-        '&Fields=name&Fields=lst_price&Fields=image_1024&Fields=product_uom_qty'
+        '&Fields=name&Fields=lst_price&Fields=image_1024&Fields=product_stock_available_qty'
       }`
     )) as unknown as {
       result: ProductType[];
@@ -64,7 +64,7 @@ class ProductService {
           name: string;
           lst_price: number;
           image_256: number;
-          product_uom_qty: number;
+          product_stock_available_qty: number;
         }>
       >
     >(
@@ -75,7 +75,7 @@ class ProductService {
         name: string;
         lst_price: number;
         image_256: number;
-        product_uom_qty: number;
+        product_stock_available_qty: number;
       }>
     >;
 
@@ -90,7 +90,7 @@ class ProductService {
       canBePurchased: true,
       canBeSold: true,
       categ_id: [0, ''],
-      quantity: response.result[0].product_uom_qty,
+      quantity: response.result[0].product_stock_available_qty,
       id: +response.result[0].id,
     });
   };
