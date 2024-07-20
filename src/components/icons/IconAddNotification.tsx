@@ -1,4 +1,8 @@
-export const IconAddNotification = ({ color = 'inherit', size = 48 }) => {
+export const IconAddNotification = ({
+  color = 'inherit',
+  bgColor = '',
+  size = 48,
+}) => {
   return (
     <svg
       width={size}

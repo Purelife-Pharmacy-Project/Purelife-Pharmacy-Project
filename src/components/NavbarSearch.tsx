@@ -82,7 +82,7 @@ export const NavbarSearch = () => {
         variant='bordered'
         size='lg'
         type='text'
-        placeholder='Search products'
+        placeholder='Search products, vaccines and lab tests'
         endContent={
           <div className='rounded-full bg-primaryLight p-2'>
             <IconSearch color='header-100' />

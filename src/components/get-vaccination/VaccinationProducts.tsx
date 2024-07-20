@@ -2,10 +2,10 @@
 
 import { Section } from '@/components/home/Section';
 import { useGetProductsInfinity } from '@/hooks';
-import { FC, useMemo } from 'react';
-import { TelehealthProductCard } from '../TelehealthProductCard';
+import React, { FC, useMemo } from 'react';
 import { LabTestsSkeleton } from '../book-lab-test/skeleton/LabTestsSkeleton';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { LabTestCard } from '@/components/book-lab-test/LabTestCard';
 
 const limit = 20;
 
@@ -29,9 +29,9 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
   }, [products]);
 
   return (
-    <div className='min-h-fit w-full bg-gray-100'>
+    <div id='scroll' className='min-h-fit w-full scroll-mt-24'>
       <div className='lg:grid lg:justify-center'>
-        <Section className='border-t-2 border-primary bg-transparent py-20'>
+        <Section className='bg-transparent'>
           {loadingVaccines ? <LabTestsSkeleton /> : null}
 
           {vaccines && vaccines?.length > 0 && !loadingVaccines ? (
@@ -44,10 +44,10 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                 className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'
               >
                 {vaccines?.map((product) => (
-                  <TelehealthProductCard
-                    color='primary'
-                    test={product}
+                  <LabTestCard
+                    product={product}
                     key={product.id}
+                    baseUrl='/telehealth/get-vaccination'
                   />
                 ))}
               </InfiniteScroll>

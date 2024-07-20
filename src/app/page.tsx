@@ -14,33 +14,46 @@ import ExploreTests from '@/components/home/ExploreTests';
 import DiscoverTopProducts from '@/components/home/DiscoverTopProducts';
 import HealthOfferings from '@/components/home/HealthOfferings';
 
-export default async function Home() {
-  // const queryClient = new QueryClient();
-  //
-  // await queryClient.prefetchQuery({
-  //   queryKey: ['featured-products'],
-  //   queryFn: () =>
-  //     ProductService.getAllProducts({
-  //       active: true,
-  //       pageSize: 3,
-  //       pageIndex: 1,
-  //     }),
-  // });
+const data = [
+  {
+    title: 'Shop our top tests now and enjoy a 20% discount!',
+    image: '/images/holding-blood-tube.png',
+    cta: 'Shop all test',
+    ctaLink: '/telehealth/book-lab-test',
+  },
+  {
+    title: 'Explore popular vaccines and get 20% off your order!',
+    image: '/images/getting-injection.png',
+    cta: 'Shop all vaccines',
+    ctaLink: '/telehealth/get-vaccination',
+  },
+  {
+    title: 'Book an instant consultation with a doctor',
+    image: '/images/doctor-consulting.png',
+    cta: 'Book Session',
+    ctaLink: '/telehealth/find-a-doctor',
+  },
+  {
+    title: 'For healthier skin and beauty, speak to our cosmetologist.',
+    image: '/images/skin-care.png',
+    cta: 'Book Session',
+    ctaLink: '/telehealth/find-a-doctor',
+  },
+  {
+    title: 'Subscribe for a drug refill for your prescriptions',
+    image: '/images/doctor-prescribing.png',
+    cta: 'Subscribe Now',
+    ctaLink: '',
+  },
+  {
+    title: 'Want to improve your health? Talk to our pharmacist.',
+    image: '/images/smiling-nurse.png',
+    cta: 'Book Session',
+    ctaLink: '/telehealth/find-a-doctor',
+  },
+];
 
-  const transformationData = [
-    {
-      stat: '80%',
-      description: 'See improvement in their first 6 months.',
-    },
-    {
-      stat: '8k+',
-      description: 'Certified and accredited laboratory test results.',
-    },
-    {
-      stat: '95%',
-      description: 'Of members would recommend to friends & family.',
-    },
-  ];
+export default async function Home() {
   return (
     <>
       <main className='grid gap-6 lg:gap-10'>
@@ -88,7 +101,7 @@ export default async function Home() {
 
         <div className='invisible mb-4'></div>
 
-        <HealthOfferings />
+        <HealthOfferings title='See our Health offerings' data={data} />
 
         <div className='invisible mb-4'></div>
 

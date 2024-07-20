@@ -8,12 +8,13 @@ import clsx from 'clsx';
 
 type Prop = {
   title: string;
-  moreLink: string;
+  moreLink?: string;
   products?: Product[];
   isLoading: boolean;
   loader: ReactElement;
   ProductComp: React.FC<{ product: Product }>;
   emptyMessage: string;
+  allowOverflow?: boolean;
 };
 
 const ProductRow: React.FC<Prop> = ({
@@ -24,6 +25,7 @@ const ProductRow: React.FC<Prop> = ({
   ProductComp,
   emptyMessage,
   loader,
+  allowOverflow = true,
 }) => {
   const ref = useRef<any>(null);
   const [overflow, setOverflow] = useState<boolean>();
@@ -47,9 +49,11 @@ const ProductRow: React.FC<Prop> = ({
         <h5 className='text-lg font-semibold capitalize lg:text-2xl'>
           {title}
         </h5>
-        <Link href={moreLink} className='text-lg text-[#919191] lg:text-xl '>
-          Shop All
-        </Link>
+        {moreLink ? (
+          <Link href={moreLink} className='text-lg text-[#919191] lg:text-xl '>
+            Shop All
+          </Link>
+        ) : null}
       </div>
       {isLoading ? (
         loader
@@ -71,7 +75,12 @@ const ProductRow: React.FC<Prop> = ({
           </button>
           <div
             ref={ref}
-            className='scroll flex w-full flex-auto snap-x scroll-pb-10 flex-nowrap gap-5 overflow-x-auto scrollbar-hide'
+            className={clsx({
+              'scroll flex w-full flex-auto snap-x scroll-pb-10 flex-nowrap gap-5 overflow-x-auto scrollbar-hide':
+                allowOverflow,
+              'grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3':
+                !allowOverflow,
+            })}
           >
             {products?.map((product) => (
               <ProductComp key={product.id} product={product} />

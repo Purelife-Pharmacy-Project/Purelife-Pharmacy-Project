@@ -63,6 +63,7 @@ class ProductService {
         Array<{
           id: string;
           name: string;
+          description: string;
           lst_price: number;
           image_256: number;
           product_stock_available_qty: number;
@@ -76,6 +77,7 @@ class ProductService {
         name: string;
         lst_price: number;
         image_256: number;
+        description: string;
         product_stock_available_qty: number;
       }>
     >;
@@ -87,7 +89,7 @@ class ProductService {
     return new Product({
       ...response.result[0],
       image_1024: response.result[0].image_256,
-      description: '',
+      description: response.result[0].description || '',
       canBePurchased: true,
       canBeSold: true,
       categ_id: [0, ''],

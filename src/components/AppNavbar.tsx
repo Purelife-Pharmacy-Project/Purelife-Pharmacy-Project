@@ -169,7 +169,7 @@ export const AppNavbar = ({
             <NavbarCart isActive={isActive} />
           </NavbarItem>
         </div>
-        <NavbarItem className='hidden lg:block'>
+        <NavbarItem className='hidden'>
           <Button
             as={Link}
             href='/shop?category=health'
