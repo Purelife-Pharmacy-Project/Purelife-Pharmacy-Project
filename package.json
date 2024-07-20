@@ -15,6 +15,7 @@
     "@nextui-org/react": "^2.3.6",
     "@nextui-org/system": "^2.2.5",
     "@nextui-org/theme": "^2.2.9",
+    "@paystack/inline-js": "^2.19.2",
     "@react-rxjs/core": "^0.10.7",
     "@react-rxjs/utils": "^0.9.7",
     "@redux-devtools/extension": "^3.3.0",

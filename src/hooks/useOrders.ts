@@ -1,6 +1,7 @@
 import OrderService from '@/services/orders';
 import { CreateOrderPayload } from '@/services/orders/types';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { InitiateTransactionResponse } from '@/services/cart/types';
 
 export const useGetOrders = () => {
   const {
@@ -20,7 +21,7 @@ export const useGetOrders = () => {
 };
 
 export const useCreateOrder = (
-  onSuccess?: () => void,
+  onSuccess?: (data: InitiateTransactionResponse['data']) => void,
   onError?: (error: unknown) => void
 ) => {
   const {
@@ -34,7 +35,7 @@ export const useCreateOrder = (
       OrderService.createOrder(payload),
     onSuccess: (data) => {
       if (data) {
-        onSuccess && onSuccess();
+        onSuccess && onSuccess(data);
       }
     },
     onError: (error) => {

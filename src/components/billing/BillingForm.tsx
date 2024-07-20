@@ -27,9 +27,14 @@ import { FormMessage } from '@/library/ui/FormMessage';
 type BillingFormProps = {
   onUpdated: () => void;
   isProfile?: boolean;
+  isPickup?: string;
 };
 
-export const BillingForm: FC<BillingFormProps> = ({ onUpdated, isProfile }) => {
+export const BillingForm: FC<BillingFormProps> = ({
+  onUpdated,
+  isProfile,
+  isPickup,
+}) => {
   const { partner } = useGetPartner();
 
   const [passwordIsVisible, setPasswordIsVisible] = useState(false);
@@ -101,12 +106,28 @@ export const BillingForm: FC<BillingFormProps> = ({ onUpdated, isProfile }) => {
   }, [setValue, partner]);
 
   useEffect(() => {
+    if (deliveryDetails) {
+      setValue('id', deliveryDetails.id);
+      setValue('firstName', deliveryDetails.name.split(' ')[0]);
+      setValue('lastName', deliveryDetails.name.split(' ')[1]);
+      setValue('email', deliveryDetails.email);
+      setValue('phone', deliveryDetails.phoneNumber);
+    }
+  }, [deliveryDetails]);
+
+  useEffect(() => {
     if (!isCreateAccount) {
       setValue('password', undefined);
       setValue('cityId', undefined);
       setValue('stateId', undefined);
     }
   }, [isCreateAccount]);
+
+  useEffect(() => {
+    if (isPickup) {
+      setValue('address', isPickup);
+    }
+  }, [isPickup]);
 
   const onSubmit = (data: BillingPayload) => {
     const payload: UserType = {
@@ -139,7 +160,10 @@ export const BillingForm: FC<BillingFormProps> = ({ onUpdated, isProfile }) => {
   );
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
+    <form
+      onSubmit={handleSubmit(onSubmit, console.log)}
+      className='flex flex-col gap-6'
+    >
       {error ? <FormMessage type='error' message={error!} /> : null}
       {!Object.keys(deliveryDetails).length ? (
         <div className='flex gap-4'>

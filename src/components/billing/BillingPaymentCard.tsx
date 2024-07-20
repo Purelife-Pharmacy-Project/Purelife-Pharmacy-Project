@@ -1,5 +1,5 @@
 'use client';
-import { fromNaira, toNaira } from '@/helpers/utils';
+import { toNaira } from '@/helpers/utils';
 import {
   useCartStore,
   useCreateOrder,
@@ -7,7 +7,7 @@ import {
   useGetProductsInfinity,
 } from '@/hooks';
 import { useStore } from '@/hooks/store';
-import { CreateOrderPayload, OrderProduct } from '@/services/orders/types';
+import { CreateOrderPayload } from '@/services/orders/types';
 import { Product } from '@/services/products/types';
 import { inputBorderedRegular, selectBordered } from '@/theme';
 import {
@@ -25,9 +25,11 @@ import {
 import { useRouter } from 'next/navigation';
 import { FC, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
-import { Paystack, PaystackSuccessResponse } from '../paystack';
 import { BillingAddressForm } from './BillingAddressForm';
 import { DELIVERY_LOCATIONS_CATEGORY_ID } from '@/constants';
+// @ts-ignore
+import Paystack from '@paystack/inline-js';
+import { BillingInfoCard } from '@/components/billing/BillingInfoCard';
 
 type BillingPaymentCardProps = {
   shouldFetchAddresses?: boolean;
@@ -42,6 +44,8 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
   amount,
   onPaymentSuccess,
 }) => {
+  const popup = new Paystack();
+
   const summary = useStore(useCartStore, (state) => state)?.summary;
   const deliveryDetails = useStore(useCartStore, (state) => state)
     ?.deliveryDetails;
@@ -97,45 +101,21 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
   );
 
   const { createOrder, loadingCreateOrder, successCreateOrder, data } =
-    useCreateOrder(() => {
-      clearCart();
-      toast.success('Order created successfully');
-      router.push('/order-status');
+    useCreateOrder((data) => {
+      if (data.access_code) {
+        const transaction = popup.resumeTransaction(data.access_code);
+        transaction.callbacks.onSuccess = handlePaymentSuccess;
+      }
     });
 
-  const handlePaymentSuccess = (response: PaystackSuccessResponse) => {
-    if (!response) return;
-
-    const cartProducts = cart?.map((product) => ({
-      productId: product.product.id,
-      productQuantity: product.quantity,
-    }));
-
-    const deliveryProduct = {
-      productId: selectedAddress?.id as number,
-      quantity: 1,
-      description: `${selectedAddress?.name} - ${phoneNumber}`,
-      priceUnit: selectedAddress?.lst_price,
-    } as OrderProduct;
-
-    const payload: CreateOrderPayload = {
-      partnerId: +(
-        deliveryDetails?.id ||
-        process.env.NEXT_PUBLIC_GUEST_ID ||
-        '0'
-      ),
-      address: deliveryDetails?.contactAddress || '',
-      email: deliveryDetails?.email || '',
-      phoneNumber: deliveryDetails?.phoneNumber || '',
-      name: deliveryDetails?.name || '',
-      products: cartProducts || [],
-    };
-
-    createOrder(payload);
+  const handlePaymentSuccess = () => {
+    clearCart();
+    toast.success('Order created successfully');
+    router.push('/order-status');
   };
 
   const handleCreateOrder = () => {
-    if (selectedAddress?.id != 1115 && !deliveryDetails?.contactAddress) {
+    if (!deliveryDetails?.contactAddress) {
       toast.error('Please fill in your billing details');
       return document.getElementById('details')?.scrollIntoView({
         behavior: 'smooth',
@@ -218,12 +198,6 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
     }
   }, [cart, router]);
 
-  useEffect(() => {
-    if (successCreateOrder && data) {
-      window.location.href = data.authorization_url;
-    }
-  }, [successCreateOrder, data]);
-
   return (
     <Card shadow='none' className='w-full bg-primaryLight'>
       <CardBody className='p-8 lg:p-12'>
@@ -291,21 +265,11 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
                 selectedAddress={selectedAddress}
               />
             ) : null}
-            <div className='flex justify-between pb-3'>
-              <RadioGroup
-                label='Payment Method'
-                value={paymentMethod}
-                onValueChange={(value) =>
-                  setPaymentMethod(value as 'card' | 'bank_transfer')
-                }
-                classNames={{
-                  label: 'text-header-100',
-                }}
-              >
-                <Radio value='bank_transfer'>Direct Bank Transfer</Radio>
-                <Radio value='card'>Pay via Debit/ Credit/ ATM card</Radio>
-              </RadioGroup>
-            </div>
+            <BillingInfoCard
+              isPickup={selectedAddress?.name}
+              className='my-5 md:hidden'
+              color='primary'
+            />
             <Image
               alt='secured by paystack'
               width={300}
@@ -338,21 +302,6 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
           >
             Place Order
           </Button>
-
-          <div className='hidden' id='paymentButton'>
-            <Paystack
-              amount={amount || fromNaira(summary?.totalPayableAmount || '0')}
-              paymentMethod={paymentMethod}
-              email={partner?.email as string}
-              ctaText='Pay Now'
-              label='Shop and Order'
-              onSuccess={(response) => {
-                onPaymentSuccess
-                  ? onPaymentSuccess()
-                  : handlePaymentSuccess(response);
-              }}
-            />
-          </div>
         </div>
       </CardBody>
     </Card>
