@@ -71,7 +71,7 @@ export const Categories = () => {
                 alt=''
                 width={200}
                 height={200}
-                className='h-[107px] w-[107px] lg:h-[171px] lg:w-[171px]'
+                className='max-h-[150px] min-w-[150px] lg:min-h-[200px] lg:min-w-[200px]'
               />
               <p className='mt-2.5 whitespace-nowrap text-center'>
                 {category.category}

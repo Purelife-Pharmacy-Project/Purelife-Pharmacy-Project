@@ -72,7 +72,7 @@ export default async function Home() {
             'saves time',
           ]}
           featuresWithLinks={[
-            { label: 'shop pharmacy', href: '/shop' },
+            { label: 'shop pharmacy', href: '/shop?category=health' },
             {
               label: 'consult with a doctor',
               href: '/telehealth/find-a-doctor',
