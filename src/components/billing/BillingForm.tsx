@@ -106,7 +106,7 @@ export const BillingForm: FC<BillingFormProps> = ({
   }, [setValue, partner]);
 
   useEffect(() => {
-    if (deliveryDetails) {
+    if (deliveryDetails && Object.keys(deliveryDetails).length) {
       setValue('id', deliveryDetails.id);
       setValue('firstName', deliveryDetails.name.split(' ')[0]);
       setValue('lastName', deliveryDetails.name.split(' ')[1]);
