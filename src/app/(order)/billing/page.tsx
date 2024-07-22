@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { BillingInfoCard } from '@/components/billing/BillingInfoCard';
 import { BillingOrderSummary } from '@/components/billing/BillingOrderSummary';
 import { BillingPaymentCard } from '@/components/billing/BillingPaymentCard';
