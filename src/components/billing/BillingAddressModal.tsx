@@ -14,7 +14,7 @@ export const BillingAddressModal: FC<BillingAddressModalProps> = ({
   isPickup,
 }) => {
   return (
-    <Modal onOpenChange={openChange} isOpen={isOpen}>
+    <Modal onOpenChange={openChange} isOpen={isOpen} placement='center'>
       <ModalContent>
         <ModalHeader>
           <p className='text-2xl font-bold text-header-100'>
