@@ -72,6 +72,7 @@ export const CreateAccountForm = () => {
         label='Full Name'
         type='text'
         autoComplete='new-name'
+        isInvalid={!!errors.name?.message}
         errorMessage={errors.name?.message}
         classNames={inputDefault}
         {...register('name')}
@@ -80,6 +81,7 @@ export const CreateAccountForm = () => {
         label='Email'
         type='email'
         autoComplete='email'
+        isInvalid={!!errors.email?.message}
         errorMessage={errors.email?.message}
         classNames={inputDefault}
         {...register('email')}
@@ -88,6 +90,7 @@ export const CreateAccountForm = () => {
         label='Phone Number'
         type='tel'
         autoComplete='tel'
+        isInvalid={!!errors.phoneNumber?.message}
         errorMessage={errors.phoneNumber?.message}
         classNames={inputDefault}
         {...register('phoneNumber')}
@@ -96,6 +99,7 @@ export const CreateAccountForm = () => {
         items={states || []}
         isLoading={loadingStates}
         label='State'
+        isInvalid={!!errors.stateId?.message}
         errorMessage={errors.stateId?.message}
         classNames={selectBorderedGrayLight}
         onChange={(value) => setValue('stateId', +value.target.value)}
@@ -110,6 +114,7 @@ export const CreateAccountForm = () => {
         items={cities || []}
         isLoading={loadingCities}
         label='City'
+        isInvalid={!!errors.cityId?.message}
         errorMessage={errors.cityId?.message}
         classNames={selectBorderedGrayLight}
         onChange={(value) => setValue('cityId', +value.target.value)}
@@ -124,6 +129,7 @@ export const CreateAccountForm = () => {
         label='Address'
         autoComplete='street-address'
         classNames={textAreaDefault}
+        isInvalid={!!errors.address?.message}
         errorMessage={errors.address?.message}
         {...register('address')}
       />
@@ -131,6 +137,7 @@ export const CreateAccountForm = () => {
         label='Password'
         type={passwordIsVisible ? 'text' : 'password'}
         autoComplete='new-password'
+        isInvalid={!!errors.password?.message}
         errorMessage={errors.password?.message}
         classNames={inputDefault}
         {...register('password')}

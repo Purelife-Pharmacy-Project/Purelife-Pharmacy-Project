@@ -43,7 +43,7 @@ export const AppNavbar = ({
         return '';
 
       default:
-        return 'bg-primaryLight';
+        return 'bg-white';
     }
   };
 
@@ -169,10 +169,10 @@ export const AppNavbar = ({
             <NavbarCart isActive={isActive} />
           </NavbarItem>
         </div>
-        <NavbarItem className='hidden lg:block'>
+        <NavbarItem className='hidden'>
           <Button
             as={Link}
-            href='/telehealth/shop-and-order'
+            href='/shop?category=health'
             radius='full'
             size='lg'
             color='primary'

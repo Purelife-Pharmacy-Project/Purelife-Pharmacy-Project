@@ -51,8 +51,8 @@ export const HowItWorks: FC<HowItWorksProps> = ({
                   >
                     {answer.icon}
                   </div>
-                  <div className='mx-auto flex max-w-[275px] flex-col gap-1'>
-                    <p className='text-balance text-center text-lg font-light text-black'>
+                  <div className='mx-auto flex max-w-[305px] flex-col gap-1'>
+                    <p className='text-balance text-center font-light text-black'>
                       {answer.description}
                     </p>
                   </div>

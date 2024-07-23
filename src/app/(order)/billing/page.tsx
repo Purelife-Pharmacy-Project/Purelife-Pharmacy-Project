@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { BillingInfoCard } from '@/components/billing/BillingInfoCard';
 import { BillingOrderSummary } from '@/components/billing/BillingOrderSummary';
 import { BillingPaymentCard } from '@/components/billing/BillingPaymentCard';
@@ -19,11 +21,8 @@ export default function BillingPage() {
       <div className='grid justify-center pt-8 lg:pb-10'>
         <Section className='bg-white'>
           <div className='grid grid-cols-1 gap-6 lg:grid-flow-col lg:grid-cols-2'>
-            <div
-              id='details'
-              className='order-last flex scroll-mt-24 flex-col gap-6 md:order-first'
-            >
-              <BillingInfoCard />
+            <div className='order-last hidden h-fit flex-col gap-6 rounded-xl bg-blueLight p-8 md:order-first md:flex'>
+              <BillingInfoCard className='scroll-mt-24' />
             </div>
 
             <div className='grid h-max gap-6'>

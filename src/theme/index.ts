@@ -87,6 +87,21 @@ export const inputDefault: SlotsToClasses<InputSlots> = {
   ],
 };
 
+export const inputBorderedDefault: SlotsToClasses<InputSlots> = {
+  label: ['text-content text-md font-light'],
+  inputWrapper: [
+    'pr-2',
+    'bg-white',
+    'shadow-sm',
+    'border',
+    'border-header-100',
+    'text-black capitalize',
+    'data-[hover=true]:bg-white',
+    'group-data-[focus=true]:bg-white',
+    'group-data-[active=true]:bg-white',
+  ],
+};
+
 export const prescriptionTextArea: SlotsToClasses<InputSlots> = {
   label: ['text-content text-md font-light hidden'],
   description: ['hidden'],

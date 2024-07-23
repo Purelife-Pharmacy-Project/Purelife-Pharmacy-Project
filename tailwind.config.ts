@@ -17,7 +17,10 @@ const config: Config = {
         '4xl': ['2.5rem', '3rem'],
       },
       colors: {
-        primary: '#FF0028',
+        primary: {
+          DEFAULT: '#FF0028',
+          400: '#C5001F',
+        },
         primaryGreen: '#00CD52',
         primaryGreenLight: '#F1FFF7',
         primaryGreenDark: '#003315',

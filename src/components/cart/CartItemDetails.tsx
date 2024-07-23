@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { IconSpinner } from '../icons/IconSpinner';
 import { OrderSummary } from './OrderSummary';
 import { ConfirmationModal } from './modals/ConfirmationModal';
+import AddToCartBtn from '@/components/cart/AddToCartBtn';
 
 export const CartItemDetails = () => {
   const itemId = usePathname().split('/')[2];
@@ -98,23 +99,10 @@ export const CartItemDetails = () => {
                     />
                   </div>
                 ) : (
-                  <Button
-                    className='w-max px-10'
-                    color={product.quantity == 0 ? 'default' : 'primary'}
-                    variant={product.quantity == 0 ? 'bordered' : 'solid'}
-                    radius='full'
-                    size='lg'
-                    isDisabled={loadingProduct || product.quantity == 0}
-                    onPress={() => {
-                      addToCart({
-                        id: product.id,
-                        product,
-                        quantity: 1,
-                      });
-                    }}
-                  >
-                    {product.quantity == 0 ? 'Out of stock' : 'Add to cart'}
-                  </Button>
+                  <AddToCartBtn
+                    product={product}
+                    className='w-max rounded-full px-10'
+                  />
                 )}
 
                 <Button
