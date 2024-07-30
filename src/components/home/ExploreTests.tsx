@@ -21,7 +21,7 @@ const TestCard: React.FC<{ product: Product }> = ({ product }) => {
       <Button
         className='mt-auto bg-primaryLight text-sm font-medium text-primary'
         radius='sm'
-        disabled={product.quantity === 0}
+        // disabled={product.quantity === 0}
         onClick={() => {
           addToCart({
             id: product.id,
@@ -30,7 +30,8 @@ const TestCard: React.FC<{ product: Product }> = ({ product }) => {
           });
         }}
       >
-        {product.quantity === 0 ? 'Out of stock' : 'Add to cart'}
+        {/*{product.quantity === 0 ? 'Out of stock' : 'Add to cart'}*/}
+        Add to cart
       </Button>
     </div>
   );
