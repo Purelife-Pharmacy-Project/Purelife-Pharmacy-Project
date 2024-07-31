@@ -20,7 +20,7 @@ export const LabTestCard: React.FC<{ product: Product; baseUrl: string }> = ({
         <Button
           className='bg-primaryLight text-sm font-medium text-primary'
           radius='sm'
-          disabled={product.quantity === 0}
+          // disabled={product.quantity === 0}
           onClick={() => {
             addToCart({
               id: product.id,
@@ -29,7 +29,8 @@ export const LabTestCard: React.FC<{ product: Product; baseUrl: string }> = ({
             });
           }}
         >
-          {product.quantity === 0 ? 'Out of stock' : 'Add to cart'}
+          {/*{product.quantity === 0 ? 'Out of stock' : 'Add to cart'}*/}
+          Add to cart
         </Button>
         <Button
           as={NextLink}
