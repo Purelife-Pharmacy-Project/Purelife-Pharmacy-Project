@@ -40,7 +40,7 @@ export default function CookiePolicy() {
       <main className='mx-auto grid max-w-[1280px] px-6'>
         <div className='relative mx-auto mt-10 w-full px-6 sm:mt-7'>
           <div className='flex flex-col-reverse sm:flex-row sm:gap-[5%]'>
-          <section className='w-full sm:w-[30%] sm:h-[70vh] overflow-y-scroll  sticky top-32 z-10 mb-7'>
+          <section className='w-full sm:w-[30%] sm:h-[300px]  sticky top-32 z-10 mb-7'>
             <header className='mb-[7px] font-bold sm:text-[16px] lg:text-[18px]'>
               ON THIS PAGE
             </header>

@@ -58,7 +58,7 @@ export default function PrivacyPolicy() {
       <main className='mx-auto grid max-w-[1280px] px-6'>
         <div className='relative mx-auto mt-10 w-full px-6 sm:mt-7'>
         <div className='flex flex-col-reverse sm:flex-row sm:gap-[5%]'>
-          <section className='w-full sm:w-[30%] sm:h-[70vh] overflow-y-scroll sticky top-32 z-10 mb-7'>
+          <section className='w-full sm:w-[30%] sm:h-[450px] sticky top-32 z-10 mb-7'>
             <header className='mb-[7px] font-bold sm:text-[16px] lg:text-[18px]'>
               ON THIS PAGE
             </header>
@@ -337,12 +337,12 @@ export default function PrivacyPolicy() {
           </section>
           </div>
         </div>
-        <div className='mx-auto mt-10 w-full px-4 sm:mb-10'>
-          <div className='flex items-center justify-between rounded-[20px] bg-primaryLight pb-[20px] pl-[40px] pr-[40px] pt-[20px]'>
-            <h3 className='font-extrabold text-[#FF0028] sm:text-[20px] lg:text-[24px]'>
+        <div className='mb-10 mx-auto mt-10 w-full px-4 sm:mb-10'>
+          <div className='sm:gap-0 sm:flex-row sm:items-center flex flex-col gap-6 justify-between rounded-[20px] bg-primaryLight pb-[20px] pl-[40px] pr-[40px] pt-[20px]'>
+            <h3 className='font-extrabold text-[#FF0028] text-[20px] sm:text-[22px] lg:text-[24px]'>
               Report any adverse drug reaction here
             </h3>
-            <button className='rounded-[50px] bg-[#FF0028] pb-[10px] pb-[15px] pl-[30px] pl-[50px] pr-[30px] pr-[50px] pt-[10px] pt-[15px] text-[#FFFFFF] text-[13px] sm:text-[14px]'>
+            <button className='w-fit rounded-[50px] bg-[#FF0028]  pb-[15px]  pl-[50px]  pr-[50px]  pt-[15px] text-[#FFFFFF] text-[13px]  sm:pb-[10px] sm:pl-[30px] sm:pr-[30px] sm:pt-[10px] sm:text-[14px]'>
               Report Now
             </button>
           </div>
