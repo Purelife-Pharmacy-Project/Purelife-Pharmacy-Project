@@ -110,10 +110,10 @@ export const Testimonials = () => {
   return (
     <div
       ref={elementRef}
-      className='h-max min-h-[380px] w-full bg-primaryGreenLight py-6 lg:min-h-[484px] lg:py-0'
+      className='h-max min-h-[380px] w-full bg-primaryLight py-6 lg:min-h-[484px] lg:py-0'
     >
       <div className='lg:grid lg:justify-center lg:pb-10 lg:pt-[55px]'>
-        <Section className='bg-primaryGreenLight'>
+        <Section className='bg-primaryLight'>
           <div className='flex flex-col items-center justify-between gap-4 lg:flex-row lg:justify-between lg:gap-0'>
             <h1 className='text-center text-4xl font-bold text-primaryGreenDark lg:text-start'>
               People ❤️ Purelife
@@ -126,8 +126,8 @@ export const Testimonials = () => {
                   key={index}
                   isIconOnly
                   className={twMerge(
-                    'h-[9px] w-6 cursor-pointer rounded-full bg-green-100',
-                    index === activeIndex && 'bg-success'
+                    'h-[9px] w-6 cursor-pointer rounded-full bg-[#FFCFCF]',
+                    index === activeIndex && 'bg-primary'
                   )}
                   onClick={() => {
                     setStartInterval(false);

@@ -1,55 +1,39 @@
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
-import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
 import { VaccinationProducts } from '@/components/get-vaccination/VaccinationProducts';
 import { Footer } from '@/components/home/Footer';
-import { HomeHero } from '@/components/home/HomeHero';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
-import { Section } from '@/components/home/Section';
-import { IconAddNotification } from '@/components/icons/IconAddNotification';
-import { IconBrowse } from '@/components/icons/IconBrowse';
-import { IconHealthShield } from '@/components/icons/IconHealthShield';
+import { BookAVaccineHero } from '@/components/get-vaccination/BookAVaccineHero';
+import HealthOfferings from '@/components/home/HealthOfferings';
+import BookSession from '@/components/book-lab-test/BookSession';
+
+const data = [
+  {
+    title: 'See top vaccine to take before your get married',
+    image: '/images/default-test.png',
+    cta: 'Shop all test',
+    ctaLink: '/telehealth/get-vaccination#scroll',
+  },
+  {
+    title: 'Top vaccine to boost your immune system',
+    image: '/images/default-test.png',
+    cta: 'Shop all test',
+    ctaLink: '/telehealth/get-vaccination#scroll',
+  },
+];
 
 export default function GetVaccinationPage() {
-  const howItWorksData: {
-    description: string;
-    icon: JSX.Element;
-  }[] = [
-    {
-      description:
-        'Browse for your preferred test packages and easily schedule a home sample collection.',
-      icon: <IconBrowse size={48} color='primary' />,
-    },
-    {
-      description:
-        'Receive one of our certified health professionals at your preferred location for a test sample collection.',
-      icon: <IconHealthShield size={60} color='primary' />,
-    },
-    {
-      description:
-        'Get notified by mail of your reports, which is also available within your account on the Purelife app.',
-      icon: <IconAddNotification size={60} color='primary' />,
-    },
-  ];
-
   return (
     <>
       <main className='grid gap-20'>
-        <div className='grid justify-center bg-primaryLight'>
-          <Section className='bg-primaryLight'>
-            <HomeHero
-              title='Select for our loads of Vaccines for your health'
-              description='Schedule laboratory tests, book vaccination appointments, and receive high-quality medical services from the convenience of wherever you are in Nigeria.'
-              ctaText='Start here'
-              ctaLink='#products'
-            />
-          </Section>
-        </div>
-
-        <div id='products' className='hidden'></div>
+        <BookAVaccineHero />
 
         <VaccinationProducts />
 
-        <HowItWorks data={howItWorksData} variant={'primary'} />
+        <HealthOfferings title='Enjoy 20% of these Vaccine ' data={data} />
+
+        {/*<HowItWorks data={howItWorksData} variant={'primary'} />*/}
+
+        <BookSession />
 
         <ReportDrugReaction />
 

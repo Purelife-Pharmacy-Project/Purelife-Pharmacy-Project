@@ -1,18 +1,8 @@
 'use client';
-import { IconCart } from '@/components/icons/IconCart';
-import { useCartStore } from '@/hooks';
 import { Product } from '@/services/products/types';
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  CardBody,
-  CardFooter,
-  Image,
-  Link,
-} from '@nextui-org/react';
-import { useRouter } from 'next/navigation';
+import { Card, CardBody, CardFooter, Image, Link } from '@nextui-org/react';
 import { FC } from 'react';
+import AddToCartBtn from '@/components/cart/AddToCartBtn';
 
 type ProductCardProps = {
   product: Product;
@@ -20,9 +10,6 @@ type ProductCardProps = {
 };
 
 export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
-  const { addToCart } = useCartStore();
-  const router = useRouter();
-
   return (
     <Card shadow='none' className='w-full' radius='lg'>
       <CardBody className='relative h-max overflow-visible p-0'>
@@ -41,7 +28,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
         <div className='flex flex-col gap-2'>
           <Link
             href={`/cart/${product.id}`}
-            className='max-h-[60px] overflow-y-auto break-words font-semibold capitalize text-header-100 hover:underline'
+            className='h-[60px] max-h-[60px] overflow-hidden text-ellipsis break-words font-semibold capitalize text-header-100 hover:underline'
           >
             {product.name?.toLowerCase()}
           </Link>
@@ -50,31 +37,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, loading }) => {
           </p>
         </div>
 
-        <ButtonGroup fullWidth>
-          <Button
-            variant='flat'
-            as={Link}
-            href={`/cart/${product.id}`}
-            isDisabled={product.quantity === 0}
-          >
-            Buy now
-          </Button>
-          <Button
-            color='primary'
-            className='flex items-center gap-2'
-            isDisabled={product.quantity === 0}
-            onPress={() =>
-              addToCart({
-                id: product.id,
-                product,
-                quantity: 1,
-              })
-            }
-          >
-            <IconCart size={20} />
-            Add to cart
-          </Button>
-        </ButtonGroup>
+        <AddToCartBtn product={product} className='flex items-center gap-2' />
 
         {/* <Button
           className='border-header-100 text-header-100 hover:border-primary hover:bg-primary/10 hover:text-primary'

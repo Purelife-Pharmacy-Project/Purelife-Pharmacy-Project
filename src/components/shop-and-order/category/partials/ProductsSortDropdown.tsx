@@ -13,6 +13,7 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = ({}) => {
   const currentCategory = useSearchParams().get('category');
 
   const allowedCategories = [
+    'all',
     'health',
     'beauty',
     'supermarket',
@@ -27,7 +28,7 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = ({}) => {
     if (!currentCategory) {
       removeQuery(['category']);
     } else {
-      setSelectedValue(currentCategory);
+      setSelectedValue(currentCategory.toUpperCase());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

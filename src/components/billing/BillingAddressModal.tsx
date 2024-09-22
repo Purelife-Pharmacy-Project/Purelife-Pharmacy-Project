@@ -5,14 +5,16 @@ import { FC } from 'react';
 type BillingAddressModalProps = {
   isOpen: boolean;
   openChange: () => void;
+  isPickup?: string;
 };
 
 export const BillingAddressModal: FC<BillingAddressModalProps> = ({
   isOpen,
   openChange,
+  isPickup,
 }) => {
   return (
-    <Modal onOpenChange={openChange} isOpen={isOpen}>
+    <Modal onOpenChange={openChange} isOpen={isOpen} placement='center'>
       <ModalContent>
         <ModalHeader>
           <p className='text-2xl font-bold text-header-100'>
@@ -20,7 +22,7 @@ export const BillingAddressModal: FC<BillingAddressModalProps> = ({
           </p>
         </ModalHeader>
         <ModalBody>
-          <BillingForm onUpdated={openChange} />
+          <BillingForm onUpdated={openChange} isPickup={isPickup} />
         </ModalBody>
       </ModalContent>
     </Modal>

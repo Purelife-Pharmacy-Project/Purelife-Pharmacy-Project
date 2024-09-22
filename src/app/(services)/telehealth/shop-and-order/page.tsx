@@ -1,15 +1,6 @@
-import { EarnedClients } from '@/components/home/EarnedClients';
-import { Footer } from '@/components/home/Footer';
-import { NewsLetterCard } from '@/components/home/NewsletterCard';
-import { Section } from '@/components/home/Section';
-import { TeleHealthServices } from '@/components/home/TeleHealthServices';
-import { ShopCategory } from '@/components/shop-and-order/ShopCategory';
 import { CategoryService } from '@/services/categories';
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from '@tanstack/react-query';
+import { QueryClient } from '@tanstack/react-query';
+import ShopPage from '@/app/(services)/shop/page';
 
 export default async function ShopAndOrder() {
   // Prefetch categories
@@ -46,52 +37,53 @@ export default async function ShopAndOrder() {
   ];
   return (
     <>
-      <main className='grid gap-6'>
-        {/* <div className='grid justify-center bg-primaryLight'>
-          <Section className='bg-primaryLight'>
-            <HomeHero
-              title='Your Wellness is Only a Shopping Order Away'
-              description='Discover our one-stop shop for your health, supermarket, beauty and skin essentials, and enjoy hassle-free ordering.'
-              ctaText='Start here'
-              ctaLink='#'
-            />
-          </Section>
-        </div> */}
+      {/*<main className='grid gap-6'>*/}
+      {/*  /!* <div className='grid justify-center bg-primaryLight'>*/}
+      {/*    <Section className='bg-primaryLight'>*/}
+      {/*      <HomeHero*/}
+      {/*        title='Your Wellness is Only a Shopping Order Away'*/}
+      {/*        description='Discover our one-stop shop for your health, supermarket, beauty and skin essentials, and enjoy hassle-free ordering.'*/}
+      {/*        ctaText='Start here'*/}
+      {/*        ctaLink='#'*/}
+      {/*      />*/}
+      {/*    </Section>*/}
+      {/*  </div> *!/*/}
 
-        <div className='grid justify-center lg:pt-[55px]'>
-          <Section>
-            <HydrationBoundary state={dehydrate(queryClient)}>
-              <ShopCategory />
-            </HydrationBoundary>
-          </Section>
-        </div>
+      {/*  <div className='grid justify-center lg:pt-[55px]'>*/}
+      {/*    <Section>*/}
+      {/*      <HydrationBoundary state={dehydrate(queryClient)}>*/}
+      {/*        <ShopCategory />*/}
+      {/*      </HydrationBoundary>*/}
+      {/*    </Section>*/}
+      {/*  </div>*/}
 
-        <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
-          <Section className='bg-white'>
-            <EarnedClients
-              earnedClients={earnedClients}
-              title='We got products over 300+ trusted manufacturers'
-            />
-          </Section>
-        </div>
+      {/*  <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>*/}
+      {/*    <Section className='bg-white'>*/}
+      {/*      <EarnedClients*/}
+      {/*        earnedClients={earnedClients}*/}
+      {/*        title='We got products over 300+ trusted manufacturers'*/}
+      {/*      />*/}
+      {/*    </Section>*/}
+      {/*  </div>*/}
 
-        <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
-          <Section className='bg-white'>
-            <TeleHealthServices />
-          </Section>
-        </div>
+      {/*  <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>*/}
+      {/*    <Section className='bg-white'>*/}
+      {/*      <TeleHealthServices />*/}
+      {/*    </Section>*/}
+      {/*  </div>*/}
 
-        <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>
-          <Section className='bg-white'>
-            <NewsLetterCard />
-          </Section>
-        </div>
-        <div className='flex justify-start md:grid md:justify-center lg:pb-10 lg:pt-[55px]'>
-          <Section className='bg-white'>
-            <Footer />
-          </Section>
-        </div>
-      </main>
+      {/*  <div className='grid justify-center lg:pb-10 lg:pt-[55px]'>*/}
+      {/*    <Section className='bg-white'>*/}
+      {/*      <NewsLetterCard />*/}
+      {/*    </Section>*/}
+      {/*  </div>*/}
+      {/*  <div className='flex justify-start md:grid md:justify-center lg:pb-10 lg:pt-[55px]'>*/}
+      {/*    <Section className='bg-white'>*/}
+      {/*      <Footer />*/}
+      {/*    </Section>*/}
+      {/*  </div>*/}
+      {/*</main>*/}
+      <ShopPage />
     </>
   );
 }

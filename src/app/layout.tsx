@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import { Bricolage_Grotesque } from 'next/font/google';
 import React from 'react';
 import './globals.css';
+import AnnouncementBanner from '@/components/AnnouncementBanner';
 
 const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
@@ -102,7 +103,7 @@ export const metadata: Metadata = {
     url: 'https://purelifehealth.io',
     images: [
       {
-        url: '/public/app-logo.png',
+        url: '/app-logo.png',
         width: 400,
         height: 400,
         alt: 'Purelife Health',
@@ -128,6 +129,7 @@ export default async function RootLayout({
         <Providers>
           <main className='bg-background text-foreground light'>
             {/* <HydrationBoundary state={dehydrate(queryClient)}> */}
+            <AnnouncementBanner />
             <AppNavbar />
             {/* </HydrationBoundary> */}
 

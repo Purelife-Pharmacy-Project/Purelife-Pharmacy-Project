@@ -84,7 +84,7 @@ export const OrderSummary: FC<OrderSummaryProps> = () => {
               Continue to Billing
             </Button>
           ) : (
-            <div className='flex items-center gap-4'>
+            <div className='flex flex-col items-center gap-4 md:flex-row'>
               <Button
                 color='primary'
                 size='lg'

@@ -4,8 +4,8 @@ import { HomeHero } from '@/components/home/HomeHero';
 import { HomeTransformation } from '@/components/home/HomeTransformation';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { Section } from '@/components/home/Section';
-import { TeleHealthServices } from '@/components/home/TeleHealthServices';
 import { earnedClients } from '@/constants';
+import { TeleHealthServices } from '@/components/home/TeleHealthServices';
 
 export default function Telehealth() {
   const transformationData = [

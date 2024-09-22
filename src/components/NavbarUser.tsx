@@ -15,6 +15,7 @@ import {
 import { useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';
 import { IconProfile } from './icons/IconProfile';
+import NextLink from 'next/link';
 
 type NavbarUserProps = {
   isActive: (path: string) => boolean;
@@ -38,19 +39,24 @@ export const NavbarUser: FC<NavbarUserProps> = ({ isActive }) => {
       {partner ? (
         <Dropdown showArrow>
           <DropdownTrigger>
-            <Button variant='light'>
+            <Button variant='solid' color='primary' radius='full' size='lg'>
               <Avatar
                 size='sm'
                 showFallback
                 src={''}
                 name={partner && partner.name.substring(0, 1)}
                 classNames={{
-                  base: 'bg-primary/80',
+                  base: 'bg-white',
                   icon: 'text-primary',
-                  name: 'text-white text-base',
+                  name: 'text-primary text-base',
                 }}
               />
-              <span className='text-base'>Profile</span>
+              <span className='text-base'>
+                Hi,{' '}
+                <span className='capitalize'>
+                  {partner.name.split(' ')[0].toLowerCase()}
+                </span>
+              </span>
             </Button>
           </DropdownTrigger>
           <DropdownMenu aria-label='Static Actions'>
@@ -84,19 +90,19 @@ export const NavbarUser: FC<NavbarUserProps> = ({ isActive }) => {
           </DropdownMenu>
         </Dropdown>
       ) : (
-        <Link
-          color='foreground'
-          className={isActive('/sign-in') ? 'font-medium text-primary' : ''}
+        <Button
+          as={NextLink}
+          radius='full'
+          size='lg'
+          color='primary'
+          className={isActive('/sign-in') ? 'font-medium' : ''}
           href='/sign-in'
         >
           <div className='flex items-center gap-2'>
-            <IconProfile
-              color={isActive('/sign-in') ? 'primary' : 'header-100'}
-              size={24}
-            />
-            <p>Sign in</p>
+            <IconProfile color='white' size={24} />
+            <p>Create Account</p>
           </div>
-        </Link>
+        </Button>
       )}
     </>
   );

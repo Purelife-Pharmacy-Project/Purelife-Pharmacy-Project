@@ -25,6 +25,7 @@ export const useGetFeaturedProducts = () => {
 
 export const useGetProductsByCategoryId = (params: {
   categoryId?: string;
+  subCategoryId?: string;
   limit?: number;
   searchStr?: string;
   offset?: number;
@@ -41,16 +42,19 @@ export const useGetProductsByCategoryId = (params: {
       params.searchStr,
       params.limit,
       params.offset,
+      params.subCategoryId,
     ],
     queryFn: () =>
       ProductService.getAllProducts({
         CategoryId: params.categoryId,
+        SubCategoryId: params.subCategoryId,
         Limit: params.limit,
         offset: params.offset,
         name: params.searchStr,
       }),
     refetchOnWindowFocus: false,
-    enabled: !!params.categoryId || !!params.searchStr,
+    enabled:
+      !!params.categoryId || !!params.searchStr || !!params.subCategoryId,
   });
 
   return {

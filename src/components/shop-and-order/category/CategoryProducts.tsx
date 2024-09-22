@@ -25,7 +25,7 @@ export const CategoryProducts = () => {
 
   const getCategoryId = () => {
     const category = currentPath.split('/').pop();
-    const categoryParam = searchParams.get('category');
+    const categoryParam = searchParams.get('category')?.replaceAll('-', ' ');
 
     if (isShopPage) {
       return categories?.find(

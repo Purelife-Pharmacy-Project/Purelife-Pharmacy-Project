@@ -11,6 +11,7 @@ export type ProductQueryParams = {
   // maxPrice?: string;
   isPublished?: boolean;
   CategoryId?: string;
+  SubCategoryId?: string;
   MinListPrice?: number;
   MaxListPrice?: number;
   Limit?: number;
@@ -30,6 +31,7 @@ export type ProductType = {
   canBePurchased: boolean;
   canBeSold: boolean;
   quantity?: number;
+  product_stock_available_qty?: number;
 };
 
 export class Product {
@@ -50,7 +52,10 @@ export class Product {
       ? `data:image/png;base64,${product.image_1024}`
       : '/images/purelife-fallback.png';
     this.amount = toNaira(this.lst_price);
-    this.quantity = 1000000000000;
+    this.quantity =
+      product.product_stock_available_qty != undefined
+        ? product.product_stock_available_qty
+        : 1000000000000;
     // this.quantity = Math.max(0, product.quantity as number) || 1;
   }
 }

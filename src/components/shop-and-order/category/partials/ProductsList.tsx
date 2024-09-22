@@ -27,7 +27,7 @@ export const ProductsList: FC<ProductsListProps> = ({
         {loadingProducts ? (
           <ProductSkeleton />
         ) : (
-          <div className='max-h-[800px] min-h-[500px]'>
+          <div className='min-h-[500px]'>
             <InfiniteScroll
               next={fetchNextPage}
               hasMore={hasNextPage}
@@ -40,8 +40,9 @@ export const ProductsList: FC<ProductsListProps> = ({
                     ))}
                 </>
               }
+              scrollThreshold={0.2}
               dataLength={products?.length}
-              className='relative grid grid-flow-row grid-cols-1 gap-10 overflow-y-auto md:grid-cols-2 lg:grid-cols-3'
+              className='relative grid grid-flow-row grid-cols-2 gap-10 overflow-y-auto md:grid-cols-2 lg:grid-cols-3'
             >
               {products?.map((product) => (
                 <ProductCard

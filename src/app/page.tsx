@@ -1,79 +1,127 @@
-import { EarnedClients } from '@/components/home/EarnedClients';
-import { HomeFaq } from '@/components/home/Faq';
-import { FeaturedProducts } from '@/components/home/FeaturedProducts';
 import { Footer } from '@/components/home/Footer';
 import { HomePageHero } from '@/components/home/HomePageHero';
 import { HomePartners } from '@/components/home/HomePartners';
-import { HomeShopAndOrder } from '@/components/home/HomeShopAndOrder';
-import { HomeTransformation } from '@/components/home/HomeTransformation';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
-import { TeleHealthServices } from '@/components/home/TeleHealthServices';
+import { Categories } from '@/components/home/Categories';
 import { Testimonials } from '@/components/home/Testimonials';
-import { WellnessBlogSection } from '@/components/home/WellnessBlogSection';
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
-import { earnedClients } from '@/constants';
+import { NavbarSearch } from '@/components/NavbarSearch';
+import HotOffersProduct from '@/components/home/HotOffersProduct';
+import BestSellers from '@/components/home/BestSellers';
+import PersonalizedPlan from '@/components/home/PersonalizedPlan';
+import HandpickedForYou from '@/components/home/HandpickedForYou';
+import ExploreTests from '@/components/home/ExploreTests';
+import DiscoverTopProducts from '@/components/home/DiscoverTopProducts';
+import HealthOfferings from '@/components/home/HealthOfferings';
+
+const data = [
+  {
+    title: 'Shop our top tests now and enjoy a 20% discount!',
+    image: '/images/holding-blood-tube.png',
+    cta: 'Shop all test',
+    ctaLink: '/telehealth/book-lab-test',
+  },
+  {
+    title: 'Explore popular vaccines and get 20% off your order!',
+    image: '/images/getting-injection.png',
+    cta: 'Shop all vaccines',
+    ctaLink: '/telehealth/get-vaccination',
+  },
+  {
+    title: 'Book an instant consultation with a doctor',
+    image: '/images/doctor-consulting.png',
+    cta: 'Book Session',
+    ctaLink: '/telehealth/find-a-doctor',
+  },
+  {
+    title: 'For healthier skin and beauty, speak to our cosmetologist.',
+    image: '/images/skin-care.png',
+    cta: 'Book Session',
+    ctaLink: '/telehealth/find-a-doctor',
+  },
+  {
+    title: 'Subscribe for a drug refill for your prescriptions',
+    image: '/images/doctor-prescribing.png',
+    cta: 'Subscribe Now',
+    ctaLink: '',
+  },
+  {
+    title: 'Want to improve your health? Talk to our pharmacist.',
+    image: '/images/smiling-nurse.png',
+    cta: 'Book Session',
+    ctaLink: '/telehealth/find-a-doctor',
+  },
+];
 
 export default async function Home() {
-  // const queryClient = new QueryClient();
-  //
-  // await queryClient.prefetchQuery({
-  //   queryKey: ['featured-products'],
-  //   queryFn: () =>
-  //     ProductService.getAllProducts({
-  //       active: true,
-  //       pageSize: 3,
-  //       pageIndex: 1,
-  //     }),
-  // });
-
-  const transformationData = [
-    {
-      stat: '80%',
-      description: 'See improvement in their first 6 months.',
-    },
-    {
-      stat: '8k+',
-      description: 'Certified and accredited laboratory test results.',
-    },
-    {
-      stat: '95%',
-      description: 'Of members would recommend to friends & family.',
-    },
-  ];
-
   return (
     <>
-      <main className='grid gap-6'>
+      <main className='grid gap-6 lg:gap-10'>
+        <div className='relative mx-6 lg:hidden'>
+          <NavbarSearch />
+        </div>
         <HomePageHero
-          title='Your one-stop for wellness and lifestyle.'
-          description='Schedule laboratory tests, book vaccination appointments, and receive high-quality medical services from the convenience of wherever you are in Nigeria.'
+          title='Simplify your health journey with one click.'
+          description='Saves time, unlimited access, quality service and providers, authentic medications and one-stop shop.'
           ctaText='Shop All'
           ctaLink='/shop'
+          features={[
+            'shop pharmacy',
+            'consult with a doctor',
+            'book a lab test',
+            'saves time',
+          ]}
+          featuresWithLinks={[
+            { label: 'shop pharmacy', href: '/shop?category=health' },
+            {
+              label: 'consult with a doctor',
+              href: '/telehealth/find-a-doctor',
+            },
+            {
+              label: 'book a vaccination',
+              href: '/telehealth/get-vaccination',
+            },
+            { label: 'book a lab test', href: '/telehealth/book-lab-test' },
+          ]}
         />
 
         <HomePartners />
 
-        <HomeTransformation data={transformationData} />
+        <div className='invisible mb-4'></div>
 
-        <div className='invisible mb-8' id='teleHealthServices'></div>
+        <HotOffersProduct />
 
-        <TeleHealthServices />
+        <div className='invisible mb-4'></div>
 
-        {/*<HydrationBoundary state={dehydrate(queryClient)}>*/}
-        <HomeShopAndOrder />
-        <FeaturedProducts />
-        {/*</HydrationBoundary>*/}
+        <Categories />
+
+        <div className='invisible mb-4'></div>
+
+        <BestSellers />
+
+        <div className='invisible mb-4'></div>
+
+        <HealthOfferings title='See our Health offerings' data={data} />
+
+        <div className='invisible mb-4'></div>
+
+        <DiscoverTopProducts />
+
+        <div className='invisible mb-4'></div>
+
+        <ExploreTests />
+
+        <div className='invisible mb-4'></div>
+
+        <HandpickedForYou />
+
+        <div className='invisible mb-4'></div>
+
+        <PersonalizedPlan />
+
+        <div className='invisible mb-4'></div>
 
         <Testimonials />
-
-        <EarnedClients
-          earnedClients={earnedClients}
-          title='We have earned the trust of 300+ Clients'
-        />
-
-        <WellnessBlogSection />
-
-        <HomeFaq />
 
         <ReportDrugReaction />
 

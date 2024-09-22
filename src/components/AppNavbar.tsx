@@ -43,18 +43,22 @@ export const AppNavbar = ({
         return '';
 
       default:
-        return 'bg-primaryLight';
+        return 'bg-white';
     }
   };
 
   const menuItems = [
     {
+      name: 'Pharmacy',
+      path: '/telehealth/shop-and-order',
+    },
+    {
       name: 'Telehealth',
       path: '/telehealth',
     },
     {
-      name: 'Shop & Order',
-      path: '/telehealth/shop-and-order',
+      name: 'Lifestyle',
+      path: '/lifestyle',
     },
     {
       name: 'Partner with us',
@@ -75,6 +79,9 @@ export const AppNavbar = ({
       isBlurred={disabled}
       className={`py-4 text-foreground lg:pb-2 ${getNavbarBackground()}`}
       maxWidth='xl'
+      classNames={{
+        menu: 'top-[120px]',
+      }}
     >
       <NavbarContent
         justify='start'
@@ -111,6 +118,19 @@ export const AppNavbar = ({
           <NavbarItem className='text-lg leading-[27px] text-header-100'>
             <Link
               color='foreground'
+              href='/shop'
+              className={
+                isActive('/telehealth/shop-and-order')
+                  ? 'font-medium text-primary'
+                  : ''
+              }
+            >
+              Pharmacy
+            </Link>
+          </NavbarItem>
+          <NavbarItem className='text-lg leading-[27px] text-header-100'>
+            <Link
+              color='foreground'
               href='/telehealth'
               className={
                 isActive('/telehealth') ? 'font-medium text-primary' : ''
@@ -122,25 +142,12 @@ export const AppNavbar = ({
           <NavbarItem className='text-lg leading-[27px] text-header-100'>
             <Link
               color='foreground'
-              href='/shop'
+              href='/lifestyle'
               className={
-                isActive('/telehealth/shop-and-order')
-                  ? 'font-medium text-primary'
-                  : ''
+                isActive('/lifestyle') ? 'font-medium text-primary' : ''
               }
             >
-              Shop & Order
-            </Link>
-          </NavbarItem>
-          <NavbarItem className='text-lg leading-[27px] text-header-100'>
-            <Link
-              color='foreground'
-              href='/partner-with-us'
-              className={
-                isActive('/partner-with-us') ? 'font-medium text-primary' : ''
-              }
-            >
-              Partner with us
+              Lifestyle
             </Link>
           </NavbarItem>
         </div>
@@ -162,10 +169,10 @@ export const AppNavbar = ({
             <NavbarCart isActive={isActive} />
           </NavbarItem>
         </div>
-        <NavbarItem className='hidden lg:block'>
+        <NavbarItem className='hidden'>
           <Button
             as={Link}
-            href='/telehealth/shop-and-order'
+            href='/shop?category=health'
             radius='full'
             size='lg'
             color='primary'
@@ -183,6 +190,17 @@ export const AppNavbar = ({
       </NavbarContent>
 
       <NavbarMenu className='bg-background pt-10'>
+        <NavbarMenuItem>
+          <Link
+            color={isActive('/') ? 'primary' : 'foreground'}
+            href='/'
+            className='w-full font-medium lg:hidden'
+            size='lg'
+          >
+            Home
+          </Link>
+        </NavbarMenuItem>
+
         {menuItems.map((link, index) => (
           <NavbarMenuItem key={index}>
             <Link

@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { IconSpinner } from '../icons/IconSpinner';
 import { OrderSummary } from './OrderSummary';
 import { ConfirmationModal } from './modals/ConfirmationModal';
+import AddToCartBtn from '@/components/cart/AddToCartBtn';
 
 export const CartItemDetails = () => {
   const itemId = usePathname().split('/')[2];
@@ -98,22 +99,10 @@ export const CartItemDetails = () => {
                     />
                   </div>
                 ) : (
-                  <Button
-                    className='w-max px-10'
-                    color='primary'
-                    radius='full'
-                    size='lg'
-                    isDisabled={loadingProduct}
-                    onPress={() => {
-                      addToCart({
-                        id: product.id,
-                        product,
-                        quantity: 1,
-                      });
-                    }}
-                  >
-                    Add to Cart
-                  </Button>
+                  <AddToCartBtn
+                    product={product}
+                    className='w-max rounded-full px-10'
+                  />
                 )}
 
                 <Button

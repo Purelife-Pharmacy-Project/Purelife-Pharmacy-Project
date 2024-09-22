@@ -18,13 +18,15 @@ class ProductService {
       Limit: params.Limit,
       Offset: params.offset,
       CategoryId: params.CategoryId,
+      SubCategoryId: params.SubCategoryId,
     });
 
     const response = (await Api.get<{
       data: ProductType[];
     }>(
       `${this.PRODUCTS_API_BASE}/fetch-products?${
-        queryParams + '&Fields=name&Fields=lst_price&Fields=image_1024'
+        queryParams +
+        '&Fields=name&Fields=lst_price&Fields=image_1024&Fields=product_stock_available_qty'
       }`
     )) as unknown as {
       result: ProductType[];
@@ -45,7 +47,8 @@ class ProductService {
       data: ProductType[];
     }>(
       `${this.PRODUCTS_API_BASE}/search-products?${
-        queryParams + '&Fields=name&Fields=lst_price&Fields=image_1024'
+        queryParams +
+        '&Fields=name&Fields=lst_price&Fields=image_1024&Fields=product_stock_available_qty'
       }`
     )) as unknown as {
       result: ProductType[];
@@ -60,8 +63,10 @@ class ProductService {
         Array<{
           id: string;
           name: string;
+          description: string;
           lst_price: number;
           image_256: number;
+          product_stock_available_qty: number;
         }>
       >
     >(
@@ -72,6 +77,8 @@ class ProductService {
         name: string;
         lst_price: number;
         image_256: number;
+        description: string;
+        product_stock_available_qty: number;
       }>
     >;
 
@@ -82,10 +89,11 @@ class ProductService {
     return new Product({
       ...response.result[0],
       image_1024: response.result[0].image_256,
-      description: '',
+      description: response.result[0].description || '',
       canBePurchased: true,
       canBeSold: true,
       categ_id: [0, ''],
+      quantity: response.result[0].product_stock_available_qty,
       id: +response.result[0].id,
     });
   };

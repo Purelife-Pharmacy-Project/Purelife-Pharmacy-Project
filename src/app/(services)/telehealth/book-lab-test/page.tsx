@@ -1,49 +1,63 @@
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { BookATestHero } from '@/components/book-lab-test/BookATestHero';
-import { FrequentLabTests } from '@/components/book-lab-test/FrequentLabTests';
-import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
 import { LabTestProducts } from '@/components/book-lab-test/LabTestProducts';
-import { WhyBookATest } from '@/components/book-lab-test/WhyBookATest';
 import { Footer } from '@/components/home/Footer';
 import { NewsLetterCard } from '@/components/home/NewsletterCard';
-import { IconAddNotification } from '@/components/icons/IconAddNotification';
-import { IconBrowse } from '@/components/icons/IconBrowse';
-import { IconHealthShield } from '@/components/icons/IconHealthShield';
+import HealthOfferings from '@/components/home/HealthOfferings';
+import SummerDeals from '@/components/book-lab-test/SummerDeals';
+import BookSession from '@/components/book-lab-test/BookSession';
 
 export default async function BookATest() {
-  const howItWorksData: {
-    description: string;
-    icon: JSX.Element;
-  }[] = [
+  const data = [
     {
-      description:
-        'Browse for your preferred test packages and easily schedule a home sample collection.',
-      icon: <IconBrowse size={48} color='success' />,
+      title: 'See top test to take before you get married',
+      image: '/images/default-test.png',
+      cta: 'Shop all test',
+      ctaLink: '/telehealth/book-lab-test?category=18#scroll',
     },
     {
-      description:
-        'Receive one of our certified health professionals at your preferred location for a test sample collection.',
-      icon: <IconHealthShield size={60} color='success' />,
+      title: 'Top Test to Improve Your Sexual Health',
+      image: '/images/default-test.png',
+      cta: 'Shop all test',
+      ctaLink: '/telehealth/book-lab-test?category=21#scroll',
     },
     {
-      description:
-        'Get notified by mail of your reports, which is also available within your account on the Purelife app.',
-      icon: <IconAddNotification size={60} color='success' />,
+      title: 'Take this test to find out your genotype',
+      image: '/images/default-test.png',
+      cta: 'Shop all test',
+      ctaLink: '/telehealth/book-lab-test?category=18#scroll',
+    },
+    {
+      title: 'Take this test to find out your genotype',
+      image: '/images/default-test.png',
+      cta: 'Shop all test',
+      ctaLink: '/telehealth/book-lab-test?category=18#scroll',
     },
   ];
 
   return (
     <>
-      <main className='grid gap-6'>
+      <main className='grid gap-6 xl:gap-12'>
         <BookATestHero />
 
-        <FrequentLabTests title='Frequently Scheduled Lab Tests' />
+        {/*<FrequentLabTests title='Frequently Scheduled Lab Tests' />*/}
 
         <LabTestProducts />
 
-        <WhyBookATest />
+        <HealthOfferings
+          title='See the top test people are taking'
+          data={data}
+        />
 
-        <HowItWorks data={howItWorksData} />
+        <div className='invisible mb-4'></div>
+
+        <SummerDeals />
+
+        <div className='invisible mb-4'></div>
+
+        <BookSession />
+
+        <div className='invisible mb-4'></div>
 
         <ReportDrugReaction />
 

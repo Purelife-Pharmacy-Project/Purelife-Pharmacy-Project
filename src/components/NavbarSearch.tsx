@@ -2,7 +2,7 @@
 import { IconSearch } from '@/components/icons/IconSearch';
 import { useSearchProducts } from '@/hooks';
 import { Product } from '@/services/products/types';
-import { inputDefault } from '@/theme';
+import { inputBorderedDefault } from '@/theme';
 import {
   Button,
   Card,
@@ -52,11 +52,11 @@ export const NavbarSearch = () => {
   }, [filteredProducts]);
 
   useEffect(() => {
-    if (filteredItems?.length === 0) {
+    if (filteredItems?.length === 0 && searchStr !== '') {
       refetch().then(() => {});
     }
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filteredProducts]);
+  }, [filteredProducts, searchStr]);
 
   const handleInputChange = useCallback(
     (value: string) => {
@@ -66,11 +66,11 @@ export const NavbarSearch = () => {
   );
 
   return (
-    <div className='w-full'>
+    <div className='relative w-full'>
       <Input
         radius='full'
-        color='default'
-        classNames={inputDefault}
+        color='primary'
+        classNames={inputBorderedDefault}
         ref={searchInputRef}
         onChange={(e) => handleInputChange(e.target.value)}
         onFocus={() => setShowSearchResults(true)}
@@ -79,9 +79,10 @@ export const NavbarSearch = () => {
             setShowSearchResults(false);
           }, 200);
         }}
+        variant='bordered'
         size='lg'
         type='text'
-        placeholder='Search products'
+        placeholder='Search products, vaccines and lab tests'
         endContent={
           <div className='rounded-full bg-primaryLight p-2'>
             <IconSearch color='header-100' />
@@ -93,7 +94,7 @@ export const NavbarSearch = () => {
           shadow='sm'
           radius='lg'
           ref={searchResultsRef}
-          className='-bottom-15 absolute z-20 mt-2 max-h-[400px] w-[400px] overflow-y-auto'
+          className='-bottom-15 absolute left-0 z-20 mt-2 max-h-[400px] w-full overflow-y-auto'
         >
           <CardBody>
             {!loadingFilteredProducts && filteredItems?.length === 0 ? (
