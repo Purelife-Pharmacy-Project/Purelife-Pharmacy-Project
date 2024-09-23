@@ -122,8 +122,8 @@ export default function CookiePolicy() {
                   </h2>
                   <p className='mb-[20px] text-justify text-[13px] text-[#5A5A5A] sm:text-[14px] lg:text-[16px]'>
                     This Cookie Policy provides information on how A- Pure
-                    Lifestyle Pharmacy Nigeria Limited ("PureLife", "we", "us",
-                    or "our") use cookies and similar tracking technologies
+                    Lifestyle Pharmacy Nigeria Limited (&quout;PureLife&quout;, &quout;we&quout;, &quout;us&quout;,
+                    or &quout;our&quout;) use cookies and similar tracking technologies
                     (collectively, “Cookies”) on our website{' '}
                     <a
                       className='text-[#0066ff]'
@@ -131,7 +131,7 @@ export default function CookiePolicy() {
                     >
                       https://purelifehealth.io
                     </a>{' '}
-                    ("Site", or "Website") to provide users (“users”, “you” or
+                    (&quot;Site&quot;, or &quot;Website&quot;) to provide users (“users”, “you” or
                     “your”) with a better user experience. Kindly read this
                     policy carefully to understand what types of Cookies we use,
                     what information we collect using Cookies, and how that
@@ -220,7 +220,7 @@ export default function CookiePolicy() {
                     Cookies. However, if you choose to refuse or disable
                     Cookies, some parts of this Website may become inaccessible
                     or not function properly. To learn more about how to manage
-                    Cookies, please consult your browser's help section.
+                    Cookies, please consult your browser&apos;s help section.
                   </p>
                 </div>
                 <div ref={internationalDataTransfers}>

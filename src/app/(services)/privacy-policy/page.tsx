@@ -223,7 +223,7 @@ export default function PrivacyPolicy() {
                   </p>
 
                   <p className='mb-5 text-justify text-[13px] text-[#5A5A5A] sm:text-[14px] lg:text-[16px]'>
-                    It's important to note that providing personal data to us is
+                    It&apos;s important to note that providing personal data to us is
                     voluntary. You have the right to refuse or withdraw consent
                     to the collection of certain personal data, although this
                     may limit your ability to use certain features of our

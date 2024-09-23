@@ -257,13 +257,13 @@ export default function TermsAndConditions() {
                     >
                       https://purelifehealth.io
                     </a>{' '}
-                    (the “Site” or "Website"). These Terms and Conditions
-                    ("Terms", “Terms and Conditions”) govern your access to and
+                    (the “Site” or &quot;Website&quot;). These Terms and Conditions
+                    (&quot;Terms&quot;, “Terms and Conditions”) govern your access to and
                     use of the Website, including any content, functionality,
                     and services offered on or through the Website
-                    (collectively, the "Services"). The Services is owned and
+                    (collectively, the &quot;Services&quot;). The Services is owned and
                     operated by A- Pure Lifestyle Pharmacy Nigeria Limited
-                    ("Company", "we", "us", or "our"), a private limited
+                    (&quot;Company&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), a private limited
                     liability company registered in Nigeria.
                   </p>
                   <p className='text-justify text-[13px] text-[#5A5A5A] sm:text-[14px] lg:text-[16px]'>
@@ -455,7 +455,7 @@ export default function TermsAndConditions() {
                   <p className='mb-[20px] text-justify text-[13px] text-[#5A5A5A] sm:text-[14px] lg:text-[16px]'>
                     We may use third-party payment processors to facilitate
                     payment transactions. Your use of such services is subject
-                    to the applicable third-party payment processor's terms and
+                    to the applicable third-party payment processor&apos;s terms and
                     conditions
                   </p>
                 </div>
@@ -572,7 +572,7 @@ export default function TermsAndConditions() {
                     Disclaimer
                   </h2>
                   <p className='mb-[20px] text-justify text-[13px] text-[#5A5A5A] sm:text-[14px] lg:text-[16px]'>
-                    The site is provided on an "AS IS" and "AS AVAILABLE" basis.
+                    The site is provided on an &quot;AS IS&quot; and &quot;AS AVAILABLE&quot; basis.
                     Your use of the site and our services is at your own risk.
                     To the fullest extent permitted by Nigerian law, we disclaim
                     all warranties, whether express or implied, related to the
