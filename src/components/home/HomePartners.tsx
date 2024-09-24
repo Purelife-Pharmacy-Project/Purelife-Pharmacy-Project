@@ -35,7 +35,7 @@ export const HomePartners = () => {
           <div className='max-w-[90vw] sm:max-w-[90vw] md:max-w-[90vw] lg:max-w-[700px] overflow-hidden'>
             <div
             className='swipe-animation flex items-center gap-10'
-            style={{'--speed': '5000ms'}}
+            style={{'--speed': '5000ms'} as React.CSSProperties}
           >
             {repeatedPartners.map((partner, index) => (
               <div key={index} className='flex flex-shrink-0 items-center justify-center p-2'>
