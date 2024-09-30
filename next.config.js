@@ -10,7 +10,6 @@ const nextConfig = {
   //     },
   //   ],
   // },
-  basePath: '/purelife-pharmacy-project2',
   async redirects() {
     return [
       // {
@@ -18,13 +17,8 @@ const nextConfig = {
       //   destination: '/my-account/personal-details',
       //   permanent: true,
       // },
-      {
-        source: '/:path*',
-        destination: '/purelife-pharmacy-project2/:path*',
-        permanent: true,
-      },
     ];
   },
 };
 
-module.exports = nextConfig;
+// module.exports = nextConfig;
