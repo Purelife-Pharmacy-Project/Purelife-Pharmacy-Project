@@ -171,7 +171,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                   {priceDropdown && (
                     <div
                       ref={pricePopupRef}
-                      className='absolute right-0 top-[35px] z-20 mt-1 flex max-h-54 w-[180px] flex-col gap-2 overflow-y-auto rounded-lg border border-gray-200 bg-[#FFFFFF] p-2 shadow-lg'
+                      className='absolute left-0 top-[35px] z-20 mt-1 flex max-h-54 w-[180px] flex-col gap-2 overflow-y-auto rounded-lg border border-gray-200 bg-[#FFFFFF] p-2 shadow-lg'
                     >
                       {priceRanges.map((range) => (
                         <div
