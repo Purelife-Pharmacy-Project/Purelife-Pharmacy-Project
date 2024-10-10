@@ -32,24 +32,26 @@ export const HomePartners = () => {
           <p className='max-w-[211px] text-center font-medium text-header-100 lg:text-start'>
             We are partners with over 30+ Health Providers
           </p>
-          <div className='max-w-[90vw] sm:max-w-[90vw] md:max-w-[90vw] lg:max-w-[700px] overflow-hidden'>
+          <div className='max-w-[90vw] overflow-hidden sm:max-w-[90vw] md:max-w-[90vw] lg:max-w-[700px]'>
             <div
-            className='swipe-animation flex items-center gap-10'
-            style={{'--speed': '5000ms'} as React.CSSProperties}
-          >
-            {repeatedPartners.map((partner, index) => (
-              <div key={index} className='flex flex-shrink-0 items-center justify-center p-2'>
-                <Image
-                  width={120}
-                  className='h-auto w-full object-cover'
-                  src={partner.image}
-                  alt={partner.name}
-                />
-              </div>
-            ))}
+              className='swipe-animation flex items-center gap-10'
+              style={{ '--speed': '5000ms' } as React.CSSProperties}
+            >
+              {repeatedPartners.map((partner, index) => (
+                <div
+                  key={index}
+                  className='flex flex-shrink-0 items-center justify-center p-2'
+                >
+                  <Image
+                    width={120}
+                    className='h-auto w-full object-cover'
+                    src={partner.image}
+                    alt={partner.name}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-          </div>
-          
         </div>
       </Section>
       <style>

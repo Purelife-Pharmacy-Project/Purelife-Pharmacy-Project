@@ -38,8 +38,8 @@ export const HowItWorks: FC<HowItWorksProps> = ({
                     {answer.icon}
                   </div>
                   <div className='flex flex-col gap-1'>
-                    <h3 className='md:h-[70px] text-[#1E272F] font-bold text-[22px]'>{answer.title}</h3>
-                    <p className='md:h-[120px] lg:h-[100px] mx-auto text-center w-[90%] sm:w-full text-balance sm:text-left font-light text-black'>
+                    <h3 className='md:h-[50px] text-[#1E272F] font-bold text-[22px]'>{answer.title}</h3>
+                    <p className='md:h-[120px] lg:h-[100px] mx-auto text-center w-[90%] sm:w-full text-balance sm:text-center font-light text-black'>
                       {answer.description}
                     </p>
                   </div>

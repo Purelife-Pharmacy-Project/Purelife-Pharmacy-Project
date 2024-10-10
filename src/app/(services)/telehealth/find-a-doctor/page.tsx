@@ -78,7 +78,8 @@ export default function FindADoctor() {
   const iconArray = Array(5).fill({ icon: <IconStarBold /> });
   const [leftIcon, setLeftIcon] = useState(false);
   const [rightIcon, setRightIcon] = useState(false);
-
+  const repeatedDoctors = Array(5).fill(allDoctors).flat();
+  console.log(repeatedDoctors)
   const reviews = [
     {
       title: 'This Care Truly Made a Difference',
@@ -118,7 +119,7 @@ export default function FindADoctor() {
               title='Book an appointment with Doctors at Purelife'
               description='Take the first step towards a healthier you. Book your appointment with one of our dedicated doctors at Purelife and embark on your journey to wellness today.'
               ctaText='Consult Now'
-              ctaLink='#doctors'
+              ctaLink=''
             />
           </Section>
         </div>
@@ -156,12 +157,13 @@ export default function FindADoctor() {
                 </Button>
               </div>
             </Section>
-            <Section className='bg-white pb-4 lg:pb-28 lg:pt-10'>
+            <Section className='bg-white pb-4 lg:pb-16 lg:pt-10 max-w-[90vw] overflow-hidden sm:max-w-[90vw] md:max-w-[90vw] lg:max-w-[90vw]'>
               <div
                 ref={scrollRef}
-                className='scrollbar-none flex md:gap-0 lg:gap-7 overflow-x-scroll'
+                className='swipe-animation flex gap-[3%] lg:gap-[3%]'
+                style={{ '--speed': '10000ms' } as React.CSSProperties}
               >
-                {allDoctors.map((doctor, i) => (
+                {repeatedDoctors.map((doctor, i) => (
                   <div
                     key={doctor.slug}
                     className='min-w-[100%] md:min-w-[50%] max-w-[30%] lg:min-w-[35%]'
@@ -336,6 +338,23 @@ export default function FindADoctor() {
 
         <Footer />
       </main>
+      <style>
+        {`
+          .swipe-animation {
+            display: flex;
+            animation: swipe var(--speed) linear infinite;
+          }
+
+          @keyframes swipe {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-113%);
+            }
+          }
+        `}
+      </style>
     </>
   );
 }
