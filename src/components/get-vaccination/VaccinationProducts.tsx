@@ -77,9 +77,12 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
   const vaccineTypePopupRef = useRef<HTMLDivElement | null>(null);
 
   const priceRanges: PriceRangeMetric[] = [
-    { id: 1, min: 0, max: 1000 },
-    { id: 2, min: 1000, max: 10000 },
-    { id: 3, min: 10000, max: 100000 },
+    { id: 1, min: 1000, max: 10000 },
+    { id: 2, min: 10000, max: 20000 },
+    { id: 3, min: 20000, max: 30000 },
+    { id: 4, min: 30000, max: 40000 },
+    { id: 5, min: 40000, max: 50000 },
+    { id: 5, min: 50000, max: 100000 },
   ];
   const [priceRange, setPriceRange] = useState('Price Range');
   const [priceDropdown, setPriceDropdown] = useState(false);
@@ -121,7 +124,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
            <div className='mb-10 w-full'>
             <div className='flex justify-between'>
               <div className='flex gap-5'>
-                <div className='relative w-fit'>
+                {/* <div className='relative w-fit'>
                   <div
                     ref={vaccineTypeButtonRef}
                     onClick={() => setVaccineTypeDropdown(!vaccineTypeDropdown)}
@@ -153,7 +156,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                       ))}
                     </div>
                   )}
-                </div>
+                </div> */}
                 <div className='relative w-fit'>
                   <div
                     ref={priceButtonRef}
@@ -168,27 +171,29 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                   {priceDropdown && (
                     <div
                       ref={pricePopupRef}
-                      className='absolute right-0 top-[35px] z-20 mt-1 flex max-h-48 w-[150px] flex-col gap-2 overflow-y-auto rounded-lg border border-gray-200 bg-[#FFFFFF] p-2 shadow-lg'
+                      className='absolute right-0 top-[35px] z-20 mt-1 flex max-h-54 w-[180px] flex-col gap-2 overflow-y-auto rounded-lg border border-gray-200 bg-[#FFFFFF] p-2 shadow-lg'
                     >
                       {priceRanges.map((range) => (
                         <div
                           key={range.id}
-                          className='flex h-fit cursor-pointer items-center justify-between rounded-[5px] bg-primaryLight p-3 py-1 pl-2 hover:bg-gray-200'
+                          className='flex h-fit cursor-pointer items-center justify-between rounded-[5px] bg-primaryLight px-2 py-1 hover:bg-gray-200'
                           onClick={() => {
                             setMin(range.min);
                             setMax(range.max);
                             setPriceDropdown(false);
                           }}
                         >
-                          <span className='cursor-pointer text-sm font-medium text-gray-600'>
-                            {range.min} - {range.max}
+                          <span className='grid grid-cols-[1fr_0.2fr_1fr] w-full cursor-pointer text-sm font-medium text-gray-600'>
+                            <span className=''>₦{range.min}</span>
+                            <span className='text-center'>-</span>
+                            <span className='text-right'>₦{range.max}</span>
                           </span>
                         </div>
                       ))}
                     </div>
                   )}
                 </div>
-                <div className='relative w-fit'>
+                {/* <div className='relative w-fit'>
                   <div
                     ref={filterButtonRef}
                     onClick={() => setFilterDropdown(!filterDropdown)}
@@ -221,10 +226,10 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                       ))}
                     </div>
                   )}
-                </div>
+                </div> */}
               </div>
 
-              <div className='relative hidden w-fit sm:block'>
+              {/* <div className='relative hidden w-fit sm:block'>
                 <div
                   ref={sortButtonRef}
                   onClick={() => setSortDropdown(!sortDropdown)}
@@ -254,7 +259,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                     ))}
                   </div>
                 )}
-              </div>
+              </div> */}
             </div>
           </div> 
 
@@ -296,6 +301,20 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
           ) : null}
         </Section>
       </div>
+    </div>
+  );
+};
+
+
+interface ShowHideProps {
+  head: string;
+  body: any;
+}
+
+const ShowHide: React.FC<ShowHideProps> = ({ head, body }) => {
+  const [show, setShow] = useState(true);
+  return (
+    <div>
     </div>
   );
 };

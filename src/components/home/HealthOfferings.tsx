@@ -39,9 +39,9 @@ const HealthOfferings: React.FC<Prop> = ({ title, data }) => {
               </div>
 
               <div
-                className={`my-auto flex ${
+                className={`my-auto mr-auto flex ${
                   index === 0 && 'h-full md:h-full w-full justify-between items-between'
-                } w-[65%] flex-col gap-3`}
+                } w-[53%] flex-col gap-3`}
               >
                 {index !== 0 && (
                   <p className='text-sm text-[#000000]'>Vaccine Essentials</p>
@@ -58,7 +58,7 @@ const HealthOfferings: React.FC<Prop> = ({ title, data }) => {
                   )}    
                 <p
                   className={`font-bold text-2xl lg:text-3xl ${
-                    index === 0 && 'w-[53%] text-3xl'
+                    index === 0 && 'text-3xl'
                   }`}
                 >
                   {offering.title}
