@@ -10,8 +10,7 @@ import { IconPen } from '@/components/icons/IconPen';
 import { IconProfessional } from '@/components/icons/IconProfessional';
 import { allDoctors } from '@/helpers/mocks/doctors';
 import { Button, Image } from '@nextui-org/react';
-import { useRef, useState } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { IconStarBold } from '@/components/icons/IconStarBold';
 
@@ -74,12 +73,12 @@ export default function FindADoctor() {
       behavior: 'smooth',
     });
   };
-
+  const [hoverScroll, setHoverScroll] = useState(true);
   const iconArray = Array(5).fill({ icon: <IconStarBold /> });
   const [leftIcon, setLeftIcon] = useState(false);
   const [rightIcon, setRightIcon] = useState(false);
   const repeatedDoctors = Array(5).fill(allDoctors).flat();
-  console.log(repeatedDoctors)
+  console.log(repeatedDoctors);
   const reviews = [
     {
       title: 'This Care Truly Made a Difference',
@@ -110,6 +109,7 @@ export default function FindADoctor() {
       name: 'Mrs Adebayo Gregson',
     },
   ];
+
   return (
     <>
       <main className=''>
@@ -123,20 +123,23 @@ export default function FindADoctor() {
             />
           </Section>
         </div>
-
-        <div id='doctors' className='bg-white lg:justify-center py-10'>
+        <div
+          id='doctors' className='bg-white py-10 lg:justify-center'>
           <div className='bg-white lg:justify-center'>
-            <Section className='flex flex-col sm:flex-row items-center justify-between px-6'>
+            <Section className='flex flex-col items-center justify-between px-6 sm:flex-row'>
               <div>
-                <h3 className='mb-3 lg:mb-0 text-3xl md:text-[40px] font-bold text-[#1E272F]'>
+                <h3 className='mb-3 text-3xl font-bold text-[#1E272F] md:text-[40px] lg:mb-3'>
                   Top-Rated Doctors on Our Platform
                 </h3>
-                <p className='lg:w-[75%] text-base md:text-[20px] text-[#5A5A5A] mb-5'>
+                <p className='mb-5 text-base text-[#5A5A5A] md:text-[20px] lg:w-[75%]'>
                   Find trusted, highly rated doctors available to assist you
                   with personalized care and expert medical services.
                 </p>
               </div>
-              <div className='sm:w-auto w-full flex justify-between gap-10 sm:mb-0 mb-7'>
+              <div
+                onMouseEnter={()=>{setHoverScroll(false)}}
+                onMouseLeave={()=>{setHoverScroll(true)}}
+                className='mb-7 flex w-full justify-between gap-10 sm:mb-0 sm:w-auto'>
                 <Button
                   color=''
                   size='md'
@@ -144,7 +147,10 @@ export default function FindADoctor() {
                   className='h-fit min-w-0 rotate-180 rounded-full border-2 border-[#1E272F] p-4'
                   onClick={scrollLeft}
                 >
-                  <IconArrowRight color='#1E272F' className='sm:w-auto w-[18px] sm:h-auto h-[18px]'/>
+                  <IconArrowRight
+                    color='#1E272F'
+                    className='h-[18px] w-[18px] sm:h-auto sm:w-auto'
+                  />
                 </Button>
                 <Button
                   color=''
@@ -153,20 +159,26 @@ export default function FindADoctor() {
                   className='h-fit min-w-0 rounded-full border-2 border-[#1E272F] p-4'
                   onClick={scrollRight}
                 >
-                  <IconArrowRight color='#1E272F' className='sm:w-auto w-[18px] sm:h-auto h-[18px]'/>
+                  <IconArrowRight
+                    color='#1E272F'
+                    className='h-[18px] w-[18px] sm:h-auto sm:w-auto'
+                  />
                 </Button>
               </div>
             </Section>
-            <Section className='bg-white pb-4 lg:pb-16 lg:pt-10 max-w-[90vw] overflow-hidden sm:max-w-[90vw] md:max-w-[90vw] lg:max-w-[90vw]'>
+            <Section
+              className={`max-w-[90vw] ${hoverScroll && 'overflow-x-scroll scrollbar-none'} bg-white pb-4 lg:pb-16 lg:pt-10`}>
               <div
+                onMouseEnter={()=>{setHoverScroll(false)}}
+                onMouseLeave={()=>{setHoverScroll(true)}} 
                 ref={scrollRef}
-                className='swipe-animation flex gap-[3%] lg:gap-[3%]'
-                style={{ '--speed': '10000ms' } as React.CSSProperties}
+                className={`${hoverScroll ? 'swipe-animation' : 'overflow-x-scroll'} scrollbar-none flex gap-[3%] lg:gap-[3%]`}
+                style={{ '--speed': `${hoverScroll ? '10000ms' : '0ms'}` } as React.CSSProperties}
               >
                 {repeatedDoctors.map((doctor, i) => (
                   <div
                     key={doctor.slug}
-                    className='min-w-[100%] md:min-w-[50%] max-w-[30%] lg:min-w-[35%]'
+                    className='min-w-[100%] max-w-[30%] md:min-w-[50%] lg:min-w-[35%]'
                   >
                     <DoctorCard doctor={doctor} />
                   </div>
@@ -182,10 +194,10 @@ export default function FindADoctor() {
           )}
         >
           <Section className='bg-primaryLight py-10'>
-            <h2 className='text-center md:text-left mb-2 w-[85%] mx-auto text-3xl md:text-4xl font-bold text-[#1E272F]'>
+            <h2 className='mx-auto mb-2 w-[85%] text-center text-3xl font-bold text-[#1E272F] md:text-left md:text-4xl'>
               The best and experienced medical workers in their field
             </h2>
-            <p className='mb-10 mx-auto w-[85%] text-center md:text-left text-base sm:text-[20px] text-[#5A5A5A]'>
+            <p className='mx-auto mb-10 w-[85%] text-center text-base text-[#5A5A5A] sm:text-[20px] md:text-left'>
               Discover how our seamless platform matches you with the right
               healthcare specialists effortlessly.
             </p>
@@ -204,19 +216,19 @@ export default function FindADoctor() {
 
         <div
           className={clsx(
-            'bg-white lg:justify-center lg:pb-10 lg:pt-[55px] mt-20 sm:mt-0'
+            'mt-20 bg-white sm:mt-0 lg:justify-center lg:pb-10 lg:pt-[55px]'
           )}
         >
           <Section className='bg-white lg:px-0'>
-            <div className='relative mb-10 h-[450px] sm:h-[900px] w-full overflow-hidden'>
+            <div className='relative mb-10 h-[450px] w-full overflow-hidden sm:h-[900px]'>
               <div className='absolute top-[50px] flex w-full justify-center  leading-[1.2]'>
-                <div className='w-[80%] md:w-[65%] text-center text-3xl sm:text-[40px] font-bold text-[#1E272F]'>
+                <div className='w-[80%] text-center text-3xl font-bold text-[#1E272F] sm:text-[40px] md:w-[65%]'>
                   Hear What Our Patients Are Saying About Our Exceptional
                   Doctors
                 </div>
               </div>
 
-              <div className='absolute right-[5%] top-[200px] sm:top-[350px] z-[9] flex w-[90%] justify-center'>
+              <div className='absolute right-[5%] top-[200px] z-[9] flex w-[90%] justify-center sm:top-[350px]'>
                 <div className='flex max-w-[100%] items-center justify-between text-center text-[40px] font-bold text-[#1E272F]'>
                   <Button
                     onMouseEnter={() => {
@@ -239,25 +251,28 @@ export default function FindADoctor() {
                   </Button>
                   <div
                     ref={scrollReviewsRef}
-                    className='scrollbar-none flex w-[90%] sm:w-[57%] overflow-x-scroll'
+                    className='scrollbar-none flex w-[90%] overflow-x-scroll sm:w-[57%]'
                   >
                     {reviews.map((review, index) => (
                       <div key={index} className='min-w-[100%] lg:min-w-[100%]'>
                         <div className='flex  flex-col items-center justify-center gap-[10px]'>
-                          <h3 className='text-2xl sm:text-[32px] font-semibold text-[#1E272F]'>
+                          <h3 className='text-2xl font-semibold text-[#1E272F] sm:text-[32px]'>
                             {review.title}
                           </h3>
-                          <p className='text-xs sm:text-base font-medium text-[#5A5A5A]'>
+                          <p className='text-xs font-medium text-[#5A5A5A] sm:text-base'>
                             {review.description}
                           </p>
                           <div className='flex'>
                             {Array.from({ length: review.noOfStars }).map(
                               (_, index) => (
-                                <IconStarBold key={index} className='sm:w-auto w-[14px] sm:h-auto h-[14px]' />
+                                <IconStarBold
+                                  key={index}
+                                  className='h-[14px] w-[14px] sm:h-auto sm:w-auto'
+                                />
                               )
                             )}
                           </div>
-                          <p className='text-xs sm:text-sm font-bold text-[#1E272F]'>
+                          <p className='text-xs font-bold text-[#1E272F] sm:text-sm'>
                             Mrs Adebayo Gregson
                           </p>
                         </div>
@@ -287,28 +302,28 @@ export default function FindADoctor() {
                 </div>
               </div>
 
-              <div className='-mr-[13%] sm:-mr-3 -mt-3 mb-[50px] flex justify-end '>
+              <div className='-mr-[13%] -mt-3 mb-[50px] flex justify-end sm:-mr-3 '>
                 <Image
                   src='/images/patients/patient1.png'
                   alt='doctor image'
-                  className=' h-[120px] sm:w-auto sm:h-auto'
+                  className=' h-[120px] sm:h-auto sm:w-auto'
                 />
               </div>
               <div className='flex justify-start '>
                 <Image
                   src='/images/patients/patient2.png'
                   alt='doctor image'
-                  className=' h-[100px] sm:w-auto sm:h-auto'
+                  className=' h-[100px] sm:h-auto sm:w-auto'
                 />
               </div>
-              <div className='hidden sm:flex absolute md:right-[30%] lg:right-[50%] top-[250px] w-full justify-end '>
+              <div className='absolute top-[250px] hidden w-full justify-end sm:flex md:right-[30%] lg:right-[50%] '>
                 <Image
                   src='/images/patients/patient3.png'
                   alt='doctor image'
                   className=''
                 />
               </div>
-              <div className='hidden md:flex absolute right-[20%] top-[420px] w-full justify-end '>
+              <div className='absolute right-[20%] top-[420px] hidden w-full justify-end md:flex '>
                 <Image
                   src='/images/patients/patient4.png'
                   alt='doctor image'
@@ -316,7 +331,7 @@ export default function FindADoctor() {
                 />
               </div>
 
-              <div className='hidden sm:flex absolute bottom-0 -mb-3 w-full items-end justify-between overflow-hidden'>
+              <div className='absolute bottom-0 -mb-3 hidden w-full items-end justify-between overflow-hidden sm:flex'>
                 <div className='ml-[10%]'>
                   <Image
                     src='/images/patients/patient5.png'
