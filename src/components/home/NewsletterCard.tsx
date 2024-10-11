@@ -11,7 +11,7 @@ export const NewsLetterCard = () => {
     toast.info('Newsletters are coming soon.');
   };
   return (
-    <div className='lg:pb-10 lg:pt-[55px] xl:grid xl:justify-center'>
+    <div className='lg:pb-10 xl:grid xl:justify-center'>
       <Section className='bg-white'>
         <Card shadow='none' fullWidth>
           <CardBody className='bg-primaryLight'>
