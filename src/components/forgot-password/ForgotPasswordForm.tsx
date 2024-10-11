@@ -1,12 +1,12 @@
 'use client';
 import { FormMessage } from '@/library/ui/FormMessage';
-import { Button, Input } from '@nextui-org/react';
+import { Button, Input, Link } from '@nextui-org/react';
 import {
   changePasswordPayload,
   changePasswordValidationSchema,
 } from '@/services/user/schema';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { inputDefault } from '@/theme';
+import { inputAuth } from '@/theme';
 import { IconEyeClose } from '@/components/icons/IconEyeClose';
 import { IconEye } from '@/components/icons/IconEye';
 import { useState } from 'react';
@@ -36,14 +36,16 @@ export const ForgotPasswordForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='grid gap-4'>
       {false ? <FormMessage type='error' message={loginError!} /> : null}
-
+      <p className='font-medium text-[#1E272F]'>Old Password</p>
       <Input
         {...register('oldPassword')}
-        label='Old Password'
         autoComplete='old-password'
         errorMessage={errors.oldPassword?.message}
         type={passwordIsVisible ? 'text' : 'password'}
-        classNames={inputDefault}
+        classNames={inputAuth}
+        startContent={
+          <span className='px-1'></span>
+        }
         endContent={
           <button className='px-2' onClick={toggleVisibility}>
             {' '}
@@ -55,14 +57,16 @@ export const ForgotPasswordForm = () => {
           </button>
         }
       />
-
+      <p className='font-medium text-[#1E272F]'>New Password</p>
       <Input
         {...register('newPassword')}
-        label='New Password'
         autoComplete='new-password'
         errorMessage={errors.newPassword?.message}
         type={passwordIsVisible ? 'text' : 'password'}
-        classNames={inputDefault}
+        classNames={inputAuth}
+        startContent={
+          <span className='px-1'></span>
+        }
         endContent={
           <button className='px-2' onClick={toggleVisibility}>
             {' '}
@@ -86,6 +90,14 @@ export const ForgotPasswordForm = () => {
       >
         Change Password
       </Button>
+
+      <p className='text-center text-sm text-[#5A5A5A4D]'>
+        Already gotten your password?
+        <Link className='ml-2 font-medium text-sm text-[#FF0028]' href='/sign-in'>
+          {' '}
+          Log in
+        </Link>
+      </p>
     </form>
   );
 };
