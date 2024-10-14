@@ -68,6 +68,7 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
           </p>
 
           <div className='relative mx-auto w-full max-w-xl'>
+            <div></div>
             <Input
               size='lg'
               radius='full'
@@ -94,13 +95,12 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
                 ],
                 description: 'text-white',
               }}
-              description='e.g, Cholera vaccine, Children vaccine'
               endContent={
                 <span className='grid h-9 w-9 place-content-center rounded-full bg-primaryLight'>
                   <IconArrowRight size={12} color='#1C1B1F' />
                 </span>
               }
-              placeholder='Search all vaccines here'
+              placeholder=''
             />
 
             {showSearchResults ? (
@@ -134,15 +134,15 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
                           className='group grid h-max grid-flow-col grid-cols-[1fr_8fr_10fr] items-center gap-3 p-2'
                         >
                           <Image
-                            width={60}
-                            height={60}
+                            width={150}
+                            height={150}
                             className='max-h-14 object-contain'
                             radius='md'
                             src={product.image_1024}
                             alt={''}
                           />
 
-                          <p className='text-body max-w-[100px] text-wrap break-words text-start capitalize'>
+                          <p className='text-body max-w-[100px] text-start capitalize'>
                             {product.name?.toLowerCase()}
                           </p>
 

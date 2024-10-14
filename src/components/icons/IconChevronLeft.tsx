@@ -1,4 +1,4 @@
-export const IconChevronLeft = ({ size = 24, color = 'inherit', ...props }) => {
+export const IconChevronLeft = ({ size = 24, color, ...props }) => {
   return (
     <svg
       width={size}
