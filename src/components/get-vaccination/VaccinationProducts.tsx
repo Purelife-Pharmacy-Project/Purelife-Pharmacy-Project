@@ -14,7 +14,7 @@ import { Button, Input } from '@nextui-org/react';
 import { z } from 'zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { inputDefault } from '@/theme';
+import { inputBorderedDefault, inputDefault } from '@/theme';
 
 const limit = 9;
 
@@ -25,34 +25,42 @@ interface RangeMetric {
 }
 
 interface PriceRangeData {
-  min?: number;
-  max?: number;
+  min?: string;
+  max?: string;
 }
 
 const initPriceRangeData: PriceRangeData = {
-  min: 0,
-  max: 100000,
+  min: '0',
+  max: '100000',
 };
 
 const priceRangeSchema = z.object({
-  min: z.number().nonnegative().optional(),
-  max: z.number().nonnegative().optional(),
+  min: z.string().regex(/^\d+$/, { message: 'Must be a valid number' }),
+  max: z.string().regex(/^\d+$/, { message: 'Must be a valid number' }),
 });
 
 export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
+  const [tempRange, setTempRange] = useState<PriceRangeData>({
+    min: '0',
+    max: '100000',
+  });
   const {
     register,
     setValue,
-    setFocus,
+    reset,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm<PriceRangeData>({
-    defaultValues: initPriceRangeData,
+    defaultValues: tempRange,
     resolver: zodResolver(priceRangeSchema),
   });
   const [currPage, setCurrPage] = useState(1);
-  const [tempRange, setTempRange] = useState({min:0, max:100000});
-  const [range, setRange] = useState({min:0, max:100000});
+
+  const [range, setRange] = useState<PriceRangeData>({
+    min: '0',
+    max: '100000',
+  });
   const {
     products,
     loadingProducts: loadingVaccines,
@@ -63,8 +71,8 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
   } = useGetProductsInfinity({
     categoryId: process.env.NEXT_PUBLIC_VACCINE_ID,
     limit: 10,
-    MinListPrice: range.min,
-    MaxListPrice: range.max,
+    MinListPrice: Number(range.min),
+    MaxListPrice: Number(range.max),
   });
 
   const handleNextPage = () => {
@@ -93,9 +101,8 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
   const priceButtonRef = useRef<HTMLDivElement | null>(null);
   const pricePopupRef = useRef<HTMLDivElement | null>(null);
   const sortRanges: RangeMetric[] = [
-    { id: 1, value: 'Low' },
-    { id: 2, value: 'Medium' },
-    { id: 3, value: 'High' },
+    { id: 1, value: 'Lowest to Highest' },
+    { id: 2, value: 'Highest to Lowest' },
   ];
   const [sort, setSort] = useState('Sort By');
   const [sortDropdown, setSortDropdown] = useState(false);
@@ -103,12 +110,13 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
   const sortPopupRef = useRef<HTMLDivElement | null>(null);
 
   useClickOutside(sortPopupRef, sortButtonRef, () => setSortDropdown(false));
+  useClickOutside(pricePopupRef, priceButtonRef, () => setPriceDropdown(false));
   const [focusedThumb, setFocusedThumb] = useState<number | null>(null);
 
   const onSubmit: SubmitHandler<PriceRangeData> = (data) => {
-    try {
-      setRange(tempRange)
-    } catch (e) {}
+    setRange(data);
+    setPriceDropdown(false);
+    console.log(data);
   };
   return (
     <div id='scroll' className='min-h-fit w-full scroll-mt-24'>
@@ -167,9 +175,10 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                       className='max-h-54 absolute left-0 top-[35px] z-20 mt-1 flex w-[250px] flex-col gap-2 overflow-y-auto rounded-lg border border-gray-200 bg-[#FFFFFF] p-4 shadow-lg'
                     >
                       <ReactSlider
-                        className='relative h-0.5 rounded-full bg-gray-200 mt-2'
+                        className='relative mt-2 h-0.5 rounded-full bg-gray-200'
                         trackClassName='bg-gray-800 h-0.5 rounded-full example-track'
                         defaultValue={[0, 100000]}
+                        value={[watch('min'), watch('max')]}
                         min={0}
                         max={100000}
                         ariaLabel={['Lower thumb', 'Upper thumb']}
@@ -204,23 +213,55 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                           </div>
                         )}
                         onChange={(value: any) => {
-                          setTempRange({min: value[0], max: value[1]});
+                          setTempRange({ min: value[0], max: value[1] });
+                          setValue('min', value[0].toString());
+                          setValue('max', value[1].toString());
+                          console.log('max: ', watch('max'));
                         }}
                       />
                       <div className='mt-5 grid grid-cols-[1fr_0.2fr_1fr] gap-2 text-sm font-medium text-gray-400'>
-                        <Input className='bg-white' classNames={inputDefault}>
-                          ₦{tempRange.min}
-                        </Input>
+                        <Input
+                          {...register('min')}
+                          errorMessage={errors.min?.message}
+                          isInvalid={!!errors.min}
+                          className='bg-white'
+                          type='string'
+                          name='min'
+                          value={watch('min')}
+                          classNames={inputBorderedDefault}
+                        ></Input>
                         <span className='my-auto text-center'>-</span>
-                        <Input className=' bg-white' classNames={inputDefault}>
-                          ₦{tempRange.max}
-                        </Input>
+                        <Input
+                          {...register('max')}
+                          errorMessage={errors.max?.message}
+                          isInvalid={!!errors.max}
+                          className=' bg-white'
+                          type='string'
+                          name='max'
+                          value={watch('max')}
+                          classNames={inputBorderedDefault}
+                        ></Input>
                       </div>
-                      <div className='mt-5 grid grid-cols-[1fr_1fr] gap-2 text-sm font-medium text-gray-400'>
-                        <Button className='rounded-[6px] border-2 border-[#1E272F] px-3 py-2 text-center bg-transparent font-medium'>
+                      <div
+                        onClick={() => {
+                          setPriceDropdown(false);
+                        }}
+                        className='mt-5 grid grid-cols-[1fr_1fr] gap-2 text-sm font-medium text-gray-400'
+                      >
+                        <Button
+                          onClick={() => {
+                            setPriceDropdown(false);
+                            setValue('min', '0');
+                            setValue('max', '100000');
+                          }}
+                          className='rounded-[6px] border-1 border-[#1E272F] bg-transparent px-3 py-2 text-center font-medium'
+                        >
                           RESET
                         </Button>
-                        <Button onClick={handleSubmit(onSubmit)} className='rounded-[6px] border-2 border-primary px-3 py-2 text-center bg-primary text-white font-medium'>
+                        <Button
+                          onClick={handleSubmit(onSubmit)}
+                          className='rounded-[6px] border-2 border-primary bg-primary px-3 py-2 text-center font-medium text-white'
+                        >
                           SAVE
                         </Button>
                       </div>
@@ -241,7 +282,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                 {sortDropdown && (
                   <div
                     ref={sortPopupRef}
-                    className='absolute right-0 top-[35px] z-20 mt-1 flex max-h-48 w-[150px] flex-col gap-2 overflow-y-auto rounded-lg border border-gray-200 bg-[#FFFFFF] p-2 shadow-lg'
+                    className='absolute right-0 top-[35px] z-20 mt-1 flex max-h-48 w-[200px] flex-col gap-2 overflow-y-auto rounded-lg border border-gray-200 bg-[#FFFFFF] p-2 shadow-lg'
                   >
                     {sortRanges.map((range) => (
                       <div
