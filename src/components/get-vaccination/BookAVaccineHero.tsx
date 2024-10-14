@@ -1,7 +1,7 @@
 'use client';
 import { useGetProducts } from '@/hooks';
 import debounce from 'lodash/debounce';
-import { FC, useCallback, useRef, useState } from 'react';
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { Section } from '../home/Section';
 import {
   Button,
@@ -35,62 +35,71 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
   const filteredVaccines = products?.filter((vaccine) =>
     vaccine.name?.toLowerCase().includes(searchStr?.toLowerCase() || '')
   );
-
+  const [showVaccineCategory, setShowVaccineCategory] = useState(true);
   const handleInputChange = useCallback(
     (value: string) => {
       handleDebouncedSearch(value);
     },
     [handleDebouncedSearch]
   );
-  const [leftIcon, setLeftIcon] = useState(false);
-  const [rightIcon, setRightIcon] = useState(false);
-  const reviews = [
+  const search = [
     {
-      title: 'This Care Truly Made a Difference',
-      description:
-        'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
-      noOfStars: 5,
-      name: 'Mrs Adebayo Gregson',
+      title: 'Cholera vaccine',
     },
     {
-      title: 'I did not like how this went',
-      description:
-        'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
-      noOfStars: 3,
-      name: 'Mrs Adebayo Gregson',
-    },
-    {
-      title: 'This Care Truly Made a Difference',
-      description:
-        'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
-      noOfStars: 2,
-      name: 'Mrs Adebayo Gregson',
-    },
-    {
-      title: 'This Care Truly Made a Difference',
-      description:
-        'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
-      noOfStars: 5,
-      name: 'Mrs Adebayo Gregson',
+      title: 'Children vaccine',
     },
   ];
+  const searchCategory = Array.from({ length: 10 }, () => search).flatMap(item => item);
+  const scrollVaccineCategoryRef = useRef<HTMLDivElement | null>(null);
+  const [itemHeight, setItemHeight] = useState(0);
 
-  const scrollReviewsRef = useRef<HTMLDivElement | null>(null);
-  const scrollReviewsLeft = () => {
-    scrollReviewsRef.current?.scrollBy({
-      top: 0,
-      left: -scrollReviewsRef.current.clientWidth,
-      behavior: 'smooth',
-    });
+  useEffect(() => {
+    if (scrollVaccineCategoryRef.current) {
+      const firstReviewItem = scrollVaccineCategoryRef.current.firstElementChild;
+      if (firstReviewItem) {
+        setItemHeight(firstReviewItem.clientHeight); 
+      }
+    }
+  }, [searchCategory]);
+
+  const scrollVaccineCategory = () => {
+    if (scrollVaccineCategoryRef.current) {
+      const startScrollTop = scrollVaccineCategoryRef.current.scrollTop;
+      const endScrollTop = startScrollTop + itemHeight; // Scroll by the height of the item
+      const duration = 600; // Duration of scroll in milliseconds
+      const startTime = performance.now();
+
+      const animateScroll = (currentTime: number) => { // Type the currentTime parameter
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1); // Calculate progress
+        if (scrollVaccineCategoryRef.current) { 
+          // Smoothly interpolate the scroll position
+        scrollVaccineCategoryRef.current.scrollTop = 
+          startScrollTop + (endScrollTop - startScrollTop) * progress;
+
+        if (progress < 1) {
+          requestAnimationFrame(animateScroll); // Continue animation
+        } else {
+          // Reset to the top if we reached the bottom
+          if (endScrollTop >= scrollVaccineCategoryRef.current.scrollHeight - scrollVaccineCategoryRef.current.clientHeight) {
+            scrollVaccineCategoryRef.current.scrollTop = 0; // Reset scroll to top
+          }
+        }
+        }
+        
+      };
+
+      requestAnimationFrame(animateScroll); // Start the animation
+    }
   };
 
-  const scrollReviewsRight = () => {
-    scrollReviewsRef.current?.scrollBy({
-      top: 0,
-      left: scrollReviewsRef.current.clientWidth,
-      behavior: 'smooth',
-    });
-  };
+  useEffect(() => {
+    const intervalId = setInterval(scrollVaccineCategory, 2000);
+
+    return () => clearInterval(intervalId);
+  }, [itemHeight]);
+
   return (
     <div className='relative w-full items-center bg-transparent md:min-h-[calc(100vh-260px)] xl:grid xl:min-h-[539px] xl:justify-center'>
       <div
@@ -113,66 +122,21 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
             Find the right vaccine for you and take a step towards a healthier
             future.
           </p>
-          <div className='flex justify-between'>
-            <Button
-              onMouseEnter={() => {
-                setLeftIcon(true);
-              }}
-              onMouseLeave={() => {
-                setLeftIcon(false);
-              }}
-              color=''
-              size='md'
-              radius='full'
-              className={`h-fit min-w-0 rounded-full border-2 border-[#1E272F] p-2 sm:p-4 ${
-                rightIcon ? 'bg-[#1E272F]' : 'bg-transparent'
-              }`}
-              onClick={scrollReviewsRight}
-            >
-              <IconArrowRight color={`${rightIcon ? '#FFFFFF' : '#1E272F'}`} />
-            </Button>
-            <div
-              ref={scrollReviewsRef}
-              className='scrollbar-none flex flex-col gap-10 w-[90%] h-[200px] overflow-y-scroll sm:w-[57%]'
-            >
-              {reviews.map((review, index) => (
-                <div key={index} className=''>
-                  <div className='flex flex-col items-center justify-center gap-[10px]'>
-                    <h3 className='text-2xl font-semibold text-[#1E272F] sm:text-[32px]'>
-                      {review.title}
-                    </h3>
-                    <p className='text-xs font-medium text-[#5A5A5A] sm:text-base'>
-                      {review.description}
-                    </p>
-                    <div className='flex'></div>
-                    <p className='text-xs font-bold text-[#1E272F] sm:text-sm'>
-                      Mrs Adebayo Gregson
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <Button
-              onMouseEnter={() => {
-                setRightIcon(true);
-              }}
-              onMouseLeave={() => {
-                setRightIcon(false);
-              }}
-              color=''
-              size='md'
-              radius='full'
-              className={`h-fit min-w-0 rounded-full border-2 border-[#1E272F] p-2 sm:p-4 ${
-                rightIcon ? 'bg-[#1E272F]' : 'bg-transparent'
-              }`}
-              onClick={scrollReviewsRight}
-            >
-              <IconArrowRight color={`${rightIcon ? '#FFFFFF' : '#1E272F'}`} />
-            </Button>
-          </div>
 
           <div className='relative mx-auto w-full max-w-xl'>
+          <div
+              ref={scrollVaccineCategoryRef} 
+              className={`scrollbar-none h-[20px] overflow-y-scroll absolute z-[999] top-4 left-6 ${!showVaccineCategory && 'hidden'}`}
+          >
+            {searchCategory.map((category, index) => (
+                <p key={index} className='leading-1 text-base text-gray-400'>
+                  {category.title}
+                </p>
+            ))}
+          </div>
             <Input
+              onMouseEnter={()=>{setShowVaccineCategory(false)}}
+              onMouseLeave={()=>{setShowVaccineCategory(true)}}
               size='lg'
               radius='full'
               type='Search'
