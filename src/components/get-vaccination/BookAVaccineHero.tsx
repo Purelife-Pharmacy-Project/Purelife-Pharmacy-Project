@@ -32,9 +32,8 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
     setSearchStr(value);
   }, 800);
 
-  const filteredVaccines = products?.filter(
-    (vaccine) =>
-      vaccine.name?.toLowerCase().includes(searchStr?.toLowerCase() || '')
+  const filteredVaccines = products?.filter((vaccine) =>
+    vaccine.name?.toLowerCase().includes(searchStr?.toLowerCase() || '')
   );
 
   const handleInputChange = useCallback(
@@ -43,7 +42,55 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
     },
     [handleDebouncedSearch]
   );
+  const [leftIcon, setLeftIcon] = useState(false);
+  const [rightIcon, setRightIcon] = useState(false);
+  const reviews = [
+    {
+      title: 'This Care Truly Made a Difference',
+      description:
+        'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
+      noOfStars: 5,
+      name: 'Mrs Adebayo Gregson',
+    },
+    {
+      title: 'I did not like how this went',
+      description:
+        'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
+      noOfStars: 3,
+      name: 'Mrs Adebayo Gregson',
+    },
+    {
+      title: 'This Care Truly Made a Difference',
+      description:
+        'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
+      noOfStars: 2,
+      name: 'Mrs Adebayo Gregson',
+    },
+    {
+      title: 'This Care Truly Made a Difference',
+      description:
+        'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
+      noOfStars: 5,
+      name: 'Mrs Adebayo Gregson',
+    },
+  ];
 
+  const scrollReviewsRef = useRef<HTMLDivElement | null>(null);
+  const scrollReviewsLeft = () => {
+    scrollReviewsRef.current?.scrollBy({
+      top: 0,
+      left: -scrollReviewsRef.current.clientWidth,
+      behavior: 'smooth',
+    });
+  };
+
+  const scrollReviewsRight = () => {
+    scrollReviewsRef.current?.scrollBy({
+      top: 0,
+      left: scrollReviewsRef.current.clientWidth,
+      behavior: 'smooth',
+    });
+  };
   return (
     <div className='relative w-full items-center bg-transparent md:min-h-[calc(100vh-260px)] xl:grid xl:min-h-[539px] xl:justify-center'>
       <div
@@ -66,9 +113,65 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
             Find the right vaccine for you and take a step towards a healthier
             future.
           </p>
+          <div className='flex justify-between'>
+            <Button
+              onMouseEnter={() => {
+                setLeftIcon(true);
+              }}
+              onMouseLeave={() => {
+                setLeftIcon(false);
+              }}
+              color=''
+              size='md'
+              radius='full'
+              className={`h-fit min-w-0 rounded-full border-2 border-[#1E272F] p-2 sm:p-4 ${
+                rightIcon ? 'bg-[#1E272F]' : 'bg-transparent'
+              }`}
+              onClick={scrollReviewsRight}
+            >
+              <IconArrowRight color={`${rightIcon ? '#FFFFFF' : '#1E272F'}`} />
+            </Button>
+            <div
+              ref={scrollReviewsRef}
+              className='scrollbar-none flex flex-col gap-10 w-[90%] h-[200px] overflow-y-scroll sm:w-[57%]'
+            >
+              {reviews.map((review, index) => (
+                <div key={index} className=''>
+                  <div className='flex flex-col items-center justify-center gap-[10px]'>
+                    <h3 className='text-2xl font-semibold text-[#1E272F] sm:text-[32px]'>
+                      {review.title}
+                    </h3>
+                    <p className='text-xs font-medium text-[#5A5A5A] sm:text-base'>
+                      {review.description}
+                    </p>
+                    <div className='flex'></div>
+                    <p className='text-xs font-bold text-[#1E272F] sm:text-sm'>
+                      Mrs Adebayo Gregson
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <Button
+              onMouseEnter={() => {
+                setRightIcon(true);
+              }}
+              onMouseLeave={() => {
+                setRightIcon(false);
+              }}
+              color=''
+              size='md'
+              radius='full'
+              className={`h-fit min-w-0 rounded-full border-2 border-[#1E272F] p-2 sm:p-4 ${
+                rightIcon ? 'bg-[#1E272F]' : 'bg-transparent'
+              }`}
+              onClick={scrollReviewsRight}
+            >
+              <IconArrowRight color={`${rightIcon ? '#FFFFFF' : '#1E272F'}`} />
+            </Button>
+          </div>
 
           <div className='relative mx-auto w-full max-w-xl'>
-            <div></div>
             <Input
               size='lg'
               radius='full'
