@@ -270,7 +270,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                 </div>
               </div>
 
-              <div className='relative hidden w-fit sm:block'>
+              {/* <div className='relative hidden w-fit sm:block'>
                 <div
                   ref={sortButtonRef}
                   onClick={() => setSortDropdown(!sortDropdown)}
@@ -300,7 +300,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                     ))}
                   </div>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
 

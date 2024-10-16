@@ -20,9 +20,7 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
   const [searchStr, setSearchStr] = useState<string | undefined>('');
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchResultsRef = useRef<HTMLDivElement>(null);
-
   const [showSearchResults, setShowSearchResults] = useState(false);
-
   const { products, loadingProducts: loadingVaccines } = useGetProducts({
     categoryId: process.env.NEXT_PUBLIC_VACCINE_ID,
     limit: 100,
@@ -50,8 +48,10 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
       title: 'Children vaccine',
     },
   ];
+  const [searchOn, setSearchOn] = useState('');
   const searchCategory = Array.from({ length: 10 }, () => search).flatMap(item => item);
   const scrollVaccineCategoryRef = useRef<HTMLDivElement | null>(null);
+  const scrollIntervalRef = useRef<number | null>(null);
   const [itemHeight, setItemHeight] = useState(0);
 
   useEffect(() => {
@@ -66,40 +66,37 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
   const scrollVaccineCategory = () => {
     if (scrollVaccineCategoryRef.current) {
       const startScrollTop = scrollVaccineCategoryRef.current.scrollTop;
-      const endScrollTop = startScrollTop + itemHeight; // Scroll by the height of the item
-      const duration = 600; // Duration of scroll in milliseconds
+      const endScrollTop = startScrollTop + itemHeight; 
+      const duration = 300; 
       const startTime = performance.now();
-
-      const animateScroll = (currentTime: number) => { // Type the currentTime parameter
+      const animateScroll = (currentTime: number) => { 
         const timeElapsed = currentTime - startTime;
-        const progress = Math.min(timeElapsed / duration, 1); // Calculate progress
+        const progress = Math.min(timeElapsed / duration, 1); 
         if (scrollVaccineCategoryRef.current) { 
-          // Smoothly interpolate the scroll position
         scrollVaccineCategoryRef.current.scrollTop = 
           startScrollTop + (endScrollTop - startScrollTop) * progress;
-
         if (progress < 1) {
-          requestAnimationFrame(animateScroll); // Continue animation
+          requestAnimationFrame(animateScroll);
         } else {
-          // Reset to the top if we reached the bottom
           if (endScrollTop >= scrollVaccineCategoryRef.current.scrollHeight - scrollVaccineCategoryRef.current.clientHeight) {
-            scrollVaccineCategoryRef.current.scrollTop = 0; // Reset scroll to top
-          }
-        }
-        }
-        
-      };
-
-      requestAnimationFrame(animateScroll); // Start the animation
+            scrollVaccineCategoryRef.current.scrollTop = 0; 
+          }}}};
+      requestAnimationFrame(animateScroll);
     }
   };
-
+  const resetScrollPosition = () => {
+    if (scrollVaccineCategoryRef.current) {
+      if (scrollIntervalRef.current !== null) {
+        clearInterval(scrollIntervalRef.current);
+        scrollIntervalRef.current = null;
+      }
+      scrollVaccineCategoryRef.current.scrollTop = 0;
+    }
+  };
   useEffect(() => {
     const intervalId = setInterval(scrollVaccineCategory, 2000);
-
     return () => clearInterval(intervalId);
   }, [itemHeight]);
-
   return (
     <div className='relative w-full items-center bg-transparent md:min-h-[calc(100vh-260px)] xl:grid xl:min-h-[539px] xl:justify-center'>
       <div
@@ -117,31 +114,49 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
           <h1 className='w-full text-balance text-center text-3xl font-bold capitalize lg:text-5xl'>
             Vaccination Made Easy
           </h1>
-
           <p className='text-balance text-center'>
             Find the right vaccine for you and take a step towards a healthier
             future.
           </p>
-
           <div className='relative mx-auto w-full max-w-xl'>
-          <div
+            <div
+              onMouseEnter={() => {
+                setShowVaccineCategory(false);
+                scrollVaccineCategory()
+              }}
+              onMouseLeave={()=>{resetScrollPosition()}}
               ref={scrollVaccineCategoryRef} 
               className={`scrollbar-none h-[20px] overflow-y-scroll absolute z-[999] top-4 left-6 ${!showVaccineCategory && 'hidden'}`}
           >
             {searchCategory.map((category, index) => (
-                <p key={index} className='leading-1 text-base text-gray-400'>
-                  {category.title}
-                </p>
+              <p key={index} className='leading-1 text-base text-gray-400'>
+                {category.title}
+              </p>
             ))}
           </div>
             <Input
               onMouseEnter={()=>{setShowVaccineCategory(false)}}
-              onMouseLeave={()=>{setShowVaccineCategory(true)}}
+              onMouseLeave={() => {
+                if (searchOn === '') {
+                  setShowVaccineCategory(true);
+                  resetScrollPosition();
+                }
+              }}
               size='lg'
               radius='full'
               type='Search'
               ref={searchInputRef}
-              onChange={(e) => handleInputChange(e.target.value)}
+              onChange={(e) => {
+                setSearchOn(e.target.value)
+                if (e.target.value !== '') {
+                  setShowVaccineCategory(false)
+                }
+                else {
+                  setShowVaccineCategory(true);
+                  resetScrollPosition();
+              }
+                handleInputChange(e.target.value)
+              }}
               onFocus={() => setShowSearchResults(true)}
               onBlur={() => {
                 setTimeout(() => {
@@ -172,6 +187,14 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
 
             {showSearchResults ? (
               <Card
+                onMouseEnter={()=>{setShowVaccineCategory(false)}}
+                onMouseLeave={() => {
+                  // if (searchOn === '') {
+                    setShowVaccineCategory(true);
+                    resetScrollPosition();
+                  // }
+                  
+                }}                
                 shadow='sm'
                 radius='lg'
                 ref={searchResultsRef}
