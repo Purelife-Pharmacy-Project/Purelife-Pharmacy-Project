@@ -342,31 +342,6 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
           ) : null}
         </Section>
       </div>
-      <style>
-        {`
-            .example-track-0 {
-              @apply bg-gray-200; /* Lighter gray for the left part */
-            }
-
-            .example-track-1 {
-              @apply bg-gray-800; /* Darker gray for the middle part (between the thumbs) */
-            }
-
-            .example-track-2 {
-              @apply bg-gray-200; /* Lighter gray for the right part */
-            }
-          `}
-      </style>
     </div>
   );
-};
-
-interface ShowHideProps {
-  head: string;
-  body: any;
-}
-
-const ShowHide: React.FC<ShowHideProps> = ({ head, body }) => {
-  const [show, setShow] = useState(true);
-  return <div></div>;
 };
