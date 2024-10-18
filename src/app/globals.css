@@ -41,6 +41,27 @@ input[type='time']::-webkit-calendar-picker-indicator {
   display: none;
 }
 
+.scrollbar-none {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, and Opera */
+}
+
+.example-track.example-track-0 {
+  background-color: lightgray; /* Lighter gray for the left part */
+}
+
+.example-track.example-track-1 {
+  background-color: #1E272F; /* Darker gray for the middle part (between the thumbs) */
+}
+
+.example-track.example-track-2 {
+  background-color: lightgray; /* Lighter gray for the right part */
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
