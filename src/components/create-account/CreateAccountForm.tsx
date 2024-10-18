@@ -7,7 +7,8 @@ import {
   registerValidationSchema,
 } from '@/services/user/schema';
 import {
-  inputDefault,
+  inputAuth,
+  selectAuth,
   selectBorderedGrayLight,
   textAreaDefault,
 } from '@/theme';
@@ -27,6 +28,7 @@ import { toast } from 'sonner';
 import { IconEye } from '../icons/IconEye';
 import { IconEyeClose } from '../icons/IconEyeClose';
 import { IconSpinner } from '../icons/IconSpinner';
+import { IconLock } from '../icons/IconLock';
 
 export const CreateAccountForm = () => {
   const {
@@ -63,84 +65,109 @@ export const CreateAccountForm = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit, console.log)}
-      className='grid gap-8 md:w-[554px]'
-    >
+    <form onSubmit={handleSubmit(onSubmit, console.log)} className='grid gap-3'>
       {isError ? <FormMessage type='error' message={registerError!} /> : null}
+      <p className='font-medium text-[#1E272F]'>Full Name</p>
       <Input
-        label='Full Name'
         type='text'
         autoComplete='new-name'
         isInvalid={!!errors.name?.message}
         errorMessage={errors.name?.message}
-        classNames={inputDefault}
+        classNames={inputAuth}
+        startContent={
+          <span className='px-1'></span>
+        }
         {...register('name')}
       />
+      <p className='font-medium text-[#1E272F]'>Email Address</p>
       <Input
-        label='Email'
         type='email'
         autoComplete='email'
         isInvalid={!!errors.email?.message}
         errorMessage={errors.email?.message}
-        classNames={inputDefault}
+        classNames={inputAuth}
+        startContent={
+          <span className='px-1'></span>
+        }
         {...register('email')}
       />
+      <p className='font-medium text-[#1E272F]'>Phone Number</p>
       <Input
-        label='Phone Number'
         type='tel'
         autoComplete='tel'
         isInvalid={!!errors.phoneNumber?.message}
         errorMessage={errors.phoneNumber?.message}
-        classNames={inputDefault}
+        classNames={inputAuth}
+        startContent={
+          <span className='px-1'></span>
+        }
         {...register('phoneNumber')}
       />
-      <Select
-        items={states || []}
-        isLoading={loadingStates}
-        label='State'
-        isInvalid={!!errors.stateId?.message}
-        errorMessage={errors.stateId?.message}
-        classNames={selectBorderedGrayLight}
-        onChange={(value) => setValue('stateId', +value.target.value)}
-      >
-        {(item) => (
-          <SelectItem value={+item.id} key={item.id} className='capitalize'>
-            {item.name}
-          </SelectItem>
-        )}
-      </Select>
-      <Select
-        items={cities || []}
-        isLoading={loadingCities}
-        label='City'
-        isInvalid={!!errors.cityId?.message}
-        errorMessage={errors.cityId?.message}
-        classNames={selectBorderedGrayLight}
-        onChange={(value) => setValue('cityId', +value.target.value)}
-      >
-        {(item) => (
-          <SelectItem value={item.id} key={item.id} className='capitalize'>
-            {item.name}
-          </SelectItem>
-        )}
-      </Select>
-      <Textarea
-        label='Address'
+      <div className='grid grid-cols-[1fr_1fr] gap-5 w-full'>
+        <div>
+          <p className='font-medium text-[#1E272F] mb-3'>State</p>
+          <Select
+            items={states || []}
+            isLoading={loadingStates}
+            label='Select'
+            isInvalid={!!errors.stateId?.message}
+            errorMessage={errors.stateId?.message}
+            classNames={selectAuth}
+            style={{ paddingLeft: '1.5rem' }}
+            onChange={(value) => setValue('stateId', +value.target.value)}
+          >
+            {(item) => (
+              <SelectItem value={+item.id} key={item.id} className='capitalize'>
+                {item.name}
+              </SelectItem>
+            )}
+          </Select>
+        </div>
+        <div>
+          <p className='font-medium text-[#1E272F] mb-3'>City</p>
+          <Select
+            items={cities || []}
+            isLoading={loadingCities}
+            label='Select'
+            isInvalid={!!errors.cityId?.message}
+            errorMessage={errors.cityId?.message}
+            classNames={selectAuth}
+            style={{ paddingLeft: '1.5rem' }}
+            onChange={(value) => setValue('cityId', +value.target.value)}
+          >
+            {(item) => (
+              <SelectItem value={item.id} key={item.id} className='capitalize'>
+                {item.name}
+              </SelectItem>
+            )}
+          </Select>
+        </div>
+      </div>
+
+      <p className='font-medium text-[#1E272F]'>Address</p>
+      <Input
         autoComplete='street-address'
-        classNames={textAreaDefault}
+        classNames={inputAuth}
         isInvalid={!!errors.address?.message}
         errorMessage={errors.address?.message}
         {...register('address')}
+        startContent={
+          <span className='px-1'></span>
+        }
       />
+      <p className='font-medium text-[#1E272F]'>Password</p>
       <Input
-        label='Password'
         type={passwordIsVisible ? 'text' : 'password'}
         autoComplete='new-password'
         isInvalid={!!errors.password?.message}
         errorMessage={errors.password?.message}
-        classNames={inputDefault}
+        classNames={inputAuth}
         {...register('password')}
+        startContent={
+          <button type='button' className='px-2'>
+              <IconLock color='content' />
+          </button>
+        }
         endContent={
           <button type='button' className='px-2' onClick={toggleVisibility}>
             {' '}
@@ -152,19 +179,14 @@ export const CreateAccountForm = () => {
           </button>
         }
       />
-      <p className='mx-auto w-full text-center font-light md:max-w-[400px]'>
-        We&apos;ll use your data to improve your website experience, manage
-        account access, and for other purposes as detailed in our privacy
-        policy.
-      </p>
 
-      <div className='flex justify-center'>
+      <div className='flex w-full justify-center'>
         <Button
           isLoading={loadingRegister}
           spinner={<IconSpinner />}
           size='lg'
           type='submit'
-          className='px-10'
+          className='mt-10 w-full px-10'
           color='primary'
           radius='full'
         >
@@ -172,11 +194,11 @@ export const CreateAccountForm = () => {
         </Button>
       </div>
 
-      <p className='text-center'>
+      <p className='text-center text-sm text-[#5A5A5A4D]'>
         Already have an account?
-        <Link className='ml-2' href='/sign-in'>
+        <Link className='ml-2 font-medium text-sm text-[#FF0028]' href='/sign-in'>
           {' '}
-          Sign in
+          Log in
         </Link>
       </p>
     </form>

@@ -87,7 +87,7 @@ export const AppNavbar = ({
         justify='start'
         className='grid grid-flow-col gap-6 data-[justify=start]:flex-grow-0'
       >
-        <NavbarBrand className='w-28 flex-none flex-grow-0 lg:w-max'>
+        <NavbarBrand className='w-28 flex-none flex-grow-0'>
           <Link href='/'>
             <Image
               src='/app-logo.png'

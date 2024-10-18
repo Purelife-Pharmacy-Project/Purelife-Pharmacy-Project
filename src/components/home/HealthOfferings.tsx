@@ -23,7 +23,7 @@ const HealthOfferings: React.FC<Prop> = ({ title, data }) => {
       <div className='grid grid-cols-1 gap-x-3.5 gap-y-6 md:grid-cols-2'>
         {data.map((offering) => (
           <Card key={offering.title} className='border border-[#EFEFEF]'>
-            <CardBody className='flex flex-row gap-5 px-8 py-5'>
+            <CardBody className='flex flex-row gap-5 px-4 sm:px-8 py-5'>
               <div className='my-auto flex flex-col gap-3'>
                 <p className='font-medium lg:text-lg xl:text-2xl'>
                   {offering.title}
@@ -47,7 +47,7 @@ const HealthOfferings: React.FC<Prop> = ({ title, data }) => {
                 alt=''
                 width={200}
                 height={200}
-                className='h-[106px] min-w-[106px] shrink-0 lg:min-h-[200px] lg:min-w-[200px]'
+                className='!h-auto min-w-[106px] shrink-0 lg:min-h-auto lg:min-w-[200px]'
               />
             </CardBody>
           </Card>
