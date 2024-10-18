@@ -4,9 +4,9 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 // Create a client to access the Google Calendar API
 const calendar = google.calendar('v3');
 
+// Set up Google Auth
 const auth = new google.auth.GoogleAuth({
   credentials: {
-    // Your service account credentials
     client_email: process.env.NEXT_GOOGLE_CLIENT_EMAIL,
     private_key: process.env.NEXT_GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
   },
@@ -17,19 +17,21 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const { doctorId } = req.query;
 
+    // Create the authorized client
     const client = await auth.getClient();
 
     // Make the request to Google Calendar API to fetch available time slots
-    const { data } = await calendar.events.list({
-      auth: client,
-      calendarId: doctorId as string,  // Doctor's Calendar ID
+    const response = await calendar.events.list({
+      auth: client as any,  // Explicitly type as any to handle the auth type mismatch
+      calendarId: doctorId as string,  // Doctor's Calendar ID (assumed to be passed in the query)
       timeMin: new Date().toISOString(),
       timeMax: new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString(),
       singleEvents: true,
       orderBy: 'startTime',
     });
 
-    const availableEvents = data.items?.map((event: any) => ({
+    // Extract the data
+    const availableEvents = response.data.items?.map((event: any) => ({
       start: event.start?.dateTime || event.start?.date,
       end: event.end?.dateTime || event.end?.date,
       summary: event.summary,
