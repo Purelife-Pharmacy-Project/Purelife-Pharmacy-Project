@@ -21,7 +21,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({
   return (
     <div
       className={clsx(
-        'lg:grid bg-primaryLight',
+        'lg:grid bg-primaryLight pt-5',
         className
       )}
     >
@@ -37,9 +37,9 @@ export const HowItWorks: FC<HowItWorksProps> = ({
                   >
                     {answer.icon}
                   </div>
-                  <div className='flex flex-col gap-1'>
-                    <h3 className='md:h-[50px] text-[#1E272F] font-bold text-[22px]'>{answer.title}</h3>
-                    <p className='md:h-[120px] lg:h-[100px] mx-auto w-[90%] sm:w-full text-balance font-light text-black'>
+                  <div className='flex flex-col gap-1 pt-2'>
+                    <h3 className='md:h-[65px] lg:h-[50px] text-[#1E272F] font-bold text-[22px]'>{answer.title}</h3>
+                    <p className='md:h-[120px] lg:h-[100px] mx-auto w-[90%] sm:w-full font-light text-black'>
                       {answer.description}
                     </p>
                   </div>
