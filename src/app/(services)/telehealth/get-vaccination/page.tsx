@@ -8,15 +8,21 @@ import BookSession from '@/components/book-lab-test/BookSession';
 
 const data = [
   {
-    title: 'See top vaccine to take before your get married',
-    image: '/images/default-test.png',
-    cta: 'Shop all test',
+    title: 'Your Medications, Delivered Exclusively Online.',
+    image: '/images/vaccines/deliveryMan.png',
+    cta: 'Shop Now',
+    ctaLink: '/telehealth/get-vaccination#scroll',
+  },
+  {
+    title: 'See top vaccine to take before marriage',
+    image: '/images/vaccines/vaccine1.png',
+    cta: 'Shop Now',
     ctaLink: '/telehealth/get-vaccination#scroll',
   },
   {
     title: 'Top vaccine to boost your immune system',
-    image: '/images/default-test.png',
-    cta: 'Shop all test',
+    image: '/images/vaccines/vaccine2.png',
+    cta: 'Shop Now',
     ctaLink: '/telehealth/get-vaccination#scroll',
   },
 ];
@@ -24,7 +30,7 @@ const data = [
 export default function GetVaccinationPage() {
   return (
     <>
-      <main className='grid gap-20'>
+      <main className='grid gap-10'>
         <BookAVaccineHero />
 
         <VaccinationProducts />
@@ -33,7 +39,7 @@ export default function GetVaccinationPage() {
 
         {/*<HowItWorks data={howItWorksData} variant={'primary'} />*/}
 
-        <BookSession />
+        {/* <BookSession /> */}
 
         <ReportDrugReaction />
 

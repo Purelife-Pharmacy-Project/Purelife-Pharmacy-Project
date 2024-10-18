@@ -43,7 +43,7 @@ export default function FindADoctor() {
 
   const autoScrollInterval = useRef<NodeJS.Timeout | null>(null);
 
-  // Function to auto-scroll to the right
+
   const startAutoScroll = () => {
     if (scrollRef.current) {
       autoScrollInterval.current = setInterval(() => {
@@ -51,30 +51,29 @@ export default function FindADoctor() {
           const maxScrollLeft = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
           if (scrollRef.current.scrollLeft < maxScrollLeft) {
             scrollRef.current.scrollBy({
-              left: 1, // Scroll slowly
+              left: 1,
             });
           } else {
-            scrollRef.current.scrollLeft = 0; // Loop back to the start
+            scrollRef.current.scrollLeft = 0;
           }
         }
-      }, 10); // Control the speed by adjusting this value
+      }, 10); 
     }
   };
 
-  // Stop auto-scroll when hovering
   const stopAutoScroll = () => {
     if (autoScrollInterval.current) {
       clearInterval(autoScrollInterval.current);
     }
   };
 
-  // Initialize auto-scroll on mount and manage hover events
+
   useEffect(() => {
     startAutoScroll();
-    return () => stopAutoScroll(); // Cleanup on unmount
+    return () => stopAutoScroll();
   }, []);
 
-  // Scroll Left logic
+
   const scrollLeft = () => {
     if (scrollRef.current) {
       const newScrollPosition = scrollRef.current.scrollLeft - scrollRef.current.clientWidth;
@@ -85,7 +84,7 @@ export default function FindADoctor() {
     }
   };
 
-  // Scroll Right logic
+
   const scrollRight = () => {
     if (scrollRef.current) {
       const newScrollPosition = scrollRef.current.scrollLeft + scrollRef.current.clientWidth;
@@ -223,7 +222,6 @@ export default function FindADoctor() {
                   startAutoScroll();
                 }}
                 className={`flex gap-[3%]`}
-                style={{ '--speed': '50000ms' } as React.CSSProperties}
               >
                 {repeatedDoctors.map((doctor, i) => (
                   <div
@@ -402,28 +400,6 @@ export default function FindADoctor() {
 
         <Footer />
       </main>
-      <style>
-        {`
-          .swipe-animation {
-          display: flex;
-          animation: swipe var(--speed) linear infinite;
-          animation-play-state: running; /* Make sure the animation is running by default */
-        }
-
-        .swipe-animation.paused {
-          animation-play-state: paused; /* Pause the animation when hovered */
-        }
-
-          @keyframes swipe {
-            0% {
-              transform: translateX(0);
-            }
-            100% {
-              transform: translateX(-550%);
-            }
-          }
-        `}
-      </style>
     </>
   );
 }
