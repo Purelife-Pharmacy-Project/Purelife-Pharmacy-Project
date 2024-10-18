@@ -77,14 +77,17 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
     });
 
   const excludeAddressIds = [62943];
+  const freeDeliveryId = 62943;
 
   const addresses = useMemo(() => {
     const items =
       products?.pages.reduce((acc, page) => {
         return [...acc, ...page];
       }, []) || [];
+
+    return items.filter((item) => item.id !== freeDeliveryId);
     // if (summary && summary.totalCartAmount >= 15000) {
-    return items.filter((item) => excludeAddressIds.includes(item.id));
+    // return items.filter((item) => excludeAddressIds.includes(item.id));
     // } else {
     //   return items.filter((item) => !excludeAddressIds.includes(item.id));
     // }

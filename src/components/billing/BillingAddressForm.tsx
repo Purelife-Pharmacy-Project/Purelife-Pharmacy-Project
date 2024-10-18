@@ -42,9 +42,9 @@ export const BillingAddressForm: FC<BillingAddressFormProps> = ({
           >
             <div className='flex items-center justify-between'>
               <span>{address.name}</span>
-              <span className='text-right font-medium'>
+              {/* <span className='text-right font-medium'>
                 {toNaira(address.lst_price)}
-              </span>
+              </span> */}
             </div>
           </AutocompleteItem>
         )) ?? []}
