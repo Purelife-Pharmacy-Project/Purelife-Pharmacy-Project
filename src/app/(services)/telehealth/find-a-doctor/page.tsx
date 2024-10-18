@@ -5,14 +5,13 @@ import { Footer } from '@/components/home/Footer';
 import { HomeHero } from '@/components/home/HomeHero';
 import { Section } from '@/components/home/Section';
 import { IconArrowRight } from '@/components/icons/IconArrowRight';
-import { IconCalendarTime } from '@/components/icons/IconCalendarTime';
-import { IconPen } from '@/components/icons/IconPen';
-import { IconProfessional } from '@/components/icons/IconProfessional';
 import { allDoctors } from '@/helpers/mocks/doctors';
 import { Button, Image } from '@nextui-org/react';
 import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { IconStarBold } from '@/components/icons/IconStarBold';
+import { IconProfessional } from '@/components/icons/IconProfessional';
+import { IconPen } from '@/components/icons/IconPen';
 
 export default function FindADoctor() {
   const howItWorksData: {
@@ -24,19 +23,19 @@ export default function FindADoctor() {
       title: 'Choose Your Specialist',
       description:
         'Select the specific health professional you would like to consult with.',
-      icon: <IconProfessional size={48} color='primary' />,
+      icon: <IconProfessional color='primary' />,
     },
     {
       title: 'Schedule Your Appointment',
       description:
         'Choose a time, provide name, contact info, reason. Appointment confirmed, professional assigned for consultation.',
-      icon: <IconPen size={60} color='primary' />,
+      icon: <IconPen color='primary' />,
     },
     {
       title: 'Appointment Confirmation',
       description:
         'Your appointment will be confirmed, and a health professional will be assigned to you for your consultation.',
-      icon: <IconCalendarTime size={60} color='primary' />,
+        icon: <IconProfessional color='primary' />,
     },
   ];
 
@@ -190,14 +189,14 @@ export default function FindADoctor() {
 
         <div
           className={clsx(
-            'bg-primaryLight lg:grid lg:justify-center lg:pb-10 lg:pt-[55px]'
+            'bg-primaryLight lg:grid lg:pt-2'
           )}
         >
           <Section className='bg-primaryLight py-10'>
-            <h2 className='mx-auto mb-2 w-[85%] text-center text-3xl font-bold text-[#1E272F] md:text-left md:text-4xl'>
+            <h2 className='w-[60%] mb-2 text-3xl font-bold text-[#1E272F] md:text-4xl'>
               The best and experienced medical workers in their field
             </h2>
-            <p className='mx-auto mb-10 w-[85%] text-center text-base text-[#5A5A5A] sm:text-[20px] md:text-left'>
+            <p className='w-[60%] mb-10 text-base text-[#5A5A5A] sm:text-[20px]'>
               Discover how our seamless platform matches you with the right
               healthcare specialists effortlessly.
             </p>
