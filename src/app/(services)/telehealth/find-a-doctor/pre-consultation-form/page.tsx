@@ -1,8 +1,6 @@
 'use client';
 import { BookConsultationForm } from '@/components/find-a-doctor/BookConsultationForm';
-import { DoctorCard } from '@/components/find-a-doctor/DoctorCard';
 import { Footer } from '@/components/home/Footer';
-import { Section } from '@/components/home/Section';
 import { IconVideo } from '@/components/icons/IconVideo';
 import { allDoctors } from '@/helpers/mocks/doctors';
 import Image from 'next/image';
