@@ -6,6 +6,7 @@ import { Bricolage_Grotesque } from 'next/font/google';
 import React from 'react';
 import './globals.css';
 import AnnouncementBanner from '@/components/AnnouncementBanner';
+import { AuthProvider } from '@/helpers/useContext/authContext';
 
 const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
@@ -126,6 +127,7 @@ export default async function RootLayout({
   return (
     <html lang='en'>
       <body className={bricolage.className}>
+      <AuthProvider>
         <Providers>
           <main className='bg-background text-foreground light'>
             {/* <HydrationBoundary state={dehydrate(queryClient)}> */}
@@ -135,7 +137,8 @@ export default async function RootLayout({
 
             {children}
           </main>
-        </Providers>
+          </Providers>
+          </AuthProvider>
         <SpeedInsights />
       </body>
     </html>

@@ -29,7 +29,6 @@ export const LoginForm = () => {
   const redirectUrl = queryParams.get('redirectUrl');
   const router = useRouter();
   const [passwordIsVisible, setPasswordIsVisible] = useState(false);
-
   const toggleVisibility = () => setPasswordIsVisible(!passwordIsVisible);
 
   useEffect(() => {

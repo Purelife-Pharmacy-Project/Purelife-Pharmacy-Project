@@ -26,7 +26,9 @@ export const DoctorCard: FC<DoctorCardProps> = ({ doctor }) => {
             <p className='text-base font-light text-[#5A5A5A]'>
               {doctor.title}{' '}
             </p>
-            <p className='text-[10px] flex gap-1'><IconRating color='#FDC04B' size={11}/> 4.5</p> 
+            <p className='flex gap-1 text-[10px]'>
+              <IconRating color='#FDC04B' size={11} /> 4.5
+            </p>
           </div>
         </div>
 
@@ -35,17 +37,17 @@ export const DoctorCard: FC<DoctorCardProps> = ({ doctor }) => {
             <IconStethoscopeNew />
             Over {doctor.yearsOfExperience}+ Years Experience
           </div>
-          <p className='max-h-[75px] overflow-y-scroll font-light text-[#5A5A5A] text-content'>
+          <p className='line-clamp-3 max-h-[70px] overflow-hidden text-ellipsis font-light text-[#5A5A5A] text-content'>
             {doctor.description}
           </p>
 
           <Button
             color=''
             as={Link}
-            href={`/telehealth/find-a-doctor/salako`}
+            href={`/telehealth/find-a-doctor/availability-calendar`}
             size='md'
             radius='full'
-            className='w-full py-5 bg-[#1E272F] text-[#FFFFFF] rounded-[35px] mt-4'
+            className='mt-4 w-full rounded-[35px] bg-[#1E272F] py-5 text-[#FFFFFF]'
           >
             Consult now
           </Button>

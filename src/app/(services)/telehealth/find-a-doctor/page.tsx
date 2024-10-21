@@ -38,9 +38,7 @@ export default function FindADoctor() {
         icon: <IconProfessional color='primary' />,
     },
   ];
-  const [hoverScroll, setHoverScroll] = useState(true);
   const scrollRef = useRef<HTMLDivElement | null>(null);
-
   const autoScrollInterval = useRef<NodeJS.Timeout | null>(null);
 
 
@@ -51,7 +49,7 @@ export default function FindADoctor() {
           const maxScrollLeft = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
           if (scrollRef.current.scrollLeft < maxScrollLeft) {
             scrollRef.current.scrollBy({
-              left: 1,
+              left: 3,
             });
           } else {
             scrollRef.current.scrollLeft = 0;
@@ -176,10 +174,8 @@ export default function FindADoctor() {
               <div
                 onMouseEnter={() => {
                   stopAutoScroll();
-                  setHoverScroll(false);
                 }}
                 onMouseLeave={() => {
-                  setHoverScroll(true);
                   startAutoScroll();
                 }}
                 className='mb-7 flex w-full justify-between gap-10 sm:mb-0 sm:w-auto'>
@@ -215,10 +211,8 @@ export default function FindADoctor() {
               <div
                 onMouseEnter={() => {
                   stopAutoScroll();
-                  setHoverScroll(false);
                 }}
                 onMouseLeave={() => {
-                  setHoverScroll(true);
                   startAutoScroll();
                 }}
                 className={`flex gap-[3%]`}
