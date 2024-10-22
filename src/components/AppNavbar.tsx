@@ -14,10 +14,13 @@ import {
 } from '@nextui-org/react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { NavbarCart } from './NavbarCart';
 import { NavbarUser } from './NavbarUser';
-
+interface RangeMetric {
+  id: number;
+  value: string;
+}
 export const AppNavbar = ({
   background = 'inherit',
   disabled = false,
@@ -73,6 +76,17 @@ export const AppNavbar = ({
       path: '/cart',
     },
   ];
+
+  const sortRanges: RangeMetric[] = [
+    { id: 1, value: 'Lowest to Highest' },
+    { id: 2, value: 'Highest to Lowest' },
+  ];
+  const [sort, setSort] = useState('Sort By');
+  const [sortDropdown, setSortDropdown] = useState(false);
+  const sortButtonRef = useRef<HTMLDivElement | null>(null);
+  const sortPopupRef = useRef<HTMLDivElement | null>(null);
+
+  useClickOutside(sortPopupRef, sortButtonRef, () => setSortDropdown(false));
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
@@ -150,6 +164,39 @@ export const AppNavbar = ({
               Lifestyle
             </Link>
           </NavbarItem>
+          <NavbarItem className='relative w-fit'>
+                  <div
+                    ref={vaccineTypeButtonRef}
+                    onClick={() => setVaccineTypeDropdown(!vaccineTypeDropdown)}
+                    className='ld:gap-5 flex h-fit w-fit cursor-pointer items-center gap-2 rounded-[100px] bg-primaryLight px-4 py-1'
+                  >
+                    <p className='text-sm font-medium text-[#797979]'>
+                      {vaccineType}
+                    </p>
+                    <IconChevronLeft className='-rotate-90' color='[#5A5A5A]' />
+                  </div>
+                  {vaccineTypeDropdown && (
+                    <div
+                      ref={vaccineTypePopupRef}
+                      className='absolute right-0 top-[35px] z-[99] mt-1 flex max-h-48 w-[150px] flex-col gap-2 overflow-y-auto rounded-lg border border-gray-200 bg-[#FFFFFF] p-2 shadow-lg'
+                    >
+                      {vaccineTypeRanges.map((range) => (
+                        <div
+                          key={range.id}
+                          className='flex h-fit cursor-pointer items-center justify-between rounded-[5px] bg-primaryLight p-3 py-1 pl-2 hover:bg-gray-200'
+                          onClick={() => {
+                            setVaccineType(range.value);
+                            setVaccineTypeDropdown(false);
+                          }}
+                        >
+                          <span className='cursor-pointer text-sm font-medium text-gray-600'>
+                            {range.value}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </NavbarItem>
         </div>
       </NavbarContent>
 
