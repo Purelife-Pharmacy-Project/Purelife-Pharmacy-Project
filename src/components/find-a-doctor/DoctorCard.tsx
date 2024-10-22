@@ -33,7 +33,7 @@ export const DoctorCard: FC<DoctorCardProps> = ({ doctor }) => {
           <Button
             color='primary'
             as={Link}
-            href={`/telehealth/find-a-doctor/${doctor.slug}`}
+            href={`/telehealth/find-a-doctor/salako`}
             size='md'
             radius='full'
             className='w-max px-8'

@@ -74,12 +74,35 @@ export const selectBorderedGrayLight: SlotsToClasses<SelectSlots> = {
   listbox: ['text-black'],
 };
 
+export const selectAuth: SlotsToClasses<SelectSlots> = {
+  label: [
+    'text-content ml-[10px] text-md font-medium ml-3 group-data-[filled=true]:font-medium data-[hover=true]:bg-white',
+  ],
+  value: ['text-content capitalize'],
+  trigger: ['border border-[rgba(18, 18, 18, 0.1)] bg-white shadow-none rounded-full hover:bg-white'],
+  listbox: ['text-black'],
+};
+
 export const inputDefault: SlotsToClasses<InputSlots> = {
   label: ['text-content text-md font-light'],
   inputWrapper: [
     'pr-2',
     'bg-white',
     'shadow-sm',
+    'text-black capitalize',
+    'data-[hover=true]:bg-white',
+    'group-data-[focus=true]:bg-white',
+    'group-data-[active=true]:bg-white',
+  ],
+};
+
+export const inputAuth: SlotsToClasses<InputSlots> = {
+  label: ['text-content text-md font-light'],
+  inputWrapper: [
+    'pr-2',
+    'shadow-none',
+    'bg-white',
+    'border border-[rgba(18, 18, 18, 0.1)] rounded-full py-7 mb-2',
     'text-black capitalize',
     'data-[hover=true]:bg-white',
     'group-data-[focus=true]:bg-white',

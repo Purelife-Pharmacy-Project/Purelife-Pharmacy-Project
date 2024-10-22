@@ -5,16 +5,16 @@ import { Card, CardBody } from '@nextui-org/react';
 export default function ForgotPasswordPage() {
   return (
     <>
-      <main className='grid h-[60vh] justify-center gap-6'>
-        <div className='mt-12 flex flex-col gap-6'>
-          <h1 className='text-center text-2xl font-semibold  text-header-100 lg:text-4xl'>
+      <main className='w-[90%] md:w-[45%] sm:w-[70%] mx-auto h-[60vh] justify-center'>
+        <div className='mt-12 flex w-full flex-col gap-6'>
+          <h1 className='text-2xl font-bold text-header-100 lg:text-3xl'>
             Forgot Password
           </h1>
           <Card
-            className='h-max border border-header-100 bg-primaryLight md:w-[554px]'
+            className='h-max'
             shadow='none'
           >
-            <CardBody className='p-8 lg:p-12'>
+            <CardBody className='p-0'>
               <ForgotPasswordForm />
             </CardBody>
           </Card>

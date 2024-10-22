@@ -58,6 +58,23 @@ export default function FindADoctor() {
 
         <Footer />
       </main>
+      <style>
+        {`
+          .swipe-animation {
+            display: flex;
+            animation: swipe var(--speed) linear infinite;
+          }
+
+          @keyframes swipe {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-113%);
+            }
+          }
+        `}
+      </style>
     </>
   );
 }

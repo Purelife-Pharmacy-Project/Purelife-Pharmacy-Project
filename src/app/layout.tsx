@@ -129,7 +129,7 @@ export default async function RootLayout({
         <Providers>
           <main className='bg-background text-foreground light'>
             {/* <HydrationBoundary state={dehydrate(queryClient)}> */}
-            <AnnouncementBanner />
+            {/* <AnnouncementBanner /> */}
             <AppNavbar />
             {/* </HydrationBoundary> */}
 

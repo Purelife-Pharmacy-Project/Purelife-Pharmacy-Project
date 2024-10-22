@@ -1,5 +1,7 @@
 'use client';
 
+import { Link } from '@nextui-org/react';
+
 export const FooterBase = () => {
   const thisYear = new Date().getFullYear();
   return (
@@ -7,9 +9,19 @@ export const FooterBase = () => {
       <p className='text-light text-sm text-content'>
         © {thisYear} Purelife Health.
       </p>
-      <p className='text-light text-sm text-content'>
-        Privacy Policy | Terms and Conditions.
-      </p>
+      <div>
+        <Link
+          className='text-light text-sm text-content'
+          href='/privacy-policy'>Privacy Policy</Link>
+        {' | '}
+        <Link
+          className='text-light text-sm text-content'
+          href='/terms-and-conditions'>Terms and Conditions</Link>
+        {' | '}
+        <Link
+          className='text-light text-sm text-content'
+          href='/cookie-policy'>Cookie Policy</Link>
+      </div>
     </div>
   );
 };
