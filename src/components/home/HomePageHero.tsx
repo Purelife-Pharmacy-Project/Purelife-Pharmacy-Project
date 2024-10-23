@@ -61,11 +61,11 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
         <div className='mb-7 text-center text-5xl font-bold'>
           The future of health services, anytime and anywhere
         </div>
-        <div className='mx-auto mb-7 w-[70%] text-center text-xl text-[#5A5A5A]'>
+        <div ref={divRef} className='mx-auto mb-7 w-[70%] text-center text-xl text-[#5A5A5A]'>
           Take control of your health and experience the benefits of Purelife
           health
         </div>
-        <div className='w-[80%]' ref={divRef}>
+        <div className='w-[80%]' >
           <NavbarSearch
             show={true}
             searchBtnClassName='h-[50px] w-[40%] justify-center'

@@ -161,7 +161,7 @@ export const NavbarSearch: React.FC<NavbarSearchProps> = ({
                 scrollVaccineCategory();
               }}
               ref={scrollVaccineCategoryRef}
-              className={`scrollbar-none absolute left-6 top-2 z-[999] h-[20px] overflow-y-scroll ${placeholderClassName} ${!showSearchCategory && 'hidden'}`}
+              className={`scrollbar-none absolute left-6 top-2 z-[2] h-[20px] overflow-y-scroll ${placeholderClassName} ${!showSearchCategory && 'hidden'}`}
             >
               {searchCategory.map((category, index) => (
                 <p key={index} className='leading-1 text-base text-[#5A5A5A]'>
