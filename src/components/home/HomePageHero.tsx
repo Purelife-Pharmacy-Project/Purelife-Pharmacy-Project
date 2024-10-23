@@ -8,6 +8,7 @@ import { useGetProductsInfinity } from '@/hooks';
 import { Spinner } from '@nextui-org/react';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
+import { useSearch } from '@/helpers/useContext/authContext';
 
 interface HomePageHeroProps {}
 export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
@@ -25,18 +26,18 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
   const baseUrl = '/telehealth/get-vaccination';
 
   const divRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(true);
-
+  const { setShowSearch } = useSearch();
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
-        setIsVisible(entry.isIntersecting);
         if (!entry.isIntersecting) {
           console.log('scrolled away from view')
+          setShowSearch(true)
         }
         else {
           console.log('scrolled into view')
+          setShowSearch(false)
         }
       },
       { threshold: 0.1 }

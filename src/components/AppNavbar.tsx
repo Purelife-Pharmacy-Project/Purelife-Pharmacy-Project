@@ -21,6 +21,7 @@ import { useClickOutside } from '@/helpers/utils';
 import { IconChevronLeft } from './icons/IconChevronLeft';
 import { IconLocation } from './icons/IconLocation';
 import { IconSearch } from './icons/IconSearch';
+import { useSearch } from '@/helpers/useContext/authContext';
 interface ServicesType {
   id: number;
   value: string;
@@ -91,7 +92,7 @@ export const AppNavbar = ({
   const [servicesDropdown, setServicesDropdown] = useState(false);
   const servicesButtonRef = useRef<HTMLDivElement | null>(null);
   const servicesPopupRef = useRef<HTMLDivElement | null>(null);
-
+  const { showSearch, setShowSearch } = useSearch();
   useClickOutside(servicesPopupRef, servicesButtonRef, () =>
     setServicesDropdown(false)
   );
@@ -188,10 +189,25 @@ export const AppNavbar = ({
         </div>
       </NavbarContent>
 
-        <NavbarContent justify='center' className='w-full hidden lg:flex pl-[10%] mr-[2%]'>
-        <NavbarSearch show={false} />
+      {showSearch ? (
+        <NavbarContent
+          justify='center'
+          className='mr-[2%] hidden w-full pl-[10%] lg:flex'
+        >
+          <NavbarSearch show={false} />
         </NavbarContent>
-
+      ) : (
+        <NavbarContent
+          onClick={() => {
+            setShowSearch(!showSearch);
+            }}
+          justify='end'
+          className='flex w-full cursor-pointer items-center justify-end gap-2 pr-[3%]'
+        >
+          <IconSearch color='#1E272F' />
+          <span className='text-[#1E272F]'>Search</span>
+        </NavbarContent>
+      )}
       <NavbarContent
         className='grid w-max grid-flow-col gap-10 py-0 data-[justify=end]:flex-grow-0'
         justify='end'
