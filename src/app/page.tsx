@@ -13,6 +13,7 @@ import HandpickedForYou from '@/components/home/HandpickedForYou';
 import ExploreTests from '@/components/home/ExploreTests';
 import DiscoverTopProducts from '@/components/home/DiscoverTopProducts';
 import HealthOfferings from '@/components/home/HealthOfferings';
+import { Reviews } from '@/components/home/Reviews';
 
 const data = [
   {
@@ -61,35 +62,13 @@ export default async function Home() {
           <NavbarSearch />
         </div>
         <HomePageHero
-          title='Simplify your health journey with one click.'
-          description='Saves time, unlimited access, quality service and providers, authentic medications and one-stop shop.'
-          ctaText='Shop All'
-          ctaLink='/shop'
-          features={[
-            'shop pharmacy',
-            'consult with a doctor',
-            'book a lab test',
-            'saves time',
-          ]}
-          featuresWithLinks={[
-            { label: 'shop pharmacy', href: '/shop?category=health' },
-            {
-              label: 'consult with a doctor',
-              href: '/telehealth/find-a-doctor',
-            },
-            {
-              label: 'book a vaccination',
-              href: '/telehealth/get-vaccination',
-            },
-            { label: 'book a lab test', href: '/telehealth/book-lab-test' },
-          ]}
         />
 
         <HomePartners />
 
         <div className='invisible mb-4'></div>
 
-        <HotOffersProduct />
+        {/* <HotOffersProduct /> */}
 
         <div className='invisible mb-4'></div>
 
@@ -121,7 +100,7 @@ export default async function Home() {
 
         <div className='invisible mb-4'></div>
 
-        <Testimonials />
+        <Reviews/>
 
         <ReportDrugReaction />
 

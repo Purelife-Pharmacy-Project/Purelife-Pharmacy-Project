@@ -22,8 +22,10 @@ export const NavbarCart: FC<NavbarCartProps> = ({ isActive }) => {
         <Badge
           isInvisible={!cart}
           content={cart?.length || '0'}
-          size='lg'
-          color='primary'
+          size='md'
+          classNames={{
+            badge: 'bg-[#1E272F] text-white text-xs',
+          }}
         >
           <IconCart
             size={24}
