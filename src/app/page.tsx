@@ -59,10 +59,9 @@ export default async function Home() {
     <>
       <main className='grid gap-6 lg:gap-10'>
         <div className='relative mx-6 lg:hidden'>
-          <NavbarSearch />
+          <NavbarSearch show={true}/>
         </div>
-        <HomePageHero
-        />
+        <HomePageHero/>
 
         <HomePartners />
 

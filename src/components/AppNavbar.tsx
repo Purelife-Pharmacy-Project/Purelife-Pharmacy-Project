@@ -81,7 +81,6 @@ export const AppNavbar = ({
       path: '/cart',
     },
   ];
-  const [search, setSearch] = useState(true);
   const services: ServicesType[] = [
     { id: 0, value: 'Pharmacy', link: '/shop?category=health' },
     { id: 1, value: 'Telehealth', link: '/telehealth' },
@@ -189,16 +188,9 @@ export const AppNavbar = ({
         </div>
       </NavbarContent>
 
-      {!search ? (
         <NavbarContent justify='center' className='w-full hidden lg:flex pl-[10%] mr-[2%]'>
-          <NavbarSearch />
+        <NavbarSearch show={false} />
         </NavbarContent>
-      ) : (
-        <NavbarContent onClick={()=>{setSearch(!search)}} justify='end' className='hidden w-full lg:flex pr-[3%] cursor-pointer'>
-          <IconSearch color='#1E272F' />
-          <span className='text-[#1E272F]'>Search</span>
-        </NavbarContent>
-      )}
 
       <NavbarContent
         className='grid w-max grid-flow-col gap-10 py-0 data-[justify=end]:flex-grow-0'

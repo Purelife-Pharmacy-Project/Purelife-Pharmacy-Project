@@ -7,6 +7,7 @@ import { IconArrowRight } from '../icons/IconArrowRight';
 import { useGetProductsInfinity } from '@/hooks';
 import { Spinner } from '@nextui-org/react';
 import Link from 'next/link';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface HomePageHeroProps {}
 export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
@@ -22,6 +23,35 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
     }, []);
   }, [products]);
   const baseUrl = '/telehealth/get-vaccination';
+
+  const divRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        setIsVisible(entry.isIntersecting);
+        if (!entry.isIntersecting) {
+          console.log('scrolled away from view')
+        }
+        else {
+          console.log('scrolled into view')
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (divRef.current) {
+      observer.observe(divRef.current);
+    }
+
+    return () => {
+      if (divRef.current) {
+        observer.unobserve(divRef.current);
+      }
+    };
+  }, []);
   return (
     <Section className='pt-16'>
       <div className='mx-auto flex w-[60%] flex-col items-center justify-center'>
@@ -35,12 +65,15 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
           Take control of your health and experience the benefits of Purelife
           health
         </div>
-        <div className='w-[80%]'>
-          <NavbarSearch searchBtnClassName='h-[50px] w-[40%] justify-center' placeholderClassName='absolute top-[15px]'/>
+        <div className='w-[80%]' ref={divRef}>
+          <NavbarSearch
+            show={true}
+            searchBtnClassName='h-[50px] w-[40%] justify-center'
+            placeholderClassName='absolute top-[15px]'
+          />
         </div>
       </div>
-      <div
-        className='mt-20 grid grid-cols-[1fr_1fr_1fr] gap-10 px-0 pb-28'>
+      <div className='mt-20 grid grid-cols-[1fr_1fr_1fr] gap-10 px-0 pb-28'>
         <div className='mt-14'>
           <div
             className='relative h-[450px] w-full'
@@ -68,8 +101,9 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
             />
           </div>
           <div
-            style={{boxShadow: '50px 70px 112px 0px #AAAAAA1A'}}
-            className='bg-white mt-10 cursor-pointer rounded-[20px] border border-[0.5px] px-5 py-4 '>
+            style={{ boxShadow: '50px 70px 112px 0px #AAAAAA1A' }}
+            className='mt-10 cursor-pointer rounded-[20px] border border-[0.5px] bg-white px-5 py-4 '
+          >
             <h3 className='flex items-center justify-between text-2xl font-medium'>
               Consult with a Doctor
               <span className='-rotate-45'>
@@ -94,9 +128,10 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
             }}
           ></div>
           <div
-            style={{boxShadow: '50px 70px 112px 0px #AAAAAA1A'}}
-            className='bg-white mt-10 cursor-pointer rounded-[20px] border border-[0.5px] px-5 py-4 '>
-            <h3 className='flex items-center justify-between text-2xl font-medium mb-5'>
+            style={{ boxShadow: '50px 70px 112px 0px #AAAAAA1A' }}
+            className='mt-10 cursor-pointer rounded-[20px] border border-[0.5px] bg-white px-5 py-4 '
+          >
+            <h3 className='mb-5 flex items-center justify-between text-2xl font-medium'>
               Book a Vaccination
               <span className='-rotate-45'>
                 <IconArrowRight />
@@ -107,31 +142,27 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
                 <Spinner size='sm' color='primary' />
               </div>
             ) : null}
-            <div
-              className='flex flex-col gap-3'>
+            <div className='flex flex-col gap-3'>
               {vaccines?.map((product) => (
-              <div className='grid grid-cols-[1fr_3fr] gap-2'>
-                <div className='relative flex w-full items-center justify-center rounded-2xl bg-primaryLight py-[13px]'>
-                  <Link href={`${baseUrl}/${product.id}`}>
-                    <Image
-                      alt=''
-                      src={product.image_1024}
-                      width={30}
-                      height={61.69}
-                      className=''
-                    />
-                  </Link>
+                <div className='grid grid-cols-[1fr_3fr] gap-2'>
+                  <div className='relative flex w-full items-center justify-center rounded-2xl bg-primaryLight py-[13px]'>
+                    <Link href={`${baseUrl}/${product.id}`}>
+                      <Image
+                        alt=''
+                        src={product.image_1024}
+                        width={30}
+                        height={61.69}
+                        className=''
+                      />
+                    </Link>
+                  </div>
+                  <div className='my-auto flex h-fit flex-col gap-1'>
+                    <p className='font-medium'>{product.name}</p>
+                    <p className='font-bold'>{product.amount}</p>
+                  </div>
                 </div>
-                <div className='flex flex-col h-fit my-auto gap-1'>
-                  <p className='font-medium'>
-                    {product.name}
-                  </p>
-                  <p className='font-bold'>{product.amount}</p>
-                </div>
-              </div>
-            ))}
+              ))}
             </div>
-            
           </div>
         </div>
         <div className='mt-14'>
@@ -146,8 +177,9 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
             }}
           ></div>
           <div
-            style={{boxShadow: '50px 70px 112px 0px #AAAAAA1A'}}
-            className='bg-white mt-10 cursor-pointer rounded-[20px] border border-[0.5px] px-5 py-4 '>
+            style={{ boxShadow: '50px 70px 112px 0px #AAAAAA1A' }}
+            className='mt-10 cursor-pointer rounded-[20px] border border-[0.5px] bg-white px-5 py-4 '
+          >
             <h3 className='flex items-center justify-between text-2xl font-medium'>
               Shop Pharmacy
               <span className='-rotate-45'>

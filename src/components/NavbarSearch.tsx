@@ -18,8 +18,13 @@ import { useRouter } from 'next/navigation';
 interface NavbarSearchProps {
   searchBtnClassName?: string;
   placeholderClassName?: string;
+  show?: boolean;
 }
-export const NavbarSearch: React.FC<NavbarSearchProps> = ({searchBtnClassName, placeholderClassName}) => {
+export const NavbarSearch: React.FC<NavbarSearchProps> = ({
+  searchBtnClassName,
+  placeholderClassName,
+  show
+}) => {
   const [searchStr, setSearchStr] = useState<string | undefined>('');
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchResultsRef = useRef<HTMLDivElement>(null);
@@ -144,138 +149,153 @@ export const NavbarSearch: React.FC<NavbarSearchProps> = ({searchBtnClassName, p
     const intervalId = setInterval(scrollVaccineCategory, 3000);
     return () => clearInterval(intervalId);
   }, [itemHeight]);
+  const [showSearch, setShowSearch] = useState(show);
   return (
-    <div className='relative w-full'>
-      <div className='relative'>
-        <div
-          onMouseEnter={() => {
-            setShowSearchCategory(false);
-            scrollVaccineCategory();
-          }}
-          ref={scrollVaccineCategoryRef}
-          className={`scrollbar-none absolute left-6 top-2 z-[999] h-[20px] overflow-y-scroll ${placeholderClassName} ${!showSearchCategory && 'hidden'}`}
-        >
-          {searchCategory.map((category, index) => (
-            <p key={index} className='leading-1 text-base text-[#5A5A5A]'>
-              {category.title}
-            </p>
-          ))}
+    <>
+      {showSearch ? (
+        <div className='relative w-full'>
+          <div className='relative'>
+            <div
+              onMouseEnter={() => {
+                setShowSearchCategory(false);
+                scrollVaccineCategory();
+              }}
+              ref={scrollVaccineCategoryRef}
+              className={`scrollbar-none absolute left-6 top-2 z-[999] h-[20px] overflow-y-scroll ${placeholderClassName} ${!showSearchCategory && 'hidden'}`}
+            >
+              {searchCategory.map((category, index) => (
+                <p key={index} className='leading-1 text-base text-[#5A5A5A]'>
+                  {category.title}
+                </p>
+              ))}
+            </div>
+            <Input
+              onMouseEnter={() => {
+                setShowSearchCategory(false);
+              }}
+              onMouseLeave={() => {
+                if (searchOn === '') {
+                  setShowSearchCategory(true);
+                }
+              }}
+              radius='full'
+              color='primary'
+              classNames={{
+                input: ['py-0'],
+                inputWrapper: [
+                  'h-max',
+                  'min-h-0',
+                  'p-0',
+                  '!p-0',
+                  'bg-white',
+                  'border border-[#1212121A]',
+                  'shadow-none',
+                  'text-black capitalize',
+                  'data-[hover=true]:bg-white',
+                  'group-data-[focus=true]:bg-white transition-all group-data-[focus=true]:shadow-md',
+                  'group-data-[active=true]:bg-white',
+                ],
+                description: 'text-white',
+              }}
+              ref={searchInputRef}
+              onChange={(e) => {
+                setSearchOn(e.target.value);
+                if (e.target.value !== '') {
+                  setShowSearchCategory(false);
+                } else {
+                  setShowSearchCategory(true);
+                }
+                handleInputChange(e.target.value);
+              }}
+              onFocus={() => setShowSearchResults(true)}
+              onBlur={() => {
+                setTimeout(() => {
+                  setShowSearchResults(false);
+                }, 200);
+              }}
+              variant='bordered'
+              size='lg'
+              type='text'
+              startContent={<div className='pl-4'></div>}
+              endContent={
+                <div
+                  className={`flex cursor-pointer items-center gap-2 rounded-full bg-primary px-6 py-2 ${searchBtnClassName}`}
+                >
+                  <IconSearch color='white' />
+                  <span className='text-white'>Search</span>
+                </div>
+              }
+            />
+          </div>
+          {showSearchResults ? (
+            <Card
+              shadow='sm'
+              radius='lg'
+              ref={searchResultsRef}
+              className='-bottom-15 absolute left-0 z-20 mt-2 max-h-[400px] w-full overflow-y-auto'
+            >
+              <CardBody>
+                {!loadingFilteredProducts && filteredItems?.length === 0 ? (
+                  <p className='text-body text-center'>No products found</p>
+                ) : null}
+
+                {loadingFilteredProducts ? (
+                  <div className='flex justify-center'>
+                    <Spinner size='sm' color='primary' />
+                  </div>
+                ) : null}
+
+                {!loadingFilteredProducts && (
+                  <div className='grid gap-4'>
+                    {filteredItems?.map((product: Product) => (
+                      <Button
+                        variant='light'
+                        size='lg'
+                        type='button'
+                        onPress={() => handleProductClick(product)}
+                        key={product.id}
+                        className='group grid h-max grid-flow-col grid-cols-[1fr_8fr_3fr] items-center gap-3 p-2'
+                      >
+                        <Image
+                          width={60}
+                          height={60}
+                          className='max-h-14 object-contain'
+                          radius='md'
+                          src={product.image_1024}
+                          alt={''}
+                        />
+
+                        <p className='text-body max-w-[150px] truncate text-start text-sm capitalize'>
+                          {product.name?.toLowerCase()}
+                        </p>
+
+                        <p className='text-body max-w-[150px] truncate text-start text-sm capitalize'>
+                          ₦{product.lst_price.toLocaleString()}
+                        </p>
+
+                        <p className='hidden text-xs text-primaryGreenDark group-hover:block'>
+                          Click to View
+                        </p>
+                      </Button>
+                    ))}
+                  </div>
+                )}
+              </CardBody>
+            </Card>
+          ) : null}
         </div>
-        <Input
-          onMouseEnter={() => {
-            setShowSearchCategory(false);
+        
+      ) : (
+        <div
+          onClick={() => {
+            setShowSearch(!showSearch);
           }}
-          onMouseLeave={() => {
-            if (searchOn === '') {
-              setShowSearchCategory(true);
-            }
-          }}
-          radius='full'
-          color='primary'
-          classNames={{
-            input: ['py-0'],
-            inputWrapper: [
-              'h-max',
-              'min-h-0',
-              'p-0',
-              '!p-0',
-              'bg-white',
-              'border border-[#1212121A]',
-              'shadow-none',
-              'text-black capitalize',
-              'data-[hover=true]:bg-white',
-              'group-data-[focus=true]:bg-white transition-all group-data-[focus=true]:shadow-md',
-              'group-data-[active=true]:bg-white',
-            ],
-            description: 'text-white',
-          }}
-          ref={searchInputRef}
-          onChange={(e) => {
-            setSearchOn(e.target.value);
-            if (e.target.value !== '') {
-              setShowSearchCategory(false);
-            } else {
-              setShowSearchCategory(true);
-            }
-            handleInputChange(e.target.value);
-          }}
-          onFocus={() => setShowSearchResults(true)}
-          onBlur={() => {
-            setTimeout(() => {
-              setShowSearchResults(false);
-            }, 200);
-          }}
-          variant='bordered'
-          size='lg'
-          type='text'
-          startContent={
-            <div className='pl-4'>
-            </div>
-          }
-          endContent={
-            <div className={`rounded-full bg-primary h-full py-2 flex gap-2 items-center px-6 cursor-pointer ${searchBtnClassName}`}>
-              <IconSearch color='white' />
-              <span className='text-white'>Search</span>
-            </div>
-          }
-        />
-      </div>
-      {showSearchResults ? (
-        <Card
-          shadow='sm'
-          radius='lg'
-          ref={searchResultsRef}
-          className='-bottom-15 absolute left-0 z-20 mt-2 max-h-[400px] w-full overflow-y-auto'
+          className='w-full cursor-pointer justify-end pr-[3%] flex items-center gap-2'
         >
-          <CardBody>
-            {!loadingFilteredProducts && filteredItems?.length === 0 ? (
-              <p className='text-body text-center'>No products found</p>
-            ) : null}
-
-            {loadingFilteredProducts ? (
-              <div className='flex justify-center'>
-                <Spinner size='sm' color='primary' />
-              </div>
-            ) : null}
-
-            {!loadingFilteredProducts && (
-              <div className='grid gap-4'>
-                {filteredItems?.map((product: Product) => (
-                  <Button
-                    variant='light'
-                    size='lg'
-                    type='button'
-                    onPress={() => handleProductClick(product)}
-                    key={product.id}
-                    className='group grid h-max grid-flow-col grid-cols-[1fr_8fr_3fr] items-center gap-3 p-2'
-                  >
-                    <Image
-                      width={60}
-                      height={60}
-                      className='max-h-14 object-contain'
-                      radius='md'
-                      src={product.image_1024}
-                      alt={''}
-                    />
-
-                    <p className='text-body max-w-[150px] truncate text-start text-sm capitalize'>
-                      {product.name?.toLowerCase()}
-                    </p>
-
-                    <p className='text-body max-w-[150px] truncate text-start text-sm capitalize'>
-                      ₦{product.lst_price.toLocaleString()}
-                    </p>
-
-                    <p className='hidden text-xs text-primaryGreenDark group-hover:block'>
-                      Click to View
-                    </p>
-                  </Button>
-                ))}
-              </div>
-            )}
-          </CardBody>
-        </Card>
-      ) : null}
-    </div>
+          <IconSearch color='#1E272F' />
+          <span className='text-[#1E272F]'>Search</span>
+        </div>
+      )}
+    </>
   );
 };

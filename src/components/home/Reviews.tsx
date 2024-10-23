@@ -64,14 +64,14 @@ export const Reviews = () => {
       )}
     >
       <div className='bg-white lg:px-0'>
-        <div className='relative mb-10 h-[450px] w-full overflow-hidden sm:h-[750px]'>
+        <div className='relative mb-10 h-[450px] w-full overflow-hidden sm:h-[800px]'>
           <div className='absolute top-[60px] flex w-full justify-center'>
             <h3 className='w-[75%] text-center text-3xl font-bold leading-[1.2] text-[#1E272F] md:w-[65%] lg:text-[40px]'>
               Hear What Our Patients Are Saying About Our Exceptional Doctors
             </h3>
           </div>
 
-          <div className='absolute right-[5%] top-[200px] z-[9999] flex w-[90%] justify-center sm:top-[300px]'>
+          <div className='absolute right-[5%] top-[200px] z-[1] flex w-[90%] justify-center sm:top-[300px]'>
             <div className='flex max-w-[100%] items-center justify-between text-center text-[40px] font-bold text-[#1E272F]'>
               <Button
                 onMouseEnter={() => {
@@ -144,7 +144,8 @@ export const Reviews = () => {
           </div>
           <div className='-mr-[13%] -mt-3 mb-[100px] flex justify-end sm:-mr-3 '>
             <Image
-              layout="fill"
+              width={324}
+              height={213}
               src='/images/patients/patient1.png'
               alt='doctor image'
               className=' h-[120px] sm:h-auto sm:w-auto'
@@ -152,7 +153,8 @@ export const Reviews = () => {
           </div>
           <div className='flex justify-start '>
             <Image
-              layout="fill"
+              width={324}
+              height={213}
               src='/images/patients/patient2.png'
               alt='doctor image'
               className=' h-[100px] sm:h-auto sm:w-auto'
@@ -160,7 +162,8 @@ export const Reviews = () => {
           </div>
           <div className='absolute top-[200px] hidden w-full justify-end sm:flex md:right-[30%] lg:right-[43%] '>
             <Image
-              layout="fill"
+              width={279}
+              height={213}
               src='/images/patients/patient3.png'
               alt='doctor image'
               className=''
@@ -168,7 +171,8 @@ export const Reviews = () => {
           </div>
           <div className='absolute right-[15%] top-[420px] hidden w-full justify-end md:flex '>
             <Image
-              layout="fill"
+              width={279}
+              height={213}
               src='/images/patients/patient4.png'
               alt='doctor image'
               className=''
@@ -178,7 +182,8 @@ export const Reviews = () => {
           <div className='absolute bottom-0 -mb-3 hidden w-full items-end justify-between overflow-hidden sm:flex'>
             <div className='ml-[10%]'>
               <Image
-                layout="fill"
+                width={324}
+                height={213}
                 src='/images/patients/patient5.png'
                 alt='doctor image'
                 className=''
@@ -186,7 +191,8 @@ export const Reviews = () => {
             </div>
             <div className='-mr-4'>
               <Image
-                layout="fill"
+                width={279}
+                height={213}
                 src='/images/patients/patient6.png'
                 alt='doctor image'
                 className=''
