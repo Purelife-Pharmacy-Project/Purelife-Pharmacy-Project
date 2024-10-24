@@ -14,6 +14,7 @@ import ExploreTests from '@/components/home/ExploreTests';
 import DiscoverTopProducts from '@/components/home/DiscoverTopProducts';
 import HealthOfferings from '@/components/home/HealthOfferings';
 import { Reviews } from '@/components/home/Reviews';
+import { GlobalHealthSolutions } from '@/components/home/global-health-solutions';
 
 const data = [
   {
@@ -99,7 +100,9 @@ export default async function Home() {
 
         <div className='invisible mb-4'></div>
 
-        <Reviews/>
+        <Reviews />
+        
+        <GlobalHealthSolutions/>
 
         <ReportDrugReaction />
 
