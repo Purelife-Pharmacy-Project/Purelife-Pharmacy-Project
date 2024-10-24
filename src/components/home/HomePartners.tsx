@@ -26,7 +26,7 @@ export const HomePartners = () => {
   ];
   const repeatedPartners = Array(5).fill(partners).flat();
   return (
-    <div className='lg:-mt-8 lg:py-4 xl:-mt-12 xl:grid xl:justify-center'>
+    <div className='lg:-mt-8 lg:py-4 xl:-mt-12 grid justify-center'>
         <div className='max-w-[60vw] overflow-hidden sm:max-w-[90vw] md:max-w-[90vw] lg:max-w-[700px]'>
           <div
             className='swipe-animation flex items-center gap-10'
