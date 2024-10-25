@@ -11,7 +11,7 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({backgroundC
     <>
       <div className={`flex justify-center bg-[#1E272F] ${backgroundClassName}`}>
         <Section className={`grid gap-4 bg-[#1E272F] sm:grid-cols-[1fr_1fr] ${backgroundClassName}`}>
-          <div className='flex flex-col overflow-hidden sm:py-10 pt-16'>
+          <div className='flex flex-col overflow-hidden pt-16 sm:pb-10'>
             <div className='relative flex w-full flex-col justify-between overflow-hidden font-bold text-[#1E272F] md:h-fit md:text-4xl xl:text-5xl'>
               <Image
                 width={430} // Keeps the intrinsic width as 430px.
