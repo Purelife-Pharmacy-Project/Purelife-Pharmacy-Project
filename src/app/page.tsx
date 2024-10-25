@@ -15,6 +15,7 @@ import DiscoverTopProducts from '@/components/home/DiscoverTopProducts';
 import HealthOfferings from '@/components/home/HealthOfferings';
 import { Reviews } from '@/components/home/Reviews';
 import { GlobalHealthSolutions } from '@/components/home/global-health-solutions';
+import { LatestInsights } from '@/components/home/latest-insignts';
 
 const data = [
   {
@@ -135,7 +136,9 @@ export default async function Home() {
           reviews={reviews}
         />
         
-        <GlobalHealthSolutions/>
+        <GlobalHealthSolutions />
+        
+        <LatestInsights/>
 
         <ReportDrugReaction />
 
