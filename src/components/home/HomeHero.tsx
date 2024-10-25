@@ -3,6 +3,7 @@ import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import { FC } from 'react';
 import { Section } from './Section';
+import { TypeAnimation } from 'react-type-animation';
 
 interface HomeHeroProps {
   title: string;
@@ -22,7 +23,22 @@ export const HomeHero: FC<HomeHeroProps> = ({
         <div className='grid grid-cols-[1fr] lg:grid-cols-[3fr_2.7fr] lg:gap-0'>
           <div className='w-full flex flex-col gap-2 lg:gap-6 lg:justify-center'>
             <h1 className='text-balance mx-auto text-center text-4xl font-bold  text-header-100 lg:mx-0 lg:w-full  sm:w-[80%] md:w-[50%] lg:max-w-full lg:text-start lg:text-6xl'>
-              {title}
+            Book an appointment with <TypeAnimation
+              sequence={[
+                'Doctors',
+                2000,
+                'Pharmacists',
+                2000,
+                'Cosmetologists',
+                2000,
+                'Dermatologists',
+                2000,
+              ]}
+              wrapper="span"
+              cursor={true}
+              repeat={Infinity}
+            /> at Purelife
+            
             </h1>
             <p className='mx-auto sm:w-[80%] w-[60%] lg:w-full text-center text-base font-medium leading-[30px] text-content lg:mx-0 lg:text-start lg:text-lg'>
               {description}
