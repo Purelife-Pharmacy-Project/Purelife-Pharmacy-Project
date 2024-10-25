@@ -40,7 +40,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
   return (
     <div
       className={clsx(
-        'mt-20 bg-white sm:mt-0 lg:justify-center lg:pb-10 lg:pt-[55px]'
+        'mt-20 bg-white sm:mt-0 lg:justify-center lg:pb-10 lg:pt-[55px] max-w-[1440px] mx-auto'
       )}
     >
       <div className='bg-white lg:px-0'>
