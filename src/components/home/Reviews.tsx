@@ -3,8 +3,8 @@ import { Button } from '@nextui-org/react';
 import Image from 'next/image';
 import React, { useRef, useState } from 'react';
 import { IconArrowRight } from '../icons/IconArrowRight';
-import { IconStarBold } from '../icons/IconStarBold';
 import clsx from 'clsx';
+import { IconStarBold } from '../icons/IconStarBold';
 
 interface ReviewProps {
   title: string;
@@ -40,7 +40,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
   return (
     <div
       className={clsx(
-        'mt-20 bg-white sm:mt-0 lg:justify-center lg:pb-10 lg:pt-[55px]'
+        'mt-20 bg-white sm:mt-0 lg:justify-center lg:pb-10 lg:pt-[55px] max-w-[1440px] mx-auto'
       )}
     >
       <div className='bg-white lg:px-0'>
