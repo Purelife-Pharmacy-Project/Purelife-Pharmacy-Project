@@ -16,7 +16,7 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({backgroundC
               <Image
                 width={430} // Keeps the intrinsic width as 430px.
                 height={235} // Keeps the intrinsic height as 235px.
-                className='h-auto w-[500px] max-w-[85%] sm:max-w-[100%] md:max-w-[400px] lg:max-w-[650px] bg-transparent'
+                className='h-auto w-[500px] max-w-[70%] sm:max-w-[100%] md:max-w-[400px] lg:max-w-[650px] bg-transparent'
                 src={'/images/quality-home-text.png'}
                 alt={'quality home image'}
               />
@@ -26,18 +26,18 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({backgroundC
               as={Link}
               href='https://primaryreporting.who-umc.org/NG'
               target='_blank'
-              className={`ml-[2%] mt-6 w-[50%] bg-white text-sm text-[#262629] sm:text-base md:w-[40%] lg:py-8 lg:text-lg ${buttonClassName}`}
+              className={`ml-[2%] mt-6 w-[40%] bg-white text-sm text-[#262629] sm:text-base md:w-[40%] lg:py-8 lg:text-lg ${buttonClassName}`}
               radius='full'
               size='lg'
             >
               Book Session
             </Button>
           </div>
-          <div className='relative flex items-end justify-end overflow-hidden pt-[50px] sm:pt-0'>
+          <div className='relative flex items-end justify-end overflow-hidden -mt-[150px] sm:-mt-0 pt-[50px] sm:pt-0'>
             <Image
               width={300}
               height={270}
-              className=' -mb-[50px] -ml-[15%] h-auto w-[530px] w-[80%] max-w-[400px] sm:-ml-0 md:-mb-[40px] md:max-w-[450px] lg:max-w-[650px]'
+              className=' -mb-[50px] -ml-[15%] h-auto w-[530px] max-w-[400px] sm:-ml-0 md:-mb-[40px] md:max-w-[450px] lg:max-w-[650px]'
               src={'/images/quality-home-bg.png'}
               alt={'quality home image'}
             />

@@ -259,7 +259,7 @@ export default function FindADoctor() {
         </div>
 
         <HowItWorks data={howItWorksData} variant='primary' />
-        <QualityHomeBanner backgroundClassName={'bg-white'} buttonClassName={'bg-[#1E272F] text-white'}/>
+        <QualityHomeBanner backgroundClassName={'bg-white sm:pt-5'} buttonClassName={'bg-[#1E272F] text-white'}/>
         <Reviews/>
         <ReportDrugReaction />
         <div className='py-8'></div>
