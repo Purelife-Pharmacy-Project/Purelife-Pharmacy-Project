@@ -11,7 +11,7 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({backgroundC
     <>
       <div className={`flex justify-center bg-[#1E272F] ${backgroundClassName}`}>
         <Section className={`grid gap-4 bg-[#1E272F] sm:grid-cols-[1fr_1fr] ${backgroundClassName}`}>
-          <div className='flex flex-col overflow-hidden sm:py-10 pt-10'>
+          <div className='flex flex-col overflow-hidden sm:py-10 pt-16'>
             <div className='relative flex w-full flex-col justify-between overflow-hidden font-bold text-[#1E272F] md:h-fit md:text-4xl xl:text-5xl'>
               <Image
                 width={430} // Keeps the intrinsic width as 430px.
@@ -20,15 +20,6 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({backgroundC
                 src={'/images/quality-home-text.png'}
                 alt={'quality home image'}
               />
-              {/* <div className='absolute left-[3%] top-[10%] flex flex-col gap-1 text-4xl sm:left-[3%] sm:top-[12%] sm:gap-0 sm:text-4xl md:top-[14%] md:gap-2 md:text-5xl lg:top-[12%] lg:gap-4 lg:text-6xl'>
-                <span className='max-w-[250px] whitespace-nowrap'>
-                  Quality home
-                </span>
-                <span className='max-w-[250px] whitespace-nowrap'>
-                  healthcare you
-                </span>
-                <span>can trust</span>
-              </div> */}
             </div>
 
             <Button
