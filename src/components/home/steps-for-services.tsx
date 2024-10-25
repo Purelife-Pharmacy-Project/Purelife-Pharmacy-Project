@@ -36,7 +36,7 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
           <div>
             <h3 className='text-3xl font-semibold w-[85%]'>Your One-Stop Destination for Hassle-Free Lab Test Bookings</h3>
             <div className='flex mt-8 gap-3 w-[70%]'>
-              <div className='flex flex-col items-center mt-3'>
+              <div className='flex flex-col items-center'>
                 <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
                   <IconSearch color='#1E272F'/>
                 </div>
@@ -63,11 +63,11 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
                   <h3 className='text-2xl font-medium'>Select and Book Your Test</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Review test details and requirements to ensure you choose the appropriate option for accurate results.</p>
                 </div>
-                <div>
+                <div className='mt-3'>
                   <h3 className='text-2xl font-medium'>Visit the Lab</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Get directions and preparation instructions for your visit, ensuring a smooth testing experience.</p>
                 </div>
-                <div>
+                <div className='mt-4'>
                   <h3 className='text-2xl font-medium'>Access Your Results</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Track your test status and receive your results online, all accessible through your PureLife account.</p>
                 </div>
