@@ -11,11 +11,13 @@ import BestSellers from '@/components/home/BestSellers';
 import PersonalizedPlan from '@/components/home/PersonalizedPlan';
 import HandpickedForYou from '@/components/home/HandpickedForYou';
 import ExploreTests from '@/components/home/ExploreTests';
-import DiscoverTopProducts from '@/components/home/DiscoverTopProducts';
 import HealthOfferings from '@/components/home/HealthOfferings';
 import { Reviews } from '@/components/home/Reviews';
 import { GlobalHealthSolutions } from '@/components/home/global-health-solutions';
 import { LatestInsights } from '@/components/home/latest-insignts';
+import { QualityHomeBanner } from '@/components/quality-home-banner';
+import { DiscoverTopProducts } from '@/components/home/DiscoverTopProducts';
+import { StepsForServices } from '@/components/home/steps-for-services';
 
 const data = [
   {
@@ -92,9 +94,9 @@ export default async function Home() {
     <>
       <main className='grid gap-6 lg:gap-10'>
         <div className='relative mx-6 lg:hidden'>
-          <NavbarSearch show={true}/>
+          <NavbarSearch show={true} />
         </div>
-        <HomePageHero/>
+        <HomePageHero />
 
         <HomePartners />
 
@@ -104,7 +106,7 @@ export default async function Home() {
 
         <div className='invisible mb-4'></div>
 
-        <Categories />
+        {/* <Categories /> */}
 
         <div className='invisible mb-4'></div>
 
@@ -112,33 +114,41 @@ export default async function Home() {
 
         <div className='invisible mb-4'></div>
 
-        <HealthOfferings title='See our Health offerings' data={data} />
+        {/* <HealthOfferings title='See our Health offerings' data={data} /> */}
+
+        <div className='invisible mb-4'></div>
+
+        {/* <HandpickedForYou /> */}
+
+        <div className='invisible mb-4'></div>
+
+        {/* <PersonalizedPlan /> */}
+        
+        {/* <ExploreTests /> */}
 
         <div className='invisible mb-4'></div>
 
         <DiscoverTopProducts />
 
-        <div className='invisible mb-4'></div>
+        <div className='invisible mb-4'></div> 
 
-        <ExploreTests />
+        <StepsForServices/>
 
-        <div className='invisible mb-4'></div>
+        <div className='invisible mb-4'></div> 
 
-        <HandpickedForYou />
+        <QualityHomeBanner
+          backgroundClassName={'bg-white'}
+          buttonClassName={'bg-[#1E272F] text-white'}
+        />
 
-        <div className='invisible mb-4'></div>
-
-        <PersonalizedPlan />
-
-        <div className='invisible mb-4'></div>
-
-        <Reviews title='See Why People Love PureLife and Our Exceptional Care'
+        <Reviews
+          title='See Why People Love PureLife and Our Exceptional Care'
           reviews={reviews}
         />
-        
+
         <GlobalHealthSolutions />
-        
-        <LatestInsights/>
+
+        <LatestInsights />
 
         <ReportDrugReaction />
 

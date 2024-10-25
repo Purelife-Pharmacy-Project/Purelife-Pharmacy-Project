@@ -103,7 +103,7 @@ export const AppNavbar = ({
       className={`py-4 text-foreground lg:pb-2 ${getNavbarBackground()}`}
       maxWidth='xl'
       classNames={{
-        menu: 'top-[120px]',
+        menu: 'top-[7.5rem]',
       }}
     >
       <NavbarContent
@@ -137,8 +137,8 @@ export const AppNavbar = ({
           hello
         </button>
 
-        <div className='hidden md:gap-[22px] lg:flex'>
-          <NavbarItem className='text-lg leading-[27px] text-header-100'>
+        <div className='hidden md:gap-[1.375rem] lg:flex'>
+          <NavbarItem className='text-lg leading-[1.6875rem] text-header-100'>
             <Link
               color='foreground'
               href='/shop'
@@ -147,7 +147,7 @@ export const AppNavbar = ({
               Home
             </Link>
           </NavbarItem>
-          <NavbarItem className='relative mt-0.5 w-fit text-lg leading-[27px] text-header-100'>
+          <NavbarItem className='relative mt-0.5 w-fit text-lg leading-[1.6875rem] text-header-100'>
             <div
               ref={servicesButtonRef}
               onClick={() => setServicesDropdown(!servicesDropdown)}
@@ -159,30 +159,34 @@ export const AppNavbar = ({
             {servicesDropdown && (
               <div
                 ref={servicesPopupRef}
-                className='absolute left-0 top-[35px] z-[99] mt-1 flex w-[200px] flex-col gap-2 overflow-y-auto rounded-lg border border-gray-200 bg-[#FFFFFF] p-2 shadow-lg'
+                className='absolute -left-[15px] top-[0] z-[99] mt-1 flex w-[12.5rem] flex-col items-center gap-2 rounded-lg border border-gray-200 bg-[#FFFFFF] p-2 pt-0 shadow-lg'
+                style={{ boxShadow: '0rem .25rem .625rem 0rem #00000040' }}
               >
-                {services.map((service) => (
-                  <div
-                    key={service.id}
-                    className='flex h-fit cursor-pointer items-center justify-between rounded-[5px] bg-primaryLight p-3 py-1 pl-2 hover:bg-gray-200'
-                    onClick={() => {
-                      setServicesDropdown(false);
-                    }}
-                  >
-                    <Link
-                      color='foreground'
-                      href={service.link}
-                      className={
-                        // isActive('/telehealth/shop-and-order')
-                        //   ? 'font-medium text-primary'
-                        //   : ''
-                        'cursor-pointer font-medium'
-                      }
+                <div className='z-[999] border-t border-l -mt-[8px] w-[15px] h-[15px] bg-white rotate-45'></div>
+                <div className=''>
+                  {services.map((service) => (
+                    <div
+                      key={service.id}
+                      className='flex h-fit cursor-pointer items-center justify-between rounded-[.3125rem] p-3 py-1 pl-2'
+                      onClick={() => {
+                        setServicesDropdown(false);
+                      }}
                     >
-                      {service.value}
-                    </Link>
-                  </div>
-                ))}
+                      <Link
+                        color='foreground'
+                        href={service.link}
+                        className={
+                          // isActive('/telehealth/shop-and-order')
+                          //   ? 'font-medium text-primary'
+                          //   : ''
+                          'cursor-pointer font-medium'
+                        }
+                      >
+                        {service.value}
+                      </Link>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </NavbarItem>
@@ -200,7 +204,7 @@ export const AppNavbar = ({
         <NavbarContent
           onClick={() => {
             setShowSearch(!showSearch);
-            }}
+          }}
           justify='end'
           className='flex w-full cursor-pointer items-center justify-end gap-2 pr-[3%]'
         >
@@ -213,16 +217,16 @@ export const AppNavbar = ({
         justify='end'
       >
         <div className='hidden py-0 md:gap-10 lg:flex'>
-          <NavbarItem className='flex flex-col items-start justify-center text-lg leading-[27px] text-header-100'>
+          <NavbarItem className='flex flex-col items-start justify-center text-lg leading-[1.6875rem] text-header-100'>
             <p className='text-xs font-light'>Deliver to:</p>
             <div className='flex w-full items-center justify-between font-medium'>
               <IconLocation /> <span className='leading-[0.7]'>10111</span>{' '}
             </div>
           </NavbarItem>
-          <NavbarItem className='flex items-center text-lg leading-[27px] text-header-100'>
+          <NavbarItem className='flex items-center text-lg leading-[1.6875rem] text-header-100'>
             <NavbarCart isActive={isActive} />
           </NavbarItem>
-          <NavbarItem className='flex items-center text-lg leading-[27px] text-header-100'>
+          <NavbarItem className='flex items-center text-lg leading-[1.6875rem] text-header-100'>
             <NavbarUser isActive={isActive} />
           </NavbarItem>
         </div>
@@ -237,7 +241,7 @@ export const AppNavbar = ({
             Shop & Order
           </Button>
         </NavbarItem>
-        <NavbarItem className='flex items-center text-lg leading-[27px] text-header-100 lg:hidden'>
+        <NavbarItem className='flex items-center text-lg leading-[1.6875rem] text-header-100 lg:hidden'>
           <NavbarCart isActive={isActive} />
         </NavbarItem>
         <NavbarMenuToggle
