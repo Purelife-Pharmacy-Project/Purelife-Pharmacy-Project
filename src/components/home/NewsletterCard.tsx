@@ -17,12 +17,12 @@ export const NewsLetterCard = () => {
       <div
         style={{
           backgroundImage: 'url(/images/signup-deals-background.png)',
-          backgroundPosition: 'center bottom 55%',
+          backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: '',
           borderRadius: '20px',
         }}
-        className='w-full rounded-[20px] bg-[#F1F5EE] pt-8'
+        className='w-full rounded-[20px] bg-[#F1F5EE] pt-16'
       >
         <div className='mx-auto flex w-[90%] md:w-[60%] flex-col items-center gap-6'>
           <Image

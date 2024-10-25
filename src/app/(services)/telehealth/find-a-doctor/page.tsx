@@ -12,6 +12,8 @@ import clsx from 'clsx';
 import { IconStarBold } from '@/components/icons/IconStarBold';
 import { IconProfessional } from '@/components/icons/IconProfessional';
 import { IconPen } from '@/components/icons/IconPen';
+import { NewsLetterCard } from '@/components/home/NewsletterCard';
+import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 
 export default function FindADoctor() {
   const howItWorksData: {
@@ -391,7 +393,9 @@ export default function FindADoctor() {
             </div>
           </div>
         </div>
-
+        <ReportDrugReaction />
+        <div className='py-8'></div>
+        <NewsLetterCard/>
         <Footer />
       </main>
     </>
