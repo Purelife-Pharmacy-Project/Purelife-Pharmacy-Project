@@ -97,26 +97,6 @@ export default function FindADoctor() {
       });
     }
   };
-
-  const scrollReviewsRef = useRef<HTMLDivElement | null>(null);
-  const scrollReviewsLeft = () => {
-    scrollReviewsRef.current?.scrollBy({
-      top: 0,
-      left: -scrollReviewsRef.current.clientWidth,
-      behavior: 'smooth',
-    });
-  };
-
-  const scrollReviewsRight = () => {
-    scrollReviewsRef.current?.scrollBy({
-      top: 0,
-      left: scrollReviewsRef.current.clientWidth,
-      behavior: 'smooth',
-    });
-  };
-  
-  const [leftIcon, setLeftIcon] = useState(false);
-  const [rightIcon, setRightIcon] = useState(false);
   const repeatedDoctors = Array(5).fill(allDoctors).flat();
   const reviews = [
     {
@@ -260,7 +240,7 @@ export default function FindADoctor() {
 
         <HowItWorks data={howItWorksData} variant='primary' />
         <QualityHomeBanner backgroundClassName={'bg-white'} buttonClassName={'bg-[#1E272F] text-white'}/>
-        <Reviews/>
+        <Reviews title='Hear What Our Patients Are Saying About Our Exceptional Doctors' reviews={reviews}/>
         <ReportDrugReaction />
         <div className='py-8'></div>
         <NewsLetterCard/>
