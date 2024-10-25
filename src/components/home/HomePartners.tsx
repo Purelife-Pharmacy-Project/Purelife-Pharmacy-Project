@@ -26,34 +26,27 @@ export const HomePartners = () => {
   ];
   const repeatedPartners = Array(5).fill(partners).flat();
   return (
-    <div className='lg:-mt-8 lg:py-4 xl:-mt-12 xl:grid xl:justify-center'>
-      <Section className='bg-white'>
-        <div className='flex flex-col items-center gap-4 lg:flex-row lg:justify-between lg:gap-[]'>
-          <p className='max-w-[211px] text-center font-medium text-header-100 lg:text-start'>
-            We are partners with over 30+ Health Providers
-          </p>
-          <div className='max-w-[90vw] overflow-hidden sm:max-w-[90vw] md:max-w-[90vw] lg:max-w-[700px]'>
-            <div
-              className='swipe-animation flex items-center gap-10'
-              style={{ '--speed': '5000ms' } as React.CSSProperties}
-            >
-              {repeatedPartners.map((partner, index) => (
-                <div
-                  key={index}
-                  className='flex flex-shrink-0 items-center justify-center p-2'
-                >
-                  <Image
-                    width={120}
-                    className='h-auto w-full object-cover'
-                    src={partner.image}
-                    alt={partner.name}
-                  />
-                </div>
-              ))}
-            </div>
+    <div className='lg:-mt-8 lg:py-4 xl:-mt-12 grid justify-center'>
+        <div className='max-w-[60vw] overflow-hidden sm:max-w-[90vw] md:max-w-[90vw] lg:max-w-[700px]'>
+          <div
+            className='swipe-animation flex items-center gap-10'
+            style={{ '--speed': '5000ms' } as React.CSSProperties}
+          >
+            {repeatedPartners.map((partner, index) => (
+              <div
+                key={index}
+                className='flex flex-shrink-0 items-center justify-center p-2'
+              >
+                <Image
+                  width={120}
+                  className='h-auto w-full object-cover'
+                  src={partner.image}
+                  alt={partner.name}
+                />
+              </div>
+            ))}
           </div>
         </div>
-      </Section>
       <style>
         {`
           .swipe-animation {

@@ -197,7 +197,7 @@ const Pagination: React.FC<PaginationProps> = ({
         </span>
         <span
           onClick={() => {
-            if (currentPage < (totalPages+5)) {
+            if (totalPages > 5) {
               setCurrentPage(currentPage + 5);
             }
           }}

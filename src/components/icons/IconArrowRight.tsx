@@ -1,4 +1,4 @@
-export const IconArrowRight = ({ size = 24, color, ...props }) => {
+export const IconArrowRight = ({ size = 24, color, ...props }: any) => {
   return (
     <svg
       width={size}

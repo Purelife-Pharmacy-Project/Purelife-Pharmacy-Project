@@ -17,7 +17,7 @@ type Prop = {
 const HealthOfferings: React.FC<Prop> = ({ title, data }) => {
   return (
     <Section>
-      <div className='grid grid-cols-[1fr] gap-x-6 gap-y-6 md:grid-cols-[0.8fr_1fr] md:grid-rows-2 mt-10 mb-[100px]'>
+      <div className='grid grid-cols-[1fr] gap-x-6 gap-y-6 md:grid-cols-[0.8fr_1fr] md:grid-rows-2 mt-10 mb-[50px]'>
         {data.map((offering, index) => (
           <Card
             key={offering.title}
@@ -40,7 +40,7 @@ const HealthOfferings: React.FC<Prop> = ({ title, data }) => {
 
               <div
                 className={`my-auto mr-auto flex ${
-                  index === 0 && 'h-full md:h-full w-full justify-between items-between'
+                  index === 0 && 'h-full md:h-full justify-between items-between'
                 } w-[53%] flex-col gap-3`}
               >
                 {index !== 0 && (

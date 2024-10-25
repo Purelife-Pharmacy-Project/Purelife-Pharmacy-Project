@@ -11,8 +11,13 @@ import BestSellers from '@/components/home/BestSellers';
 import PersonalizedPlan from '@/components/home/PersonalizedPlan';
 import HandpickedForYou from '@/components/home/HandpickedForYou';
 import ExploreTests from '@/components/home/ExploreTests';
-import DiscoverTopProducts from '@/components/home/DiscoverTopProducts';
 import HealthOfferings from '@/components/home/HealthOfferings';
+import { Reviews } from '@/components/home/Reviews';
+import { GlobalHealthSolutions } from '@/components/home/global-health-solutions';
+import { LatestInsights } from '@/components/home/latest-insignts';
+import { QualityHomeBanner } from '@/components/quality-home-banner';
+import { DiscoverTopProducts } from '@/components/home/DiscoverTopProducts';
+import { StepsForServices } from '@/components/home/steps-for-services';
 
 const data = [
   {
@@ -53,55 +58,55 @@ const data = [
   },
 ];
 
+const reviews = [
+  {
+    title: 'This Care Truly Made a Difference',
+    description:
+      'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
+    noOfStars: 5,
+    name: 'Mrs Adebayo Gregson',
+  },
+  {
+    title: 'I did not like how this went',
+    description:
+      'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
+    noOfStars: 3,
+    name: 'Mrs Adebayo Gregson',
+  },
+  {
+    title: 'This Care Truly Made a Difference',
+    description:
+      'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
+    noOfStars: 2,
+    name: 'Mrs Adebayo Gregson',
+  },
+  {
+    title: 'This Care Truly Made a Difference',
+    description:
+      'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
+    noOfStars: 5,
+    name: 'Mrs Adebayo Gregson',
+  },
+];
+
 export default async function Home() {
   return (
     <>
       <main className='grid gap-6 lg:gap-10'>
         <div className='relative mx-6 lg:hidden'>
-          <NavbarSearch />
+          <NavbarSearch show={true} />
         </div>
-        <HomePageHero
-          title='Simplify your health journey with one click.'
-          description='Saves time, unlimited access, quality service and providers, authentic medications and one-stop shop.'
-          ctaText='Shop All'
-          ctaLink='/shop'
-          features={[
-            'shop pharmacy',
-            'consult with a doctor',
-            'book a lab test',
-            'saves time',
-          ]}
-          featuresWithLinks={[
-            { label: 'shop pharmacy', href: '/shop?category=health' },
-            {
-              label: 'consult with a doctor',
-              href: '/telehealth/find-a-doctor',
-            },
-            {
-              label: 'book a vaccination',
-              href: '/telehealth/get-vaccination',
-            },
-            { label: 'book a lab test', href: '/telehealth/book-lab-test' },
-          ]}
-        />
+        <HomePageHero />
 
         <HomePartners />
 
         <div className='invisible mb-4'></div>
 
-        <HotOffersProduct />
+        {/* <HotOffersProduct /> */}
 
-        <div className='invisible mb-4'></div>
+        {/* <div className='invisible mb-4'></div> */}
 
         <Categories />
-
-        <div className='invisible mb-4'></div>
-
-        <BestSellers />
-
-        <div className='invisible mb-4'></div>
-
-        <HealthOfferings title='See our Health offerings' data={data} />
 
         <div className='invisible mb-4'></div>
 
@@ -109,19 +114,41 @@ export default async function Home() {
 
         <div className='invisible mb-4'></div>
 
+        {/* <BestSellers /> */}
+
+        {/* <div className='invisible mb-4'></div> */}
+
+        {/* <HealthOfferings title='See our Health offerings' data={data} /> */}
+
+        {/* <div className='invisible mb-4'></div> */}
+
+        {/* <HandpickedForYou /> */}
+
+        {/* <div className='invisible mb-4'></div> */}
+
+        {/* <PersonalizedPlan /> */}
+        
         <ExploreTests />
 
-        <div className='invisible mb-4'></div>
+        <div className='invisible mb-4'></div> 
 
-        <HandpickedForYou />
+        <StepsForServices/>
 
-        <div className='invisible mb-4'></div>
+        <div className='invisible mb-4'></div> 
 
-        <PersonalizedPlan />
+        <QualityHomeBanner
+          backgroundClassName={'bg-white'}
+          buttonClassName={'bg-[#1E272F] text-white'}
+        />
 
-        <div className='invisible mb-4'></div>
+        <Reviews
+          title='See Why People Love PureLife and Our Exceptional Care'
+          reviews={reviews}
+        />
 
-        <Testimonials />
+        <GlobalHealthSolutions />
+
+        <LatestInsights />
 
         <ReportDrugReaction />
 

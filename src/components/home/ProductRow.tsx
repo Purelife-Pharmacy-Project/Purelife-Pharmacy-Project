@@ -76,13 +76,13 @@ const ProductRow: React.FC<Prop> = ({
           <div
             ref={ref}
             className={clsx({
-              'scroll flex w-full flex-auto snap-x scroll-pb-10 flex-nowrap gap-5 overflow-x-auto scrollbar-hide':
+              'grid grid-cols-4 gap-5 scrollbar-hide':
                 allowOverflow,
               'grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3':
                 !allowOverflow,
             })}
           >
-            {products?.map((product) => (
+            {products?.slice(0, 4)?.map((product) => (
               <ProductComp key={product.id} product={product} />
             ))}
           </div>

@@ -1,64 +1,51 @@
-import React from 'react';
-import { Section } from '@/components/home/Section';
-import { Button, Card, CardBody, Image } from '@nextui-org/react';
+import { Button, Link } from '@nextui-org/react';
+import Image from 'next/image';
+import { Section } from './Section';
 
-type Prop = {};
-
-const DiscoverTopProducts: React.FC<Prop> = () => {
+interface DiscoverTopProductsProps {}
+export const DiscoverTopProducts: React.FC<DiscoverTopProductsProps> = () => {
   return (
-    <Section>
-      <Card className='border border-[#BDBDBD]'>
-        <CardBody className='flex flex-col p-0 pb-9 md:flex-row-reverse md:px-7 md:py-10 lg:px-14 lg:py-20 xl:px-[67px] '>
-          <div className='grid grow grid-cols-3 gap-2 bg-[#FFF7F8] px-3.5 pb-7 pt-9 md:bg-transparent lg:py-0'>
-            <span className='mx-auto h-[112px] w-[112px] overflow-hidden rounded-full border border-[#EFEFEF] xl:h-[180px] xl:w-[180px]'>
-              <Image
-                src='/images/male-pill-bottle.png'
-                alt=''
-                width={200}
-                height={200}
-                className=''
-              />
-            </span>
-            <span className='mx-auto h-[112px] w-[112px] overflow-hidden rounded-full border border-[#EFEFEF] xl:h-[180px] xl:w-[180px]'>
-              <Image
-                src='/images/sex-bottle-1.png'
-                alt=''
-                width={200}
-                height={200}
-                className=''
-              />
-            </span>
-            <span className='mx-auto h-[112px] w-[112px] overflow-hidden rounded-full border border-[#EFEFEF] xl:h-[180px] xl:w-[180px]'>
-              <Image
-                src='/images/sex-bottle-2.png'
-                alt=''
-                width={200}
-                height={200}
-                className=''
-              />
-            </span>
-          </div>
-          <div className='flex flex-col gap-[18px] px-[18px] md:w-[290px] md:p-0 lg:w-[393px]'>
-            <h3 className='text-2xl font-bold'>
-              Discover top products for better sexual health.
-            </h3>
-            <p className='text-sm'>
-              Improve your sexual health with expert-endorsed products for
-              enhanced intimacy.
-            </p>
-            <Button
-              as='a'
-              className='mt-auto w-[150px] bg-primaryLight text-sm font-medium text-primary'
-              radius='full'
-              href='/shop?category=sexual-health'
-            >
-              Shop Now
-            </Button>
-          </div>
-        </CardBody>
-      </Card>
-    </Section>
+    <>
+      <Section
+        className={`relative rounded-[25px] bg-[#E3DFE5] flex justify-center overflow-hidden`}
+      >
+        <div className='absolute bottom-0 left-0'>
+          <Image
+            width={207}
+            height={347}
+            className='h-[300px] w-auto'
+            src={'/images/mens-health-1.png'}
+            alt={'quality home image'}
+            quality={100}
+          />
+        </div>
+        <div className='flex flex-col gap-3 w-[45%] sm:py-16 items-center text-center'>
+          <h2 className='text-4xl font-bold'>Discover top products for better sexual health.
+          </h2>
+          <p className='font-medium text-[#5A5A5A] text-lg'>Improve your sexual health with expert-endorsed products for enhanced intimacy.</p>
+          <Button
+            color='primary'
+            as={Link}
+            target='_blank'
+            className={`w-[25%] text-sm text-white`}
+            radius='sm'
+            size='lg'
+            href='/shop?category=sexual-health'
+          >
+            Shop Now
+          </Button>
+        </div>
+        <div className='absolute bottom-0 right-0'>
+          <Image
+            width={207}
+            height={347}
+            className='h-[300px] w-auto'
+            src={'/images/mens-health-2.png'}
+            alt={'quality home image'}
+            quality={100}
+          />
+        </div>
+      </Section>
+    </>
   );
 };
-
-export default DiscoverTopProducts;
