@@ -100,7 +100,7 @@ export const AppNavbar = ({
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
       isBlurred={disabled}
-      className={`py-4 text-foreground lg:pb-2 ${getNavbarBackground()}`}
+      className={`py-4 text-foreground z-[9999] lg:pb-2 ${getNavbarBackground()}`}
       maxWidth='xl'
       classNames={{
         menu: 'top-[7.5rem]',

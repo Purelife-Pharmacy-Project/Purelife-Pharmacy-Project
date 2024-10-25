@@ -2,10 +2,12 @@
 
 import React from 'react';
 import { useCartStore, useGetProductsByCategoryId } from '@/hooks';
-import { Button } from '@nextui-org/react';
+import { Button, Image } from '@nextui-org/react';
 import { Product } from '@/services/products/types';
 import ProductRow from '@/components/home/ProductRow';
 import { TestLoadingSkeleton } from '@/components/home/Skeletons';
+import Link from 'next/link';
+import { IconCart } from '../icons/IconCart';
 
 type Prop = {};
 
@@ -13,26 +15,28 @@ const TestCard: React.FC<{ product: Product }> = ({ product }) => {
   const { addToCart } = useCartStore();
 
   return (
-    <div className='flex min-w-[300px] max-w-[400px] flex-col gap-5 rounded-xl border border-[#D9D9D9] p-6 pb-3.5 lg:min-w-[400px] lg:p-9 lg:pb-5'>
-      <p className='text-header-100 lg:text-2xl'>{product.name}</p>
-      <p className='font-semibold text-header-100 lg:text-2xl'>
-        {product.amount}
+    <div className='flex w-full flex-col rounded-xl'>
+      <div className='relative mb-5 flex w-full items-center justify-center rounded-2xl border py-14'>
+        <Image alt='' src={product.image_1024} width={211} height={207} className='' />
+        <Button
+          disabled={product.quantity === 0}
+          onClick={() => {
+            addToCart({
+              id: product.id,
+              product,
+              quantity: 1,
+            });
+          }}
+          className='absolute z-[99] right-6 top-6 h-auto min-w-0 rounded-full bg-primaryLight p-3'
+        >
+          <IconCart />
+        </Button>
+      </div>
+
+      <p className='mb-2 font-medium text-header-100 lg:text-xl'>
+        {product.name}
       </p>
-      <Button
-        className='mt-auto bg-primaryLight text-sm font-medium text-primary'
-        radius='sm'
-        // disabled={product.quantity === 0}
-        onClick={() => {
-          addToCart({
-            id: product.id,
-            product,
-            quantity: 1,
-          });
-        }}
-      >
-        {/*{product.quantity === 0 ? 'Out of stock' : 'Add to cart'}*/}
-        Add to cart
-      </Button>
+      <p className='font-bold text-header-100 lg:text-xl'>{product.amount}</p>
     </div>
   );
 };
@@ -46,7 +50,7 @@ const ExploreTests: React.FC<Prop> = () => {
 
   return (
     <ProductRow
-      title='Get a lab test today'
+      title='Explore Various Top Test'
       moreLink='/shop?category=general-lab-tests'
       isLoading={loadingProducts}
       loader={<TestLoadingSkeleton />}
