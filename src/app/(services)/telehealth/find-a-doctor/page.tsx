@@ -27,19 +27,19 @@ export default function FindADoctor() {
       title: 'Choose Your Specialist',
       description:
         'Select the specific health professional you would like to consult with.',
-      icon: <IconProfessional color='primary' />,
+      icon: <IconProfessional color='white' />,
     },
     {
       title: 'Schedule Your Appointment',
       description:
         'Choose a time, provide name, contact info, reason. Appointment confirmed, professional assigned for consultation.',
-      icon: <IconPen color='primary' />,
+      icon: <IconPen color='white' />,
     },
     {
       title: 'Appointment Confirmation',
       description:
         'Your appointment will be confirmed, and a health professional will be assigned to you for your consultation.',
-        icon: <IconProfessional color='primary' />,
+        icon: <IconProfessional color='white' />,
     },
   ];
   const scrollRef = useRef<HTMLDivElement | null>(null);
