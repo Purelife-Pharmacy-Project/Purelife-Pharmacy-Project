@@ -45,7 +45,7 @@ export const LatestInsights = () => {
     <Section className='mt-10'>
       <div className='mb-10 flex justify-between'>
         <h3 className='text-4xl font-semibold'>Latest Insights</h3>
-        <div className='flex items-center justify-between gap-3'>
+        <div className='flex items-center justify-between gap-5'>
           <Button
             onMouseEnter={() => {
               setLeftIcon(true);
