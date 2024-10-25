@@ -6,7 +6,17 @@ import { IconArrowRight } from '../icons/IconArrowRight';
 import { IconStarBold } from '../icons/IconStarBold';
 import clsx from 'clsx';
 
-export const Reviews = () => {
+interface ReviewProps {
+  title: string;
+  reviews: {
+    title : string;
+    description : string;
+    noOfStars : number;
+    name : string;
+  }[];
+}
+
+export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
   const scrollReviewsRef = useRef<HTMLDivElement | null>(null);
   const scrollReviewsLeft = () => {
     scrollReviewsRef.current?.scrollBy({
@@ -26,36 +36,6 @@ export const Reviews = () => {
 
   const [leftIcon, setLeftIcon] = useState(false);
   const [rightIcon, setRightIcon] = useState(false);
-  const reviews = [
-    {
-      title: 'This Care Truly Made a Difference',
-      description:
-        'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
-      noOfStars: 5,
-      name: 'Mrs Adebayo Gregson',
-    },
-    {
-      title: 'I did not like how this went',
-      description:
-        'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
-      noOfStars: 3,
-      name: 'Mrs Adebayo Gregson',
-    },
-    {
-      title: 'This Care Truly Made a Difference',
-      description:
-        'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
-      noOfStars: 2,
-      name: 'Mrs Adebayo Gregson',
-    },
-    {
-      title: 'This Care Truly Made a Difference',
-      description:
-        'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
-      noOfStars: 5,
-      name: 'Mrs Adebayo Gregson',
-    },
-  ];
 
   return (
     <div
@@ -67,7 +47,7 @@ export const Reviews = () => {
         <div className='relative mb-10 h-[450px] w-full overflow-hidden sm:h-[800px]'>
           <div className='absolute top-[60px] flex w-full justify-center'>
             <h3 className='w-[75%] text-center text-3xl font-bold leading-[1.2] text-[#1E272F] md:w-[65%] lg:text-[40px]'>
-              Hear What Our Patients Are Saying About Our Exceptional Doctors
+              {title}
             </h3>
           </div>
 

@@ -22,7 +22,7 @@ export const NewsLetterCard = () => {
           backgroundSize: '',
           borderRadius: '20px',
         }}
-        className='w-full rounded-[20px] bg-[#F1F5EE] bg-white pt-8'
+        className='w-full rounded-[20px] bg-[#F1F5EE] pt-8'
       >
         <div className='mx-auto flex w-[90%] md:w-[60%] flex-col items-center gap-6'>
           <Image
