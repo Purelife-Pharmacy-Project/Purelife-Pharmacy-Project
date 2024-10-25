@@ -15,6 +15,7 @@ import { z } from 'zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { inputBorderedDefault, inputDefault } from '@/theme';
+import { QualityHomeBanner } from '../quality-home-banner';
 
 const limit = 9;
 
@@ -125,39 +126,6 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
           <div className='mb-10 w-full'>
             <div className='mt-3 flex justify-between'>
               <div className='flex gap-5'>
-                {/* <div className='relative w-fit'>
-                  <div
-                    ref={vaccineTypeButtonRef}
-                    onClick={() => setVaccineTypeDropdown(!vaccineTypeDropdown)}
-                    className='ld:gap-5 flex h-fit w-fit cursor-pointer items-center gap-2 rounded-[100px] bg-primaryLight px-4 py-1'
-                  >
-                    <p className='text-sm font-medium text-[#797979]'>
-                      {vaccineType}
-                    </p>
-                    <IconChevronLeft className='-rotate-90' color='[#5A5A5A]' />
-                  </div>
-                  {vaccineTypeDropdown && (
-                    <div
-                      ref={vaccineTypePopupRef}
-                      className='absolute right-0 top-[35px] z-[99] mt-1 flex max-h-48 w-[150px] flex-col gap-2 overflow-y-auto rounded-lg border border-gray-200 bg-[#FFFFFF] p-2 shadow-lg'
-                    >
-                      {vaccineTypeRanges.map((range) => (
-                        <div
-                          key={range.id}
-                          className='flex h-fit cursor-pointer items-center justify-between rounded-[5px] bg-primaryLight p-3 py-1 pl-2 hover:bg-gray-200'
-                          onClick={() => {
-                            setVaccineType(range.value);
-                            setVaccineTypeDropdown(false);
-                          }}
-                        >
-                          <span className='cursor-pointer text-sm font-medium text-gray-600'>
-                            {range.value}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div> */}
                 <div className='relative w-fit'>
                   <div
                     ref={priceButtonRef}
@@ -306,7 +274,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
 
           <h3 className='mb-5 text-3xl text-[#1E272F]'>Get Your Vaccines!</h3>
           {loadingVaccines ? <LabTestsSkeleton /> : null}
-          {vaccines && vaccines?.length > 0 ? (
+          {vaccines && vaccines.length > 0 ? (
             <div className='grid w-full gap-6'>
               <InfiniteScroll
                 next={fetchProductNextPage}
@@ -315,7 +283,8 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                 dataLength={vaccines?.length || 0}
                 className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'
               >
-                {vaccines?.map((product) => (
+                {/* Display the first 6 items */}
+                {vaccines.slice(0, 6).map((product) => (
                   <LabTestCard
                     product={product}
                     key={product.id}
@@ -323,6 +292,32 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                   />
                 ))}
               </InfiniteScroll>
+            </div>
+          ) : null}
+        </Section>
+        <div className='relative my-10 w-screen'>
+          <QualityHomeBanner/>
+        </div>
+        <Section className='w-full bg-transparent'>
+          {vaccines && vaccines.length > 6 ? (
+            <div className='grid w-full gap-6'>
+              <InfiniteScroll
+                next={fetchProductNextPage}
+                hasMore={productHasNextPage}
+                loader={<LabTestsSkeleton />}
+                dataLength={vaccines?.length || 0}
+                className='grid grid-flow-row grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3'
+              >
+                {/* Display the remaining items */}
+                {vaccines.slice(6).map((product) => (
+                  <LabTestCard
+                    product={product}
+                    key={product.id}
+                    baseUrl='/telehealth/get-vaccination'
+                  />
+                ))}
+              </InfiniteScroll>
+
               <Pagination
                 currentPage={currPage}
                 setCurrentPage={setCurrPage}

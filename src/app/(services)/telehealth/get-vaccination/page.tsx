@@ -5,6 +5,7 @@ import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { BookAVaccineHero } from '@/components/get-vaccination/BookAVaccineHero';
 import HealthOfferings from '@/components/home/HealthOfferings';
 import BookSession from '@/components/book-lab-test/BookSession';
+import { QualityHomeBanner } from '@/components/quality-home-banner';
 
 const data = [
   {
@@ -40,7 +41,7 @@ export default function GetVaccinationPage() {
         {/*<HowItWorks data={howItWorksData} variant={'primary'} />*/}
 
         {/* <BookSession /> */}
-
+        
         <ReportDrugReaction />
 
         <NewsLetterCard />
