@@ -10,8 +10,8 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({backgroundC
   return (
     <>
       <div className={`flex justify-center bg-[#1E272F] ${backgroundClassName}`}>
-        <Section className={`grid gap-4 bg-[#1E272F] sm:grid-cols-[1fr_1fr] ${backgroundClassName}`}>
-          <div className='flex flex-col overflow-hidden pt-16 sm:pb-10'>
+        <Section className={`grid gap-4 bg-[#1E272F] sm:grid-cols-[1fr_1.2fr] ${backgroundClassName}`}>
+          <div className='flex flex-col overflow-hidden sm:py-14 pt-10'>
             <div className='relative flex w-full flex-col justify-between overflow-hidden font-bold text-[#1E272F] md:h-fit md:text-4xl xl:text-5xl'>
               <Image
                 width={430} // Keeps the intrinsic width as 430px.
@@ -37,14 +37,14 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({backgroundC
             <Image
               width={300}
               height={270}
-              className=' -mb-[50px] -ml-[15%] h-auto w-[530px] max-w-[400px] sm:-ml-0 md:-mb-[40px] md:max-w-[450px] lg:max-w-[650px]'
+              className=' -mb-[50px] md:-mb-[40px] h-auto sm:-ml-[10%] md:mr-[5%] w-[600px] max-w-[400px] md:max-w-[450px] lg:max-w-[650px]'
               src={'/images/quality-home-bg.png'}
               alt={'quality home image'}
             />
             <Image
               width={400}
               height={470}
-              className='absolute -right-14 bottom-0 h-auto w-[650px] max-w-[450px] sm:max-w-[500px] md:max-w-[550px] lg:max-w-[650px]'
+              className='absolute -right-12 sm:-right-14 md:-right-20 lg:-right-24 bottom-0 h-auto w-[800px] max-w-[450px] sm:max-w-[580px] md:max-w-[620px] lg:max-w-[780px]'
               src={'/images/quality-home-image.png'}
               alt={'quality home image'}
             />
