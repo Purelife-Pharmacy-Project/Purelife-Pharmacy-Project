@@ -5,6 +5,7 @@ import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { BookAVaccineHero } from '@/components/get-vaccination/BookAVaccineHero';
 import HealthOfferings from '@/components/home/HealthOfferings';
 import { Reviews } from '@/components/home/Reviews';
+import HealthOfferingsVaccine from '@/components/home/HealthOfferingsVaccine';
 
 const data = [
   {
@@ -85,7 +86,7 @@ export default function GetVaccinationPage() {
 
         <VaccinationProducts />
 
-        <HealthOfferings title='Enjoy 20% of these Vaccine ' data={data} />
+        <HealthOfferingsVaccine title='Enjoy 20% of these Vaccine ' data={data} />
 
         {/*<HowItWorks data={howItWorksData} variant={'primary'} />*/}
 
