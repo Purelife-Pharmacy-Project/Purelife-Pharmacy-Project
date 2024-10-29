@@ -6,13 +6,13 @@ import React, { useRef, useState } from 'react';
 export const GlobalHealthSolutions = () => {
   return (
     <Section className='mt-10'>
-      <h3 className='mb-14 w-[75%] text-4xl font-semibold'>
+      <h3 className='mb-14 lg:w-[75%] w-full text-3xl lg:text-4xl font-semibold'>
         Empowering Wellness Through Global Health Solutions
       </h3>
-      <div className=' grid grid-cols-[1fr_1fr] grid-rows-2 gap-5 pb-10'>
+      <div className=' grid lg:grid-cols-[1fr_1fr] grid-cols-1 grid-rows-2 gap-5 pb-10'>
         <div className='row-span-2'>
           <div
-            className='flex h-full w-full flex-col justify-end '
+            className='flex lg:h-full h-[400px] w-full flex-col justify-end '
             style={{
               backgroundImage: 'url(/images/mission.jpg)',
               backgroundPosition: 'center bottom 55%',
@@ -33,7 +33,7 @@ export const GlobalHealthSolutions = () => {
         </div>
         <div className='row-span-1'>
           <div
-            className='relative flex items-end  h-[290px] w-full flex-col'
+            className='relative flex items-end  lg:h-[290px] h-[400px] w-full flex-col'
             style={{
               backgroundImage: 'url(/images/location.jpg)',
               backgroundPosition: 'center bottom 100%',
@@ -56,7 +56,7 @@ export const GlobalHealthSolutions = () => {
         </div>
         <div className='row-span-1'>
           <div
-            className='relative flex h-[290px] w-full flex-col justify-end'
+            className='relative flex lg:h-[290px] h-[400px] w-full flex-col justify-end'
             style={{
               backgroundImage: 'url(/images/esg-promise.jpg)',
               backgroundPosition: 'center bottom 20%',

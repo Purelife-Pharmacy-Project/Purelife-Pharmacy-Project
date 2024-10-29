@@ -85,7 +85,7 @@ const ProductRow: React.FC<Prop> = ({
           </button>
           <div
             ref={ref}
-            className={`${variant === 'normal' && 'grid grid-cols-4 gap-5'} ${variant === 'hot offers' && 'grid grid-cols-2 gap-5'} ${variant === 'best sellers' && 'grid grid-cols-2 gap-5'}`}>
+            className={`${variant === 'normal' && 'grid lg:grid-cols-4 grid-cols-2 gap-5'} ${variant === 'hot offers' && 'grid grid-cols-2 gap-5'} ${variant === 'best sellers' && 'grid grid-cols-2 gap-5'}`}>
             {products?.slice(0, (variant === 'normal' || variant === 'hot offers') ? 4 : 3).map((product, index) => (
               <div
               key={product.id}

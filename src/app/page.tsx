@@ -129,7 +129,7 @@ export default async function Home() {
 
         <div className='invisible mb-4'></div>
 
-        <Section className='grid grid-cols-[1fr_1fr] gap-5 w-full'>
+        <Section className='grid lg:grid-cols-[1fr_1fr] grid-cols-1 lg:gap-5 gap-10 w-full'>
           <HotOffersProduct />
           <BestSellers/>
         </Section>
@@ -141,6 +141,7 @@ export default async function Home() {
         {/* <HandpickedForYou /> */}
 
         {/* <PersonalizedPlan /> */}
+        <div className='invisible mb-4'></div> 
         <Section><ExploreTests /></Section>
         <div className='invisible mb-4'></div> 
 

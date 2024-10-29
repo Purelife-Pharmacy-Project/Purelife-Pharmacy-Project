@@ -89,7 +89,7 @@ export const LatestInsights = () => {
           className='scrollbar-none flex w-[100%] overflow-x-scroll'
         >
           {insights.map((item, index) => (
-            <div key={index} className='min-w-[50%] border-x'>
+            <div key={index} className='lg:min-w-[50%] min-w-[70%] border-x'>
               <div
                 className='mx-auto h-[570px] w-[83%]'
                 style={{

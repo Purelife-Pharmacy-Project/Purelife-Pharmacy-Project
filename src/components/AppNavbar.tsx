@@ -97,7 +97,7 @@ export const AppNavbar = ({
     setServicesDropdown(false)
   );
   return (
-    <div>
+    <div className='w-full bg-white fixed top-0 z-[9999]'>
       <Navbar
       onMenuOpenChange={setIsMenuOpen}
       isBlurred={disabled}
@@ -197,7 +197,7 @@ export const AppNavbar = ({
       {showSearch ? (
         <NavbarContent
           justify='center'
-          className='mt-4 lg:mt-0 mr-[2%] border hidden w-full xl:pl-[10%] lg:flex'
+          className='mt-4 lg:mt-0 mr-[2%] hidden w-full xl:pl-[10%] lg:flex'
         >
           <NavbarSearch show={false} />
         </NavbarContent>

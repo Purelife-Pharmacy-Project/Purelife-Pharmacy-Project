@@ -16,7 +16,7 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
       <Section
         className={``}
       >
-        <div className='flex justify-between w-[80%] mb-10 text-2xl font-medium'>
+        <div className='flex justify-between lg:w-[80%] w-full mb-10 text-2xl font-medium'>
           <div className='cursor-pointer' onClick={()=>{setActive('Consult Doctor')}}>
             <h3 className={`${(active === 'Consult Doctor') ? '' : 'text-[#5A5A5A]'}`}>Consult Doctor</h3>
             {(active === 'Consult Doctor') && <div className='bg-primary rounded-full w-[50%] h-[6px]'></div>}
@@ -34,10 +34,10 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
             {(active === 'Book a Lab test') && <div className='bg-primary rounded-full w-[50%] h-[6px]'></div>}
           </div>
         </div>
-        {(active === 'Consult Doctor') && <div className='grid grid-cols-[6fr_4fr]'>
+        {(active === 'Consult Doctor') && <div className='grid lg:grid-cols-[6fr_4fr] grid-cols-1'>
           <div>
-            <h3 className='text-3xl font-semibold w-[85%]'>Streamline Your Consultation Booking, All in One Place</h3>
-            <div className='flex mt-8 gap-3 w-[70%]'>
+            <h3 className='text-3xl font-semibold lg:w-[85%] w-full'>Streamline Your Consultation Booking, All in One Place</h3>
+            <div className='flex mt-8 lg:gap-3 gap-6 lg:w-[70%] w-full'>
               <div className='flex flex-col items-center'>
                 <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
                   <IconSearch color='#1E272F'/>
@@ -79,16 +79,16 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
           <Image
             width={415}
             height={385}
-            className='h-[385px] w-auto mt-20'
+            className='h-[385px] w-auto mt-20 hidden lg:block'
             src={'/images/consult-a-doctor-section.png'}
             alt={'quality home image'}
             quality={100}
           />
         </div>}
-        {(active === 'Shop Pharmacy') && <div className='grid grid-cols-[6fr_4fr]'>
+        {(active === 'Shop Pharmacy') && <div className='grid lg:grid-cols-[6fr_4fr] grid-cols-1'>
           <div>
-            <h3 className='text-3xl font-semibold w-[85%]'>Effortless Online Pharmacy Experience for Your Health Needs</h3>
-            <div className='flex mt-8 gap-3 w-[70%]'>
+            <h3 className='text-3xl font-semibold lg:w-[85%] w-full'>Effortless Online Pharmacy Experience for Your Health Needs</h3>
+            <div className='flex mt-8 lg:gap-3 gap-6 lg:w-[70%] w-full'>
               <div className='flex flex-col items-center'>
                 <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
                   <IconSearch color='#1E272F'/>
@@ -130,16 +130,16 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
           <Image
             width={415}
             height={385}
-            className='h-[385px] w-auto mt-20'
+            className='h-[385px] w-auto mt-20 hidden lg:block'
             src={'/images/shop-pharmacy-section.png'}
             alt={'quality home image'}
             quality={100}
           />
         </div>}
-        {(active === 'Book a Vaccination') && <div className='grid grid-cols-[6fr_4fr]'>
+        {(active === 'Book a Vaccination') && <div className='grid lg:grid-cols-[6fr_4fr] grid-cols-1'>
           <div>
-            <h3 className='text-3xl font-semibold w-[85%]'>Quick and Simple Steps to Secure Your Vaccination Appointment</h3>
-            <div className='flex mt-8 gap-3 w-[70%]'>
+            <h3 className='text-3xl font-semibold lg:w-[85%] w-full'>Quick and Simple Steps to Secure Your Vaccination Appointment</h3>
+            <div className='flex mt-8 lg:gap-3 gap-6 lg:w-[70%] w-full'>
               <div className='flex flex-col items-center'>
                 <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
                   <IconSearch color='#1E272F'/>
@@ -181,17 +181,17 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
           <Image
             width={415}
             height={385}
-            className='h-[385px] w-auto mt-20'
+            className='h-[385px] w-auto mt-20 hidden lg:block'
             src={'/images/book-a-vaccination-section.png'}
             alt={'quality home image'}
             quality={100}
           />
           </div>
         }
-        {(active === 'Book a Lab test') && <div className='grid grid-cols-[6fr_4fr]'>
+        {(active === 'Book a Lab test') && <div className='grid lg:grid-cols-[6fr_4fr] grid-cols-1'>
           <div>
-            <h3 className='text-3xl font-semibold w-[85%]'>Your One-Stop Destination for Hassle-Free Lab Test Bookings</h3>
-            <div className='flex mt-8 gap-3 w-[70%]'>
+            <h3 className='text-3xl font-semibold lg:w-[85%] w-full'>Your One-Stop Destination for Hassle-Free Lab Test Bookings</h3>
+            <div className='flex mt-8 lg:gap-3 gap-6 lg:w-[70%] w-full'>
               <div className='flex flex-col items-center'>
                 <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
                   <IconSearch color='#1E272F'/>
@@ -233,7 +233,7 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
           <Image
             width={415}
             height={385}
-            className='h-[385px] w-auto mt-20'
+            className='h-[385px] w-auto mt-20 hidden lg:block'
             src={'/images/book-a-lab-test-section.png'}
             alt={'quality home image'}
             quality={100}
