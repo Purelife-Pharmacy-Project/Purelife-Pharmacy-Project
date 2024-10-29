@@ -97,7 +97,8 @@ export const AppNavbar = ({
     setServicesDropdown(false)
   );
   return (
-    <Navbar
+    <div>
+      <Navbar
       onMenuOpenChange={setIsMenuOpen}
       isBlurred={disabled}
       className={`py-4 text-foreground z-[9999] lg:pb-2 ${getNavbarBackground()}`}
@@ -196,7 +197,7 @@ export const AppNavbar = ({
       {showSearch ? (
         <NavbarContent
           justify='center'
-          className='mr-[2%] hidden w-full pl-[10%] lg:flex'
+          className='mt-4 lg:mt-0 mr-[2%] border hidden w-full xl:pl-[10%] lg:flex'
         >
           <NavbarSearch show={false} />
         </NavbarContent>
@@ -206,7 +207,7 @@ export const AppNavbar = ({
             setShowSearch(!showSearch);
           }}
           justify='end'
-          className='flex w-full cursor-pointer items-center justify-end gap-2 pr-[3%]'
+          className='w-full cursor-pointer items-center justify-end gap-2 pr-[3%] hidden lg:flex'
         >
           <IconSearch color='#1E272F' />
           <span className='text-[#1E272F]'>Search</span>
@@ -217,12 +218,12 @@ export const AppNavbar = ({
         justify='end'
       >
         <div className='hidden py-0 md:gap-10 lg:flex'>
-          <NavbarItem className='flex flex-col items-start justify-center text-lg leading-[1.6875rem] text-header-100'>
+          {false && <NavbarItem className='flex flex-col items-start justify-center text-lg leading-[1.6875rem] text-header-100'>
             <p className='text-xs font-light'>Deliver to:</p>
             <div className='flex w-full items-center justify-between font-medium'>
               <IconLocation /> <span className='leading-[0.7]'>10111</span>{' '}
             </div>
-          </NavbarItem>
+          </NavbarItem>}
           <NavbarItem className='flex items-center text-lg leading-[1.6875rem] text-header-100'>
             <NavbarCart isActive={isActive} />
           </NavbarItem>
@@ -276,5 +277,10 @@ export const AppNavbar = ({
         ))}
       </NavbarMenu>
     </Navbar>
+      <div className='relative mx-6 lg:hidden lg:my-0 my-4'>
+          <NavbarSearch show={true} />
+        </div>
+    </div>
+    
   );
 };

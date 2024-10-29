@@ -18,6 +18,7 @@ import { LatestInsights } from '@/components/home/latest-insignts';
 import { QualityHomeBanner } from '@/components/quality-home-banner';
 import { DiscoverTopProducts } from '@/components/home/DiscoverTopProducts';
 import { StepsForServices } from '@/components/home/steps-for-services';
+import { Section } from '@/components/home/Section';
 
 const data = [
   {
@@ -60,32 +61,53 @@ const data = [
 
 const reviews = [
   {
-    title: 'This Care Truly Made a Difference',
+    title: 'Reliable and Comprehensive Service',
     description:
-      'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
+      "Purelife Pharmacy is the best. It's your go-to for all health needs, with top-notch service. No matter how rare your medication, they've got you covered. I recommend them anytime..",
     noOfStars: 5,
-    name: 'Mrs Adebayo Gregson',
+    name: 'Aisosa Urhoghide',
   },
   {
-    title: 'I did not like how this went',
+    title: "Excellent Customer Care",
     description:
-      'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
-    noOfStars: 3,
-    name: 'Mrs Adebayo Gregson',
-  },
-  {
-    title: 'This Care Truly Made a Difference',
-    description:
-      'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
-    noOfStars: 2,
-    name: 'Mrs Adebayo Gregson',
-  },
-  {
-    title: 'This Care Truly Made a Difference',
-    description:
-      'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
+      "Purelife Pharmacy has great customer service. They always greet me whenever I visit the shop, and I also receive phone calls and text messages after getting my medication.",
     noOfStars: 5,
-    name: 'Mrs Adebayo Gregson',
+    name: "Abigeal Remilekun",
+  },
+  {
+    title: "Family-Friendly and Caring Staff",
+    description:
+      "I love this pharmacy. I went there for my toddler's meds, and when they started throwing up, the staff were super helpful. Their prices were fair, and they didn’t push the most expensive products on me right away. I’m definitely a fan!",
+    noOfStars: 4,
+    name: "Mmeme Amune",
+  },
+  {
+    title: "Organized and Customer-Centric Pharmacy",
+    description:
+      "Nice, organized, clean, and smart pharmacy that deals with a variety of pharmaceutical products, beverages, and outstanding cosmetics. Customer satisfaction is their priority goal. You can make your choice in person or through ordering and delivery",
+    noOfStars: 5,
+    name: "Emmanuel Ohaeri",
+  },
+  {
+    title: "Friendly and Knowledgeable Team",
+    description:
+      "Great friendly service, smiling faces, and knowledgeable staff. A much better customer experience.",
+    noOfStars: 5,
+    name: "Ogedengbe Patience",
+  },
+  {
+    title: "Unmatched Customer Experience",
+    description:
+      "There is no place like Purelife Pharmacy; the experience here is overwhelming, and customer service is simply unparalleled.",
+    noOfStars: 5,
+    name: "Osang Caleb",
+  },
+  {
+    title: "Welcoming Atmosphere and Great Variety",
+    description:
+      "Great ambiance, spacious. The highlight for me is the hospitality and excellence of the members of the staff. Overall, it's a good store with a good variety.",
+    noOfStars: 5,
+    name: "Seunfunmi Omale",
   },
 ];
 
@@ -93,18 +115,11 @@ export default async function Home() {
   return (
     <>
       <main className='grid gap-6 lg:gap-10'>
-        <div className='relative mx-6 lg:hidden'>
-          <NavbarSearch show={true} />
-        </div>
         <HomePageHero />
 
         <HomePartners />
 
         <div className='invisible mb-4'></div>
-
-        {/* <HotOffersProduct /> */}
-
-        {/* <div className='invisible mb-4'></div> */}
 
         <Categories />
 
@@ -114,22 +129,19 @@ export default async function Home() {
 
         <div className='invisible mb-4'></div>
 
-        {/* <BestSellers /> */}
+        <Section className='grid grid-cols-[1fr_1fr] gap-5 w-full'>
+          <HotOffersProduct />
+          <BestSellers/>
+        </Section>
 
-        {/* <div className='invisible mb-4'></div> */}
+        
 
         {/* <HealthOfferings title='See our Health offerings' data={data} /> */}
 
-        {/* <div className='invisible mb-4'></div> */}
-
         {/* <HandpickedForYou /> */}
 
-        {/* <div className='invisible mb-4'></div> */}
-
         {/* <PersonalizedPlan /> */}
-        
-        <ExploreTests />
-
+        <Section><ExploreTests /></Section>
         <div className='invisible mb-4'></div> 
 
         <StepsForServices/>

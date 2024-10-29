@@ -94,7 +94,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
                         )}
                       </div>
                       <p className='text-xs font-bold text-[#1E272F] sm:text-sm'>
-                        Mrs Adebayo Gregson
+                        {review.name}
                       </p>
                     </div>
                   </div>

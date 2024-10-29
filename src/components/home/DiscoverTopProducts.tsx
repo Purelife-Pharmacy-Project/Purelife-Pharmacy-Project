@@ -7,9 +7,10 @@ export const DiscoverTopProducts: React.FC<DiscoverTopProductsProps> = () => {
   return (
     <>
       <Section
-        className={`relative rounded-[25px] bg-[#E3DFE5] flex justify-center overflow-hidden`}
+        
       >
-        <div className='absolute bottom-0 left-0'>
+        <div className={`relative rounded-[25px] bg-[#E3DFE5] flex justify-center overflow-hidden`}>
+          <div className='absolute bottom-0 left-0'>
           <Image
             width={207}
             height={347}
@@ -45,6 +46,8 @@ export const DiscoverTopProducts: React.FC<DiscoverTopProductsProps> = () => {
             quality={100}
           />
         </div>
+        </div>
+        
       </Section>
     </>
   );

@@ -27,7 +27,7 @@ export const HomePartners = () => {
   const repeatedPartners = Array(5).fill(partners).flat();
   return (
     <div className='lg:-mt-8 lg:py-4 xl:-mt-12 grid justify-center'>
-        <div className='max-w-[60vw] overflow-hidden sm:max-w-[90vw] md:max-w-[90vw] lg:max-w-[700px]'>
+        <div className='overflow-hidden mx-auto max-w-[90%] lg:max-w-[700px]'>
           <div
             className='swipe-animation flex items-center gap-10'
             style={{ '--speed': '5000ms' } as React.CSSProperties}

@@ -16,13 +16,17 @@ const BestSellers: React.FC<Prop> = () => {
   );
   return (
     <ProductRow
-      title='Shop best selling🤯'
+      title='Shop best selling'
       moreLink='/shop?category=health-best-sellers'
       products={allProducts}
       isLoading={loadingProducts}
       emptyMessage='Oops. No products yet'
       ProductComp={ProductCard}
       loader={<ProductLoadingSkeleton />}
+      productClassName='rounded-[20px] bg-primaryLight p-8'
+      headerClassName='mx-auto'
+      price
+      variant="best sellers"
     />
   );
 };

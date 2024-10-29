@@ -217,7 +217,7 @@ export const NavbarSearch: React.FC<NavbarSearchProps> = ({
           startContent={<div className='pl-4'></div>}
           endContent={
             <div
-              className={`flex cursor-pointer items-center gap-2 rounded-full bg-primary px-6 py-2 ${searchBtnClassName}`}
+              className={`flex cursor-pointer border-[#FF0028] items-center gap-2 rounded-full bg-primary px-6 py-2 ${searchBtnClassName}`}
             >
               <IconSearch color='white' />
               <span className='text-white'>Search</span>

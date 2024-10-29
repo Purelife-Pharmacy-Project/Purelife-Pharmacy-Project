@@ -17,7 +17,7 @@ const TestCard: React.FC<{ product: Product }> = ({ product }) => {
   return (
     <div className='flex w-full flex-col rounded-xl'>
       <div className='relative mb-5 flex w-full items-center justify-center rounded-2xl border py-14'>
-        <Image alt='' src={product.image_1024} width={211} height={207} className='' />
+        <Image alt='' src={product.image_1024} width={211} height={180} className='' />
         <Button
           disabled={product.quantity === 0}
           onClick={() => {
@@ -57,6 +57,9 @@ const ExploreTests: React.FC<Prop> = () => {
       ProductComp={TestCard}
       products={allProducts}
       emptyMessage='No tests available'
+      price
+      allowOverflow={true}
+      variant='normal'
     />
   );
 };

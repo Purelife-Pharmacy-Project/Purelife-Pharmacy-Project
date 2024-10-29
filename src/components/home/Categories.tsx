@@ -1,7 +1,7 @@
 'use client';
 import { Button, Image } from '@nextui-org/react';
 import { Section } from './Section';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { IconCategoryImage } from '../icons/IconCategoryImage';
 import { IconArrowRight } from '../icons/IconArrowRight';
 
@@ -98,36 +98,67 @@ export const Categories = () => {
     return result;
   };
   const groupedCategories = chunkArray(repeatedCategories, 12);
+  const groupedCategories6 = chunkArray(repeatedCategories, 6);
+  const containerRef = useRef(null);
+  const [maxNameWidth, setMaxNameWidth] = useState('');
+
+  const updateMaxWidth = () => {
+    if (containerRef.current) {
+      const containerWidth = containerRef.current.offsetWidth;
+      setMaxNameWidth(`${containerWidth}px`);
+    }
+  };
+  useEffect(() => {
+    updateMaxWidth();
+    window.addEventListener('resize', updateMaxWidth);
+    return () => {
+      window.removeEventListener('resize', updateMaxWidth);
+    };
+  }, []);
+  const containerTwoRef = useRef(null);
+  const [maxCircleWidth, setMaxCircleWidth] = useState('');
+
+  const updateCircleMaxWidth = () => {
+    if (containerTwoRef.current) {
+      const containerWidth = containerTwoRef.current.offsetWidth;
+      setMaxCircleWidth(`${containerWidth}px`);
+    }
+  };
+  useEffect(() => {
+    updateCircleMaxWidth();
+    window.addEventListener('resize', updateCircleMaxWidth);
+    return () => {
+      window.removeEventListener('resize', updateCircleMaxWidth);
+    };
+  }, []);
   return (
     <Section>
-      <div className=''>
-        <h3 className='mx-auto w-[75%] text-center text-3xl font-semibold'>
+      <div>
+        <h3 className='mx-auto w-[95%] text-center text-3xl font-semibold lg:w-[75%]'>
           Discover personalized health solutions tailored to your wellness needs
           with PureLife Health
         </h3>
-        <div className='mx-auto mt-20 grid w-[80%] grid-cols-[1fr_1fr_1fr]'>
-          <div className=''>
+        <div className='mx-auto mt-10 grid w-[95%] grid-cols-[1fr_1fr_1fr] lg:mt-20 lg:w-[80%]'>
+          <div>
             <h4 className='mb-2 w-full border-r text-center text-5xl font-medium'>
-              100M+
+              100k+
             </h4>
             <p className='text-center text-[#5A5A5A]'>
-              Health and wellness products
+              Approved healthcare products
             </p>
           </div>
-          <div className=''>
+          <div>
             <h4 className='mb-2 w-full border-r text-center text-5xl font-medium'>
-              50k+
+              8k+
             </h4>
             <p className='text-center text-[#5A5A5A]'>
-              Health and wellness products
+              Verified and accredited laboratory results
             </p>
           </div>
-          <div className=''>
-            <h4 className='mb-2 w-full text-center text-5xl font-medium'>
-              1200+
-            </h4>
+          <div>
+            <h4 className='mb-2 w-full text-center text-5xl font-medium'>2%</h4>
             <p className='text-center text-[#5A5A5A]'>
-              Health and wellness products
+              Top 2% telehealth service providers in Nigeria
             </p>
           </div>
         </div>
@@ -140,60 +171,84 @@ export const Categories = () => {
               scrollSnapStop: 'always',
             }}
           >
-            {groupedCategories.map((group) => (
-              <div style={{
-                scrollSnapAlign: 'center', // Aligns each group at the center during scroll
-                minWidth: '100%', // Ensures each group takes full width of the container
-              }} className='grid grid-cols-6 w-[100%] grid-rows-2 gap-6'>
-                {group.map((category: any) => (
+            <div>
+              <div className='hidden lg:flex'>
+                {groupedCategories.map((group, index) => (
                   <div
-                    key={group.id} // Assuming each category has a unique id
-                    className='flex py-12 snap-center items-center justify-center rounded-full border border-[#E7E7E7]'
+                    key={index}
                     style={{
                       scrollSnapAlign: 'center',
+                      minWidth: '100%',
+                      
                     }}
+                    className='grid w-[100%] grid-cols-3 grid-rows-2 gap-6 lg:grid-cols-6'
                   >
-                    <div className='flex max-w-[100px] flex-col items-center'>
-                      <IconCategoryImage />
-                      <p className='overflow-ellipsis text-center text-[#5A5A5A]'>
-                        {category.category}
-                      </p>
-                    </div>
+                    {group.map((category: any, categoryIndex: number) => (
+                      <div
+                      ref={containerTwoRef}
+                      key={categoryIndex}
+                      style={{ height: maxCircleWidth }}
+                        className='flex snap-center items-center justify-center rounded-full border border-[#E7E7E7]'
+                      >
+                        <div className='flex flex-col place-content-center items-center rounded-full'>
+                          <IconCategoryImage />
+                          <p className='overflow-ellipsis text-center text-[#5A5A5A]'>
+                            {category.category}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 ))}
               </div>
-            ))}
+              <div className='flex lg:hidden'>
+                {groupedCategories6.map((group, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      scrollSnapAlign: 'center',
+                      minWidth: '100%',
+                    }}
+                    className='grid w-[100%] grid-cols-3 grid-rows-2 gap-6'
+                  >
+                    {group.map((category: any, categoryIndex: number) => (
+                      <div
+                        ref={containerRef}
+                        key={categoryIndex}
+                        style={{ height: maxNameWidth }}
+                        className='flex snap-center items-center justify-center rounded-full border border-[#E7E7E7]'
+                      >
+                        <div className='flex max-w-[100px] flex-col place-content-center items-center rounded-full'>
+                          <IconCategoryImage />
+                          <p className='overflow-ellipsis text-center text-[#5A5A5A]'>
+                            {category.category}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
           <Button
-            onMouseEnter={() => {
-              setLeftIcon(true);
-            }}
-            onMouseLeave={() => {
-              setLeftIcon(false);
-            }}
+            onMouseEnter={() => setLeftIcon(true)}
+            onMouseLeave={() => setLeftIcon(false)}
             color=''
             size='md'
             radius='full'
-            className={`absolute left-0 top-[40%] h-fit min-w-0 rotate-180 rounded-full border-2 border-[#1E272F] p-2 sm:p-4  ${
-              leftIcon ? 'bg-[#1E272F]' : 'bg-white'
-            }`}
+            className={`absolute left-0 top-[40%] h-fit min-w-0 rotate-180 rounded-full border-2 border-[#1E272F] p-2 sm:p-4 ${leftIcon ? 'bg-[#1E272F]' : 'bg-white'}`}
             onClick={scrollCategoriesLeft}
           >
             <IconArrowRight color={`${leftIcon ? '#FFFFFF' : '#1E272F'}`} />
           </Button>
           <Button
-            onMouseEnter={() => {
-              setRightIcon(true);
-            }}
-            onMouseLeave={() => {
-              setRightIcon(false);
-            }}
+            onMouseEnter={() => setRightIcon(true)}
+            onMouseLeave={() => setRightIcon(false)}
             color=''
             size='md'
             radius='full'
-            className={`absolute right-0 top-[40%] h-fit min-w-0 rounded-full border-2 border-[#1E272F] p-2 sm:p-4  ${
-              rightIcon ? 'bg-[#1E272F]' : 'bg-white'
-            }`}
+            className={`absolute right-0 top-[40%] h-fit min-w-0 rounded-full border-2 border-[#1E272F] p-2 sm:p-4 ${rightIcon ? 'bg-[#1E272F]' : 'bg-white'}`}
             onClick={scrollCategoriesRight}
           >
             <IconArrowRight color={`${rightIcon ? '#FFFFFF' : '#1E272F'}`} />
