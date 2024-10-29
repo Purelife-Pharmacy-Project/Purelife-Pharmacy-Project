@@ -60,7 +60,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
                 onMouseLeave={() => {
                   setLeftIcon(false);
                 }}
-                color=''
+                color={undefined}
                 size='md'
                 radius='full'
                 className={`h-fit min-w-0 rotate-180 rounded-full border-2 border-[#1E272F] p-2 sm:p-4  ${
@@ -108,7 +108,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
                 onMouseLeave={() => {
                   setRightIcon(false);
                 }}
-                color=''
+                color={undefined}
                 size='md'
                 radius='full'
                 className={`h-fit min-w-0 rounded-full border-2 border-[#1E272F] p-2 sm:p-4 ${
