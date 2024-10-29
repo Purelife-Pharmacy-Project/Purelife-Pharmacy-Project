@@ -179,15 +179,14 @@ export const Categories = () => {
                     style={{
                       scrollSnapAlign: 'center',
                       minWidth: '100%',
-                      
                     }}
                     className='grid w-[100%] grid-cols-3 grid-rows-2 gap-6 lg:grid-cols-6'
                   >
                     {group.map((category: any, categoryIndex: number) => (
                       <div
-                      ref={containerTwoRef}
-                      key={categoryIndex}
-                      style={{ height: maxCircleWidth }}
+                        ref={containerTwoRef}
+                        key={categoryIndex}
+                        style={{ height: maxCircleWidth }}
                         className='flex snap-center items-center justify-center rounded-full border border-[#E7E7E7]'
                       >
                         <div className='flex flex-col place-content-center items-center rounded-full'>
@@ -234,7 +233,7 @@ export const Categories = () => {
           <Button
             onMouseEnter={() => setLeftIcon(true)}
             onMouseLeave={() => setLeftIcon(false)}
-            color=''
+            color={undefined}
             size='md'
             radius='full'
             className={`absolute left-0 top-[40%] h-fit min-w-0 rotate-180 rounded-full border-2 border-[#1E272F] p-2 sm:p-4 ${leftIcon ? 'bg-[#1E272F]' : 'bg-white'}`}
@@ -245,7 +244,7 @@ export const Categories = () => {
           <Button
             onMouseEnter={() => setRightIcon(true)}
             onMouseLeave={() => setRightIcon(false)}
-            color=''
+            color={undefined}
             size='md'
             radius='full'
             className={`absolute right-0 top-[40%] h-fit min-w-0 rounded-full border-2 border-[#1E272F] p-2 sm:p-4 ${rightIcon ? 'bg-[#1E272F]' : 'bg-white'}`}

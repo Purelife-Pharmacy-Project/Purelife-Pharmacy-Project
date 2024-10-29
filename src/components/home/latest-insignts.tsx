@@ -53,7 +53,7 @@ export const LatestInsights = () => {
             onMouseLeave={() => {
               setLeftIcon(false);
             }}
-            color=''
+            color={undefined}
             size='md'
             radius='full'
             className={`h-fit min-w-0 rotate-180 rounded-full border-2 border-[#1E272F] p-2 sm:p-4  ${
@@ -70,7 +70,7 @@ export const LatestInsights = () => {
             onMouseLeave={() => {
               setRightIcon(false);
             }}
-            color=''
+            color={undefined}
             size='md'
             radius='full'
             className={`h-fit min-w-0 rounded-full border-2 border-[#1E272F] p-2 sm:p-4  ${
@@ -86,7 +86,7 @@ export const LatestInsights = () => {
       <div className='bg-[#F6F6F6] py-14'>
         <div
           ref={scrollInsightsRef}
-          className='scrollbar-none w-[100%] flex overflow-x-scroll'
+          className='scrollbar-none flex w-[100%] overflow-x-scroll'
         >
           {insights.map((item, index) => (
             <div key={index} className='min-w-[50%] border-x'>
@@ -100,10 +100,8 @@ export const LatestInsights = () => {
                   borderRadius: '20px',
                 }}
               ></div>
-              <div className='mx-auto w-[83%] pt-5 mt-3 border-t flex justify-between items-center'>
-                <p className='px-auto text-xl font-semibold'>
-                {item.title}
-                </p>
+              <div className='mx-auto mt-3 flex w-[83%] items-center justify-between border-t pt-5'>
+                <p className='px-auto text-xl font-semibold'>{item.title}</p>
                 <Button
                   color='primary'
                   size='md'
@@ -111,10 +109,7 @@ export const LatestInsights = () => {
                   className={`h-fit min-w-0 rounded-full p-2`}
                   onClick={scrollInsightsRight}
                 >
-                  <IconArrowRight
-                    size={12}
-                    color={`#FFFFFF`}
-                  />
+                  <IconArrowRight size={12} color={`#FFFFFF`} />
                 </Button>
               </div>
             </div>
