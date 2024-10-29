@@ -145,8 +145,8 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                       <ReactSlider
                         className='relative mt-2 h-0.5 rounded-full bg-gray-200'
                         trackClassName='bg-gray-800 h-0.5 rounded-full example-track'
-                        defaultValue={[0, 100000]}
-                        value={[watch('min'), watch('max')]}
+                        defaultValue={[0, 100000] as any}
+                        value={[watch('min'), watch('max')] as any}
                         min={0}
                         max={100000}
                         ariaLabel={['Lower thumb', 'Upper thumb']}
