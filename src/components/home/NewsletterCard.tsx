@@ -4,6 +4,8 @@ import { FormEvent } from 'react';
 import { toast } from 'sonner';
 import { IconRocket } from '../icons/IconRocket';
 import { Section } from './Section';
+import { inputAuth, inputBorderedGray } from '@/theme';
+import Image from 'next/image';
 
 export const NewsLetterCard = () => {
   const handleSubmit = (e: FormEvent) => {
@@ -11,52 +13,87 @@ export const NewsLetterCard = () => {
     toast.info('Newsletters are coming soon.');
   };
   return (
-    <div className='lg:pb-10 lg:pt-[55px] xl:grid xl:justify-center'>
-      <Section className='bg-white'>
-        <Card shadow='none' fullWidth>
-          <CardBody className='bg-primaryLight'>
-            <div className='flex w-full flex-col items-center justify-between gap-4 p-1 md:p-4 lg:p-20 xl:flex-row'>
-              <h1 className='w-full text-center text-2xl font-bold text-header-100 md:text-start lg:text-4xl xl:max-w-[500px]'>
-                Sign up for amazing health and lifestyle deals
-              </h1>
-              <form onSubmit={handleSubmit} className='grid w-full gap-4'>
-                <div className='grid items-end gap-2 lg:grid-flow-col lg:gap-0'>
-                  <Input
-                    labelPlacement='outside'
-                    size='lg'
-                    label='Name'
-                    radius='none'
-                    variant='underlined'
-                    type='text'
-                    isRequired
-                    placeholder='Name'
-                  />
-                  <Input
-                    radius='none'
-                    labelPlacement='outside'
-                    size='lg'
-                    label='Email Address'
-                    type='email'
-                    variant='underlined'
-                    isRequired
-                    placeholder='Email'
-                  />
-                </div>
-                <Button
-                  className='lg:ml-auto'
-                  size='lg'
-                  radius='full'
-                  type='submit'
-                  color='primary'
-                  endContent={<IconRocket />}
-                >
-                  Subscribe
-                </Button>
-              </form>
+    <Section className=''>
+      <div
+        style={{
+          backgroundImage: 'url(/images/signup-deals-background.png)',
+          backgroundPosition: 'center bottom 55%',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '',
+          borderRadius: '20px',
+        }}
+        className='w-full rounded-[20px] bg-[#F1F5EE] pt-8'
+      >
+        <div className='mx-auto flex w-[90%] md:w-[60%] flex-col items-center gap-6'>
+          <Image
+            src='/app-logo.png'
+            alt='Purelife logo'
+            width={147}
+            height={68.271}
+          />
+          <h1 className='w-full text-center text-4xl font-bold'>
+            Sign up for Amazing Health & Lifestyle Deals
+          </h1>
+          <p className='w-[60%] text-center text-[#5A5A5A]'>
+            Get exclusive offers and discounts on wellness products straight to
+            your inbox
+          </p>
+          <form
+            onSubmit={handleSubmit}
+            className='flex w-full flex-col items-center gap-5'
+          >
+            <div className='flex w-full flex-col items-center gap-6'>
+              <Input
+                type='text'
+                isRequired
+                placeholder='Full Name'
+                radius='full'
+                classNames={{
+                  inputWrapper: [
+                    'text-base',
+                    'pr-2',
+                    'shadow-none',
+                    'bg-transparent',
+                    'border border-[rgba(18, 18, 18, 0.1)] rounded-full py-7 mb-2',
+                    'text-black capitalize',
+                    'data-[hover=true]:bg-white',
+                    'group-data-[focus=true]:bg-white',
+                    'group-data-[active=true]:bg-white',
+                  ],
+                }}
+                startContent={<div className='mx-1'></div>}
+              />
+              <Input
+                type='email'
+                isRequired
+                placeholder='Email'
+                classNames={{
+                  inputWrapper: [
+                    'pr-2',
+                    'shadow-none',
+                    'bg-transparent',
+                    'border border-[rgba(18, 18, 18, 0.1)] rounded-full py-7 mb-2',
+                    'text-black capitalize',
+                    'data-[hover=true]:bg-white',
+                    'group-data-[focus=true]:bg-white',
+                    'group-data-[active=true]:bg-white',
+                  ],
+                }}
+                startContent={<div className='mx-1'></div>}
+              />
             </div>
-          </CardBody>
-        </Card>
-      </Section>
-    </div>
+            <Button
+              className='mb-10 w-[30%] py-7'
+              size='lg'
+              radius='full'
+              type='submit'
+              color='primary'
+            >
+              Subscribe
+            </Button>
+          </form>
+        </div>
+      </div>
+    </Section>
   );
 };
