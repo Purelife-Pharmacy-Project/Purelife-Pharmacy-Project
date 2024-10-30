@@ -295,7 +295,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
             </div>
           ) : null}
         </Section>
-        <div className='relative my-10 w-screen'>
+        <div className='relative my-10 w-full'>
           <QualityHomeBanner/>
         </div>
         <Section className='w-full bg-transparent'>
