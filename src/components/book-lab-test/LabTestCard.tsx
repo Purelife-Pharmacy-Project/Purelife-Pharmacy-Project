@@ -13,11 +13,30 @@ export const LabTestCard: React.FC<{ product: Product; baseUrl: string }> = ({
   const { addToCart } = useCartStore();
 
   return (
-    <div className='flex w-full flex-col rounded-xl'>
-      <div className='relative mb-5 flex w-full items-center justify-center rounded-2xl bg-primaryLight py-14'>
-        <Link href={`${baseUrl}/${product.id}`}>
-          <Image alt='' src={product.image_1024} width={100} height={207} className='' />
+    <div className='flex items-center justify-center p-6 bg-white w-full flex-col rounded-xl border border-[#E7E7E7]'>
+        <div className='flex justify-between items-center w-full'>
+          <p className='text-sm md:text-base lg:text-lg'>{product.name}</p>
+           <Button
+          disabled={product.quantity === 0}
+          onClick={() => {
+            addToCart({
+              id: product.id,
+              product,
+              quantity: 1,
+            });
+          }}
+          className='h-auto min-w-0 rounded-full bg-primaryLight p-3'
+        >
+          <IconCart />
+        </Button>
+      </div>
+      <div className='h-[80px] w-full'>{product.description}...
+        <Link href={`${baseUrl}/${product.id}`} className='text-primary underline ml-2'>
+          View More
         </Link>
+      </div>
+      <div className='flex justify-between items-end w-full text-xl font-semibold'>
+        {product.amount}{' '}
         <Button
           disabled={product.quantity === 0}
           onClick={() => {
@@ -27,16 +46,12 @@ export const LabTestCard: React.FC<{ product: Product; baseUrl: string }> = ({
               quantity: 1,
             });
           }}
-          className='absolute right-6 top-6 h-auto min-w-0 rounded-full bg-white p-3'
+          className='h-auto min-w-0 rounded-full bg-primary text-white p-3'
         >
-          <IconCart />
+          Book Session
         </Button>
       </div>
-
-      <p className='mb-2 font-medium text-header-100 lg:text-xl'>
-        {product.name}
-      </p>
-      <p className='font-bold text-header-100 lg:text-xl'>{product.amount}</p>
+       
     </div>
   );
 };

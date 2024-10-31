@@ -18,9 +18,7 @@ type Prop = {
 const TopTest: React.FC<Prop> = ({ title, data }) => {
   return (
     <Section>
-      <h5 className='mb-6 text-lg font-semibold capitalize lg:text-2xl'>
-        {title}
-      </h5>
+      <h3 className='mb-5 text-3xl text-[#1E272F]'>{title}</h3>
       <div className='grid grid-cols-[1fr] gap-x-6 gap-y-6 md:grid-cols-[0.8fr_1fr] md:grid-rows-2 mt-10 mb-[50px]'>
         {data.map((offering, index) => (
           <Card
@@ -30,7 +28,7 @@ const TopTest: React.FC<Prop> = ({ title, data }) => {
             }`}
           >
             <CardBody
-              className={`flex items-center flex-row-reverse  ${index !== 0 ? 'px-0 py-0' : 'p-0 pt-10 pl-8 md:h-auto h-[500px] gap-5'}  ${
+              className={`flex items-center overflow-y-hidden flex-row-reverse  ${index !== 0 ? 'px-0 py-0' : 'p-0 pt-10 pl-8 md:h-auto h-[500px] gap-5'}  ${
                 index === 1 && 'flex-row'
               }`}
             >
@@ -45,11 +43,11 @@ const TopTest: React.FC<Prop> = ({ title, data }) => {
               <div
                 className={`my-5 mr-auto flex ${
                   index === 0 && 'h-full md:h-full w-[60%] justify-between items-between'
-                } ${index === 1 && 'mr-[7%]'} ${index === 2 && 'ml-[7%]'} flex-col gap-3`}
+                } ${index === 1 && 'mr-[7%] ml-[3%]'} ${index === 2 && 'ml-[7%]'} flex-col gap-3`}
               >
                 {index !== 0 && (
                   <p className='text-sm text-[#000000]'>{offering.tag}</p>
-                )}
+                )}  
 
                 <div className='gap-[30px] flex flex-col'>
                 {index === 0 && (
