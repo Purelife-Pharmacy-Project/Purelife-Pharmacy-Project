@@ -172,8 +172,8 @@ export const useGetProductsInfinity = ({
         CategoryId: categoryId,
         Limit: limit,
         offset: pageParam,
-        MinListPrice,
-        MaxListPrice,
+        MinListPrice: MinListPrice,
+        MaxListPrice: MaxListPrice,
         isPublished,
       });
     },
@@ -182,6 +182,11 @@ export const useGetProductsInfinity = ({
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.length ? allPages.length * lastPage.length : undefined;
+    },
+    getPreviousPageParam: (firstPage, allPages) => {
+      const currentOffset = allPages.length * firstPage.length;
+      const previousOffset = currentOffset - firstPage.length;
+      return previousOffset > 0 ? previousOffset - firstPage.length : undefined;
     },
   });
 
