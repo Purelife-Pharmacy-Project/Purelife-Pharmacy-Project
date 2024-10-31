@@ -8,31 +8,29 @@ import SummerDeals from '@/components/book-lab-test/SummerDeals';
 import BookSession from '@/components/book-lab-test/BookSession';
 import { Reviews } from '@/components/home/Reviews';
 import { QualityHomeBanner } from '@/components/quality-home-banner';
+import HealthOfferingsVaccine from '@/components/home/TopTest';
+import TopTest from '@/components/home/TopTest';
 
 export default async function BookATest() {
   const data = [
     {
       title: 'See top test to take before you get married',
-      image: '/images/default-test.png',
-      cta: 'Shop all test',
+      image: '/images/lab-test-1.png',
+      cta: 'Shop Now',
       ctaLink: '/telehealth/book-lab-test?category=18#scroll',
     },
     {
-      title: 'Top Test to Improve Your Sexual Health',
-      image: '/images/default-test.png',
-      cta: 'Shop all test',
+      title: 'See top test to improve your sexual health',
+      tag: 'Sexual Health',
+      image: '/images/lab-test-2.png',
+      cta: 'Shop Now',
       ctaLink: '/telehealth/book-lab-test?category=21#scroll',
     },
     {
       title: 'Take this test to find out your genotype',
-      image: '/images/default-test.png',
-      cta: 'Shop all test',
-      ctaLink: '/telehealth/book-lab-test?category=18#scroll',
-    },
-    {
-      title: 'Take this test to find out your genotype',
-      image: '/images/default-test.png',
-      cta: 'Shop all test',
+      tag: 'Genotype',
+      image: '/images/lab-test-3.png',
+      cta: 'Shop Now',
       ctaLink: '/telehealth/book-lab-test?category=18#scroll',
     },
   ];
@@ -98,7 +96,7 @@ export default async function BookATest() {
 
         <LabTestProducts />
 
-        <HealthOfferings
+        <TopTest
           title='See the top test people are taking'
           data={data}
         />
@@ -109,7 +107,7 @@ export default async function BookATest() {
 
         <div className='invisible mb-4'></div>
 
-        <BookSession />
+        {/* <BookSession /> */}
 
         <div className='invisible mb-4'></div>
 

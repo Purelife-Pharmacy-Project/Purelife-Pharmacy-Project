@@ -160,8 +160,11 @@ export const useGetProductsInfinity = ({
     isError,
     refetch,
     fetchNextPage,
+    fetchPreviousPage,
     isFetchingNextPage,
+    isFetchingPreviousPage,
     hasNextPage,
+    hasPreviousPage,
   } = useInfiniteQuery({
     queryKey: queryKeys,
     queryFn: async ({ pageParam }) => {
@@ -190,8 +193,11 @@ export const useGetProductsInfinity = ({
     isSuccess,
     isError,
     fetchProductNextPage: fetchNextPage,
+    fetchProductPreviousPage: fetchPreviousPage,
     isFetchingProductNextPage: isFetchingNextPage,
+    isFetchingProductPreviousPage: isFetchingPreviousPage,
     productHasNextPage: hasNextPage,
+    productHasPreviousPage: hasPreviousPage,
   };
 };
 
