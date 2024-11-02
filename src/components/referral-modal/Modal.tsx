@@ -20,7 +20,7 @@ const ReferralModal: React.FC<ModalProps> = ({ onClose }) => {
     <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50'>
       <div
         ref={modalRef}
-        className='w-full max-w-[50%] rounded-lg bg-white p-6'
+        className='w-[90%] md:w-[50%] rounded-lg bg-white p-6'
       >
         <h2 className='mb-4 flex items-center justify-between text-3xl font-bold'>
           Refer and Earn
