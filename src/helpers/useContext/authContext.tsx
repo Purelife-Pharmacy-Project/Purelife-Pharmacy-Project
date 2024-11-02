@@ -1,4 +1,3 @@
-// authContext.tsx
 'use client';
 import { createContext, useContext, useEffect, useState } from 'react';
 
@@ -20,6 +19,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 export const useAuth = () => useContext(AuthContext);
 
+// Define your search context
 const SearchContext = createContext<{ showSearch: boolean; setShowSearch: (show: boolean) => void }>({
   showSearch: false,
   setShowSearch: () => {},
@@ -35,5 +35,4 @@ export const SearchProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// Custom hook to access search context
 export const useSearch = () => useContext(SearchContext);
