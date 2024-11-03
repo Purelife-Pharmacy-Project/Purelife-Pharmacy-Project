@@ -23,7 +23,7 @@ export const HomeHero: FC<HomeHeroProps> = ({
         <div className='grid grid-cols-[1fr] lg:grid-cols-[3fr_2.7fr] lg:gap-0'>
           <div className='w-full flex flex-col gap-2 lg:gap-6 lg:justify-center'>
             <h1 className='text-balance mx-auto text-center text-4xl font-bold  text-header-100 lg:mx-0 lg:w-full  sm:w-[80%] md:w-[50%] lg:max-w-full lg:text-start lg:text-6xl'>
-            Book an appointment with <TypeAnimation
+            Book an appointment<br/>  with <TypeAnimation
               sequence={[
                 'Doctors',
                 2000,
@@ -37,7 +37,7 @@ export const HomeHero: FC<HomeHeroProps> = ({
               wrapper="span"
               cursor={true}
               repeat={Infinity}
-            /> at Purelife
+            /> <br/> at Purelife
             
             </h1>
             <p className='mx-auto sm:w-[80%] w-[60%] lg:w-full text-center text-base font-medium leading-[30px] text-content lg:mx-0 lg:text-start lg:text-lg'>

@@ -2,25 +2,17 @@
 import { Footer } from '@/components/home/Footer';
 import { IconLeftArrow } from '@/components/icons/IconLeftArrow';
 import { LoginForm } from '@/components/login/loginForm';
-import { useAuth } from '@/helpers/useContext/authContext';
 import { Card, CardBody } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 // import { Suspense } from 'react';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { isAuthenticated, logout } = useAuth();
   const redirectPath = localStorage.getItem('redirectPath');
   const handleBackClick = () => {
     localStorage.removeItem('redirectPath');
     router.push('/telehealth/find-a-doctor/availability-calendar'); 
   };
-  useEffect(() => {
-    if (isAuthenticated && (redirectPath === '/telehealth/find-a-doctor/availability-calendar')) {
-      router.push(`/telehealth/find-a-doctor/review-and-book`)
-    }
-  }, [])
   return (
     <>
       <main className='mb-10 w-[90%] md:w-[45%] sm:w-[70%] mx-auto h-screen justify-center md:mb-0'>

@@ -34,16 +34,16 @@ const Modal: React.FC<ModalProps> = ({
     return `${hours}:${minutes} ${ampm}`;
   };
   const [submittedDay, setSubmittedDay] = useState('');
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   const handleTimeSelect = (hour: string) => {
     setSelectedHour(hour);
     localStorage.setItem('redirectPath', '/telehealth/find-a-doctor/availability-calendar');
-    if (false) {
-      router.push(`/sign-in`);
+    if (isAuthenticated) {
+      router.push(`/telehealth/find-a-doctor/review-and-book`)
     }
     else {
-      router.push(`/telehealth/find-a-doctor/review-and-book`)
+      router.push(`/sign-in`);
     }
     setSubmittedDay(`Submitted appointment for ${doctor.name}: ${date.toDateString()} at ${convertTo12HourFormat(hour)}`);
     console.log(`Submitted appointment for ${doctor.name}: ${date.toDateString()} at ${convertTo12HourFormat(hour)}`);
@@ -75,7 +75,7 @@ const Modal: React.FC<ModalProps> = ({
               <IconRating color='#FDC04B' size={11} className='-mt-1'/> 4.5
             </p>
             <div className='flex items-center gap-2'>
-              <IconVideo /> <span>Video Visit</span>{' '}
+              <IconVideo /> <span onClick={()=>{console.log()}}>Video Visit</span>{' '}
             </div>
           </div>
         </div>

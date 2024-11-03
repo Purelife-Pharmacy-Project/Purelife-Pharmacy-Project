@@ -44,9 +44,15 @@ export const LoginForm = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  const redirectPath = localStorage.getItem('redirectPath');
   const { loginUser, loadingLogin, loginError, isError } = useLogin(() => {
-    router.push(redirectUrl ? redirectUrl : '/');
+    if (redirectPath === '/telehealth/find-a-doctor/availability-calendar') {
+      router.push(`/telehealth/find-a-doctor/review-and-book`)
+    }
+    else {
+      router.push(redirectUrl ? redirectUrl : '/');
+    }
+    
   });
 
   const onSubmit: SubmitHandler<LoginPayload> = (data) => {
