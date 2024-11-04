@@ -92,8 +92,6 @@ export default async function BookATest() {
       <main className='grid gap-6 xl:gap-12'>
         <BookATestHero />
 
-        {/*<FrequentLabTests title='Frequently Scheduled Lab Tests' />*/}
-
         <LabTestProducts />
 
         <TopTest
@@ -105,15 +103,7 @@ export default async function BookATest() {
 
         <SummerDeals />
 
-        <div className='invisible mb-4'></div>
-
-        {/* <BookSession /> */}
-
-        <div className='invisible mb-4'></div>
-
         <QualityHomeBanner/>
-
-        <div className='invisible mb-4'></div>
 
         <Reviews title={'Hear What Our Patients Are Saying About Our Exceptional Doctors'} reviews={reviews}/>
 

@@ -17,18 +17,18 @@ type Prop = {
 
 const TopTest: React.FC<Prop> = ({ title, data }) => {
   return (
-    <Section>
-      <h3 className='mb-5 text-3xl text-[#1E272F]'>{title}</h3>
+    <Section className='px-0'>
+      <h3 className='mb-5 pl-4 md:pl-0 text-xl md:text-3xl text-[#1E272F]'>{title}</h3>
       <div className='grid grid-cols-[1fr] gap-x-6 gap-y-6 md:grid-cols-[0.8fr_1fr] md:grid-rows-2 mt-10 mb-[50px]'>
         {data.map((offering, index) => (
           <Card
             key={offering.title}
-            className={`bg-[#F9F6EF] shadow-none ${
+            className={`bg-[#F9F6EF] rounded-none shadow-none ${
               index === 0 ? 'md:row-span-2' : 'md:row-span-1'
             }`}
           >
             <CardBody
-              className={`flex items-center overflow-y-hidden flex-row-reverse  ${index !== 0 ? 'px-0 py-0' : 'p-0 pt-10 pl-8 md:h-auto h-[500px] gap-5'}  ${
+              className={`flex items-center overflow-y-hidden flex-row-reverse  ${index !== 0 ? 'px-0 py-0' : 'p-0 pt-5 pl-5 pb-5 md:pt-10 md:pl-8 sm:h-[500px] h-[450px] gap-5'}  ${
                 index === 1 && 'flex-row'
               }`}
             >
@@ -37,12 +37,12 @@ const TopTest: React.FC<Prop> = ({ title, data }) => {
                   index === 0 ? 'absolute bottom-0 w-auto -right-10 overflow-hidden' : 'relative'
                 } justify-center  `}
               >
-                <Image src={offering.image} alt='' className={`${index === 0 ? 'h-[500px] lg:h-auto max-w-none' : 'h-[300px] w-auto max-w-none'}`} />
+                <Image src={offering.image} alt='' className={`${index === 0 ? 'h-[400px] sm:h-[500px] lg:h-auto max-w-none' : 'h-[200px] sm:h-[300px] w-auto max-w-none'}`} />
               </div>
 
               <div
                 className={`my-5 mr-auto flex ${
-                  index === 0 && 'h-full md:h-full w-[60%] justify-between items-between'
+                  index === 0 && 'h-full md:h-full w-[60%] items-between'
                 } ${index === 1 && 'mr-[7%] ml-[3%]'} ${index === 2 && 'ml-[7%]'} flex-col gap-3`}
               >
                 {index !== 0 && (
@@ -55,22 +55,23 @@ const TopTest: React.FC<Prop> = ({ title, data }) => {
                     src='/app-logo.png'
                     alt='Purelife logo'
                     width={147}
-                    height={68.271}
+                    height='auto'
+                    className='w-[100px] h-auto md:w-auto'
                   />
                   )}    
                 <p
-                  className={`font-bold text-2xl lg:text-3xl ${
+                  className={`font-bold text-xl sm:text-2xl lg:text-3xl ${
                     index === 0 && 'text-3xl'
                   }`}
                 >
                   {offering.title}
                 </p>                  
                 </div>
-                {index !== 0 && (
+                {(
                   <Button
                     as={offering.ctaLink ? NextLink : 'button'}
                     className={clsx(
-                      'w-[120px] bg-primary text-xs font-medium text-[#FFFFFF] lg:text-sm',
+                      'w-[80px] md:w-[120px] bg-primary text-xs font-medium text-[#FFFFFF] lg:text-sm',
                       { 'bg-transparent text-default': !offering.ctaLink }
                     )}
                     radius='sm'

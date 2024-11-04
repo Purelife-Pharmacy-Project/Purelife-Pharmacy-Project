@@ -20,7 +20,7 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({
         >
           <div className='flex flex-col justify-center pt-10 sm:py-14'>
             <div className='relative flex w-[60%] sm:w-full flex-col justify-between text-[#1E272F] md:h-fit '>
-              <h1 className='mb-4 flex h-auto w-[500px] max-w-[70%] flex-col xl:gap-3 bg-transparent font-bold text-white sm:max-w-[100%] text-3xl md:text-4xl lg:max-w-[650px] xl:text-5xl'>
+              <h1 className='mb-4 flex h-auto max-w-[70%] flex-col xl:gap-3 bg-transparent font-bold text-white sm:max-w-[100%] text-3xl md:text-4xl lg:max-w-[650px] xl:text-5xl'>
                 <span className='whitespace-nowrap'>Quality home</span>
                 <span className='whitespace-nowrap'>healthcare you can</span>
                 <span className='whitespace-nowrap'>trust</span>

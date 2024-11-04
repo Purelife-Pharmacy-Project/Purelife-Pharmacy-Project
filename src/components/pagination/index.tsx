@@ -125,7 +125,7 @@ const Pagination: React.FC<PaginationProps> = ({
           of {totalPages}
         </span> */}
       </div>
-      <div className={`flex items-center gap-3 font-medium`}>
+      <div className={`flex items-center gap-1 md:gap-3 font-medium`}>
         {/* <span
           onClick={() => {
             if (currentPage > 5) {
@@ -152,7 +152,7 @@ const Pagination: React.FC<PaginationProps> = ({
             // }
             
           }
-          className=' cursor-pointer mr-4 flex rounded-[4px] bg-[#FF00280D] items-center pr-4'
+          className='md:text-base text-sm cursor-pointer mr-4 flex rounded-[4px] bg-[#FF00280D] items-center pr-4'
         >
           <IconChevronLeft
             color='[#FF0028]'
@@ -188,7 +188,7 @@ const Pagination: React.FC<PaginationProps> = ({
               handleNextPage
             // }
         }
-          className=' cursor-pointer ml-4 flex rounded-[4px] bg-[#FF00280D] items-center pl-4'
+          className='md:text-base text-sm cursor-pointer md:ml-4 flex rounded-[4px] bg-[#FF00280D] items-center pl-4'
         >
           Next
           <IconChevronLeft
