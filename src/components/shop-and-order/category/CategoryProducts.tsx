@@ -199,7 +199,7 @@ export const CategoryProducts = () => {
               >
                 Reset Filter
               </Button>
-              <div className='relative w-fit'>
+              <div className='block lg:hidden relative w-fit'>
                 <div
                   ref={filterButtonRef}
                   onClick={() => setFilterDropdown(!filterDropdown)}
