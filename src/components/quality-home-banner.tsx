@@ -5,27 +5,29 @@ import Image from 'next/image';
 interface QualityHomeBannerProps {
   backgroundClassName?: string;
   buttonClassName?: string;
+  textClassName?: string;
 }
 export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({
   backgroundClassName,
   buttonClassName,
+  textClassName
 }) => {
   return (
     <>
       <div
-        className={`flex justify-center bg-[#1E272F] ${backgroundClassName}`}
+        className={`flex justify-center ${backgroundClassName}`}
       >
         <Section
           className={`grid gap-4 bg-[#1E272F] sm:grid-cols-[1fr_1.4fr] ${backgroundClassName}`}
         >
           <div className='flex flex-col justify-center pt-10 sm:py-14'>
             <div className='relative flex w-[60%] sm:w-full flex-col justify-between text-[#1E272F] md:h-fit '>
-              <h1 className='mb-4 flex h-auto max-w-[70%] flex-col xl:gap-3 bg-transparent font-bold text-white sm:max-w-[100%] text-3xl md:text-4xl lg:max-w-[500px] xl:text-5xl'>
+              <h1 className={`${textClassName} mb-4 flex h-auto max-w-[70%] flex-col xl:gap-3 bg-transparent font-bold  sm:max-w-[100%] text-3xl md:text-4xl lg:max-w-[500px] xl:text-5xl`}>
                 <span className='whitespace-nowrap'>Quality home</span>
                 <span className='whitespace-nowrap'>healthcare you can</span>
                 <span className='whitespace-nowrap'>trust</span>
               </h1>
-              <p className='text-white md:text-base text-xs'>
+              <p className={`md:text-base text-xs ${textClassName}`}>
                 We provide homecare services such as Sample pickup for lab
                 tests, Home vaccination and Home doctor visitation.
               </p>

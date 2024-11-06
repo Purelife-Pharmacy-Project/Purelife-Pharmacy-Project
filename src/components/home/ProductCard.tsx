@@ -1,4 +1,5 @@
-import React from 'react';
+"use client";
+import React, { useEffect, useRef, useState } from 'react';
 import { Product } from '@/services/products/types';
 import { Button, Image } from '@nextui-org/react';
 import { IconHeart } from '@/components/icons/IconHeart';
@@ -9,12 +10,17 @@ type Prop = {
 };
 
 const ProductCard: React.FC<Prop> = ({ product }) => {
+  const containerRef = useRef(null);
+  const [maxNameWidth, setMaxNameWidth] = useState('100%');
+  useEffect(() => {
+    if (containerRef.current) {
+      const containerWidth = containerRef.current.offsetWidth;
+      setMaxNameWidth(`${containerWidth * 0.9}px`);
+    }
+  }, []);
   return (
-    <div className='flex min-w-[200px] max-w-[300px] flex-col gap-5'>
-      <div className='relative h-40 rounded-lg border border-[#FFEAED] p-4 lg:h-60 lg:p-10'>
-        <Button className='absolute right-2 top-3.5 z-20 h-10 min-h-0 w-10 min-w-0 rounded-full bg-[#F0F0F0] p-0'>
-          <IconHeart className='text-[#FFA7B5]' size={20} />
-        </Button>
+    <div className='flex flex-col gap-5'>
+      <div ref={containerRef} className='relative bg-white h-40 rounded-[20px] p-4 lg:h-60 lg:p-10'>
         <Image
           alt={product.name}
           className='h-full w-full object-contain'
@@ -26,10 +32,10 @@ const ProductCard: React.FC<Prop> = ({ product }) => {
         />
       </div>
       <div className='flex justify-between gap-3 text-xs font-medium text-[#383838]'>
-        <p>{product.name}</p>
-        <p>{product.amount}</p>
+        <p style={{ maxWidth: maxNameWidth }} className='font-semibold truncate'>{product.name}</p>
+        {product.price && <p>{product.amount}</p>}
       </div>
-      <AddToCartBtn product={product} className='mt-auto' />
+      {product.price && <AddToCartBtn product={product} className='mt-auto' />}
     </div>
   );
 };

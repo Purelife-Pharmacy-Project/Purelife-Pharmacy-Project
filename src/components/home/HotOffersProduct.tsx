@@ -17,13 +17,17 @@ const HotOffersProduct: React.FC<Prop> = () => {
   return (
     <div>
       <ProductRow
-        title='Hot New Offers🔥'
+        title='Hot New Offers Under ₦5,000'
         moreLink='/shop?category=health-new-offers'
         products={allProducts}
         isLoading={loadingProducts}
         emptyMessage='Oops. No products yet'
         ProductComp={ProductCard}
         loader={<ProductLoadingSkeleton />}
+        productClassName='rounded-[20px] bg-primaryLight p-8'
+        headerClassName='mx-auto'
+        price={false}
+        variant="hot offers"
       />
     </div>
   );

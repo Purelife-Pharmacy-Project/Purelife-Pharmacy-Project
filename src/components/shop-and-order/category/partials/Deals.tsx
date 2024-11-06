@@ -5,10 +5,10 @@ import { useGetCategories, useQueryParams } from '@/hooks';
 import { Radio, RadioGroup } from '@nextui-org/react';
 import { useSearchParams } from 'next/navigation';
 import { FC, useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
-type ProductSortDropdownProps = {};
 
-export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
+type DealsProps = {};
+
+export const Deals: FC<DealsProps> = () => {
   const { categories, loadingCategories } = useGetCategories();
   const { setQuery, removeQuery } = useQueryParams();
   const currentCategory = useSearchParams().get('category');
@@ -16,37 +16,27 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
   const allowedCategories = [
     'health',
     'beauty',
-    'supermarket',
-    'general',
-    'tests',
-    'vaccines',
-    'all',
   ];
 
   const displayCategories: any = {
-    health: 'Health',
-    beauty: 'Beauty',
-    supermarket: 'Supermarket',
-    general: 'General',
-    tests: 'Tests',
-    vaccines: 'Vaccines',
-    all: 'All',
+    health: 'Hot New Offers',
+    beauty: 'Best Selling Products',
   };
 
   const [selectedValue, setSelectedValue] = useState<string>('all');
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [height, setHeight] = useState<string>('0');
+
   useEffect(() => {
     if (!currentCategory) {
       removeQuery(['category']);
-      setSelectedValue('all');
     } else {
-      setSelectedValue(currentCategory.toUpperCase());
+      setSelectedValue(currentCategory.toLowerCase());
     }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentCategory]);
+  }, [currentCategory, removeQuery]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSelectCategory = (category: string) => {
     if (String(category)?.toLowerCase() === 'all') {
       removeQuery(['category']);
@@ -59,23 +49,23 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
     if (selectedValue) {
       handleSelectCategory(selectedValue);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedValue]);
+  }, [selectedValue, handleSelectCategory]);
 
   useEffect(() => {
     if (isOpen && contentRef.current) {
-      setHeight(`${contentRef.current.scrollHeight}px`);
+      setHeight(`${contentRef.current.scrollHeight - 5}px`);
     } else {
       setHeight('0');
     }
-  }, [isOpen, categories]); 
+  }, [isOpen, categories]);
+
   return (
     <section>
       <div
         className="flex justify-between items-center cursor-pointer"
         onClick={() => setIsOpen((prev) => !prev)}
       >
-        <span className="font-semibold text-header-100 mb-3">Categories</span>
+        <span className="font-semibold text-header-100 mb-3">Deals</span>
         {isOpen ? (
           <div className="-rotate-90">
             <IconChevronLeft />
@@ -101,18 +91,22 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
             label: 'font-semibold text-header-100 cursor-pointer',
           }}
         >
-          {(filteredCategories(categories, allowedCategories) || []).map(
-            (category) => (
+          {allowedCategories.map((category) => {
+            const filteredCategory = categories?.find(
+              (cat) => cat.name.toLowerCase() === category
+            );
+            return (
+              filteredCategory && (
                 <Radio
-                  key={category.name}
+                  key={filteredCategory.name}
                   className="capitalize text-[#797979]"
-                  value={category.name}
+                  value={category}
                 >
-                  {category.name?.toLowerCase()}
+                  {displayCategories[category]}
                 </Radio>
               )
             );
-          }
+          })}
         </RadioGroup>
       </div>
     </section>
