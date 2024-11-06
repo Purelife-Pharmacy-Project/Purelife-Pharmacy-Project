@@ -32,7 +32,7 @@ const ProductCard: React.FC<Prop> = ({ product }) => {
         />
       </div>
       <div className='flex justify-between gap-3 text-xs font-medium text-[#383838]'>
-        <p style={{ maxWidth: maxNameWidth }} className='font-semibold truncate'>{product.name}</p>
+        <p style={{ maxWidth: maxNameWidth }} className='font-semibold truncate text-sm md:text-base'>{product.name}</p>
         {product.price && <p>{product.amount}</p>}
       </div>
       {product.price && <AddToCartBtn product={product} className='mt-auto' />}

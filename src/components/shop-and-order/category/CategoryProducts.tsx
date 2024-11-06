@@ -225,7 +225,7 @@ export const CategoryProducts = () => {
                   </div>
                 )}
               </div>
-              <div className='relative w-fit'>
+              {/* <div className='relative w-fit'>
                 <div
                   ref={sortButtonRef}
                   onClick={() => setSortDropdown(!sortDropdown)}
@@ -255,7 +255,7 @@ export const CategoryProducts = () => {
                     ))}
                   </div>
                 )}
-              </div>
+              </div> */}
             </div>
             <ProductsList
               limit={limit}
