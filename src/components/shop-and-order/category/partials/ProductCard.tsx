@@ -78,7 +78,7 @@ export const ProductCard: React.FC<{ product: Product; loading: boolean }> = ({
     <div className='flex w-full flex-col rounded-xl'>
       <div className='relative mb-5 flex w-full items-center justify-center rounded-2xl bg-primaryLight py-14'>
         <Link href={`/cart/${product.id}`}>
-          <Image alt='' src={product.image_1024} width={120.22} height={150} className='bg-primaryLight' />
+          <Image alt='' src={product.image_1024} width={120.22} height={150} className='bg-primaryLight !h-[100px] md:h-[150px]' />
         </Link>
         <Button
           disabled={product.quantity === 0}
@@ -89,16 +89,16 @@ export const ProductCard: React.FC<{ product: Product; loading: boolean }> = ({
               quantity: 1,
             });
           }}
-          className='absolute right-6 top-6 h-auto min-w-0 rounded-full bg-white p-3'
+          className='absolute z-[10] right-6 top-6 h-auto min-w-0 rounded-full bg-white p-3'
         >
           <IconCart color='[#686868]'/>
         </Button>
       </div>
 
-      <p className='mb-2 font-medium text-header-100 lg:text-xl'>
+      <p className='mb-2 font-medium text-sm md:text-base lg:text-xl'>
         {product.name}
       </p>
-      <p className='font-bold text-header-100 lg:text-xl'>{product.amount}</p>
+      <p className='font-bold text-sm md:text-base lg:text-xl'>{product.amount}</p>
     </div>
   );
 };

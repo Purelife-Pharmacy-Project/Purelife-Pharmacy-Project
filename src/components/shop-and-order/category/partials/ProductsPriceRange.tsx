@@ -8,6 +8,7 @@ import { FC, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import ReactSlider from 'react-slider';
+import { useSearchParams } from 'next/navigation';
 
 type ProductsPriceRangeProps = {};
 
@@ -48,6 +49,23 @@ export const ProductsPriceRange: FC<ProductsPriceRangeProps> = ({}) => {
       setHeight('0');
     }
   }, [isOpen]);
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    const minPrice = searchParams.get('minPrice');
+    const maxPrice = searchParams.get('maxPrice');
+  
+    if (minPrice && maxPrice) {
+      // Update state with URL parameters if they exist
+      setTempRange({ min: minPrice, max: maxPrice });
+      setValue('min', minPrice);
+      setValue('max', maxPrice);
+    } else {
+      // If parameters are missing, set to default values
+      setTempRange({ min: '0', max: '200000' });
+      setValue('min', '0');
+      setValue('max', '200000');
+    }
+  }, [searchParams, setValue]);
   return (
     <div className='relative w-fit'>
       <div
@@ -72,14 +90,14 @@ export const ProductsPriceRange: FC<ProductsPriceRangeProps> = ({}) => {
           overflow: 'hidden',
           transition: 'height 0.3s ease-in-out',
         }}
-        className=''
+        className='px-4'
       >
         <ReactSlider
-          className='relative mt-6 h-0.5 rounded-full bg-gray-200'
-          defaultValue={[0, 100000] as any}
+          className='relative mt-5 h-0.5 rounded-full bg-gray-200'
+          defaultValue={[0, 200000] as any}
           value={[watch('min'), watch('max')] as any}
           min={0}
-          max={100000}
+          max={200000}
           ariaLabel={['Lower thumb', 'Upper thumb']}
           pearling
           step={1000}
@@ -97,8 +115,8 @@ export const ProductsPriceRange: FC<ProductsPriceRangeProps> = ({}) => {
               onMouseLeave={() => setFocusedThumb(null)}
             >
               <div
-                className={`h-4 w-4 rounded-full bg-[#36CB60] ${
-                  focusedThumb === state.index ? 'bg-gray-300' : 'bg-white'
+                className={`h-4 w-4 rounded-full !bg-[#36CB60] border-[#E7E7E7] border-[0.5px] ${
+                  focusedThumb === state.index ? 'bg-[#36CB60]' : 'bg-white'
                 }`}
               ></div>
               <div

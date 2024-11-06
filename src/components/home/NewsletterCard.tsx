@@ -22,17 +22,18 @@ export const NewsLetterCard = () => {
         }}
         className='w-full rounded-[20px] bg-[#F1F5EE] pt-8'
       >
-        <div className='mx-auto flex w-[90%] md:w-[60%] flex-col items-center gap-6'>
+        <div className='mx-auto flex w-[90%] md:w-[60%] flex-col items-center gap-4 md:gap-6'>
           <Image
             src='/app-logo.png'
             alt='Purelife logo'
             width={147}
             height={68.271}
+            className='!h-[50px] w-auto md:h-[68.271px]'
           />
-          <h1 className='w-full text-center text-4xl font-bold'>
+          <h1 className='w-[80%] text-center text-xl md:text-3xl lg:text-4xl font-bold'>
             Sign up for Amazing Health & Lifestyle Deals
           </h1>
-          <p className='w-[60%] text-center text-[#5A5A5A]'>
+          <p className='w-[80%] md:w-[60%] text-center text-sm md:text-base text-[#5A5A5A]'>
             Get exclusive offers and discounts on wellness products straight to
             your inbox
           </p>
@@ -40,7 +41,7 @@ export const NewsLetterCard = () => {
             onSubmit={handleSubmit}
             className='flex w-full flex-col items-center gap-5'
           >
-            <div className='flex w-full flex-col items-center gap-6'>
+            <div className='flex w-full flex-col items-center gap-2 md:gap-6'>
               <Input
                 type='text'
                 isRequired
@@ -81,7 +82,7 @@ export const NewsLetterCard = () => {
               />
             </div>
             <Button
-              className='mb-10 w-[30%] py-7'
+              className='mb-10 w-[50%] md:w-[30%] py-7'
               size='lg'
               radius='full'
               type='submit'

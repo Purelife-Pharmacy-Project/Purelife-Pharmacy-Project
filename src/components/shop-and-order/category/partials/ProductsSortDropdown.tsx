@@ -5,7 +5,6 @@ import { useGetCategories, useQueryParams } from '@/hooks';
 import { Radio, RadioGroup } from '@nextui-org/react';
 import { useSearchParams } from 'next/navigation';
 import { FC, useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
 type ProductSortDropdownProps = {};
 
 export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
@@ -30,7 +29,7 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
     general: 'General',
     tests: 'Tests',
     vaccines: 'Vaccines',
-    all: 'All',
+    all: 'All Categories',
   };
 
   const [selectedValue, setSelectedValue] = useState<string>('all');
@@ -70,7 +69,7 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
     }
   }, [isOpen, categories]); 
   return (
-    <section>
+    <section className='border-b pb-3'>
       <div
         className="flex justify-between items-center cursor-pointer"
         onClick={() => setIsOpen((prev) => !prev)}
@@ -96,24 +95,30 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
       >
         <RadioGroup
           value={selectedValue}
-          onValueChange={(value) => setSelectedValue(value)}
+          onValueChange={(value) => {
+            setSelectedValue(value);
+          }}
           classNames={{
             label: 'font-semibold text-header-100 cursor-pointer',
           }}
         >
-          {(filteredCategories(categories, allowedCategories) || []).map(
-            (category) => (
-                <Radio
-                  key={category.name}
-                  className="capitalize text-[#797979]"
-                  value={category.name}
-                >
-                  {category.name?.toLowerCase()}
-                </Radio>
-              )
-            );
-          }
+          {(filteredCategories(categories, allowedCategories) || [])
+            .sort((a, b) => {
+              if (a.name.toLowerCase() === 'all') return 1;
+              if (b.name.toLowerCase() === 'all') return -1;
+              return 0;
+            })
+            .map((category) => (
+              <Radio
+                key={category.name}
+                className="capitalize text-[#797979]"
+                value={category.name}
+              >
+                {displayCategories[category.name?.toLowerCase()]}
+              </Radio>
+            ))}
         </RadioGroup>
+
       </div>
     </section>
   );
