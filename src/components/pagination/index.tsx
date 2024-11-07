@@ -82,8 +82,8 @@ const Pagination: React.FC<PaginationProps> = ({
   return (
     <section className={`flex w-full justify-between py-5`}>
       <div className={`flex items-center gap-4`}>
-        <span className='text-sm font-medium text-[#333333]'>Page</span>
-        <div className='relative w-fit'>
+        {/* <span className='text-sm font-medium text-[#333333]'>Page</span> */}
+        {/* <div className='relative w-fit'>
           <span
             ref={pageSelectButtonRef}
             onClick={() => {
@@ -119,14 +119,14 @@ const Pagination: React.FC<PaginationProps> = ({
               ))}
             </div>
           )}
-        </div>
+        </div> */}
 
-        <span className='text-sm font-medium text-[#333333]'>
+        {/* <span className='text-sm font-medium text-[#333333]'>
           of {totalPages}
-        </span>
+        </span> */}
       </div>
-      <div className={`flex items-center gap-3 font-medium`}>
-        <span
+      <div className={`flex items-center gap-1 md:gap-3 font-medium`}>
+        {/* <span
           onClick={() => {
             if (currentPage > 5) {
               setCurrentPage(currentPage - 5);
@@ -143,24 +143,25 @@ const Pagination: React.FC<PaginationProps> = ({
             style={{ transform: 'rotate(0deg)' }}
             className='-ml-6 h-[33px] w-[33px] cursor-pointer'
           />
-        </span>
+        </span> */}
         <span
-          onClick={() => {
-            if (currentPage > 1) {
-              setCurrentPage(currentPage - 1);
+          onClick={
+            // if (currentPage > 1) {
+              // setCurrentPage(currentPage - 1);
               handlePrevPage
-            }
-            ;
-          }}
-          className='mr-4 flex rounded-[4px] bg-[#FF00280D]'
+            // }
+            
+          }
+          className='md:text-base text-sm cursor-pointer mr-4 flex rounded-[4px] bg-[#FF00280D] items-center pr-4'
         >
           <IconChevronLeft
             color='[#FF0028]'
             style={{ transform: 'rotate(0deg)' }}
             className='h-[33px] w-[33px] cursor-pointer'
           />
+          Previous
         </span>
-        {pageNumbers.map((page, index) =>
+        {/* {pageNumbers.map((page, index) =>
           page === '...' ? (
             <span key={index}>...</span>
           ) : (
@@ -179,23 +180,24 @@ const Pagination: React.FC<PaginationProps> = ({
               {page}
             </span>
           )
-        )}
+        )} */}
         <span
-          onClick={() => {
-            if (currentPage < totalPages) {
-              setCurrentPage(currentPage + 1);
+          onClick={
+            // if (currentPage < totalPages) {
+              // setCurrentPage(currentPage + 1);
               handleNextPage
-            }
-          }}
-          className='ml-4 flex rounded-[4px] bg-[#FF00280D]'
+            // }
+        }
+          className='md:text-base text-sm cursor-pointer md:ml-4 flex rounded-[4px] bg-[#FF00280D] items-center pl-4'
         >
+          Next
           <IconChevronLeft
             color='[#FF0028]'
             style={{ transform: 'rotate(180deg)' }}
             className='h-[33px] w-[33px] cursor-pointer'
           />
         </span>
-        <span
+        {/* <span
           onClick={() => {
             if (totalPages > 5) {
               setCurrentPage(currentPage + 5);
@@ -212,7 +214,7 @@ const Pagination: React.FC<PaginationProps> = ({
             style={{ transform: 'rotate(180deg)' }}
             className='-ml-6 h-[33px] w-[33px] cursor-pointer'
           />
-        </span>
+        </span> */}
       </div>
     </section>
   );

@@ -16,6 +16,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { inputBorderedDefault, inputDefault } from '@/theme';
 import { QualityHomeBanner } from '../quality-home-banner';
+import { VaccineCard } from './VaccineCard';
 
 const limit = 9;
 
@@ -285,7 +286,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
               >
                 {/* Display the first 6 items */}
                 {vaccines.slice(0, 6).map((product) => (
-                  <LabTestCard
+                  <VaccineCard
                     product={product}
                     key={product.id}
                     baseUrl='/telehealth/get-vaccination'
@@ -310,7 +311,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
               >
                 {/* Display the remaining items */}
                 {vaccines.slice(6).map((product) => (
-                  <LabTestCard
+                  <VaccineCard
                     product={product}
                     key={product.id}
                     baseUrl='/telehealth/get-vaccination'
