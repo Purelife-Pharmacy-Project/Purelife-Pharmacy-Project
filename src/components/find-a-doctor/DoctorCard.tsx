@@ -42,6 +42,7 @@ export const DoctorCard: FC<DoctorCardProps> = ({ doctor }) => {
           </p>
 
           <Button
+            isDisabled={true}
             color=''
             as={Link}
             href={`/telehealth/find-a-doctor/availability-calendar`}
@@ -49,7 +50,7 @@ export const DoctorCard: FC<DoctorCardProps> = ({ doctor }) => {
             radius='full'
             className='mt-4 w-full rounded-[35px] bg-[#1E272F] py-5 text-[#FFFFFF]'
           >
-            Consult now
+            Coming Soon
           </Button>
         </div>
       </div>

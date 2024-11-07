@@ -68,7 +68,7 @@ export const teleHealthServices = [
       'Consult with our team of healthcare professionals and specialists, anytime, anywhere\n' +
       '\n',
     url: '/telehealth/find-a-doctor',
-    actionText: 'Consult Now',
+    actionText: 'Coming Soon',
     isAvailable: true,
   },
   // {

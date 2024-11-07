@@ -39,18 +39,18 @@ export default function FindADoctor() {
       title: 'Appointment Confirmation',
       description:
         'Your appointment will be confirmed, and a health professional will be assigned to you for your consultation.',
-        icon: <IconProfessional color='white' />,
+      icon: <IconProfessional color='white' />,
     },
   ];
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const autoScrollInterval = useRef<NodeJS.Timeout | null>(null);
 
-
   const startAutoScroll = () => {
     if (scrollRef.current) {
       autoScrollInterval.current = setInterval(() => {
         if (scrollRef.current) {
-          const maxScrollLeft = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
+          const maxScrollLeft =
+            scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
           if (scrollRef.current.scrollLeft < maxScrollLeft) {
             scrollRef.current.scrollBy({
               left: 3,
@@ -59,7 +59,7 @@ export default function FindADoctor() {
             scrollRef.current.scrollLeft = 0;
           }
         }
-      }, 10); 
+      }, 10);
     }
   };
 
@@ -69,16 +69,15 @@ export default function FindADoctor() {
     }
   };
 
-
   useEffect(() => {
     startAutoScroll();
     return () => stopAutoScroll();
   }, []);
 
-
   const scrollLeft = () => {
     if (scrollRef.current) {
-      const newScrollPosition = scrollRef.current.scrollLeft - scrollRef.current.clientWidth;
+      const newScrollPosition =
+        scrollRef.current.scrollLeft - scrollRef.current.clientWidth;
       scrollRef.current.scrollTo({
         left: newScrollPosition > 0 ? newScrollPosition : 0,
         behavior: 'smooth',
@@ -86,13 +85,15 @@ export default function FindADoctor() {
     }
   };
 
-
   const scrollRight = () => {
     if (scrollRef.current) {
-      const newScrollPosition = scrollRef.current.scrollLeft + scrollRef.current.clientWidth;
-      const maxScrollLeft = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
+      const newScrollPosition =
+        scrollRef.current.scrollLeft + scrollRef.current.clientWidth;
+      const maxScrollLeft =
+        scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
       scrollRef.current.scrollTo({
-        left: newScrollPosition < maxScrollLeft ? newScrollPosition : maxScrollLeft,
+        left:
+          newScrollPosition < maxScrollLeft ? newScrollPosition : maxScrollLeft,
         behavior: 'smooth',
       });
     }
@@ -137,20 +138,19 @@ export default function FindADoctor() {
             <HomeHero
               title='Book an appointment with Doctors at Purelife'
               description='Take the first step towards a healthier you. Book your appointment with one of our dedicated doctors at Purelife and embark on your journey to wellness today.'
-              ctaText='Consult Now'
+              ctaText='Coming Soon'
               ctaLink=''
             />
           </Section>
         </div>
-        <div
-          id='doctors' className='bg-white pt-20 pb-10 lg:justify-center'>
+        <div id='doctors' className='bg-white pb-10 pt-20 lg:justify-center'>
           <div className='bg-white lg:justify-center'>
             <Section className='flex flex-col items-center justify-between px-6 sm:flex-row'>
               <div>
-                <h3 className='mb-3 text-3xl font-bold text-[#1E272F] xl:text-[40px] lg:mb-3'>
+                <h3 className='mb-3 text-3xl font-bold text-[#1E272F] lg:mb-3 xl:text-[40px]'>
                   Top-Rated Doctors on Our Platform
                 </h3>
-                <p className='mb-5 text-base text-[#5A5A5A] xl:text-[20px] sm:w-[75%]'>
+                <p className='mb-5 text-base text-[#5A5A5A] sm:w-[75%] xl:text-[20px]'>
                   Find trusted, highly rated doctors available to assist you
                   with personalized care and expert medical services.
                 </p>
@@ -162,7 +162,8 @@ export default function FindADoctor() {
                 onMouseLeave={() => {
                   startAutoScroll();
                 }}
-                className='mb-7 flex w-full justify-between gap-10 sm:mb-0 sm:w-auto'>
+                className='mb-7 flex w-full justify-between gap-10 sm:mb-0 sm:w-auto'
+              >
                 <Button
                   color=''
                   size='md'
@@ -191,7 +192,8 @@ export default function FindADoctor() {
             </Section>
             <div
               ref={scrollRef}
-              className={`pl-2 max-w-[95vw] ml-auto overflow-x-scroll scrollbar-none bg-white pb-4 lg:pb-16 lg:pt-10`}>
+              className={`scrollbar-none ml-auto max-w-[95vw] overflow-x-scroll bg-white pb-4 pl-2 lg:pb-16 lg:pt-10`}
+            >
               <div
                 onMouseEnter={() => {
                   stopAutoScroll();
@@ -210,20 +212,16 @@ export default function FindADoctor() {
                   </div>
                 ))}
               </div>
-            </div>  
+            </div>
           </div>
         </div>
 
-        <div
-          className={clsx(
-            'bg-primaryLight lg:grid lg:pt-2'
-          )}
-        >
-          <Section className='bg-primaryLight pt-10 pb-5'>
-            <h2 className='md:w-[60%] mb-2 font-bold text-[#1E272F] text-3xl xl:text-[40px] leading-[1.2]'>
+        <div className={clsx('bg-primaryLight lg:grid lg:pt-2')}>
+          <Section className='bg-primaryLight pb-5 pt-10'>
+            <h2 className='mb-2 text-3xl font-bold leading-[1.2] text-[#1E272F] md:w-[60%] xl:text-[40px]'>
               The best and experienced medical workers in their field
             </h2>
-            <p className='lg:w-[60%] mb-10 text-base text-[#5A5A5A] sm:text-[18px] lg:text-[20px]'>
+            <p className='mb-10 text-base text-[#5A5A5A] sm:text-[18px] lg:w-[60%] lg:text-[20px]'>
               Discover how our seamless platform matches you with the right
               healthcare specialists effortlessly.
             </p>
@@ -239,11 +237,17 @@ export default function FindADoctor() {
         </div>
 
         <HowItWorks data={howItWorksData} variant='primary' />
-        <QualityHomeBanner backgroundClassName={'bg-white'} buttonClassName={'bg-[#1E272F] text-white'}/>
-        <Reviews title='Hear What Our Patients Are Saying About Our Exceptional Doctors' reviews={reviews}/>
+        <QualityHomeBanner
+          backgroundClassName={'bg-white'}
+          buttonClassName={'bg-[#1E272F] text-white'}
+        />
+        <Reviews
+          title='Hear What Our Patients Are Saying About Our Exceptional Doctors'
+          reviews={reviews}
+        />
         <ReportDrugReaction />
         <div className='py-8'></div>
-        <NewsLetterCard/>
+        <NewsLetterCard />
         <Footer />
       </main>
     </>

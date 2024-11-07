@@ -23,6 +23,7 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({backgroundC
             </div>
 
             <Button
+              isDisabled={true}
               as={Link}
               href='https://primaryreporting.who-umc.org/NG'
               target='_blank'

@@ -47,6 +47,7 @@ export const HomeHero: FC<HomeHeroProps> = ({
             {ctaText !== '' && (
               <div className='flex w-full justify-center lg:w-max lg:justify-start'>
                 <Button
+                  isDisabled={true}
                   as={Link}
                   href={`/telehealth/find-a-doctor/availability-calendar`}
                   className='px-12 py-6 rounded-[35px] w-[40%] lg:w-[auto]'
