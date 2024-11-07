@@ -16,6 +16,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { inputBorderedDefault, inputDefault } from '@/theme';
 import { QualityHomeBanner } from '../quality-home-banner';
+import { VaccineCard } from './VaccineCard';
 
 const limit = 9;
 
@@ -145,8 +146,8 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                       <ReactSlider
                         className='relative mt-2 h-0.5 rounded-full bg-gray-200'
                         trackClassName='bg-gray-800 h-0.5 rounded-full example-track'
-                        defaultValue={[0, 100000]}
-                        value={[watch('min'), watch('max')]}
+                        defaultValue={[0, 100000] as any}
+                        value={[watch('min'), watch('max')] as any}
                         min={0}
                         max={100000}
                         ariaLabel={['Lower thumb', 'Upper thumb']}
@@ -285,7 +286,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
               >
                 {/* Display the first 6 items */}
                 {vaccines.slice(0, 6).map((product) => (
-                  <LabTestCard
+                  <VaccineCard
                     product={product}
                     key={product.id}
                     baseUrl='/telehealth/get-vaccination'
@@ -295,7 +296,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
             </div>
           ) : null}
         </Section>
-        <div className='relative my-10 w-screen'>
+        <div className='relative my-10 w-full'>
           <QualityHomeBanner/>
         </div>
         <Section className='w-full bg-transparent'>
@@ -310,7 +311,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
               >
                 {/* Display the remaining items */}
                 {vaccines.slice(6).map((product) => (
-                  <LabTestCard
+                  <VaccineCard
                     product={product}
                     key={product.id}
                     baseUrl='/telehealth/get-vaccination'

@@ -128,7 +128,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
               height={213}
               src='/images/patients/patient1.png'
               alt='doctor image'
-              className=' h-[120px] sm:h-auto sm:w-auto'
+              className=''
             />
           </div>
           <div className='flex justify-start '>
@@ -137,10 +137,10 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
               height={213}
               src='/images/patients/patient2.png'
               alt='doctor image'
-              className=' h-[100px] sm:h-auto sm:w-auto'
+              className=''
             />
           </div>
-          <div className='absolute top-[200px] hidden w-full justify-end sm:flex md:right-[30%] lg:right-[43%] '>
+          <div className='absolute top-[200px] hidden w-full justify-end lg:flex md:right-[30%] lg:right-[43%] '>
             <Image
               width={279}
               height={213}
@@ -149,7 +149,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
               className=''
             />
           </div>
-          <div className='absolute right-[15%] top-[420px] hidden w-full justify-end md:flex '>
+          <div className='absolute right-[15%] top-[420px] hidden w-full justify-end lg:flex '>
             <Image
               width={279}
               height={213}
@@ -159,7 +159,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
             />
           </div>
 
-          <div className='absolute bottom-0 -mb-3 hidden w-full items-end justify-between overflow-hidden sm:flex'>
+          <div className='absolute bottom-0 -mb-3 hidden w-full items-end justify-between overflow-hidden lg:flex'>
             <div className='ml-[10%]'>
               <Image
                 width={324}
