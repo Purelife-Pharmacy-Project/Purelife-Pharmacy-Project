@@ -6,6 +6,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { deleteCookie } from 'cookies-next';
 import { toast } from 'sonner';
 import { useCartStore } from '@/hooks/store/useCart';
+import { useAuth } from '@/helpers/useContext/authContext';
 
 export const useGetUser = () => {
   const {
@@ -49,6 +50,7 @@ export const useLogin = (
   onSuccess?: () => void,
   onError?: (error: string) => void
 ) => {
+  const { setIsAuthenticated } = useAuth();
   const {
     mutate: loginUser,
     isPending: loadingLogin,
@@ -77,6 +79,7 @@ export const useLogin = (
       queryKey: ['partner'],
       queryFn: () => UsersService.getPartner(),
     });
+    setIsAuthenticated(true);
   }
 
   return {
