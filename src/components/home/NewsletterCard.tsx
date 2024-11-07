@@ -6,8 +6,6 @@ import { IconRocket } from '../icons/IconRocket';
 import { Section } from './Section';
 import { inputAuth, inputBorderedGray } from '@/theme';
 import Image from 'next/image';
-import { inputAuth, inputBorderedGray } from '@/theme';
-import Image from 'next/image';
 
 export const NewsLetterCard = () => {
   const handleSubmit = (e: FormEvent) => {
