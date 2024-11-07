@@ -103,7 +103,7 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
   }, [itemHeight]);
   
   return (
-    <div className='relative w-full items-center bg-transparent md:min-h-[calc(100vh-260px)] xl:grid xl:min-h-[539px] xl:justify-center'>
+    <div className='relative w-full items-center bg-transparent md:grid md:min-h-[539px] md:justify-center'>
       <div
         className='absolute left-0 top-0 h-full w-full bg-center md:bg-right'
         style={{

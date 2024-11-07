@@ -3,8 +3,8 @@ import { Button } from '@nextui-org/react';
 import Image from 'next/image';
 import React, { useRef, useState } from 'react';
 import { IconArrowRight } from '../icons/IconArrowRight';
-import { IconStarBold } from '../icons/IconStarBold';
 import clsx from 'clsx';
+import { IconStarBold } from '../icons/IconStarBold';
 
 interface ReviewProps {
   title: string;
@@ -40,7 +40,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
   return (
     <div
       className={clsx(
-        'mt-20 bg-white sm:mt-0 lg:justify-center lg:pb-10 lg:pt-[55px] max-w-[1440px] mx-auto'
+        'mt-20 bg-white sm:mt-0 lg:justify-center lg:pb-10 lg:pt-[55px]'
       )}
     >
       <div className='bg-white lg:px-0'>
@@ -60,7 +60,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
                 onMouseLeave={() => {
                   setLeftIcon(false);
                 }}
-                color=''
+                color={undefined}
                 size='md'
                 radius='full'
                 className={`h-fit min-w-0 rotate-180 rounded-full border-2 border-[#1E272F] p-2 sm:p-4  ${
@@ -94,7 +94,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
                         )}
                       </div>
                       <p className='text-xs font-bold text-[#1E272F] sm:text-sm'>
-                        Mrs Adebayo Gregson
+                        {review.name}
                       </p>
                     </div>
                   </div>
@@ -108,7 +108,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
                 onMouseLeave={() => {
                   setRightIcon(false);
                 }}
-                color=''
+                color={undefined}
                 size='md'
                 radius='full'
                 className={`h-fit min-w-0 rounded-full border-2 border-[#1E272F] p-2 sm:p-4 ${

@@ -6,6 +6,8 @@ import { IconRocket } from '../icons/IconRocket';
 import { Section } from './Section';
 import { inputAuth, inputBorderedGray } from '@/theme';
 import Image from 'next/image';
+import { inputAuth, inputBorderedGray } from '@/theme';
+import Image from 'next/image';
 
 export const NewsLetterCard = () => {
   const handleSubmit = (e: FormEvent) => {
@@ -17,12 +19,12 @@ export const NewsLetterCard = () => {
       <div
         style={{
           backgroundImage: 'url(/images/signup-deals-background.png)',
-          backgroundPosition: 'center',
+          backgroundPosition: 'center bottom 55%',
           backgroundRepeat: 'no-repeat',
           backgroundSize: '',
           borderRadius: '20px',
         }}
-        className='w-full rounded-[20px] bg-[#F1F5EE] pt-16'
+        className='w-full rounded-[20px] bg-[#F1F5EE] pt-8'
       >
         <div className='mx-auto flex w-[90%] md:w-[60%] flex-col items-center gap-6'>
           <Image

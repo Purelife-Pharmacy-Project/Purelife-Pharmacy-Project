@@ -16,7 +16,6 @@ export const LabTestCard: React.FC<{ product: Product; baseUrl: string }> = ({
     <div className='flex w-full flex-col rounded-xl'>
       <div className='relative mb-5 flex w-full items-center justify-center rounded-2xl bg-primaryLight py-14'>
         <Link href={`${baseUrl}/${product.id}`}>
-          {/* <Image alt='' src='/images/vaccines/vaccine1.png' className='' /> */}
           <Image alt='' src={product.image_1024} width={100} height={207} className='' />
         </Link>
         <Button
@@ -38,31 +37,6 @@ export const LabTestCard: React.FC<{ product: Product; baseUrl: string }> = ({
         {product.name}
       </p>
       <p className='font-bold text-header-100 lg:text-xl'>{product.amount}</p>
-      {/* <div className='mt-auto flex gap-2.5'> */}
-      {/* <Button
-          className='bg-primaryLight text-sm font-medium text-primary'
-          radius='sm'
-          // disabled={product.quantity === 0}
-          onClick={() => {
-            addToCart({
-              id: product.id,
-              product,
-              quantity: 1,
-            });
-          }}
-        >
-          {product.quantity === 0 ? 'Out of stock' : 'Add to cart'}
-          Add to cart
-        </Button> */}
-      {/* <Button
-          as={NextLink}
-          className='bg-primaryLight text-sm font-medium text-primary'
-          radius='sm'
-          href={`${baseUrl}/${product.id}`}
-        >
-          Learn More
-        </Button> */}
-      {/* </div> */}
     </div>
   );
 };
