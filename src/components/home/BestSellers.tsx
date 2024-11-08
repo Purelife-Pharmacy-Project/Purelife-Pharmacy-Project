@@ -16,7 +16,7 @@ const BestSellers: React.FC<Prop> = () => {
   );
   return (
     <ProductRow
-      title='Shop best selling'
+      title='Shop our best selling products'
       moreLink='/shop?category=health-best-sellers'
       products={allProducts}
       isLoading={loadingProducts}

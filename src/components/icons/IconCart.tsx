@@ -1,4 +1,4 @@
-export const IconCart = ({ size = 24, color = 'inherit' }) => {
+export const IconCart = ({ size = 24, color }: any) => {
   return (
     <svg
       width={size}

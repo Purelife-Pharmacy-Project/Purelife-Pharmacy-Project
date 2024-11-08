@@ -17,7 +17,7 @@ const HotOffersProduct: React.FC<Prop> = () => {
   return (
     <div>
       <ProductRow
-        title='Hot New Offers'
+        title='Hot New Offers Under ₦5,000'
         moreLink='/shop?category=health-new-offers'
         products={allProducts}
         isLoading={loadingProducts}

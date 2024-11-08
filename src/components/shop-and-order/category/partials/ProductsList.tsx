@@ -12,6 +12,7 @@ type ProductsListProps = {
   isFetchingNextPage?: boolean;
   fetchNextPage: () => void;
   hasNextPage: boolean;
+  limit: number;
 };
 
 export const ProductsList: FC<ProductsListProps> = ({
@@ -20,6 +21,7 @@ export const ProductsList: FC<ProductsListProps> = ({
   isFetchingNextPage,
   fetchNextPage,
   hasNextPage,
+  limit,
 }) => {
   return (
     <Card shadow='none' className='w-full'>
@@ -31,20 +33,11 @@ export const ProductsList: FC<ProductsListProps> = ({
             <InfiniteScroll
               next={fetchNextPage}
               hasMore={hasNextPage}
-              loader={
-                <>
-                  {Array(6)
-                    .fill(0)
-                    .map((_, index) => (
-                      <ProductCardSkeleton key={index} />
-                    ))}
-                </>
-              }
-              scrollThreshold={0.2}
-              dataLength={products?.length}
+              loader={<ProductCardSkeleton/>}
+              dataLength={products?.length || 0}
               className='relative grid grid-flow-row grid-cols-2 gap-10 overflow-y-auto md:grid-cols-2 lg:grid-cols-3'
             >
-              {products?.map((product) => (
+              {products.slice(0, limit)?.map((product) => (
                 <ProductCard
                   loading={loadingProducts}
                   key={product.id}

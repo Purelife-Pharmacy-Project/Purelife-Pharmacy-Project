@@ -1,113 +1,176 @@
 'use client';
+import { IconChevronLeft } from '@/components/icons/IconChevronLeft';
 import { useQueryParams } from '@/hooks';
-import { Button, Radio, RadioGroup } from '@nextui-org/react';
+import { inputBorderedDefault, inputBorderedGray } from '@/theme';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Input } from '@nextui-org/react';
+import { FC, useEffect, useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import ReactSlider from 'react-slider';
 import { useSearchParams } from 'next/navigation';
-import { FC, useEffect, useState } from 'react';
 
 type ProductsPriceRangeProps = {};
 
-enum PriceRanges {
-  BELOW_1000 = `below ₦1000`,
-  ABOVE_1000 = `₦1000 - ₦2999`,
-  ABOVE_3999 = `₦3000 - ₦3999`,
-  ABOVE_4999 = `₦4000 - ₦4999`,
-  ABOVE_5999 = `₦5000 - ₦9999`,
-  ABOVE_9999 = `₦10000 above`,
+interface PriceRangeData {
+  min?: string;
+  max?: string;
 }
 
+const priceRangeSchema = z.object({
+  min: z.string().regex(/^\d+$/, { message: 'Must be a valid number' }),
+  max: z.string().regex(/^\d+$/, { message: 'Must be a valid number' }),
+});
+
 export const ProductsPriceRange: FC<ProductsPriceRangeProps> = ({}) => {
-  const [range, setRange] = useState<string | null>(null);
+  const [focusedThumb, setFocusedThumb] = useState<number | null>(null);
+  const [tempRange, setTempRange] = useState<PriceRangeData>({
+    min: '0',
+    max: '100000',
+  });
+  const {
+    register,
+      setValue,
+      reset,
+    watch,
+    formState: { errors },
+  } = useForm<PriceRangeData>({
+    defaultValues: tempRange,
+    resolver: zodResolver(priceRangeSchema),
+  });
   const { setQuery, removeQuery } = useQueryParams();
-
-  const urlParams = useSearchParams();
-
-  const maxPrice = urlParams.get('maxPrice');
-  const minPrice = urlParams.get('minPrice');
-
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const [height, setHeight] = useState<string>('0');
   useEffect(() => {
-    if (maxPrice && minPrice) {
-      const priceRange = `${minPrice}-${maxPrice}`;
-
-      switch (priceRange) {
-        case '1-999':
-          return setRange(PriceRanges.BELOW_1000);
-        case '1000-2999':
-          return setRange(PriceRanges.ABOVE_1000);
-        case '3000-3999':
-          return setRange(PriceRanges.ABOVE_3999);
-        case '4000-4999':
-          return setRange(PriceRanges.ABOVE_4999);
-        case '5000-9999':
-          return setRange(PriceRanges.ABOVE_5999);
-        case '10000-99999999999999':
-          return setRange(PriceRanges.ABOVE_9999);
-        default:
-          return setRange(PriceRanges.BELOW_1000);
-      }
+    if (isOpen && contentRef.current) {
+      setHeight(`${contentRef.current.scrollHeight + 20}px`);
     } else {
-      handleReset();
+      setHeight('0');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const handleReset = () => {
-    setRange(null);
-    removeQuery(['minPrice', 'maxPrice']);
-  };
-
-  const handleSetPrice = () => {
-    if (!range) return;
-    switch (range) {
-      case PriceRanges.BELOW_1000:
-        return setQuery({ minPrice: 1, maxPrice: 999 });
-      case PriceRanges.ABOVE_1000:
-        return setQuery({ minPrice: 1000, maxPrice: 2999 });
-      case PriceRanges.ABOVE_3999:
-        return setQuery({ minPrice: 3000, maxPrice: 3999 });
-      case PriceRanges.ABOVE_4999:
-        return setQuery({ minPrice: 4000, maxPrice: 4999 });
-      case PriceRanges.ABOVE_5999:
-        return setQuery({ minPrice: 5000, maxPrice: 9999 });
-      case PriceRanges.ABOVE_9999:
-        return setQuery({ minPrice: 10000, maxPrice: 99999999999999 });
-      default:
-        return setQuery({ minPrice: 1, maxPrice: 999 });
-    }
-  };
-
+  }, [isOpen]);
+  const searchParams = useSearchParams();
   useEffect(() => {
-    if (range) {
-      handleSetPrice();
+    const minPrice = searchParams.get('minPrice');
+    const maxPrice = searchParams.get('maxPrice');
+  
+    if (minPrice && maxPrice) {
+      // Update state with URL parameters if they exist
+      setTempRange({ min: minPrice, max: maxPrice });
+      setValue('min', minPrice);
+      setValue('max', maxPrice);
+    } else {
+      // If parameters are missing, set to default values
+      setTempRange({ min: '0', max: '200000' });
+      setValue('min', '0');
+      setValue('max', '200000');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [range]);
-
+  }, [searchParams, setValue]);
   return (
-    <section>
-      <RadioGroup
-        label={'Price'}
-        value={range!}
-        onValueChange={(value) => setRange(value as string)}
-        classNames={{
-          label: 'font-semibold text-header-100',
-        }}
+    <div className='relative w-fit'>
+      <div
+        className='flex cursor-pointer items-center justify-between'
+        onClick={() => setIsOpen((prev) => !prev)}
       >
-        {Object.keys(PriceRanges).map((variant) => {
-          const priceVariant = PriceRanges[variant as keyof typeof PriceRanges];
-          return (
-            <Radio key={variant} className='capitalize' value={priceVariant}>
-              {priceVariant}
-            </Radio>
-          );
-        })}
-      </RadioGroup>
-      {range ? (
-        <div className='flex justify-end'>
-          <Button size='sm' variant='faded' onPress={handleReset}>
-            Reset
-          </Button>
+        <span className='mb-3 font-semibold text-header-100'>Prices</span>
+        {isOpen ? (
+          <div className='-rotate-90'>
+            <IconChevronLeft />
+          </div>
+        ) : (
+          <div className='rotate-90'>
+            <IconChevronLeft />
+          </div>
+        )}
+      </div>
+      <div
+        ref={contentRef}
+        style={{
+          height,
+          overflow: 'hidden',
+          transition: 'height 0.3s ease-in-out',
+        }}
+        className='px-4'
+      >
+        <ReactSlider
+          className='relative mt-5 h-0.5 rounded-full bg-gray-200'
+          defaultValue={[0, 200000] as any}
+          value={[watch('min'), watch('max')] as any}
+          min={0}
+          max={200000}
+          ariaLabel={['Lower thumb', 'Upper thumb']}
+          pearling
+          step={1000}
+          minDistance={10000}
+          renderThumb={(props: any, state: any) => (
+            <div
+              {...props}
+              className={`-mt-[5px] flex cursor-pointer items-center justify-center focus:outline-none ${
+                state.index === 0 && ''
+              } ${state.index === 1 && ''}
+              ${
+                focusedThumb === state.index ? 'relative' : ''
+              }`}
+              onMouseEnter={() => setFocusedThumb(state.index)}
+              onMouseLeave={() => setFocusedThumb(null)}
+            >
+              <div
+                className={`h-4 w-4 rounded-full !bg-[#36CB60] border-[#E7E7E7] border-[0.5px] ${
+                  focusedThumb === state.index ? 'bg-[#36CB60]' : 'bg-white'
+                }`}
+              ></div>
+              <div
+                className={`none ${
+                  focusedThumb === state.index &&
+                  'absolute h-10 w-10 rounded-full border-2 border-gray-400'
+                }`}
+              ></div>
+            </div>
+          )}
+          renderTrack={(props, state) => (
+            <div
+              {...props}
+              className={`h-1.5 rounded-full ${
+                state.index === 0
+                  ? 'bg-gray-200'
+                  : state.index === 1
+                  ? 'bg-[#36CB60]'
+                  : 'bg-gray-200'
+              }`}
+            />
+          )}
+          onChange={(value: any) => {
+            setTempRange({ min: value[0].toString(), max: value[1].toString() });
+            setValue('min', value[0].toString());
+            setValue('max', value[1].toString());
+            setQuery({ minPrice: value[0], maxPrice: value[1] })
+            console.log('max: ', watch('max'));
+          }}
+        />
+        <div className='mt-5 grid grid-cols-[1fr_0.2fr_1fr] gap-2 text-sm font-medium text-gray-400'>
+          <Input
+            {...register('min')}
+            errorMessage={errors.min?.message}
+            isInvalid={!!errors.min}
+            className='bg-white text-[#5A5A5A] font-medium'
+            type='string'
+            name='min'
+            value={watch('min')}
+            classNames={inputBorderedGray}
+          ></Input>
+          <span className='ml-2 my-auto w-[9px] h-[2px] bg-[#797979]'></span>
+          <Input
+            {...register('max')}
+            errorMessage={errors.max?.message}
+            isInvalid={!!errors.max}
+            className='bg-white text-[#5A5A5A] font-medium'
+            type='string'
+            name='max'
+            value={watch('max')}
+            classNames={inputBorderedGray}
+          ></Input>
         </div>
-      ) : null}
-    </section>
+      </div>
+    </div>
   );
 };

@@ -55,12 +55,12 @@ const ProductRow: React.FC<Prop> = ({
 
   return (
     <div className={`relative overflow-hidden ${productClassName}`}>
-      <div className={`relative mb-8 flex items-center justify-between gap-3 overflow-hidden ${headerClassName}`}>
-        <h5 className={`text-lg font-semibold capitalize lg:text-2xl`}>
+      <div className={`relative mb-8 grid grid-cols-[3fr_1fr] gap-3 overflow-hidden ${headerClassName}`}>
+        <h5 className={`text-lg font-medium capitalize lg:text-2xl`}>
           {title}
         </h5>
         {moreLink ? (
-          <Link href={moreLink} className={`text-lg text-[#919191] lg:text-xl`}>
+          <Link href={moreLink} className={`text-lg text-[#919191] lg:text-2xl h-fit`}>
             Shop All
           </Link>
         ) : null}
