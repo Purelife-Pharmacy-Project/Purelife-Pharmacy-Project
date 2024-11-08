@@ -160,7 +160,7 @@ export const AppNavbar = ({
             {servicesDropdown && (
               <div
                 ref={servicesPopupRef}
-                className='absolute -left-[15px] top-[0] z-[99] mt-1 flex w-[12.5rem] flex-col items-center gap-2 rounded-lg border border-gray-200 bg-[#FFFFFF] p-2 pt-0 shadow-lg'
+                className='absolute -left-[15px] top-[10] z-[99] mt-1 flex w-[12.5rem] flex-col items-center gap-2 rounded-lg border border-gray-200 bg-[#FFFFFF] p-2 pt-0 shadow-lg'
                 style={{ boxShadow: '0rem .25rem .625rem 0rem #00000040' }}
               >
                 <div className='z-[999] border-t border-l -mt-[8px] w-[15px] h-[15px] bg-white rotate-45'></div>

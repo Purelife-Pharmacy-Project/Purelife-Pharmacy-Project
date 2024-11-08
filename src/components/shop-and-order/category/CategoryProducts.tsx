@@ -165,7 +165,7 @@ export const CategoryProducts = () => {
   }, [filteredProducts]);
 
   return (
-    <div id='products' className='lg:grid lg:justify-center lg:pb-10'>
+    <div id='products' className='lg:grid lg:justify-center lg:pb-10 mt-10'>
       <div className='grid bg-white'>
         {/* <div className='mt-6 grid w-full grid-cols-[10fr_2fr]  items-center justify-between gap-2 lg:mt-0 lg:grid-cols-2 lg:gap-4'>
           <ProductSearch loadingProducts={loadingProducts} />
@@ -176,7 +176,7 @@ export const CategoryProducts = () => {
             <div className='hidden w-full justify-end lg:flex'></div>
           ) : null}
         </div> */}
-        <div className='flex w-full items-center justify-between border-b border-t px-[4%] py-[15px]'>
+        <div className='flex w-full items-center justify-between border-b border-t border-[#E7E7E7] px-[4%] py-[15px]'>
           <div className='flex cursor-pointer gap-8 text-sm font-medium text-[#797979] md:text-base'>
             <span>Beauty</span>
             <span>Health</span>
@@ -192,7 +192,7 @@ export const CategoryProducts = () => {
         </div>
         <div className='grid gap-4 lg:grid-flow-col lg:grid-cols-[1fr_3fr]'>
           <ProductsFilterContainer />
-          <div className='pl-[5%] pr-[5%] lg:pl-0'>
+          <div className='pl-[2%] pr-[5%]'>
             <div className='flex w-full justify-between py-[35px]'>
               <Button
                 onClick={() => {
