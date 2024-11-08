@@ -6,6 +6,7 @@ import { Bricolage_Grotesque } from 'next/font/google';
 import React from 'react';
 import './globals.css';
 import AnnouncementBanner from '@/components/AnnouncementBanner';
+import ReferralBanner from '@/components/ReferralBanner';
 import { AuthProvider, SearchProvider } from '@/helpers/useContext/authContext';
 
 const bricolage = Bricolage_Grotesque({
@@ -133,6 +134,7 @@ export default async function RootLayout({
               <main className='bg-background text-foreground light'>
                 {/* <HydrationBoundary state={dehydrate(queryClient)}> */}
                 {/* <AnnouncementBanner /> */}
+                <ReferralBanner />
                 <AppNavbar />
                 {/* </HydrationBoundary> */}
 
