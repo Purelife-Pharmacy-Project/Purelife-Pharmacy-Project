@@ -113,6 +113,7 @@ export const BillingForm: FC<BillingFormProps> = ({
       setValue('email', deliveryDetails.email);
       setValue('phone', deliveryDetails.phoneNumber);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deliveryDetails]);
 
   useEffect(() => {
@@ -121,12 +122,14 @@ export const BillingForm: FC<BillingFormProps> = ({
       setValue('cityId', undefined);
       setValue('stateId', undefined);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCreateAccount]);
 
   useEffect(() => {
     if (isPickup) {
       setValue('address', isPickup);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPickup]);
 
   const onSubmit = (data: BillingPayload) => {

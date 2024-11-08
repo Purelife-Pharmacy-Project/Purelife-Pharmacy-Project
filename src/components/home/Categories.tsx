@@ -99,7 +99,7 @@ export const Categories = () => {
   };
   const groupedCategories = chunkArray(repeatedCategories, 12);
   const groupedCategories6 = chunkArray(repeatedCategories, 6);
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [maxNameWidth, setMaxNameWidth] = useState('');
 
   const updateMaxWidth = () => {
@@ -115,7 +115,7 @@ export const Categories = () => {
       window.removeEventListener('resize', updateMaxWidth);
     };
   }, []);
-  const containerTwoRef = useRef(null);
+  const containerTwoRef = useRef<HTMLDivElement>(null);
   const [maxCircleWidth, setMaxCircleWidth] = useState('');
 
   const updateCircleMaxWidth = () => {

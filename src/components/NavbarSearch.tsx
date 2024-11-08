@@ -149,6 +149,8 @@ export const NavbarSearch: React.FC<NavbarSearchProps> = ({
   useEffect(() => {
     const intervalId = setInterval(scrollVaccineCategory, 3000);
     return () => clearInterval(intervalId);
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemHeight]);
   return (
     <div className='relative w-full'>

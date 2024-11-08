@@ -91,7 +91,7 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
     // } else {
     //   return items.filter((item) => !excludeAddressIds.includes(item.id));
     // }
-  }, [products, summary]);
+  }, [products]);
 
   const [selectedAddress, setSelectedAddress] = useState<
     Partial<Product> | undefined

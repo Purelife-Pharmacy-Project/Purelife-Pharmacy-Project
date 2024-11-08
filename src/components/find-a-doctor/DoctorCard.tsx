@@ -43,7 +43,6 @@ export const DoctorCard: FC<DoctorCardProps> = ({ doctor }) => {
 
           <Button
             isDisabled={true}
-            color=''
             as={Link}
             href={`/telehealth/find-a-doctor/availability-calendar`}
             size='md'

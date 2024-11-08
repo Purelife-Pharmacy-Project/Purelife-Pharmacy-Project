@@ -10,7 +10,7 @@ type Prop = {
 };
 
 const ProductCard: React.FC<Prop> = ({ product }) => {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [maxNameWidth, setMaxNameWidth] = useState('100%');
   useEffect(() => {
     if (containerRef.current) {

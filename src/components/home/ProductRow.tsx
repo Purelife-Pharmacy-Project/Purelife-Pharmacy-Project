@@ -46,11 +46,16 @@ const ProductRow: React.FC<Prop> = ({
         entries[0].target.scrollWidth > entries[0].target.clientWidth
       );
     });
-    if (ref.current) {
-      observer.observe(ref?.current);
-      setOverflow(ref.current?.scrollWidth > ref.current?.clientWidth);
+    const currentRef = ref.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+      setOverflow(currentRef?.scrollWidth > currentRef?.clientWidth);
     }
-    return () => ref.current && observer.unobserve(ref.current);
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
   }, [isLoading, products]);
 
   return (

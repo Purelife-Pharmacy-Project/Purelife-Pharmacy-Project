@@ -100,6 +100,7 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
     const intervalId = setInterval(scrollVaccineCategory, 3000); // Scroll every 3 seconds
   
     return () => clearInterval(intervalId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemHeight]);
   
   return (

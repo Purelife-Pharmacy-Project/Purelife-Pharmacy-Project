@@ -12,7 +12,10 @@ export default function Doctor() {
 
   const doctorData = allDoctors.find((doctor) => doctor.slug === 'salako');
 
-  if (!doctorData) router.push('/find-a-doctor');
+  if (!doctorData) {
+    router.push('/find-a-doctor')
+    return null
+  };
 
   return (
     <>
