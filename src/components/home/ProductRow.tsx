@@ -15,6 +15,11 @@ type Prop = {
   ProductComp: React.FC<{ product: Product }>;
   emptyMessage: string;
   allowOverflow?: boolean;
+  productClassName?: string;
+  headerClassName?: string;
+  rowClassName?: string;
+  price: boolean;
+  variant: any;
 };
 
 const ProductRow: React.FC<Prop> = ({
@@ -26,8 +31,13 @@ const ProductRow: React.FC<Prop> = ({
   emptyMessage,
   loader,
   allowOverflow = true,
+  productClassName,
+  headerClassName,
+  variant,
+  rowClassName,
+  price,
 }) => {
-  const ref = useRef<any>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [overflow, setOverflow] = useState<boolean>();
 
   useEffect(() => {
@@ -44,13 +54,13 @@ const ProductRow: React.FC<Prop> = ({
   }, [isLoading, products]);
 
   return (
-    <Section className='relative w-screen overflow-hidden'>
-      <div className='relative mb-8 flex items-center justify-between gap-3 overflow-hidden'>
-        <h5 className='text-lg font-semibold capitalize lg:text-2xl'>
+    <div className={`relative overflow-hidden ${productClassName}`}>
+      <div className={`relative mb-8 flex items-center justify-between gap-3 overflow-hidden ${headerClassName}`}>
+        <h5 className={`text-lg font-semibold capitalize lg:text-2xl`}>
           {title}
         </h5>
         {moreLink ? (
-          <Link href={moreLink} className='text-lg text-[#919191] lg:text-xl '>
+          <Link href={moreLink} className={`text-lg text-[#919191] lg:text-xl`}>
             Shop All
           </Link>
         ) : null}
@@ -75,15 +85,14 @@ const ProductRow: React.FC<Prop> = ({
           </button>
           <div
             ref={ref}
-            className={clsx({
-              'scroll flex w-full flex-auto snap-x scroll-pb-10 flex-nowrap gap-5 overflow-x-auto scrollbar-hide':
-                allowOverflow,
-              'grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3':
-                !allowOverflow,
-            })}
-          >
-            {products?.map((product) => (
-              <ProductComp key={product.id} product={product} />
+            className={`${variant === 'normal' && 'grid lg:grid-cols-4 grid-cols-2 gap-5'} ${variant === 'hot offers' && 'grid grid-cols-2 gap-5'} ${variant === 'best sellers' && 'grid grid-cols-2 gap-5'}`}>
+            {products?.slice(0, (variant === 'normal' || variant === 'hot offers') ? 4 : 3).map((product, index) => (
+              <div
+              key={product.id}
+              className={`${(variant === 'best sellers' && index === 2) && 'col-span-2'}`}
+            >
+              <ProductComp product={product} />
+            </div>
             ))}
           </div>
           <button
@@ -105,7 +114,7 @@ const ProductRow: React.FC<Prop> = ({
       {(!isLoading && !products) || products?.length === 0 ? (
         <p className='text-center text-sm text-header-100'>{emptyMessage}</p>
       ) : null}
-    </Section>
+    </div>
   );
 };
 

@@ -83,7 +83,3 @@ input[type='time']::-webkit-calendar-picker-indicator {
     text-wrap: pretty;
   }
 }
-
-/* *{
-  border: 1px solid;
-} */
