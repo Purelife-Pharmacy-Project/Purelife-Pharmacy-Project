@@ -15,6 +15,7 @@ export default async function DrugRefill() {
   // });
 
   const howItWorksData: {
+    title?: string;
     description: string;
     icon: JSX.Element;
   }[] = [

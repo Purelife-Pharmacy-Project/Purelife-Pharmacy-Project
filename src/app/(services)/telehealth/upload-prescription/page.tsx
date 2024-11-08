@@ -9,6 +9,7 @@ import { DrugSubscriptionTabs } from '@/components/upload-prescription/DrugSubsc
 
 export default function UploadPrescriptionPage() {
   const howItWorksData: {
+    title?: string;
     description: string;
     icon: JSX.Element;
   }[] = [

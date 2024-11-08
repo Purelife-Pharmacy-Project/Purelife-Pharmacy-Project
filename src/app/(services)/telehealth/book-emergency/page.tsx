@@ -10,6 +10,7 @@ import { IconHealthShield } from '@/components/icons/IconHealthShield';
 
 export default function BookEmergencyPage() {
   const howItWorksData: {
+    title?: string;
     description: string;
     icon: JSX.Element;
   }[] = [
