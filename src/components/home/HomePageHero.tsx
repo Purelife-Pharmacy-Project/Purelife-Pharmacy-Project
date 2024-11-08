@@ -25,32 +25,31 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
   }, [products]);
   const baseUrl = '/telehealth/get-vaccination';
 
-  const divRef = useRef(null);
+  const divRef = useRef<HTMLDivElement>(null);
   const { setShowSearch } = useSearch();
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
         if (!entry.isIntersecting) {
-          console.log('scrolled away from view');
           setShowSearch(true);
         } else {
-          console.log('scrolled into view');
           setShowSearch(false);
         }
       },
       { threshold: 0.1 }
     );
-
-    if (divRef.current) {
-      observer.observe(divRef.current);
+    const currentRef = divRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (divRef.current) {
-        observer.unobserve(divRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [fade, setFade] = useState(true);
@@ -72,6 +71,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
       return () => clearTimeout(timeout);
     }, 5000);
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [isLargeScreen, setIsLargeScreen] = useState(false);
@@ -84,7 +84,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
     setIsLargeScreen(mediaQuery.matches);
 
     // Event listener to update state on resize
-    const handleResize = (e) => setIsLargeScreen(e.matches);
+    const handleResize = (e: { matches: boolean | ((prevState: boolean) => boolean); }) => setIsLargeScreen(e.matches);
     mediaQuery.addEventListener('change', handleResize);
 
     return () => mediaQuery.removeEventListener('change', handleResize);

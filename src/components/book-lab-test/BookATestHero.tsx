@@ -117,6 +117,7 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
     const intervalId = setInterval(scrollLabTestCategory, 3000); // Scroll every 3 seconds
   
     return () => clearInterval(intervalId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemHeight]);
 
   return (

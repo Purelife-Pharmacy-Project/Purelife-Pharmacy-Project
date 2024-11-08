@@ -18,7 +18,10 @@ export default function ReviewConsultationBooking() {
 
   const doctorData = allDoctors.find((doctor) => doctor.slug === 'salako');
 
-  if (!doctorData) router.push('/find-a-doctor');
+  if (!doctorData) {
+    router.push('/find-a-doctor')
+    return null
+  };
   const onOpenCheckoutModal = () => {
     setOpenCheckoutModal(true);
   };

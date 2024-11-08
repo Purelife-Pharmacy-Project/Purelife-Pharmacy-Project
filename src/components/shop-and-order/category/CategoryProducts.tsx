@@ -39,7 +39,7 @@ export const CategoryProducts = () => {
   const searchString = searchParams.get('searchString') || undefined;
   const minPrice = searchParams.get('minPrice') || undefined;
   const maxPrice = searchParams.get('maxPrice') || undefined;
-  const divRef = useRef(null);
+  const divRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [fade, setFade] = useState(true);
   const [offset, setOffset] = useState(0);
@@ -77,6 +77,7 @@ export const CategoryProducts = () => {
       return () => clearTimeout(timeout);
     }, 5000);
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -150,7 +151,9 @@ export const CategoryProducts = () => {
   });
 
   const productItems = useMemo(() => {
-    return products?.pages.reduce((acc, page) => {
+    if (!products || !products.pages) return [];
+  
+    return products.pages.reduce((acc, page) => {
       return [...acc, ...page];
     }, []);
   }, [products]);

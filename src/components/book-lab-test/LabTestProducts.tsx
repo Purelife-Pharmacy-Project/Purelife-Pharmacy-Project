@@ -117,6 +117,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
 
   useEffect(() => {
     handleFilterByCategory(18);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const vaccines = useMemo(() => {

@@ -25,6 +25,7 @@ export const BillingInfoCard = ({
     if (partner && Object.keys(deliveryDetails).length <= 0) {
       setDeliveryDetails(partner);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [partner, deliveryDetails]);
 
   return (

@@ -165,7 +165,7 @@ export default function FindADoctor() {
                 className='mb-7 flex w-full justify-between gap-10 sm:mb-0 sm:w-auto'
               >
                 <Button
-                  color=''
+                  
                   size='md'
                   radius='full'
                   className='h-fit min-w-0 rotate-180 rounded-full border-2 border-[#1E272F] p-4'
@@ -177,7 +177,7 @@ export default function FindADoctor() {
                   />
                 </Button>
                 <Button
-                  color=''
+                  
                   size='md'
                   radius='full'
                   className='h-fit min-w-0 rounded-full border-2 border-[#1E272F] p-4'

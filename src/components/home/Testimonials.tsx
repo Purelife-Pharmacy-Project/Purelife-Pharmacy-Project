@@ -66,7 +66,7 @@ export const Testimonials = () => {
   }, [activeIndex, testimonials.length, startInterval]);
 
   // Start the process when it's in the viewPort
-  const elementRef = useRef(null);
+  const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const elementCurrent = elementRef.current;

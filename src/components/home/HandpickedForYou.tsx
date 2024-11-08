@@ -24,6 +24,8 @@ const HandpickedForYou: React.FC<Prop> = () => {
         emptyMessage='Oops. No products yet'
         ProductComp={ProductCard}
         loader={<ProductLoadingSkeleton />}
+        price={false}
+        variant={undefined}
       />
     </div>
   );
