@@ -99,8 +99,7 @@ export const NavbarUser: FC<NavbarUserProps> = ({ isActive }) => {
           href='/sign-in'
         >
           <div className='flex items-center gap-2'>
-            <IconProfile color='white' size={24} />
-            <p>Create Account</p>
+            <p>Join Now</p>
           </div>
         </Button>
       )}

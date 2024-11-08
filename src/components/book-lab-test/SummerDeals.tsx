@@ -15,6 +15,7 @@ const SummerDeals: React.FC<Prop> = () => {
     { categoryId: CATEGORY_ID, limit: 10, offset: 35 }
   );
   return (
+    <>
     <ProductRow
       title='Summer Deal! Enjoy up to 30%'
       products={allProducts}
@@ -26,6 +27,8 @@ const SummerDeals: React.FC<Prop> = () => {
       loader={<ProductLoadingSkeleton />}
       allowOverflow={false}
     />
+    </>
+    
   );
 };
 

@@ -3,6 +3,7 @@ import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import { FC } from 'react';
 import { Section } from './Section';
+import { TypeAnimation } from 'react-type-animation';
 
 interface HomeHeroProps {
   title: string;
@@ -17,24 +18,39 @@ export const HomeHero: FC<HomeHeroProps> = ({
   ctaLink = '#',
 }) => {
   return (
-    <div className='grid h-max items-center justify-center bg-primaryLight pb-4 md:pb-0 lg:h-max lg:py-10'>
-      <Section className='bg-primaryLight'>
-        <div className='flex flex-col justify-between lg:flex-row lg:gap-10'>
-          <div className='flex flex-col gap-6 lg:justify-center'>
-            <h1 className='text-balance mx-auto w-4/5  text-center text-2xl font-bold  text-header-100 sm:max-w-[300px] md:max-w-[250px] lg:mx-0 lg:w-full lg:max-w-[530px] lg:text-start lg:text-5xl'>
-              {title}
+    <div className='grid h-max items-center justify-center bg-white pb-4 md:pb-0 lg:h-max lg:pb-10'>
+      <section className='bg-white xl:w-full '>
+        <div className='grid grid-cols-[1fr] lg:grid-cols-[3fr_2.7fr] lg:gap-0'>
+          <div className='w-full flex flex-col gap-2 lg:gap-6 lg:justify-center'>
+            <h1 className='text-balance mx-auto text-center text-4xl font-bold  text-header-100 lg:mx-0 lg:w-full  sm:w-[80%] md:w-[50%] lg:max-w-full lg:text-start lg:text-6xl'>
+            Book an appointment<br/>  with <TypeAnimation
+              sequence={[
+                'Doctors',
+                2000,
+                'Pharmacists',
+                2000,
+                'Cosmetologists',
+                2000,
+                'Dermatologists',
+                2000,
+              ]}
+              wrapper="span"
+              cursor={true}
+              repeat={Infinity}
+            /> <br/> at Purelife
+            
             </h1>
-            <p className='mx-auto w-full text-center text-base font-light leading-[30px] text-content sm:max-w-[300px] md:max-w-full lg:mx-0 lg:max-w-[498px] lg:text-start lg:text-lg'>
+            <p className='mx-auto sm:w-[80%] w-[60%] lg:w-full text-center text-base font-medium leading-[30px] text-content lg:mx-0 lg:text-start lg:text-lg'>
               {description}
             </p>
 
             {ctaText !== '' && (
               <div className='flex w-full justify-center lg:w-max lg:justify-start'>
                 <Button
+                  isDisabled={true}
                   as={Link}
-                  href={ctaLink}
-                  radius='full'
-                  className='px-12 py-6'
+                  href={`/telehealth/find-a-doctor/availability-calendar`}
+                  className='px-12 py-6 rounded-[35px] w-[40%] lg:w-[auto]'
                   color='primary'
                   size='lg'
                 >
@@ -43,11 +59,11 @@ export const HomeHero: FC<HomeHeroProps> = ({
               </div>
             )}
           </div>
-          <div className='relative mt-6 flex justify-end lg:mt-0'>
-            <HeroImage />
+          <div className='relative mt-6 flex justify-center items-center lg:justify-end lg:mt-0'>
+            <HeroImage/>
           </div>
         </div>
-      </Section>
+      </section>
     </div>
   );
 };
