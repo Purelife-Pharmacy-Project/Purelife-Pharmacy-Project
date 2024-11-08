@@ -50,6 +50,18 @@ input[type='time']::-webkit-calendar-picker-indicator {
   display: none;  /* Chrome, Safari, and Opera */
 }
 
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(193, 199, 207, 1);
+  border-radius: 10px; }
 .example-track.example-track-0 {
   background-color: lightgray; /* Lighter gray for the left part */
 }

@@ -18,7 +18,13 @@ import {
   consultDoctorFormValidationSchema,
 } from '@/services/consult-doctor/schema';
 import { ModifiedConsultDoctorFormPayload } from '@/services/consult-doctor/types';
-import { inputBordered, selectBordered, textAreaClassNames } from '@/theme';
+import {
+  inputBordered,
+  inputBorderedGray,
+  selectBordered,
+  selectBorderedGray,
+  textAreaClassNames,
+} from '@/theme';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Button,
@@ -60,7 +66,6 @@ export const BookConsultationForm = () => {
     useCreateCalendarEvent({
       onSuccess: () => {
         toast.success('Slot booked successfully');
-        setIsBooked(true);
       },
     });
 
@@ -81,7 +86,6 @@ export const BookConsultationForm = () => {
   } = useSubmitConsultDoctorForm({
     onSuccess: () => {
       reset();
-      setIsBooked(false);
       setCalendarDate(undefined);
       setCalendarTime(undefined);
       toast.success('Information saved successfully');
@@ -90,10 +94,6 @@ export const BookConsultationForm = () => {
       toast.error(error.message);
     },
   });
-
-  const weekend = (date: Date | string) => new Date() < date;
-  const minDate = new Date();
-  const [isBooked, setIsBooked] = useState(false);
 
   const genericAnswers: BooleanEnumType[] = [
     {
@@ -105,16 +105,6 @@ export const BookConsultationForm = () => {
       value: false,
     },
   ];
-
-  const handleDateDebounce = debounce((value: string) => {
-    const date = value.split('-').join('/');
-    setFormattedDate(date);
-    setCalendarDate(value);
-
-    if (calendarTime) {
-      setCalendarTime(undefined);
-    }
-  }, 500);
 
   const onSubmit: SubmitHandler<ConsultDoctorFormPayload> = (data) => {
     setOpenCheckoutModal(true);
@@ -158,49 +148,17 @@ export const BookConsultationForm = () => {
         ).value,
       };
 
-      if (isBooked) {
-        submitConsultDoctorForm(payload);
-      }
-    }
-  };
-
-  const combineDateAndTime = (date: string, time: string): string => {
-    const [hours, minutes, period] = time.match(/\d+|AM|PM/g) as string[];
-    const adjustedHours =
-      (parseInt(hours, 10) % 12) + (period === 'PM' ? 12 : 0);
-    return new Date(
-      `${date}T${adjustedHours.toString().padStart(2, '0')}:${minutes.padStart(
-        2,
-        '0'
-      )}:00.000Z`
-    ).toISOString();
-  };
-
-  const booksSlotOnSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const date = (formattedDate as string)?.split('/').join('-');
-    const dateTime = combineDateAndTime(date!, formattedDate!);
-
-    const payload = {
-      summary: 'Consultation',
-      startTime: dateTime,
-      endTime: dateTime,
-    };
-
-    if (!isBooked) {
-      createCalendarEvent(payload);
+      submitConsultDoctorForm(payload);
+      
     }
   };
 
   return (
-    <Card shadow='none' className='bg-primaryLight p-5'>
-      <CardBody>
-        <p className='mb-4 text-2xl font-semibold text-header-100'>
-          Book a slot
-        </p>
-        <form
+    <Card shadow='none' className='mt-4 w-[40%] rounded-none border-t pt-5'>
+      <CardBody className='p-0 '>
+        {/* <form
           onSubmit={booksSlotOnSubmit}
-          className='grid gap-4 md:max-w-[50%] md:flex-row'
+          className='grid gap-4  md:flex-row'
         >
           <div className='grid'>
             <label
@@ -269,58 +227,29 @@ export const BookConsultationForm = () => {
           >
             Book Slot
           </Button>
-        </form>
+        </form> */}
 
-        <div className='mt-8 h-[1px] w-full bg-header-100'></div>
-        <p className='my-4 text-2xl font-semibold text-header-100'>
-          Enter information
-        </p>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className='grid gap-6 md:max-w-[80%]'
-        >
-          <div className='flex flex-col gap-4 md:flex-row'>
+        <form onSubmit={handleSubmit(onSubmit)} className='gap-6 pt-2'>
+          <div className='flex flex-col'>
+            <label className='mb-2 font-medium text-[#1E272F]'>
+              What is your age?
+            </label>
             <Input
               size='lg'
-              placeholder='First Name'
-              label='First Name'
-              labelPlacement='outside'
-              classNames={inputBordered}
-              radius='md'
-              errorMessage={errors.firstName?.message}
-              {...register('firstName')}
-            />
-            <Input
-              size='lg'
-              placeholder='Last Name'
-              label='Last Name'
-              labelPlacement='outside'
-              classNames={inputBordered}
-              radius='md'
-              errorMessage={errors.lastName?.message}
-              {...register('lastName')}
-            />
-          </div>
-          <div className='flex flex-col gap-4 md:flex-row'>
-            <Input
-              size='lg'
-              placeholder='Age'
-              label='What is your age?'
-              labelPlacement='outside'
-              classNames={inputBordered}
-              radius='md'
+              classNames={inputBorderedGray}
+              radius='full'
               type='number'
               errorMessage={errors.age?.message}
               {...register('age')}
             />
-
+            <label className='mb-2 mt-4 font-medium text-[#1E272F]'>
+              Gender
+            </label>
             <Select
               size='lg'
-              label='What is your gender'
-              placeholder='Select your gender'
-              labelPlacement='outside'
               color='default'
-              classNames={selectBordered}
+              classNames={selectBorderedGray}
+              radius='full'
               errorMessage={errors.gender?.message}
               {...register('gender')}
             >
@@ -335,35 +264,10 @@ export const BookConsultationForm = () => {
               )) ?? []}
             </Select>
           </div>
-          <div className='flex flex-col gap-4 md:flex-row'>
-            <Input
-              size='lg'
-              placeholder='Email'
-              label='Email'
-              labelPlacement='outside'
-              type='email'
-              {...register('email')}
-              errorMessage={errors.email?.message}
-              classNames={inputBordered}
-              radius='md'
-            />
-            <Input
-              size='lg'
-              placeholder='Phone number'
-              label='Phone number'
-              labelPlacement='outside'
-              type='number'
-              {...register('phoneNumber')}
-              errorMessage={errors.phoneNumber?.message}
-              inputMode='numeric'
-              classNames={inputBordered}
-              radius='md'
-            />
-          </div>
           <div className='grid gap-2'>
             <label
               htmlFor='conditions'
-              className='text-md block origin-top-left pb-1.5 font-light text-content transition-all !duration-200 !ease-out will-change-auto motion-reduce:transition-none'
+              className='text-md mt-4 block origin-top-left pb-1.5 font-medium text-[#1E272F] transition-all !duration-200 !ease-out will-change-auto motion-reduce:transition-none'
             >
               Check the conditions that apply to you or any member of your
               immediate relatives:
@@ -371,7 +275,7 @@ export const BookConsultationForm = () => {
 
             {loadingConditions ? <p>Loading conditions...</p> : null}
 
-            <div className='grid grid-cols-2 gap-4 md:max-w-[50%]'>
+            <div className='grid grid-cols-2 gap-4'>
               {conditions?.map((condition, index) => (
                 <Controller
                   key={index}
@@ -405,12 +309,12 @@ export const BookConsultationForm = () => {
           <div className='grid gap-2'>
             <label
               htmlFor='conditions'
-              className='text-md block origin-top-left pb-1.5 font-light text-content transition-all !duration-200 !ease-out will-change-auto motion-reduce:transition-none'
+              className='text-md mt-4 block origin-top-left pb-1.5 font-light font-medium text-[#1E272F] transition-all !duration-200 !ease-out will-change-auto motion-reduce:transition-none'
             >
               Check the symptoms that you&apos;re currently experiencing:
             </label>
 
-            <div className='grid grid-cols-2 gap-4 md:max-w-[50%]'>
+            <div className='grid grid-cols-2 gap-4'>
               {loadingSymptoms ? <p>Loading symptoms...</p> : null}
 
               {symptoms?.map((symptom, index) => (
@@ -441,14 +345,15 @@ export const BookConsultationForm = () => {
               <InputError message={errors.symptoms.message} />
             )}
           </div>
-          <div className='grid gap-2 md:max-w-[50%]'>
+          <div className='grid'>
+            <label className='mb-2 mt-6 font-medium text-[#1E272F]'>
+              Are you currently taking any medication?
+            </label>
             <Select
               size='lg'
-              label='Are you currently taking any medication?'
-              placeholder='Choose answer'
-              labelPlacement='outside'
               color='default'
-              classNames={selectBordered}
+              radius='full'
+              classNames={selectBorderedGray}
               {...register('takingMeds')}
               errorMessage={errors.takingMeds?.message}
             >
@@ -464,24 +369,37 @@ export const BookConsultationForm = () => {
             </Select>
 
             <Textarea
-              classNames={textAreaClassNames}
-              className='w-full'
+              classNames={{
+                inputWrapper: [
+                  'pr-2 py-4 flex items-start',
+                  'bg-white',
+                  'shadow-none',
+                  'text-content',
+                  'border border-gray-300 data-[hover=true]:bg-white',
+                  'group-data-[focus=true]:bg-white',
+                  'group-data-[active=true]:bg-white',
+                ],
+              }}
+              className='mt-6 w-full'
               size='lg'
-              placeholder='Type them here..'
+              placeholder='Type them here...'
               radius='md'
               {...register('medsDescription')}
               errorMessage={errors.medsDescription?.message}
             />
           </div>
-          <div className='grid gap-2 md:max-w-[50%]'>
+          <div className='grid gap-2'>
+            <label className='mb-2 mt-6 font-medium text-[#1E272F]'>
+              Do you have any allergies to medication?
+            </label>
             <Select
               size='lg'
               isDisabled={loadingMedsAllergies}
-              label='Do you have any allergies to medication?'
-              placeholder='Choose answer'
               labelPlacement='outside'
               color='default'
-              classNames={selectBordered}
+              classNames={selectBorderedGray}
+              className='mb-4'
+              radius='full'
               {...register('medsAllergy')}
             >
               {medsAllergies?.map((answer, index) => (
@@ -495,14 +413,15 @@ export const BookConsultationForm = () => {
               )) ?? []}
             </Select>
           </div>
+          <label className='font-medium text-[#1E272F]'>
+            Do you use any kind of tobacco or have you ever used them?
+          </label>
           <Select
             size='lg'
-            label='Do you use any kind of tobacco or have you ever used them?'
-            placeholder='Choose answer'
-            labelPlacement='outside'
             color='default'
-            className='md:max-w-[50%]'
-            classNames={selectBordered}
+            className='mt-2'
+            classNames={selectBorderedGray}
+            radius='full'
             {...register('tobaccoUsage')}
             errorMessage={errors.tobaccoUsage?.message}
           >
@@ -518,7 +437,7 @@ export const BookConsultationForm = () => {
           </Select>
           <div className='flex flex-col gap-2'>
             <label
-              className='text-md block origin-top-left pb-1.5 font-light text-content transition-all !duration-200 !ease-out will-change-auto motion-reduce:transition-none'
+              className='text-md block origin-top-left pb-1.5 pt-4 font-light font-medium text-[#1E272F] transition-all !duration-200 !ease-out will-change-auto motion-reduce:transition-none'
               htmlFor='tobaccoProducts'
             >
               What kind of tobacco products? How long have you used/been using
@@ -526,23 +445,33 @@ export const BookConsultationForm = () => {
             </label>
 
             <Textarea
-              classNames={textAreaClassNames}
+              classNames={{
+                inputWrapper: [
+                  'pr-2 py-4 flex items-start',
+                  'bg-white',
+                  'shadow-none',
+                  'text-content',
+                  'border border-gray-300 data-[hover=true]:bg-white',
+                  'group-data-[focus=true]:bg-white',
+                  'group-data-[active=true]:bg-white',
+                ],
+              }}
               size='lg'
-              className='w-full md:w-[50%]'
+              className='w-full'
               placeholder='Type them here..'
               radius='md'
               {...register('tobaccoProductBrand')}
               errorMessage={errors.tobaccoProductBrand?.message}
             />
           </div>
-          <div className='flex flex-col gap-2 md:max-w-[50%]'>
+          <div className='flex flex-col'>
+            <label className='mb-2 mt-4 font-medium text-[#1E272F]'>
+              Do you use any kind of illegal drugs or have you ever used them?
+            </label>
             <Select
               size='lg'
-              label=' Do you use any kind of illegal drugs or have you ever used them?'
-              placeholder='Choose answer'
-              labelPlacement='outside'
               color='default'
-              classNames={selectBordered}
+              classNames={selectBorderedGray}
               {...register('illegalDrugHistory')}
               errorMessage={errors.illegalDrugHistory?.message}
             >
@@ -558,49 +487,52 @@ export const BookConsultationForm = () => {
             </Select>
           </div>
           <div className='flex flex-col'>
-            <div className='md:max-w-[50%]'>
-              <Select
-                size='lg'
-                isLoading={loadingAlcoholConsumptions}
-                label='How often do you consume alcohol?'
-                placeholder='Choose answer'
-                labelPlacement='outside'
-                color='default'
-                classNames={selectBordered}
-                {...register('alcoholConsumption')}
-                errorMessage={errors.alcoholConsumption?.message}
-              >
-                {alcoholConsumptions?.map((answer, index) => (
-                  <SelectItem
-                    className='text-content'
-                    key={index}
-                    value={answer.name}
-                  >
-                    {answer.name}
-                  </SelectItem>
-                )) ?? []}
-              </Select>
-            </div>
+            <label className='text-[#1E272F]mt-4 mt-4 mb-2 font-medium'>
+              How often do you consume alcohol?
+            </label>
+            <Select
+              size='lg'
+              isLoading={loadingAlcoholConsumptions}
+              color='default'
+              classNames={selectBorderedGray}
+              {...register('alcoholConsumption')}
+              errorMessage={errors.alcoholConsumption?.message}
+            >
+              {alcoholConsumptions?.map((answer, index) => (
+                <SelectItem
+                  className='text-content'
+                  key={index}
+                  value={answer.name}
+                >
+                  {answer.name}
+                </SelectItem>
+              )) ?? []}
+            </Select>
           </div>
 
           <div className='grid gap-4 md:flex-row'>
-            <p className='text-2xl font-semibold text-header-100'>
-              Additional Notes
-            </p>
-
             <div className='flex flex-col gap-2'>
               <label
-                className='text-md block origin-top-left pb-1.5 font-light text-content transition-all !duration-200 !ease-out will-change-auto motion-reduce:transition-none'
+                className='mt-5 text-md block origin-top-left pb-1.5 font-light font-medium text-[#1E272F] transition-all !duration-200 !ease-out will-change-auto motion-reduce:transition-none'
                 htmlFor='tobaccoProducts'
               >
                 Doctor’s Notes (Optional)
               </label>
 
               <Textarea
-                classNames={textAreaClassNames}
+                classNames={{
+                  inputWrapper: [
+                    'pr-2 py-4 flex items-start',
+                    'bg-white',
+                    'shadow-none',
+                    'text-content',
+                    'border border-gray-300 data-[hover=true]:bg-white',
+                    'group-data-[focus=true]:bg-white',
+                    'group-data-[active=true]:bg-white',
+                  ],
+                }}
                 size='lg'
-                className='w-full md:max-w-[50%]'
-                placeholder='Type them here..'
+                className='w-full '
                 radius='md'
                 {...register('additionalNote')}
                 errorMessage={errors.additionalNote?.message}
@@ -608,29 +540,16 @@ export const BookConsultationForm = () => {
             </div>
           </div>
 
-          <p className='text-sm'>
-            By clicking on “Book Doctor” y/ou agree to our terms of service and
-            privacy policy
-          </p>
-
-          <div className='flex w-full flex-col gap-6 lg:mt-10 lg:flex-row lg:items-center lg:justify-between lg:gap-0 xl:w-[50%]'>
-            <div className='grid gap-2'>
-              <p className='text-sm font-medium uppercase'>Consultation Fee:</p>
-              <p className='text-3xl font-bold text-primary'>
-                $10/{toNaira(10000)}
-              </p>
-            </div>
-
+          <div className='flex w-full flex-col gap-6 lg:mt-10 lg:flex-row lg:items-center lg:justify-between'>
             <Button
               color='primary'
               type='submit'
-              isDisabled={!isBooked}
               isLoading={isSubmittingConsultDoctorForm}
               radius='full'
               size='lg'
-              className='px-8'
+              className='w-full'
             >
-              Save and Continue
+              Continue
             </Button>
           </div>
         </form>

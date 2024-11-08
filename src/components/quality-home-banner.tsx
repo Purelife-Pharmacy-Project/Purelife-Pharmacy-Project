@@ -32,6 +32,7 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({
             </div>
 
             <Button
+              isDisabled={true}
               as={Link}
               target='_blank'
               className={`mt-6 w-[30%] bg-white text-sm text-[#262629] md:text-base md:w-[40%] py-3 lg:py-8 lg:text-lg ${buttonClassName}`}

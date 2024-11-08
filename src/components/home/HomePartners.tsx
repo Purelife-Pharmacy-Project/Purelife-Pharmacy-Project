@@ -59,7 +59,7 @@ export const HomePartners = () => {
               transform: translateX(0);
             }
             100% {
-              transform: translateX(-125%);
+              transform: translateX(-123%);
             }
           }
         `}

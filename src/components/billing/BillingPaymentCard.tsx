@@ -293,12 +293,12 @@ export const BillingPaymentCard: FC<BillingPaymentCardProps> = ({
             color='primary'
             size='md'
             isLoading={loadingCreateOrder}
-            isDisabled={
-              !shouldFetchAddresses ||
-              !deliveryMethod ||
-              (deliveryMethod === 'pick-up' && phoneNumber === '') ||
-              !selectedAddress
-            }
+            // isDisabled={
+            //   !shouldFetchAddresses ||
+            //   !deliveryMethod ||
+            //   (deliveryMethod === 'pick-up' && phoneNumber === '') ||
+            //   !selectedAddress
+            // }
             onPress={handleCreateOrder}
             radius='full'
             className='mt-6 w-full py-6'
