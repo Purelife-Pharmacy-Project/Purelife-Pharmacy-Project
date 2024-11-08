@@ -18,6 +18,7 @@ import { Skeleton } from '@nextui-org/react';
 type Prop = {};
 
 const howItWorksData: {
+  title?: string;
   description: string;
   icon: JSX.Element;
 }[] = [

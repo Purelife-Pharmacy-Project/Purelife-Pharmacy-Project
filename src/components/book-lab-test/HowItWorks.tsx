@@ -6,7 +6,7 @@ import clsx from 'clsx';
 type HowItWorksProps = {
   variant?: 'primary' | 'success';
   data: {
-    title: string;
+    title?: string;
     description: string;
     icon: JSX.Element;
   }[];

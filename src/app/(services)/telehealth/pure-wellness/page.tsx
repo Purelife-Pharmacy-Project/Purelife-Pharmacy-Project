@@ -10,6 +10,7 @@ import { IconHealthShield } from '@/components/icons/IconHealthShield';
 
 export default function PureWellnessPage() {
   const howItWorksData: {
+    title?: string;
     description: string;
     icon: JSX.Element;
   }[] = [
