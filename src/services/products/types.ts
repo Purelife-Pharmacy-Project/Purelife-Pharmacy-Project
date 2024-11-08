@@ -42,6 +42,7 @@ export class Product {
   public description: any;
   public amount: string;
   public quantity?: number;
+  public price?: number;
 
   constructor(product: ProductType) {
     this.id = product.id;

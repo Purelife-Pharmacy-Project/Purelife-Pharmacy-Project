@@ -3,8 +3,8 @@ import { Button } from '@nextui-org/react';
 import Image from 'next/image';
 import React, { useRef, useState } from 'react';
 import { IconArrowRight } from '../icons/IconArrowRight';
-import clsx from 'clsx';
 import { IconStarBold } from '../icons/IconStarBold';
+import clsx from 'clsx';
 
 interface ReviewProps {
   title: string;
