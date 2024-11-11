@@ -36,7 +36,7 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({
         setFade(true);
       }, 500);
       return () => clearTimeout(timeout);
-    }, 50000);
+    }, 5000);
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

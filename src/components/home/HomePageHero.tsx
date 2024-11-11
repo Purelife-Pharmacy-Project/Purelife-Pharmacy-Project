@@ -103,7 +103,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
         } ${fade ? 'fade-in' : 'fade-out'}`}
       >
         <div className='mx-auto w-[95%] lg:ml-[5%] lg:w-[45%]'>
-          <div className='lg:mt-0 mt-8 mb-7 text-center text-[50px] leading-[1.2] font-bold lg:text-white lg:text-left'>
+          <div className='lg:mt-8 mt-8 mb-7 text-center text-[50px] leading-[1.2] font-bold lg:text-white lg:text-left'>
             The future of health services, anytime and anywhere
           </div>
           <div

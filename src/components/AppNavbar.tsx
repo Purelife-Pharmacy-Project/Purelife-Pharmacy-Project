@@ -88,7 +88,7 @@ export const AppNavbar = ({
     { id: 1, value: 'Telehealth', link: '/telehealth' },
     { id: 2, value: 'Vaccination', link: '/telehealth/get-vaccination' },
     { id: 2, value: 'Lab tests', link: '/telehealth/book-lab-test' },
-    { id: 2, value: 'Virtual Consultation', link: '/telehealth/find-a-doctor' },
+    { id: 2, value: 'Virtual Consultation', link: '' },
   ];
   const [servicesDropdown, setServicesDropdown] = useState(false);
   const servicesButtonRef = useRef<HTMLDivElement | null>(null);
@@ -166,13 +166,15 @@ export const AppNavbar = ({
                   {services.map((service) => (
                     <div
                       key={service.id}
-                      className='flex h-fit cursor-pointer items-center justify-between rounded-[.3125rem] p-3 py-1 pl-2'
+                      className='flex flex-col h-fit cursor-pointer justify-center items-between rounded-[.3125rem] p-3 py-1 pl-2'
                       onClick={() => {
                         setServicesDropdown(false);
                       }}
                     >
+                      {service.value === 'Virtual Consultation' && <p className='text-[10px] leading-[1] text-right'>Coming soon</p>}
                       <Link
                         color='foreground'
+                        isDisabled={service.link === ''}
                         href={service.link}
                         className={
                           // isActive('/telehealth/shop-and-order')
@@ -182,6 +184,7 @@ export const AppNavbar = ({
                         }
                       >
                         {service.value}
+                        
                       </Link>
                     </div>
                   ))}

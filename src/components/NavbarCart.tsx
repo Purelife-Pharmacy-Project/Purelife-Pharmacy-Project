@@ -4,7 +4,7 @@ import { useCartStore } from '@/hooks';
 import { useStore } from '@/hooks/store';
 import { Badge, Link } from '@nextui-org/react';
 import { FC } from 'react';
-import { IconCart } from './icons/IconCart';
+import { IconCartTwo } from './icons/IconCart-2';
 
 type NavbarCartProps = {
   isActive: (path: string) => boolean;
@@ -27,7 +27,7 @@ export const NavbarCart: FC<NavbarCartProps> = ({ isActive }) => {
             badge: 'bg-[#1E272F] text-white text-xs',
           }}
         >
-          <IconCart
+          <IconCartTwo
             size={24}
             color={isActive('/cart') ? 'primary' : 'header-100'}
           />

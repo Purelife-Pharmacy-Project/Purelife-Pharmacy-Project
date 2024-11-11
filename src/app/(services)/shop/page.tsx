@@ -9,7 +9,10 @@ export default async function ShopPage() {
     <>
       <div className='flex flex-col justify-center gap-10'>
         <CategoryProducts />
-        <QualityHomeBanner backgroundClassName='bg-white' textClassName='text-[#1E272F]' buttonClassName='bg-[#1E272F] text-white'/>
+        <QualityHomeBanner backgroundClassName={'bg-white'}
+          buttonClassName={'bg-[#1E272F] text-white'}
+          theme='light' />
+        <div className='mb-1'></div>
         <ReportDrugReaction />
         <NewsLetterCard/>
         <Footer />

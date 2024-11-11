@@ -22,6 +22,7 @@ import { IconLocation } from '@/components/icons/IconLocation';
 import { IconFilter } from '@/components/icons/IconFilter';
 import { ProductSortDropdown } from './partials/ProductsSortDropdown';
 import { ProductsPriceRange } from './partials/ProductsPriceRange';
+import { Deals } from './partials/Deals';
 
 interface SortData {
   id: number;
