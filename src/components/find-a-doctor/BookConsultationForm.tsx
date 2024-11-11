@@ -329,7 +329,7 @@ export const BookConsultationForm = () => {
                       onChange={(e) => {
                         const value = e.target.checked
                           ? [...field.value, symptom.name]
-                          : field.value.filter((v) => v !== symptom.name);
+                          : field.value.filter((v: any) => v !== symptom.name);
                         field.onChange(value);
                       }}
                       color='primary'
@@ -553,12 +553,12 @@ export const BookConsultationForm = () => {
             </Button>
           </div>
         </form>
-        <BillingAndPaymentModal
+        {/* <BillingAndPaymentModal
           isOpen={openCheckoutModal}
           onClose={onCloseCheckoutModal}
           toggleModal={() => setOpenCheckoutModal(false)}
           amount={10000}
-        />
+        /> */}
       </CardBody>
     </Card>
   );

@@ -2,12 +2,15 @@
 import { CheckBox } from '@/components/checkbox/Checkbox';
 import { IconChevronLeft } from '@/components/icons/IconChevronLeft';
 import { useQueryParams } from '@/hooks';
+import { useSearchParams } from 'next/navigation';
 import { FC, useEffect, useRef, useState } from 'react';
 type ProductSortDropdownProps = {};
 
 export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
   const { setQuery, removeQuery } = useQueryParams();
-  const currentCategory = new URLSearchParams(window.location.search).get('category'); // Getting category from the URL query
+  const searchParams = useSearchParams();
+  const currentCategory = searchParams.get('category') || undefined;
+  // const currentCategory = new URLSearchParams(window.location.search).get('category'); // Getting category from the URL query
 
   const displayCategories: any = [
     'Health',
