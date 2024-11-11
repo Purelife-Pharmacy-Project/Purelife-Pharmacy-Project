@@ -103,7 +103,9 @@ export default async function BookATest() {
 
         <SummerDeals />
 
-        <QualityHomeBanner/>
+        <QualityHomeBanner
+          theme='dark'
+        />
 
         <Reviews title={'Hear What Our Patients Are Saying About Our Exceptional Doctors'} reviews={reviews}/>
 

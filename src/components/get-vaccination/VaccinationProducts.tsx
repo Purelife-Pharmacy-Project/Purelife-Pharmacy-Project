@@ -14,7 +14,7 @@ import { Button, Input } from '@nextui-org/react';
 import { z } from 'zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { inputBorderedDefault, inputDefault } from '@/theme';
+import { inputBorderedDefault, inputBorderedGray, inputDefault } from '@/theme';
 import { QualityHomeBanner } from '../quality-home-banner';
 import { VaccineCard } from './VaccineCard';
 
@@ -144,50 +144,59 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                       className='max-h-54 absolute left-0 top-[35px] z-20 mt-1 flex w-[250px] flex-col gap-2 overflow-y-auto rounded-lg border border-gray-200 bg-[#FFFFFF] p-4 shadow-lg'
                     >
                       <ReactSlider
-                        className='relative mt-2 h-0.5 rounded-full bg-gray-200'
-                        trackClassName='bg-gray-800 h-0.5 rounded-full example-track'
-                        defaultValue={[0, 100000] as any}
-                        value={[watch('min'), watch('max')] as any}
-                        min={0}
-                        max={100000}
-                        ariaLabel={['Lower thumb', 'Upper thumb']}
-                        pearling
-                        step={1000}
-                        minDistance={10000}
-                        renderThumb={(props, state) => (
-                          <div
-                            {...props}
-                            className={`-mt-[7px] flex cursor-pointer items-center justify-center focus:outline-none ${
-                              state.index === 0 && ''
-                            } ${state.index === 1 && ''}
-                              ${
-                                focusedThumb === state.index ? 'relative' : ''
-                              }`}
-                            onMouseEnter={() => setFocusedThumb(state.index)}
-                            onMouseLeave={() => setFocusedThumb(null)}
-                          >
-                            <div
-                              className={`h-4 w-4 rounded-full border-2 border-gray-800 ${
-                                focusedThumb === state.index
-                                  ? 'bg-gray-300'
-                                  : 'bg-white'
-                              }`}
-                            ></div>
-                            <div
-                              className={`none ${
-                                focusedThumb === state.index &&
-                                'absolute h-10 w-10 rounded-full border-2 border-gray-400'
-                              }`}
-                            ></div>
-                          </div>
-                        )}
-                        onChange={(value: any) => {
-                          setTempRange({ min: value[0], max: value[1] });
-                          setValue('min', value[0].toString());
-                          setValue('max', value[1].toString());
-                          console.log('max: ', watch('max'));
-                        }}
+                    className='relative mt-2 h-0.5 rounded-full bg-[#F6F6F6]'
+                    defaultValue={[0, 100000] as any}
+                    value={[watch('min'), watch('max')] as any}
+                    min={0}
+                    max={100000}
+                    ariaLabel={['Lower thumb', 'Upper thumb']}
+                    pearling
+                    step={1000}
+                    minDistance={10000}
+                    renderThumb={(props: any, state: any) => (
+                      <div
+                        {...props}
+                        className={`-mt-[5px] flex cursor-pointer items-center justify-center focus:outline-none ${
+                          state.index === 0 && ''
+                        } ${state.index === 1 && ''}
+                        ${
+                          focusedThumb === state.index ? 'relative' : ''
+                        }`}
+                        onMouseEnter={() => setFocusedThumb(state.index)}
+                        onMouseLeave={() => setFocusedThumb(null)}
+                      >
+                        <div
+                          className={`h-4 w-4 rounded-full !bg-[#36CB60] border-[#E7E7E7] border-[0.5px] ${
+                            focusedThumb === state.index ? 'bg-[#36CB60]' : 'bg-white'
+                          }`}
+                        ></div>
+                        <div
+                          className={`none ${
+                            focusedThumb === state.index &&
+                            'absolute h-10 w-10 rounded-full border-2 border-gray-400'
+                          }`}
+                        ></div>
+                      </div>
+                    )}
+                    renderTrack={(props, state) => (
+                      <div
+                        {...props}
+                        className={`h-1.5 rounded-full ${
+                          state.index === 0
+                            ? 'bg-gray-200'
+                            : state.index === 1
+                            ? 'bg-[#36CB60]'
+                            : 'bg-gray-200'
+                        }`}
                       />
+                    )}
+                    onChange={(value: any) => {
+                      setTempRange({ min: value[0], max: value[1] });
+                      setValue('min', value[0].toString());
+                      setValue('max', value[1].toString());
+                      console.log('max: ', watch('max'));
+                    }}
+                  />
                       <div className='mt-5 grid grid-cols-[1fr_0.2fr_1fr] gap-2 text-sm font-medium text-gray-400'>
                         <Input
                           {...register('min')}
@@ -197,7 +206,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                           type='string'
                           name='min'
                           value={watch('min')}
-                          classNames={inputBorderedDefault}
+                          classNames={inputBorderedGray}
                         ></Input>
                         <span className='my-auto text-center'>-</span>
                         <Input
@@ -208,7 +217,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                           type='string'
                           name='max'
                           value={watch('max')}
-                          classNames={inputBorderedDefault}
+                          classNames={inputBorderedGray}
                         ></Input>
                       </div>
                       <div
@@ -223,7 +232,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
                             setValue('min', '0');
                             setValue('max', '100000');
                           }}
-                          className='rounded-[6px] border-1 border-[#1E272F] bg-transparent px-3 py-2 text-center font-medium'
+                          className='rounded-[6px] border-1 border-[#F6F6F6]  bg-transparent px-3 py-2 text-center font-medium'
                         >
                           RESET
                         </Button>
@@ -297,7 +306,7 @@ export const VaccinationProducts: FC<VaccinationProductsProps> = () => {
           ) : null}
         </Section>
         <div className='relative my-10 w-full'>
-          <QualityHomeBanner/>
+          <QualityHomeBanner theme='dark'/>
         </div>
         <Section className='w-full bg-transparent'>
           {vaccines && vaccines.length > 6 ? (

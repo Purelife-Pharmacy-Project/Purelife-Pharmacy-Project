@@ -3,6 +3,7 @@ import { NavbarSearch } from '@/components/NavbarSearch';
 import { useLogout } from '@/hooks';
 import {
   Button,
+  Image,
   Link,
   Navbar,
   NavbarBrand,
@@ -12,7 +13,6 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from '@nextui-org/react';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { NavbarCart } from './NavbarCart';
@@ -22,6 +22,7 @@ import { IconChevronLeft } from './icons/IconChevronLeft';
 import { IconLocation } from './icons/IconLocation';
 import { IconSearch } from './icons/IconSearch';
 import { useSearch } from '@/helpers/useContext/authContext';
+import ReferralBanner from './ReferralBanner';
 interface ServicesType {
   id: number;
   value: string;
@@ -87,7 +88,7 @@ export const AppNavbar = ({
     { id: 1, value: 'Telehealth', link: '/telehealth' },
     { id: 2, value: 'Vaccination', link: '/telehealth/get-vaccination' },
     { id: 2, value: 'Lab tests', link: '/telehealth/book-lab-test' },
-    { id: 2, value: 'Virtual Consultation', link: '/telehealth/find-a-doctor' },
+    { id: 2, value: 'Virtual Consultation', link: '' },
   ];
   const [servicesDropdown, setServicesDropdown] = useState(false);
   const servicesButtonRef = useRef<HTMLDivElement | null>(null);
@@ -98,6 +99,7 @@ export const AppNavbar = ({
   );
   return (
     <div className='w-full bg-white fixed top-0 z-[9999]'>
+      <ReferralBanner />
       <Navbar
       onMenuOpenChange={setIsMenuOpen}
       isBlurred={disabled}
@@ -109,19 +111,15 @@ export const AppNavbar = ({
     >
       <NavbarContent
         justify='start'
-        className='grid grid-flow-col gap-6 data-[justify=start]:flex-grow-0'
+        className='grid grid-flow-col gap-20 data-[justify=start]:flex-grow-0'
       >
         <NavbarBrand className='w-28 flex-none flex-grow-0'>
-          <Link href='/'>
             <Image
               src='/app-logo.png'
-              priority
               alt='Purelife logo'
-              width={147}
               loading='eager'
-              height={68.271}
+              className='max-w-[150px] max-h-[68px] w-[120px] h-[56px]'
             />
-          </Link>
         </NavbarBrand>
 
         {/* Silent Logout Button */}
@@ -138,12 +136,12 @@ export const AppNavbar = ({
           hello
         </button>
 
-        <div className='hidden md:gap-[1.375rem] lg:flex'>
-          <NavbarItem className='text-lg leading-[1.6875rem] text-header-100'>
+        <div className='hidden md:gap-[3.5rem] lg:flex'>
+          <NavbarItem className='text-[15px] leading-[1.6875rem] mt-auto '>
             <Link
               color='foreground'
-              href='/shop'
-              className={isActive('/') ? 'font-medium text-primary' : ''}
+              href='/'
+              className={'font-semibold text-[#1E272F] text-[15px]'}
             >
               Home
             </Link>
@@ -154,13 +152,13 @@ export const AppNavbar = ({
               onClick={() => setServicesDropdown(!servicesDropdown)}
               className='ld:gap-5 flex h-fit w-fit cursor-pointer items-center gap-2 font-medium '
             >
-              <p className='text-medium font-medium'>Services</p>
+              <p className='text-[15px] font-semibold text-[#1E272F]'>Services</p>
               <IconChevronLeft className='-rotate-90' color='[#5A5A5A]' />
             </div>
             {servicesDropdown && (
               <div
                 ref={servicesPopupRef}
-                className='absolute -left-[15px] top-[0] z-[99] mt-1 flex w-[12.5rem] flex-col items-center gap-2 rounded-lg border border-gray-200 bg-[#FFFFFF] p-2 pt-0 shadow-lg'
+                className='absolute -left-[18px] top-[10] z-[99] mt-1 flex w-[12.5rem] flex-col items-center gap-2 rounded-lg border border-gray-200 bg-[#FFFFFF] p-2 pt-0 shadow-lg'
                 style={{ boxShadow: '0rem .25rem .625rem 0rem #00000040' }}
               >
                 <div className='z-[999] border-t border-l -mt-[8px] w-[15px] h-[15px] bg-white rotate-45'></div>
@@ -168,13 +166,15 @@ export const AppNavbar = ({
                   {services.map((service) => (
                     <div
                       key={service.id}
-                      className='flex h-fit cursor-pointer items-center justify-between rounded-[.3125rem] p-3 py-1 pl-2'
+                      className='flex flex-col h-fit cursor-pointer justify-center items-between rounded-[.3125rem] p-3 py-1 pl-2'
                       onClick={() => {
                         setServicesDropdown(false);
                       }}
                     >
+                      {service.value === 'Virtual Consultation' && <p className='text-[10px] leading-[1] text-right'>Coming soon</p>}
                       <Link
                         color='foreground'
+                        isDisabled={service.link === ''}
                         href={service.link}
                         className={
                           // isActive('/telehealth/shop-and-order')
@@ -184,6 +184,7 @@ export const AppNavbar = ({
                         }
                       >
                         {service.value}
+                        
                       </Link>
                     </div>
                   ))}
@@ -209,8 +210,8 @@ export const AppNavbar = ({
           justify='end'
           className='w-full cursor-pointer items-center justify-end gap-2 pr-[3%] hidden lg:flex'
         >
-          <IconSearch color='#1E272F' />
-          <span className='text-[#1E272F]'>Search</span>
+          <IconSearch color='#1E272F' size={24}/>
+          <span className='text-[#1E272F] text-[15px] font-semibold'>Search</span>
         </NavbarContent>
       )}
       <NavbarContent

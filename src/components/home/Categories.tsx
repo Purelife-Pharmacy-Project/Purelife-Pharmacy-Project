@@ -165,7 +165,7 @@ export const Categories = () => {
         <div className='relative'>
           <div
             ref={scrollCategoriesRef}
-            className='scrollbar-none mx-auto mt-20 flex w-[88%] gap-6 overflow-x-scroll'
+            className='scrollbar-none mx-auto mt-20 flex w-full gap-6 overflow-x-scroll'
             style={{
               scrollSnapType: 'x mandatory',
               scrollSnapStop: 'always',

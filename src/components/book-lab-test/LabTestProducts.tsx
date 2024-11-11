@@ -14,7 +14,7 @@ import ReactSlider from 'react-slider';
 import { z } from 'zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { inputBorderedDefault, inputDefault } from '@/theme';
+import { inputBorderedDefault, inputBorderedGray, inputDefault } from '@/theme';
 import { IconChevronLeft } from '../icons/IconChevronLeft';
 
 const limit = 9;
@@ -125,7 +125,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
       return [...acc, ...page];
     }, []);
   }, [products]);
-  const [priceRange, setPriceRange] = useState('Price Range');
+  const [priceRange, setPriceRange] = useState('Price');
   const [priceDropdown, setPriceDropdown] = useState(false);
   const priceButtonRef = useRef<HTMLDivElement | null>(null);
   const pricePopupRef = useRef<HTMLDivElement | null>(null);
@@ -165,21 +165,22 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
               <div
                 ref={testTypeButtonRef}
                 onClick={() => setTestTypeDropdown(!testTypeDropdown)}
-                className='ld:gap-5 flex h-fit w-fit cursor-pointer items-center gap-2 rounded-[100px] bg-primaryLight px-4 py-1'
+                className='ld:gap-5 flex h-fit w-fit cursor-pointer items-center gap-7 rounded-[100px] bg-primaryLight px-5 py-2'
               >
-                <p className='text-sm font-medium text-[#797979]'>{testType}</p>
-                <IconChevronLeft className='-rotate-90' color='[#1E272F]' />
+                <p className='text-sm md:text-base font-medium text-[#797979]'>{testType}</p>
+                <IconChevronLeft className='-rotate-90' color='[#5A5A5A]' />
               </div>
               {testTypeDropdown && (
                 <div
                   ref={testTypePopupRef}
-                  className='max-h-54 absolute left-0 top-[35px] z-20 mt-1 flex w-[250px] flex-col gap-2 overflow-y-auto rounded-lg border border-gray-200 bg-[#FFFFFF] p-4 shadow-lg'
+                  className='max-h-54 absolute left-0 top-[40px] z-20 mt-1 flex w-[180px] flex-col gap-2 overflow-y-auto rounded-lg border border-gray-200 bg-[#FFFFFF] p-2 shadow-lg'
                 >
                   {labTestCategories.map((range) => (
                     <div
                       key={range.id}
-                      className='flex h-fit cursor-pointer items-center justify-between rounded-[5px] bg-primaryLight p-3 py-1 pl-2 hover:bg-gray-200'
+                      className='flex h-fit cursor-pointer items-center justify-between rounded-[5px] bg-primaryLight py-1 hover:bg-gray-200'
                       onClick={() => {
+                        setTestType(range.name)
                         setSort(range.name);
                         setSortDropdown(false);
                       }}
@@ -193,7 +194,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                           handleFilterByCategory(String(range.id));
                           setTestTypeDropdown(!testTypeDropdown);
                         }}
-                        className='cursor-pointer bg-transparent py-0 text-sm font-medium text-gray-600'
+                        className='cursor-pointer bg-transparent py-0 h-auto text-sm md:text-base font-medium text-[#797979]'
                       >
                         {range.name}
                       </Button>
@@ -206,9 +207,9 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
               <div
                 ref={priceButtonRef}
                 onClick={() => setPriceDropdown(!priceDropdown)}
-                className='ld:gap-5 flex h-fit w-fit cursor-pointer items-center gap-2 rounded-[100px] bg-primaryLight px-4 py-1'
+                className='ld:gap-5 flex h-fit w-fit cursor-pointer items-center gap-2 rounded-[100px] bg-primaryLight px-5 py-2'
               >
-                <p className='text-sm font-medium text-[#797979]'>
+                <p className='text-sm md:text-base font-medium text-[#797979]'>
                   {priceRange}
                 </p>
                 <IconChevronLeft className='-rotate-90' color='[#5A5A5A]' />
@@ -219,8 +220,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                   className='max-h-54 absolute left-0 top-[35px] z-20 mt-1 flex w-[250px] flex-col gap-2 overflow-y-auto rounded-lg border border-gray-200 bg-[#FFFFFF] p-4 shadow-lg'
                 >
                   <ReactSlider
-                    className='relative mt-2 h-0.5 rounded-full bg-gray-200'
-                    trackClassName='bg-gray-800 h-0.5 rounded-full example-track'
+                    className='relative mt-2 h-0.5 rounded-full bg-[#F6F6F6]'
                     defaultValue={[0, 100000] as any}
                     value={[watch('min'), watch('max')] as any}
                     min={0}
@@ -229,23 +229,21 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                     pearling
                     step={1000}
                     minDistance={10000}
-                    renderThumb={(props, state) => (
+                    renderThumb={(props: any, state: any) => (
                       <div
                         {...props}
-                        className={`-mt-[7px] flex cursor-pointer items-center justify-center focus:outline-none ${
+                        className={`-mt-[5px] flex cursor-pointer items-center justify-center focus:outline-none ${
                           state.index === 0 && ''
                         } ${state.index === 1 && ''}
-                              ${
-                                focusedThumb === state.index ? 'relative' : ''
-                              }`}
+                        ${
+                          focusedThumb === state.index ? 'relative' : ''
+                        }`}
                         onMouseEnter={() => setFocusedThumb(state.index)}
                         onMouseLeave={() => setFocusedThumb(null)}
                       >
                         <div
-                          className={`h-4 w-4 rounded-full border-2 border-gray-800 ${
-                            focusedThumb === state.index
-                              ? 'bg-gray-300'
-                              : 'bg-white'
+                          className={`h-4 w-4 rounded-full !bg-[#36CB60] border-[#E7E7E7] border-[0.5px] ${
+                            focusedThumb === state.index ? 'bg-[#36CB60]' : 'bg-white'
                           }`}
                         ></div>
                         <div
@@ -255,6 +253,18 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                           }`}
                         ></div>
                       </div>
+                    )}
+                    renderTrack={(props, state) => (
+                      <div
+                        {...props}
+                        className={`h-1.5 rounded-full ${
+                          state.index === 0
+                            ? 'bg-gray-200'
+                            : state.index === 1
+                            ? 'bg-[#36CB60]'
+                            : 'bg-gray-200'
+                        }`}
+                      />
                     )}
                     onChange={(value: any) => {
                       setTempRange({ min: value[0], max: value[1] });
@@ -272,7 +282,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                       type='string'
                       name='min'
                       value={watch('min')}
-                      classNames={inputBorderedDefault}
+                      classNames={inputBorderedGray}
                     ></Input>
                     <span className='my-auto text-center'>-</span>
                     <Input
@@ -283,7 +293,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                       type='string'
                       name='max'
                       value={watch('max')}
-                      classNames={inputBorderedDefault}
+                      classNames={inputBorderedGray}
                     ></Input>
                   </div>
                   <div
@@ -298,7 +308,7 @@ export const LabTestProducts: FC<LabTestProductsProps> = () => {
                         setValue('min', '0');
                         setValue('max', '100000');
                       }}
-                      className='rounded-[6px] border-1 border-[#1E272F] bg-transparent px-3 py-2 text-center font-medium'
+                      className='rounded-[6px] border-1 border-[#F6F6F6] bg-transparent px-3 py-2 text-center font-medium'
                     >
                       RESET
                     </Button>

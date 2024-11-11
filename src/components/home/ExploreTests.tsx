@@ -59,7 +59,7 @@ const ExploreTests: React.FC<Prop> = () => {
       emptyMessage='No tests available'
       price
       allowOverflow={true}
-      variant='normal'
+      variant='top test'
     />
   );
 };

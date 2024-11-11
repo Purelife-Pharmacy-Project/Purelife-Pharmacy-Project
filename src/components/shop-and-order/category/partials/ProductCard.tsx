@@ -61,7 +61,7 @@
 // };
 
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Product } from '@/services/products/types';
 import { useCartStore } from '@/hooks';
 import { Button, Image } from '@nextui-org/react';
@@ -72,13 +72,20 @@ export const ProductCard: React.FC<{ product: Product; loading: boolean }> = ({
   product,
   loading,
 }) => {
-  const { addToCart } = useCartStore();
-
+  const { addToCart, cart } = useCartStore();
+  const outOfStock = useMemo(
+    () =>
+      product.quantity === 0 ||
+      cart.find((item) => item.id === product.id)?.quantity ===
+        product.quantity,
+    [cart, product]
+  );
   return (
     <div className='flex w-full flex-col rounded-xl'>
-      <div className='relative mb-5 flex w-full items-center justify-center rounded-2xl bg-primaryLight py-14'>
+      <div className='relative mb-5 flex w-full items-center justify-center rounded-2xl bg-[#F6F6F6] py-[70px]'>
+        {outOfStock && <div className='w-full h-full bg-[#F6F6F6] bg-opacity-[60%] rounded-2xl absolute z-[22]'></div>}
         <Link href={`/cart/${product.id}`}>
-          <Image alt='' src={product.image_1024} width={120.22} height={150} className='bg-primaryLight !h-[100px] md:h-[150px]' />
+          <Image alt='' src={product.image_1024} width={120.22} height={150} className='bg-[#F6F6F6] h-[100px] md:h-[150px]' />
         </Link>
         <Button
           disabled={product.quantity === 0}
@@ -89,14 +96,14 @@ export const ProductCard: React.FC<{ product: Product; loading: boolean }> = ({
               quantity: 1,
             });
           }}
-          className='absolute z-[10] right-6 top-6 h-auto min-w-0 rounded-full bg-white p-3'
+          className={`absolute z-[10] right-6 top-6 h-auto min-w-0 rounded-full bg-white p-3 ${outOfStock && 'border border-[#E7E7E7]'}`}
         >
-          <IconCart color='[#686868]'/>
+          {outOfStock ? <p className='text-[#686868] font-[500] text-[20px]'>Out of Stock</p> : <IconCart color='#686868'/>}
         </Button>
       </div>
 
       <p className='mb-2 font-medium text-sm md:text-base lg:text-xl'>
-        {product.name}
+      {product.name?.charAt(0).toUpperCase() + product.name?.slice(1).toLowerCase()}
       </p>
       <p className='font-bold text-sm md:text-base lg:text-xl'>{product.amount}</p>
     </div>

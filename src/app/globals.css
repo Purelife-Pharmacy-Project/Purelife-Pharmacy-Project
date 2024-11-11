@@ -22,7 +22,7 @@ html {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: #1E272F;
   background: linear-gradient(
       to bottom,
       transparent,

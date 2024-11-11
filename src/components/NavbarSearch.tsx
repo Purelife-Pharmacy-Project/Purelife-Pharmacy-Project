@@ -19,11 +19,13 @@ import { useSearch } from '@/helpers/useContext/authContext';
 interface NavbarSearchProps {
   searchBtnClassName?: string;
   placeholderClassName?: string;
+  borderClassName?: string;
   show?: boolean;
 }
 export const NavbarSearch: React.FC<NavbarSearchProps> = ({
   searchBtnClassName,
   placeholderClassName,
+  borderClassName,
   show,
 }) => {
   const [searchStr, setSearchStr] = useState<string | undefined>('');
@@ -188,7 +190,7 @@ export const NavbarSearch: React.FC<NavbarSearchProps> = ({
               'p-0',
               '!p-0',
               'bg-white',
-              'border border-[#1212121A]',
+              `border border-[#1212121A] ${borderClassName}`,
               'shadow-none',
               'text-black capitalize',
               'data-[hover=true]:bg-white',

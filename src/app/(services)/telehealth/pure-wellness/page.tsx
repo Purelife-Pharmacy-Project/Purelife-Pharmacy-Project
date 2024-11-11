@@ -66,9 +66,7 @@ export default function PureWellnessPage() {
     <>
       <main className='grid gap-6'>
         <HomeHero
-          title='Get a personalized 
-                    wellness plan for 
-                    your lifestyle.'
+          title='Get a personalized wellness plan for your lifestyle.'
           description='Tailored solutions for your unique needs. Achieve balance and vitality with a wellness plan designed just for you.'
           ctaText='Start Here'
           ctaLink='#'

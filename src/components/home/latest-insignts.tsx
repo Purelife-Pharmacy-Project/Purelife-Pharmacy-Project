@@ -1,5 +1,5 @@
 'use client';
-import { Button, Image } from '@nextui-org/react';
+import { Button, Image, Link } from '@nextui-org/react';
 import { Section } from './Section';
 import React, { useEffect, useRef, useState } from 'react';
 import { IconArrowRight } from '../icons/IconArrowRight';
@@ -30,15 +30,28 @@ export const LatestInsights = () => {
   const insights = [
     {
       title: 'Getting Started with Purelife Health',
-      image: '/images/insights-1.jpg',
+      image: '/images/insights-1.png',
+      link: 'https://www.thisdaylive.com/index.php/2024/07/16/purelife-group-launches-groundbreaking-digital-platform-to-transform-primary-healthcare-in-africa/'
     },
     {
       title: 'Quality Homecare with Purelife',
       image: '/images/insights-2.jpg',
+      link: 'https://www.vanguardngr.com/2024/07/pharmaceutical-firm-unveils-primary-care-mobile-app-purelife/'
     },
     {
       title: 'Choosing the right medications',
       image: '/images/insights-3.jpg',
+      link: 'https://guardian.ng/purelife-unveils-digital-platform-to-transform-primary-healthcare-access/'
+    },
+    {
+      title: 'Choosing the right medications',
+      image: '/images/insights-4.png',
+      link: 'https://techpoint.africa/2024/07/23/purelife-group-launches-purelifehealth-io-a-revolutionary-digital-platform-to-bridge-africas-primary-healthcare-gap/'
+    },
+    {
+      title: 'Choosing the right medications',
+      image: '/images/insights-5.jpg',
+      link: 'https://techeconomy.ng/purelife-pharmacy-revolutionizes-healthcare-access-with-primary-care-mobile-app/'
     },
   ];
   return (
@@ -102,15 +115,17 @@ export const LatestInsights = () => {
               ></div>
               <div className='mx-auto mt-3 flex w-[83%] items-center justify-between border-t pt-5'>
                 <p className='px-auto text-xl font-semibold'>{item.title}</p>
-                <Button
+                <Link href={item.link} target="_blank">
+                  <Button
                   color='primary'
                   size='md'
                   radius='full'
                   className={`h-fit min-w-0 rounded-full p-2`}
-                  onClick={scrollInsightsRight}
                 >
                   <IconArrowRight size={12} color={`#FFFFFF`} />
                 </Button>
+                </Link>
+                
               </div>
             </div>
           ))}

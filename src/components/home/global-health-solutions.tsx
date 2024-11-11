@@ -5,7 +5,7 @@ import React, { useRef, useState } from 'react';
 
 export const GlobalHealthSolutions = () => {
   return (
-    <Section className='mt-10'>
+    <Section className=''>
       <h3 className='mb-14 lg:w-[75%] w-full text-3xl lg:text-4xl font-semibold'>
         Empowering Wellness Through Global Health Solutions
       </h3>

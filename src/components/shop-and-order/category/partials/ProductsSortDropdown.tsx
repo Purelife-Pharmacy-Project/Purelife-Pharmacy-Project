@@ -1,41 +1,28 @@
 'use client';
+import { CheckBox } from '@/components/checkbox/Checkbox';
 import { IconChevronLeft } from '@/components/icons/IconChevronLeft';
-import { filteredCategories } from '@/helpers/utils';
-import { useGetCategories, useQueryParams } from '@/hooks';
-import { Radio, RadioGroup } from '@nextui-org/react';
-import { useSearchParams } from 'next/navigation';
+import { useQueryParams } from '@/hooks';
 import { FC, useEffect, useRef, useState } from 'react';
 type ProductSortDropdownProps = {};
 
 export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
-  const { categories, loadingCategories } = useGetCategories();
   const { setQuery, removeQuery } = useQueryParams();
-  const currentCategory = useSearchParams().get('category');
+  const currentCategory = new URLSearchParams(window.location.search).get('category'); // Getting category from the URL query
 
-  const allowedCategories = [
-    'health',
-    'beauty',
-    'supermarket',
-    'general',
-    'tests',
-    'vaccines',
-    'all',
+  const displayCategories: any = [
+    'Health',
+    'Beauty',
+    'Supermarket',
+    'Vaccines',
+    'All Categories',
   ];
 
-  const displayCategories: any = {
-    health: 'Health',
-    beauty: 'Beauty',
-    supermarket: 'Supermarket',
-    general: 'General',
-    tests: 'Tests',
-    vaccines: 'Vaccines',
-    all: 'All Categories',
-  };
-
+  const [checks, setChecks] = useState<boolean[]>(new Array(displayCategories.length).fill(false));
   const [selectedValue, setSelectedValue] = useState<string>('all');
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [height, setHeight] = useState<string>('0');
+
   useEffect(() => {
     if (!currentCategory) {
       removeQuery(['category']);
@@ -43,14 +30,16 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
     } else {
       setSelectedValue(currentCategory.toUpperCase());
     }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCategory]);
 
   const handleSelectCategory = (category: string) => {
-    if (String(category)?.toLowerCase() === 'all') {
+    if (category.toLowerCase() === 'all') {
       removeQuery(['category']);
+      setChecks(new Array(displayCategories.length).fill(false)); // Reset checks when 'All Categories' is selected
     } else {
-      setQuery({ category: category?.toLowerCase() });
+      setQuery({ category: category.toLowerCase() });
+      setChecks(displayCategories.map((_: any, i: any) => i === displayCategories.indexOf(category))); // Set check for selected category
     }
   };
 
@@ -58,7 +47,7 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
     if (selectedValue) {
       handleSelectCategory(selectedValue);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedValue]);
 
   useEffect(() => {
@@ -67,9 +56,10 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
     } else {
       setHeight('0');
     }
-  }, [isOpen, categories]); 
+  }, [isOpen]);
+
   return (
-    <section className='border-b pb-3'>
+    <section className='border-b border-[#E7E7E7] border-opacity-50 pb-3'>
       <div
         className="flex justify-between items-center cursor-pointer"
         onClick={() => setIsOpen((prev) => !prev)}
@@ -92,33 +82,24 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
           overflow: 'hidden',
           transition: 'height 0.3s ease-in-out',
         }}
+        className='flex flex-col gap-3'
       >
-        <RadioGroup
-          value={selectedValue}
-          onValueChange={(value) => {
-            setSelectedValue(value);
-          }}
-          classNames={{
-            label: 'font-semibold text-header-100 cursor-pointer',
-          }}
-        >
-          {(filteredCategories(categories, allowedCategories) || [])
-            .sort((a, b) => {
-              if (a.name.toLowerCase() === 'all') return 1;
-              if (b.name.toLowerCase() === 'all') return -1;
-              return 0;
-            })
-            .map((category) => (
-              <Radio
-                key={category.name}
-                className="capitalize text-[#797979]"
-                value={category.name}
-              >
-                {displayCategories[category.name?.toLowerCase()]}
-              </Radio>
-            ))}
-        </RadioGroup>
-
+        {displayCategories.map((item: any, index: any) => (
+          <div key={index} className='flex gap-3'>
+            <CheckBox
+              id={index}
+              checked={checks[index]}
+              onChange={() => {
+                if (item === 'All Categories') {
+                  setSelectedValue('all');
+                } else {
+                  setSelectedValue(item);
+                }
+              }}
+            />
+            <p className='text-[15px] text-[#797979] font-[400]'>{item}</p>
+          </div>
+        ))}
       </div>
     </section>
   );

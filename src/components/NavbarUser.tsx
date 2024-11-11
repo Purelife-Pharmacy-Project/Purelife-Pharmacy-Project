@@ -93,13 +93,12 @@ export const NavbarUser: FC<NavbarUserProps> = ({ isActive }) => {
         <Button
           as={NextLink}
           radius='full'
-          size='lg'
           color='primary'
-          className={isActive('/sign-in') ? 'font-medium' : ''}
+          className={isActive('/sign-in') ? 'font-medium' : 'w-[8rem] py-6'}
           href='/sign-in'
         >
           <div className='flex items-center gap-2'>
-            <p>Join Now</p>
+            <p className='text-[17px]'>Join Now</p>
           </div>
         </Button>
       )}

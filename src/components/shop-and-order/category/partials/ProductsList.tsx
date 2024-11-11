@@ -35,7 +35,7 @@ export const ProductsList: FC<ProductsListProps> = ({
               hasMore={hasNextPage}
               loader={<ProductCardSkeleton/>}
               dataLength={products?.length || 0}
-              className='relative grid grid-flow-row grid-cols-2 gap-10 overflow-y-auto md:grid-cols-2 lg:grid-cols-3'
+              className='relative grid grid-flow-row grid-cols-2 gap-6 overflow-y-auto md:grid-cols-2 lg:grid-cols-3'
             >
               {products.slice(0, limit)?.map((product) => (
                 <ProductCard
