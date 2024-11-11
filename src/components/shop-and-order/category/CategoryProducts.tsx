@@ -198,7 +198,7 @@ export const CategoryProducts = () => {
                 onClick={() => {
                   removeQuery(['category', 'minPrice', 'maxPrice']);
                 }}
-                className='hidden bg-white text-lg font-medium text-[#FF0028] lg:block'
+                className='hidden w-fit px-0 bg-white text-lg font-medium text-[#FF0028] lg:block'
               >
                 Reset Filter
               </Button>

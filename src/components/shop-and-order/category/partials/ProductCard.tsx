@@ -76,7 +76,7 @@ export const ProductCard: React.FC<{ product: Product; loading: boolean }> = ({
 
   return (
     <div className='flex w-full flex-col rounded-xl'>
-      <div className='relative mb-5 flex w-full items-center justify-center rounded-2xl bg-[#F6F6F6] py-14'>
+      <div className='relative mb-5 flex w-full items-center justify-center rounded-2xl bg-[#F6F6F6] py-[70px]'>
         <Link href={`/cart/${product.id}`}>
           <Image alt='' src={product.image_1024} width={120.22} height={150} className='bg-[#F6F6F6] h-[100px] md:h-[150px]' />
         </Link>
@@ -91,12 +91,12 @@ export const ProductCard: React.FC<{ product: Product; loading: boolean }> = ({
           }}
           className='absolute z-[10] right-6 top-6 h-auto min-w-0 rounded-full bg-white p-3'
         >
-          <IconCart color='[#686868]'/>
+          <IconCart color='#686868'/>
         </Button>
       </div>
 
       <p className='mb-2 font-medium text-sm md:text-base lg:text-xl'>
-        {product.name}
+      {product.name?.charAt(0).toUpperCase() + product.name?.slice(1).toLowerCase()}
       </p>
       <p className='font-bold text-sm md:text-base lg:text-xl'>{product.amount}</p>
     </div>
