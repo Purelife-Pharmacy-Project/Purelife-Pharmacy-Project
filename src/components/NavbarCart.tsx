@@ -32,7 +32,7 @@ export const NavbarCart: FC<NavbarCartProps> = ({ isActive }) => {
             color={isActive('/cart') ? 'primary' : 'header-100'}
           />
         </Badge>
-        <p>Cart</p>
+        <p className='font-semibold text-[15px]'>Cart</p>
       </div>
     </Link>
   );

@@ -17,7 +17,7 @@ const ReferralModal: React.FC<ModalProps> = ({ onClose }) => {
   const { isAuthenticated } = useAuth();
 
   return (
-    <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50'>
+    <div className='fixed inset-0 z-[99999] flex items-center justify-center bg-black bg-opacity-50'>
       <div
         ref={modalRef}
         className='w-[90%] md:w-[50%] rounded-lg bg-white p-6'

@@ -46,7 +46,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
       <div className='bg-white lg:px-0'>
         <div className='relative mb-10 h-[450px] w-full overflow-hidden sm:h-[800px]'>
           <div className='absolute top-[60px] flex w-full justify-center'>
-            <h3 className='w-[75%] text-center text-3xl font-bold leading-[1.2] text-[#1E272F] md:w-[65%] lg:text-[40px]'>
+            <h3 className='w-[75%] text-center font-bold leading-[1.2] text-[#1E272F] md:w-[65%] lg:text-[40px] md:text-[30px] text-[25px]'>
               {title}
             </h3>
           </div>
@@ -77,7 +77,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
                 {reviews.map((review, index) => (
                   <div key={index} className='min-w-[100%] lg:min-w-[100%]'>
                     <div className='flex  flex-col items-center justify-center gap-[10px]'>
-                      <h3 className='text-2xl font-semibold text-[#1E272F] sm:text-[32px]'>
+                      <h3 className='text-xl font-semibold text-[#1E272F] sm:text-[32px]'>
                         {review.title}
                       </h3>
                       <p className='text-xs font-medium text-[#5A5A5A] sm:text-base'>

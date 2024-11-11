@@ -1,4 +1,5 @@
 'use client';
+import { CheckBox } from '@/components/checkbox/Checkbox';
 import { IconChevronLeft } from '@/components/icons/IconChevronLeft';
 import { filteredCategories } from '@/helpers/utils';
 import { useGetCategories, useQueryParams } from '@/hooks';
@@ -16,26 +17,27 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
     'health',
     'beauty',
     'supermarket',
-    'general',
-    'tests',
+    // 'general',
+    // 'tests',
     'vaccines',
     'all',
   ];
 
-  const displayCategories: any = {
-    health: 'Health',
-    beauty: 'Beauty',
-    supermarket: 'Supermarket',
-    general: 'General',
-    tests: 'Tests',
-    vaccines: 'Vaccines',
-    all: 'All Categories',
-  };
-
+  const displayCategories: any = [
+    'Health',
+    'Beauty',
+    'Supermarket',
+    'Vaccines',
+    'All Categories',
+  ];
+  const [checks, setChecks] = useState<boolean[]>(
+    new Array(displayCategories.length).fill(false)
+  );
   const [selectedValue, setSelectedValue] = useState<string>('all');
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [height, setHeight] = useState<string>('0');
+
   useEffect(() => {
     if (!currentCategory) {
       removeQuery(['category']);
@@ -69,7 +71,7 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
     }
   }, [isOpen, categories]); 
   return (
-    <section className='border-b pb-3'>
+    <section className='border-b border-[#E7E7E7] border-opacity-50 pb-3'>
       <div
         className="flex justify-between items-center cursor-pointer"
         onClick={() => setIsOpen((prev) => !prev)}
@@ -92,32 +94,25 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
           overflow: 'hidden',
           transition: 'height 0.3s ease-in-out',
         }}
+        className='flex flex-col gap-3'
       >
-        <RadioGroup
-          value={selectedValue}
-          onValueChange={(value) => {
-            setSelectedValue(value);
-          }}
-          classNames={{
-            label: 'font-semibold text-header-100 cursor-pointer',
-          }}
-        >
-          {(filteredCategories(categories, allowedCategories) || [])
-            .sort((a, b) => {
-              if (a.name.toLowerCase() === 'all') return 1;
-              if (b.name.toLowerCase() === 'all') return -1;
-              return 0;
-            })
-            .map((category) => (
-              <Radio
-                key={category.name}
-                className="capitalize text-[#797979]"
-                value={category.name}
-              >
-                {displayCategories[category.name?.toLowerCase()]}
-              </Radio>
-            ))}
-        </RadioGroup>
+        {displayCategories.map((item: any, index: any) => (
+          <div key={index} className='flex gap-3'>
+            <CheckBox
+              id={index}
+              checked={checks[index]}
+              onChange={() => {
+                if (item === 'All Categories') {
+                  setSelectedValue('all')
+                  setChecks(checks.fill(false))
+                }
+                const updatedChecks = checks.map((_, i) => i === index);
+                setChecks(updatedChecks);
+                setSelectedValue(item);
+              }} />
+            <p className='text-[15px] text-[#797979] font-[400]'>{item}</p>
+          </div>
+        ))}
 
       </div>
     </section>

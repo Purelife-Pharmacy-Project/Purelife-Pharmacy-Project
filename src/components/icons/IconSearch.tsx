@@ -6,7 +6,7 @@ type IconSearchProps = {
 };
 
 export const IconSearch: FC<IconSearchProps> = ({
-  size = 18,
+  size = 24,
   color = 'white',
 }) => {
   return (

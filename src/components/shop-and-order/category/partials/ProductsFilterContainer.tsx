@@ -12,9 +12,9 @@ export const ProductsFilterContainer: FC<
 > = ({}) => {
   return (
     <>
-      <Card shadow='none' className='h-fit bg-white hidden lg:block border-r border-b rounded-none pl-[11%]'>
+      <Card shadow='none' className='h-fit bg-white hidden lg:block border-r border-b border-[#E7E7E7] border-opacity-50 rounded-none pl-[15%]'>
         <CardBody className=''>
-          <h1 className='mb-2 text-2xl font-semibold text-header-100'>
+          <h1 className='mb-2 text-[18px] font-semibold text-header-100'>
             Filters
           </h1>
 

@@ -176,23 +176,23 @@ export const CategoryProducts = () => {
             <div className='hidden w-full justify-end lg:flex'></div>
           ) : null}
         </div> */}
-        <div className='flex w-full items-center justify-between border-b border-t px-[4%] py-[15px]'>
-          <div className='flex cursor-pointer gap-8 text-sm font-medium text-[#797979] md:text-base'>
+        <div className='flex w-full items-center justify-between border-b border-t border-[#E7E7E7] border-opacity-50 px-[5%] py-[15px]'>
+          <div className='flex cursor-pointer gap-6 text-sm font-medium text-[#797979] md:text-[15px]'>
             <span>Beauty</span>
             <span>Health</span>
             <span>Sexual Health</span>
             <span>Supermarket</span>
           </div>
-          <div className='hidden gap-1 font-medium text-[#797979] md:flex'>
+          {/* <div className='hidden gap-1 font-medium text-[#797979] md:flex'>
             <span className='flex items-center gap-2'>
               <IconLocation /> Deliver to:
             </span>
             <span className='text-[#1E272F]'>Lagos, Nigeria</span>
-          </div>
+          </div> */}
         </div>
         <div className='grid gap-4 lg:grid-flow-col lg:grid-cols-[1fr_3fr]'>
           <ProductsFilterContainer />
-          <div className='pl-[5%] pr-[5%] lg:pl-0'>
+          <div className='pl-[2%] pr-[5%]'>
             <div className='flex w-full justify-between py-[35px]'>
               <Button
                 onClick={() => {

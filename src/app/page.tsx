@@ -112,6 +112,7 @@ const reviews = [
 ];
 
 export default async function Home() {
+
   return (
     <>
       <main className='grid gap-6 lg:gap-10'>
@@ -119,7 +120,7 @@ export default async function Home() {
 
         <HomePartners />
 
-        <div className='invisible mb-4'></div>
+        <div className='invisible mb-8'></div>
 
         <Categories />
 
@@ -128,7 +129,7 @@ export default async function Home() {
         <DiscoverTopProducts />
 
         <div className='invisible mb-4'></div>
-
+        <Section className='mb-3 text-[20px] md:text-[26px] lg:text-[32px] font-semibold text-[#1E272F]'>Find Your Perfect Health and Wellness Solution</Section> 
         <Section className='grid lg:grid-cols-[1fr_1fr] grid-cols-1 lg:gap-5 gap-10 w-full'>
           <HotOffersProduct />
           <BestSellers/>
@@ -152,6 +153,7 @@ export default async function Home() {
         <QualityHomeBanner
           backgroundClassName={'bg-white'}
           buttonClassName={'bg-[#1E272F] text-white'}
+          theme='light'
         />
 
         <Reviews

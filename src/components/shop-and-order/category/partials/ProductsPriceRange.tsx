@@ -93,7 +93,7 @@ export const ProductsPriceRange: FC<ProductsPriceRangeProps> = ({}) => {
         className='px-4'
       >
         <ReactSlider
-          className='relative mt-5 h-0.5 rounded-full bg-gray-200'
+          className='relative mt-5 h-0.5 rounded-full bg-[#F6F6F6]'
           defaultValue={[0, 200000] as any}
           value={[watch('min'), watch('max')] as any}
           min={0}

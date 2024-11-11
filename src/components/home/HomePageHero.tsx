@@ -98,12 +98,12 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
         }}
-        className={`banner-container flex min-h-[540px] w-full flex-col items-start justify-center ${
+        className={`banner-container flex min-h-[580px] w-full flex-col items-start justify-center ${
           isLargeScreen ? '' : 'bg-primaryLight'
         } ${fade ? 'fade-in' : 'fade-out'}`}
       >
         <div className='mx-auto w-[95%] lg:ml-[5%] lg:w-[45%]'>
-          <div className='lg:mt-0 mt-8 mb-7 text-center text-5xl font-bold lg:text-white lg:text-left'>
+          <div className='lg:mt-0 mt-8 mb-7 text-center text-[50px] leading-[1.2] font-bold lg:text-white lg:text-left'>
             The future of health services, anytime and anywhere
           </div>
           <div
@@ -113,14 +113,15 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
             Take control of your health and experience the benefits of Purelife
             health
           </div>
-          <div className='lg-mx-0 mx-auto w-[95%]'>
+          <div className=''>
             <NavbarSearch
               show={true}
-              searchBtnClassName='h-[50px] w-[40%] justify-center'
-              placeholderClassName='absolute top-[15px]'
+              searchBtnClassName='h-[60px] w-[40%] justify-center text-[18px]'
+              placeholderClassName='absolute top-[20px]'
+              borderClassName='border-none'
             />
           </div>
-          <div className='lg-mx-0 mx-auto mt-8 hidden w-fit gap-2 lg:flex'>
+          <div className='lg-mx-0 mt-8 hidden w-fit gap-2 lg:flex'>
             {bannerImages.map((_, index) => (
               <div
                 key={index}
@@ -154,7 +155,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
       </div>
       
       <Section>
-        <h1 className='mb-6 mt-14 w-full text-center text-3xl font-semibold'>
+        <h1 className='mb-6 mt-14 w-full text-center text-[35px] font-semibold text-[#1E272F]'>
           Quality Healthcare you can trust
         </h1>
         <div className='mt-20 grid lg:grid-cols-[1fr_1fr_1fr] grid-cols-1 lg:gap-10 px-0 pb-28'>
@@ -191,7 +192,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
               <h3 className='flex items-center justify-between text-2xl font-medium'>
                 Consult with a Doctor
                 <span className='-rotate-45'>
-                  <IconArrowRight />
+                  <IconArrowRight color='#1E272F'/>
                 </span>
               </h3>
               <p className='text-sm text-[#5A5A5A]'>
@@ -218,7 +219,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
               <h3 className='mb-5 flex items-center justify-between text-2xl font-medium'>
                 Book a Vaccination
                 <span className='-rotate-45'>
-                  <IconArrowRight />
+                  <IconArrowRight color='#1E272F'/>
                 </span>
               </h3>
               {loadingVaccines ? (
@@ -267,10 +268,10 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
               style={{ boxShadow: '50px 70px 112px 0px #AAAAAA1A' }}
               className='mt-10 cursor-pointer rounded-[20px] border border-[0.5px] bg-white px-5 py-4 '
             >
-              <h3 className='flex items-center justify-between text-2xl font-medium'>
+              <h3 className='flex items-center justify-between text-2xl font-[600] text-[#1E272F]'>
                 Shop Pharmacy
                 <span className='-rotate-45'>
-                  <IconArrowRight />
+                  <IconArrowRight color='#1E272F'/>
                 </span>
               </h3>
               <p className='text-sm text-[#5A5A5A]'>

@@ -56,7 +56,7 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
                 </div>
                 <IconLine/>
               </div>
-              <div className='flex flex-col gap-[20px]'>
+              <div className='flex flex-col gap-[25px]'>
                 <div>
                   <h3 className='text-2xl font-medium'>Search for Specialists</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Browse and filter through a diverse range of healthcare professionals to find the right consultant for your needs.</p>
@@ -65,11 +65,11 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
                   <h3 className='text-2xl font-medium'>Choose your Specialists</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Select the specific health professional you would like to consult with.</p>
                 </div>
-                <div className='mt-3'>
+                <div className='mt-1'>
                   <h3 className='text-2xl font-medium'>Schedule your Appointments</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Choose a time, provide name, contact info, reason. Appointment confirmed, professional assigned for consultation.</p>
                 </div>
-                <div className='mt-4'>
+                <div className='mt-2'>
                   <h3 className='text-2xl font-medium'>Attend your appointment</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Consult your provider from the Comfort of your home or office.</p>
                 </div>
@@ -107,7 +107,7 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
                 </div>
                 <IconLine/>
               </div>
-              <div className='flex flex-col gap-[20px]'>
+              <div className='flex flex-col gap-[25px]'>
                 <div>
                   <h3 className='text-2xl font-medium'>Browse Our Pharmacy</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Explore a wide variety of lab tests available to find the right one for your health needs.</p>
@@ -116,11 +116,11 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
                   <h3 className='text-2xl font-medium'>Select Your Medications</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Choose the right products by reviewing descriptions, dosages, and customer ratings.</p>
                 </div>
-                <div className='mt-3'>
+                <div className='mt-1'>
                   <h3 className='text-2xl font-medium'>Place Your Order</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Securely complete your purchase with multiple payment options and instant order confirmation.</p>
                 </div>
-                <div className='mt-4'>
+                <div className='mt-1'>
                   <h3 className='text-2xl font-medium'>Receive Your Delivery</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Enjoy fast and discreet shipping straight to your door, with tracking available for your convenience.</p>
                 </div>
@@ -158,7 +158,7 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
                 </div>
                 <IconLine/>
               </div>
-              <div className='flex flex-col gap-[20px]'>
+              <div className='flex flex-col gap-[25px]'>
                 <div>
                   <h3 className='text-2xl font-medium'>Explore Vaccine Options</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Check our comprehensive list of vaccines available for you and your family.</p>
@@ -167,11 +167,11 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
                   <h3 className='text-2xl font-medium'>Select Your Preferred Location</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Choose a nearby clinic or pharmacy that offers your selected vaccine.</p>
                 </div>
-                <div className='mt-3'>
+                <div className='mt-1'>
                   <h3 className='text-2xl font-medium'>Choose Your Appointment Time</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Schedule your vaccination at a convenient time that fits your schedule.</p>
                 </div>
-                <div className='mt-4'>
+                <div className='mt-1'>
                   <h3 className='text-2xl font-medium'>Attend and Get Vaccinated</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Go to your appointment and receive your vaccine, with follow-up information provided for your records.</p>
               </div>
@@ -210,7 +210,7 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
                 </div>
                 <IconLine/>
               </div>
-              <div className='flex flex-col gap-[20px]'>
+              <div className='flex flex-col gap-[25px]'>
                 <div>
                   <h3 className='text-2xl font-medium'>Search for Tests</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Explore a wide variety of lab tests available to find the right one for your health needs.</p>
@@ -219,11 +219,11 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
                   <h3 className='text-2xl font-medium'>Select and Book Your Test</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Review test details and requirements to ensure you choose the appropriate option for accurate results.</p>
                 </div>
-                <div className='mt-3'>
+                <div className='mt-1'>
                   <h3 className='text-2xl font-medium'>Visit the Lab</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Get directions and preparation instructions for your visit, ensuring a smooth testing experience.</p>
                 </div>
-                <div className='mt-4'>
+                <div className='mt-1'>
                   <h3 className='text-2xl font-medium'>Access Your Results</h3>
                   <p className='text-[#5A5A5A] text-sm font-medium'>Track your test status and receive your results online, all accessible through your PureLife account.</p>
                 </div>
