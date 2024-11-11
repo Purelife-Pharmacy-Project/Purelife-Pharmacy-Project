@@ -38,7 +38,7 @@ const Modal: React.FC<ModalProps> = ({
 
   const handleTimeSelect = (hour: string) => {
     setSelectedHour(hour);
-    localStorage.setItem('redirectPath', '/telehealth/find-a-doctor/availability-calendar');
+    // localStorage.setItem('redirectPath', '/telehealth/find-a-doctor/availability-calendar');
     if (isAuthenticated) {
       router.push(`/telehealth/find-a-doctor/review-and-book`)
     }
