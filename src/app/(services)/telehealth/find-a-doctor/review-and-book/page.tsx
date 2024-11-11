@@ -1,5 +1,4 @@
 'use client';
-import { BookConsultationForm } from '@/components/find-a-doctor/BookConsultationForm';
 import { BillingAndPaymentModal } from '@/components/find-a-doctor/modals/BillingAndPaymentModal';
 import { Footer } from '@/components/home/Footer';
 import { Section } from '@/components/home/Section';
@@ -14,7 +13,6 @@ import { useState } from 'react';
 export default function ReviewConsultationBooking() {
   const [openCheckoutModal, setOpenCheckoutModal] = useState(false);
   const router = useRouter();
-  // const doctorSlug = usePathname().split('/').pop();
 
   const doctorData = allDoctors.find((doctor) => doctor.slug === 'salako');
 
@@ -86,12 +84,12 @@ export default function ReviewConsultationBooking() {
 
         <Footer />
       </main>
-      <BillingAndPaymentModal
+      {/* <BillingAndPaymentModal
         isOpen={openCheckoutModal}
         onClose={onCloseCheckoutModal}
         toggleModal={() => setOpenCheckoutModal(false)}
         amount={10000}
-      />
+      /> */}
     </>
   );
 }

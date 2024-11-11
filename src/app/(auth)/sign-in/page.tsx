@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
   const router = useRouter();
-  const redirectPath = localStorage.getItem('redirectPath');
+  
   const handleBackClick = () => {
     localStorage.removeItem('redirectPath');
     router.push('/telehealth/find-a-doctor/availability-calendar'); 
@@ -17,7 +17,7 @@ export default function LoginPage() {
     <>
       <main className='mb-10 w-[90%] md:w-[45%] sm:w-[70%] mx-auto h-screen justify-center md:mb-0'>
         <div className='mt-12 flex w-full flex-col gap-6'>
-          {(redirectPath === '/telehealth/find-a-doctor/availability-calendar') &&
+          {false &&
             <div
               onClick={handleBackClick}
               className='w-fit cursor-pointer'>

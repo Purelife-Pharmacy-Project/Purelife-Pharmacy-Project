@@ -39,7 +39,7 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
       setChecks(new Array(displayCategories.length).fill(false)); // Reset checks when 'All Categories' is selected
     } else {
       setQuery({ category: category.toLowerCase() });
-      setChecks(displayCategories.map((_, i) => i === displayCategories.indexOf(category))); // Set check for selected category
+      setChecks(displayCategories.map((_: any, i: any) => i === displayCategories.indexOf(category))); // Set check for selected category
     }
   };
 
