@@ -44,8 +44,8 @@ export const LoginForm = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const redirectPath = localStorage.getItem('redirectPath');
-  console.log(redirectPath)
+  // const redirectPath = localStorage.getItem('redirectPath');
+  // console.log(redirectPath)
   const { loginUser, loadingLogin, loginError, isError } = useLogin(() => {
     // if (redirectPath === '/telehealth/find-a-doctor/availability-calendar') {
     //   router.push(`/telehealth/find-a-doctor/review-and-book`)
