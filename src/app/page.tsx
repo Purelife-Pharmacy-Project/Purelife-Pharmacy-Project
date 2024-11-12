@@ -120,9 +120,9 @@ export default async function Home() {
 
         <HomePartners />
 
-        <div className='invisible mb-8'></div>
+        {/* <div className='invisible mb-8'></div> */}
 
-        <Categories />
+        {/* <Categories /> */}
 
         <div className='invisible mb-4'></div>
 

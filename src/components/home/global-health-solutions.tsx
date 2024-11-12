@@ -12,12 +12,12 @@ export const GlobalHealthSolutions = () => {
       <div className=' grid lg:grid-cols-[1fr_1fr] grid-cols-1 grid-rows-2 gap-5 pb-10'>
         <div className='row-span-2'>
           <div
-            className='flex lg:h-full h-[400px] w-full flex-col justify-end '
+            className='flex lg:h-full h-[400px] w-full flex-col justify-end border'
             style={{
               backgroundImage: 'url(/images/mission.jpg)',
               backgroundPosition: 'center bottom 55%',
               backgroundRepeat: 'no-repeat',
-              backgroundSize: '',
+              backgroundSize: 'cover',
               borderRadius: '20px',
             }}
           >

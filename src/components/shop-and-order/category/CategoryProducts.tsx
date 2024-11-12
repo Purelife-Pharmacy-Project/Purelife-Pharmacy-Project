@@ -177,7 +177,8 @@ export const CategoryProducts = () => {
             <div className='hidden w-full justify-end lg:flex'></div>
           ) : null}
         </div> */}
-        <div className='flex w-full items-center justify-between border-b border-t border-[#E7E7E7] border-opacity-50 py-[15px]'>
+        <div className='border-b border-[#E7E7E7] border-opacity-50'></div>
+        <div className='hidden flex w-full items-center justify-between border-b border-t border-[#E7E7E7] border-opacity-50 py-[15px]'>
           <div className='xl:max-w-1024 mx-auto w-full px-4 lg:px-6 xl:w-1024 flex cursor-pointer gap-6 text-sm font-medium text-[#797979] md:text-[15px]'>
             <span>Beauty</span>
             <span>Health</span>
@@ -218,11 +219,7 @@ export const CategoryProducts = () => {
                     ref={filterPopupRef}
                     className='absolute left-0 top-[35px] z-20 mt-1 flex max-h-[500px] w-[200px] flex-col gap-2 overflow-y-auto rounded-lg border border-gray-200 bg-[#FFFFFF] p-2 shadow-lg'
                   >
-                    <div
-                      onClick={() => {
-                        setFilterDropdown(false);
-                      }}
-                    >
+                    <div>
                       <ProductSortDropdown />
                       <ProductsPriceRange />
                     </div>
