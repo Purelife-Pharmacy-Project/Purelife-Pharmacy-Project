@@ -26,16 +26,6 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [height, setHeight] = useState<string>('0');
 
-  useEffect(() => {
-    if (!currentCategory) {
-      removeQuery(['category']);
-      setSelectedValue('all');
-    } else {
-      setSelectedValue(currentCategory.toUpperCase());
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentCategory]);
-
   const handleSelectCategory = (category: string) => {
     if (category.toLowerCase() === 'all') {
       removeQuery(['category']);

@@ -101,7 +101,7 @@ export const LoginForm = () => {
         }
       />
       <p className='text-right cursor-pointer'>
-          <Link href='/forgot-password'>
+          <Link href='/forgot-password' isDisabled>
             Forgot Password
           </Link>
         </p>
