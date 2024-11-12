@@ -332,12 +332,12 @@ export default function FAQ() {
               </Card>
             ) : null}
           </div>
-            <div className='mx-auto flex gap-4 flex-wrap w-fit justify-center'>
+            <div className='mx-auto flex gap-4 flex-wrap w-full justify-center'>
             {buttons.map((button) => (
               <Button
                 key={button.id}
                 onClick={() => setActiveButton(button.id)} // Set active button on click
-                className={`rounded-full border border-[#1E272F] px-6 transition-all ${
+                className={`rounded-full border border-[#1E272F] px-5 transition-all ${
                   activeButton === button.id
                     ? 'bg-[#1E272F] text-white'
                     : 'bg-white text-[#1E272F]'
