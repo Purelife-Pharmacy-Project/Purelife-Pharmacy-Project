@@ -168,7 +168,7 @@ export default function FindADoctor() {
                   
                   size='md'
                   radius='full'
-                  className='h-fit min-w-0 rotate-180 rounded-full border-2 border-[#1E272F] p-4'
+                  className='h-fit min-w-0 rotate-180 rounded-full border-2 border-[#1E272F] p-4 bg-white'
                   onClick={scrollLeft}
                 >
                   <IconArrowRight
@@ -180,7 +180,7 @@ export default function FindADoctor() {
                   
                   size='md'
                   radius='full'
-                  className='h-fit min-w-0 rounded-full border-2 border-[#1E272F] p-4'
+                  className='h-fit min-w-0 rounded-full border-2 border-[#1E272F] p-4 bg-white'
                   onClick={scrollRight}
                 >
                   <IconArrowRight
@@ -193,14 +193,15 @@ export default function FindADoctor() {
             <div
               ref={scrollRef}
               className={`scrollbar-none ml-auto max-w-[95vw] overflow-x-scroll bg-white pb-4 pl-2 lg:pb-16 lg:pt-10`}
-            >
-              <div
-                onMouseEnter={() => {
+              onMouseEnter={() => {
                   stopAutoScroll();
                 }}
                 onMouseLeave={() => {
                   startAutoScroll();
                 }}
+            >
+              <div
+                
                 className={`flex gap-[3%]`}
               >
                 {repeatedDoctors.map((doctor, i) => (
@@ -238,8 +239,7 @@ export default function FindADoctor() {
 
         <HowItWorks data={howItWorksData} variant='primary' />
         <QualityHomeBanner
-          backgroundClassName={'bg-white'}
-          buttonClassName={'bg-[#1E272F] text-white'}
+          theme='light'
         />
         <Reviews
           title='Hear What Our Patients Are Saying About Our Exceptional Doctors'

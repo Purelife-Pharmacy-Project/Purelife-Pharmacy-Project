@@ -14,7 +14,7 @@ export default function CreateAccountPage() {
   // };
   return (
     <>
-      <main className='mb-10 w-[90%] md:w-[45%] sm:w-[70%] mx-auto h-full justify-center md:mb-0'>
+      <main className='mb-[200px] w-[90%] md:w-[45%] sm:w-[70%] mx-auto h-full justify-center md:mb-[300px]'>
         <div className='mt-12 flex w-full flex-col gap-6'>
         {false &&
             <div

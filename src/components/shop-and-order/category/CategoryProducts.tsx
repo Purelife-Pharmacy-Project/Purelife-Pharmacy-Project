@@ -166,8 +166,8 @@ export const CategoryProducts = () => {
   }, [filteredProducts]);
 
   return (
-    <div id='products' className='lg:grid lg:justify-center lg:pb-10'>
-      <div className='grid bg-white'>
+    <div id='products' className='lg:pb-10'>
+      <div className='bg-white'>
         {/* <div className='mt-6 grid w-full grid-cols-[10fr_2fr]  items-center justify-between gap-2 lg:mt-0 lg:grid-cols-2 lg:gap-4'>
           <ProductSearch loadingProducts={loadingProducts} />
           <div className={'block lg:hidden'}>
@@ -177,8 +177,8 @@ export const CategoryProducts = () => {
             <div className='hidden w-full justify-end lg:flex'></div>
           ) : null}
         </div> */}
-        <div className='flex w-full items-center justify-between border-b border-t border-[#E7E7E7] border-opacity-50 px-[5%] py-[15px]'>
-          <div className='flex cursor-pointer gap-6 text-sm font-medium text-[#797979] md:text-[15px]'>
+        <div className='flex w-full items-center justify-between border-b border-t border-[#E7E7E7] border-opacity-50 py-[15px]'>
+          <div className='xl:max-w-1024 mx-auto w-full px-4 lg:px-6 xl:w-1024 flex cursor-pointer gap-6 text-sm font-medium text-[#797979] md:text-[15px]'>
             <span>Beauty</span>
             <span>Health</span>
             <span>Sexual Health</span>
@@ -191,9 +191,9 @@ export const CategoryProducts = () => {
             <span className='text-[#1E272F]'>Lagos, Nigeria</span>
           </div> */}
         </div>
-        <div className='grid gap-4 lg:grid-flow-col lg:grid-cols-[1fr_3fr]'>
+        <div className='xl:max-w-1024 mx-auto w-full bg-background pr-4 lg:pr-6 xl:w-1024 grid gap-4 lg:grid-flow-col lg:grid-cols-[1fr_3fr]'>
           <ProductsFilterContainer />
-          <div className='pl-[2%] pr-[5%]'>
+          <div className='pl-[2%] w-full mr-auto'>
             <div className='flex w-full justify-between py-[35px]'>
               <Button
                 onClick={() => {
