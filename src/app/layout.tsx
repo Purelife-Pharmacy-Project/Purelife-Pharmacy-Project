@@ -126,8 +126,8 @@ export default async function RootLayout({
   // });
 
   return (
-    <html lang='en'>
-      <body className={bricolage.className}>
+    <html lang='en' >
+      <body>
         <AuthProvider>
           <SearchProvider>
             <Providers>

@@ -137,7 +137,7 @@ export const Footer = () => {
       <Section className='bg-white'>
         <footer className='mx-auto grid w-full gap-4 pb-10 lg:gap-8'>
           <div className='grid grid-flow-dense gap-8 sm:grid-cols-2 md:gap-24 lg:grid-flow-col'>
-            <div className='flex flex-col gap-2 md:col-span-2 lg:col-span-1'>
+            <div className='flex flex-col gap-2 col-span-2 lg:col-span-1'>
               <Link href='/'>
                 <Image
                   src='/app-logo.png'
@@ -160,13 +160,13 @@ export const Footer = () => {
               </div>
             </div>
             {footerContent.map((content, index) => (
-              <div key={index} className='flex flex-col'>
+              <div key={index} className={`flex flex-col ${index === 3 ? 'col-span-2 lg:col-span-1' : ''}`}>
                 <p className='mb-5 h-max font-bold text-header-100'>
                   {content.title}
                 </p>
                 <div className='grid gap-3'>
-                  {content.links.map((link, index) => (
-                    <div key={index} className='max-w-[350px]'>
+                  {content.links.map((link, id) => (
+                    <div key={id} className={`max-w-[350px]`}>
                       <Link
                         href={link.path}
                         size='sm'
