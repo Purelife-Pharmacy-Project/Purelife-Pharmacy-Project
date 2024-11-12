@@ -12,6 +12,10 @@ export const FooterBase = () => {
       <div>
         <Link
           className='text-light text-sm text-content'
+          href='/FAQ'>FAQ</Link>
+        {' | '}
+        <Link
+          className='text-light text-sm text-content'
           href='/privacy-policy'>Privacy Policy</Link>
         {' | '}
         <Link
