@@ -27,9 +27,9 @@ const TestCard: React.FC<{ product: Product }> = ({ product }) => {
               quantity: 1,
             });
           }}
-          className='absolute z-[99] right-6 top-6 h-auto min-w-0 rounded-full bg-primaryLight p-3'
+          className='absolute z-[99] right-6 top-6 h-auto min-w-0 rounded-full bg-[#F6F6F6] p-3 cursor-pointer'
         >
-          <IconCart />
+          <IconCart color={'#686868'}/>
         </Button>
       </div>
 

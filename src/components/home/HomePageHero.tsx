@@ -93,14 +93,13 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
     <div className=''>
       <div
         style={{
-          backgroundImage: isLargeScreen ? `url(${bannerImages[currentIndex]})` : undefined,
+          // backgroundImage: isLargeScreen ? `url(${bannerImages[currentIndex]})` : undefined,
+          backgroundImage: `url('/images/homepage-banner/banner-1.jpg')`,
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
         }}
-        className={`banner-container flex min-h-[580px] w-full flex-col items-start justify-center ${
-          isLargeScreen ? '' : 'bg-primaryLight'
-        } ${fade ? 'fade-in' : 'fade-out'}`}
+        className={`banner-container flex min-h-[580px] w-full flex-col items-start justify-center`}
       >
         <div className='mx-auto w-[95%] lg:ml-[5%] lg:w-[45%]'>
           <div className='lg:mt-8 mt-8 mb-7 text-center text-[50px] leading-[1.2] font-bold lg:text-white lg:text-left'>
@@ -121,7 +120,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
               borderClassName='border-none'
             />
           </div>
-          <div className='lg-mx-0 mt-8 hidden w-fit gap-2 lg:flex'>
+          {/*<div className='lg-mx-0 mt-8 hidden w-fit gap-2 lg:flex'>
             {bannerImages.map((_, index) => (
               <div
                 key={index}
@@ -130,7 +129,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
                 }`}
               />
             ))}
-          </div>
+          </div>*/}
         </div>
 
         <div className='my-8 w-full block lg:hidden'>
@@ -159,7 +158,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
           Quality Healthcare you can trust
         </h1>
         <div className='mt-20 grid lg:grid-cols-[1fr_1fr_1fr] grid-cols-1 lg:gap-10 px-0 pb-28'>
-          <div className='mt-14'>
+          <Link href={'/telehealth/find-a-doctor'} className='mt-14'>
             <div
               className='relative h-[600px] lg:h-[450px] w-full rounded-[20px]'
               style={{
@@ -200,8 +199,8 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
                 healthier life style
               </p>
             </div>
-          </div>
-          <div className=''>
+          </Link>
+          <Link href={'/telehealth/book-lab-test'} className=''>
             <div
               className='relative h-[600px] lg:h-[375px] w-full'
               style={{
@@ -252,8 +251,8 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
                 ))}
               </div>
             </div>
-          </div>
-          <div className='mt-14'>
+          </Link>
+          <Link href={'/shop'} className='mt-14'>
             <div
               className='h-[650px] lg:h-[450px] w-full'
               style={{
@@ -279,7 +278,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
                 licensed pharmacies.
               </p>
             </div>
-          </div>
+          </Link>
         </div>
       </Section>
     </div>

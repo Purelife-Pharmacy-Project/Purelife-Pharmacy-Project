@@ -28,7 +28,7 @@ export const LabTestCard: React.FC<{ product: Product; baseUrl: string }> = ({
             }}
             className='h-auto min-w-0 rounded-full bg-primaryLight p-3'
           >
-            <IconCart />
+            <IconCart color={'#686868'} />
           </Button>
         </div>
         <div className='h-[80px] w-full'>
@@ -49,7 +49,7 @@ export const LabTestCard: React.FC<{ product: Product; baseUrl: string }> = ({
             as={NextLink}
             radius='full'
             size='lg'
-            className='h-auto min-w-0 rounded-full bg-primary text-white p-3'
+            className='h-auto min-w-0 rounded-full bg-primary p-3 text-white'
             color='primary'
             href={`/cart/${product.id}`}
           >

@@ -177,7 +177,6 @@ export const CategoryProducts = () => {
             <div className='hidden w-full justify-end lg:flex'></div>
           ) : null}
         </div> */}
-        <div className='border-b border-[#E7E7E7] border-opacity-50'></div>
         <div className='hidden flex w-full items-center justify-between border-b border-t border-[#E7E7E7] border-opacity-50 py-[15px]'>
           <div className='xl:max-w-1024 mx-auto w-full px-4 lg:px-6 xl:w-1024 flex cursor-pointer gap-6 text-sm font-medium text-[#797979] md:text-[15px]'>
             <span>Beauty</span>
