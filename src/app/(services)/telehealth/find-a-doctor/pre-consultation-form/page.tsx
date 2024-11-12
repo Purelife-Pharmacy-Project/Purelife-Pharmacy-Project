@@ -19,7 +19,7 @@ export default function Doctor() {
 
   return (
     <>
-      <main className='flex flex-col items-center mt-20'>
+      <main className='flex flex-col items-center mt-20 mb-[200px]'>
         <h1 className='w-[40%] text-2xl font-bold  text-header-100 lg:text-3xl'>
           Pre-Consultation Form
         </h1>
