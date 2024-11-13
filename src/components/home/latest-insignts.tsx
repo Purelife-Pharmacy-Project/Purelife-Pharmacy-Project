@@ -60,7 +60,7 @@ export const LatestInsights = () => {
   useEffect(() => {
     if (containerRef.current) {
       const containerWidth = containerRef.current.offsetWidth;
-      setMaxNameWidth(`${containerWidth * 0.9}px`);
+      setMaxNameWidth(`${containerWidth * 0.8}px`);
     }
   }, []);
   return (
@@ -129,7 +129,7 @@ export const LatestInsights = () => {
                   borderRadius: '20px',
                 }}
               ></div>
-              <div className='mx-auto mt-3 flex w-[83%] items-center justify-between border-t pt-5'>
+              {/* <div className='mx-auto mt-3 flex w-[83%] items-center justify-between border-t pt-5'>
                 <p style={{ maxWidth: maxNameWidth }} className=' text-[#1E272F] truncate px-auto text-xl font-semibold'>{item.title}</p>
                   <Button
                   color='primary'
@@ -141,8 +141,21 @@ export const LatestInsights = () => {
                 </Button>
                 
                 
+              </div> */}
+                <div className='mx-auto mt-3 flex w-[83%] items-center justify-between border-t pt-5'>
+                <p style={{ maxWidth: maxNameWidth }} className='px-auto text-xl font-semibold text-[#1E272F] line-clamp-1'>{item.title}</p>
+                <Button
+                  color='primary'
+                  size='md'
+                  radius='full'
+                  className={`h-fit min-w-0 rounded-full p-2`}
+                  onClick={scrollInsightsRight}
+                >
+                  <IconArrowRight size={12} color={`#FFFFFF`} />
+                </Button>
               </div>
-            </div></Link>
+            </div>
+            </Link>
           ))}
         </div>
       </div>

@@ -116,7 +116,7 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({
           backgroundRepeat: 'no-repeat',
           backgroundSize: `${currentIndex !== 0 ? 'cover' : backgroundSize}`,
         }}
-        className={`banner-container mt-16 min-h[200px] sm:min-h-[250px] md:min-h-[434px] w-full flex flex-col items-start justify-center ${currentIndex === 0 && theme === 'dark' && 'bg-[#1E272F]'} `}
+        className={`banner-container mt-16 min-h[250px] sm:min-h-[250px] md:min-h-[434px] w-full flex flex-col items-start justify-center ${currentIndex === 0 && theme === 'dark' && 'bg-[#1E272F]'} `}
       >
         <div className={`w-[95%] ml-[5%] md:w-[50%] ${currentIndex === 0 && 'mt-10'}`}>
           <div
@@ -137,7 +137,7 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({
             ref={divRef}
             className={`mb-3 md:mb-7 mr-auto w-[100%] text-center text-sm sm:text-lg font-medium md:text-left ${currentIndex === 0 && 'w-[50%] md:w-[80%] mt-8 !text-left'} ${
               currentIndex === 1 && 'text-white'
-            } ${currentIndex === 0 && theme === 'light' && 'lg:block hidden text-[#1E272F] !text-left text-xs mt-2'} ${currentIndex === 0 && theme === 'dark' && 'text-white !text-left text-xs mt-2 lg:block hidden '}`}
+            } ${currentIndex === 0 && theme === 'light' && ' text-[#1E272F] !text-left text-xs mt-2'} ${currentIndex === 0 && theme === 'dark' && 'text-white !text-left text-xs mt-2  '}`}
           >
             {currentIndex === 0
               ? 'We provide homecare services such as Sample pickup for lab tests, Home vaccination and Home doctor visitation.'
