@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { Button, Link } from '@nextui-org/react';
 import Image from 'next/image';
 import { Section } from './Section';
@@ -9,236 +9,160 @@ import { IconProfessional } from '../icons/IconProfessional';
 import { IconPen } from '../icons/IconPen';
 
 interface StepsForServicesProps {}
+
+const serviceSteps:any = {
+  'Consult Doctor': [
+    {
+      icon: <IconSearch color='#1E272F' />,
+      title: 'Search for Specialists',
+      description: 'Browse and filter through a diverse range of healthcare professionals to find the right consultant for your needs.',
+    },
+    {
+      icon: <IconProfessional color='#1E272F' />,
+      title: 'Choose your Specialists',
+      description: 'Select the specific health professional you would like to consult with.',
+    },
+    {
+      icon: <IconPen color='#1E272F' />,
+      title: 'Schedule your Appointments',
+      description: 'Choose a time, provide name, contact info, reason. Appointment confirmed, professional assigned for consultation.',
+    },
+    {
+      icon: <IconProfessional color='#1E272F' />,
+      title: 'Attend your appointment',
+      description: 'Consult your provider from the Comfort of your home or office.',
+    },
+  ],
+  'Shop Pharmacy': [
+    {
+      icon: <IconSearch color='#1E272F' />,
+      title: 'Browse Our Pharmacy',
+      description: 'Explore a wide variety of lab tests available to find the right one for your health needs.',
+    },
+    {
+      icon: <IconProfessional color='#1E272F' />,
+      title: 'Select Your Medications',
+      description: 'Choose the right products by reviewing descriptions, dosages, and customer ratings.',
+    },
+    {
+      icon: <IconPen color='#1E272F' />,
+      title: 'Place Your Order',
+      description: 'Securely complete your purchase with multiple payment options and instant order confirmation.',
+    },
+    {
+      icon: <IconProfessional color='#1E272F' />,
+      title: 'Receive Your Delivery',
+      description: 'Enjoy fast and discreet shipping straight to your door, with tracking available for your convenience.',
+    },
+  ],
+  'Book a Vaccination': [
+    {
+      icon: <IconSearch color='#1E272F' />,
+      title: 'Explore Vaccine Options',
+      description: 'Check our comprehensive list of vaccines available for you and your family.',
+    },
+    {
+      icon: <IconProfessional color='#1E272F' />,
+      title: 'Select Your Preferred Location',
+      description: 'Choose a nearby clinic or pharmacy that offers your selected vaccine.',
+    },
+    {
+      icon: <IconPen color='#1E272F' />,
+      title: 'Choose Your Appointment Time',
+      description: 'Schedule your vaccination at a convenient time that fits your schedule.',
+    },
+    {
+      icon: <IconProfessional color='#1E272F' />,
+      title: 'Attend and Get Vaccinated',
+      description: 'Go to your appointment and receive your vaccine, with follow-up information provided for your records.',
+    },
+  ],
+  'Book a Lab test': [
+    {
+      icon: <IconSearch color='#1E272F' />,
+      title: 'Search for Tests',
+      description: 'Explore a wide variety of lab tests available to find the right one for your health needs.',
+    },
+    {
+      icon: <IconProfessional color='#1E272F' />,
+      title: 'Select and Book Your Test',
+      description: 'Review test details and requirements to ensure you choose the appropriate option for accurate results.',
+    },
+    {
+      icon: <IconPen color='#1E272F' />,
+      title: 'Visit the Lab',
+      description: 'Get directions and preparation instructions for your visit, ensuring a smooth testing experience.',
+    },
+    {
+      icon: <IconProfessional color='#1E272F' />,
+      title: 'Access Your Results',
+      description: 'Track your test status and receive your results online, all accessible through your PureLife account.',
+    },
+  ],
+};
+
 export const StepsForServices: React.FC<StepsForServicesProps> = () => {
   const [active, setActive] = useState('Consult Doctor');
+
   return (
     <>
-      <Section
-        className={``}
-      >
-        <div className='flex justify-between lg:w-[80%] w-full mb-10 text-2xl font-medium'>
-          <div className='cursor-pointer' onClick={()=>{setActive('Consult Doctor')}}>
-            <h3 className={`${(active === 'Consult Doctor') ? '' : 'text-[#5A5A5A]'}`}>Consult Doctor</h3>
-            {(active === 'Consult Doctor') && <div className='bg-primary rounded-full w-[50%] h-[6px]'></div>}
-          </div>
-          <div className='cursor-pointer' onClick={()=>{setActive('Shop Pharmacy')}}>
-            <h3 className={`${(active === 'Shop Pharmacy') ? '' : 'text-[#5A5A5A]'}`}>Shop Pharmacy</h3>
-            {(active === 'Shop Pharmacy') && <div className='bg-primary rounded-full w-[50%] h-[6px]'></div>}
-          </div>
-          <div className='cursor-pointer' onClick={()=>{setActive('Book a Vaccination')}}>
-            <h3 className={`${(active === 'Book a Vaccination') ? '' : 'text-[#5A5A5A]'}`}>Book a Vaccination</h3>
-            {(active === 'Book a Vaccination') && <div className='bg-primary rounded-full w-[50%] h-[6px]'></div>}
-          </div>
-          <div className='cursor-pointer' onClick={()=>{setActive('Book a Lab test')}}>
-            <h3 className={`${(active === 'Book a Lab test') ? '' : 'text-[#5A5A5A]'}`}>Book a Lab test</h3>
-            {(active === 'Book a Lab test') && <div className='bg-primary rounded-full w-[50%] h-[6px]'></div>}
-          </div>
+      <Section>
+        <div className='mb-10 flex w-full justify-between text-xl font-medium md:text-2xl lg:w-[80%]'>
+          {Object.keys(serviceSteps).map((service) => (
+            <div key={service} className='cursor-pointer' onClick={() => setActive(service)}>
+              <h3 className={`${active === service ? '' : 'text-[#5A5A5A]'}`}>{service}</h3>
+              {active === service && <div className='h-[6px] w-[50%] rounded-full bg-primary'></div>}
+            </div>
+          ))}
         </div>
-        {(active === 'Consult Doctor') && <div className='grid lg:grid-cols-[6fr_4fr] grid-cols-1'>
-          <div>
-            <h3 className='text-3xl font-semibold lg:w-[85%] w-full'>Streamline Your Consultation Booking, All in One Place</h3>
-            <div className='flex mt-8 lg:gap-3 gap-6 lg:w-[70%] w-full'>
-              <div className='flex flex-col items-center'>
-                <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
-                  <IconSearch color='#1E272F'/>
-                </div>
-                <IconLine/>
-                <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
-                  <IconProfessional color='#1E272F'/>
-                </div>
-                <IconLine/>
-                <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
-                  <IconPen color='#1E272F'/>
-                </div>
-                <IconLine/>
-                <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
-                  <IconProfessional color='#1E272F'/>
-                </div>
-                <IconLine/>
+
+        {active && (
+          <div className='grid grid-cols-1 lg:grid-cols-[6fr_4fr]'>
+            <div>
+              <h3 className='w-full text-2xl font-semibold lg:w-[85%] lg:text-3xl'>
+                {active === 'Consult Doctor'
+                  ? 'Streamline Your Consultation Booking, All in One Place'
+                  : active === 'Shop Pharmacy'
+                  ? 'Effortless Online Pharmacy Experience for Your Health Needs'
+                  : active === 'Book a Vaccination'
+                  ? 'Quick and Simple Steps to Secure Your Vaccination Appointment'
+                  : active === 'Book a Lab test'
+                  ? 'Your One-Stop Destination for Hassle-Free Lab Test Bookings'
+                  : ''}
+              </h3>
+                <div className='mt-8 flex flex-col items-start w-full lg:w-[70%]'>
+                {serviceSteps[active].map((step: any, index: any) => (
+                  <div key={index}>
+                    <div className='flex items-center gap-6'>
+                      <div className='my-2 grid h-[50px] w-[50px] place-content-center rounded-full border'>
+                        {step.icon}
+                      </div>
+                      <div className='w-[90%]'>
+                        <h3 className='text-xl font-medium md:text-2xl'>{step.title}</h3>
+                        <p className='text-sm font-medium text-[#5A5A5A]'>{step.description}</p>
+                      </div>
+                    </div>
+                    {index < serviceSteps[active].length - 1 && <IconLine className="ml-[23px]" />}
+                  </div>
+                ))}
               </div>
-              <div className='flex flex-col gap-[25px]'>
-                <div>
-                  <h3 className='text-2xl font-medium'>Search for Specialists</h3>
-                  <p className='text-[#5A5A5A] text-sm font-medium'>Browse and filter through a diverse range of healthcare professionals to find the right consultant for your needs.</p>
-                </div>
-                <div>
-                  <h3 className='text-2xl font-medium'>Choose your Specialists</h3>
-                  <p className='text-[#5A5A5A] text-sm font-medium'>Select the specific health professional you would like to consult with.</p>
-                </div>
-                <div className='mt-1'>
-                  <h3 className='text-2xl font-medium'>Schedule your Appointments</h3>
-                  <p className='text-[#5A5A5A] text-sm font-medium'>Choose a time, provide name, contact info, reason. Appointment confirmed, professional assigned for consultation.</p>
-                </div>
-                <div className='mt-2'>
-                  <h3 className='text-2xl font-medium'>Attend your appointment</h3>
-                  <p className='text-[#5A5A5A] text-sm font-medium'>Consult your provider from the Comfort of your home or office.</p>
-                </div>
               </div>
-            </div>
+              
+              {/* Conditional image rendering based on active section */}
+              {active === 'Consult Doctor' && (
+                <Image width={415} height={385} className='mt-20 hidden h-[385px] w-auto lg:block' src={'/images/consult-a-doctor-section.png'} alt={'quality home image'} quality={100} />
+              )}
+              {active === 'Shop Pharmacy' && (
+                <Image width={415} height={385} className='mt-20 hidden h-[385px] w-auto lg:block' src={'/images/shop-pharmacy-section.png'} alt={'quality home image'} quality={100} />
+              )}
+              {active === 'Book a Vaccination' && (
+                <Image width={415} height={385} className='mt-20 hidden h-[385px] w-auto lg:block' src={'/images/book-a-vaccination-section.png'} alt={'quality home image'} quality={100} />
+              )}
+              {active === 'Book a Lab test' && (
+                <Image width={415} height={385} className='mt-20 hidden h-[385px] w-auto lg:block' src={'/images/book-a-lab-test-section.png'} alt={'quality home image'} quality={100} />
+              )}
           </div>
-          <Image
-            width={415}
-            height={385}
-            className='h-[385px] w-auto mt-20 hidden lg:block'
-            src={'/images/consult-a-doctor-section.png'}
-            alt={'quality home image'}
-            quality={100}
-          />
-        </div>}
-        {(active === 'Shop Pharmacy') && <div className='grid lg:grid-cols-[6fr_4fr] grid-cols-1'>
-          <div>
-            <h3 className='text-3xl font-semibold lg:w-[85%] w-full'>Effortless Online Pharmacy Experience for Your Health Needs</h3>
-            <div className='flex mt-8 lg:gap-3 gap-6 lg:w-[70%] w-full'>
-              <div className='flex flex-col items-center'>
-                <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
-                  <IconSearch color='#1E272F'/>
-                </div>
-                <IconLine/>
-                <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
-                  <IconProfessional color='#1E272F'/>
-                </div>
-                <IconLine/>
-                <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
-                  <IconPen color='#1E272F'/>
-                </div>
-                <IconLine/>
-                <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
-                  <IconProfessional color='#1E272F'/>
-                </div>
-                <IconLine/>
-              </div>
-              <div className='flex flex-col gap-[25px]'>
-                <div>
-                  <h3 className='text-2xl font-medium'>Browse Our Pharmacy</h3>
-                  <p className='text-[#5A5A5A] text-sm font-medium'>Explore a wide variety of lab tests available to find the right one for your health needs.</p>
-                </div>
-                <div>
-                  <h3 className='text-2xl font-medium'>Select Your Medications</h3>
-                  <p className='text-[#5A5A5A] text-sm font-medium'>Choose the right products by reviewing descriptions, dosages, and customer ratings.</p>
-                </div>
-                <div className='mt-1'>
-                  <h3 className='text-2xl font-medium'>Place Your Order</h3>
-                  <p className='text-[#5A5A5A] text-sm font-medium'>Securely complete your purchase with multiple payment options and instant order confirmation.</p>
-                </div>
-                <div className='mt-1'>
-                  <h3 className='text-2xl font-medium'>Receive Your Delivery</h3>
-                  <p className='text-[#5A5A5A] text-sm font-medium'>Enjoy fast and discreet shipping straight to your door, with tracking available for your convenience.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <Image
-            width={415}
-            height={385}
-            className='h-[385px] w-auto mt-20 hidden lg:block'
-            src={'/images/shop-pharmacy-section.png'}
-            alt={'quality home image'}
-            quality={100}
-          />
-        </div>}
-        {(active === 'Book a Vaccination') && <div className='grid lg:grid-cols-[6fr_4fr] grid-cols-1'>
-          <div>
-            <h3 className='text-3xl font-semibold lg:w-[85%] w-full'>Quick and Simple Steps to Secure Your Vaccination Appointment</h3>
-            <div className='flex mt-8 lg:gap-3 gap-6 lg:w-[70%] w-full'>
-              <div className='flex flex-col items-center'>
-                <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
-                  <IconSearch color='#1E272F'/>
-                </div>
-                <IconLine/>
-                <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
-                  <IconProfessional color='#1E272F'/>
-                </div>
-                <IconLine/>
-                <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
-                  <IconPen color='#1E272F'/>
-                </div>
-                <IconLine/>
-                <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
-                  <IconProfessional color='#1E272F'/>
-                </div>
-                <IconLine/>
-              </div>
-              <div className='flex flex-col gap-[25px]'>
-                <div>
-                  <h3 className='text-2xl font-medium'>Explore Vaccine Options</h3>
-                  <p className='text-[#5A5A5A] text-sm font-medium'>Check our comprehensive list of vaccines available for you and your family.</p>
-                </div>
-                <div>
-                  <h3 className='text-2xl font-medium'>Select Your Preferred Location</h3>
-                  <p className='text-[#5A5A5A] text-sm font-medium'>Choose a nearby clinic or pharmacy that offers your selected vaccine.</p>
-                </div>
-                <div className='mt-1'>
-                  <h3 className='text-2xl font-medium'>Choose Your Appointment Time</h3>
-                  <p className='text-[#5A5A5A] text-sm font-medium'>Schedule your vaccination at a convenient time that fits your schedule.</p>
-                </div>
-                <div className='mt-1'>
-                  <h3 className='text-2xl font-medium'>Attend and Get Vaccinated</h3>
-                  <p className='text-[#5A5A5A] text-sm font-medium'>Go to your appointment and receive your vaccine, with follow-up information provided for your records.</p>
-              </div>
-            </div>
-            </div>
-          </div>
-          <Image
-            width={415}
-            height={385}
-            className='h-[385px] w-auto mt-20 hidden lg:block'
-            src={'/images/book-a-vaccination-section.png'}
-            alt={'quality home image'}
-            quality={100}
-          />
-          </div>
-        }
-        {(active === 'Book a Lab test') && <div className='grid lg:grid-cols-[6fr_4fr] grid-cols-1'>
-          <div>
-            <h3 className='text-3xl font-semibold lg:w-[85%] w-full'>Your One-Stop Destination for Hassle-Free Lab Test Bookings</h3>
-            <div className='flex mt-8 lg:gap-3 gap-6 lg:w-[70%] w-full'>
-              <div className='flex flex-col items-center'>
-                <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
-                  <IconSearch color='#1E272F'/>
-                </div>
-                <IconLine/>
-                <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
-                  <IconProfessional color='#1E272F'/>
-                </div>
-                <IconLine/>
-                <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
-                  <IconPen color='#1E272F'/>
-                </div>
-                <IconLine/>
-                <div className='grid h-[50px] w-[50px] place-content-center rounded-full border my-2'>
-                  <IconProfessional color='#1E272F'/>
-                </div>
-                <IconLine/>
-              </div>
-              <div className='flex flex-col gap-[25px]'>
-                <div>
-                  <h3 className='text-2xl font-medium'>Search for Tests</h3>
-                  <p className='text-[#5A5A5A] text-sm font-medium'>Explore a wide variety of lab tests available to find the right one for your health needs.</p>
-                </div>
-                <div>
-                  <h3 className='text-2xl font-medium'>Select and Book Your Test</h3>
-                  <p className='text-[#5A5A5A] text-sm font-medium'>Review test details and requirements to ensure you choose the appropriate option for accurate results.</p>
-                </div>
-                <div className='mt-1'>
-                  <h3 className='text-2xl font-medium'>Visit the Lab</h3>
-                  <p className='text-[#5A5A5A] text-sm font-medium'>Get directions and preparation instructions for your visit, ensuring a smooth testing experience.</p>
-                </div>
-                <div className='mt-1'>
-                  <h3 className='text-2xl font-medium'>Access Your Results</h3>
-                  <p className='text-[#5A5A5A] text-sm font-medium'>Track your test status and receive your results online, all accessible through your PureLife account.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <Image
-            width={415}
-            height={385}
-            className='h-[385px] w-auto mt-20 hidden lg:block'
-            src={'/images/book-a-lab-test-section.png'}
-            alt={'quality home image'}
-            quality={100}
-          />
-        </div>}
+        )}
       </Section>
     </>
   );

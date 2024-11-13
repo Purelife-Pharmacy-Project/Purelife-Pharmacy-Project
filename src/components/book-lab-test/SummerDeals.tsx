@@ -28,7 +28,7 @@ const SummerDeals: React.FC<Prop> = () => {
       loader={<ProductLoadingSkeleton />}
       allowOverflow={false}
       price={false}
-      variant='normal'
+      variant='summer'
       />
     </Section>
     
