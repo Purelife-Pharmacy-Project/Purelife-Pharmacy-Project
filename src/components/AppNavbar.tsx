@@ -14,7 +14,7 @@ import {
   NavbarMenuToggle,
 } from '@nextui-org/react';
 import { usePathname } from 'next/navigation';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { NavbarCart } from './NavbarCart';
 import { NavbarUser } from './NavbarUser';
 import { useClickOutside } from '@/helpers/utils';
@@ -57,7 +57,11 @@ export const AppNavbar = ({
         return 'bg-white';
     }
   };
-
+  useEffect(() => {
+    if (currentPath !== "/") {
+      setShowSearch(true)
+    } 
+  }, [currentPath])
   const menuItems = [
     {
       name: 'Pharmacy',
@@ -98,6 +102,7 @@ export const AppNavbar = ({
   useClickOutside(servicesPopupRef, servicesButtonRef, () =>
     setServicesDropdown(false)
   );
+  
   return (
     <div className='fixed top-0 z-[9999] w-full border-b border-[#E7E7E7] border-opacity-50 bg-white pb-3'>
       {/* <ReferralBanner /> */}
