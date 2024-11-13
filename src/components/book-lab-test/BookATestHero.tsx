@@ -57,13 +57,23 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
   );
 
   const search = [
-    {
-      title: "Men's Health",
-    },
-    {
-      title: 'Sexual Health',
-    },
+    { title: "COVID-19 test" },
+    { title: "Pap smear" },
+    { title: "Urinalysis" },
+    { title: "Blood glucose test" },
+    { title: "Vitamin D levels" },
+    { title: "HIV test" },
+    { title: "Pregnancy test" },
+    { title: "Allergy testing" },
+    { title: "Liver function test" },
+    { title: "Urine culture" },
+    { title: "Hepatitis test" },
+    { title: "Drug screening" },
+    { title: "Stool culture" },
+    { title: "A1c test" },
+    { title: "Cholesterol test" }
   ];
+  
   const [showLabTestCategory, setShowLabTestCategory] = useState(true);
   const [searchOn, setSearchOn] = useState('');
   const searchCategory = Array.from({ length: 10 }, () => search).flatMap(

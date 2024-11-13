@@ -41,13 +41,29 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
     [handleDebouncedSearch]
   );
   const search = [
-    {
-      title: 'Cholera vaccine',
-    },
-    {
-      title: 'Children vaccine',
-    },
+    { title: "Influenza (Flu) Vaccine" },
+    { title: "Tetanus, Diphtheria, Pertussis (Tdap) Vaccine" },
+    { title: "Measles, Mumps, Rubella (MMR) Vaccine" },
+    { title: "Hepatitis B Vaccine" },
+    { title: "Varicella (Chickenpox) Vaccine" },
+    { title: "Human Papillomavirus (HPV) Vaccine" },
+    { title: "Pneumococcal Vaccine" },
+    { title: "Meningococcal Vaccine" },
+    { title: "Hepatitis A Vaccine" },
+    { title: "Polio Vaccine" },
+    { title: "Rotavirus Vaccine" },
+    { title: "Shingles (Herpes Zoster) Vaccine" },
+    { title: "Typhoid Vaccine" },
+    { title: "Yellow Fever Vaccine" },
+    { title: "Rabies Vaccine" },
+    { title: "Japanese Encephalitis Vaccine" },
+    { title: "Cholera Vaccine" },
+    { title: "Tuberculosis (BCG) Vaccine" },
+    { title: "COVID-19 Vaccine" },
+    { title: "Malaria Vaccine" }
   ];
+  
+  
   const [searchOn, setSearchOn] = useState('');
   const searchCategory = Array.from({ length: 10 }, () => search).flatMap(
     (item) => item
