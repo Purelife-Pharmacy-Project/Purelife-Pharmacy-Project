@@ -132,6 +132,7 @@ export const useGetProducts = ({
 export const useGetProductsInfinity = ({
   categoryId,
   limit,
+  offset,
   MinListPrice,
   MaxListPrice,
   isPublished,
@@ -146,6 +147,7 @@ export const useGetProductsInfinity = ({
   const queryKeys = [
     'products',
     categoryId,
+    offset,
     MinListPrice,
     MaxListPrice,
     String(limit),
@@ -160,25 +162,36 @@ export const useGetProductsInfinity = ({
     isError,
     refetch,
     fetchNextPage,
+    fetchPreviousPage,
     isFetchingNextPage,
+    isFetchingPreviousPage,
     hasNextPage,
+    hasPreviousPage,
   } = useInfiniteQuery({
     queryKey: queryKeys,
     queryFn: async ({ pageParam }) => {
       return await ProductService.getAllProducts({
         CategoryId: categoryId,
         Limit: limit,
-        offset: pageParam,
+        offset,
         MinListPrice,
         MaxListPrice,
         isPublished,
       });
     },
-    enabled: !!categoryId || !!limit || !!MinListPrice || !!MaxListPrice,
+    enabled: !!categoryId || !!limit || !!MinListPrice || !!MaxListPrice || !!offset,
     refetchOnWindowFocus: false,
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.length ? allPages.length * lastPage.length : undefined;
+    },
+    getPreviousPageParam: (firstPage, allPages) => {
+      if (limit) {
+        const currentOffset = (allPages.length - 1) * limit;
+        const previousOffset = currentOffset - limit;
+        return previousOffset >= 0 ? previousOffset : undefined;
+      }
+      
     },
   });
 
@@ -190,8 +203,11 @@ export const useGetProductsInfinity = ({
     isSuccess,
     isError,
     fetchProductNextPage: fetchNextPage,
+    fetchProductPreviousPage: fetchPreviousPage,
     isFetchingProductNextPage: isFetchingNextPage,
+    isFetchingProductPreviousPage: isFetchingPreviousPage,
     productHasNextPage: hasNextPage,
+    productHasPreviousPage: hasPreviousPage,
   };
 };
 

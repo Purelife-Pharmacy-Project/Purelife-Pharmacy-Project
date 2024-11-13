@@ -1,3 +1,4 @@
+"use client";
 import { EarnedClients } from '@/components/home/EarnedClients';
 import { Footer } from '@/components/home/Footer';
 import { HomeHero } from '@/components/home/HomeHero';

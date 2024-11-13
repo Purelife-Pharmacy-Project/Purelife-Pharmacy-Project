@@ -1,7 +1,7 @@
 'use client';
 import { useGetProducts } from '@/hooks';
 import debounce from 'lodash/debounce';
-import { FC, useCallback, useRef, useState } from 'react';
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { Section } from '../home/Section';
 import {
   Button,
@@ -20,9 +20,7 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
   const [searchStr, setSearchStr] = useState<string | undefined>('');
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchResultsRef = useRef<HTMLDivElement>(null);
-
   const [showSearchResults, setShowSearchResults] = useState(false);
-
   const { products, loadingProducts: loadingVaccines } = useGetProducts({
     categoryId: process.env.NEXT_PUBLIC_VACCINE_ID,
     limit: 100,
@@ -32,20 +30,97 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
     setSearchStr(value);
   }, 800);
 
-  const filteredVaccines = products?.filter(
-    (vaccine) =>
-      vaccine.name?.toLowerCase().includes(searchStr?.toLowerCase() || '')
+  const filteredVaccines = products?.filter((vaccine) =>
+    vaccine.name?.toLowerCase().includes(searchStr?.toLowerCase() || '')
   );
-
+  const [showVaccineCategory, setShowVaccineCategory] = useState(true);
   const handleInputChange = useCallback(
     (value: string) => {
       handleDebouncedSearch(value);
     },
     [handleDebouncedSearch]
   );
-
+  const search = [
+    { title: "Influenza (Flu) Vaccine" },
+    { title: "Tetanus, Diphtheria, Pertussis (Tdap) Vaccine" },
+    { title: "Measles, Mumps, Rubella (MMR) Vaccine" },
+    { title: "Hepatitis B Vaccine" },
+    { title: "Varicella (Chickenpox) Vaccine" },
+    { title: "Human Papillomavirus (HPV) Vaccine" },
+    { title: "Pneumococcal Vaccine" },
+    { title: "Meningococcal Vaccine" },
+    { title: "Hepatitis A Vaccine" },
+    { title: "Polio Vaccine" },
+    { title: "Rotavirus Vaccine" },
+    { title: "Shingles (Herpes Zoster) Vaccine" },
+    { title: "Typhoid Vaccine" },
+    { title: "Yellow Fever Vaccine" },
+    { title: "Rabies Vaccine" },
+    { title: "Japanese Encephalitis Vaccine" },
+    { title: "Cholera Vaccine" },
+    { title: "Tuberculosis (BCG) Vaccine" },
+    { title: "COVID-19 Vaccine" },
+    { title: "Malaria Vaccine" }
+  ];
+  
+  
+  const [searchOn, setSearchOn] = useState('');
+  const searchCategory = Array.from({ length: 10 }, () => search).flatMap(
+    (item) => item
+  );
+  const scrollVaccineCategoryRef = useRef<HTMLDivElement | null>(null);
+  const [itemHeight, setItemHeight] = useState<number>(0); // Type the state variable
+  
+  useEffect(() => {
+    if (scrollVaccineCategoryRef.current) {
+      const firstItem = scrollVaccineCategoryRef.current.firstElementChild as HTMLElement; // Cast to HTMLElement
+      if (firstItem) {
+        setItemHeight(firstItem.clientHeight);
+      }
+    }
+  }, [searchCategory]);
+  
+  const scrollVaccineCategory = () => {
+    if (scrollVaccineCategoryRef.current) {
+      const startScrollTop = scrollVaccineCategoryRef.current.scrollTop;
+      const endScrollTop = Math.ceil((startScrollTop + itemHeight) / itemHeight) * itemHeight; // Round to nearest multiple of itemHeight
+      const duration = 1000; // Duration of scroll in milliseconds
+      const startTime = performance.now();
+  
+      const animateScroll = (currentTime: number) => { // Type the currentTime parameter
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1); // Calculate progress
+  
+        // Smoothly interpolate the scroll position
+        scrollVaccineCategoryRef.current!.scrollTop = 
+          startScrollTop + (endScrollTop - startScrollTop) * progress;
+  
+        if (progress < 1) {
+          requestAnimationFrame(animateScroll); // Continue animation
+        } else {
+          // Snap to exact position to avoid small offsets
+          scrollVaccineCategoryRef.current!.scrollTop = endScrollTop;
+  
+          // Reset to the top if we reached the bottom
+          if (endScrollTop >= scrollVaccineCategoryRef.current!.scrollHeight - scrollVaccineCategoryRef.current!.clientHeight) {
+            scrollVaccineCategoryRef.current!.scrollTop = 0; // Reset scroll to top
+          }
+        }
+      };
+  
+      requestAnimationFrame(animateScroll); // Start the animation
+    }
+  };
+  
+  useEffect(() => {
+    const intervalId = setInterval(scrollVaccineCategory, 3000); // Scroll every 3 seconds
+  
+    return () => clearInterval(intervalId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [itemHeight]);
+  
   return (
-    <div className='relative w-full items-center bg-transparent md:min-h-[calc(100vh-260px)] xl:grid xl:min-h-[539px] xl:justify-center'>
+    <div className='relative w-full items-center bg-transparent md:grid md:min-h-[539px] md:justify-center'>
       <div
         className='absolute left-0 top-0 h-full w-full bg-center md:bg-right'
         style={{
@@ -61,19 +136,47 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
           <h1 className='w-full text-balance text-center text-3xl font-bold capitalize lg:text-5xl'>
             Vaccination Made Easy
           </h1>
-
           <p className='text-balance text-center'>
             Find the right vaccine for you and take a step towards a healthier
             future.
           </p>
-
           <div className='relative mx-auto w-full max-w-xl'>
+            <div
+              onMouseEnter={() => {
+                setShowVaccineCategory(false);
+                scrollVaccineCategory();
+              }}
+              ref={scrollVaccineCategoryRef}
+              className={`scrollbar-none absolute left-6 top-4 z-[999] h-[20px] overflow-y-scroll ${!showVaccineCategory && 'hidden'}`}
+            >
+              {searchCategory.map((category, index) => (
+                <p key={index} className='leading-1 text-base text-gray-400'>
+                  {category.title}
+                </p>
+              ))}
+            </div>
             <Input
+              onMouseEnter={() => {
+                setShowVaccineCategory(false);
+              }}
+              onMouseLeave={() => {
+                if (searchOn === '') {
+                  setShowVaccineCategory(true);
+                }
+              }}
               size='lg'
               radius='full'
               type='Search'
               ref={searchInputRef}
-              onChange={(e) => handleInputChange(e.target.value)}
+              onChange={(e) => {
+                setSearchOn(e.target.value);
+                if (e.target.value !== '') {
+                  setShowVaccineCategory(false);
+                } else {
+                  setShowVaccineCategory(true);
+                }
+                handleInputChange(e.target.value);
+              }}
               onFocus={() => setShowSearchResults(true)}
               onBlur={() => {
                 setTimeout(() => {
@@ -94,17 +197,22 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
                 ],
                 description: 'text-white',
               }}
-              description='e.g, Cholera vaccine, Children vaccine'
               endContent={
                 <span className='grid h-9 w-9 place-content-center rounded-full bg-primaryLight'>
                   <IconArrowRight size={12} color='#1C1B1F' />
                 </span>
               }
-              placeholder='Search all vaccines here'
+              placeholder=''
             />
 
             {showSearchResults ? (
               <Card
+                onMouseEnter={() => {
+                  setShowVaccineCategory(false);
+                }}
+                onMouseLeave={() => {
+                  setShowVaccineCategory(true);
+                }}
                 shadow='sm'
                 radius='lg'
                 ref={searchResultsRef}
@@ -134,15 +242,15 @@ export const BookAVaccineHero: FC<BookATestHeroProps> = ({}) => {
                           className='group grid h-max grid-flow-col grid-cols-[1fr_8fr_10fr] items-center gap-3 p-2'
                         >
                           <Image
-                            width={60}
-                            height={60}
+                            width={150}
+                            height={150}
                             className='max-h-14 object-contain'
                             radius='md'
                             src={product.image_1024}
                             alt={''}
                           />
 
-                          <p className='text-body max-w-[100px] text-wrap break-words text-start capitalize'>
+                          <p className='text-body max-w-[100px] text-start capitalize'>
                             {product.name?.toLowerCase()}
                           </p>
 

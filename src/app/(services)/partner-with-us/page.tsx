@@ -1,3 +1,4 @@
+"use client"
 import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
 import { Footer } from '@/components/home/Footer';
 import { HomeHero } from '@/components/home/HomeHero';
@@ -11,6 +12,7 @@ import { Button, Card, CardBody, Input, Textarea } from '@nextui-org/react';
 
 export default function PartnerWithUs() {
   const howItWorksData: {
+    title?: string;
     description: string;
     icon: JSX.Element;
   }[] = [

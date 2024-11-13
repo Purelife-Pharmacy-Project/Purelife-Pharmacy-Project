@@ -1,4 +1,4 @@
-export const IconX = ({ size = 32, color = 'inherit' }) => {
+export const IconX = ({ size, color = 'inherit' }: any) => {
   return (
     <svg
       width={size}

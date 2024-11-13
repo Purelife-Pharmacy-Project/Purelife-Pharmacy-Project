@@ -56,8 +56,82 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
     [handleDebouncedSearch]
   );
 
+  const search = [
+    { title: "COVID-19 test" },
+    { title: "Pap smear" },
+    { title: "Urinalysis" },
+    { title: "Blood glucose test" },
+    { title: "Vitamin D levels" },
+    { title: "HIV test" },
+    { title: "Pregnancy test" },
+    { title: "Allergy testing" },
+    { title: "Liver function test" },
+    { title: "Urine culture" },
+    { title: "Hepatitis test" },
+    { title: "Drug screening" },
+    { title: "Stool culture" },
+    { title: "A1c test" },
+    { title: "Cholesterol test" }
+  ];
+  
+  const [showLabTestCategory, setShowLabTestCategory] = useState(true);
+  const [searchOn, setSearchOn] = useState('');
+  const searchCategory = Array.from({ length: 10 }, () => search).flatMap(
+    (item) => item
+  );
+  const scrollLabTestCategoryRef = useRef<HTMLDivElement | null>(null);
+  const [itemHeight, setItemHeight] = useState<number>(0); // Type the state variable
+  
+  useEffect(() => {
+    if (scrollLabTestCategoryRef.current) {
+      const firstItem = scrollLabTestCategoryRef.current.firstElementChild as HTMLElement; // Cast to HTMLElement
+      if (firstItem) {
+        setItemHeight(firstItem.clientHeight);
+      }
+    }
+  }, [searchCategory]);
+  
+  const scrollLabTestCategory = () => {
+    if (scrollLabTestCategoryRef.current) {
+      const startScrollTop = scrollLabTestCategoryRef.current.scrollTop;
+      const endScrollTop = Math.ceil((startScrollTop + itemHeight) / itemHeight) * itemHeight; // Round to nearest multiple of itemHeight
+      const duration = 1000; // Duration of scroll in milliseconds
+      const startTime = performance.now();
+  
+      const animateScroll = (currentTime: number) => { // Type the currentTime parameter
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1); // Calculate progress
+  
+        // Smoothly interpolate the scroll position
+        scrollLabTestCategoryRef.current!.scrollTop = 
+          startScrollTop + (endScrollTop - startScrollTop) * progress;
+  
+        if (progress < 1) {
+          requestAnimationFrame(animateScroll); // Continue animation
+        } else {
+          // Snap to exact position to avoid small offsets
+          scrollLabTestCategoryRef.current!.scrollTop = endScrollTop;
+  
+          // Reset to the top if we reached the bottom
+          if (endScrollTop >= scrollLabTestCategoryRef.current!.scrollHeight - scrollLabTestCategoryRef.current!.clientHeight) {
+            scrollLabTestCategoryRef.current!.scrollTop = 0; // Reset scroll to top
+          }
+        }
+      };
+  
+      requestAnimationFrame(animateScroll); // Start the animation
+    }
+  };
+  
+  useEffect(() => {
+    const intervalId = setInterval(scrollLabTestCategory, 3000); // Scroll every 3 seconds
+  
+    return () => clearInterval(intervalId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [itemHeight]);
+
   return (
-    <div className='relative w-full items-center bg-transparent md:min-h-[calc(100vh-260px)] xl:grid xl:min-h-[539px] xl:justify-center'>
+    <div className='relative w-full items-center bg-transparent md:grid md:min-h-[539px] md:justify-center'>
       <div
         className='absolute left-0 top-0 h-full w-full bg-center md:bg-right'
         style={{
@@ -80,12 +154,42 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
           </p>
 
           <div className='relative mx-auto w-full max-w-xl'>
+            <div
+              onMouseEnter={() => {
+                setShowLabTestCategory(false);
+                scrollLabTestCategory();
+              }}
+              ref={scrollLabTestCategoryRef}
+              className={`scrollbar-none absolute left-6 top-4 z-[999] h-[20px] overflow-y-scroll ${!showLabTestCategory && 'hidden'}`}
+            >
+              {searchCategory.map((category, index) => (
+                <p key={index} className='leading-1 text-base text-gray-400'>
+                  {category.title}
+                </p>
+              ))}
+            </div>
             <Input
+              onMouseEnter={() => {
+                setShowLabTestCategory(false);
+              }}
+              onMouseLeave={() => {
+                if (searchOn === '') {
+                  setShowLabTestCategory(true);
+                }
+              }}
               size='lg'
               radius='full'
               type='Search'
               ref={searchInputRef}
-              onChange={(e) => handleInputChange(e.target.value)}
+              onChange={(e) => {
+                setSearchOn(e.target.value);
+                if (e.target.value !== '') {
+                  setShowLabTestCategory(false);
+                } else {
+                  setShowLabTestCategory(true);
+                }
+                handleInputChange(e.target.value);
+              }}
               onFocus={() => setShowSearchResults(true)}
               onBlur={() => {
                 setTimeout(() => {
@@ -106,13 +210,11 @@ export const BookATestHero: FC<BookATestHeroProps> = ({}) => {
                 ],
                 description: 'text-white',
               }}
-              description='e.g, mens health, sexual health'
               endContent={
                 <span className='grid h-9 w-9 place-content-center rounded-full bg-primaryLight'>
                   <IconArrowRight size={12} color='#1C1B1F' />
                 </span>
               }
-              placeholder='Search all tests here'
             />
 
             {showSearchResults ? (

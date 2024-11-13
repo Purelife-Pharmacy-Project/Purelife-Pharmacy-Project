@@ -6,6 +6,9 @@ import { Bricolage_Grotesque } from 'next/font/google';
 import React from 'react';
 import './globals.css';
 import AnnouncementBanner from '@/components/AnnouncementBanner';
+import ReferralBanner from '@/components/ReferralBanner';
+import { AuthProvider, SearchProvider } from '@/helpers/useContext/authContext';
+import AppContent from './app-content';
 
 const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
@@ -111,7 +114,6 @@ export const metadata: Metadata = {
     ],
   },
 };
-
 export default async function RootLayout({
   children,
 }: {
@@ -124,18 +126,22 @@ export default async function RootLayout({
   // });
 
   return (
-    <html lang='en'>
-      <body className={bricolage.className}>
-        <Providers>
-          <main className='bg-background text-foreground light'>
-            {/* <HydrationBoundary state={dehydrate(queryClient)}> */}
-            {/* <AnnouncementBanner /> */}
-            <AppNavbar />
-            {/* </HydrationBoundary> */}
+    <html lang='en' >
+      <body>
+        <AuthProvider>
+          <SearchProvider>
+            <Providers>
+              <main className='bg-background text-foreground light'>
+                {/* <HydrationBoundary state={dehydrate(queryClient)}> */}
+                {/* <AnnouncementBanner /> */}
+                <AppNavbar />
+                {/* </HydrationBoundary> */}
 
-            {children}
-          </main>
-        </Providers>
+                <AppContent>{children}</AppContent>
+              </main>
+            </Providers>
+          </SearchProvider>
+        </AuthProvider>
         <SpeedInsights />
       </body>
     </html>

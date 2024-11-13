@@ -18,7 +18,7 @@ export const serverAxiosInstance = _axios.create({
 
 // Server Interceptors
 let hasHandledUnauthorizedError = false;
-const cookieStore = cookies();
+const cookieStore = await cookies();  
 
 serverAxiosInstance.interceptors.request.use(async (config) => {
   const token = cookieStore.get(USER_TOKEN_KEY)?.value || '';

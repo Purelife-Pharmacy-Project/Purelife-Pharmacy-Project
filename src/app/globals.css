@@ -17,12 +17,71 @@
   }
 }
 
+/* styles/fonts.css */
+
+/* Regular */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/fonts/Bricolage_Grotesque/static/BricolageGrotesque-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Light */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/fonts/Bricolage_Grotesque/static/BricolageGrotesque-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Medium */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/fonts/Bricolage_Grotesque/static/BricolageGrotesque-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* SemiBold */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/fonts/Bricolage_Grotesque/static/BricolageGrotesque-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Bold */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/fonts/Bricolage_Grotesque/static/BricolageGrotesque-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* ExtraBold */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/fonts/Bricolage_Grotesque/static/BricolageGrotesque-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+/* ExtraLight */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/fonts/Bricolage_Grotesque/static/BricolageGrotesque-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: #1E272F;
   background: linear-gradient(
       to bottom,
       transparent,
@@ -30,7 +89,8 @@ body {
     )
     rgb(var(--background-start-rgb));
   height: 100vh;
-
+  /* font-family: var(--font-grotesque); */
+  font-family: 'Bricolage Grotesque', sans-serif;
 }
 
 input[type='date']::-webkit-calendar-picker-indicator {
@@ -39,6 +99,39 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
 input[type='time']::-webkit-calendar-picker-indicator {
   display: none;
+}
+
+.scrollbar-none {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, and Opera */
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(193, 199, 207, 1);
+  border-radius: 10px; }
+.example-track.example-track-0 {
+  background-color: lightgray; /* Lighter gray for the left part */
+}
+
+.example-track.example-track-1 {
+  background-color: #1E272F; /* Darker gray for the middle part (between the thumbs) */
+}
+
+.example-track.example-track-2 {
+  background-color: lightgray; /* Lighter gray for the right part */
 }
 
 @layer utilities {
@@ -50,3 +143,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
     text-wrap: pretty;
   }
 }
+
+/* * {
+  border: 1px solid
+} */

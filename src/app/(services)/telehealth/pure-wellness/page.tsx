@@ -1,3 +1,4 @@
+"use client"
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { FeatureCard } from '@/components/book-emergency/FeatureCard';
 import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
@@ -10,6 +11,7 @@ import { IconHealthShield } from '@/components/icons/IconHealthShield';
 
 export default function PureWellnessPage() {
   const howItWorksData: {
+    title?: string;
     description: string;
     icon: JSX.Element;
   }[] = [
@@ -65,9 +67,7 @@ export default function PureWellnessPage() {
     <>
       <main className='grid gap-6'>
         <HomeHero
-          title='Get a personalized 
-                    wellness plan for 
-                    your lifestyle.'
+          title='Get a personalized wellness plan for your lifestyle.'
           description='Tailored solutions for your unique needs. Achieve balance and vitality with a wellness plan designed just for you.'
           ctaText='Start Here'
           ctaLink='#'

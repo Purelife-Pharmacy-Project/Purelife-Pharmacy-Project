@@ -1,3 +1,4 @@
+"use client"
 import { HowItWorks } from '@/components/book-lab-test/HowItWorks';
 import { Footer } from '@/components/home/Footer';
 import { HomeHero } from '@/components/home/HomeHero';
@@ -9,6 +10,7 @@ import { DrugSubscriptionTabs } from '@/components/upload-prescription/DrugSubsc
 
 export default function UploadPrescriptionPage() {
   const howItWorksData: {
+    title?: string;
     description: string;
     icon: JSX.Element;
   }[] = [

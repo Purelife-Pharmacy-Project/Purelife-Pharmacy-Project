@@ -2,7 +2,7 @@
 import { useLogin } from '@/hooks';
 import { FormMessage } from '@/library/ui/FormMessage';
 import { LoginPayload, loginValidationSchema } from '@/services/user/schema';
-import { inputDefault } from '@/theme';
+import { inputAuth } from '@/theme';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input, Link } from '@nextui-org/react';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -11,6 +11,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { IconEye } from '../icons/IconEye';
 import { IconEyeClose } from '../icons/IconEyeClose';
 import { IconSpinner } from '../icons/IconSpinner';
+import { IconLock } from '../icons/IconLock';
 
 export const LoginForm = () => {
   const {
@@ -28,7 +29,6 @@ export const LoginForm = () => {
   const redirectUrl = queryParams.get('redirectUrl');
   const router = useRouter();
   const [passwordIsVisible, setPasswordIsVisible] = useState(false);
-
   const toggleVisibility = () => setPasswordIsVisible(!passwordIsVisible);
 
   useEffect(() => {
@@ -44,9 +44,16 @@ export const LoginForm = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  // const redirectPath = localStorage.getItem('redirectPath');
+  // console.log(redirectPath)
   const { loginUser, loadingLogin, loginError, isError } = useLogin(() => {
-    router.push(redirectUrl ? redirectUrl : '/');
+    // if (redirectPath === '/telehealth/find-a-doctor/availability-calendar') {
+    //   router.push(`/telehealth/find-a-doctor/review-and-book`)
+    // }
+    // else {
+      router.push(redirectUrl ? redirectUrl : '/');
+    // }
+    
   });
 
   const onSubmit: SubmitHandler<LoginPayload> = (data) => {
@@ -56,25 +63,33 @@ export const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='grid gap-4 md:w-[554px]'>
+    <form onSubmit={handleSubmit(onSubmit)} className='grid gap-4'>
       {isError ? <FormMessage type='error' message={loginError!} /> : null}
+      <p className='font-medium text-[#1E272F]'>Email Address</p>
       <Input
         {...register('email')}
-        label='Email'
         autoComplete='user-email'
         errorMessage={errors.email?.message}
         isInvalid={!!errors.email}
         type='email'
-        classNames={inputDefault}
+        classNames={inputAuth}
+        startContent={
+          <span className='px-1'></span>
+        }
       />
+      <p className='font-medium text-[#1E272F]'>Password</p>
       <Input
         {...register('password')}
-        label='Password'
         autoComplete='user-password'
         errorMessage={errors.password?.message}
         isInvalid={!!errors.password}
         type={passwordIsVisible ? 'text' : 'password'}
-        classNames={inputDefault}
+        classNames={inputAuth}
+        startContent={
+          <button type='button' className='px-2'>
+              <IconLock color='content' />
+          </button>
+        }
         endContent={
           <button type='button' className='px-2' onClick={toggleVisibility}>
             {passwordIsVisible ? (
@@ -85,30 +100,26 @@ export const LoginForm = () => {
           </button>
         }
       />
-
-      <div className='flex flex-col items-center justify-start gap-4 md:flex-row'>
+      <p className='text-right cursor-pointer'>
+          <Link href='/forgot-password' isDisabled>
+            Forgot Password
+          </Link>
+        </p>
         <Button
           type='submit'
           size='lg'
           spinner={<IconSpinner />}
           isLoading={loadingLogin}
-          className='px-20'
+          className=''
           color='primary'
           radius='full'
         >
-          Login
+          Continue
         </Button>
 
-        <p className='text-center'>
-          <Link isDisabled href='/forgot-password'>
-            Forgot Password
-          </Link>
-        </p>
-      </div>
-
-      <p className='mt-4'>
+      <p className='text-center text-sm text-[#5A5A5A4D]'>
         Don&apos;t have an account?{' '}
-        <Link color='primary' href='/create-account'>
+        <Link className='ml-2 font-medium text-sm text-[#FF0028]' color='primary' href='/create-account'>
           Create an account
         </Link>
       </p>

@@ -24,7 +24,7 @@ export type ProductType = {
   id: number;
   name: string;
   lst_price: number;
-  description: string;
+  description: any;
   image_1024: any;
   categ_id: [number, string];
   amount?: number;
@@ -39,15 +39,18 @@ export class Product {
   public name: string;
   public image_1024: string;
   public lst_price: number;
-  public description: string;
+  public description: any;
   public amount: string;
   public quantity?: number;
+  public price?: number;
 
   constructor(product: ProductType) {
     this.id = product.id;
     this.name = product.name;
     this.lst_price = product.lst_price || 0;
-    this.description = removeHtmlTags(product.description) || '';
+    this.description = typeof product.description === 'string'
+    ? removeHtmlTags(product.description)
+    : ''; // Fallback if description is not a string
     this.image_1024 = product.image_1024
       ? `data:image/png;base64,${product.image_1024}`
       : '/images/purelife-fallback.png';

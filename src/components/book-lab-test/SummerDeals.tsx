@@ -5,6 +5,7 @@ import { useGetProductsByCategoryId } from '@/hooks';
 import ProductRow from '@/components/home/ProductRow';
 import { ProductLoadingSkeleton } from '@/components/home/Skeletons';
 import { LabTestCard } from '@/components/book-lab-test/LabTestCard';
+import { Section } from '../home/Section';
 
 type Prop = {};
 
@@ -15,6 +16,7 @@ const SummerDeals: React.FC<Prop> = () => {
     { categoryId: CATEGORY_ID, limit: 10, offset: 35 }
   );
   return (
+    <Section>
     <ProductRow
       title='Summer Deal! Enjoy up to 30%'
       products={allProducts}
@@ -25,7 +27,11 @@ const SummerDeals: React.FC<Prop> = () => {
       )}
       loader={<ProductLoadingSkeleton />}
       allowOverflow={false}
-    />
+      price={false}
+      variant='summer'
+      />
+    </Section>
+    
   );
 };
 

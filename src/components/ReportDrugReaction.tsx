@@ -3,19 +3,24 @@ import { Section } from './home/Section';
 
 export const ReportDrugReaction = () => {
   return (
-    <div className='lg:grid lg:justify-center'>
+    <div className=''>
       <Section>
-        <div className='flex flex-col items-center justify-between gap-4 rounded-xl bg-gray-100 p-4 text-center md:flex-row md:text-left lg:px-8'>
-          <p className='text-xl font-bold text-primary md:text-2xl'>
-            Report any adverse drug reaction here{' '}
-          </p>
+        <div className='flex flex-col md:items-center justify-between gap-4 rounded-[25px] bg-[#262629] px-4  py-7 sm:px-8 sm:py-12 md:flex-row lg:px-12'>
+          <div>
+            <p className='mb-3 sm:mb-4 text-xl font-medium text-white md:text-2xl text-center md:text-left'>
+            Report Adverse Drug Reactions
+            </p>
+            <p className='sm:w-full w-[80%] mx-auto text-sm sm:text-base font-[300] sm:font-normal text-white text-center md:text-left'>
+              Help us ensure safety by reporting any side effects or concerns
+              related to medications here.
+            </p>
+          </div>
 
           <Button
             as={Link}
             href='https://primaryreporting.who-umc.org/NG'
             target='_blank'
-            color='primary'
-            className='px-10 lg:px-12'
+            className='bg-white px-10 text-sm sm:text-lg text-[#262629] lg:px-12 lg:py-8 w-[40%] mx-auto md:w-auto'
             radius='full'
             size='lg'
           >

@@ -15,6 +15,11 @@ type Prop = {
   ProductComp: React.FC<{ product: Product }>;
   emptyMessage: string;
   allowOverflow?: boolean;
+  productClassName?: string;
+  headerClassName?: string;
+  rowClassName?: string;
+  price: boolean;
+  variant: any;
 };
 
 const ProductRow: React.FC<Prop> = ({
@@ -26,8 +31,13 @@ const ProductRow: React.FC<Prop> = ({
   emptyMessage,
   loader,
   allowOverflow = true,
+  productClassName,
+  headerClassName,
+  variant,
+  rowClassName,
+  price,
 }) => {
-  const ref = useRef<any>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [overflow, setOverflow] = useState<boolean>();
 
   useEffect(() => {
@@ -36,21 +46,26 @@ const ProductRow: React.FC<Prop> = ({
         entries[0].target.scrollWidth > entries[0].target.clientWidth
       );
     });
-    if (ref.current) {
-      observer.observe(ref?.current);
-      setOverflow(ref.current?.scrollWidth > ref.current?.clientWidth);
+    const currentRef = ref.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+      setOverflow(currentRef?.scrollWidth > currentRef?.clientWidth);
     }
-    return () => ref.current && observer.unobserve(ref.current);
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
   }, [isLoading, products]);
 
   return (
-    <Section className='relative w-screen overflow-hidden'>
-      <div className='relative mb-8 flex items-center justify-between gap-3 overflow-hidden'>
-        <h5 className='text-lg font-semibold capitalize lg:text-2xl'>
+    <div className={`relative overflow-hidden ${productClassName}`}>
+      <div className={`relative mb-8 grid grid-cols-[3.3fr_1fr] gap-3 overflow-hidden ${headerClassName}`}>
+        <h5 className={`${variant === 'top test' && '!text-[18px] lg:!text-2xl'} text-base font-medium capitalize lg:text-2xl`}>
           {title}
         </h5>
         {moreLink ? (
-          <Link href={moreLink} className='text-lg text-[#919191] lg:text-xl '>
+          <Link href={moreLink} className={`${variant === 'top test' && '!text-[18px] lg:!text-2xl'} ml-auto text-base text-[#919191] lg:text-2xl h-fit`}>
             Shop All
           </Link>
         ) : null}
@@ -75,15 +90,14 @@ const ProductRow: React.FC<Prop> = ({
           </button>
           <div
             ref={ref}
-            className={clsx({
-              'scroll flex w-full flex-auto snap-x scroll-pb-10 flex-nowrap gap-5 overflow-x-auto scrollbar-hide':
-                allowOverflow,
-              'grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3':
-                !allowOverflow,
-            })}
-          >
-            {products?.map((product) => (
-              <ProductComp key={product.id} product={product} />
+            className={`${variant === 'top test' && 'grid lg:grid-cols-4 grid-cols-2 gap-5'} ${variant === 'summer' && 'grid lg:grid-cols-3 md:grid-cols-2 gap-5'} ${variant === 'normal' && 'grid lg:grid-cols-3 grid-cols-1 gap-5'} ${variant === 'hot offers' && 'grid grid-cols-2 gap-5'} ${variant === 'best sellers' && 'grid grid-cols-2 gap-8 sm:gap-5'}`}>
+            {products?.slice(0, (variant === 'normal' || variant === 'hot offers' || variant === 'top test') ? 4 : (variant === 'summer') ? 9 : 3).map((product, index) => (
+              <div
+              key={product.id}
+              className={`${(variant === 'best sellers' && index === 2) && 'col-span-2'}`}
+            >
+              <ProductComp product={product} />
+            </div>
             ))}
           </div>
           <button
@@ -105,7 +119,7 @@ const ProductRow: React.FC<Prop> = ({
       {(!isLoading && !products) || products?.length === 0 ? (
         <p className='text-center text-sm text-header-100'>{emptyMessage}</p>
       ) : null}
-    </Section>
+    </div>
   );
 };
 
