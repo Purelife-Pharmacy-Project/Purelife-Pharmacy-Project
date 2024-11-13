@@ -65,7 +65,7 @@ const ProductRow: React.FC<Prop> = ({
           {title}
         </h5>
         {moreLink ? (
-          <Link href={moreLink} className={`${variant === 'top test' && '!text-[18px] lg:!text-2xl'} text-base text-[#919191] lg:text-2xl h-fit`}>
+          <Link href={moreLink} className={`${variant === 'top test' && '!text-[18px] lg:!text-2xl'} ml-auto text-base text-[#919191] lg:text-2xl h-fit`}>
             Shop All
           </Link>
         ) : null}

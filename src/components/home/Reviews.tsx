@@ -44,7 +44,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
       )}
     >
       <div className='bg-white lg:px-0'>
-        <div className='relative sm:mb-10 h-[450px] w-full overflow-hidden sm:h-[800px]'>
+        <div className='relative sm:mb-10 h-[450px] w-full overflow-hidden sm:h-[600px] lg:[800px]'>
           <div className='absolute top-[60px] flex w-full justify-center'>
             <h3 className='w-[85%] text-center font-bold leading-[1.2] text-[#1E272F] md:w-[65%] lg:text-[40px] md:text-[30px] text-[32px]'>
               {title}
