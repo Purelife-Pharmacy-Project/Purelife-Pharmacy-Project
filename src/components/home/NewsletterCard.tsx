@@ -50,6 +50,7 @@ export const NewsLetterCard = () => {
                 classNames={{
                   inputWrapper: [
                     'text-base',
+                    'placeholder:text-[#1E272F]',
                     'pr-2',
                     'shadow-none',
                     'bg-transparent',

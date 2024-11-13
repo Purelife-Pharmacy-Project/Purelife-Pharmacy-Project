@@ -74,13 +74,13 @@ export const LatestInsights = () => {
             color={undefined}
             size='md'
             radius='full'
-            className={`h-fit min-w-0 rotate-180 rounded-full border-2 border-[#1E272F] p-2 sm:p-4  ${
+            className={`h-fit min-w-0 rotate-180 rounded-full border-2 border-[#1E272F] p-3 sm:p-4  ${
               leftIcon ? 'bg-[#1E272F]' : 'bg-transparent'
             }`}
             onClick={scrollInsightsLeft}
           >
             <IconArrowRight
-              className='h-5 w-5'
+              className="w-[12px] h-[12px] sm:w-auto sm:h-auto"
               color={`${leftIcon ? '#FFFFFF' : '#1E272F'}`}
             />
           </Button>
@@ -94,13 +94,13 @@ export const LatestInsights = () => {
             color={undefined}
             size='sm'
             radius='full'
-            className={`h-fit min-w-0 rounded-full border-2 border-[#1E272F] p-2 sm:p-4  ${
+            className={`h-fit min-w-0 rounded-full border-2 border-[#1E272F] p-3 sm:p-4  ${
               rightIcon ? 'bg-[#1E272F]' : 'bg-transparent'
             }`}
             onClick={scrollInsightsRight}
           >
             <IconArrowRight
-              className='h-5 w-5'
+              className="w-[12px] h-[12px] sm:w-auto sm:h-auto"
               color={`${rightIcon ? '#FFFFFF' : '#1E272F'}`}
             />
           </Button>

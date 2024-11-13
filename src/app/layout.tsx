@@ -137,7 +137,7 @@ export default async function RootLayout({
                 <AppNavbar />
                 {/* </HydrationBoundary> */}
 
-                <div className="pt-[170px] lg:pt-[92px]"> 
+                <div className="pt-[143px] lg:pt-[92px]"> 
                   {children}
                 </div>
               </main>

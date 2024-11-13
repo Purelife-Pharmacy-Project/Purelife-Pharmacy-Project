@@ -107,11 +107,11 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
   return (
     <>
       <Section>
-        <div className='mb-10 flex w-full justify-between text-xl font-medium md:text-2xl lg:w-[80%]'>
+        <div className='mb-5 sm:mb-10 flex w-full justify-between text-[15px] sm:text-xl font-medium md:text-2xl lg:w-[80%]'>
           {Object.keys(serviceSteps).map((service) => (
             <div key={service} className='cursor-pointer' onClick={() => setActive(service)}>
-              <h3 className={`${active === service ? '' : 'text-[#5A5A5A]'}`}>{service}</h3>
-              {active === service && <div className='h-[6px] w-[50%] rounded-full bg-primary'></div>}
+              <h3 className={`${active === service ? 'font-semibold' : 'text-[#5A5A5A]'}`}>{service}</h3>
+              {active === service && <div className='h-[6px] w-[40%] sm:w-[50%] rounded-full bg-primary'></div>}
             </div>
           ))}
         </div>
@@ -119,7 +119,7 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
         {active && (
           <div className='grid grid-cols-1 lg:grid-cols-[6fr_4fr]'>
             <div>
-              <h3 className='w-full text-2xl font-semibold lg:w-[85%] lg:text-3xl'>
+              <h3 className='w-full text-[18px] sm:text-2xl font-semibold lg:w-[85%] lg:text-3xl'>
                 {active === 'Consult Doctor'
                   ? 'Streamline Your Consultation Booking, All in One Place'
                   : active === 'Shop Pharmacy'
@@ -130,16 +130,16 @@ export const StepsForServices: React.FC<StepsForServicesProps> = () => {
                   ? 'Your One-Stop Destination for Hassle-Free Lab Test Bookings'
                   : ''}
               </h3>
-                <div className='mt-8 flex flex-col items-start w-full lg:w-[70%]'>
+                <div className='mt-4 sm:mt-8 flex flex-col items-start w-full lg:w-[70%]'>
                 {serviceSteps[active].map((step: any, index: any) => (
                   <div key={index}>
                     <div className='flex items-center gap-6'>
                       <div className='my-2 grid h-[50px] w-[50px] place-content-center rounded-full border'>
                         {step.icon}
                       </div>
-                      <div className='w-[90%]'>
-                        <h3 className='text-xl font-medium md:text-2xl'>{step.title}</h3>
-                        <p className='text-sm font-medium text-[#5A5A5A]'>{step.description}</p>
+                      <div className='w-[80%] sm:w-[90%]'>
+                        <h3 className='text-[17px] sm:text-xl font-semibold md:text-2xl'>{step.title}</h3>
+                        <p className='text-[12px] sm:text-sm font-medium text-[#5A5A5A]'>{step.description}</p>
                       </div>
                     </div>
                     {index < serviceSteps[active].length - 1 && <IconLine className="ml-[23px]" />}

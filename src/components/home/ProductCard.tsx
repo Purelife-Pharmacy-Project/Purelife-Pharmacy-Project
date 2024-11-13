@@ -20,19 +20,19 @@ const ProductCard: React.FC<Prop> = ({ product }) => {
   }, []);
   return (
     <div className='flex flex-col gap-5'>
-      <div ref={containerRef} className='relative bg-white h-40 rounded-[20px] p-4 lg:h-60 lg:p-10'>
+      <div ref={containerRef} className='flex justify-center items-center relative bg-white h-[142px] rounded-[20px] p-4 lg:h-60 lg:p-10'>
         <Image
           alt={product.name}
-          className='h-full w-full object-contain'
+          className='sm:h-full sm:w-full w-[60px] h-[90px] object-contain'
           classNames={{
-            wrapper: '!max-w-full !h-full',
+            wrapper: '!max-w-full sm:!h-full',
           }}
           radius='none'
           src={product.image_1024}
         />
       </div>
       <div className='flex justify-between gap-3 text-xs font-medium text-[#383838]'>
-        <p className={`font-semibold truncate text-sm md:text-base max-w${maxNameWidth}`}>{product.name.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase())}</p>
+        <p className={`font-medium truncate text-base md:text-base max-w${maxNameWidth}`}>{product.name.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase())}</p>
         {product.price && <p>{product.amount}</p>}
       </div>
       {product.price && <AddToCartBtn product={product} className='mt-auto' />}

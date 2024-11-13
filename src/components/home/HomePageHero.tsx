@@ -102,15 +102,15 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
         }}
-        className={`${isLargeScreen ? '' : 'bg-primaryLight'} banner-container flex min-h-[580px] w-full flex-col items-start justify-center`}
+        className={`${isLargeScreen ? '' : 'bg-primaryLight'} banner-container flex sm:h-auto sm:min-h-[580px] w-full flex-col items-start justify-center`}
       >
         <div className='mx-auto w-[95%] lg:ml-[5%] lg:w-[45%]'>
-          <div className='mb-7 mt-[100px] text-center text-[50px] font-bold leading-[1.2] lg:mt-8 lg:text-left lg:text-white'>
+          <div className='mb-[10px] sm:mb-7 mt-[40px] sm:mt-[100px] text-center text-[30px] sm:text-[50px] font-bold leading-[1.2] lg:mt-8 lg:text-left lg:text-white'>
             The future of health services, anytime and anywhere
           </div>
           <div
             ref={divRef}
-            className='w-[75%] mx-auto lg:w-full mb-7 mr-auto text-center text-xl font-light text-[#5A5A5A] lg:text-left lg:text-white'
+            className='w-[85%] mx-auto lg:w-full mb-7 mr-auto text-center text-[15px] sm:text-xl font-light text-[#5A5A5A] lg:text-left lg:text-white'
           >
             Take control of your health and experience the benefits of Purelife
             health
@@ -118,9 +118,10 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
           <div className=''>
             <NavbarSearch
               show={true}
-              searchBtnClassName='h-[60px] w-[40%] justify-center text-[18px]'
-              placeholderClassName='absolute top-[20px]'
+              searchBtnClassName='h-[40px] sm:h-[60px] w-[40%] justify-center sm:text-[18px]'
+              placeholderClassName='absolute top-[10px] sm:top-[20px]'
               borderClassName='border-none'
+              searchIconClassName='w-[18px] h-[18px] sm:w-auto sm:h-auto'
             />
           </div>
           {/*<div className='lg-mx-0 mt-8 hidden w-fit gap-2 lg:flex'>
@@ -143,7 +144,7 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
               backgroundRepeat: 'no-repeat',
               backgroundSize: 'cover',
             }}
-            className={`banner-container flex h-[300px] w-[95%] rounded-[20px] mx-auto flex-col items-start justify-center`}
+            className={`banner-container flex h-[150px] sm:h-[300px] w-[95%] rounded-[15px] sm:rounded-[20px] mx-auto flex-col items-start justify-center`}
           ></div>
           <div className='lg-mx-0 mx-auto mt-8 flex hidden w-fit gap-2'>
             {bannerImages.map((_, index) => (
@@ -159,13 +160,13 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
       </div>
 
       <Section>
-        <h1 className='mb-6 mt-14 w-full text-center text-[35px] font-semibold text-[#1E272F]'>
+        <h1 className='mb-6 mt-7 sm:mt-14 w-full text-center text-2xl sm:text-[35px] font-semibold text-[#1E272F]'>
           Quality Healthcare you can trust
         </h1>
-        <div className='mt-20 grid grid-cols-1 px-0 pb-28 lg:grid-cols-[1fr_1fr_1fr] lg:gap-10'>
-          <Link href={'/telehealth/find-a-doctor'} className='mt-14'>
+        <div className='mt-10 sm:mt-20 grid grid-cols-1 px-0 pb-10 sm:pb-28 lg:grid-cols-[1fr_1fr_1fr] lg:gap-10'>
+          <Link href={'/telehealth/find-a-doctor'} className='mt-0 sm:mt-14'>
             <div
-              className='relative border rounded-[20px] w-full lg:h-[450px] h-[600px]'
+              className='relative border rounded-[20px] w-full lg:h-[450px] h-[300px] sm:h-[500px]'
               style={{
                 backgroundImage: 'url(/images/doctor.jpg)',
                 backgroundPosition: 'center',
@@ -178,14 +179,14 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
                 src={'/images/mini-doctor.png'}
                 width={139}
                 height={155}
-                className='absolute left-[5%] top-6 lg:left-6'
+                className='absolute left-4 sm:left-[5%] top-4 sm:top-6 lg:left-6 sm:h-auto sm:w-auto w-[80px] h-auto'
                 alt={'consult a doctor image'}
               />
               <Image
                 src={'/images/call-frame.png'}
                 width={304}
                 height={59}
-                className='absolute bottom-5 left-0 right-0 mx-auto lg:left-9'
+                className='sm:h-auto sm:w-auto w-[200px] h-auto absolute bottom-5 left-0 right-0 mx-auto lg:left-9'
                 alt={'consult a doctor image'}
               />
             </div>
@@ -193,7 +194,7 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
               style={{ boxShadow: '50px 70px 112px 0px #AAAAAA1A' }}
               className='mb-8 mt-10 cursor-pointer rounded-[20px] border border-[0.5px] bg-white px-5 py-4 lg:mb-0'
             >
-              <h3 className='flex items-center justify-between text-2xl font-medium'>
+              <h3 className='flex items-center justify-between text-xl sm:text-2xl font-medium'>
                 Consult with a Doctor
                 <span className='-rotate-45'>
                   <IconArrowRight color='#1E272F' />
@@ -207,7 +208,7 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
           </Link>
           <Link href={'/telehealth/book-lab-test'} className=''>
             <div
-              className='relative h-[600px] w-full lg:h-[375px]'
+              className='relative w-full lg:h-[450px] h-[300px] sm:h-[500px]'
               style={{
                 backgroundImage: 'url(/images/book-a-lab-test.png)',
                 backgroundPosition: 'center bottom 20%',
@@ -220,7 +221,7 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
               style={{ boxShadow: '50px 70px 112px 0px #AAAAAA1A' }}
               className='mb-8 mt-10 cursor-pointer rounded-[20px] border border-[0.5px] bg-white px-5  py-4 lg:mb-0'
             >
-              <h3 className='mb-5 flex items-center justify-between text-2xl font-medium'>
+              <h3 className='mb-5 flex items-center justify-between text-xl sm:text-2xl font-medium'>
                 Book a Vaccination
                 <span className='-rotate-45'>
                   <IconArrowRight color='#1E272F' />
@@ -248,7 +249,7 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
                         />
                       </Link>
                     </div>
-                    <div className='my-auto flex h-fit flex-col gap-1'>
+                    <div className='text-sm sm:text-base my-auto flex h-fit flex-col gap-1'>
                       <p className='font-medium'>{product.name}</p>
                       <p className='font-bold'>{product.amount}</p>
                     </div>
@@ -259,7 +260,7 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
           </Link>
           <Link href={'/shop'} className='mt-14'>
             <div
-              className='h-[650px] w-full lg:h-[450px]'
+              className='relative w-full lg:h-[450px] h-[350px] sm:h-[500px]'
               style={{
                 backgroundImage: 'url(/images/shop-pharmacy.png)',
                 backgroundPosition: isLargeScreen ? `center bottom 30%` : `center bottom 10%`,
@@ -272,7 +273,7 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
               style={{ boxShadow: '50px 70px 112px 0px #AAAAAA1A' }}
               className='mt-10 cursor-pointer rounded-[20px] border border-[0.5px] bg-white px-5 py-4 '
             >
-              <h3 className='flex items-center justify-between lg:text-2xl font-[600] text-[#1E272F]'>
+              <h3 className='flex items-center justify-between text-xl sm:text-2xl font-[600] text-[#1E272F]'>
                 Shop Pharmacy
                 <span className='-rotate-45'>
                   <IconArrowRight color='#1E272F' />

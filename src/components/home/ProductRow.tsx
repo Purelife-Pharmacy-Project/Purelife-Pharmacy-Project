@@ -60,12 +60,12 @@ const ProductRow: React.FC<Prop> = ({
 
   return (
     <div className={`relative overflow-hidden ${productClassName}`}>
-      <div className={`relative mb-8 grid grid-cols-[3fr_1fr] gap-3 overflow-hidden ${headerClassName}`}>
-        <h5 className={`text-lg font-medium capitalize lg:text-2xl`}>
+      <div className={`relative mb-8 grid grid-cols-[3.3fr_1fr] gap-3 overflow-hidden ${headerClassName}`}>
+        <h5 className={`${variant === 'top test' && '!text-[18px] lg:!text-2xl'} text-base font-medium capitalize lg:text-2xl`}>
           {title}
         </h5>
         {moreLink ? (
-          <Link href={moreLink} className={`text-lg text-[#919191] lg:text-2xl h-fit`}>
+          <Link href={moreLink} className={`${variant === 'top test' && '!text-[18px] lg:!text-2xl'} ml-auto text-base text-[#919191] lg:text-2xl h-fit`}>
             Shop All
           </Link>
         ) : null}
@@ -90,7 +90,7 @@ const ProductRow: React.FC<Prop> = ({
           </button>
           <div
             ref={ref}
-            className={`${variant === 'top test' && 'grid lg:grid-cols-4 grid-cols-2 gap-5'} ${variant === 'summer' && 'grid lg:grid-cols-3 md:grid-cols-2 gap-5'} ${variant === 'normal' && 'grid lg:grid-cols-3 grid-cols-1 gap-5'} ${variant === 'hot offers' && 'grid grid-cols-2 gap-5'} ${variant === 'best sellers' && 'grid grid-cols-2 gap-5'}`}>
+            className={`${variant === 'top test' && 'grid lg:grid-cols-4 grid-cols-2 gap-5'} ${variant === 'summer' && 'grid lg:grid-cols-3 md:grid-cols-2 gap-5'} ${variant === 'normal' && 'grid lg:grid-cols-3 grid-cols-1 gap-5'} ${variant === 'hot offers' && 'grid grid-cols-2 gap-5'} ${variant === 'best sellers' && 'grid grid-cols-2 gap-8 sm:gap-5'}`}>
             {products?.slice(0, (variant === 'normal' || variant === 'hot offers' || variant === 'top test') ? 4 : (variant === 'summer') ? 9 : 3).map((product, index) => (
               <div
               key={product.id}

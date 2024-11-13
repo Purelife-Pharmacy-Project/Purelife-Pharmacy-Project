@@ -124,7 +124,7 @@ export default async function Home() {
 
         {/* <Categories /> */}
 
-        <div className='invisible mb-4'></div>
+        <div className='invisible mb-2'></div>
 
         <DiscoverTopProducts />
 
