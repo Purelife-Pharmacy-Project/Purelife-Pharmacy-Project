@@ -107,25 +107,18 @@ export const LatestInsights = () => {
         </div>
       </div>
 
-      <div className='max-w-[calc(100dvw-2rem)] bg-[#F6F6F6] py-14'>
+      <div className='max-w-[calc(100dvw-2rem)] bg-[#F6F6F6] py-8 sm:py-14'>
         <div
           ref={scrollInsightsRef}
           className='scrollbar-none flex w-[100%] overflow-x-scroll'
         >
           {insights.map((item, index) => (
-            //  <a href={item.link} >
-            <div className='w-[80%] border-r px-6 hover:opacity-100 sm:min-w-[500px] sm:px-8'>
-              {/* <div
-                  ref={containerRef}
-                  className='mx-auto h-[570px] w-[83%]'
-                  style={{
-                    backgroundImage: `url(${item.image})`,
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
-                    borderRadius: '20px',
-                  }}
-                ></div> */}
+            <Link
+              key={index}
+              href={item.link}
+              target='_blank'
+              className='block w-[80%] border-r px-6 hover:opacity-100 sm:min-w-[500px] sm:px-8'
+            >
               <img className='w-full' src={item.image} />
 
               <div className='mx-auto mt-4 flex items-center justify-between gap-4 border-t pt-2 sm:mt-6 sm:pt-4'>
@@ -136,8 +129,7 @@ export const LatestInsights = () => {
                   <IconArrowRight size={12} color={`#FFFFFF`} />
                 </span>
               </div>
-            </div>
-            //  </a>
+            </Link>
           ))}
         </div>
       </div>
