@@ -9,7 +9,7 @@ export const GlobalHealthSolutions = () => {
       <h3 className='mb-14 lg:w-[75%] w-full text-[19px] sm:text-3xl lg:text-4xl font-semibold'>
         Empowering Wellness Through Global Health Solutions
       </h3>
-      <div className=' grid lg:grid-cols-[1fr_1fr] grid-cols-1 grid-rows-2 gap-5 pb-10'>
+      <div className=' grid lg:grid-cols-[1fr_1fr] grid-cols-1 grid-rows-2 gap-5 sm:pb-10'>
         <div className='row-span-2'>
           <div
             className='flex lg:h-full h-[362px] sm:h-[400px] w-full flex-col justify-end'
