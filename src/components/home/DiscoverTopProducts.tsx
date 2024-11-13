@@ -8,23 +8,23 @@ export const DiscoverTopProducts: React.FC<DiscoverTopProductsProps> = () => {
     <>
       <Section>
         <div
-          className={`relative flex justify-center overflow-hidden rounded-[25px] bg-[#E3DFE5]`}
+          className={`relative flex justify-center overflow-hidden rounded-[15px] sm:rounded-[25px] bg-[#E3DFE5]`}
         >
-          <div className='absolute bottom-0 left-0'>
+          <div className='absolute bottom-0 left-0 -mb-[25px] -ml-[30px]  sm:-mb-0 sm:-ml-0'>
             <Image
               width={207}
               height={347}
-              className='-mb-[40px] -ml-[30px] h-[200px] w-auto sm:-mb-0 sm:-ml-0 lg:h-[300px]'
+              className='h-[150px] sm:h-[200px] w-auto lg:h-[300px]'
               src={'/images/mens-health-1.png'}
               alt={'quality home image'}
               quality={100}
             />
           </div>
-          <div className='z-[9] flex w-[60%] flex-col items-center gap-3 pb-10 pt-10 text-center sm:pt-16 lg:w-[45%]'>
-            <h2 className='font-bold text-[#1E272F] text-2xl md:text-4xl'>
+          <div className='z-[9] flex w-[75%] flex-col items-center gap-1 sm:gap-3 pb-10 pt-10 text-center sm:pt-16 lg:w-[45%]'>
+            <h2 className='font-bold text-[#1E272F] text-[20px] md:text-4xl'>
               Discover top products for better sexual health.
             </h2>
-            <p className='text-sm font-medium text-[#5A5A5A] sm:text-base md:text-lg'>
+            <p className='w-[80%] sm:w-full text-xs font-medium text-[#5A5A5A] sm:text-base md:text-lg'>
               Improve your sexual health with expert-endorsed products for
               enhanced intimacy.
             </p>
@@ -32,7 +32,7 @@ export const DiscoverTopProducts: React.FC<DiscoverTopProductsProps> = () => {
               color='primary'
               as={Link}
               target='_blank'
-              className={`w-[25%] text-sm text-white`}
+              className={`w-[29%] h-[38px] text-sm text-white mt-3 sm:mt-0`}
               radius='sm'
               size='lg'
               href='/shop?category=sexual-health'
@@ -50,11 +50,11 @@ export const DiscoverTopProducts: React.FC<DiscoverTopProductsProps> = () => {
               ))}
             </div>
           </div>
-          <div className='absolute bottom-0 right-0'>
+          <div className='absolute bottom-0 right-0 sm:-mb-0 -mb-[25px] -mr-[40px] sm:-mr-0'>
             <Image
               width={207}
               height={347}
-              className='-mb-[40px] -mr-[30px] h-[200px] w-auto sm:-mb-0 sm:-mr-0 lg:h-[300px]'
+              className='h-[150px] sm:h-[200px] w-auto  lg:h-[300px]'
               src={'/images/mens-health-2.png'}
               alt={'quality home image'}
               quality={100}

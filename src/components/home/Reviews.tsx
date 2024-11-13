@@ -40,13 +40,13 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
   return (
     <div
       className={clsx(
-        'mt-20 bg-white sm:mt-0 lg:justify-center lg:pb-10 lg:pt-[55px]'
+        '-mt-6 sm:-mt-0 sm:mt-20 bg-white sm:mt-0 lg:justify-center lg:pb-10 lg:pt-[55px]'
       )}
     >
       <div className='bg-white lg:px-0'>
-        <div className='relative mb-10 h-[450px] w-full overflow-hidden sm:h-[800px]'>
+        <div className='relative sm:mb-10 h-[450px] w-full overflow-hidden sm:h-[800px]'>
           <div className='absolute top-[60px] flex w-full justify-center'>
-            <h3 className='w-[75%] text-center font-bold leading-[1.2] text-[#1E272F] md:w-[65%] lg:text-[40px] md:text-[30px] text-[25px]'>
+            <h3 className='w-[85%] text-center font-bold leading-[1.2] text-[#1E272F] md:w-[65%] lg:text-[40px] md:text-[30px] text-[32px]'>
               {title}
             </h3>
           </div>
@@ -68,11 +68,11 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
                 }`}
                 onClick={scrollReviewsLeft}
               >
-                <IconArrowRight color={`${leftIcon ? '#FFFFFF' : '#1E272F'}`} />
+                <IconArrowRight className="w-[12px] h-[12px] sm:w-auto sm:h-auto" color={`${leftIcon ? '#FFFFFF' : '#1E272F'}`} />
               </Button>
               <div
                 ref={scrollReviewsRef}
-                className='scrollbar-none flex w-[90%] overflow-x-scroll sm:w-[57%]'
+                className='scrollbar-none flex w-[80%] overflow-x-scroll sm:w-[57%]'
               >
                 {reviews.map((review, index) => (
                   <div key={index} className='min-w-[100%] lg:min-w-[100%]'>
@@ -80,7 +80,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
                       <h3 className='text-xl font-semibold text-[#1E272F] sm:text-[32px]'>
                         {review.title}
                       </h3>
-                      <p className='text-xs font-medium text-[#5A5A5A] sm:text-base'>
+                      <p className='text-[13px] font-medium text-[#5A5A5A] sm:text-base'>
                         {review.description}
                       </p>
                       <div className='flex'>
@@ -93,7 +93,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
                           )
                         )}
                       </div>
-                      <p className='text-xs font-bold text-[#1E272F] sm:text-sm'>
+                      <p className='text-sm font-bold text-[#1E272F] sm:text-sm'>
                         {review.name}
                       </p>
                     </div>
@@ -117,6 +117,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
                 onClick={scrollReviewsRight}
               >
                 <IconArrowRight
+                  className="w-[12px] h-[12px] sm:w-auto sm:h-auto"
                   color={`${rightIcon ? '#FFFFFF' : '#1E272F'}`}
                 />
               </Button>
@@ -128,7 +129,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
               height={213}
               src='/images/patients/patient1.png'
               alt='doctor image'
-              className=''
+              className='w-[165px] h-[108px] sm:h-auto sm:w-auto rounded-[10px]'
             />
           </div>
           <div className='flex justify-start '>
@@ -137,7 +138,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
               height={213}
               src='/images/patients/patient2.png'
               alt='doctor image'
-              className=''
+              className='w-[117px] h-[77px] sm:h-auto sm:w-auto rounded-[10px]'
             />
           </div>
           <div className='absolute top-[200px] hidden w-full justify-end lg:flex md:right-[30%] lg:right-[43%] '>

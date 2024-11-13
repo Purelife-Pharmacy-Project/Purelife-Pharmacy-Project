@@ -23,7 +23,7 @@ const BestSellers: React.FC<Prop> = () => {
       emptyMessage='Oops. No products yet'
       ProductComp={ProductCard}
       loader={<ProductLoadingSkeleton />}
-      productClassName='rounded-[20px] bg-primaryLight p-8'
+      productClassName='rounded-[20px] bg-primaryLight p-4 pt-8 sm:p-8'
       headerClassName='mx-auto'
       price
       variant="best sellers"
