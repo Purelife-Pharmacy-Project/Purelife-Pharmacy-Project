@@ -20,21 +20,21 @@ export const Footer = () => {
       icon: <IconInstagram />,
       url: 'https://www.instagram.com/purelifepharmang?igsh=bHRncm85cXU1eTF6',
     },
-    {
-      name: 'facebook',
-      icon: <IconFacebook />,
-      url: '#',
-    },
+    // {
+    //   name: 'facebook',
+    //   icon: <IconFacebook />,
+    //   url: '#',
+    // },
     {
       name: 'linkedin',
       icon: <IconLinkedin />,
       url: 'https://www.linkedin.com/company/purelife-pharmacy-ltd/',
     },
-    {
-      name: 'twitter',
-      icon: <IconTwitter />,
-      url: '#',
-    },
+    // {
+    //   name: 'twitter',
+    //   icon: <IconTwitter />,
+    //   url: '#',
+    // },
   ];
 
   const footerContent = [
@@ -62,21 +62,21 @@ export const Footer = () => {
           name: 'Book a lab test',
           path: '/telehealth/book-lab-test',
         },
-        {
-          name: 'Subscribe to drug refill',
-          path: '/telehealth/drug-refill',
-        },
-        {
-          name: 'Upload Prescription',
-          path: '/telehealth/get-vaccination',
-        },
+        // {
+        //   name: 'Subscribe to drug refill',
+        //   path: '/telehealth/drug-refill',
+        // },
+        // {
+        //   name: 'Upload Prescription',
+        //   path: '/telehealth/get-vaccination',
+        // },
         {
           name: 'Consult a doctor',
           path: '/telehealth/find-a-doctor',
         },
         {
           name: 'Book a vaccination',
-          path: '/telehealth/upload-prescription',
+          path: '/telehealth/get-vaccination',
         },
       ],
     },
@@ -91,22 +91,22 @@ export const Footer = () => {
           name: 'Partner with us',
           path: '/partner-with-us',
         },
-        {
-          name: 'About us',
-          path: '#',
-        },
-        {
-          name: 'Blog',
-          path: '#',
-        },
-        {
-          name: 'Careers',
-          path: '#',
-        },
-        {
-          name: 'Refund policy',
-          path: '#',
-        },
+        // {
+        //   name: 'About us',
+        //   path: '#',
+        // },
+        // {
+        //   name: 'Blog',
+        //   path: '#',
+        // },
+        // {
+        //   name: 'Careers',
+        //   path: '#',
+        // },
+        // {
+        //   name: 'Refund policy',
+        //   path: '#',
+        // },
       ],
     },
     {

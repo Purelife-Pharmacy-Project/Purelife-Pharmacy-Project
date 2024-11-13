@@ -10,7 +10,7 @@ export const LatestInsights = () => {
   const scrollInsightsLeft = () => {
     scrollInsightsRef.current?.scrollBy({
       top: 0,
-      left: -scrollInsightsRef.current.clientWidth / 4,
+      left: -scrollInsightsRef.current.clientWidth,
       behavior: 'smooth',
     });
   };
@@ -18,13 +18,13 @@ export const LatestInsights = () => {
   const scrollInsightsRight = () => {
     scrollInsightsRef.current?.scrollBy({
       top: 0,
-      left: scrollInsightsRef.current.clientWidth / 4,
+      left: scrollInsightsRef.current.clientWidth,
       behavior: 'smooth',
     });
   };
-  useEffect(() => {
-    scrollInsightsRight();
-  }, []);
+  // useEffect(() => {
+  //   scrollInsightsRight();
+  // }, []);
   const [leftIcon, setLeftIcon] = useState(false);
   const [rightIcon, setRightIcon] = useState(false);
   const insights = [
@@ -36,13 +36,13 @@ export const LatestInsights = () => {
     },
     {
       title: 'Pharmaceutical firm unveils Primary Care Mobile App Purelife',
-      image: '/images/insights-2.jpg',
+      image: '/images/insights-2.png',
       link: 'https://www.vanguardngr.com/2024/07/pharmaceutical-firm-unveils-primary-care-mobile-app-purelife/',
     },
     {
       title:
         "Purelife Group Launches Purelifehealth.io, a Revolutionary Digital Platform to Bridge Africa's Primary Healthcare Gap",
-      image: '/images/insights-3.jpg',
+      image: '/images/insights-3.png',
       link: 'https://techpoint.africa/2024/07/23/purelife-group-launches-purelifehealth-io-a-revolutionary-digital-platform-to-bridge-africas-primary-healthcare-gap/',
     },
     {
@@ -54,23 +54,15 @@ export const LatestInsights = () => {
     {
       title:
         'Purelife Pharmacy Revolutionizes Healthcare Access with Primary Care Mobile App',
-      image: '/images/insights-5.jpg',
+      image: '/images/insights-5.png',
       link: 'https://techeconomy.ng/purelife-pharmacy-revolutionizes-healthcare-access-with-primary-care-mobile-app/',
     },
   ];
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [maxNameWidth, setMaxNameWidth] = useState('100%');
-  useEffect(() => {
-    if (containerRef.current) {
-      const containerWidth = containerRef.current.offsetWidth;
-      setMaxNameWidth(`${containerWidth * 0.7}px`);
-    }
-  }, []);
   return (
     <Section className='mt-10'>
-      <div className='mb-10 flex justify-between'>
-        <h3 className='text-4xl font-semibold'>Latest Insights</h3>
+      <div className='mb-10 flex items-center justify-between'>
+        <h3 className='text-xl font-medium sm:text-3xl'>Latest Insights</h3>
         <div className='flex items-center justify-between gap-5'>
           <Button
             onMouseEnter={() => {
@@ -87,7 +79,10 @@ export const LatestInsights = () => {
             }`}
             onClick={scrollInsightsLeft}
           >
-            <IconArrowRight color={`${leftIcon ? '#FFFFFF' : '#1E272F'}`} />
+            <IconArrowRight
+              className='h-5 w-5'
+              color={`${leftIcon ? '#FFFFFF' : '#1E272F'}`}
+            />
           </Button>
           <Button
             onMouseEnter={() => {
@@ -97,32 +92,30 @@ export const LatestInsights = () => {
               setRightIcon(false);
             }}
             color={undefined}
-            size='md'
+            size='sm'
             radius='full'
             className={`h-fit min-w-0 rounded-full border-2 border-[#1E272F] p-2 sm:p-4  ${
               rightIcon ? 'bg-[#1E272F]' : 'bg-transparent'
             }`}
             onClick={scrollInsightsRight}
           >
-            <IconArrowRight color={`${rightIcon ? '#FFFFFF' : '#1E272F'}`} />
+            <IconArrowRight
+              className='h-5 w-5'
+              color={`${rightIcon ? '#FFFFFF' : '#1E272F'}`}
+            />
           </Button>
         </div>
       </div>
 
-      <div className='bg-[#F6F6F6] py-14'>
+      <div className='max-w-[calc(100dvw-2rem)] bg-[#F6F6F6] py-14'>
         <div
           ref={scrollInsightsRef}
           className='scrollbar-none flex w-[100%] overflow-x-scroll'
         >
           {insights.map((item, index) => (
-            <Link
-              key={index}
-              href={item.link}
-              target='_blank'
-              className='min-w-[100%] border-x hover:opacity-100 lg:min-w-[50%]'
-            >
-              <div className='w-full'>
-                <div
+            //  <a href={item.link} >
+            <div className='w-[80%] border-r px-6 hover:opacity-100 sm:min-w-[500px] sm:px-8'>
+              {/* <div
                   ref={containerRef}
                   className='mx-auto h-[570px] w-[83%]'
                   style={{
@@ -132,22 +125,19 @@ export const LatestInsights = () => {
                     backgroundSize: 'cover',
                     borderRadius: '20px',
                   }}
-                ></div>
+                ></div> */}
+              <img className='w-full' src={item.image} />
 
-                <div className='mx-auto mt-3 flex items-center justify-between border-t pt-5'>
-                  {/* <p className='px-auto text-xl font-semibold text-[#1E272F]'>{item.title}</p> */}
-                  <Button
-                    color='primary'
-                    size='md'
-                    radius='full'
-                    className={`h-fit min-w-0 rounded-full p-2`}
-                    onClick={scrollInsightsRight}
-                  >
-                    <IconArrowRight size={12} color={`#FFFFFF`} />
-                  </Button>
-                </div>
+              <div className='mx-auto mt-4 flex items-center justify-between gap-4 border-t pt-2 sm:mt-6 sm:pt-4'>
+                <p className='px-auto truncate text-sm font-semibold text-[#1E272F] sm:text-xl'>
+                  {item.title}
+                </p>
+                <span className='flex h-6 min-h-6 w-6 min-w-6 items-center justify-center rounded-full bg-[#ff0028] sm:h-8 sm:min-h-8 sm:w-8 sm:min-w-8'>
+                  <IconArrowRight size={12} color={`#FFFFFF`} />
+                </span>
               </div>
-            </Link>
+            </div>
+            //  </a>
           ))}
         </div>
       </div>

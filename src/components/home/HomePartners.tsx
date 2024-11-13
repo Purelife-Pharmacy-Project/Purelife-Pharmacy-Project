@@ -24,7 +24,7 @@ export const HomePartners = () => {
       image: '/images/partners/reddington-hospital.png',
     },
   ];
-  const repeatedPartners = Array(5).fill(partners).flat();
+  const repeatedPartners = [...partners, ...partners]
   return (
     <div className='lg:-mt-8 lg:py-4 xl:-mt-12 grid justify-center'>
         <div className='overflow-hidden mx-auto max-w-[90%] lg:max-w-[850px]'>
@@ -59,7 +59,7 @@ export const HomePartners = () => {
               transform: translateX(0);
             }
             100% {
-              transform: translateX(-123%);
+              transform: translateX(-860px);
             }
           }
         `}

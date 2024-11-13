@@ -17,10 +17,10 @@ export const FooterBase = () => {
         <Link
           className='text-light text-sm text-content'
           href='/terms-and-conditions'>Terms and Conditions</Link>
-        {' | '}
+        {/* {' | '}
         <Link
           className='text-light text-sm text-content'
-          href='/cookie-policy'>Cookie Policy</Link>
+          href='/cookie-policy'>Cookie Policy</Link> */}
       </div>
     </div>
   );
