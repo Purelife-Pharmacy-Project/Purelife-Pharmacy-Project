@@ -18,12 +18,14 @@ import { useSearch } from '@/helpers/useContext/authContext';
 
 interface NavbarSearchProps {
   searchBtnClassName?: string;
+  searchIconClassName?: string;
   placeholderClassName?: string;
   borderClassName?: string;
   show?: boolean;
 }
 export const NavbarSearch: React.FC<NavbarSearchProps> = ({
   searchBtnClassName,
+  searchIconClassName,
   placeholderClassName,
   borderClassName,
   show,
@@ -166,7 +168,7 @@ export const NavbarSearch: React.FC<NavbarSearchProps> = ({
           className={`scrollbar-none absolute left-6 top-2 z-[2] h-[20px] overflow-y-scroll ${placeholderClassName} ${!showSearchCategory && 'hidden'}`}
         >
           {searchCategory.map((category, index) => (
-            <p key={index} className='leading-1 text-base text-[#5A5A5A]'>
+            <p key={index} className='leading-1 text-sm sm:text-base text-[#5A5A5A]'>
               {category.title}
             </p>
           ))}
@@ -223,7 +225,7 @@ export const NavbarSearch: React.FC<NavbarSearchProps> = ({
             <div
               className={`flex cursor-pointer border-[#FF0028] items-center gap-2 rounded-full bg-primary px-6 py-2 ${searchBtnClassName}`}
             >
-              <IconSearch color='white' />
+              <IconSearch color='white' className={`${searchIconClassName}`}/>
               <span className='text-white'>Search</span>
             </div>
           }

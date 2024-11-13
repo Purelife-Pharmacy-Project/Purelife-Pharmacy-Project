@@ -3,14 +3,17 @@ import { FC } from 'react';
 type IconSearchProps = {
   size?: number;
   color?: string;
+  className?: string;
 };
 
 export const IconSearch: FC<IconSearchProps> = ({
   size = 24,
   color = 'white',
+  className,
 }) => {
   return (
     <svg
+      className={className}
       width={size}
       height={size}
       viewBox='0 0 18 19'

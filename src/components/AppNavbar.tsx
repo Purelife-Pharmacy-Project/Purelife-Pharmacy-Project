@@ -23,6 +23,7 @@ import { IconLocation } from './icons/IconLocation';
 import { IconSearch } from './icons/IconSearch';
 import { useSearch } from '@/helpers/useContext/authContext';
 import ReferralBanner from './ReferralBanner';
+import { IconHamburger } from './icons/IconHamburger';
 interface ServicesType {
   id: number;
   value: string;
@@ -98,12 +99,12 @@ export const AppNavbar = ({
     setServicesDropdown(false)
   );
   return (
-    <div className='fixed top-0 z-[9999] w-full bg-white border-b border-[#E7E7E7] border-opacity-50 pb-3'>
+    <div className='fixed top-0 z-[9999] w-full border-b border-[#E7E7E7] border-opacity-50 bg-white pb-3'>
       {/* <ReferralBanner /> */}
       <Navbar
         onMenuOpenChange={setIsMenuOpen}
         isBlurred={disabled}
-        className={`z-[9999] py-4 text-foreground lg:pb-2 ${getNavbarBackground()}`}
+        className={`z-[9999] pt-3 pb-0 sm:pb-4 sm:pt-4 text-foreground lg:pb-2 ${getNavbarBackground()}`}
         maxWidth='xl'
         classNames={{
           menu: 'top-[7.5rem]',
@@ -119,7 +120,7 @@ export const AppNavbar = ({
                 src='/app-logo.png'
                 alt='Purelife logo'
                 loading='eager'
-                className='h-[56px] max-h-[68px] w-[120px] max-w-[150px]'
+                className='h-[50px] w-[103px] sm:h-[56px] sm:max-h-[68px] sm:w-[120px] sm:max-w-[150px]'
               />
             </Link>
           </NavbarBrand>
@@ -223,10 +224,10 @@ export const AppNavbar = ({
           </NavbarContent>
         )}
         <NavbarContent
-          className='grid w-max grid-flow-col gap-10 py-0 data-[justify=end]:flex-grow-0'
+          className='grid w-max grid-flow-col gap-6 sm:gap-10 py-0 data-[justify=end]:flex-grow-0'
           justify='end'
         >
-          <div className='hidden py-0 md:gap-10 lg:flex'>
+          <div className='hidden py-0 gap-4 md:gap-10 lg:flex'>
             {false && (
               <NavbarItem className='flex flex-col items-start justify-center text-lg leading-[1.6875rem] text-header-100'>
                 <p className='text-xs font-light'>Deliver to:</p>
@@ -256,13 +257,20 @@ export const AppNavbar = ({
           <NavbarItem className='flex items-center text-lg leading-[1.6875rem] text-header-100 lg:hidden'>
             <NavbarCart isActive={isActive} />
           </NavbarItem>
-          <NavbarMenuToggle
+          {/* <NavbarMenuToggle
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            className='lg:hidden'
+          /> */}
+          <IconHamburger
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            onClick={() => {
+              setIsMenuOpen(!isMenuOpen);
+              console.log(isMenuOpen);
+            }}
             className='lg:hidden'
           />
         </NavbarContent>
-
-        <NavbarMenu className='bg-background pt-10'>
+        {/* <NavbarMenu className='bg-background pt-10'>
           <NavbarMenuItem>
             <Link
               color={isActive('/') ? 'primary' : 'foreground'}
@@ -286,11 +294,31 @@ export const AppNavbar = ({
               </Link>
             </NavbarMenuItem>
           ))}
-        </NavbarMenu>
+        </NavbarMenu> */}
       </Navbar>
-      <div className='relative mx-6 my-4 lg:my-0 lg:hidden'>
-        <NavbarSearch show={true} />
+      <div className='relative mx-6 mt-1 mb-2 sm:mt-4 sm:mb-4 lg:my-0 lg:hidden'>
+        <NavbarSearch
+          placeholderClassName='top-[11px] sm:top-[20px]'
+          show={true} />
       </div>
+      {isMenuOpen && (
+          <div className='absolute z-[999999999999] h-screen sm:h-fit top-[76px] right-0 flex w-[50%] flex-col items-end bg-white'>
+            <div>
+              {menuItems.map((link, index) => (
+                <div key={index} className='flex mb-[20px] mr-5'>
+                  <Link
+                    color={isActive(link.path) ? 'primary' : 'foreground'}
+                    href={link.path}
+                    className='w-full'
+                    size='lg'
+                  >
+                    {link.name}
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
     </div>
   );
 };

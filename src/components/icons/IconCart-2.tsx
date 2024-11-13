@@ -1,6 +1,7 @@
-export const IconCartTwo = ({ size = 24, color }: any) => {
+export const IconCartTwo = ({ size = 24, color, className }: any) => {
   return (
     <svg
+      className={className}
       width={size}
       height={size}
       viewBox='0 0 18 18'

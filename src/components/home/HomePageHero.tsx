@@ -105,12 +105,12 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
         className={`${isLargeScreen ? '' : 'bg-primaryLight'} banner-container flex min-h-[580px] w-full flex-col items-start justify-center`}
       >
         <div className='mx-auto w-[95%] lg:ml-[5%] lg:w-[45%]'>
-          <div className='mb-7 mt-[100px] text-center text-[50px] font-bold leading-[1.2] lg:mt-8 lg:text-left lg:text-white'>
+          <div className='mb-[10px] sm:mb-7 mt-[40px] sm:mt-[100px] text-center text-[30px] sm:text-[50px] font-bold leading-[1.2] lg:mt-8 lg:text-left lg:text-white'>
             The future of health services, anytime and anywhere
           </div>
           <div
             ref={divRef}
-            className='w-[75%] mx-auto lg:w-full mb-7 mr-auto text-center text-xl font-light text-[#5A5A5A] lg:text-left lg:text-white'
+            className='w-[85%] mx-auto lg:w-full mb-7 mr-auto text-center text-[15px] sm:text-xl font-light text-[#5A5A5A] lg:text-left lg:text-white'
           >
             Take control of your health and experience the benefits of Purelife
             health
@@ -118,9 +118,10 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
           <div className=''>
             <NavbarSearch
               show={true}
-              searchBtnClassName='h-[60px] w-[40%] justify-center text-[18px]'
-              placeholderClassName='absolute top-[20px]'
+              searchBtnClassName='h-[40px] sm:h-[60px] w-[40%] justify-center sm:text-[18px]'
+              placeholderClassName='absolute top-[10px] sm:top-[20px]'
               borderClassName='border-none'
+              searchIconClassName='w-[18px] h-[18px] sm:w-auto sm:h-auto'
             />
           </div>
           {/*<div className='lg-mx-0 mt-8 hidden w-fit gap-2 lg:flex'>
@@ -143,7 +144,7 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
               backgroundRepeat: 'no-repeat',
               backgroundSize: 'cover',
             }}
-            className={`banner-container flex h-[300px] w-[95%] rounded-[20px] mx-auto flex-col items-start justify-center`}
+            className={`banner-container flex h-[142] sm:h-[300px] w-[95%] rounded-[20px] mx-auto flex-col items-start justify-center`}
           ></div>
           <div className='lg-mx-0 mx-auto mt-8 flex hidden w-fit gap-2'>
             {bannerImages.map((_, index) => (
