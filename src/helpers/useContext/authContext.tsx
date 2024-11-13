@@ -2,7 +2,10 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
 // Define your authentication context
-const AuthContext = createContext<{ isAuthenticated: boolean; setIsAuthenticated: (authenticated: boolean) => void;}>({
+const AuthContext = createContext<{
+  isAuthenticated: boolean;
+  setIsAuthenticated: (authenticated: boolean) => void;
+}>({
   isAuthenticated: false,
   setIsAuthenticated: () => {},
 });
@@ -20,7 +23,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 export const useAuth = () => useContext(AuthContext);
 
 // Define your search context
-const SearchContext = createContext<{ showSearch: boolean; setShowSearch: (show: boolean) => void }>({
+const SearchContext = createContext<{
+  showSearch: boolean;
+  setShowSearch: (show: boolean) => void;
+}>({
   showSearch: false,
   setShowSearch: () => {},
 });

@@ -58,10 +58,10 @@ export const AppNavbar = ({
     }
   };
   useEffect(() => {
-    if (currentPath !== "/") {
-      setShowSearch(true)
-    } 
-  }, [currentPath])
+    if (currentPath !== '/') {
+      setShowSearch(true);
+    }
+  }, [currentPath]);
   const menuItems = [
     {
       name: 'Pharmacy',
@@ -99,17 +99,18 @@ export const AppNavbar = ({
   const servicesButtonRef = useRef<HTMLDivElement | null>(null);
   const servicesPopupRef = useRef<HTMLDivElement | null>(null);
   const { showSearch, setShowSearch } = useSearch();
+
   useClickOutside(servicesPopupRef, servicesButtonRef, () =>
     setServicesDropdown(false)
   );
-  
+
   return (
     <div className='fixed top-0 z-[9999] w-full border-b border-[#E7E7E7] border-opacity-50 bg-white pb-3'>
       {/* <ReferralBanner /> */}
       <Navbar
         onMenuOpenChange={setIsMenuOpen}
         isBlurred={disabled}
-        className={`z-[9999] pt-3 pb-0 sm:pb-4 sm:pt-4 text-foreground lg:pb-2 ${getNavbarBackground()}`}
+        className={`z-[9999] pb-0 pt-3 text-foreground sm:pb-4 sm:pt-4 lg:pb-2 ${getNavbarBackground()}`}
         maxWidth='xl'
         classNames={{
           menu: 'top-[7.5rem]',
@@ -229,10 +230,10 @@ export const AppNavbar = ({
           </NavbarContent>
         )}
         <NavbarContent
-          className='grid w-max grid-flow-col gap-6 sm:gap-10 py-0 data-[justify=end]:flex-grow-0'
+          className='grid w-max grid-flow-col gap-6 py-0 data-[justify=end]:flex-grow-0 sm:gap-10'
           justify='end'
         >
-          <div className='hidden py-0 gap-4 md:gap-10 lg:flex'>
+          <div className='hidden gap-4 py-0 md:gap-10 lg:flex'>
             {false && (
               <NavbarItem className='flex flex-col items-start justify-center text-lg leading-[1.6875rem] text-header-100'>
                 <p className='text-xs font-light'>Deliver to:</p>
@@ -301,29 +302,32 @@ export const AppNavbar = ({
           ))}
         </NavbarMenu> */}
       </Navbar>
-      {showSearch && <div className='relative mx-6 mt-1 mb-2 sm:mt-4 sm:mb-4 lg:my-0 lg:hidden'>
-        <NavbarSearch
-          placeholderClassName='top-[11px] sm:top-[20px]'
-          show={true} />
-      </div>}
+      {showSearch && (
+        <div className={`relative mx-6 mb-2 mt-1 sm:mb-4 sm:mt-4 lg:my-0 lg:hidden`}>
+          <NavbarSearch
+            placeholderClassName='top-[11px] sm:top-[20px]'
+            show={true}
+          />
+        </div>
+      )} 
       {isMenuOpen && (
-          <div className='absolute z-[999999999999] h-screen sm:h-fit top-[76px] right-0 flex w-[50%] flex-col items-end bg-white'>
-            <div>
-              {menuItems.map((link, index) => (
-                <div key={index} className='flex mb-[20px] mr-5'>
-                  <Link
-                    color={isActive(link.path) ? 'primary' : 'foreground'}
-                    href={link.path}
-                    className='w-full'
-                    size='lg'
-                  >
-                    {link.name}
-                  </Link>
-                </div>
-              ))}
-            </div>
+        <div className='absolute right-0 top-[76px] z-[999999999999] flex h-screen w-[50%] flex-col items-end bg-white sm:h-fit'>
+          <div>
+            {menuItems.map((link, index) => (
+              <div key={index} className='mb-[20px] mr-5 flex'>
+                <Link
+                  color={isActive(link.path) ? 'primary' : 'foreground'}
+                  href={link.path}
+                  className='w-full'
+                  size='lg'
+                >
+                  {link.name}
+                </Link>
+              </div>
+            ))}
           </div>
-        )}
+        </div>
+      )}
     </div>
   );
 };

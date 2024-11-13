@@ -78,7 +78,7 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({
           </div>
           <div
             ref={divRef}
-            className={`mb-3 md:mb-7 mr-auto w-[100%] text-center text-sm sm:text-base font-medium md:text-left ${currentIndex === 0 && 'hidden sm:block w-[50%] md:w-[80%] mt-4 !text-left mb-0'} ${
+            className={`mb-3 md:mb-7 mr-auto w-[100%] text-center text-sm sm:text-base font-medium md:text-left ${currentIndex === 0 && 'sm:block w-[60%] md:w-[80%] mt-4 !text-left mb-0'} ${
               currentIndex === 1 && 'text-white'
             } ${currentIndex === 0 && theme === 'light' && ' text-[#1E272F] !text-left text-xs mt-0'} ${currentIndex === 0 && theme === 'dark' && 'text-white !text-left text-xs mt-0  '}`}
           >
@@ -96,8 +96,9 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({
               className={`sm:mt-3 w-[25%] bg-white h-auto py-3 text-[13px] text-[#262629] md:w-[30%] md:text-base lg:py-4 lg:text-lg ${currentIndex === 0 && theme === 'light' && 'bg-[#1E272F] text-white text-xs py-2'} ${currentIndex === 0 && theme === 'dark' && 'bg-white text-[#1E272F] text-xs py-2'}`}
               radius='full'
               // size='lg'
+              isDisabled
             >
-              Book Session
+              Coming soon
             </Button>
           )}
           <div className={`mx-auto md:mx-0 mt-8 flex w-fit gap-2 cursor-pointer mb-5 ${currentIndex === 0 && '!mx-0 mb-6'}`}>
