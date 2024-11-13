@@ -23,6 +23,7 @@ import { IconFilter } from '@/components/icons/IconFilter';
 import { ProductSortDropdown } from './partials/ProductsSortDropdown';
 import { ProductsPriceRange } from './partials/ProductsPriceRange';
 import { Deals } from './partials/Deals';
+import Link from 'next/link';
 
 interface SortData {
   id: number;
@@ -56,9 +57,7 @@ export const CategoryProducts = () => {
 
   //CONSTANT VARIABLES
   const bannerImages = [
-    '/images/pharmacy-banner-1.jpg',
-    '/images/pharmacy-banner-2.jpg',
-    '/images/pharmacy-banner-1.jpg',
+    // '/images/pharmacy-banner-1.jpg',
     '/images/pharmacy-banner-2.jpg',
   ];
 
@@ -92,7 +91,9 @@ export const CategoryProducts = () => {
   }, []);
 
   useClickOutside(sortPopupRef, sortButtonRef, () => setSortDropdown(false));
-  useClickOutside(filterPopupRef, filterButtonRef, () => setFilterDropdown(false));
+  useClickOutside(filterPopupRef, filterButtonRef, () =>
+    setFilterDropdown(false)
+  );
 
   //FUNCTIONS
   const getCategoryId = () => {
@@ -153,7 +154,7 @@ export const CategoryProducts = () => {
 
   const productItems = useMemo(() => {
     if (!products || !products.pages) return [];
-  
+
     return products.pages.reduce((acc, page) => {
       return [...acc, ...page];
     }, []);
@@ -177,9 +178,8 @@ export const CategoryProducts = () => {
             <div className='hidden w-full justify-end lg:flex'></div>
           ) : null}
         </div> */}
-        <div className='border-b border-[#E7E7E7] border-opacity-50'></div>
-        <div className='hidden flex w-full items-center justify-between border-b border-t border-[#E7E7E7] border-opacity-50 py-[15px]'>
-          <div className='xl:max-w-1024 mx-auto w-full px-4 lg:px-6 xl:w-1024 flex cursor-pointer gap-6 text-sm font-medium text-[#797979] md:text-[15px]'>
+        <div className='flex hidden w-full items-center justify-between border-b border-t border-[#E7E7E7] border-opacity-50 py-[15px]'>
+          <div className='xl:max-w-1024 mx-auto flex w-full cursor-pointer gap-6 px-4 text-sm font-medium text-[#797979] md:text-[15px] lg:px-6 xl:w-1024'>
             <span>Beauty</span>
             <span>Health</span>
             <span>Sexual Health</span>
@@ -192,19 +192,19 @@ export const CategoryProducts = () => {
             <span className='text-[#1E272F]'>Lagos, Nigeria</span>
           </div> */}
         </div>
-        <div className='xl:max-w-1024 mx-auto w-full bg-background pr-4 lg:pr-6 xl:w-1024 grid gap-4 lg:grid-flow-col lg:grid-cols-[1fr_3fr]'>
+        <div className='xl:max-w-1024 mx-auto grid w-full gap-4 bg-background pr-4 lg:grid-flow-col lg:grid-cols-[1fr_3fr] lg:pr-6 xl:w-1024'>
           <ProductsFilterContainer />
-          <div className='pl-[2%] w-full mr-auto'>
+          <div className='mr-auto w-full pl-[2%]'>
             <div className='flex w-full justify-between py-[35px]'>
               <Button
                 onClick={() => {
                   removeQuery(['category', 'minPrice', 'maxPrice']);
                 }}
-                className='hidden w-fit px-0 bg-white text-lg font-medium text-[#FF0028] lg:block'
+                className='hidden w-fit bg-white px-0 text-lg font-medium text-[#FF0028] lg:block'
               >
                 Reset Filter
               </Button>
-              <div className='block lg:hidden relative w-fit'>
+              <div className='relative block w-fit lg:hidden'>
                 <div
                   ref={filterButtonRef}
                   onClick={() => setFilterDropdown(!filterDropdown)}
@@ -293,25 +293,38 @@ export const CategoryProducts = () => {
             >
               <div className='mx-auto w-[95%] lg:ml-[5%] lg:w-[50%]'>
                 <div
-                  className={`mb-7 mt-8 text-center text-5xl font-semibold lg:mt-0 lg:text-left ${
-                    (currentIndex === 1 || currentIndex === 3) && 'text-white'
-                  }`}
+                  className={`mb-7 mt-8 text-center text-5xl font-semibold text-white lg:mt-0 lg:text-left 
+                    ${(currentIndex === 1 || currentIndex === 3) && 'text-white'}
+                  `}
                 >
-                  {currentIndex === 0 || currentIndex === 2
+                  {/* {currentIndex === 0 || currentIndex === 2
                     ? 'Limited Time offer! Up to 50%'
-                    : 'Subscribe to a drug refill'}
+                    : 'Subscribe to a drug refill'} */}
+                  Subscribe to a drug refill
                 </div>
                 <div
                   ref={divRef}
-                  className={`mb-7 mr-auto text-center text-xl font-medium lg:text-left ${
+                  className={`mb-7 mr-auto text-center text-xl font-medium text-white lg:text-left ${
                     (currentIndex === 1 || currentIndex === 3) && 'text-white'
                   }`}
                 >
-                  {currentIndex === 0 || currentIndex === 2
+                  {/* {currentIndex === 0 || currentIndex === 2
                     ? 'Take control of your health and experience the benefits of Purelife health'
-                    : 'Get your medications delivered to you at your preferred intervals.'}
+                    : 'Get your medications delivered to you at your preferred intervals.'} */}
+                  Get your medications delivered to you at your preferred
+                  intervals.
                 </div>
-                <div className='mt-8 flex w-fit gap-2'>
+                <Button
+                  as={Link}
+                  href='/telehealth/drug-refil'
+                  target='_blank'
+                  className={`mt-3 h-auto w-[40%] bg-white py-2 text-sm text-[#262629] md:w-[50%] md:text-base lg:py-3 lg:text-lg ${'bg-[#1E272F] text-xs text-white'}`}
+                  radius='full'
+                  // size='lg'
+                >
+                  Subscribe
+                </Button>
+                <div className='mt-8 flex hidden w-fit gap-2'>
                   {bannerImages.map((_, index) => (
                     <div
                       key={index}

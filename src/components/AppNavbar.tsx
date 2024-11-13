@@ -88,7 +88,7 @@ export const AppNavbar = ({
     // { id: 1, value: 'Telehealth', link: '/telehealth' },
     { id: 2, value: 'Vaccination', link: '/telehealth/get-vaccination' },
     { id: 2, value: 'Lab tests', link: '/telehealth/book-lab-test' },
-    { id: 2, value: 'Virtual Consultation', link: '' },
+    { id: 2, value: 'Book a doctor', link: '/telehealth/find-a-doctor' },
   ];
   const [servicesDropdown, setServicesDropdown] = useState(false);
   const servicesButtonRef = useRef<HTMLDivElement | null>(null);
@@ -98,7 +98,7 @@ export const AppNavbar = ({
     setServicesDropdown(false)
   );
   return (
-    <div className='fixed top-0 z-[9999] w-full bg-white'>
+    <div className='fixed top-0 z-[9999] w-full bg-white border-b border-[#E7E7E7] border-opacity-50 pb-3'>
       {/* <ReferralBanner /> */}
       <Navbar
         onMenuOpenChange={setIsMenuOpen}
@@ -162,7 +162,7 @@ export const AppNavbar = ({
               {servicesDropdown && (
                 <div
                   ref={servicesPopupRef}
-                  className='absolute -left-[18px] top-[10] z-[99] mt-1 flex w-[12.5rem] flex-col items-center gap-2 rounded-lg border border-gray-200 bg-[#FFFFFF] p-2 pt-0 shadow-lg'
+                  className='absolute left-[11px] top-[10] z-[99] mt-1 flex w-[9rem] flex-col items-center gap-2 rounded-lg border border-gray-200 bg-[#FFFFFF] p-2 pt-0 shadow-lg'
                   style={{ boxShadow: '0rem .25rem .625rem 0rem #00000040' }}
                 >
                   <div className='z-[999] -mt-[8px] h-[15px] w-[15px] rotate-45 border-l border-t bg-white'></div>
@@ -175,14 +175,13 @@ export const AppNavbar = ({
                           setServicesDropdown(false);
                         }}
                       >
-                        {service.value === 'Virtual Consultation' && (
+                        {service.value === 'Book a doctor' && (
                           <p className='text-right text-[10px] leading-[1]'>
                             Coming soon
                           </p>
                         )}
                         <Link
                           color='foreground'
-                          isDisabled={service.link === ''}
                           href={service.link}
                           className={
                             // isActive('/telehealth/shop-and-order')

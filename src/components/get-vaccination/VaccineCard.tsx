@@ -16,7 +16,13 @@ export const VaccineCard: React.FC<{ product: Product; baseUrl: string }> = ({
     <div className='flex w-full flex-col rounded-xl'>
       <div className='relative mb-5 flex w-full items-center justify-center rounded-2xl bg-primaryLight py-14'>
         <Link href={`${baseUrl}/${product.id}`}>
-          <Image alt='' src={product.image_1024} width={100} height={207} className='' />
+          <Image
+            alt=''
+            src={product.image_1024}
+            width={100}
+            height={207}
+            className=''
+          />
         </Link>
         <Button
           disabled={product.quantity === 0}
@@ -29,7 +35,7 @@ export const VaccineCard: React.FC<{ product: Product; baseUrl: string }> = ({
           }}
           className='absolute right-6 top-6 h-auto min-w-0 rounded-full bg-white p-3'
         >
-          <IconCart />
+          <IconCart color={'#686868'} />
         </Button>
       </div>
 

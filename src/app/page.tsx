@@ -164,9 +164,9 @@ export default async function Home() {
         <GlobalHealthSolutions />
 
         <LatestInsights />
-
+        <div className='invisible mb-6'></div> 
         <ReportDrugReaction />
-
+        <div className='invisible mb-4'></div> 
         <NewsLetterCard />
         <Footer />
       </main>

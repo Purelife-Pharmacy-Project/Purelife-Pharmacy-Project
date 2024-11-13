@@ -25,7 +25,7 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({
       ? '/images/banner-frame-1.png'
       : '/images/banner-frame-2.png',
     '/images/pharmacy-banner-2.jpg',
-    '/images/pharmacy-banner-1.jpg',
+    // '/images/pharmacy-banner-1.jpg',
   ];
 
   useEffect(() => {
@@ -116,12 +116,12 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({
           backgroundRepeat: 'no-repeat',
           backgroundSize: `${currentIndex !== 0 ? 'cover' : backgroundSize}`,
         }}
-        className={`banner-container mt-16 min-h[200px] sm:min-h-[250px] md:min-h-[434px] w-full flex flex-col items-start justify-center  ${currentIndex === 0 && theme === 'dark' && 'bg-[#1E272F]'} `}
+        className={`banner-container h-[350px] md:h-[434px] w-full flex flex-col items-start justify-center ${currentIndex === 0 && theme === 'dark' && 'bg-[#1E272F]'} `}
       >
-        <div className={`w-[95%] ml-[5%] md:w-[50%] ${currentIndex === 0 && 'mt-10'}`}>
+        <div className={`w-[95%] ml-[5%] md:w-[50%]`}>
           <div
-            className={`mb-3 md:mb-7 mt-8 text-center text-2xl sm:text-4xl lg:text-5xl font-semibold lg:mt-0 md:text-left 
-              ${currentIndex === 0 && 'w-[50%] md:w-[80%] mt-8 !text-left text-xl mb-1'} 
+            className={`mb-3 md:mb-7 mt-8 text-center text-2xl sm:text-3xl lg:text-5xl font-semibold md:text-left 
+              ${currentIndex === 0 && 'w-[50%] md:w-[80%] mb-[20px] !text-left text-xl'} 
               ${currentIndex === 1 && 'text-white'}
               ${currentIndex === 0 && theme === 'dark' && 'text-white'}
               ${currentIndex === 0 && theme === 'light' && 'text-[#1E272F]'}`}
@@ -129,20 +129,22 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({
             {currentIndex === 0
               ? 'Quality home healthcare you can trust'
               : currentIndex === 1
-                ? 'Subscribe to a drug refill'
-                : 'Limited Time offer! Up to 50%'}
+                && 'Subscribe to a drug refill'
+                // : 'Limited Time offer! Up to 50%'
+                }
           </div>
           <div
             ref={divRef}
-            className={`mb-3 md:mb-7 mr-auto w-[100%] text-center text-sm sm:text-lg font-medium md:text-left ${currentIndex === 0 && 'w-[50%] md:w-[80%] mt-8 !text-left'} ${
+            className={`mb-3 md:mb-7 mr-auto w-[100%] text-center text-sm sm:text-base font-medium md:text-left ${currentIndex === 0 && 'w-[50%] md:w-[80%] mt-4 !text-left mb-0'} ${
               currentIndex === 1 && 'text-white'
-            } ${currentIndex === 0 && theme === 'light' && 'lg:block hidden text-[#1E272F] !text-left text-xs mt-2'} ${currentIndex === 0 && theme === 'dark' && 'text-white !text-left text-xs mt-2 lg:block hidden '}`}
+            } ${currentIndex === 0 && theme === 'light' && ' text-[#1E272F] !text-left text-xs mt-0'} ${currentIndex === 0 && theme === 'dark' && 'text-white !text-left text-xs mt-0  '}`}
           >
             {currentIndex === 0
               ? 'We provide homecare services such as Sample pickup for lab tests, Home vaccination and Home doctor visitation.'
               : currentIndex === 1
-                ? 'Get your medications delivered to you at your preferred intervals.'
-                : 'Take control of your health and experience the benefits of Purelife health'}
+                && 'Get your medications delivered to you at your preferred intervals.'
+                // : 'Take control of your health and experience the benefits of Purelife health'
+                }
           </div>
           {currentIndex === 0 && (
             <Button

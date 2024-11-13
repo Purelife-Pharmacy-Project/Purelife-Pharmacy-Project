@@ -1,6 +1,7 @@
-export const IconLine = ({ size = 24, color = 'currentColor' }) => {
+export const IconLine = ({ size = 24, color = 'currentColor', className }: any) => {
   return (
     <svg
+      className={className}
       width='1'
       height='33'
       viewBox='0 0 1 33'

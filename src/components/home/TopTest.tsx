@@ -17,13 +17,13 @@ type Prop = {
 
 const TopTest: React.FC<Prop> = ({ title, data }) => {
   return (
-    <Section className='px-0'>
+    <Section className='px-0 md:px-4'>
       <h3 className='mb-5 pl-4 md:pl-0 text-xl md:text-3xl text-[#1E272F]'>{title}</h3>
       <div className='grid grid-cols-[1fr] gap-x-6 gap-y-6 md:grid-cols-[0.8fr_1fr] md:grid-rows-2 mt-10 mb-[50px]'>
         {data.map((offering, index) => (
           <Card
             key={offering.title}
-            className={`bg-[#F9F6EF] rounded-none shadow-none ${
+            className={`bg-[#F9F6EF] rounded-none md:rounded-[20px] shadow-none ${
               index === 0 ? 'md:row-span-2' : 'md:row-span-1'
             }`}
           >

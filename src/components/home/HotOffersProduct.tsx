@@ -1,18 +1,18 @@
 'use client';
 
 import React from 'react';
-import { useGetProductsByCategoryId } from '@/hooks';
+import { useGetProducts, useGetProductsByCategoryId } from '@/hooks';
 import ProductRow from './ProductRow';
 import ProductCard from '@/components/home/ProductCard';
 import { ProductLoadingSkeleton } from '@/components/home/Skeletons';
 
 type Prop = {};
 
-const CATEGORY_ID = '25';
+const CATEGORY_ID = '18';
 
 const HotOffersProduct: React.FC<Prop> = () => {
-  const { products: allProducts, loadingProducts } = useGetProductsByCategoryId(
-    { categoryId: CATEGORY_ID }
+  const { products: allProducts, loadingProducts } = useGetProducts(
+    { limit: 4, offset: 4 }
   );
   return (
     <div>
