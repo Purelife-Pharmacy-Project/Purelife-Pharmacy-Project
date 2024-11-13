@@ -79,28 +79,43 @@ export const NavbarSearch: React.FC<NavbarSearchProps> = ({
     [handleDebouncedSearch]
   );
   const search = [
-    {
-      title: 'Products',
-    },
-    {
-      title: 'Vaccines',
-    },
-    {
-      title: 'Lab tests',
-    },
-    {
-      title: 'Beauty',
-    },
-    {
-      title: 'Skin care',
-    },
-    {
-      title: 'Health',
-    },
-    {
-      title: 'Supermarket products',
-    },
+    { title: "Painkillers" },
+    { title: "COVID-19 test" },
+    { title: "Blood test" },
+    { title: "Antibiotics" },
+    { title: "Antiviral medications" },
+    { title: "Flu shots" },
+    { title: "Allergy medication" },
+    { title: "Diabetes medication" },
+    { title: "Asthma inhalers" },
+    { title: "Antidepressants" },
+    { title: "Birth control pills" },
+    { title: "Insulin" },
+    { title: "Blood pressure medication" },
+    { title: "Cholesterol medication" },
+    { title: "Vitamin supplements" },
+    { title: "Cold and flu remedies" },
+    { title: "Motion sickness pills" },
+    { title: "Muscle relaxants" },
+    { title: "Nausea medication" },
+    { title: "Sleep aids" },
+    { title: "Topical creams" },
+    { title: "Eye drops" },
+    { title: "Antifungal medication" },
+    { title: "Digestive aids" },
+    { title: "Bandage" },
+    { title: "Postpill" },
+    { title: "Sunscreen" },
+    { title: "Moisturizer" },
+    { title: "Cleaning supplies" },
+    { title: "Detergent" },
+    { title: "Freshly baked bread" },
+    { title: "Cereal" },
+    { title: "Snacks" },
+    { title: "Hand sanitizer" }
   ];
+  
+  
   const [showSearchCategory, setShowSearchCategory] = useState(true);
   const [searchOn, setSearchOn] = useState('');
   const searchCategory = Array.from({ length: 10 }, () => search).flatMap(

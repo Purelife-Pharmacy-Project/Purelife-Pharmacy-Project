@@ -301,11 +301,11 @@ export const AppNavbar = ({
           ))}
         </NavbarMenu> */}
       </Navbar>
-      <div className='relative mx-6 mt-1 mb-2 sm:mt-4 sm:mb-4 lg:my-0 lg:hidden'>
+      {showSearch && <div className='relative mx-6 mt-1 mb-2 sm:mt-4 sm:mb-4 lg:my-0 lg:hidden'>
         <NavbarSearch
           placeholderClassName='top-[11px] sm:top-[20px]'
           show={true} />
-      </div>
+      </div>}
       {isMenuOpen && (
           <div className='absolute z-[999999999999] h-screen sm:h-fit top-[76px] right-0 flex w-[50%] flex-col items-end bg-white'>
             <div>

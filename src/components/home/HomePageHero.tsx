@@ -159,14 +159,14 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
         </div>
       </div>
 
-      <Section>
-        <h1 className='mb-6 mt-7 sm:mt-14 w-full text-center text-2xl sm:text-[35px] font-semibold text-[#1E272F]'>
+      <div className='xl:max-w-1024 mx-auto w-full bg-background sm:px-4 lg:px-6 xl:w-1024'>
+        <h1 className='hidden lg:block mb-6 mt-7 sm:mt-14 w-full text-center text-2xl sm:text-[35px] font-semibold text-[#1E272F]'>
           Quality Healthcare you can trust
         </h1>
-        <div className='mt-10 sm:mt-20 grid grid-cols-1 px-0 pb-10 sm:pb-28 lg:grid-cols-[1fr_1fr_1fr] lg:gap-10'>
-          <Link href={'/telehealth/find-a-doctor'} className='mt-0 sm:mt-14'>
+        <div className='mt-10 sm:mt-20 grid grid-cols-2 gap-[14px] lg:gap-0 px-0 sm:pb-28 lg:grid-cols-[1fr_1fr_1fr] lg:gap-10'>
+          <Link href={'/telehealth/find-a-doctor'} className='mt-0 lg:mt-14'>
             <div
-              className='relative border rounded-[20px] w-full lg:h-[450px] h-[300px] sm:h-[500px]'
+              className='relative border rounded-[20px] w-full lg:h-[450px] h-[240px] sm:h-[500px]'
               style={{
                 backgroundImage: 'url(/images/doctor.jpg)',
                 backgroundPosition: 'center',
@@ -179,36 +179,36 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
                 src={'/images/mini-doctor.png'}
                 width={139}
                 height={155}
-                className='absolute left-4 sm:left-[5%] top-4 sm:top-6 lg:left-6 sm:h-auto sm:w-auto w-[80px] h-auto'
+                className='absolute left-4 sm:left-[5%] top-4 sm:top-6 lg:left-6 sm:h-auto sm:w-auto w-[70px] h-auto'
                 alt={'consult a doctor image'}
               />
               <Image
                 src={'/images/call-frame.png'}
                 width={304}
                 height={59}
-                className='sm:h-auto sm:w-auto w-[200px] h-auto absolute bottom-5 left-0 right-0 mx-auto lg:left-9'
+                className='sm:h-auto sm:w-auto w-[120px] h-auto absolute bottom-5 left-0 right-0 mx-auto lg:left-9'
                 alt={'consult a doctor image'}
               />
             </div>
             <div
               style={{ boxShadow: '50px 70px 112px 0px #AAAAAA1A' }}
-              className='mb-8 mt-10 cursor-pointer rounded-[20px] border border-[0.5px] bg-white px-5 py-4 lg:mb-0'
+              className='my-4 sm:my-0 sm:mb-8 sm:mt-10 cursor-pointer rounded-[20px] border border-[0.5px] bg-white px-3 sm:px-5 py-4 lg:mb-0'
             >
-              <h3 className='flex items-center justify-between text-xl sm:text-2xl font-medium'>
+              <h3 className='flex items-start justify-between text-base sm:text-2xl font-semibold'>
                 Consult with a Doctor
-                <span className='-rotate-45'>
-                  <IconArrowRight color='#1E272F' />
+                <span className='-rotate-45 mt-1 sm:mt-0'>
+                  <IconArrowRight color='#1E272F' className="w-[16px] h-[16px] sm:w-auto sm:h-auto"/>
                 </span>
               </h3>
-              <p className='text-sm text-[#5A5A5A]'>
+              <p className='text-xs sm:text-sm text-[#5A5A5A] pb-[16px] sm:pb-0'>
                 Top rated doctors at your finger tip, to help you live a
                 healthier life style
               </p>
             </div>
           </Link>
-          <Link href={'/telehealth/book-lab-test'} className=''>
+          <Link href={'/telehealth/book-lab-test'} className='hidden lg:block'>
             <div
-              className='relative w-full lg:h-[450px] h-[300px] sm:h-[500px]'
+              className='relative w-full lg:h-[450px] h-[240px] sm:h-[500px]'
               style={{
                 backgroundImage: 'url(/images/book-a-lab-test.png)',
                 backgroundPosition: 'center bottom 20%',
@@ -219,12 +219,12 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
             ></div>
             <div
               style={{ boxShadow: '50px 70px 112px 0px #AAAAAA1A' }}
-              className='mb-8 mt-10 cursor-pointer rounded-[20px] border border-[0.5px] bg-white px-5  py-4 lg:mb-0'
+              className='mb-8 mt-10 cursor-pointer rounded-[20px] border border-[0.5px] bg-white px-5 py-4 lg:mb-0'
             >
-              <h3 className='mb-5 flex items-center justify-between text-xl sm:text-2xl font-medium'>
+              <h3 className='flex items-start justify-between text-base sm:text-2xl font-semibold'>
                 Book a Vaccination
-                <span className='-rotate-45'>
-                  <IconArrowRight color='#1E272F' />
+                <span className='-rotate-45 mt-1 sm:mt-0'>
+                  <IconArrowRight color='#1E272F' className="w-[12px] h-[12px] sm:w-auto sm:h-auto"/>
                 </span>
               </h3>
               {loadingVaccines ? (
@@ -258,9 +258,9 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
               </div>
             </div>
           </Link>
-          <Link href={'/shop'} className='mt-14'>
+          <Link href={'/shop'} className='lg:mt-14'>
             <div
-              className='relative w-full lg:h-[450px] h-[350px] sm:h-[500px]'
+              className='relative w-full lg:h-[450px] h-[240px] sm:h-[500px]'
               style={{
                 backgroundImage: 'url(/images/shop-pharmacy.png)',
                 backgroundPosition: isLargeScreen ? `center bottom 30%` : `center bottom 10%`,
@@ -271,22 +271,74 @@ const [isLargeScreen, setIsLargeScreen] = useState(false);
             ></div>
             <div
               style={{ boxShadow: '50px 70px 112px 0px #AAAAAA1A' }}
-              className='mt-10 cursor-pointer rounded-[20px] border border-[0.5px] bg-white px-5 py-4 '
+              className='my-4 sm:my-0 sm:mb-8 sm:mt-10 cursor-pointer rounded-[20px] border border-[0.5px] bg-white px-3 sm:px-5 py-4 '
             >
-              <h3 className='flex items-center justify-between text-xl sm:text-2xl font-[600] text-[#1E272F]'>
-                Shop Pharmacy
-                <span className='-rotate-45'>
-                  <IconArrowRight color='#1E272F' />
+              <h3 className='flex items-start justify-between text-base sm:text-2xl font-semibold'>
+                <span className='w-[40%] sm:w-fit '>Shop Pharmacy</span>
+                <span className='-rotate-45 mt-1 sm:mt-0'>
+                  <IconArrowRight color='#1E272F' className="w-[16px] h-[16px] sm:w-auto sm:h-auto"/>
                 </span>
               </h3>
-              <p className='text-sm text-[#5A5A5A]'>
+              <p className='text-xs sm:text-sm text-[#5A5A5A]'>
                 Buy genuine prescription medications online from trusted,
                 licensed pharmacies.
               </p>
             </div>
           </Link>
+          <Link href={'/telehealth/book-lab-test'} className=' lg:hidden grid grid-cols-2 gap-[14px] col-span-2'>
+            <div
+              className='relative w-full lg:h-[450px] h-[240px] sm:h-[500px]'
+              style={{
+                backgroundImage: 'url(/images/book-a-lab-test.png)',
+                backgroundPosition: 'center bottom 20%',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+                borderRadius: '20px',
+              }}
+            ></div>
+            <div
+              style={{ boxShadow: '50px 70px 112px 0px #AAAAAA1A' }}
+              className='lg:h-[450px] h-[240px] sm:h-[500px] cursor-pointer rounded-[20px] border border-[0.5px] bg-white px-3 sm:px-5 py-4 lg:mb-0'
+            >
+              <h3 className='mb-5 flex items-start justify-between text-[15px] sm:text-2xl font-semibold'>
+                Book a Vaccination
+                <span className='-rotate-45 mt-1 sm:mt-0'>
+                  <IconArrowRight color='#1E272F' className="w-[16px] h-[16px] sm:w-auto sm:h-auto"/>
+                </span>
+              </h3>
+              {loadingVaccines ? (
+                <div className='flex justify-center'>
+                  <Spinner size='sm' color='primary' />
+                </div>
+              ) : null}
+              <div className='flex flex-col gap-4'>
+                {vaccines?.map((product) => (
+                  <div
+                    key={product.id}
+                    className='grid grid-cols-[1.5fr_3fr] gap-2'
+                  >
+                    <div className='relative flex w-full items-center justify-center rounded-2xl bg-primaryLight py-[13px]'>
+                      <Link href={`${baseUrl}/${product.id}`}>
+                        <Image
+                          alt=''
+                          src={product.image_1024}
+                          width={30}
+                          height={61.69}
+                          className='h-[45px] sm:h-[173px] lg:h-auto w-auto'
+                        />
+                      </Link>
+                    </div>
+                    <div className='text-xs sm:text-lg my-auto flex h-fit flex-col gap-1'>
+                      <p className='font-medium line-clamp-2 sm:line-clamp-3'>{product.name}</p>
+                      <p className='font-bold'>{product.amount}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Link>
         </div>
-      </Section>
+      </div>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import './globals.css';
 import AnnouncementBanner from '@/components/AnnouncementBanner';
 import ReferralBanner from '@/components/ReferralBanner';
 import { AuthProvider, SearchProvider } from '@/helpers/useContext/authContext';
+import AppContent from './app-content';
 
 const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
@@ -113,7 +114,6 @@ export const metadata: Metadata = {
     ],
   },
 };
-
 export default async function RootLayout({
   children,
 }: {
@@ -137,9 +137,7 @@ export default async function RootLayout({
                 <AppNavbar />
                 {/* </HydrationBoundary> */}
 
-                <div className="pt-[143px] lg:pt-[92px]"> 
-                  {children}
-                </div>
+                <AppContent>{children}</AppContent>
               </main>
             </Providers>
           </SearchProvider>
