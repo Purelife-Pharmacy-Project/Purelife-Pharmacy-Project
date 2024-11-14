@@ -8,6 +8,7 @@ import { IconAddNotification } from '@/components/icons/IconAddNotification';
 import { IconBrowse } from '@/components/icons/IconBrowse';
 import { IconHealthShield } from '@/components/icons/IconHealthShield';
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
+import { WhyJoinUs } from '@/components/why-join-us';
 import { inputAuth } from '@/theme';
 import {
   Button,
@@ -59,7 +60,7 @@ export default function PartnerWithUs() {
             <Button
               radius='full'
               color='primary'
-              className='mb-[30px] sm:mb-20 h-fit px-7 py-3 sm:py-5 md:py-8 text-sm sm:text-base lg:text-[20px]'
+              className='mb-[30px] sm:mb-20 h-fit px-7 py-3 sm:py-5 md:py-5 text-sm sm:text-base lg:text-[20px]'
             >
               Apply Here - It’s Free
             </Button>
@@ -75,7 +76,7 @@ export default function PartnerWithUs() {
           </div>
         </div>
 
-        <HowItWorks />
+        <WhyJoinUs />
 
         <Section className='px-0'>
           <Card shadow='none' className='mx-auto w-[85%] px-0 lg:px-0'>

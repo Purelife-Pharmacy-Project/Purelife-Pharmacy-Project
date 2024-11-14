@@ -16,7 +16,7 @@ import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { Reviews } from '@/components/home/Reviews';
 import { QualityHomeBanner } from '@/components/quality-home-banner';
-import { ProviderSignupBanner } from '@/components/partner-with-us-banner';
+import { ProviderSignupBanner } from '@/components/provider-signup-banner';
 
 export default function FindADoctor() {
   const howItWorksData: {
