@@ -1,54 +1,62 @@
 import { FC } from 'react';
-import { twMerge } from 'tailwind-merge';
 import { Section } from '../home/Section';
-import clsx from 'clsx';
+import { IconGetInTouch } from '../icons/IconGetInTouch';
+import { IconTailoredSolution } from '../icons/IconTailoredSolution';
+import { IconTeamUp } from '../icons/IconTeamUp';
 
-type HowItWorksProps = {
-  variant?: 'primary' | 'success';
-  data: {
-    title?: string;
-    description: string;
-    icon: JSX.Element;
-  }[];
-  className?: string;
-};
+type HowItWorksProps = {};
 
-export const HowItWorks: FC<HowItWorksProps> = ({
-  data,
-  className,
-  variant,
-}) => {
+export const HowItWorks: FC<HowItWorksProps> = ({}) => {
+  const items = [
+    {
+      title: 'Get in Touch',
+      description: 'Fill out our forms to schedule a chat.',
+      icon: <IconGetInTouch />,
+    },
+    {
+      title: 'Tailored Solutions',
+      description:
+        "We'll use your info to customize solutions that fit your needs perfectly.",
+      icon: <IconTailoredSolution />,
+    },
+    {
+      title: 'Team Up',
+      description: "Let's work together to build the future of healthcare.",
+      icon: <IconTeamUp />,
+    },
+  ];
+
   return (
-    <div
-      className={clsx(
-        'lg:grid bg-primaryLight pt-5',
-        className
-      )}
-    >
-      <Section className='py-5 bg-inherit'>
-        <div className='grid gap-10'>
-          <div className='grid gap-10 md:grid-cols-3 grid-cols-1'>
-            {data.map((answer, index) => {
-              return (
-                <div key={index} className='items-center sm:items-start flex flex-col w-full'>
-                  <div
-                    className={`${twMerge(
-                      'grid w-[50px] h-[50px] place-content-center rounded-full bg-[#D74B42]') } ${index !== 1 && ''}`}
-                  >
-                    {answer.icon}
-                  </div>
-                  <div className='text-center sm:text-left flex flex-col gap-1 pt-2'>
-                    <h3 className='md:h-[65px] lg:h-[50px] text-[#1E272F] font-bold text-[18px] sm:text-[22px]'>{answer.title}</h3>
-                    <p className='md:h-[120px] lg:h-[100px] mx-auto w-[90%] sm:w-full font-light text-[#5a5a5a]'>
-                      {answer.description}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+    <Section className=''>
+      <div className='mx-auto mt-2 sm:mt-10 sm:w-[85%]'>
+        <h1 className='mx-auto w-fit text-[30px] font-bold lg:text-[40px]'>
+          Why Join Us?
+        </h1>
+        <p className='mx-auto mt-2 text-center text-base text-[#5A5A5A] md:w-[80%] lg:text-[20px]'>
+          Join our platform as a healthcare provider to expand your reach,
+          connect with more patients, and access tools that make managing your
+          practice easier. Be part of a growing network dedicated to providing
+          quality care and making a real difference in healthcare!
+        </p>
+        <div className='mt-8 grid gap-10 md:mt-20 md:grid-cols-3'>
+          {items.map((item, index) => (
+            <div
+              key={index}
+              className='flex flex-col items-center justify-start gap-2'
+            >
+              <div className='flex h-[50px] w-[50px] items-center justify-center rounded-full border border-[#E7E7E7] border-opacity-50 bg-primaryLight'>
+                {item.icon}
+              </div>
+              <h3 className='text-center text-base font-bold sm:text-[18px] md:text-[22px]'>
+                {item.title}
+              </h3>
+              <p className='w-[70%] text-center text-[#5A5A5A] md:w-full md:text-base'>
+                {item.description}
+              </p>
+            </div>
+          ))}
         </div>
-      </Section>
-    </div>
+      </div>
+    </Section>
   );
 };

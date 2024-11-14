@@ -16,6 +16,7 @@ import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { Reviews } from '@/components/home/Reviews';
 import { QualityHomeBanner } from '@/components/quality-home-banner';
+import { ProviderSignupBanner } from '@/components/partner-with-us-banner';
 
 export default function FindADoctor() {
   const howItWorksData: {
@@ -234,7 +235,7 @@ export default function FindADoctor() {
             </div>
           </Section>
         </div>
-
+        <ProviderSignupBanner />
         <HowItWorks
           className='!bg-[#F9F6EF] pb-6 sm:pb-4'
           data={howItWorksData}
