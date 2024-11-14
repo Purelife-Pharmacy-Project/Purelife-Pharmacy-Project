@@ -16,6 +16,7 @@ import { NewsLetterCard } from '@/components/home/NewsletterCard';
 import { ReportDrugReaction } from '@/components/ReportDrugReaction';
 import { Reviews } from '@/components/home/Reviews';
 import { QualityHomeBanner } from '@/components/quality-home-banner';
+import { ProviderSignupBanner } from '@/components/provider-signup-banner';
 
 export default function FindADoctor() {
   const howItWorksData: {
@@ -214,13 +215,13 @@ export default function FindADoctor() {
             </div>
           </div>
         </div>
-
+        <ProviderSignupBanner />
         <div className={clsx('bg-[#F9F6EF] lg:grid lg:pt-2')}>
           <Section className='bg-[#F9F6EF] pb-5 pt-10'>
             <h2 className='mb-4 text-center text-3xl font-bold leading-[1.2] text-[#1E272F] sm:text-left md:w-[60%] xl:text-[40px]'>
               The best and experienced medical workers in their field
             </h2>
-            <p className='mx-auto mb-6 w-[80%] text-center text-[1rem] font-light leading-7 text-[#5A5A5A] sm:mb-10 sm:text-left sm:text-[18px] sm:leading-6 lg:w-[60%] lg:text-[20px]'>
+            <p className='mx-auto sm:mx-0 mb-6 w-[80%] text-center text-[1rem] font-light leading-7 text-[#5A5A5A] sm:mb-10 sm:text-left sm:text-[18px] sm:leading-6 lg:w-[60%] lg:text-[20px]'>
               Discover how our seamless platform matches you with the right
               healthcare specialists effortlessly.
             </p>
@@ -234,7 +235,7 @@ export default function FindADoctor() {
             </div>
           </Section>
         </div>
-
+        
         <HowItWorks
           className='!bg-[#F9F6EF] pb-6 sm:pb-4'
           data={howItWorksData}
