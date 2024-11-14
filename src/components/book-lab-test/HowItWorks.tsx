@@ -25,21 +25,21 @@ export const HowItWorks: FC<HowItWorksProps> = ({
         className
       )}
     >
-      <Section className='bg-primaryLight py-5'>
+      <Section className='py-5 bg-inherit'>
         <div className='grid gap-10'>
           <div className='grid gap-10 md:grid-cols-3 grid-cols-1'>
             {data.map((answer, index) => {
               return (
-                <div key={index} className=' flex flex-col w-full'>
+                <div key={index} className='items-center sm:items-start flex flex-col w-full'>
                   <div
                     className={`${twMerge(
                       'grid w-[50px] h-[50px] place-content-center rounded-full bg-[#D74B42]') } ${index !== 1 && ''}`}
                   >
                     {answer.icon}
                   </div>
-                  <div className='flex flex-col gap-1 pt-2'>
-                    <h3 className='md:h-[65px] lg:h-[50px] text-[#1E272F] font-bold text-[22px]'>{answer.title}</h3>
-                    <p className='md:h-[120px] lg:h-[100px] mx-auto w-[90%] sm:w-full font-light text-black'>
+                  <div className='text-center sm:text-left flex flex-col gap-1 pt-2'>
+                    <h3 className='md:h-[65px] lg:h-[50px] text-[#1E272F] font-bold text-[18px] sm:text-[22px]'>{answer.title}</h3>
+                    <p className='md:h-[120px] lg:h-[100px] mx-auto w-[90%] sm:w-full font-light text-[#5a5a5a]'>
                       {answer.description}
                     </p>
                   </div>

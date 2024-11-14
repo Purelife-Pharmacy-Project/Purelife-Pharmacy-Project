@@ -16,9 +16,9 @@ export const DoctorCard: FC<DoctorCardProps> = ({ doctor }) => {
             <Image
               src={doctor.image}
               alt='doctor image'
-              className='rounded-full'
-              width={100}
-              height={100}
+              className='rounded-full w-[80px] h-[80px] min-w-[80px] sm:w-[100px] sm:h-[100px] sm:min-w-[100px]'
+              // width={100}
+              // height={100}
             />
           </div>
           <div>

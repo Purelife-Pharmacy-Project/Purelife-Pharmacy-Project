@@ -91,16 +91,16 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
         className={`${isLargeScreen ? '' : 'bg-primaryLight'} banner-container flex w-full flex-col items-start justify-center sm:h-auto sm:min-h-[580px]`}
       >
         <div className='mx-auto w-[95%] lg:ml-[5%] lg:w-[45%]'>
-          <div className='mb-[10px] mt-[40px] text-center text-[30px] font-bold leading-[1.2] sm:mb-7 sm:mt-[100px] sm:text-[50px] lg:mt-8 lg:text-left lg:text-white'>
+          <h1 className='mb-[10px] mt-[40px] text-center text-[30px] font-bold leading-[1.2] sm:mb-7 sm:mt-[100px] text-header-100 sm:text-[50px] lg:mt-8 lg:text-left lg:text-white'>
             The future of health services, anytime and anywhere
-          </div>
-          <div
+          </h1>
+          <p
             ref={divRef}
             className='mx-auto mb-7 mr-auto w-[85%] text-center text-[15px] font-light text-[#5A5A5A] sm:text-xl lg:w-full lg:text-left lg:text-white'
           >
             Take control of your health and experience the benefits of Purelife
             health
-          </div>
+          </p>
           <div className=''>
             <NavbarSearch
               show={true}
