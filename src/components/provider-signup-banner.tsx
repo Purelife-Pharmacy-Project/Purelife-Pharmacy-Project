@@ -65,7 +65,6 @@ export const ProviderSignupBanner: React.FC<ProviderSignupBannerProps> = ({
             <Button
               as={Link}
               href='/partner-with-us'
-              target='_blank'
               className={`mt-0 sm:mt-3 lg:mt-6 h-auto w-[23%] bg-white py-[8px] sm:py-2 sm:text-sm text-[#262629] md:w-[30%] md:text-base lg:py-4 lg:text-lg ${'bg-[#FF0028] text-xs text-white'}`}
               radius='full'
               // size='lg'
