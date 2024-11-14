@@ -28,18 +28,18 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({
     // '/images/pharmacy-banner-1.jpg',
   ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setFade(false);
-      const timeout = setTimeout(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % bannerImages.length);
-        setFade(true);
-      }, 500);
-      return () => clearTimeout(timeout);
-    }, 5000);
-    return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setFade(false);
+  //     const timeout = setTimeout(() => {
+  //       setCurrentIndex((prevIndex) => (prevIndex + 1) % bannerImages.length);
+  //       setFade(true);
+  //     }, 500);
+  //     return () => clearTimeout(timeout);
+  //   }, 5000);
+  //   return () => clearInterval(interval);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
   const [backgroundSize, setBackgroundSize] = useState("");
 
   useEffect(() => {
@@ -59,13 +59,13 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({
           backgroundRepeat: 'no-repeat',
           backgroundSize: `${currentIndex !== 0 ? 'cover' : backgroundSize}`,
         }}
-        className={`banner-container h-[215px] md:h-[434px] w-full flex flex-col items-start justify-center ${currentIndex === 0 && theme === 'dark' && 'bg-[#1E272F]'} `}
+        className={`banner-container min-h-[215px] md:min-h-[434px] w-full flex flex-col items-start justify-center ${currentIndex === 0 && theme === 'dark' && 'bg-[#1E272F]'} `}
       >
         <div className={`w-[95%] ml-[5%] md:w-[50%]`}>
           <div
             className={`mb-3 md:mb-7 mt-8 text-center text-[24px] sm:text-3xl lg:text-5xl font-bold sm:font-semibold md:text-left 
-              ${currentIndex === 0 && 'w-[50%] md:w-[80%] mb-[20px] !text-left text-[24px] leading-[1.2]'} 
-              ${currentIndex === 1 && 'text-white'}
+              ${currentIndex === 0 && 'w-[50%] md:w-[80%] mb-[20px] !text-left text-[24px] leading-[1.2] !mb-2 sm:mb-7'} 
+              ${currentIndex === 1 && 'text-white !mt-10'}
               ${currentIndex === 0 && theme === 'dark' && 'text-white'}
               ${currentIndex === 0 && theme === 'light' && 'text-[#1E272F]'}`}
           >
@@ -78,7 +78,7 @@ export const QualityHomeBanner: React.FC<QualityHomeBannerProps> = ({
           </div>
           <div
             ref={divRef}
-            className={`mb-3 md:mb-7 mr-auto w-[100%] text-center text-sm sm:text-base font-medium md:text-left ${currentIndex === 0 && 'sm:block w-[60%] md:w-[80%] mt-4 !text-left mb-0'} ${
+            className={`mb-3 md:mb-7 mr-auto w-[100%] text-center text-sm sm:text-base font-medium md:text-left ${currentIndex === 0 && 'sm:block w-[60%] md:w-[80%] mt-2 !text-left mb-0'} ${
               currentIndex === 1 && 'text-white'
             } ${currentIndex === 0 && theme === 'light' && ' text-[#1E272F] !text-left text-xs mt-0'} ${currentIndex === 0 && theme === 'dark' && 'text-white !text-left text-xs mt-0  '}`}
           >

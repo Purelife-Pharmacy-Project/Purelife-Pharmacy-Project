@@ -40,18 +40,18 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
   return (
     <div
       className={clsx(
-        '-mt-6 sm:-mt-0 sm:mt-20 bg-white sm:mt-0 lg:justify-center lg:pb-10 lg:pt-[55px]'
+        '-mt-6 bg-white lg:justify-center lg:pb-10 lg:pt-[55px] max-w-[100dvw]'
       )}
     >
       <div className='bg-white lg:px-0'>
-        <div className='relative sm:mb-10 h-[450px] w-full overflow-hidden sm:h-[600px] lg:[800px]'>
-          <div className='absolute top-[60px] flex w-full justify-center'>
+        <div className='relative sm:mb-10  w-full overflow-hidden sm:min-h-[600px] lg:min-h-[800px]'>
+          <div className='mt-[60px] mb-10 md:mb-[140px] flex w-full justify-center'>
             <h3 className='w-[85%] text-center font-bold leading-[1.2] text-[#1E272F] md:w-[65%] lg:text-[40px] md:text-[30px] text-[32px]'>
               {title}
             </h3>
           </div>
 
-          <div className='absolute right-[5%] top-[200px] z-[1] flex w-[90%] justify-center sm:top-[300px]'>
+          <div className='mx-auto  z-[1] flex w-[90%] justify-center sm:top-[300px] pb-16'>
             <div className='flex max-w-[100%] items-center justify-between text-center text-[40px] font-bold text-[#1E272F]'>
               <Button
                 onMouseEnter={() => {
@@ -76,14 +76,14 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
               >
                 {reviews.map((review, index) => (
                   <div key={index} className='min-w-[100%] lg:min-w-[100%]'>
-                    <div className='flex  flex-col items-center justify-center gap-[10px]'>
-                      <h3 className='text-xl font-semibold text-[#1E272F] sm:text-[32px]'>
+                    <div className='flex flex-col items-center justify-center gap-[10px]'>
+                      <h3 className='text-xl font-medium text-[#1E272F] md:text-[32px] mb-4'>
                         {review.title}
                       </h3>
-                      <p className='text-[13px] font-medium text-[#5A5A5A] sm:text-base'>
+                      <p className='text-[13px] font-light text-[#5A5A5A] sm:text-base max-w-[640px]'>
                         {review.description}
                       </p>
-                      <div className='flex'>
+                      <div className='flex gap-3 my-1'>
                         {Array.from({ length: review.noOfStars }).map(
                           (_, index) => (
                             <IconStarBold
@@ -93,7 +93,7 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
                           )
                         )}
                       </div>
-                      <p className='text-sm font-bold text-[#1E272F] sm:text-sm'>
+                      <p className='text-sm font-medium text-[#1E272F] sm:text-sm'>
                         {review.name}
                       </p>
                     </div>
@@ -123,22 +123,22 @@ export const Reviews: React.FC<ReviewProps> = ({title, reviews}) => {
               </Button>
             </div>
           </div>
-          <div className='-mr-[13%] -mt-3 mb-[100px] flex justify-end sm:-mr-3 '>
+          <div className='absolute top-0 right-0 -mr-[13%] -mt-3 mb-[100px] flex justify-end sm:-mr-3 '>
             <Image
               width={324}
               height={213}
               src='/images/patients/patient1.png'
               alt='doctor image'
-              className='w-[165px] h-[108px] sm:h-auto sm:w-auto rounded-[10px]'
+              className='!w-[140px] !h-auto md:!w-[240px] rounded-[10px]'
             />
           </div>
-          <div className='flex justify-start '>
+          <div className='absolute left-0 top-[34%] flex justify-start '>
             <Image
               width={324}
               height={213}
               src='/images/patients/patient2.png'
               alt='doctor image'
-              className='w-[117px] h-[77px] sm:h-auto sm:w-auto rounded-[10px]'
+              className='!w-[80px] !h-auto md:!w-[200px] rounded-[10px]'
             />
           </div>
           <div className='absolute top-[200px] hidden w-full justify-end lg:flex md:right-[30%] lg:right-[43%] '>

@@ -19,10 +19,10 @@ export const HomeHero: FC<HomeHeroProps> = ({
 }) => {
   return (
     <div className='grid h-max items-center justify-center bg-white pb-4 md:pb-0 lg:h-max lg:pb-10'>
-      <section className='bg-white xl:w-full '>
+      <section className='bg-white xl:w-full pt-6 sm:pt-0'>
         <div className='grid grid-cols-[1fr] lg:grid-cols-[3fr_2.7fr] lg:gap-0'>
-          <div className='w-full flex flex-col gap-2 lg:gap-6 lg:justify-center'>
-            <h1 className='text-balance mx-auto text-center text-4xl font-bold  text-header-100 lg:mx-0 lg:w-full  sm:w-[80%] md:w-[50%] lg:max-w-full lg:text-start lg:text-6xl'>
+          <div className='w-full flex flex-col gap-4 lg:gap-6 lg:justify-center'>
+            <h1 className='text-balance mx-auto text-center text-[32px] sm:text-[50px] font-bold  text-header-100 lg:mx-0 lg:w-full  sm:w-[80%] md:w-[50%] lg:max-w-full lg:text-start lg:text-6xl'>
             Book an appointment<br/>  with <TypeAnimation
               sequence={[
                 'Doctors',
@@ -40,7 +40,7 @@ export const HomeHero: FC<HomeHeroProps> = ({
             /> <br/> at Purelife
             
             </h1>
-            <p className='mx-auto sm:w-[80%] w-[60%] lg:w-full text-center text-base font-medium leading-[30px] text-content lg:mx-0 lg:text-start lg:text-lg'>
+            <p className='mx-auto w-[80%] lg:w-full text-center text-base font-normal sm:leading-[30px] text-content lg:mx-0 lg:text-start lg:text-lg'>
               {description}
             </p>
 

@@ -27,7 +27,7 @@ const config: Config = {
         primaryLight: '#F6F6F6',
         blueLight: '#F7F8FF',
         header: {
-          100: '#40000A',
+          100: '#1E272F',
           200: '#582029',
         },
         white: '#FFFFFF',

@@ -103,30 +103,33 @@ export default function FindADoctor() {
     {
       title: 'This Care Truly Made a Difference',
       description:
-        'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
+        'When I had a consultation with Dr. Bayo, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
+      noOfStars: 4,
+      name: 'Mrs Adebayo Gregson',
+    },
+    {
+      title: 'Super convenient!',
+      description: `Amazing service! The online pharmacist consultation was so convenient, and the pharmacist was super helpful in explaining my medications. Highly recommend this pharmacy!`,
       noOfStars: 5,
-      name: 'Mrs Adebayo Gregson',
+      name: 'Sarah Adegbite',
     },
     {
-      title: 'I did not like how this went',
-      description:
-        'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
-      noOfStars: 3,
-      name: 'Mrs Adebayo Gregson',
-    },
-    {
-      title: 'This Care Truly Made a Difference',
-      description:
-        'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
-      noOfStars: 2,
-      name: 'Mrs Adebayo Gregson',
-    },
-    {
-      title: 'This Care Truly Made a Difference',
-      description:
-        'When I had a consultation with Dr. Smith, I felt like I was in the hands of someone who truly cared. He took the time to explain everything, making me feel comfortable and understood. The whole team was attentive, and it made all the difference in my recovery.',
+      title: 'Purelife is a top-notch pharmacy',
+      description: `Virtual doctor consultation was a game-changer for me. The doctor was attentive and caring, and the pharmacist's advice was invaluable. Purelife is a top-notch pharmacy with exceptional virtual services!`,
       noOfStars: 5,
-      name: 'Mrs Adebayo Gregson',
+      name: 'Nkechi Anozie',
+    },
+    {
+      title: 'Clear guidance and professionalism',
+      description: `Impressed by the professionalism of the virtual consultations. The doctor was thorough, and the pharmacist provided clear guidance on my prescriptions. Will be using their services again!`,
+      noOfStars: 4,
+      name: 'John Adaranijo',
+    },
+    {
+      title: 'The consultations are a lifesaver',
+      description: `Virtual consultations at this pharmacy are a lifesaver! The doctor was knowledgeable, and the pharmacist went above and beyond to ensure I felt comfortable with my treatment plan. Fantastic experience!`,
+      noOfStars: 5,
+      name: 'Ahmed Adarale',
     },
   ];
 
@@ -146,11 +149,11 @@ export default function FindADoctor() {
         <div id='doctors' className='bg-white pb-10 pt-20 lg:justify-center'>
           <div className='bg-white lg:justify-center'>
             <Section className='flex flex-col items-center justify-between px-6 sm:flex-row'>
-              <div>
-                <h3 className='mb-3 text-3xl font-bold text-[#1E272F] lg:mb-3 xl:text-[40px]'>
+              <div className='text-center sm:text-left'>
+                <h3 className='mb-4 text-3xl font-bold text-[#1E272F] md:text-[40px] lg:mb-4'>
                   Top-Rated Doctors on Our Platform
                 </h3>
-                <p className='mb-5 text-base text-[#5A5A5A] sm:w-[75%] xl:text-[20px]'>
+                <p className='mb-8 text-base font-light leading-7 text-[#5A5A5A] sm:mb-5 sm:w-[75%] sm:leading-6 xl:text-[20px]'>
                   Find trusted, highly rated doctors available to assist you
                   with personalized care and expert medical services.
                 </p>
@@ -165,10 +168,9 @@ export default function FindADoctor() {
                 className='mb-7 flex w-full justify-between gap-10 sm:mb-0 sm:w-auto'
               >
                 <Button
-                  
                   size='md'
                   radius='full'
-                  className='h-fit min-w-0 rotate-180 rounded-full border-2 border-[#1E272F] p-4 bg-white'
+                  className='h-fit min-w-0 rotate-180 rounded-full border-2 border-[#1E272F] bg-white p-4'
                   onClick={scrollLeft}
                 >
                   <IconArrowRight
@@ -177,10 +179,9 @@ export default function FindADoctor() {
                   />
                 </Button>
                 <Button
-                  
                   size='md'
                   radius='full'
-                  className='h-fit min-w-0 rounded-full border-2 border-[#1E272F] p-4 bg-white'
+                  className='h-fit min-w-0 rounded-full border-2 border-[#1E272F] bg-white p-4'
                   onClick={scrollRight}
                 >
                   <IconArrowRight
@@ -194,20 +195,17 @@ export default function FindADoctor() {
               ref={scrollRef}
               className={`scrollbar-none ml-auto max-w-[95vw] overflow-x-scroll bg-white pb-4 pl-2 lg:pb-16 lg:pt-10`}
               onMouseEnter={() => {
-                  stopAutoScroll();
-                }}
-                onMouseLeave={() => {
-                  startAutoScroll();
-                }}
+                stopAutoScroll();
+              }}
+              onMouseLeave={() => {
+                startAutoScroll();
+              }}
             >
-              <div
-                
-                className={`flex gap-[3%]`}
-              >
+              <div className={`flex gap-[3%]`}>
                 {repeatedDoctors.map((doctor, i) => (
                   <div
                     key={doctor.slug + i}
-                    className='min-w-[100%] max-w-[30%] md:min-w-[50%] lg:min-w-[35%]'
+                    className='min-w-[90%] max-w-[30%] md:min-w-[50%] lg:min-w-[35%]'
                   >
                     <DoctorCard doctor={doctor} />
                   </div>
@@ -217,12 +215,12 @@ export default function FindADoctor() {
           </div>
         </div>
 
-        <div className={clsx('bg-primaryLight lg:grid lg:pt-2')}>
-          <Section className='bg-primaryLight pb-5 pt-10'>
-            <h2 className='mb-2 text-3xl font-bold leading-[1.2] text-[#1E272F] md:w-[60%] xl:text-[40px]'>
+        <div className={clsx('bg-[#F9F6EF] lg:grid lg:pt-2')}>
+          <Section className='bg-[#F9F6EF] pb-5 pt-10'>
+            <h2 className='mb-4 text-center text-3xl font-bold leading-[1.2] text-[#1E272F] sm:text-left md:w-[60%] xl:text-[40px]'>
               The best and experienced medical workers in their field
             </h2>
-            <p className='mb-10 text-base text-[#5A5A5A] sm:text-[18px] lg:w-[60%] lg:text-[20px]'>
+            <p className='mx-auto mb-6 w-[80%] text-center text-[1rem] font-light leading-7 text-[#5A5A5A] sm:mb-10 sm:text-left sm:text-[18px] sm:leading-6 lg:w-[60%] lg:text-[20px]'>
               Discover how our seamless platform matches you with the right
               healthcare specialists effortlessly.
             </p>
@@ -237,10 +235,12 @@ export default function FindADoctor() {
           </Section>
         </div>
 
-        <HowItWorks data={howItWorksData} variant='primary' />
-        <QualityHomeBanner
-          theme='light'
+        <HowItWorks
+          className='!bg-[#F9F6EF] pb-6 sm:pb-4'
+          data={howItWorksData}
+          variant='primary'
         />
+        <QualityHomeBanner theme='light' />
         <Reviews
           title='Hear What Our Patients Are Saying About Our Exceptional Doctors'
           reviews={reviews}
