@@ -250,7 +250,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({}) => {
               </div>
             </div>
           </Link>
-          <Link href={'/shop'} className='lg:mt-14'>
+          <Link href={'/shop?category=health'} className='lg:mt-14'>
             <div
               className='relative h-[240px] w-full sm:h-[500px] lg:h-[450px]'
               style={{
