@@ -65,7 +65,7 @@ export const AppNavbar = ({
   const menuItems = [
     {
       name: 'Pharmacy',
-      path: '/telehealth/shop-and-order',
+      path: '/shop?category=health',
     },
     {
       name: 'Telehealth',
