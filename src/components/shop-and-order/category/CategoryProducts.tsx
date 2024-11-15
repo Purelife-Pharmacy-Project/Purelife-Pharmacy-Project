@@ -81,6 +81,11 @@ export const CategoryProducts = () => {
   }, []);
 
   useEffect(() => {
+    setQuery({ category: 'health' })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
     const updateLimit = (e: MediaQueryListEvent) => {
       setLimit(e.matches ? 10 : 9);
     };
