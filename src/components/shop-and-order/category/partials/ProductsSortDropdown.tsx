@@ -11,9 +11,8 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
   const { setQuery, removeQuery } = useQueryParams();
   const searchParams = useSearchParams();
   const currentCategory = searchParams.get('category') || undefined;
-  // const currentCategory = new URLSearchParams(window.location.search).get('category'); // Getting category from the URL query
 
-  const displayCategories: any = [
+  const displayCategories = [
     'Health',
     'Beauty',
     'Supermarket',
@@ -24,31 +23,37 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
   const [checks, setChecks] = useState<boolean[]>(
     new Array(displayCategories.length).fill(false)
   );
-  const [selectedValue, setSelectedValue] = useState<string>('all');
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [height, setHeight] = useState<string>('0');
 
-  const handleSelectCategory = (category: string) => {
-    if (category.toLowerCase() === 'all') {
+  const handleSelectCategory = (category: any) => {
+    if (category?.toLowerCase() === 'all') {
       removeQuery(['category']);
-      setChecks(new Array(displayCategories.length).fill(false)); // Reset checks when 'All Categories' is selected
+      setChecks(new Array(displayCategories.length).fill(false));
     } else {
-      setQuery({ category: category.toLowerCase() });
+      setQuery({ category: category?.toLowerCase() });
       setChecks(
         displayCategories.map(
-          (_: any, i: any) => i === displayCategories.indexOf(category)
+          (item) => item.toLowerCase() === category?.toLowerCase()
         )
-      ); // Set check for selected category
+      );
     }
   };
 
   useEffect(() => {
-    if (selectedValue) {
-      handleSelectCategory(selectedValue);
+    // Set the initial state based on the query parameter
+    if (currentCategory) {
+      setChecks(
+        displayCategories.map(
+          (item) => item.toLowerCase() === currentCategory.toLowerCase()
+        )
+      );
+    } else {
+      setChecks(new Array(displayCategories.length).fill(false));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedValue]);
+  }, [currentCategory]);
 
   useEffect(() => {
     if (isOpen && contentRef.current) {
@@ -84,14 +89,12 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
         }}
         className='flex flex-col gap-3'
       >
-        {displayCategories.map((item: any, index: any) => (
+        {displayCategories.map((item, index) => (
           <div
             onClick={() => {
-              if (item === 'All Categories') {
-                setSelectedValue('all');
-              } else {
-                setSelectedValue(item);
-              }
+              handleSelectCategory(
+                item === 'All Categories' ? 'all' : item
+              );
             }}
             key={index}
             className='flex item-center cursor-pointer gap-3'
@@ -100,15 +103,13 @@ export const ProductSortDropdown: FC<ProductSortDropdownProps> = () => {
               <IconAllCategories className="my-auto" />
             ) : (
               <CheckBox
-                id={index}
+                id={item}
                 checked={checks[index]}
-                onChange={() => {
-                  if (item === 'All Categories') {
-                    setSelectedValue('all');
-                  } else {
-                    setSelectedValue(item);
-                  }
-                }}
+                onChange={() =>
+                  handleSelectCategory(
+                    item === 'All Categories' ? 'all' : item
+                  )
+                }
               />
             )}
             <p className='text-[15px] font-[400] text-[#797979]'>{item}</p>
